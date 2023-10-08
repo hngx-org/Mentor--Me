@@ -19,9 +19,10 @@ export default function MessagesLayout() {
             <Button
               variant="primary"
               type="button"
-              title="Write Message "
-              className=" px-2 py-2 w-[100%]"
-            />
+              className=" px-2 py-2 !w-[100%] "
+            >
+              <p>Write Message</p>
+            </Button>
             <SearchInput />
           </div>
           <div className="overflow-y-scroll hide-message-layout-scroll h-[83%]">
