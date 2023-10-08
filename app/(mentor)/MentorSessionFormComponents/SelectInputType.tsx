@@ -1,7 +1,6 @@
 import React, { FormHTMLAttributes, LabelHTMLAttributes } from "react";
 
 type SelectInputProps = {
-  htmlFor?: string;
   labelText?: string;
   selectId?: string;
   selectName?: string;
