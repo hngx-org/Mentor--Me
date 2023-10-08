@@ -1,34 +1,29 @@
-import React from 'react'
+import React from "react"
 import Image from "next/image";
-import { ProfileImage } from "@/public"
-import { Star } from "@/public"
-import { Star0 } from "@/public"
-import { Facebuk } from "@/public"
-import { instaggram } from "@/public"
-import { updatee } from "@/public"
+import { Star, Star0, Facebuk, instaggram, updatee, ProfileImage } from "@/public"
 import { EditIcon } from "@/public/SVGs"
 
 
 const UserHero = () => {
     return (
-        <div className='' >
-            <div className=' bg-neutral-700 h-44 relative'>
-                <div className=' flex '>
+        <div className="" >
+            <div className=" bg-neutral-700 h-44 relative">
+                <div className="flex" >
 
 
                     <Image
-                        className=' border rounded-full ml-12 absolute -bottom-28'
+                        className=" border rounded-full ml-12 absolute -bottom-28"
                         src={ProfileImage}
                         width={180}
                         height={180}
-                        alt='ths profileImage' />
+                        alt="ths profileImage" />
                     <EditIcon
-                        className=' rounded-lg bg-white ml-48 absolute -bottom-20'
+                        className=" rounded-lg bg-white ml-48 absolute -bottom-20"
                     />
 
                 </div>
             </div>
-            <div className=' lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 items-center justiry-between'>
+            <div className="lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 items-center justiry-between">
                 <div className='justify-center items-center ml-[50px] mt-[150px] lg:ml-[270px] lg:mt-8 md:ml-[270px] md:mt-8'>
                     <h1 className=' font-Hanken text-3xl font-bold text-Neutra50 lg:text-4xl md:3xl md:whitespace-nowrap'>Shade Mayowa</h1>
                     <p className=' font-Hanken text-sm font-normal text-Neutra40'>Product Designer</p>
@@ -39,17 +34,17 @@ const UserHero = () => {
                         <Image src={Star} alt="Star" />
                         <Image src={Star0} alt="Rating" />
 
-                        <p className='text-Neutra50 font-Hanken flex gap-2'>4.5 <span>|</span> <span className='flex gap-1'>20 <span>reviews</span></span>
+                        <p className="text-Neutra50 font-Hanken flex gap-2">4.5 <span>|</span> <span className='flex gap-1'>20 <span>reviews</span></span>
                             <Image
                                 src={Facebuk}
                                 width={50}
                                 height={40}
-                                alt='facebook' />
+                                alt="facebook" />
                             <Image
                                 src={instaggram}
                                 width={50}
                                 height={40}
-                                alt='facebook' />
+                                alt="instagramIcon" />
                         </p>
 
                     </div>
@@ -61,7 +56,7 @@ const UserHero = () => {
                         src={updatee}
                         width={30}
                         height={5}
-                        alt='facebook' />
+                        alt="updateIcon" />
                     <div className='flex'>
 
                         <button className=' inline-flex h-14 px-10 py-5 items-center border-[0.5px] rounded-lg border-gray-900'>
@@ -73,6 +68,6 @@ const UserHero = () => {
             </div>
         </div>
     )
-}
+};
 
 export default UserHero
