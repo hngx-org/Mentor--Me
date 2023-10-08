@@ -12,7 +12,6 @@ type SessionFormProps = {
 
 function FreeSessionForm({
   labelName,
-  selectLabels,
   isRequired,
   sessionType,
   placeholder,
