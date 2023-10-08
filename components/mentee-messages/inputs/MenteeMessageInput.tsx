@@ -4,7 +4,7 @@ import {
   EmojiIcon,
   MicrophoneIcon,
 } from "@/public/SVGs";
-import IconWrapper from "../../components/IconWrapper";
+import IconWrapper from "../IconWrapper";
 
 export default function MenteeMessageInput() {
   return (
