@@ -12,8 +12,8 @@ import {
   Instagram,
   LoveIcon,
   ExportIcon,
-  StarIcon,
   StarIcon1,
+  StarIcon2,
   LeftIcon,
   RightIcon,
   RightArrowIcon,
@@ -76,23 +76,23 @@ export default function MentorReviews() {
                   <div className="inline-flex justify-center gap-x-[2px] xl:gap-x-[5px]">
                     <span>
                       {" "}
-                      <StarIcon />
-                    </span>
-                    <span>
-                      {" "}
-                      <StarIcon />
-                    </span>
-                    <span>
-                      {" "}
-                      <StarIcon />
-                    </span>
-                    <span>
-                      {" "}
-                      <StarIcon />
+                      <StarIcon1 />
                     </span>
                     <span>
                       {" "}
                       <StarIcon1 />
+                    </span>
+                    <span>
+                      {" "}
+                      <StarIcon1 />
+                    </span>
+                    <span>
+                      {" "}
+                      <StarIcon1 />
+                    </span>
+                    <span>
+                      {" "}
+                      <StarIcon2 />
                     </span>
                   </div>
                   <div className="inline-flex justify-center gap-x-[2px] xl:gap-x-[5px]">

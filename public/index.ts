@@ -20,3 +20,20 @@ export { default as MentorCreationCheckMark } from "./assets/images/mentor-profi
 // Image exports for the mentee-review-screen
 export { default as DashboardMenteeProfileImg } from "./assets/images/mentee-review-screen/Ellipse 1 (1).png";
 export { default as DashboardMenteeProfileVerifiedmark } from "./assets/images/mentee-review-screen/verified (2) 1.png";
+// Image exports for mentor profile verification screens
+
+export { default as Amico } from "./assets/images/amico.png";
+export { default as verificationPending } from "./assets/images/verifcation-pending.png";
+export { default as verificationApproved } from "./assets/images/verification-approved.png";
+export { default as verificationRejected } from "./assets/images/verification-rejected.png";
+export { default as SucessIcon } from "./assets/Icons/icon-park-outline_success.svg";
+
+// Image and icons import and export for mentor profile dashboard
+export { default as Awards } from "./assets/Icons/awards-icon.png";
+export { default as ProfileImage } from "./assets/images/profile-imagee1.png";
+export { default as Star } from "./assets/Icons/Star_ratting.png";
+export { default as Star0 } from "./assets/Icons/Star-rating-empty.png";
+export { default as Facebuk } from "./assets/Icons/facebookforprofile.png";
+export { default as instaggram } from "./assets/Icons/instinstagramforprofile.png";
+export { default as updatee } from "./assets/Icons/upload_icon.png";
+export { default as EditIcon } from "./assets/Icons/iconamoon_edit-thin.png";
