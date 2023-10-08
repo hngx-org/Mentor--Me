@@ -53,7 +53,7 @@ const Input: React.FC<InputProps> = ({
           <button
             type="button"
             onClick={togglePasswordVisibility}
-            className="absolute top-4 right-2 cursor-pointer text-[#808080]"
+            className="absolute top-[18px] right-2 cursor-pointer text-[#808080]"
           >
             {values.isPasswordVisible ? <IoEyeSharp /> : <IoEyeOffSharp />}
           </button>

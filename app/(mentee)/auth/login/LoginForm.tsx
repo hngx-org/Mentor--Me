@@ -2,6 +2,8 @@ import React from "react";
 
 import Image from "next/image";
 
+import Link from "next/link";
+
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import google from "../../../../public/assets/images/goggle.svg";
@@ -14,8 +16,8 @@ import { Button } from "@/components/buttons/button";
 
 const LoginForm = () => (
   <div>
-    <div className="w-full h-[100vh] grid sm:grid-cols-6 overflow-hidden">
-      <div className="sm:col-span-3 ">
+    <div className="w-full h-[100vh] grid grid-cols-1 lg:grid-cols-6  overflow-hidden">
+      <div className="lg:col-span-3 ">
         <div style={{ position: "relative", width: "100%", height: "100%" }}>
           <Image
             src={auth}
@@ -25,23 +27,30 @@ const LoginForm = () => (
           />
         </div>
       </div>
-      <div className="col-span-3  px-6  sm:px-32">
-        <div className="flex justify-center flex-col w-full h-[100vh]">
-          <h2 className="text-[#2A2A2A] font-Gladiora text-3xl">Mentor Me</h2>
-          <h4 className="font-Inter font-medium text-[#121212] text-2xl mt-3">
-            Sign Up
+      <div className="col-span-3  px-4  lg:px-6 xl:px-32">
+        <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
+          Mentor Me
+        </h2>
+        <div className="flex justify-center flex-col">
+          <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
+            Welcome Back
           </h4>
           <h5 className="text-[#808080] text-base font-Hanken mt-2 mb-5">
-            Create an account
+            Login into your account
           </h5>
-          <Input id="email" label="Email Address" required type="email" />
-          <Input id="password" label="Password" required type="password" />
-          <p className="font-Hanken text-[#565656] text-base my-3 flex justify-end ">
-            Forgot Password?
-          </p>
+          <div className="flex flex-col gap-5">
+            <Input id="email" label="Email Address" required type="email" />
+            <Input id="password" label="Password" required type="password" />
+          </div>
+          <Link href="/auth/forget-password">
+            {" "}
+            <p className="font-Hanken text-[#008080] flex justify-end text-sm my-3">
+              Forget Password?
+            </p>
+          </Link>
 
           <Button variant="primary" paddingLess className="w-full h-[48px]">
-            Login
+            Log in
           </Button>
           <div className="flex justify-center w-full">
             <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
@@ -56,7 +65,7 @@ const LoginForm = () => (
               imgSrc={google}
               imgAlt="google"
             >
-              Login with Google
+              Log in with Google
             </Button>
             <Button
               variant="outline-primary"
@@ -65,10 +74,15 @@ const LoginForm = () => (
               imgSrc={facebook}
               imgAlt="facebook"
             >
-              Login with Google
+              Log in with Google
             </Button>
           </div>
-          <h5 className="font-Hanken mt-3">New to Mentor.me? Sign Up</h5>
+          <Link href="auth/auth/signup">
+            <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
+              New to MentorMe?
+              <span className="font-semibold text-[#121212]"> Sign Up</span>
+            </h5>
+          </Link>
         </div>
       </div>
     </div>
