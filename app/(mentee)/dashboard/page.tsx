@@ -1,13 +1,10 @@
 import { NextPage } from "next";
 import CheckedIcon from "@/svgs/CheckedIcon";
-import HomeNavBar from "@/components/homeNavbar";
 import DummyCalender from "@/svgs/DummyCalender";
 
 const MenteeDashboard: NextPage = () => (
   <div className="w-full min-h-screen">
-    <HomeNavBar />
-    <div className="flex items-start">
-      <div className="w-[250px] h-full" />
+    <div className="flex items-start p-4">
       <main>
         <div className="my-4">
           <h1 className="text-2xl font-semibold leading-10">
@@ -17,8 +14,8 @@ const MenteeDashboard: NextPage = () => (
             You have no upcoming sessions
           </p>
         </div>
-        <div className="flex items-start justify-between mt-12">
-          <div className="rounded-md border border-gray-200 p-7">
+        <div className=" md:flex items-start justify-between mt-12">
+          <div className="md:w-full  rounded-md border border-gray-200 p-7">
             <h3 className="text-base font-medium">
               Let’s start with the basics
             </h3>
@@ -43,7 +40,9 @@ const MenteeDashboard: NextPage = () => (
               </p>
             </div>
           </div>
-          <DummyCalender width="35%" height="auto" />
+          <div className="w-full md:w-[30%] mt-6 md:mt-0">
+            <DummyCalender width="100%" height="auto" />
+          </div>
         </div>
       </main>
     </div>
