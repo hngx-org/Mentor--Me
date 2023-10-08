@@ -1,3 +1,5 @@
+"use client";
+
 import { NextPage } from "next";
 import React, { useState } from "react";
 import NewMentee from "./newUser";
