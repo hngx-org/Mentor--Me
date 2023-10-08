@@ -25,3 +25,12 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* Mentor resources page horizontal scrollbar */
+.mentor-resources-scroll::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+.mentor-resources-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+}
