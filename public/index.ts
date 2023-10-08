@@ -2,6 +2,8 @@
 export { default as membersCardAvatar } from "./assets/images/mentee-communities/membersCardAvatar.svg";
 export { default as mentorCardHero } from "./assets/images/mentee-communities/mentoreCardHero.svg";
 export { default as mentorCardAvatar } from "./assets/images/mentee-communities/mentorCardAvatar.svg";
+export { default as bigDiscussionCardHero } from "./assets/images/mentee-communities/bigDisscussionCardHero.svg";
+// export { default as messageedit } from "./assets/Icons/mentee-communities/messageEdit.svg"
 
 export { default as DashboardCoverBg } from "./assets/images/mentee-profile-screen/cover-bg.png";
 export { default as MenteeDashboardProfileImg } from "./assets/images/mentee-profile-screen/my-profile.png";
@@ -16,6 +18,17 @@ export { default as MentorCreationMan } from "./assets/images/mentor-profile-cre
 export { default as MentorCreationPlusIcon } from "./assets/images/mentor-profile-creation/mentor-plus-icon.svg";
 export { default as MentorCreationArrDown } from "./assets/images/mentor-profile-creation/mentor-arrow-down.svg";
 export { default as MentorCreationCheckMark } from "./assets/images/mentor-profile-creation/mentor-checkmark.svg";
+
+// Image exports for the mentee-review-screen
+export { default as DashboardMenteeProfileImg } from "./assets/images/mentee-review-screen/Ellipse 1 (1).png";
+export { default as DashboardMenteeProfileVerifiedmark } from "./assets/images/mentee-review-screen/verified (2) 1.png";
+// Image exports for mentor profile verification screens
+
+export { default as Amico } from "./assets/images/amico.png";
+export { default as verificationPending } from "./assets/images/verifcation-pending.png";
+export { default as verificationApproved } from "./assets/images/verification-approved.png";
+export { default as verificationRejected } from "./assets/images/verification-rejected.png";
+export { default as SucessIcon } from "./assets/Icons/icon-park-outline_success.svg";
 
 // Image and icons import and export for mentor profile dashboard
 export { default as Awards } from "./assets/Icons/awards-icon.png";
