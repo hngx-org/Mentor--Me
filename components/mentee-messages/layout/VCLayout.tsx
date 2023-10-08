@@ -5,9 +5,9 @@ import {
   CallIcon,
   VideoIcon,
 } from "@/public/SVGs";
-import IconWrapper from "../../components/IconWrapper";
+import IconWrapper from "../IconWrapper";
 import VCInput from "../inputs/VCinput";
-import VCMessageBubble from "../../components/VCMessageBubble";
+import VCMessageBubble from "../VCMessageBubble";
 
 export default function VCLayout() {
   return (

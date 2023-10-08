@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "@/components/buttons/button";
 import SearchInput from "../inputs/SearchInput";
-import MessageCard from "../../components/MessageCard";
-import MessageUserProfile from "../../components/ProfileHeader";
-import MessageBubble from "../../components/MessageBubble";
+import MessageCard from "../MessageCard";
+import MessageUserProfile from "../ProfileHeader";
+import MessageBubble from "../MessageBubble";
 import MenteeMessageInput from "../inputs/MenteeMessageInput";
 
 type MessagesLayoutProps = {
