@@ -1,5 +1,7 @@
 import React, { FC } from "react";
 
+import { Button } from "../buttons/button";
+
 const HomeNavBar: FC = () => (
   // <nav className="flex justify-between items-center py-5 px-3 text-[black] cursor-pointer">
   //   <svg
@@ -59,18 +61,20 @@ const HomeNavBar: FC = () => (
       <li className="text-[#565656] text-[0.8rem]">Resources</li>
     </ul>
     <div className="flex gap-2">
-      <button
-        type="button"
-        className="text-black  bg-white rounded-[7px] border-[1px] text-[13px] w-[90px]  border-black p-2 "
+      <Button
+        variant="outline-primary"
+        paddingLess
+        className="w-[90px] p-2 text-[13px]"
       >
         Log in
-      </button>
-      <button
-        type="button"
-        className="bg-[#121212] text-white rounded-[8px] w-[90px] p-2 text-[13px] "
+      </Button>
+      <Button
+        variant="primary"
+        paddingLess
+        className="w-[90px] p-2 text-[13px]"
       >
-        Sign up
-      </button>
+        Sign Up
+      </Button>
     </div>
   </nav>
 );
