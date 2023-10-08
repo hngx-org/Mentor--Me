@@ -34,3 +34,5 @@ export { default as Facebuk } from "./assets/Icons/facebookforprofile.png";
 export { default as instaggram } from "./assets/Icons/instinstagramforprofile.png";
 export { default as updatee } from "./assets/Icons/upload_icon.png";
 export { default as EditIcon } from "./assets/Icons/iconamoon_edit-thin.png";
+
+export { default as MentorSchedule } from "./assets/images/MentorSchedule/photocard.png";
