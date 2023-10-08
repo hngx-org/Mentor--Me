@@ -11,7 +11,10 @@ const Resources = () => (
     <p className="mb-[66px] font-Hanken text-[#121212] text-lg text-center">
       Click on “Get new resources” to start exploring
     </p>
-    <Link href="/resources/explore?path=Explore Resources" className="w-full">
+    <Link
+      href="/mentee-resources/explore?path=Explore Resources"
+      className="w-full"
+    >
       <button
         type="button"
         className="font-Hanken text-white rounded-lg bg-NeutalBase h-12 mb-4 w-full"
