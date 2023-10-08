@@ -1,5 +1,5 @@
 import React from "react";
-import HomeNavBar from "@/components/HomeNavbar copy";
+import HomeNavBar from "@/components/homeNavbar";
 import FilterContainer from "./components/FilterContainer";
 import CardContainer from "./components/CardContainer";
 import Pagination from "./components/Pagination";
@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 
 export default function page() {
   return (
-    <main className="bg[white] text[black] container mx-auto p-2 hscreen">
+    <main className="bg[white] text[black] containr mxauto p2 hscreen">
       <HomeNavBar />
       <FilterContainer />
       <div className="md:hidden ml-10">
