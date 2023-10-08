@@ -17,6 +17,9 @@ export { default as MentorCreationPlusIcon } from "./assets/images/mentor-profil
 export { default as MentorCreationArrDown } from "./assets/images/mentor-profile-creation/mentor-arrow-down.svg";
 export { default as MentorCreationCheckMark } from "./assets/images/mentor-profile-creation/mentor-checkmark.svg";
 
+// Image exports for the mentee-review-screen
+export { default as DashboardMenteeProfileImg } from "./assets/images/mentee-review-screen/Ellipse 1 (1).png";
+export { default as DashboardMenteeProfileVerifiedmark } from "./assets/images/mentee-review-screen/verified (2) 1.png";
 // Image exports for mentor profile verification screens
 
 export { default as Amico } from "./assets/images/amico.png";
