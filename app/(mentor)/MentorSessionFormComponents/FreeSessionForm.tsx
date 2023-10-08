@@ -1,5 +1,5 @@
 import React, { FormHTMLAttributes, LabelHTMLAttributes } from "react";
-import SelectInputType from "../ui/SelectInputType";
+import SelectInputType from "./SelectInputType";
 import Button from "../buttons/button";
 
 type SessionFormProps = {
