@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
 
-import back from "../../../../public/assets/icons/back.png";
+import back from "../../../../public/assets/Icons/back.png";
 
 import Input from "@/components/inputs/input";
 

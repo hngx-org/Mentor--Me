@@ -42,7 +42,7 @@ const LoginForm = () => (
             <Input id="email" label="Email Address" required type="email" />
             <Input id="password" label="Password" required type="password" />
           </div>
-          <Link href="/auth/forget-password">
+          <Link href="/mentor-auth/forget-password">
             {" "}
             <p className="font-Hanken text-[#008080] flex justify-end text-sm my-3">
               Forget Password?
@@ -77,7 +77,7 @@ const LoginForm = () => (
               Log in with Google
             </Button>
           </div>
-          <Link href="auth/auth/signup">
+          <Link href="mentor-auth/sign-up">
             <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
               New to MentorMe?
               <span className="font-semibold text-[#121212]"> Sign Up</span>
