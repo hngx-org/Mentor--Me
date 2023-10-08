@@ -31,15 +31,15 @@ export default function MentorSideBar({
       <div className="flex flex-col">
         <div>
           <div className="w-full pl-3">{light ? <Logo2 /> : <LogoIcon />}</div>
-          <div className="mt-8">
-            <p className="font-Inter tetx-[14px]  leading-[20.3px] font-[500]   text-Neutra30 pl-3">
+          <div className="mt-14">
+            <p className="font-Inter text-[14px]  leading-[20.3px] font-[500]   text-Neutra30 pl-3">
               MENU
             </p>
-            <ul className="px-3  py-2  gap-1 cursor-pointer text-[12px]">
+            <ul className="px-3  py-2  gap-1 cursor-pointer text-[14px]">
               {sidebarMentorLinks.map((link) => (
                 <Link key={link.id} href={link.path} prefetch>
                   <li
-                    className={`flex gap-3  ${
+                    className={`flex gap-3 mt-4  ${
                       light && path === link.label.toLowerCase()
                         ? "bg-[#E5FFFF]"
                         : !light && path === link.label.toLowerCase()
@@ -50,7 +50,7 @@ export default function MentorSideBar({
                     {light ? link.iconLight : link.iconDark}
 
                     <span
-                      className={` font-Inter tetx-[12px] font-[500] ${
+                      className={` font-Inter text-[14px] font-[500] ${
                         light ? " text-NeutalBase" : "text-[#fff]"
                       } `}
                     >
