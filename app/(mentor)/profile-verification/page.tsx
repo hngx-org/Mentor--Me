@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import HeaderAfterSignUp from "@/components/mentor-profile-verification/HeaderAfterSignUp";
-import SidebarMentor from "@/components/mentor-profile-verification/SidebarMentor";
+import SidebarMentor from "@/components/mentor/SidebarMentor";
 import {
   Amico,
   verificationApproved,
@@ -23,7 +23,7 @@ import {
   RejectedStatusIcon,
   CancelIcon,
 } from "@/public/SVGs";
-import MobileSideBar from "@/components/mentor-profile-verification/MobileSiderBar";
+import MobileSideBar from "@/components/mentor/MobileSiderBar";
 import { Button } from "@/components/buttons/button";
 
 export default function MentorProfileVerification() {
