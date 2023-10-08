@@ -16,3 +16,11 @@ export { default as MentorCreationMan } from "./assets/images/mentor-profile-cre
 export { default as MentorCreationPlusIcon } from "./assets/images/mentor-profile-creation/mentor-plus-icon.svg";
 export { default as MentorCreationArrDown } from "./assets/images/mentor-profile-creation/mentor-arrow-down.svg";
 export { default as MentorCreationCheckMark } from "./assets/images/mentor-profile-creation/mentor-checkmark.svg";
+
+// Image exports for mentor profile verification screens
+
+export { default as Amico } from "./assets/images/amico.png";
+export { default as verificationPending } from "./assets/images/verifcation-pending.png";
+export { default as verificationApproved } from "./assets/images/verification-approved.png";
+export { default as verificationRejected } from "./assets/images/verification-rejected.png";
+export { default as SucessIcon } from "./assets/Icons/icon-park-outline_success.svg";
