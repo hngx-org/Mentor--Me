@@ -4,7 +4,7 @@ import Button from "../buttons/button";
 
 type SessionFormProps = {
   labelName?: string;
-  selectLabels?: LabelHTMLAttributes<HTMLLabelElement>["htmlFor"];
+  // selectLabels?: LabelHTMLAttributes<HTMLLabelElement>["htmlFor"];
   isRequired?: true;
   sessionType?: string;
   placeholder?: string;
@@ -12,7 +12,6 @@ type SessionFormProps = {
 
 function RecurringSessionForm({
   labelName,
-  selectLabels,
   isRequired,
   sessionType,
   placeholder,
@@ -29,42 +28,42 @@ function RecurringSessionForm({
         <form className="flex flex-col gap-3 sm:gap-6 py-3 rounded sm:px-12 w-full justify-between">
           <SelectInputType
             labelText="Session name"
-            isRequired={true}
+            isRequired
             selectId="session-name"
             selectName="session-name"
             placeholder="Give this session a name"
           />
           <SelectInputType
             labelText="Description"
-            isRequired={true}
+            isRequired
             selectId="Description"
             selectName="Description"
             placeholder="Tell us a little about this session"
           />
           <SelectInputType
             labelText="Session type"
-            isRequired={true}
+            isRequired
             selectId="session-type"
             selectName="session-type"
             placeholder="Select from the options"
           />
           <SelectInputType
             labelText="Number of session"
-            isRequired={true}
+            isRequired
             selectId="number-of-session"
             selectName="number-of-session"
             placeholder="Select..."
           />
           <SelectInputType
             labelText="Occurrence"
-            isRequired={true}
+            isRequired
             selectId="occurrence"
             selectName="occurrence"
             placeholder="How often will you like to have this session"
           />
           <SelectInputType
             labelText="Select relevant topics"
-            isRequired={true}
+            isRequired
             selectId="topics"
             selectName="topics"
             placeholder="Select some relevant topics this session"
