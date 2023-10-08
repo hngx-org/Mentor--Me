@@ -1,10 +1,8 @@
-interface myProps{
+interface myProps {
   currForm: any;
-
 }
 
-
-export default function MentorProgressBar({currForm}: myProps) {
+export default function MentorProgressBar({ currForm }: myProps) {
   const arr = [0, 1, 2, 3, 4];
   return (
     <div>

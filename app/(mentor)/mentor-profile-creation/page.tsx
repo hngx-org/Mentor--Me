@@ -95,6 +95,7 @@ export default function MentorProfileCreation() {
     <div className={`lg:flex-row flex  ${styles.scroll} relative bg-white`}>
       {/* overlay that shows behind the modal */}
       <button
+        aria-label="hide/show overlay"
         type="button"
         onClick={() => {
           setIsModalShown(false);
@@ -188,12 +189,9 @@ export default function MentorProfileCreation() {
             >
               <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-2 w-[70%]">
-                  <label
-                    htmlFor="certification"
-                    className="font-Inter text-Neutral60 font-[500]"
-                  >
+                  <p className="font-Inter text-Neutral60 font-[500]">
                     Certification file
-                  </label>
+                  </p>
 
                   <input
                     className="w-full border-[#d0d5dd] border-[1px] rounded-md p-4 placeholder:text-[#98A2B3]"
