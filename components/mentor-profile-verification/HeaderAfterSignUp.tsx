@@ -18,45 +18,19 @@ export default function HeaderAfterSignUp({ step }: Steps) {
       <div className="flex items-center">
         <h1 className={h1ClassName}>Mentor Account </h1>
 
-        {step === 1 && (
-          <div className="md:block hidden">
-            {" "}
-            <span>
-              <BulletIcon />
-            </span>
-            <p className="font-Hanken font-[700] md:text-2xl text-xl text-NeutalBase">
-              Certifications
-            </p>
-          </div>
-        )}
-        {step === 2 && (
-          <>
-            {" "}
-            <span>
-              <BulletIcon />
-            </span>
-            <p className="font-Hanken font-[700] md:text-2xl text-xl text-NeutalBase">
-              Achievements & Awards
-            </p>
-          </>
-        )}
-        {step === 3 && (
+        {isStep1To4 && (
           <>
             <span>
               <BulletIcon />
             </span>
             <p className="font-Hanken font-[700] md:text-2xl text-xl text-NeutalBase">
-              Qualifications
-            </p>
-          </>
-        )}
-        {step === 4 && (
-          <>
-            <span>
-              <BulletIcon />
-            </span>
-            <p className="font-Hanken font-[700] md:text-2xl text-xl text-NeutalBase">
-              Identification
+              {step === 1
+                ? "Certifications"
+                : step === 2
+                ? "Achievements & Awards"
+                : step === 3
+                ? "Qualifications"
+                : "Identification"}
             </p>
           </>
         )}
