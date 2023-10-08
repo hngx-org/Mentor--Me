@@ -19,20 +19,18 @@ export default function HeaderAfterSignUp({ step }: Steps) {
         <h1 className={h1ClassName}>Mentor Account </h1>
 
         {isStep1To4 && (
-          <>
-            <span>
-              <BulletIcon />
-            </span>
+          <div className="md:flex hidden">
+            <BulletIcon />
             <p className="font-Hanken font-[700] md:text-2xl text-xl text-NeutalBase">
               {step === 1
                 ? "Certifications"
                 : step === 2
-                ? "Achievements & Awards"
-                : step === 3
                 ? "Qualifications"
+                : step === 3
+                ? " Achievements & Awards"
                 : "Identification"}
             </p>
-          </>
+          </div>
         )}
       </div>
 
