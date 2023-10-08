@@ -35,3 +35,12 @@ export { default as achieve1 } from "./assets/images/mentee-booking/4969a6a6e7a8
 export { default as check } from "./assets/images/mentee-booking/tick-circle.svg";
 export { default as link } from "./assets/images/mentee-booking/SVG.svg";
 export { default as clock } from "./assets/images/mentee-booking/clock.svg";
+// Image and icons import and export for mentor profile dashboard
+export { default as Awards } from "./assets/Icons/awards-icon.png";
+export { default as ProfileImage } from "./assets/images/profile-imagee1.png";
+export { default as Star } from "./assets/Icons/Star_ratting.png";
+export { default as Star0 } from "./assets/Icons/Star-rating-empty.png";
+export { default as Facebuk } from "./assets/Icons/facebookforprofile.png";
+export { default as instaggram } from "./assets/Icons/instinstagramforprofile.png";
+export { default as updatee } from "./assets/Icons/upload_icon.png";
+export { default as EditIcon } from "./assets/Icons/iconamoon_edit-thin.png";
