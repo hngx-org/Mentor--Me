@@ -19,7 +19,7 @@ export default function HeaderAfterSignUp({ step }: Steps) {
         <h1 className={h1ClassName}>Mentor Account </h1>
 
         {step === 1 && (
-          <>
+          <div className="md:block hidden">
             {" "}
             <span>
               <BulletIcon />
@@ -27,7 +27,7 @@ export default function HeaderAfterSignUp({ step }: Steps) {
             <p className="font-Hanken font-[700] md:text-2xl text-xl text-NeutalBase">
               Certifications
             </p>
-          </>
+          </div>
         )}
         {step === 2 && (
           <>
@@ -63,7 +63,7 @@ export default function HeaderAfterSignUp({ step }: Steps) {
       </div>
 
       <div className="flex items-center gap-5">
-        <span className="visible">
+        <span className="md:block hidden">
           <NotifyIcon />
         </span>
 

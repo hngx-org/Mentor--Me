@@ -8,7 +8,7 @@ export default function StepList({
   formSubmitted,
 }: StepListProps) {
   return (
-    <ul>
+    <ul className="flex flex-col">
       <button
         type="button"
         className={`cursor-pointer mt-8 p-2 mx-3 md:mx-0 ${
@@ -30,7 +30,7 @@ export default function StepList({
           >
             1
           </div>
-          <span className="ml-2 font-Hanken font-[400]">
+          <span className="ml-2 font-Hanken font-[400] text-left">
             {" "}
             Certifications & Diplomas
           </span>
@@ -83,7 +83,10 @@ export default function StepList({
           >
             2
           </div>
-          <span className="ml-2 font-Hanken font-[400]"> Qualifications</span>
+          <span className="ml-2 font-Hanken font-[400] text-left">
+            {" "}
+            Qualifications
+          </span>
         </div>
         {step === 2 ? (
           <div className="ml-6 mt-4 text-left">
@@ -124,7 +127,7 @@ export default function StepList({
           >
             3
           </div>
-          <span className="ml-2 font-Hanken font-[400]">
+          <span className="ml-2 font-Hanken font-[400] text-left">
             {" "}
             Achievements & Awards
           </span>
@@ -168,7 +171,10 @@ export default function StepList({
           >
             4
           </div>
-          <span className="ml-2 font-Hanken font-[400]"> Identification</span>
+          <span className="ml-2 font-Hanken font-[400] text-left">
+            {" "}
+            Identification
+          </span>
         </div>
         {step === 4 ? (
           <div className="ml-6 mt-4 text-left">

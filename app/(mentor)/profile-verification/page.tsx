@@ -48,7 +48,7 @@ export default function MentorProfileVerification() {
   };
   return (
     <>
-      <div className="w-full flex bg-white text-black h-full ">
+      <div className="w-full flex bg-white text-black h-full lg:pb-0 pb-14">
         <div className="hidden lg:block">
           <SidebarMentor />
         </div>

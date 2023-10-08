@@ -8,12 +8,12 @@ import {
 
 export default function MobileSideBar() {
   return (
-    <nav className="w-full flex justify-center fixed bottom-0  items-center lg:hidden cursor-pointer shadow-xl ">
-      <div className="w-[90%] flex   justify-between  items-center ">
+    <nav className="w-full flex justify-center fixed bottom-0 items-center lg:hidden cursor-pointer shadow-xl bg-black bg-opacity-75">
+      <div className="w-[90%] flex mt-4 justify-between  items-center ">
         <Link href="/mentee-profile?path=home">
-          <div className="flex flex-col  justify-center  items-center">
+          <div className="flex flex-col justify-center items-center">
             <HomeIcon />
-            <span className="text-[14px] text-[#121212]  font-[500] font-Hanken">
+            <span className="text-[14px] text-[#ABABAB]  font-[500] font-Hanken">
               Home
             </span>
           </div>
