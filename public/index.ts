@@ -2,6 +2,8 @@
 export { default as membersCardAvatar } from "./assets/images/mentee-communities/membersCardAvatar.svg";
 export { default as mentorCardHero } from "./assets/images/mentee-communities/mentoreCardHero.svg";
 export { default as mentorCardAvatar } from "./assets/images/mentee-communities/mentorCardAvatar.svg";
+export { default as bigDiscussionCardHero } from "./assets/images/mentee-communities/bigDisscussionCardHero.svg";
+// export { default as messageedit } from "./assets/Icons/mentee-communities/messageEdit.svg"
 
 export { default as DashboardCoverBg } from "./assets/images/mentee-profile-screen/cover-bg.png";
 export { default as MenteeDashboardProfileImg } from "./assets/images/mentee-profile-screen/my-profile.png";
