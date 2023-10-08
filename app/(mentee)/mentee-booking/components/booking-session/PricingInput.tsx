@@ -11,7 +11,7 @@ const PricingSelect: React.FC<PricingSelectProps> = ({
   onChange,
 }) => (
   <div className="w-full">
-    <p className="font-Hanken font-bold text-lg">Pricing</p>
+    <p className="font-Hanken font-bold text-lg mb-3">Pricing</p>
     <select
       id="pricing"
       name="pricing"

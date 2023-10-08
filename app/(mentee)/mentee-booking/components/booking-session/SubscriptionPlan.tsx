@@ -11,7 +11,7 @@ const SubscriptionPlan: React.FC<SubscriptionPlanProps> = ({
   onChange,
 }) => (
   <div className="w-full">
-    <p className="font-Hanken font-bold text-lg">Subscription Plan</p>
+    <p className="font-Hanken font-bold text-lg mb-3">Subscription Plan</p>
     <select
       id="plan"
       name="plan"

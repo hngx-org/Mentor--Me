@@ -107,7 +107,7 @@ export default function MenteeBooking() {
   ];
 
   return (
-    <div className="w-full">
+    <div className="w-full space-y-1">
       <Header />
       <div className="flex flex-col gap-10 sm:flex-row px-2 sm:px-5">
         {" "}
@@ -119,9 +119,6 @@ export default function MenteeBooking() {
           </p>
           <div className="flex-grow border-t border-Neutra30" />
           <div className="flex gap-8">
-            {/* <p className="font-Inter font-medium text-righ border-b-2 border-Accent1 ">
-              Overview
-            </p> */}
             {tabs.map((item, i) => (
               <Link href={item.link}>
                 <p
@@ -209,7 +206,7 @@ export default function MenteeBooking() {
           {achievement.map((achieve) => (
             <div
               key={achieve.id}
-              className="flex flex-col sm:flex-row justify-between items-center"
+              className="flex flex-wrap justify-between items-center"
             >
               <div className="flex gap-4 sm:gap-8">
                 <Image src={achieve.photos} alt="" />

@@ -8,6 +8,7 @@ import SubscriptionPlan from "./SubscriptionPlan";
 import NotesTextarea from "./Notes";
 import { clock } from "@/public";
 import Calendarcomponent from "./Calender";
+import { Button } from "@/components/buttons/button";
 
 const MentorProfileRight = () => {
   interface TxF {
@@ -58,14 +59,16 @@ const MentorProfileRight = () => {
   return (
     <div className="space-y-10">
       <div className="">
-        <p className="font-Hanken font-bold text-lg">Available Sessions</p>
+        <p className="font-Hanken font-bold text-lg mb-3">Available Sessions</p>
         <Calendarcomponent
           updateDate={handleUpdateDate}
           unAvailableDates={[new Date()]}
         />
       </div>
       <div>
-        <p className="font-Hanken font-bold text-lg">Available time slots</p>
+        <p className="font-Hanken font-bold text-lg mb-3">
+          Available time slots
+        </p>
         <ul className="flex flex-wrap gap-3 ">
           {TimeSlots.map((time) => (
             <li
@@ -81,7 +84,7 @@ const MentorProfileRight = () => {
       <div className="flex-grow border-t border-Neutra30" />
       <div>
         {" "}
-        <p className="font-Hanken font-bold text-lg">Time Zones</p>
+        <p className="font-Hanken font-bold text-lg mb-3">Time Zones</p>
         <div className="flex flex-wrap gap-8 ">
           {options.map((option) => (
             <RadioButton
@@ -104,12 +107,9 @@ const MentorProfileRight = () => {
       />
       <NotesTextarea notes={notes} onChange={handleNotesChange} />
       <div className="flex justify-center mt-32">
-        {/* <Button
-          className="text-[10px] px-32 py-3 flex"
-          title={`Book A Session`}
-          variant="primary"
-          // onClick={handleClick}
-        /> */}
+        <Button className="text-[10px] !px-20 !py-3 !flex" variant="primary">
+          Book A Session
+        </Button>
       </div>
     </div>
   );

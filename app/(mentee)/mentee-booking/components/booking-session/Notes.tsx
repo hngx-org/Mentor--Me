@@ -7,7 +7,7 @@ interface NotesTextareaProps {
 
 const NotesTextarea: React.FC<NotesTextareaProps> = ({ notes, onChange }) => (
   <div className="w-full">
-    <p className="font-Hanken font-bold text-lg">Add Notes</p>
+    <p className="font-Hanken font-bold text-lg mb-3">Add Notes</p>
     <input
       id="notes"
       name="notes"

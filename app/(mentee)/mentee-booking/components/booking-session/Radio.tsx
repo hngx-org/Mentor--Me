@@ -22,7 +22,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
       htmlFor="radio"
       className="flex gap-5 items-center cursor-pointer border border-black py-2 px-6 rounded-lg "
     >
-      <p className="font-normal text-base">{label}</p>
+      <p className="font-normal text-base mb-3">{label}</p>
       <input
         id="radio"
         type="radio"
