@@ -62,7 +62,7 @@ export default function MenteeCommunitiesPage() {
         </div>
         <div
           ref={containerRef}
-          className="flex gap-6 overflow-hidden discussion-comms"
+          className="flex gap-6 overflow-x-auto discussion-comms"
         >
           {discussionCommunities.map((comm) => (
             <CommunityCard

@@ -31,3 +31,7 @@ body {
 .mentor-resources-scroll::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.2);
 }
+
+.discussion-comms::-webkit-scrollbar {
+  display: none;
+}
