@@ -2,7 +2,7 @@ import Image from "next/image";
 import { MessageBubbleProps } from "./MessageBubble";
 
 type VCMessageBubbleType = {
-  isAppended: boolean;
+  isAppended: "Append" | "New";
 };
 export default function VCMessageBubble({
   isAppended,
@@ -14,7 +14,7 @@ export default function VCMessageBubble({
     <div
       className={`flex text-sm py-0.5  max-w-[100%]  ${
         message === "sent" ? "justify-start" : "justify-end"
-      } ${!isAppended && "mt-6 "}`}
+      } ${isAppended === "Append" && "mt-6 "}`}
     >
       <div
         className={` flex ${
@@ -22,7 +22,7 @@ export default function VCMessageBubble({
         }  w-[100%]  space-between`}
       >
         <div className="rounded-full w-[48px] h-[48px] mx-2">
-          {!isAppended && (
+          {isAppended === "New" && (
             <Image
               width={48}
               height={48}
