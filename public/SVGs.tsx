@@ -1032,23 +1032,277 @@ export const DownArrowIcon = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export const NotifyIcon = (props: SVGProps<SVGSVGElement>) => (
+export const NotifyIcon = (props?: SVGProps<SVGSVGElement>) => (
   <svg
-    width="17"
-    height="16"
-    viewBox="0 0 17 16"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M12 6.43945V9.76945"
+      stroke="#292D32"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+    />
+    <path
+      d="M12.0199 2C8.3399 2 5.3599 4.98 5.3599 8.66V10.76C5.3599 11.44 5.0799 12.46 4.7299 13.04L3.4599 15.16C2.6799 16.47 3.2199 17.93 4.6599 18.41C9.4399 20 14.6099 20 19.3899 18.41C20.7399 17.96 21.3199 16.38 20.5899 15.16L19.3199 13.04C18.9699 12.46 18.6899 11.43 18.6899 10.76V8.66C18.6799 5 15.6799 2 12.0199 2Z"
+      stroke="#292D32"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+    />
+    <path
+      d="M15.3299 18.8203C15.3299 20.6503 13.8299 22.1503 11.9999 22.1503C11.0899 22.1503 10.2499 21.7703 9.64992 21.1703C9.04992 20.5703 8.66992 19.7303 8.66992 18.8203"
+      stroke="#292D32"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+    />
+    <path
+      d="M18 9C19.6569 9 21 7.65685 21 6C21 4.34315 19.6569 3 18 3C16.3431 3 15 4.34315 15 6C15 7.65685 16.3431 9 18 9Z"
+      fill="#D53232"
+    />
+  </svg>
+);
+
+export const Facebook = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g id="vuesax/bold/information">
-      <g id="information">
+    <g id="vuesax/linear/facebook">
+      <g id="facebook">
         <path
           id="Vector"
-          d="M13.8151 6.42676L13.815 6.42678L13.819 6.43147L14.7169 7.48224C14.7172 7.48261 14.7175 7.48299 14.7178 7.48337C14.9552 7.76627 14.9477 8.23856 14.7136 8.49946L14.7135 8.49936L14.7057 8.50853L13.8057 9.56187L13.8057 9.56184L13.8017 9.56658C13.6714 9.72297 13.5698 9.92141 13.5008 10.1089C13.4318 10.2962 13.3792 10.5165 13.3792 10.7267V11.86C13.3792 12.2905 13.023 12.6467 12.5925 12.6467H11.4592C11.249 12.6467 11.0287 12.6993 10.8414 12.7683C10.6539 12.8373 10.4555 12.9389 10.2991 13.0692L10.2991 13.0692L10.2944 13.0732L9.24103 13.9732L9.24089 13.9733C8.96798 14.2067 8.49035 14.2067 8.21744 13.9733L8.2173 13.9732L7.16397 13.0732L7.16399 13.0732L7.15926 13.0692C7.0016 12.9378 6.80052 12.8364 6.61357 12.768C6.42699 12.6997 6.20663 12.6467 5.99917 12.6467H4.83917C4.40864 12.6467 4.0525 12.2905 4.0525 11.86V10.72C4.0525 10.516 4.00277 10.2975 3.93587 10.1102C3.86971 9.92493 3.76915 9.72081 3.63259 9.56181C3.63213 9.56127 3.63167 9.56073 3.63121 9.5602L2.73365 8.50305L2.73292 8.50219C2.50849 8.23907 2.50193 7.7656 2.73586 7.48101L3.63365 6.42362L3.63366 6.42363L3.63661 6.42009C3.76877 6.2615 3.86872 6.06101 3.93558 5.87483C4.00252 5.68842 4.0525 5.47121 4.0525 5.26667V4.13333C4.0525 3.70281 4.40864 3.34667 4.83917 3.34667H5.9925C6.20264 3.34667 6.42296 3.29399 6.61023 3.22505C6.79776 3.15602 6.99619 3.05444 7.15259 2.92411L7.1526 2.92412L7.15494 2.92215L8.2216 2.02215L8.22161 2.02216L8.22411 2.02002C8.49702 1.78666 8.97465 1.78666 9.24756 2.02002L9.2477 2.02014L10.301 2.92014L10.301 2.92017L10.3057 2.92411C10.4635 3.05561 10.6648 3.15711 10.8531 3.22566C11.0414 3.29423 11.2629 3.34667 11.4725 3.34667H12.6058C13.0364 3.34667 13.3925 3.70281 13.3925 4.13333V5.26667C13.3925 5.47681 13.4452 5.69712 13.5141 5.8844C13.5832 6.07193 13.6847 6.27036 13.8151 6.42676ZM8.72583 4.42C8.17636 4.42 7.72583 4.87053 7.72583 5.42V8.64C7.72583 9.0156 7.93634 9.34496 8.24507 9.5158C7.83769 9.69931 7.55917 10.1092 7.55917 10.58C7.55917 11.2228 8.08302 11.7467 8.72583 11.7467C9.37857 11.7467 9.8925 11.2195 9.8925 10.58C9.8925 10.1079 9.60993 9.69995 9.20519 9.51658C9.51468 9.34597 9.72583 9.01617 9.72583 8.64V5.42C9.72583 4.87053 9.27531 4.42 8.72583 4.42Z"
-          fill="white"
-          stroke="white"
+          d="M14 9.3V12.2H16.6C16.8 12.2 16.9 12.4 16.9 12.6L16.5 14.5C16.5 14.6 16.3 14.7 16.2 14.7H14V22H11V14.8H9.3C9.1 14.8 9 14.7 9 14.5V12.6C9 12.4 9.1 12.3 9.3 12.3H11V9C11 7.3 12.3 6 14 6H16.7C16.9 6 17 6.1 17 6.3V8.7C17 8.9 16.9 9 16.7 9H14.3C14.1 9 14 9.1 14 9.3Z"
+          stroke="#17191C"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+        />
+        <path
+          id="Vector_2"
+          d="M15 22H9C4 22 2 20 2 15V9C2 4 4 2 9 2H15C20 2 22 4 22 9V15C22 20 20 22 15 22Z"
+          stroke="#17191C"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
+    </g>
+  </svg>
+);
+
+export const Instagram = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="vuesax/linear/instagram">
+      <g id="instagram">
+        <path
+          id="Vector"
+          d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          id="Vector_2"
+          d="M12 15.5C13.933 15.5 15.5 13.933 15.5 12C15.5 10.067 13.933 8.5 12 8.5C10.067 8.5 8.5 10.067 8.5 12C8.5 13.933 10.067 15.5 12 15.5Z"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          id="Vector_3"
+          d="M17.6361 7H17.6477"
+          stroke="#292D32"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </g>
+  </svg>
+);
+export const LoveIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="vuesax/linear/heart">
+      <g id="heart">
+        <path
+          id="Vector"
+          d="M12.62 20.8101C12.28 20.9301 11.72 20.9301 11.38 20.8101C8.48 19.8201 2 15.6901 2 8.6901C2 5.6001 4.49 3.1001 7.56 3.1001C9.38 3.1001 10.99 3.9801 12 5.3401C13.01 3.9801 14.63 3.1001 16.44 3.1001C19.51 3.1001 22 5.6001 22 8.6901C22 15.6901 15.52 19.8201 12.62 20.8101Z"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </g>
+  </svg>
+);
+
+export const ExportIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="vuesax/linear/export">
+      <g id="export">
+        <path
+          id="Vector"
+          d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          id="Vector_2"
+          d="M13 10.9998L21.2 2.7998"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          id="Vector_3"
+          d="M21.9999 6.83V2H17.1699"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </g>
+  </svg>
+);
+
+export const StarIcon1 = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="15"
+    height="15"
+    viewBox="0 0 15 15"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="Star">
+      <path
+        id="Union"
+        d="M7.5 0L10.0494 4.60228L15 5.72949L11.625 9.70106L12.1353 15L7.5 12.8523L2.86474 15L3.375 9.70106L0 5.72949L4.95061 4.60228L7.5 0Z"
+        fill="#FFCB45"
+      />
+    </g>
+  </svg>
+);
+
+export const StarIcon2 = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="15"
+    height="15"
+    viewBox="0 0 15 15"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="Star">
+      <path
+        id="Union"
+        d="M7.5 0L10.0494 4.60228L15 5.72949L11.625 9.70106L12.1353 15L7.5 12.8523L2.86474 15L3.375 9.70106L0 5.72949L4.95061 4.60228L7.5 0Z"
+        fill="#D9D9D9"
+      />
+    </g>
+  </svg>
+);
+
+export const RightArrowIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="25"
+    height="24"
+    viewBox="0 0 25 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="vuesax/linear/arrow-right">
+      <g id="arrow-right">
+        <path
+          id="Vector"
+          d="M9.41016 19.9201L15.9302 13.4001C16.7002 12.6301 16.7002 11.3701 15.9302 10.6001L9.41016 4.08008"
+          stroke="#121212"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </g>
+  </svg>
+);
+export const RoundIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="40"
+    height="40"
+    viewBox="0 0 40 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle id="Ellipse 4" cx="20" cy="20" r="20" fill="#008080" />
+  </svg>
+);
+
+export const LeftIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="60"
+    height="60"
+    viewBox="0 0 60 60"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="arrow-circle-left">
+      <path
+        id="Vector"
+        d="M30 55C16.225 55 5 43.775 5 30C5 16.225 16.225 5 30 5C43.775 5 55 16.225 55 30C55 43.775 43.775 55 30 55ZM34.475 22.5C35.2 21.775 35.2 20.575 34.475 19.85C34.1 19.475 33.625 19.3 33.15 19.3C32.675 19.3 32.2 19.475 31.825 19.85L23 28.675C22.275 29.4 22.275 30.6 23 31.325L31.825 40.15C32.55 40.875 33.75 40.875 34.475 40.15C35.2 39.425 35.2 38.225 34.475 37.5L26.975 30L34.475 22.5Z"
+        fill="#818181"
+      />
+    </g>
+  </svg>
+);
+
+export const RightIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="60"
+    height="60"
+    viewBox="0 0 60 60"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="arrow-circle-left">
+      <path
+        id="Vector"
+        d="M30 55C43.775 55 55 43.775 55 30C55 16.225 43.775 5 30 5C16.225 5 5 16.225 5 30C5 43.775 16.225 55 30 55ZM25.525 22.5C24.8 21.775 24.8 20.575 25.525 19.85C25.9 19.475 26.375 19.3 26.85 19.3C27.325 19.3 27.8 19.475 28.175 19.85L37 28.675C37.725 29.4 37.725 30.6 37 31.325L28.175 40.15C27.45 40.875 26.25 40.875 25.525 40.15C24.8 39.425 24.8 38.225 25.525 37.5L33.025 30L25.525 22.5Z"
+        fill="#2A2A2A"
+      />
     </g>
   </svg>
 );
