@@ -4,7 +4,7 @@ import Button from "../buttons/button";
 
 type SessionFormProps = {
   labelName?: string;
-  selectLabels?: LabelHTMLAttributes<HTMLLabelElement>["htmlFor"];
+  // selectLabels?: LabelHTMLAttributes<HTMLLabelElement>["htmlFor"];
   isRequired?: true;
   sessionType?: string;
   placeholder?: string;
@@ -12,13 +12,12 @@ type SessionFormProps = {
 
 function OneOffSessionForm({
   labelName,
-  selectLabels,
   isRequired,
   sessionType,
   placeholder,
 }: SessionFormProps) {
   return (
-    <div className="p-0 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
+    <div className="p-0 absolute sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
       <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
         <div className=" w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3">
           <h1 className="text-left font-bold text-[1.5rem] sm:text-[2rem] text-[#08051e]">
@@ -29,42 +28,42 @@ function OneOffSessionForm({
         <form className="flex flex-col gap-3 sm:gap-6 py-3 rounded sm:px-12 w-full justify-between">
           <SelectInputType
             labelText="Session name"
-            isRequired={true}
+            isRequired
             selectId="session-name"
             selectName="session-name"
             placeholder="Give this session a name"
           />
           <SelectInputType
             labelText="Description"
-            isRequired={true}
+            isRequired
             selectId="Description"
             selectName="Description"
             placeholder="Tell us a little about this session"
           />
           <SelectInputType
             labelText="Session type"
-            isRequired={true}
+            isRequired
             selectId="session-type"
             selectName="session-type"
             placeholder="Select from the options"
           />
           <SelectInputType
             labelText="Time"
-            isRequired={true}
+            isRequired
             selectId="time"
             selectName="time"
             placeholder="Select the time of the day"
           />
           <SelectInputType
             labelText="Date"
-            isRequired={true}
+            isRequired
             selectId="date"
             selectName="date"
             placeholder="Choose a date"
           />
           <SelectInputType
             labelText="Select relevant topics"
-            isRequired={true}
+            isRequired
             selectId="topics"
             selectName="topics"
             placeholder="Select some relevant topics this session"
