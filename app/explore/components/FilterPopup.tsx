@@ -23,6 +23,7 @@ export default function FilterPopup({ onClose }: PopupProps) {
     <div className="absolute top-20 right-5 md:top-16 md:right-0 drop-shadow-2xl bg-white shadow-md rounded-md p-6 w-fit md:w-[430px] space-y-5">
       <div className="relative flex flex-col">
         <button
+          type="button"
           onClick={closePopup}
           className="absolute -top-5 right-0 text-4xl"
         >
@@ -30,7 +31,7 @@ export default function FilterPopup({ onClose }: PopupProps) {
         </button>
         <h1 className="font-Inter font-medium text-lg">Time Zones</h1>
         <div className="grid grid-cols-3 gap-5 p-4">
-          <form className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
+          <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
             <label htmlFor="choiceGmt" className="font-Hanken mr-3">
               GMT
             </label>
@@ -42,10 +43,10 @@ export default function FilterPopup({ onClose }: PopupProps) {
               onChange={handleChange}
               //   className="appearance-none w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
-          </form>
+          </div>
 
           {/* EST Time Zone */}
-          <form className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
+          <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
             <label htmlFor="choiceEst" className="font-Hanken mr-3">
               EST
             </label>
@@ -57,10 +58,10 @@ export default function FilterPopup({ onClose }: PopupProps) {
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
-          </form>
+          </div>
 
           {/* GST TimeZone */}
-          <form className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
+          <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
             <label htmlFor="choiceGst" className="font-Hanken mr-3">
               GST
             </label>
@@ -72,10 +73,10 @@ export default function FilterPopup({ onClose }: PopupProps) {
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
-          </form>
+          </div>
 
           {/* WAT TimeZone */}
-          <form className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
+          <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
             <label htmlFor="choiceWat" className="font-Hanken mr-3">
               WAT
             </label>
@@ -87,10 +88,10 @@ export default function FilterPopup({ onClose }: PopupProps) {
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
-          </form>
+          </div>
 
           {/* EST TimeZone */}
-          <form className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
+          <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
             <label htmlFor="choiceEst2" className="font-Hanken mr-3">
               EST
             </label>
@@ -102,10 +103,10 @@ export default function FilterPopup({ onClose }: PopupProps) {
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
-          </form>
+          </div>
 
           {/* GST TimeZone */}
-          <form className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
+          <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
             <label htmlFor="choiceGst2" className="font-Hanken mr-3">
               GST
             </label>
@@ -117,11 +118,14 @@ export default function FilterPopup({ onClose }: PopupProps) {
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
-          </form>
+          </div>
         </div>
       </div>
       <RangeSlider />
-      <button className="flex flex-col items-center bg-black text-white rounded-lg py-3 px-6 cursor-pointer -mr-0">
+      <button
+        type="button"
+        className="flex flex-col items-center bg-black text-white rounded-lg py-3 px-6 cursor-pointer -mr-0"
+      >
         Apply
       </button>
     </div>

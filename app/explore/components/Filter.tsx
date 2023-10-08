@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import FilterPopup from "./FilterPopup";
 import { FilterIcon } from "@/public/SVGs";
@@ -16,6 +17,7 @@ export default function Filter() {
   return (
     <div className="relative ">
       <button
+        type="button"
         onClick={filterPop}
         className=" bg-black text-white rounded-lg py-3 px-6 cursor-pointer"
       >
