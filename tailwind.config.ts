@@ -49,6 +49,9 @@ const config: Config = {
         Inter: ["var(--font-inter)", "sans-serif"],
         Hanken: ["var(--font-hanken)", "sans-serif"],
       },
+      width: {
+        "9/10": "90%",
+      },
     },
   },
   plugins: [],
