@@ -1,10 +1,5 @@
-import React from "react"
+import React from "react";
 
-const userExperience2 = () => {
-    return (
-        <div>
-        </div>
-    )
-}
+const userExperience2 = () => <div />;
 
-export default userExperience2
+export default userExperience2;

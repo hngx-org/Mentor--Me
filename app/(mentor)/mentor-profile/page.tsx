@@ -4,9 +4,11 @@ import UserDetails from "./userDetails";
 import UserExperience from "./userExperience";
 
 export default function ProfilePage() {
-	return <div>
-		<UserHero />
-		<UserDetails />
-		<UserExperience />
-	</div>;
+  return (
+    <div>
+      <UserHero />
+      <UserDetails />
+      <UserExperience />
+    </div>
+  );
 }
