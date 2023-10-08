@@ -117,8 +117,6 @@ MentoMe is open to contributions, but I recommend creating an issue or replying 
 
 ## Contribution Guidelines
 
-
-
 3. Pull origin `git pull origin dev`
 
 4. Create a new branch for the task you were assigned to, eg `TicketNumber/(Feat/Bug/Fix/Chore)/Ticket-title` : `git checkout -b MME-001/Feat/Dashboard`
