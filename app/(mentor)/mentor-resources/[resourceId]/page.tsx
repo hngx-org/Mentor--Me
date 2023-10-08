@@ -33,7 +33,7 @@ export default function Resource({
         </div>
         <p className="my-3">
           Created by{" "}
-          <Link href="" className="text-Accent2">
+          <Link href="/mentor-profile" className="text-Accent2">
             Dylan Matthias
           </Link>{" "}
         </p>
@@ -91,7 +91,10 @@ export default function Resource({
             Microsoft, Deb collaborates with product leaders to create engaging
             narratives that communicate value and business impact.{" "}
           </p>
-          <Link href="" className="text-Accent1 font-medium mt-4">
+          <Link
+            href="/mentor-profile"
+            className="text-Accent1 font-medium mt-4"
+          >
             View Profile
           </Link>
         </div>
