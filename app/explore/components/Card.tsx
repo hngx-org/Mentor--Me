@@ -98,9 +98,12 @@ export default function Card() {
               Next Available - {details.nextAvailable}
             </div>
             {/* Line */}
-            <div className="mt-2 border-t-2 border-t-Neutra20">{""}</div>
+            <div className="mt-2 border-t-2 border-t-Neutra20" />
             {/* View Profile */}
-            <button className=" cursorpointer ml-auto mr-auto flex justify-center items-center font-Hanken text-Accent1 text-base">
+            <button
+              type="button"
+              className=" cursorpointer ml-auto mr-auto flex justify-center items-center font-Hanken text-Accent1 text-base"
+            >
               View Profile
             </button>
           </div>

@@ -4,7 +4,7 @@ export default function Pagination() {
   return (
     <div className="flex justify-center items-center mb-20 mt-10 ">
       <div className="flex items-center gap-4 lg:gap-8 rounded-[40px] border-[0.2px] border-Neutra40 px-2 py-2">
-        <button>
+        <button type="button">
           <svg
             width="60"
             height="60"
@@ -18,7 +18,10 @@ export default function Pagination() {
             />
           </svg>
         </button>
-        <button className=" font-Inter text-base lg:text-lg font-medium">
+        <button
+          type="button"
+          className=" font-Inter text-base lg:text-lg font-medium"
+        >
           Prev
         </button>
         <div className="flex items-center gap-3 lg:gap-8">
@@ -31,8 +34,10 @@ export default function Pagination() {
           <span className=" cursor-pointer">...</span>
           <span className=" cursor-pointer">10</span>
         </div>
-        <button className=" font-Inter lg:text-lg font-medium">Next</button>
-        <button>
+        <button type="button" className=" font-Inter lg:text-lg font-medium">
+          Next
+        </button>
+        <button type="button">
           <svg
             width="60"
             height="60"

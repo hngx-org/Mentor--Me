@@ -1,8 +1,8 @@
 import { StaticImageData } from "next/image";
-import { MentorImg1 } from "@/public";
-import { MentorImg2 } from "@/public";
-import { MentorImg3 } from "@/public";
-import { MentorImg4 } from "@/public";
+import { MentorImg1, MentorImg2, MentorImg3, MentorImg4 } from "@/public";
+// import { MentorImg2 } from "@/public";
+// import { MentorImg3 } from "@/public";
+// import { MentorImg4 } from "@/public";
 
 export type CardProps = {
   id: number;

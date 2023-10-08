@@ -6,7 +6,7 @@ export default function RangeSlider() {
   const [value, setValue] = useState<number>(10);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(parseInt(event.target.value));
+    setValue(Number(event.target.value));
   };
   return (
     <div className="flex flex-col space-y-3">

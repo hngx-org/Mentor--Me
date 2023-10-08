@@ -32,24 +32,19 @@ export default function FilterPopup({ onClose }: PopupProps) {
         <h1 className="font-Inter font-medium text-lg">Time Zones</h1>
         <div className="grid grid-cols-3 gap-5 p-4">
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <label htmlFor="choiceGmt" className="font-Hanken mr-3">
-              GMT
-            </label>
+            <div className="font-Hanken mr-3">GMT</div>
             <input
               id="choiceGmt"
               type="radio"
               value="choiceGmt"
               checked={selected === "choiceGmt"}
               onChange={handleChange}
-              //   className="appearance-none w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
           </div>
 
           {/* EST Time Zone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <label htmlFor="choiceEst" className="font-Hanken mr-3">
-              EST
-            </label>
+            <div className="font-Hanken mr-3">EST</div>
             <input
               id="choiceEst"
               type="radio"
@@ -62,9 +57,7 @@ export default function FilterPopup({ onClose }: PopupProps) {
 
           {/* GST TimeZone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <label htmlFor="choiceGst" className="font-Hanken mr-3">
-              GST
-            </label>
+            <div className="font-Hanken mr-3">GST</div>
             <input
               id="choiceGst"
               type="radio"
@@ -77,9 +70,7 @@ export default function FilterPopup({ onClose }: PopupProps) {
 
           {/* WAT TimeZone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <label htmlFor="choiceWat" className="font-Hanken mr-3">
-              WAT
-            </label>
+            <div className="font-Hanken mr-3">WAT</div>
             <input
               id="choiceWat"
               type="radio"
@@ -92,9 +83,7 @@ export default function FilterPopup({ onClose }: PopupProps) {
 
           {/* EST TimeZone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <label htmlFor="choiceEst2" className="font-Hanken mr-3">
-              EST
-            </label>
+            <div className="font-Hanken mr-3">EST</div>
             <input
               id="choiceEst2"
               type="radio"
@@ -107,9 +96,7 @@ export default function FilterPopup({ onClose }: PopupProps) {
 
           {/* GST TimeZone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <label htmlFor="choiceGst2" className="font-Hanken mr-3">
-              GST
-            </label>
+            <div className="font-Hanken mr-3">GST</div>
             <input
               id="choiceGst2"
               type="radio"
