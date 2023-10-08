@@ -96,9 +96,15 @@ const Resource = () => (
         </div>
       </div>
       <div className="w-full lg:w-[45%] flex flex-col">
-        <video src="your-video.mp4" controls>
+        {/* <video src="" controls>
           <track kind="captions" src="captions.vtt" label="English captions" />
-        </video>
+        </video> */}
+        <iframe
+          src="https://www.youtube.com/embed/lFUXtURI-Dk?si=_RNgHAhBoVmB_Ws1"
+          title="YouTube video player"
+          allowFullScreen
+          className="w-full h-[400px]"
+        />
         <div className="w-full p-3 sm:p-6">
           <div className="w-full flex justify-between items-center mb-[34px]">
             <p className="font-Hanken text-[32px] text-NeutalBase font-semibold">
