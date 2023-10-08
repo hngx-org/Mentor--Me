@@ -117,9 +117,7 @@ MentoMe is open to contributions, but I recommend creating an issue or replying 
 
 ## Contribution Guidelines
 
-1. Clone the repo `git clone https://github.com/hngx-org/Mentor-Me.git`.
 
-2. Open your terminal & set the origin branch: `git remote add origin https://github.com/hngx-org/Mentor-Me.git`
 
 3. Pull origin `git pull origin dev`
 
