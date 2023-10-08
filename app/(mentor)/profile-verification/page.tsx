@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import HeaderAfterSignUp from "@/components/mentor-profile-verification/HeaderAfterSignUp";
-import SidebarMentor from "@/components/mentor/SidebarMentor";
 import {
   Amico,
   verificationApproved,
@@ -23,8 +22,9 @@ import {
   RejectedStatusIcon,
   CancelIcon,
 } from "@/public/SVGs";
-import MobileSideBar from "@/components/mentor/MobileSiderBar";
 import { Button } from "@/components/buttons/button";
+import MentorSideBar from "@/components/SideBar/MentorSideBar";
+import MobileSideBar from "@/components/MobileSideBar";
 
 export default function MentorProfileVerification() {
   const [step, setStep] = useState(0);
@@ -50,7 +50,7 @@ export default function MentorProfileVerification() {
     <>
       <div className="w-full flex bg-white text-black h-full lg:pb-0 pb-14">
         <div className="hidden lg:block">
-          <SidebarMentor />
+          <MentorSideBar />
         </div>
         <div className="w-full h-full">
           <HeaderAfterSignUp step={step} />

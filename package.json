@@ -14,12 +14,14 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "eslint-config-prettier": "^9.0.0",
     "framer-motion": "^10.16.4",
     "nanoid": "^5.0.1",
     "next": "13.5.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-icons": "^4.11.0"
   },
   "devDependencies": {
     "@types/node": "^20",

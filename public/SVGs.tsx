@@ -1068,6 +1068,245 @@ export const NotifyIcon = (props?: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+export const Facebook = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="vuesax/linear/facebook">
+      <g id="facebook">
+        <path
+          id="Vector"
+          d="M14 9.3V12.2H16.6C16.8 12.2 16.9 12.4 16.9 12.6L16.5 14.5C16.5 14.6 16.3 14.7 16.2 14.7H14V22H11V14.8H9.3C9.1 14.8 9 14.7 9 14.5V12.6C9 12.4 9.1 12.3 9.3 12.3H11V9C11 7.3 12.3 6 14 6H16.7C16.9 6 17 6.1 17 6.3V8.7C17 8.9 16.9 9 16.7 9H14.3C14.1 9 14 9.1 14 9.3Z"
+          stroke="#17191C"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+        />
+        <path
+          id="Vector_2"
+          d="M15 22H9C4 22 2 20 2 15V9C2 4 4 2 9 2H15C20 2 22 4 22 9V15C22 20 20 22 15 22Z"
+          stroke="#17191C"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </g>
+  </svg>
+);
+
+export const Instagram = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="vuesax/linear/instagram">
+      <g id="instagram">
+        <path
+          id="Vector"
+          d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          id="Vector_2"
+          d="M12 15.5C13.933 15.5 15.5 13.933 15.5 12C15.5 10.067 13.933 8.5 12 8.5C10.067 8.5 8.5 10.067 8.5 12C8.5 13.933 10.067 15.5 12 15.5Z"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          id="Vector_3"
+          d="M17.6361 7H17.6477"
+          stroke="#292D32"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </g>
+  </svg>
+);
+export const LoveIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="vuesax/linear/heart">
+      <g id="heart">
+        <path
+          id="Vector"
+          d="M12.62 20.8101C12.28 20.9301 11.72 20.9301 11.38 20.8101C8.48 19.8201 2 15.6901 2 8.6901C2 5.6001 4.49 3.1001 7.56 3.1001C9.38 3.1001 10.99 3.9801 12 5.3401C13.01 3.9801 14.63 3.1001 16.44 3.1001C19.51 3.1001 22 5.6001 22 8.6901C22 15.6901 15.52 19.8201 12.62 20.8101Z"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </g>
+  </svg>
+);
+
+export const ExportIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="vuesax/linear/export">
+      <g id="export">
+        <path
+          id="Vector"
+          d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          id="Vector_2"
+          d="M13 10.9998L21.2 2.7998"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          id="Vector_3"
+          d="M21.9999 6.83V2H17.1699"
+          stroke="#292D32"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </g>
+  </svg>
+);
+
+export const StarIcon1 = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="15"
+    height="15"
+    viewBox="0 0 15 15"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="Star">
+      <path
+        id="Union"
+        d="M7.5 0L10.0494 4.60228L15 5.72949L11.625 9.70106L12.1353 15L7.5 12.8523L2.86474 15L3.375 9.70106L0 5.72949L4.95061 4.60228L7.5 0Z"
+        fill="#FFCB45"
+      />
+    </g>
+  </svg>
+);
+
+export const StarIcon2 = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="15"
+    height="15"
+    viewBox="0 0 15 15"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="Star">
+      <path
+        id="Union"
+        d="M7.5 0L10.0494 4.60228L15 5.72949L11.625 9.70106L12.1353 15L7.5 12.8523L2.86474 15L3.375 9.70106L0 5.72949L4.95061 4.60228L7.5 0Z"
+        fill="#D9D9D9"
+      />
+    </g>
+  </svg>
+);
+
+export const RightArrowIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="25"
+    height="24"
+    viewBox="0 0 25 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="vuesax/linear/arrow-right">
+      <g id="arrow-right">
+        <path
+          id="Vector"
+          d="M9.41016 19.9201L15.9302 13.4001C16.7002 12.6301 16.7002 11.3701 15.9302 10.6001L9.41016 4.08008"
+          stroke="#121212"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </g>
+  </svg>
+);
+export const RoundIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="40"
+    height="40"
+    viewBox="0 0 40 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle id="Ellipse 4" cx="20" cy="20" r="20" fill="#008080" />
+  </svg>
+);
+
+export const LeftIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="60"
+    height="60"
+    viewBox="0 0 60 60"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="arrow-circle-left">
+      <path
+        id="Vector"
+        d="M30 55C16.225 55 5 43.775 5 30C5 16.225 16.225 5 30 5C43.775 5 55 16.225 55 30C55 43.775 43.775 55 30 55ZM34.475 22.5C35.2 21.775 35.2 20.575 34.475 19.85C34.1 19.475 33.625 19.3 33.15 19.3C32.675 19.3 32.2 19.475 31.825 19.85L23 28.675C22.275 29.4 22.275 30.6 23 31.325L31.825 40.15C32.55 40.875 33.75 40.875 34.475 40.15C35.2 39.425 35.2 38.225 34.475 37.5L26.975 30L34.475 22.5Z"
+        fill="#818181"
+      />
+    </g>
+  </svg>
+);
+
+export const RightIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="60"
+    height="60"
+    viewBox="0 0 60 60"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="arrow-circle-left">
+      <path
+        id="Vector"
+        d="M30 55C43.775 55 55 43.775 55 30C55 16.225 43.775 5 30 5C16.225 5 5 16.225 5 30C5 43.775 16.225 55 30 55ZM25.525 22.5C24.8 21.775 24.8 20.575 25.525 19.85C25.9 19.475 26.375 19.3 26.85 19.3C27.325 19.3 27.8 19.475 28.175 19.85L37 28.675C37.725 29.4 37.725 30.6 37 31.325L28.175 40.15C27.45 40.875 26.25 40.875 25.525 40.15C24.8 39.425 24.8 38.225 25.525 37.5L33.025 30L25.525 22.5Z"
+        fill="#2A2A2A"
+      />
+    </g>
+  </svg>
+);
+
 export const ForwardIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width="22"
