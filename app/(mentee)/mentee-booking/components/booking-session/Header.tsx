@@ -16,7 +16,7 @@ const Header = () => (
     <Image
       src={DashboardCoverBg}
       alt="cover"
-      className="min-h-[100px] sm:min-h-[150px]"
+      className="w-full min-h-[100px] sm:min-h-[150px]"
     />
 
     <div className="flex flex-row flex-wrap justify-between items-center gap-4 px-2 sm:px-5">
