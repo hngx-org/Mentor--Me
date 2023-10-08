@@ -12,7 +12,7 @@ type MessagesLayoutProps = {
 
 export default function MessagesLayout() {
   return (
-    <div className="md:h-[83dvh]  w-[100%] pl-4 pt-4  overflow-clip lg:h-[90dvh]">
+    <div className="md:h-[90dvh]  w-[100%] pl-4 pt-4  overflow-clip lg:h-[100dvh]">
       <div className="flex w-[100%] justify-center h-[100%]">
         <div className="border border-b-[0] rounded-t-[8px]  w-[305px] h-[100%] pb-10">
           <div className="py-5  flex flex-col space-y-5 items-center  w-[100%] px-4 ">

@@ -11,7 +11,7 @@ import VCMessageBubble from "../VCMessageBubble";
 
 export default function VCLayout() {
   return (
-    <div className=" h-[89dvh] flex  w-[100%] overflow-clip ">
+    <div className=" h-[100dvh] flex  w-[100%] overflow-clip ">
       <div className="w-[65%]  h-[100%]">
         <VCLHS />
       </div>
