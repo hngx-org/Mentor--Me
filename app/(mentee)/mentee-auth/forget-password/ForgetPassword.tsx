@@ -4,6 +4,8 @@ import React, { useState } from "react";
 
 import Image from "next/image";
 
+import Link from "next/link";
+
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import back from "../../../../public/assets/Icons/back.png";
@@ -42,10 +44,13 @@ const ResetPassword = () => {
           <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
             Mentor Me
           </h2>
-          <div className="flex items-center gap-2 my-5">
-            <Image src={back} width={20} height={20} alt="back-icon" />
-            <h5 className="font-Hanken text-[18px]">Back</h5>
-          </div>
+          <Link href="/mentee-auth/login">
+            <div className="flex items-center gap-2 my-5">
+              <Image src={back} width={20} height={20} alt="back-icon" />
+              <h5 className="font-Hanken text-[18px]">Back</h5>
+            </div>
+          </Link>
+
           <div className="flex justify-center flex-col">
             <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
               Forgot Password
