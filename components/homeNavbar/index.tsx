@@ -6,12 +6,12 @@ import {
   ShoppingIcon,
 } from "@/public/SVGs";
 
-type HomeNavProps = {
+interface HomeNavProps {
   isUserLogin?: boolean;
-};
+}
 
 // const HomeNavBar: FC = ({ isUserLogin = true }: HomeNavProps) =>
-const HomeNavBar: FC = ({ isUserLogin = false }: HomeNavProps) => (
+const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => (
   <nav className="flex justify-between items-center py-[2rem] w-9/10  mx-auto bg-[#FFFF] cursor-pointer">
     <svg
       width="195"
@@ -36,7 +36,7 @@ const HomeNavBar: FC = ({ isUserLogin = false }: HomeNavProps) => (
         <li>Resources</li>
       </ul>
     ) : (
-      <ul className="hidden lgblock lg:flex items-center gap-10  font-Hanken">
+      <ul className="hidden lg:flex items-center gap-10  font-Hanken">
         <li className="text-[#565656] text-[0.8rem]">Find a Mentor</li>
         <li className="text-[#565656] text-[0.8rem]">Become a Mentor</li>
         <li className="text-[#565656] text-[0.8rem]">Community </li>
