@@ -66,3 +66,12 @@ export { default as achieve1 } from "./assets/images/mentee-booking/4969a6a6e7a8
 export { default as check } from "./assets/images/mentee-booking/tick-circle.svg";
 export { default as link } from "./assets/images/mentee-booking/SVG.svg";
 export { default as clock } from "./assets/images/mentee-booking/clock.svg";
+
+//  images for checkout and cart page
+export const CardRectangle1 = "assets/images/cart/cardRectangle1.png";
+export const CardRectangle2 = "assets/images/cart/cardRectangle2.png";
+export const CardRectangle3 = "assets/images/cart/cardRectangle3.png";
+export const CartImgPath1 = "assets/images/cart/cart1.png";
+export const CartImgPath2 = "assets/images/cart/cart2.png";
+export const CartImgPath3 = "assets/images/cart/cart3.png";
+export const SuccessImg = "assets/images/cart/success-img.png";
