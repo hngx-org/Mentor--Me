@@ -66,7 +66,7 @@ text-NeutalBase font-Inter overflow-hidden "
       </h2>
 
       <div
-        className={`${styles.slider} flex gap-3  transition-all  duration-300 transform  lg:w-fit md:w-fit ml-[vw] overflow-x-auto lg:gap-16 md:gap-x-10 gap-x-6`}
+        className={`${styles.slider} flex gap-3  transition-all  duration-300 transform  lg:w-fit md:w-fit ml-[vw] overflow-x-auto lg:gap-[57px] md:gap-x-10 gap-x-6`}
         style={{
           transform: `translateX(calc(-${
             (currentIndex * 3) / slideInfo.length
