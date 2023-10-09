@@ -4,6 +4,9 @@ import Partners from "@/components/landingPage/partners/page";
 import MentorTypes from "@/components/landingPage/mentorTypes/page";
 import BookingMentor from "@/components/landingPage/bookingMentor/page";
 import Reviews from "@/components/landingPage/reviews/page";
+import Footer from "@/components/Footer";
+import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
+import MentorSideBar from "@/components/SideBar/MentorSideBar";
 
 export default function Home() {
   return (
@@ -14,6 +17,7 @@ export default function Home() {
       <MentorTypes />
       <BookingMentor />
       <Reviews />
+      <Footer />
     </main>
   );
 }
