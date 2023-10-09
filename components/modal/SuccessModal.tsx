@@ -17,7 +17,13 @@ interface ModalProps {
   title?: string;
   buttontext?: string; // Add a prop for the text content
 }
-const SuccessModal: FC<ModalProps> = ({ isOpen, closeModal, content, buttontext, title }) => (
+const SuccessModal: FC<ModalProps> = ({
+  isOpen,
+  closeModal,
+  content,
+  buttontext,
+  title,
+}) => (
   <Transition appear show={isOpen}>
     <Dialog as="div" className="relative z-10" onClose={closeModal}>
       <Transition.Child

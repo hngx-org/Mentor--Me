@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from "react";
@@ -20,7 +19,7 @@ export function FreeSessionForm({
   sessionType,
   placeholder,
 }: SessionFormProps) {
-    // const [isOpen, setIsOpen] = useState<boolean>(false);
+  // const [isOpen, setIsOpen] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
   const closeSuccessModal = (): void => {
     setSuccessful(false);
@@ -96,7 +95,7 @@ export function FreeSessionForm({
               Cancel
             </Button>
             <Button
-            onClick={openSuccessModal}
+              onClick={openSuccessModal}
               className="p-4 w-full md:w-[20%]"
               variant="primary"
               type="button"
@@ -107,7 +106,7 @@ export function FreeSessionForm({
         </form>
       </div>
 
-      {successful &&
+      {successful && (
         <SuccessModal
           isOpen={successful}
           closeModal={closeSuccessModal}
@@ -115,7 +114,7 @@ export function FreeSessionForm({
           content="You have successfully created a session"
           buttontext="Return to dashboard"
         />
-      }
+      )}
     </div>
   );
 }
@@ -126,7 +125,7 @@ export function OneOffSessionForm({
   sessionType,
   placeholder,
 }: SessionFormProps) {
-    const [successful, setSuccessful] = useState<boolean>(false);
+  const [successful, setSuccessful] = useState<boolean>(false);
   const closeSuccessModal = (): void => {
     setSuccessful(false);
   };
@@ -289,20 +288,23 @@ export function RecurringSessionForm({
             </span>
           </div>
           <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
-             <Button
+            <Button
               className="p-4 w-full md:w-[20%]"
               variant="outline-primary"
               type="button"
-            >Cancel</Button>
+            >
+              Cancel
+            </Button>
             <Button
               className="p-4 w-full md:w-[20%]"
               variant="primary"
               type="button"
-            >Continue</Button>
+            >
+              Continue
+            </Button>
           </div>
         </form>
       </div>
-
     </div>
   );
 }
