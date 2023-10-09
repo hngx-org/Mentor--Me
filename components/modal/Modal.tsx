@@ -40,7 +40,9 @@ const Modal: FC<ModalProps> = ({ isOpen, closeModal, content, buttontext }) => (
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <Dialog.Panel className="w-full max-w-[520px] py-20 px-20 transform overflow-hidden  rounded-[8px] bg-white  text-left align-middle shadow-xl transition-all">
+
+            <Dialog.Panel className="w-full max-w-[520px] sm:p-20 p-10 transform overflow-hidden  rounded-[8px] bg-white  text-left align-middle shadow-xl transition-all">
+
               <div className="flex flex-col justify-center items-center">
                 <div
                   style={{

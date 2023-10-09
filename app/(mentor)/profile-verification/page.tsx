@@ -102,7 +102,7 @@ export default function MentorProfileVerification() {
                     )}
 
                     {verificationStatus === "pending" && (
-                      <div className="flex flex-col justify-center items-center md:ml-5 ml-0">
+                      <div className="flex flex-col justify-center items-center lg:ml-5 ml-0 lg:mt-0 mt-6">
                         <div className="w-full bg-[#fffbde] py-3 px-4 border-t-4 border-[#e5b800]">
                           <div className="flex justify-between">
                             <p className="flex font-Inter font-[600] text-[16px] text-[#e5b800]">
