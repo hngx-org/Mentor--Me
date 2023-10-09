@@ -27,7 +27,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "../Mentor-Me/components/ui/SelectInputType.tsx"
   ],
   "exclude": ["node_modules"]
 }

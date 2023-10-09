@@ -1,4 +1,9 @@
-import React from "react";
+
+"use client";
+
+import React, { useState } from "react";
+import SuccessModal from "@/components/modal/SuccessModal";
+// import SuccessModal fro../SuccessModaldal";
 import SelectInputType from "./SelectInputType";
 import { Button } from "@/components/buttons/button";
 
@@ -15,6 +20,15 @@ export function FreeSessionForm({
   sessionType,
   placeholder,
 }: SessionFormProps) {
+    // const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [successful, setSuccessful] = useState<boolean>(false);
+  const closeSuccessModal = (): void => {
+    setSuccessful(false);
+  };
+
+  const openSuccessModal = (): void => {
+    setSuccessful(true);
+  };
   return (
     <div className="p-0 bg-[#1d1c1c57] bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
       <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
@@ -78,17 +92,30 @@ export function FreeSessionForm({
               className="p-4 w-full md:w-[20%]"
               variant="outline-primary"
               type="button"
-              title="Cancel"
-            />
+            >
+              Cancel
+            </Button>
             <Button
+            onClick={openSuccessModal}
               className="p-4 w-full md:w-[20%]"
               variant="primary"
               type="button"
-              title="Continue"
-            />
+            >
+              Continue
+            </Button>
           </div>
         </form>
       </div>
+
+      {successful &&
+        <SuccessModal
+          isOpen={successful}
+          closeModal={closeSuccessModal}
+          title="Session Creation Successful!"
+          content="You have successfully created a session"
+          buttontext="Return to dashboard"
+        />
+      }
     </div>
   );
 }
@@ -99,6 +126,14 @@ export function OneOffSessionForm({
   sessionType,
   placeholder,
 }: SessionFormProps) {
+    const [successful, setSuccessful] = useState<boolean>(false);
+  const closeSuccessModal = (): void => {
+    setSuccessful(false);
+  };
+
+  const openSuccessModal = (): void => {
+    setSuccessful(true);
+  };
   return (
     <div className="p-0 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
       <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
@@ -162,17 +197,29 @@ export function OneOffSessionForm({
               className="p-4 w-full md:w-[20%]"
               variant="outline-primary"
               type="button"
-              title="Cancel"
-            />
+            >
+              Cancel
+            </Button>
             <Button
+              onClick={openSuccessModal}
               className="p-4 w-full md:w-[20%]"
               variant="primary"
               type="button"
-              title="Continue"
-            />
+            >
+              Continue
+            </Button>
           </div>
         </form>
       </div>
+      {successful && (
+        <SuccessModal
+          isOpen={successful}
+          closeModal={closeSuccessModal}
+          title="Session Creation Successful!"
+          content="You have successfully created a session"
+          buttontext="Return to dashboard"
+        />
+      )}
     </div>
   );
 }
@@ -242,21 +289,20 @@ export function RecurringSessionForm({
             </span>
           </div>
           <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
-            <Button
+             <Button
               className="p-4 w-full md:w-[20%]"
               variant="outline-primary"
               type="button"
-              title="Cancel"
-            />
+            >Cancel</Button>
             <Button
               className="p-4 w-full md:w-[20%]"
               variant="primary"
               type="button"
-              title="Continue"
-            />
+            >Continue</Button>
           </div>
         </form>
       </div>
+
     </div>
   );
 }
