@@ -10,7 +10,6 @@ type HomeNavProps = {
   isUserLogin?: boolean;
 };
 
-// const HomeNavBar: FC = ({ isUserLogin = true }: HomeNavProps) =>
 const HomeNavBar: FC = ({ isUserLogin = false }: HomeNavProps) => (
   <nav className="flex justify-between items-center py-[2rem] w-9/10  mx-auto bg-[#FFFF] cursor-pointer">
     <svg
