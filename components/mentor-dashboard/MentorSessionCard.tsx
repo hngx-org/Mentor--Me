@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React from "react";
 
 type cardType = {
   name: string;
@@ -7,6 +8,7 @@ type cardType = {
   min: number;
   month: string;
   location: string;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const MentorSessionCard = ({
@@ -16,6 +18,7 @@ const MentorSessionCard = ({
   day,
   month,
   min,
+  setIsOpen,
 }: cardType) => (
   <div className="border-Neutra10 border rounded-lg bg-white py-5 lg:py-10 px-3 flex flex-col gap-2 lg:gap-3">
     <p className="text-Neutra30 text-sm font-normal font-Hanken">{types}</p>
@@ -33,12 +36,13 @@ const MentorSessionCard = ({
         <p className="text-base lg:text-lg font-medium text-[#121212]">MINS</p>
       </div>
     </div>
-    <Link
+    <button
+      onClick={() => setIsOpen(true)}
+      type="button"
       className="w-full border border-[#121212] text-[#121212] text-center border-red block rounded-lg py-2"
-      href="#"
     >
       View Detail
-    </Link>
+    </button>
   </div>
 );
 
