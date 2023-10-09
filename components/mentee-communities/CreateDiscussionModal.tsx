@@ -10,7 +10,7 @@ import UploadIcon from "../../public/assets/Icons/mentee-communities/UploadImage
 import { Button } from "../buttons/button";
 
 const CreateDiscussionModal = () => (
-  <div className="modalOverLay flex fixed lg:w-[calc(100vw-274px)] w-[100vw] h-[100vh] md:pt-20 lg:pt-0  lg:items-center p-[15px] justify-center z-[100]">
+  <div className="modalOverLay flex fixed w-[100vw] h-full md:pt-20 lg:pt-0  lg:items-center p-[15px] justify-center z-[100]">
     <div className="createDiscussionModal md:w-[560px] w-[100%] h-fit bg-white md:pt-10  md:px-10 md:pb-[35px]  gap-y-6 rounded-[10px] border-Neutra10 md:border">
       <div className="title flex justify-between items-center mb-10 w-full ">
         <h1 className="font-medium text-[24px] leading-[28.8px]  w-fit font-Inter text-NeutalBase pl-[90px] md:pl-[0]">

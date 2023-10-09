@@ -15,19 +15,28 @@ const MobileSideBar = () => (
           Home
         </span>
       </Link>
-      <Link href="/" className="flex flex-col  justify-center  items-center ">
+      <Link
+        href="/mentee-sessions"
+        className="flex flex-col  justify-center  items-center "
+      >
         <MobileSession />
         <span className="text-[12px] text-[#ABABAB]  font-[400] font-Hanken">
           Sessions
         </span>
       </Link>
-      <Link href="/" className="flex flex-col  justify-center  items-center">
+      <Link
+        href="/mentee-communities"
+        className="flex flex-col  justify-center  items-center"
+      >
         <CommunitIconMobile />
         <span className="text-[12px] text-[#ABABAB]  font-[400] font-Hanken">
           Communities
         </span>
       </Link>
-      <Link href="/" className="flex flex-col  justify-center  items-center">
+      <Link
+        href="/mentee-resources"
+        className="flex flex-col  justify-center  items-center"
+      >
         <ResourcesMobile />
         <span className="text-[12px] text-[#ABABAB]  font-[400] font-Hanken">
           Resource center
