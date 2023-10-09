@@ -58,3 +58,9 @@ export { default as achieve1 } from "./assets/images/mentee-booking/4969a6a6e7a8
 export { default as check } from "./assets/images/mentee-booking/tick-circle.svg";
 export { default as link } from "./assets/images/mentee-booking/SVG.svg";
 export { default as clock } from "./assets/images/mentee-booking/clock.svg";
+
+// Image exports for explore page
+export { default as MentorImg1 } from "./assets/images/explore-page/mentor1.png";
+export { default as MentorImg2 } from "./assets/images/explore-page/mentor2.png";
+export { default as MentorImg3 } from "./assets/images/explore-page/mentor3.png";
+export { default as MentorImg4 } from "./assets/images/explore-page/mentor4.png";
