@@ -63,8 +63,6 @@ export default function BigDiscussionCard({
         <div className="largeButton lg:flex hidden ">
           {" "}
           <div className="buttons gap-5 flex">
-
-
             <button
               type="button"
               className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[10px] whitespace-nowrap px-[30px]   py-[10px] text-Accent1 bg-Accent6 border-0"
@@ -79,12 +77,10 @@ export default function BigDiscussionCard({
               <Image alt="icon" width={20} height={20} src={sendIcon} />
               Join ClassRoom
             </button>
-
           </div>
         </div>
         <div className="smallButton lg:hidden flex mt-2 ">
           <div className="buttons gap-2 flex">
-
             <button
               type="button"
               className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[10px] whitespace-nowrap px-[15px]   py-[6px] text-Accent1 bg-Accent6 border-0"
@@ -99,7 +95,6 @@ export default function BigDiscussionCard({
               <Image alt="icon" width={15} height={15} src={sendIcon} />
               Join ClassRoom
             </button>
-
           </div>
         </div>
       </div>

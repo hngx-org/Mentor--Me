@@ -64,7 +64,6 @@ const BigMentorShipCard = () => (
         {" "}
         Join ClassRoom
       </button>
-
     </div>
   </div>
 );

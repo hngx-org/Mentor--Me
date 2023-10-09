@@ -60,15 +60,12 @@ const MentorCard = () => (
         <div className="border-b border-Neutra10 border-[.5px] " />
       </div>
       <Link href="/mentee-communities/forums">
-
-
         <button
           type="button"
           className="text-[10px]  whitespace-nowrap px-[50px]   py-[16px]  bg-white border  border-NeutalBase text-NeutalBase flex items-center gap-x-1 rounded-[8px]"
         >
           Join ClassRoom
         </button>
-
       </Link>
     </div>
   </div>

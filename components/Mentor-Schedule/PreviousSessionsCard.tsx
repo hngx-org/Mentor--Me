@@ -46,7 +46,7 @@ function PreviousSessionsCard({
           <hr className="w-[150px] md:w-[263.32px] mx-auto md:mt-7" />
           <Button
             variant="outline-primary"
-            className="bg-[#FFFF] ml-[12px] min-w-[152px] md:min-w-[200px] md:ml-[35px] hover:bg-black hover:text-white mt-3 md:mt-3 text-[#000] text-[16px] font-[500]  border-[1.5px]  border-[#121212]  rounded-[6px] sm:rounded-[8px]  font-Hanken w-[152px] h-[40px] md:w-[200px]"
+            className="bg-[#FFFF] ml-[12px] min-w-[152px] md:min-w-[200px] md:ml-[44px] hover:bg-black hover:text-white mt-3 md:mt-3 text-[#000] text-[16px] font-[500]  border-[1.5px]  border-[#121212]  rounded-[6px] sm:rounded-[8px]  font-Hanken w-[152px] h-[40px] md:w-[200px]"
           >
             View Details
           </Button>

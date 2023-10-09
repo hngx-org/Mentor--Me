@@ -18,7 +18,9 @@ function PortfolioReview({ time, mode }: PortfolioReviewProps) {
             <h3 className="font-Hanken font-bold text-base">
               Portfolio Review
             </h3>
-            <MySettingsIcon />
+            <div className="cursor-pointer">
+              <MySettingsIcon />
+            </div>
           </div>
           <div className="font-Hanken text-sm font-normal flex flex-col h-[58px] gap-4 justify-between lg:mt-[-50px]">
             <p>

@@ -47,7 +47,7 @@ export default function Forums(): React.ReactElement {
         </div>
         <div className="largeButton lg:flex hidden">
           <Link href="/mentee-communities/forums/new-discussion">
-      {/* <Button
+            {/* <Button
               variant="primary"
               className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px] xl:max-w-fit  l"
               type="button"
@@ -62,20 +62,17 @@ export default function Forums(): React.ReactElement {
               <Image alt="icon" width={20} height={20} src={messageedit} />
               Start a disscussion
             </button>
-
           </Link>
         </div>
         <div className="smallButton lg:hidden flex">
           {" "}
           <Link href="/mentee-communities/forums/new-discussion">
-
             <button
               type="button"
               className="whitespace-nowrap px-[40px]   py-[16px]    h-fit  w-fit flex lg:hidden text-white border  bg-NeutalBase items-center rounded-[8px]"
             >
               Start a disscussion
             </button>
-
           </Link>
         </div>
       </div>

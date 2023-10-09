@@ -40,7 +40,6 @@ export { default as instaggram } from "./assets/Icons/instinstagramforprofile.pn
 export { default as updatee } from "./assets/Icons/upload_icon.png";
 export { default as EditIcon } from "./assets/Icons/iconamoon_edit-thin.png";
 
-
 export { default as MentorSchedule } from "./assets/images/MentorSchedule/photocard.png";
 
 // Image exports for explore page
@@ -67,4 +66,3 @@ export { default as achieve1 } from "./assets/images/mentee-booking/4969a6a6e7a8
 export { default as check } from "./assets/images/mentee-booking/tick-circle.svg";
 export { default as link } from "./assets/images/mentee-booking/SVG.svg";
 export { default as clock } from "./assets/images/mentee-booking/clock.svg";
-

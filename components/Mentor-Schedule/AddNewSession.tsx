@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  MouseEvent,
+  KeyboardEvent,
+} from "react";
 import {
   PlusIcon,
   MymodalComponent,
@@ -13,7 +19,7 @@ function AddNewSession() {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const closeModalOnOutsideClick = (event: MouseEvent) => {
+    const closeModalOnOutsideClick = (event: MouseEvent<Document>) => {
       if (
         modalRef.current &&
         !modalRef.current.contains(event.target as Node)
@@ -22,7 +28,7 @@ function AddNewSession() {
       }
     };
 
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleKeyDown = (event: KeyboardEvent<Document>) => {
       if (event.key === "Escape") {
         closeModal();
       }
@@ -52,7 +58,7 @@ function AddNewSession() {
     <div>
       <div
         onClick={openModal}
-        onKeyPress={(e) => {
+        onKeyPress={(e: React.KeyboardEvent) => {
           if (e.key === "Enter") {
             openModal();
           }
@@ -80,7 +86,7 @@ function AddNewSession() {
           {/* Dark background overlay */}
           <div
             onClick={closeModal}
-            aria-hidden="true"
+            aria-hidden
             className="fixed inset-0 bg-black z-0 opacity-50"
           />
 
@@ -98,7 +104,7 @@ function AddNewSession() {
                   </h2>
                   <div
                     onClick={closeModal}
-                    onKeyPress={(e) => {
+                    onKeyPress={(e: React.KeyboardEvent) => {
                       if (e.key === "Enter") {
                         closeModal();
                       }
@@ -112,7 +118,7 @@ function AddNewSession() {
                   </div>
                   <div
                     onClick={closeModal}
-                    onKeyPress={(e) => {
+                    onKeyPress={(e: React.KeyboardEvent) => {
                       if (e.key === "Enter") {
                         closeModal();
                       }
@@ -134,7 +140,7 @@ function AddNewSession() {
                     onClick={() => {
                       // Handle click for the first option here
                     }}
-                    onKeyPress={(e) => {
+                    onKeyPress={(e: React.KeyboardEvent) => {
                       if (e.key === "Enter") {
                         // Handle click for the first option here
                       }
@@ -162,7 +168,7 @@ function AddNewSession() {
                     onClick={() => {
                       // Handle click for the second option here
                     }}
-                    onKeyPress={(e) => {
+                    onKeyPress={(e: React.KeyboardEvent) => {
                       if (e.key === "Enter") {
                         // Handle click for the second option here
                       }
@@ -190,7 +196,7 @@ function AddNewSession() {
                     onClick={() => {
                       // Handle click for the third option here
                     }}
-                    onKeyPress={(e) => {
+                    onKeyPress={(e: React.KeyboardEvent) => {
                       if (e.key === "Enter") {
                         // Handle click for the third option here
                       }

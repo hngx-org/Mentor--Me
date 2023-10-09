@@ -55,9 +55,6 @@ const CreateDiscussionModal = () => (
         </div>
 
         <div className="buttons flex w-full justify-between">
-
-
-
           {/* <Button
 
             variant="primary"
@@ -93,7 +90,6 @@ const CreateDiscussionModal = () => (
             >
               Post
             </button>
-
           </Link>
         </div>
       </form>

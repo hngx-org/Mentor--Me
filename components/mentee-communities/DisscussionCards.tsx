@@ -49,7 +49,6 @@ const DiscussionCards: React.FC<Props> = ({ title, members, desc, id = 1 }) => (
       >
         Join Discussion
       </button>
-
     </Link>
   </div>
 );
