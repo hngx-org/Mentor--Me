@@ -2,6 +2,8 @@ import React from "react";
 
 import Image from "next/image";
 
+import Link from "next/link";
+
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import google from "../../../../public/assets/images/goggle.svg";
@@ -45,10 +47,13 @@ const SignUpForm = () => (
             By clicking Sign Up, you agree to mentor.Me’s
             <span className="text-[#008080]">Terms of Privacy & Policy</span>
           </p>
+          <Link href="/mentor-profile-creation">
+            {" "}
+            <Button variant="primary" paddingLess className="w-full h-[48px]">
+              Sign Up
+            </Button>
+          </Link>
 
-          <Button variant="primary" paddingLess className="w-full h-[48px]">
-            Sign Up
-          </Button>
           <div className="flex justify-center w-full">
             <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
               OR
@@ -76,7 +81,10 @@ const SignUpForm = () => (
           </div>
           <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
             Already a user?{" "}
-            <span className="font-semibold text-[#121212]"> Log In</span>
+            <span className="font-semibold text-[#121212]">
+              {" "}
+              <Link href="/mentor-auth/login">Log In</Link>
+            </span>
           </h5>
         </div>
       </div>
