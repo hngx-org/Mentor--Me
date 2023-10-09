@@ -43,3 +43,12 @@ body {
 .custom-hover-scale:hover {
   transform: scale(1.01); /* Adjust the scaling factor as desired */
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 5px;
+}
