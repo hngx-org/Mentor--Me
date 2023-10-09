@@ -26,22 +26,22 @@ export default function MentorSideBar({
 }: SideBarMentorProps) {
   return (
     <section
-      className={`w-[274px] min-h-screen border-[1px] relative p-5 hidden lg:flex ${
+      className={`w-[274px] min-h-screen border-[1px] fixed relative left-0 top-0 h-full  p-5 hidden lg:flex ${
         light ? "bg-[#fff]" : "bg-[#000]"
       } ${className}`}
     >
       <div className="flex flex-col">
         <div>
           <div className="w-full pl-3">{light ? <Logo2 /> : <LogoIcon />}</div>
-          <div className="mt-14">
+          <div className="mt-5">
             <p className="font-Inter text-[14px]  leading-[20.3px] font-[500]   text-Neutra30 pl-3">
               MENU
             </p>
-            <ul className="px-3  py-2  gap-1 cursor-pointer text-[14px]">
+            <ul className="px-3  py-1   cursor-pointer text-[9px]">
               {sidebarMentorLinks.map((link) => (
                 <Link key={link.id} href={link.path} prefetch>
                   <li
-                    className={`flex gap-3 mt-4  ${
+                    className={`flex gap-3   ${
                       light && path === link.label.toLowerCase()
                         ? "bg-[#E5FFFF]"
                         : !light && path === link.label.toLowerCase()
@@ -52,7 +52,7 @@ export default function MentorSideBar({
                     {light ? link.iconLight : link.iconDark}
 
                     <span
-                      className={` font-Inter text-[14px] font-[500] ${
+                      className={` font-Inter text-[10px] font-[500] ${
                         light ? " text-NeutalBase" : "text-[#fff]"
                       } `}
                     >
@@ -65,13 +65,13 @@ export default function MentorSideBar({
           </div>
         </div>
 
-        <div className="my-10 border-t-2 border-Neutra40">
-          <ul className="px-3  py-2 flex flex-col gap-2 cursor-pointer">
+        <div className="my-1 border-t-2 border-Neutra40">
+          <ul className="px-3  py-1 flex flex-col gap-1 cursor-pointer">
             <li className="flex gap-3 rounded-[5px] p-2">
               <SettingIcon />
 
               <span
-                className={` font-Inter text-[14px] font-[500] ${
+                className={` font-Inter text-[12px] font-[500] ${
                   light ? "text-[#40444B]" : "text-[#fff]"
                 } `}
               >
@@ -88,12 +88,12 @@ export default function MentorSideBar({
           </ul>
         </div>
 
-        <div className="absolute bottom-1">
+        <div className=" ">
           <ul className="cursor-pointer">
             <li className="flex gap-3 items-center  p-2">
               <ProfileIcon />
 
-              <span className="font-Inter text-[14px] font-[500]   text-Neutra30">
+              <span className="font-Inter text-[12px] font-[500]   text-Neutra30">
                 <span className={`${light ? "text-[#000]" : "text-Neutra30"}`}>
                   Funmi Oladapo
                 </span>

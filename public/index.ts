@@ -1,3 +1,14 @@
+// Images for Mentee Sessions
+export { default as sessionHope } from "./assets/images/mentee-sessions/session-hope.png";
+export { default as sessionPatricia } from "./assets/images/mentee-sessions/session-patricia.png";
+export { default as sessionShaolin } from "./assets/images/mentee-sessions/session-shaolin.png";
+export { default as sessionMaurice } from "./assets/images/mentee-sessions/session-maurice.png";
+export { default as sessionKaplan } from "./assets/images/mentee-sessions/session-kaplan.png";
+// Facemojis for Sessions Mentee
+export { default as faceMoji1 } from "./assets/images/mentee-sessions/facemojis/facemoji.png";
+export { default as faceMoji2 } from "./assets/images/mentee-sessions/facemojis/facemoji-2.png";
+export { default as faceMoji3 } from "./assets/images/mentee-sessions/facemojis/facemoji-3.png";
+
 // Image exports for the mentee community
 export { default as membersCardAvatar } from "./assets/images/mentee-communities/membersCardAvatar.svg";
 export { default as mentorCardHero } from "./assets/images/mentee-communities/mentoreCardHero.svg";
@@ -66,3 +77,12 @@ export { default as achieve1 } from "./assets/images/mentee-booking/4969a6a6e7a8
 export { default as check } from "./assets/images/mentee-booking/tick-circle.svg";
 export { default as link } from "./assets/images/mentee-booking/SVG.svg";
 export { default as clock } from "./assets/images/mentee-booking/clock.svg";
+
+//  images for checkout and cart page
+export const CardRectangle1 = "assets/images/cart/cardRectangle1.png";
+export const CardRectangle2 = "assets/images/cart/cardRectangle2.png";
+export const CardRectangle3 = "assets/images/cart/cardRectangle3.png";
+export const CartImgPath1 = "assets/images/cart/cart1.png";
+export const CartImgPath2 = "assets/images/cart/cart2.png";
+export const CartImgPath3 = "assets/images/cart/cart3.png";
+export const SuccessImg = "assets/images/cart/success-img.png";

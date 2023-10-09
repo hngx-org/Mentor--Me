@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import SidebarMentor from "@/components/mentor/SidebarMentor";
+import Link from "next/link";
+import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
 import MenteeNavBar from "@/components/menteeTopNav";
 import {
   DashboardMenteeProfileImg,
@@ -49,9 +50,9 @@ export default function MentorReviews() {
   return (
     <div className="w-full flex bg-white text-black h-full lg:pb-0 pb-14">
       <div className="hidden lg:block fixed top-0">
-        <SidebarMentor />
+        <MenteeSideBar />
       </div>
-      <div className="bg-white flex flex-col overflow-hidden lg:ml-[280px]">
+      <div className="bg-white flex flex-col overflow-hidden lg:ml-[270px]">
         <MenteeNavBar />
 
         <Image className="w-full" src={DashboardCoverBg} alt="cover-img" />
@@ -129,26 +130,31 @@ export default function MentorReviews() {
           </div>
           <div className="flex flex-col text-center p-[15px] xl:p-[50px] gap-y-[35px]">
             <div className="inline-flex w-[188px] items-center gap-x-[29px]">
-              <p className="text-Neutra30 font-Inter text-18 font-normal leading-[120%]">
-                Overview
-              </p>
-              <div className="flex  justify-center w-[96px] h-[25px] items-start border-b-[3px] border-Accent1 rounded-8 gap-x-[4px] b">
-                <p className="text-black font-Inter text-18 font-semibold leading-[120%]">
-                  Reviews
+              <Link href="https://mentor-me-lake.vercel.app/mentee-booking">
+                <p className="text-Neutra30 font-Inter text-18 font-normal leading-[120%]">
+                  Overview
                 </p>
+              </Link>
+
+              <div className="flex  justify-center w-[96px] h-[25px] items-start border-b-[3px] border-Accent1 rounded-8 gap-x-[4px] b">
+                <Link href="https://mentor-me-lake.vercel.app/mentor-reviews?path=reviews">
+                  <p className="text-black font-Inter text-18 font-semibold leading-[120%]">
+                    Reviews
+                  </p>
+                </Link>
                 <span className="flex w-[20px] text-white h-[21px] p-[6px] flex-col justify-center items-center gap-[8px] rounded-full bg-Accent1">
                   6
                 </span>
               </div>
             </div>
             <div className="inline-flex flex-col w-full items-start">
-              <div className="flex flex-row flex-wrap max-w-[720px] gap-x-[2px] sm:gap-x-[12px] xl:gap-x-[52px] xl:gap-y-[40px] ">
+              <div className="flex flex-row flex-wrap max-w-[720px] gap-x-[2px] sm:gap-x-[12px] xl:gap-x-[52px] gap-y-[15px] xl:gap-y-[40px] ">
                 {qualityArr.map((item) => (
                   <div
                     key={item.id}
                     className="flex flex-col justify-center items-start gap-y-[20px]"
                   >
-                    <div className="flex flex-row w-[327px] items-center gap-[53px] sm:gap-x-[110px] md:gap-x-[200px] xl:gap-x-[103px">
+                    <div className="flex flex-row w-[327px] items-center gap-x-[200px] gap-y-[100px] sm:gap-x-[110px] md:gap-x-[200px] xl:gap-x-[103px">
                       <p className=" h-[24px] text-#121212 font-Hanken text-[12px] font-normal  leading-[120%]">
                         {item.title}
                       </p>
@@ -167,7 +173,7 @@ export default function MentorReviews() {
                 <p className="w-[190px] text-#121212 font-Hanken text-[24px] font-semibold  leading-[120%]">
                   People often say
                 </p>
-                <div className="flex flex-wrap max-w-[711px] items-start gap-x-[16px]">
+                <div className="flex flex-wrap max-w-[711px] items-start gap-y-[10px] gap-x-[16px]">
                   <div className="flex w-[98px] bg-black p-[6.5px] justify-center items-center rounded-[8px] border border-Neutra20 text-white">
                     All
                   </div>

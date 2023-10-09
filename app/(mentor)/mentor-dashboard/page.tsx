@@ -11,7 +11,7 @@ import Modal from "@/components/mentor-dashboard/Modal";
 import MenteeNavBar from "@/components/menteeTopNav";
 
 const page = () => {
-  const [isVerified, setIsVerified] = useState<boolean>(false);
+  const [isVerified, setIsVerified] = useState<boolean>(true);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div className="flex">
