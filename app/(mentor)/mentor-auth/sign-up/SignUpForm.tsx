@@ -15,7 +15,7 @@ import { Button } from "@/components/buttons/button";
 const SignUpForm = () => (
   <div>
     <div className="w-full h-[100vh] grid grid-cols-1 lg:grid-cols-6  overflow-hidden">
-      <div className="lg:col-span-3">
+      <div className="lg:col-span-3 ">
         <div style={{ position: "relative", width: "100%", height: "100%" }}>
           <Image
             src={auth}
