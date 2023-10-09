@@ -1,10 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function Pagination() {
+type PaginationProps = {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+};
+
+export default function Pagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: PaginationProps) {
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+
+    for (let i = 0; i < totalPages; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          onClick={() => onPageChange(i)}
+          className="{i === currentPage ? 'active': ''}"
+        >
+          {i}
+        </button>
+      );
+    }
+    return pageNumbers;
+  };
+
+  const [onClicked, setOnClicked] = useState(2);
+  const linkStyle = "font-semibold text-lg cursor-pointer";
+  const activeStyle =
+    linkStyle +
+    " md:bg-Accent1 px2 py2 md:px-[8px] md:py-[4px] md:text-white rounded-[9px] transition";
+  const nonActiveStyle = linkStyle + " text-black";
+
+  const numClicked = (num: number) => {
+    setOnClicked(num);
+  };
+
   return (
     <div className="flex justify-center items-center mb-20 mt-10 ">
-      <div className="flex items-center gap-4 lg:gap-8 rounded-[40px] border-[0.2px] border-Neutra40 px-2 py-2">
-        <button type="button">
+      <div className="flex items-center gap-4 lg:gap-7 rounded-[40px] border-[0.2px] border-Neutra40 px-2 py-2">
+        <button type="button" className="hover:opacity-70 transition-opacity">
           <svg
             width="60"
             height="60"
@@ -20,24 +58,58 @@ export default function Pagination() {
         </button>
         <button
           type="button"
-          className=" font-Inter text-base lg:text-lg font-medium"
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className=" font-Inter text-base lg:text-lg font-semibold hover:opacity-60 transition-opacity"
         >
           Prev
         </button>
-        <div className="flex items-center gap-3 lg:gap-8">
-          <span className=" cursor-pointer">1</span>
-          <span className=" font-bold cursor-pointer md:bg-Accent1 px-2 py-2 md:px-4 md:py-2 md:text-white rounded-[9999999px]">
+        <div className="flex items-center gap-3 lg:gap-5">
+          <button
+            className={onClicked === 1 ? activeStyle : nonActiveStyle}
+            onClick={() => numClicked(1)}
+          >
+            1
+          </button>
+          <button
+            onClick={() => numClicked(2)}
+            className={onClicked === 2 ? activeStyle : nonActiveStyle}
+            // className=" font-bold cursor-pointer md:bg-Accent1 px-2 py-2 md:px-4 md:py-2 md:text-white rounded-[9999999px]"
+          >
             2
-          </span>
-          <span className="hidden lg:flex cursor-pointer">3</span>
-          <span className="hidden lg:flex cursor-pointer">4</span>
-          <span className=" cursor-pointer">...</span>
-          <span className=" cursor-pointer">10</span>
+          </button>
+          <button
+            onClick={() => numClicked(3)}
+            className={onClicked === 3 ? activeStyle : nonActiveStyle}
+            // className="hidden lg:flex cursor-pointer"
+          >
+            3
+          </button>
+          <button
+            onClick={() => numClicked(4)}
+            className={onClicked === 4 ? activeStyle : nonActiveStyle}
+            // className="hidden lg:flex cursor-pointer"
+          >
+            4
+          </button>
+          <button className=" cursor-pointer">...</button>
+          <button
+            onClick={() => numClicked(10)}
+            className={onClicked === 10 ? activeStyle : nonActiveStyle}
+          >
+            10
+          </button>
+          {/* {renderPageNumbers()} */}
         </div>
-        <button type="button" className=" font-Inter lg:text-lg font-medium">
+        <button
+          type="button"
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className=" font-Inter lg:text-lg font-semibold hover:opacity-60 transition-opacity"
+        >
           Next
         </button>
-        <button type="button">
+        <button type="button" className=" hover:opacity-50 transition-opacity">
           <svg
             width="60"
             height="60"
