@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   CartImgPath1,
@@ -14,8 +15,11 @@ import {
   CartArrowRightIcon,
 } from "@/public/SVGs";
 import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function cart() {
+  const router = useRouter();
   return (
     <div>
       <div>
@@ -191,6 +195,7 @@ export default function cart() {
             </p>
             <p className="text-[32px] leading-[38.4px] font-[500]">N4,500</p>
             <button
+              onClick={() => router.push("/checkout")}
               type="button"
               className="mt-[20px] w-[298px] pl-[50px] pr-[50px] pt-[10px] pb-[10px] bg-[#121212] text-[#FFFFFF] rounded-[8px]"
             >
@@ -267,6 +272,7 @@ export default function cart() {
                   </p>
                   <div>
                     <button
+                      onClick={() => router.push("/checkout")}
                       type="button"
                       className="mt-[20px] w-[112px] h-[40px] p-[5px] bg-[#121212] text-[#FFFFFF] rounded-[8px]"
                     >
@@ -328,6 +334,7 @@ export default function cart() {
                   </p>
                   <div>
                     <button
+                      onClick={() => router.push("/checkout")}
                       type="button"
                       className="mt-[20px] w-[112px] h-[40px] p-[5px] bg-[#121212] text-[#FFFFFF] rounded-[8px]"
                     >
@@ -389,6 +396,7 @@ export default function cart() {
                   </p>
                   <div>
                     <button
+                      onClick={() => router.push("/checkout")}
                       type="button"
                       className="mt-[20px] w-[112px] h-[40px] p-[5px] bg-[#121212] text-[#FFFFFF] rounded-[8px]"
                     >
