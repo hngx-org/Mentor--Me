@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import HeaderAfterSignUp from "@/components/mentor-profile-verification/HeaderAfterSignUp";
-import SidebarMentor from "@/components/mentor/SidebarMentor";
 import {
   Amico,
   verificationApproved,
@@ -23,8 +22,9 @@ import {
   RejectedStatusIcon,
   CancelIcon,
 } from "@/public/SVGs";
-import MobileSideBar from "@/components/mentor/MobileSiderBar";
 import { Button } from "@/components/buttons/button";
+import MentorSideBar from "@/components/SideBar/MentorSideBar";
+import MobileSideBar from "@/components/MobileSideBar";
 
 export default function MentorProfileVerification() {
   const [step, setStep] = useState(0);
@@ -50,7 +50,7 @@ export default function MentorProfileVerification() {
     <>
       <div className="w-full flex bg-white text-black h-full lg:pb-0 pb-14">
         <div className="hidden lg:block">
-          <SidebarMentor />
+          <MentorSideBar />
         </div>
         <div className="w-full h-full">
           <HeaderAfterSignUp step={step} />
@@ -102,7 +102,7 @@ export default function MentorProfileVerification() {
                     )}
 
                     {verificationStatus === "pending" && (
-                      <div className="flex flex-col justify-center items-center md:ml-5 ml-0">
+                      <div className="flex flex-col justify-center items-center lg:ml-5 ml-0 lg:mt-0 mt-6">
                         <div className="w-full bg-[#fffbde] py-3 px-4 border-t-4 border-[#e5b800]">
                           <div className="flex justify-between">
                             <p className="flex font-Inter font-[600] text-[16px] text-[#e5b800]">

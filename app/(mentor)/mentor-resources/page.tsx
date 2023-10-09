@@ -85,7 +85,7 @@ const ResourceCard = ({
   };
   const formattedPrice = new Intl.NumberFormat("en-US", options).format(price);
   return (
-    <div className="w-[min(100%,_390px)] border-Neutra10 border-[1px] rounded-[8px] overflow-hidden shrink-0">
+    <div className="w-[min(100%,_390px)] min-w-[327px] border-Neutra10 border-[1px] rounded-[8px] overflow-hidden shrink-0">
       <Image
         className="w-full aspect-[398/167] object-cover"
         width={398}

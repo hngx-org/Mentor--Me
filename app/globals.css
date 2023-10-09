@@ -31,3 +31,11 @@ body {
 .mentor-resources-scroll::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.2);
 }
+
+.custom-hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.custom-hover-scale:hover {
+  transform: scale(1.01); /* Adjust the scaling factor as desired */
+}
