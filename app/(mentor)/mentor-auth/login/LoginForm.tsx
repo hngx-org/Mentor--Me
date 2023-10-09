@@ -48,10 +48,12 @@ const LoginForm = () => (
               Forget Password?
             </p>
           </Link>
+          <Link href="/mentor-profile-creation">
+            <Button variant="primary" paddingLess className="w-full h-[48px]">
+              Log in
+            </Button>
+          </Link>
 
-          <Button variant="primary" paddingLess className="w-full h-[48px]">
-            Log in
-          </Button>
           <div className="flex justify-center w-full">
             <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
               OR
@@ -67,6 +69,7 @@ const LoginForm = () => (
             >
               Log in with Google
             </Button>
+
             <Button
               variant="outline-primary"
               paddingLess
@@ -80,7 +83,10 @@ const LoginForm = () => (
           <Link href="mentor-auth/sign-up">
             <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
               New to MentorMe?
-              <span className="font-semibold text-[#121212]"> Sign Up</span>
+              <Link href="/mentor-auth/sign-up">
+                {" "}
+                <span className="font-semibold text-[#121212]"> Sign Up</span>
+              </Link>
             </h5>
           </Link>
         </div>

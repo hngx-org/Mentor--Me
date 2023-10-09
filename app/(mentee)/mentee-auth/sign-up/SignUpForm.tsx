@@ -2,6 +2,8 @@ import React from "react";
 
 import Image from "next/image";
 
+import Link from "next/link";
+
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import google from "../../../../public/assets/images/goggle.svg";
@@ -76,7 +78,10 @@ const SignUpForm = () => (
           </div>
           <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
             Already a user?{" "}
-            <span className="font-semibold text-[#121212]"> Log In</span>
+            <span className="font-semibold text-[#121212]">
+              {" "}
+              <Link href="/mentee-auth/login">Log In</Link>
+            </span>
           </h5>
         </div>
       </div>
