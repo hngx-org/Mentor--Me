@@ -25,7 +25,7 @@ const SuccessModal: FC<ModalProps> = ({
   title,
 }) => (
   <Transition appear show={isOpen}>
-    <Dialog as="div" className="relative z-10" onClose={closeModal}>
+    <Dialog as="div" className="relative z-50" onClose={closeModal}>
       <Transition.Child
         enter="ease-out duration-300"
         enterFrom="opacity-0"
