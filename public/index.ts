@@ -40,6 +40,12 @@ export { default as instaggram } from "./assets/Icons/instinstagramforprofile.pn
 export { default as updatee } from "./assets/Icons/upload_icon.png";
 export { default as EditIcon } from "./assets/Icons/iconamoon_edit-thin.png";
 
+// Image exports for explore page
+export { default as MentorImg1 } from "./assets/images/explore-page/mentor1.png";
+export { default as MentorImg2 } from "./assets/images/explore-page/mentor2.png";
+export { default as MentorImg3 } from "./assets/images/explore-page/mentor3.png";
+export { default as MentorImg4 } from "./assets/images/explore-page/mentor4.png";
+
 // Image Imports for Booking Session by Mentee
 export { default as MentorProfile } from "./assets/images/mentee-booking/Ellipse 1.svg";
 export { default as stars } from "./assets/images/mentee-booking/Group 68.svg";
