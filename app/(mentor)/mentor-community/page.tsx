@@ -62,7 +62,7 @@ export default function MenteeCommunitiesPage() {
         </div>
         <div
           ref={containerRef}
-          className="flex gap-6 overflow-x-auto discussion-comms"
+          className="flex gap-6 overflow-x-auto scroll-smooth discussion-comms"
         >
           {discussionCommunities.map((comm) => (
             <CommunityCard
@@ -84,12 +84,13 @@ export default function MenteeCommunitiesPage() {
           </h2>
           <Link
             href="#"
-            className="hidden md:block font-medium cursor-pointer text-Accent1 hover:underline"
+            className="text-[.875rem] md:block md:text-[1rem] font-medium cursor-pointer text-Accent1 hover:underline"
           >
             View More
           </Link>
         </div>
-        <div className="flex flex-col items-center gap-4 sm:grid sm:grid-cols-2 xl:flex xl:flex-row xl:gap-6 xl:items-start">
+        {/* xl:flex xl:flex-row xl:gap-6 xl:items-start xl:flex-wrap xl:justify-evenly */}
+        <div className="flex flex-col items-center gap-4 sm:grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 ">
           {freeMentorSessions.slice(0, 4).map((sesh) => (
             <MentorSeshCard
               key={sesh.author.name}

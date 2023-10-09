@@ -43,7 +43,7 @@ const UnverifiedMentorCard = () => {
                   <div className="w-[70%] h-full bg-[#008080]" />
                 </div>
               </div>
-              <div>
+              <div className="mb-2">
                 <label
                   htmlFor="verify_account"
                   className="text-Neutra40 text-[10px] md:text-base flex gap-3 items-center"

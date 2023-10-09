@@ -1,6 +1,24 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
+export const GoNextArrowIcon = (props?: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={22}
+    height={21}
+    fill="none"
+    {...props}
+  >
+    <path
+      stroke="#818181"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeMiterlimit={10}
+      strokeWidth={1.291}
+      d="m8.258 17.417 5.613-5.614a1.71 1.71 0 0 0 0-2.41L8.258 3.779"
+    />
+  </svg>
+);
 export const FilterIcon = (props?: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
