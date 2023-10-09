@@ -19,7 +19,7 @@ export default function Filter() {
       <button
         type="button"
         onClick={filterPop}
-        className=" bg-black text-white rounded-lg py-3 px-6 cursor-pointer"
+        className=" bg-black text-white rounded-lg py-2 px-5 cursor-pointer hover:bg-opacity-80 transition-opacity"
       >
         <div className="flex items-center justify-center">
           <span className="mr-2">

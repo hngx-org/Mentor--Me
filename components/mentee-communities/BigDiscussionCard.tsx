@@ -65,17 +65,17 @@ export default function BigDiscussionCard({
           <div className="buttons gap-5 flex">
             <button
               type="button"
-              className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[10px] whitespace-nowrap px-[30px]   py-[10px] text-Accent1 bg-Accent6 border-0"
+              className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[16px] whitespace-nowrap px-[30px]   py-[10px] text-Accent1 bg-Accent6 border-0"
             >
-              <Image alt="icon" width={20} height={20} src={messageIcon} />
-              Join ClassRoom
+              <Image alt="icon" width={24} height={24} src={messageIcon} />
+              14 Comments
             </button>
             <button
               type="button"
-              className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[10px] whitespace-nowrap px-[30px]   py-[10px] text-Accent1 bg-Accent6 border-0"
+              className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[16px] whitespace-nowrap px-[30px]   py-[10px] text-Accent1 bg-Accent6 border-0"
             >
-              <Image alt="icon" width={20} height={20} src={sendIcon} />
-              Join ClassRoom
+              <Image alt="icon" width={24} height={24} src={sendIcon} />
+              Share
             </button>
           </div>
         </div>
