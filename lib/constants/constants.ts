@@ -1,3 +1,12 @@
+import { StaticImageData } from "next/image";
+import {
+  sessionHope,
+  sessionKaplan,
+  sessionMaurice,
+  sessionPatricia,
+  sessionShaolin,
+} from "@/public";
+
 export type QualityProps = {
   id: number;
   title: string;
@@ -16,6 +25,152 @@ export type IReview = {
   track: string;
   role: string;
 };
+export type UpcomingSessionProp = {
+  id?: number;
+  underline?: boolean;
+  name: string;
+  time: string;
+  date: string;
+  meetingLink: string;
+  rescheduleBtn: string;
+  reminderBtn: string;
+  imgSrc: string | StaticImageData;
+};
+export type historySessionProp = {
+  id?: number;
+  session: string;
+  mentor: string;
+  date: string;
+  duration: string;
+};
+
+// Vxrcel constants
+export const historySessions: historySessionProp[] = [
+  {
+    id: 1,
+    session: "Individual Session",
+    mentor: "Eve Jenny",
+    date: "Sept 06, 2023",
+    duration: "2 hours",
+  },
+  {
+    id: 2,
+    session: "Group Session",
+    mentor: "Tammy Abraham",
+    date: "Sept 20, 2023",
+    duration: "4 hours",
+  },
+  {
+    id: 3,
+    session: "Individual Session",
+    mentor: "Ole Lutjens",
+    date: "Sept 24, 2023",
+    duration: "1 hour",
+  },
+  {
+    id: 4,
+    session: "Individual Session",
+    mentor: "Ole Lutjens",
+    date: "Sept 24, 2023",
+    duration: "1 hour",
+  },
+  {
+    id: 5,
+    session: "Individual Session",
+    mentor: "Ole Lutjens",
+    date: "Sept 24, 2023",
+    duration: "1 hour",
+  },
+  {
+    id: 6,
+    session: "Individual Session",
+    mentor: "Ole Lutjens",
+    date: "Sept 24, 2023",
+    duration: "1 hour",
+  },
+  {
+    id: 7,
+    session: "Individual Session",
+    mentor: "Ole Lutjens",
+    date: "Sept 24, 2023",
+    duration: "1 hour",
+  },
+  {
+    id: 8,
+    session: "Individual Session",
+    mentor: "Ole Lutjens",
+    date: "Sept 24, 2023",
+    duration: "1 hour",
+  },
+];
+
+export const upcomingSessions: UpcomingSessionProp[] = [
+  {
+    id: 1,
+    name: "Patricia Flow",
+    time: "4pm (WAT)",
+    date: "06 Sept",
+    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Reschedule Session",
+    reminderBtn: "Set reminder",
+    imgSrc: sessionPatricia,
+  },
+  {
+    id: 2,
+    name: "Shao Lin",
+    time: "4pm (WAT)",
+    date: "06 Sept",
+    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Reschedule Session",
+    reminderBtn: "Set reminder",
+    imgSrc: sessionShaolin,
+  },
+  {
+    id: 3,
+    name: "Hope Chidi",
+    time: "4pm (WAT)",
+    date: "06 Sept",
+    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Reschedule Session",
+    reminderBtn: "Set reminder",
+    imgSrc: sessionHope,
+  },
+];
+export const cancelledSessions: UpcomingSessionProp[] = [
+  {
+    id: 1,
+    name: "Patricia Flow",
+    time: "4pm (WAT)",
+    date: "02 Aug",
+    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Reschedule Session",
+    reminderBtn: "Contact Mentor",
+    imgSrc: sessionPatricia,
+    underline: false,
+  },
+  {
+    id: 2,
+    name: "Maurice Monye",
+    time: "4pm (WAT)",
+    date: "02 Aug",
+    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Reschedule Session",
+    reminderBtn: "Contact Mentor",
+    imgSrc: sessionMaurice,
+    underline: true,
+  },
+  {
+    id: 3,
+    name: "Kaplan Kai",
+    time: "4pm (WAT)",
+    date: "02 Aug",
+    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Reschedule Session",
+    reminderBtn: "Contact Mentor",
+    imgSrc: sessionKaplan,
+    underline: true,
+  },
+];
 
 export const reviewsArr: IReview[] = [
   {

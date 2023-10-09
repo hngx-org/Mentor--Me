@@ -34,9 +34,11 @@ const mentorSessionsDetail = [
 
 interface mentorProps {
   isVerified: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
 }
 
-const MentorSession = ({ isVerified }: mentorProps) => (
+const MentorSession = ({ isVerified, setIsOpen, isOpen }: mentorProps) => (
   <div className="mt-7 md:mt-10">
     <div>
       <div className="flex justify-between">
@@ -66,7 +68,11 @@ const MentorSession = ({ isVerified }: mentorProps) => (
     </div>
     <div className="grid grid-cols-2 gap-5 lg:grid-cols-3 lg:gap-10 mt-7">
       {mentorSessionsDetail.map((session) => (
-        <MentorSessionCard {...session} key={session.id} />
+        <MentorSessionCard
+          setIsOpen={setIsOpen}
+          {...session}
+          key={session.id}
+        />
       ))}
     </div>
   </div>
