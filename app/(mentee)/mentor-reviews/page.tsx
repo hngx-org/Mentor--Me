@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import SidebarMentor from "@/components/mentor/SidebarMentor";
-import HeaderAfterSignUp from "@/components/mentor-profile-verification/HeaderAfterSignUp";
+import MenteeNavBar from "@/components/menteeTopNav";
 import {
   DashboardMenteeProfileImg,
   DashboardMenteeProfileVerifiedmark,
@@ -48,11 +48,12 @@ export default function MentorReviews() {
 
   return (
     <div className="w-full flex bg-white text-black h-full lg:pb-0 pb-14">
-      <div className="hidden lg:block">
+      <div className="hidden lg:block fixed top-0">
         <SidebarMentor />
       </div>
+      <div className="bg-white flex flex-col overflow-hidden lg:ml-[280px]">
+        <MenteeNavBar />
 
-      <div className="bg-white flex flex-col overflow-hidden">
         <Image className="w-full" src={DashboardCoverBg} alt="cover-img" />
         <div className=" flex-col items-start gap-y-[35px]">
           <div className="inline-flex justify-center  w-full gap-x-4 relative px-[69px] sm:px-12 md:px-8 lg:px-10 xl:pl-12">
@@ -187,7 +188,7 @@ export default function MentorReviews() {
               <p className="text-#121212 font-Hanken text-[24px] font-semibold leading-[120%]">
                 Real experience with mentor
               </p>
-              <div className="flex flex-wrap items-start gap-[20px] w-full">
+              <div className="flex flex-wrap mx-[auto] items-start gap-[20px] w-full">
                 {reviewsArr.map((item) => (
                   <ItemComponent item={item} />
                 ))}
