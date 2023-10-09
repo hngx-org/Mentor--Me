@@ -58,7 +58,7 @@ export default function AllSession() {
   }, [params]);
 
   return (
-    <section className="bg-[#f9fafc] h-full w-full flex-col flex  pt-10 lg:pt-12 lg:min-h-screen pb-16 lg:pb-0">
+    <section className="bg-[#f9fafc] h-full w-full flex-col flex  pt-10 lg:pt-12 sm:min-h-screen pb-16 lg:pb-0">
       <div className="flex items-center gap-10 !max-lg:w-full border-b-[1px] border-Neutra10 px-4 sm:px-6 lg:px-8 2xl:px-24 select-none">
         {sessionsTabs.map((session) => (
           <p
