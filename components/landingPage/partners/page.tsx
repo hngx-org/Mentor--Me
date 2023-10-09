@@ -9,7 +9,7 @@ export default function Partners() {
   return (
     <section className="py-[3rem]">
       <div className="w-9/10 md:w-5/6 mx-auto">
-        <h3 className="text-[1.2rem] font-semibold mb-[1.2rem]">
+        <h3 className="text-[1.7rem] text-center md:text-[1.2rem] font-semibold mb-[1.5rem] md:mb-[1.2rem]">
           Trusted By top Companies
         </h3>
         <div className="w-full flex flex-wrap md:flex-nowrap justify-evenly md:justify-between items-center">
