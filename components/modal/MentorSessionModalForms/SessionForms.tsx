@@ -138,7 +138,7 @@ export function FreeSessionForm({
   );
 }
 
-export function OnOffSessionForm({
+export function OneOffSessionForm({
   labelName,
   isRequired,
   sessionType,
