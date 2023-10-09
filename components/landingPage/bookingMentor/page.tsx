@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function BookingMentor() {
   return (
     <section className="mb-[5rem] w-9/10 md:w-5/6 mx-auto relative">
@@ -71,7 +73,7 @@ export default function BookingMentor() {
           type="button"
           className="bg-[black] text-[white] py-[1.1rem] md:py-[0.8rem] text-[0.8rem] w-5/6 md:w-1/5 max-w-[250px] rounded-[8px]"
         >
-          Explore More
+          <Link href="/explore"> Explore More</Link>
         </button>
       </div>
     </section>
