@@ -19,14 +19,14 @@ function PreviousSessionsCard({
 }: CardApiReturn) {
   return (
     <div>
-      <div className="w-[182px] rounded-lg h-[270px] md:w-[295px] md:h-[361px] border-2 border-neutral-300 mb-10">
-        <div className="w-[182px] h-[109.8px] md:w-[295px] md:h-[183px]">
+      <div className="w-[182px] h-[270px] md:w-[295px] rounded-xl md:h-[361px] border-2 border-neutral-300 mb-10">
+        <div className="w-[182px] h-[109.8px] md:w-[295px] md:h-[183px] overflow-hidden">
           <Image
             alt="th"
             src={imageFromServer}
-            width={300}
+            width={295}
             height={300}
-            className="object-cover"
+            className="object-contain"
           />
         </div>
         <div className=" h-[90.6px] text-neutral-600 text-xs md:h-[66px] text-left p-2 md:p-4">
