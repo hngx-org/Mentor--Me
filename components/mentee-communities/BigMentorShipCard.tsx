@@ -57,12 +57,13 @@ const BigMentorShipCard = () => (
         Learn the basics from industry experts.
       </div>
 
-      {/* <Button
-        variant="primary"
-        className="text-[10px] px-10 py-5 whitespace-nowrap"
+      <button
         type="button"
-        title="Join Classroom"
-      />  */}
+        className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px]   w-fittext-white border  bg-NeutalBase flex items-center gap-x-1 rounded-[8px] w-fit text-white"
+      >
+        {" "}
+        Join ClassRoom
+      </button>
     </div>
   </div>
 );

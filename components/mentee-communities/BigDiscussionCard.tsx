@@ -63,42 +63,38 @@ export default function BigDiscussionCard({
         <div className="largeButton lg:flex hidden ">
           {" "}
           <div className="buttons gap-5 flex">
-            <Button
-              variant="primary"
-              className="text-[10px] whitespace-nowrap px-[12px]   py-[10px]  text-Accent1 bg-Accent6 border-0"
+            <button
               type="button"
-              title="14 Comments"
-              iconPresent={messageIcon}
-            />
-            <Button
-              variant="primary"
-              className="text-[10px] whitespace-nowrap px-[12px]   py-[10px] text-Accent1 bg-Accent6 border-0"
+              className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[16px] whitespace-nowrap px-[30px]   py-[10px] text-Accent1 bg-Accent6 border-0"
+            >
+              <Image alt="icon" width={24} height={24} src={messageIcon} />
+              14 Comments
+            </button>
+            <button
               type="button"
-              title="Share"
-              iconPresent={sendIcon}
-            />
+              className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[16px] whitespace-nowrap px-[30px]   py-[10px] text-Accent1 bg-Accent6 border-0"
+            >
+              <Image alt="icon" width={24} height={24} src={sendIcon} />
+              Share
+            </button>
           </div>
         </div>
         <div className="smallButton lg:hidden flex mt-2 ">
           <div className="buttons gap-2 flex">
-            <Button
-              variant="primary"
-              className="text-[8px]  flex whitespace-nowrap px-[8px] gap-x-[1px]  py-[4px]  text-Accent1 bg-Accent6 border-0"
+            <button
               type="button"
-              title="14 Comments"
-              iconPresent={messageIcon}
-              // iconHeight={15}
-              // iconWidth={15}
-            />
-            <Button
-              variant="primary"
-              className="text-[8px]  flex whitespace-nowrap px-[8px] gap-x-[1px]  py-[4px]  text-Accent1 bg-Accent6 border-0"
+              className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[10px] whitespace-nowrap px-[15px]   py-[6px] text-Accent1 bg-Accent6 border-0"
+            >
+              <Image alt="icon" width={15} height={15} src={messageIcon} />
+              Join ClassRoom
+            </button>
+            <button
               type="button"
-              // iconHeight={15}
-              // iconWidth={15}
-              title="Share"
-              iconPresent={sendIcon}
-            />
+              className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[6px] whitespace-nowrap px-[15px]   py-[10px] text-Accent1 bg-Accent6 border-0"
+            >
+              <Image alt="icon" width={15} height={15} src={sendIcon} />
+              Join ClassRoom
+            </button>
           </div>
         </div>
       </div>

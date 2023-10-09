@@ -15,7 +15,7 @@ type Props = {
 };
 
 const DiscussionCards: React.FC<Props> = ({ title, members, desc, id = 1 }) => (
-  <div className="discussioncard lg:pt-4 lg:px-[19px] lg:pb-[30px] px-2 py-4 border border-Neutra10 lg:rounded-[8px] rounded-[6.2px] justify-center items-center flex flex-col flex-shrink-0 gap-2 xl:w-[268px]  md:w-[23vw] w-[45vw] md:min-h-[220px]  h-fit  ">
+  <div className="discussioncard  flex flex-col flex-shrink-0 lg:pt-4 lg:px-[19px] lg:pb-[30px] px-2 py-4 border border-Neutra10 lg:rounded-[8px] rounded-[6.2px] justify-center items-center  gap-2 lg:max-w-[295px]   lg:w-[18vw] md:w-[23vw] w-[40vw]  md:min-h-[220px]  h-fit   ">
     <div className="text flex flex-col xl:gap-[14px] gap-2 font-Hanken xl:mb-[45px] text-left">
       <p className=" text-NeutalBase font-semibold xl:text-[24px] text-[14px] leading-[28.8px]  ">
         {title}
@@ -43,12 +43,12 @@ const DiscussionCards: React.FC<Props> = ({ title, members, desc, id = 1 }) => (
       </button> */}
 
     <Link href="/mentee-communities/forums">
-      <Button
-        variant="primary"
-        className="text-[10px]  lg:px-[5rem] whitespace-nowrap   px-6 py-3  md:mt-3 mt-0"
+      <button
         type="button"
-        title="Join Discussion"
-      />
+        className="text-[10px]  whitespace-nowrap px-[30px]   py-[16px]  bg-white border  border-NeutalBase text-NeutalBase flex items-center gap-x-1 rounded-[8px]"
+      >
+        Join Discussion
+      </button>
     </Link>
   </div>
 );

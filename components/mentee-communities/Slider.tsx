@@ -35,7 +35,7 @@ const Slider: React.FC<Props> = ({ slideInfo }) => {
 
   return (
     <div
-      className="discussion-section relative lg:mt-[98px] md:mt[40px] mt-[23px]  flex flex-col mx-[2vw] 
+      className="discussion-section relative lg:mt-[98px] md:mt[40px] mt-[23px]  flex flex-col lg:mx-[6vw] md:mx-[9vw] mx-[7vw]
 text-NeutalBase font-Inter overflow-hidden "
       // style={{marginLeft:`${}`}}
     >
@@ -66,7 +66,7 @@ text-NeutalBase font-Inter overflow-hidden "
       </h2>
 
       <div
-        className={`${styles.slider} flex gap-3 lg:gap-0  transition-all  duration-300 transform  lg:w-fit md:w-full  lg:px-[0.75vw] px-[2vw] overflow-x-auto `}
+        className={`${styles.slider} flex gap-3  transition-all  duration-300 transform  lg:w-fit md:w-fit ml-[vw] overflow-x-auto lg:gap-16 md:gap-x-10 gap-x-6`}
         style={{
           transform: `translateX(calc(-${
             (currentIndex * 3) / slideInfo.length
@@ -74,12 +74,12 @@ text-NeutalBase font-Inter overflow-hidden "
         }}
       >
         {slideInfo.map((item, index) => (
-          <div className="flex-shrink-0 w-fit xl:px-[14px] lg:px-[4px]">
+          <div className="flex-shrink-0 w-fit ">
             {/* {item} */}
             <DiscussionCards
               id={Number(Date.now()) + index}
               title="Memeber Math"
-              members={13}
+              members={13 + index}
               desc="Connect with industry-leading mentors in science and technology. Explore the cutting edge together."
             />
           </div>
