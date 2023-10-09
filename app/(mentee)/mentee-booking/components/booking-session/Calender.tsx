@@ -16,7 +16,7 @@ const Calendarcomponent = ({
   };
 
   return (
-    <div className="max-w-[374px] border-[0.5px] border-Accent1 rounded-xl">
+    <div className="max-w-fit border-[0.5px] border-Accent1 rounded-xl">
       <DayPicker
         selected={unAvailableDates}
         onSelect={(date: Date[] | Date | undefined) => updateDates(date)}
