@@ -1,4 +1,7 @@
 import React, { FC } from "react";
+
+import Link from "next/link";
+
 import {
   NotificationIcon,
   NotifyIcon,
@@ -28,21 +31,38 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => (
     </svg>
 
     {isUserLogin ? (
-      <ul className=" items-center gap-10  font-Hanken hidden lg:flex text-NeutalBase ">
+      <div className=" items-center gap-10  font-Hanken hidden lg:flex text-NeutalBase ">
         <li className="font-[700] border-b-[3px] border-black">Home</li>
         <li>Dashboard</li>
-        <li>Community </li>
+        <Link
+          href="/mentor-communities"
+          className="text-[#565656] text-[0.8rem]"
+        >
+          Community
+        </Link>
 
-        <li>Resources</li>
-      </ul>
+        <Link href="/mentor-resources" className="text-[#565656] text-[0.8rem]">
+          Resources
+        </Link>
+      </div>
     ) : (
-      <ul className="hidden lg:flex items-center gap-10  font-Hanken">
-        <li className="text-[#565656] text-[0.8rem]">Find a Mentor</li>
-        <li className="text-[#565656] text-[0.8rem]">Become a Mentor</li>
-        <li className="text-[#565656] text-[0.8rem]">Community </li>
-
-        <li className="text-[#565656] text-[0.8rem]">Resources</li>
-      </ul>
+      <div className="hidden lg:flex items-center gap-10  font-Hanken">
+        <Link href="" className="text-[#565656] text-[0.8rem]">
+          Find a Mentor
+        </Link>
+        <Link href="" className="text-[#565656] text-[0.8rem]">
+          Become a Mentor
+        </Link>
+        <Link
+          href="/mentor-communities"
+          className="text-[#565656] text-[0.8rem]"
+        >
+          Community
+        </Link>
+        <Link href="/mentor-resources" className="text-[#565656] text-[0.8rem]">
+          Resources
+        </Link>
+      </div>
     )}
 
     {isUserLogin ? (
@@ -67,13 +87,13 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => (
           type="button"
           className="text-black  bg-white rounded-[7px] border-[1px] text-[13px] w-[90px]  border-black p-2 "
         >
-          Log in
+          <Link href="welcome/login"> Log in</Link>
         </button>
         <button
           type="button"
           className="bg-[#121212] text-white rounded-[8px] w-[90px] p-2 text-[13px] "
         >
-          Sign up
+          <Link href="welcome/signup"> Sign up</Link>
         </button>
       </div>
     )}
