@@ -1,3 +1,6 @@
+import { StaticImageData } from "next/image";
+import { sessionHope, sessionPatricia, sessionShaolin } from "@/public";
+
 export type QualityProps = {
   id: number;
   title: string;
@@ -16,6 +19,51 @@ export type IReview = {
   track: string;
   role: string;
 };
+export type UpcomingSessionProp = {
+  id?: number;
+  name: string;
+  time: string;
+  date: string;
+  meetingLink: string;
+  rescheduleBtn: string;
+  reminderBtn: string;
+  imgSrc: string | StaticImageData;
+};
+
+// Vxrcel constants
+
+export const upcomingSessions: UpcomingSessionProp[] = [
+  {
+    id: 1,
+    name: "Patricia Flow",
+    time: "4pm (WAT)",
+    date: "06 Sept",
+    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Reschedule Session",
+    reminderBtn: "Set reminder",
+    imgSrc: sessionPatricia,
+  },
+  {
+    id: 2,
+    name: "Shao Lin",
+    time: "4pm (WAT)",
+    date: "06 Sept",
+    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Reschedule Session",
+    reminderBtn: "Set reminder",
+    imgSrc: sessionShaolin,
+  },
+  {
+    id: 3,
+    name: "Hope Chidi",
+    time: "4pm (WAT)",
+    date: "06 Sept",
+    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Reschedule Session",
+    reminderBtn: "Set reminder",
+    imgSrc: sessionHope,
+  },
+];
 
 export const reviewsArr: IReview[] = [
   {
