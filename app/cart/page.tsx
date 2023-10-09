@@ -1,5 +1,7 @@
 "use client";
+
 import React from "react";
+import { useRouter } from "next/navigation";
 import {
   CartImgPath1,
   CartImgPath2,
@@ -15,8 +17,6 @@ import {
   CartArrowRightIcon,
 } from "@/public/SVGs";
 import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export default function cart() {
   const router = useRouter();
