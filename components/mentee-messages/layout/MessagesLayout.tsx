@@ -25,7 +25,7 @@ export default function MessagesLayout() {
             </Button>
             <SearchInput />
           </div>
-          <div className="overflow-y-scroll hide-message-layout-scroll h-[83%]">
+          <div className="overflow-y-scroll hide-message-layout-scroll h-[83%] ">
             <MessageCard userName="Patricia Flow" />
             <MessageCard userName="Mauteen" />
             <MessageCard userName="Naomi Hyde" />
@@ -45,7 +45,7 @@ export default function MessagesLayout() {
             <MessageCard userName="Nuga Olaoluwa" />
           </div>
         </div>
-        <div className="flex flex-col space-between h-[100%]">
+        <div className="flex flex-col space-between h-[100%] hidden sm:flex">
           <div className="px-4">
             <MessageUserProfile userName="Patricia flow" />
           </div>
