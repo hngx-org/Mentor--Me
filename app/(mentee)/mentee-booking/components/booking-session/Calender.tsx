@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DayPicker } from "react-day-picker";
-import "./calender.css";
+import "react-day-picker/dist/style.css";
 
 interface ICalendarProps {
   unAvailableDates?: Date[];
