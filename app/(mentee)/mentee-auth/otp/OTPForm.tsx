@@ -62,14 +62,14 @@ const OTPForm = () => {
         <div className="col-span-3  px-6  sm:px-32">
           <div className="mt-6">
             <h2 className="text-[#2A2A2A] font-Gladiora text-3xl">Mentor Me</h2>
-            <h4 className="font-Inter font-medium text-[#121212] text-2xl mt-3">
+            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-10">
               OTP Verification
             </h4>
-            <h5 className="text-[#808080] text-base font-Hanken mt-2 mb-5">
+            <h5 className="text-[#808080] text-sm font-Hanken mt-2 mb-10">
               Please enter the 6 digit code sent to funmi.iny***@gmail.com
             </h5>
 
-            <div className="flex  space-x-4">
+            <div className="flex  space-x-5">
               {otpInputs.map((inputRef, index) => (
                 <input
                   key={generateKey(index)}
@@ -83,25 +83,9 @@ const OTPForm = () => {
               ))}
             </div>
 
-            <p className="font-Hanken text-[#565656] text-base my-3 ">
-              Didn’t receive OTP? Resend
+            <p className="font-Hanken text-[#565656] text-sm my-5 ">
+              Didn’t receive OTP? <span className="text-[#008080]">Resend</span>
             </p>
-
-            <Button
-              variant="primary"
-              paddingLess
-              className="w-full h-[48px]"
-              onClick={openModal}
-            >
-              Continue
-            </Button>
-
-            <Modal
-              isOpen={isOpen}
-              closeModal={closeModal}
-              content="A resent link has been sent to your email address. Please follow the instructions to reset your password"
-              buttontext="Check inbox"
-            />
           </div>
         </div>
       </div>
