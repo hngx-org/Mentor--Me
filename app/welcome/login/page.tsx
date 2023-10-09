@@ -10,7 +10,7 @@ const page = () => (
   <div className="sm:px-16 px-6">
     <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">Mentor Me</h2>
     <div className="flex flex-col gap-8 font-Hanken justify-center items-center h-[80vh]">
-      <h4 className="font-semibold text-[28px] text-[#000]">
+      <h4 className="font-semibold md:text-[28px] text-base text-[#000]">
         How do you want to get involved?
       </h4>
 

@@ -2,15 +2,32 @@
 
 import React, { useState } from "react";
 import { NextPage } from "next";
+import { usePathname } from "next/navigation";
 
-import NewMentee from "./newUser";
-import RegularMentee from "./regularUser";
-import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
+import NewMentee from "./noBookings";
+import AfterBookings from "./afterBookings";
+import RegularUser from "./regularUser";
 
 const MenteeDashboard: NextPage = () => {
-  const [isNewUser, setIsNewUser] = useState(true);
+  const [activeScreen, setActiveScreen] = useState<
+    "beforeBooking" | "hasBooking" | "regular"
+  >("beforeBooking");
 
-  return isNewUser ? <NewMentee /> : <RegularMentee />;
+  const handleActiveScreen = () => {
+    switch (activeScreen) {
+      case "beforeBooking":
+        return <NewMentee />;
+      case "hasBooking":
+        return <AfterBookings />;
+      case "regular":
+        return <RegularUser />;
+
+      default:
+        return <NewMentee />;
+    }
+  };
+
+  return handleActiveScreen();
 };
 
 export default MenteeDashboard;
