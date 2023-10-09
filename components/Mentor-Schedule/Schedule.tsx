@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Button } from "../buttons/button";
 import { ArrowRightIcon } from "@/svgs/Schedule/ScheduleMentor";
 import PortfolioReview from "./PortfolioReview";
@@ -9,6 +10,7 @@ import SeeYourUpComingSession from "./SeeYourUpComingSession";
 import PreviousSessionsCall from "./PreviousSessionsCall";
 import MobileSideBar from "../mentor/MobileSiderBar";
 import SidebarMentor from "../mentor/SidebarMentor";
+import MenteeNavBar from "../menteeTopNav";
 
 function Schedule() {
   return (
@@ -18,7 +20,7 @@ function Schedule() {
       <div className="fixed ml-[-6px] mt-[-3px] hidden lg:block">
         <SidebarMentor />
       </div>
-
+      <MenteeNavBar />
       {/* Mobile search */}
       <div className="lg:ml-[274px]">
         <div className="w-full mx-auto bg-NeutalBase min-h-[128px] flex justify-center items-center lg:hidden">
@@ -37,22 +39,26 @@ function Schedule() {
           </div>
         </div>
         {/* Mobile header ends */}
+
         {/* Body of the page */}
-        <section className="contianer p-5 md:p-10">
+        <section className="contianer p-10">
           {/* My schedule segment */}
           <div className="flex justify-between items-center">
             <h1 className="text-[32px] font-Hanken font-bold sm:text-[38px] md:text-[46px]">
               My Schedule
             </h1>
             <div className="hidden lg:block">
-              <Button
-                variant="outline-primary"
-                className="text-[10px] px-4 py-3 min-w-[140px]"
-                title="Return to profile"
-                type="button"
-              >
-                Return to profile
-              </Button>
+              <Link href="/mentor-profile?path=home">
+                {/* Link to mentor profile */}
+                <Button
+                  variant="outline-primary"
+                  className="text-[10px] shadow-md px-4 py-3 min-w-[140px]"
+                  title="Return to profile"
+                  type="button"
+                >
+                  Return to profile
+                </Button>
+              </Link>
             </div>
           </div>
           {/* Intro talk */}
@@ -81,16 +87,16 @@ function Schedule() {
           </div>
           <hr className="max-w-[380px] h-1 lg:max-w-[606px]" />
           {/* My sessions */}
-          <h3 className="text-lg font-Hanken text-neutral-950 font-semibold mt-3 md:mt-6  md:font-inter md:font-medium md:text-[32px]">
+          <h3 className="text-lg font-Hanken text-neutral-950 font-semibold mt-3 md:mt-6 lg:mt-7 md:font-inter md:font-medium md:text-[32px]">
             My Sessions
           </h3>
           <div className="flex justify-between items-center lg:hidden">
             <p className="text-xs font-Hanken font-normal">
-              View, share and create new sessions
+              View, share, and create new sessions
             </p>
             <ArrowRightIcon />
           </div>
-          <div className="container flex justify-start hover:overflow-auto overflow-hidden items-center mt-6 md:mt-8  ml-[-10px] gap-4 lg:gap-4 lg:max-w-[993px] ml">
+          <div className="container flex md:justify-start hover:overflow-auto overflow-hidden items-center mt-6 md:mt-8  ml-[-10px] gap-4 lg:gap-4 lg:max-w-[993px] mx-auto">
             {/* PortfolioCard component */}
             <PortfolioCard />
             {/* AddNewSession component */}
@@ -99,8 +105,9 @@ function Schedule() {
             </div>
           </div>
           {/* Upcoming session */}
-          <h3 className="text-lg font-Hanken text-neutral-950 font-semibold mt-3 md:mt-6  md:font-inter md:font-medium md:text-[32px]">
-            Upcoming Sessions
+          <h3 className="text-lg lg:mt-20 font-Hanken text-neutral-950 font-semibold mt-3 md:mt-6 lg:mb-[-10px] md:font-inter md:font-medium md:text-[32px]">
+            Upcoming Sessions{" "}
+            <span className="hidden lg:inline-block">with Mentees</span>
           </h3>
           <div className="flex justify-between items-center lg:hidden">
             <p className="text-xs font-Hanken font-normal">
@@ -123,8 +130,9 @@ function Schedule() {
               </div>
             </div>
           </div>
+
           {/* Previous Sessions */}
-          <h3 className="text-lg font-Hanken text-neutral-950 font-semibold mt-3 md:mt-6  md:font-inter md:font-medium md:text-[32px]">
+          <h3 className="text-lg font-Hanken lg:mt-20 text-neutral-950 font-semibold mt-3 md:mt-6  md:font-inter md:font-medium md:text-[32px]">
             Previous Sessions
           </h3>
           <div className="flex justify-between items-center lg:hidden">
@@ -134,7 +142,9 @@ function Schedule() {
             <ArrowRightIcon />
           </div>
           {/* PreviousSessionsCall component */}
-          <PreviousSessionsCall />
+          <div className="mb-3">
+            <PreviousSessionsCall />
+          </div>
         </section>
       </div>
     </div>
