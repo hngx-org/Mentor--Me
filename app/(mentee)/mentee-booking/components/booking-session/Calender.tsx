@@ -19,7 +19,7 @@ const Calendarcomponent = ({
     <div className="max-w-[374px] border-[0.5px] border-Accent1 rounded-xl">
       <DayPicker
         selected={unAvailableDates}
-        onSelect={(date) => updateDates(date)}
+        onSelect={(date: Date[] | Date | undefined) => updateDates(date)}
         mode="multiple"
         disabled={unAvailableDates}
       />
