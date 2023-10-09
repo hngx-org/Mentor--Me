@@ -16,17 +16,19 @@ import {
 export type SideBarMentorProps = {
   light?: boolean;
   path?: string;
+  className?: string;
 };
 
 export default function MentorSideBar({
   light = false,
   path,
+  className,
 }: SideBarMentorProps) {
   return (
     <section
-      className={`w-[274px] h-full border-[1px] relative p-5 fixed hidden lg:flex ${
+      className={`w-[274px] min-h-screen border-[1px] relative p-5 hidden lg:flex ${
         light ? "bg-[#fff]" : "bg-[#000]"
-      }`}
+      } ${className}`}
     >
       <div className="flex flex-col">
         <div>
