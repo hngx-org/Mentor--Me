@@ -5,6 +5,7 @@ import CardContainer from "./components/CardContainer";
 import Pagination from "./components/Pagination";
 import Filter from "./components/Filter";
 import Footer from "@/components/Footer";
+import PaginatedItem from "./components/PaginatedItem";
 
 export default function page() {
   return (
@@ -15,7 +16,7 @@ export default function page() {
         <Filter />
       </div>
       <CardContainer />
-      <Pagination />
+      <PaginatedItem />
       <Footer />
     </main>
   );

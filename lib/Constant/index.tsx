@@ -33,7 +33,7 @@ export type SidebarLinksProps = {
 export const sidebarMentorLinks: SidebarLinksProps[] = [
   {
     id: 1,
-    path: "/mentor-profile?path=home",
+    path: "/mentor-profile",
     label: "Home",
     iconDark: <HomeIcon />,
     iconLight: <HomeIcon2 />,
@@ -41,7 +41,7 @@ export const sidebarMentorLinks: SidebarLinksProps[] = [
 
   {
     id: 2,
-    path: "/mentor-messages?path=messages",
+    path: "/mentor-messages",
     label: "Messages",
     iconDark: <MessageIcon />,
     iconLight: <Messaging2 />,
@@ -62,21 +62,21 @@ export const sidebarMentorLinks: SidebarLinksProps[] = [
   },
   {
     id: 5,
-    path: "/mentor-sessions?path=sessions",
+    path: "/mentor-schedule",
     label: "Sessions",
     iconDark: <Sessions />,
     iconLight: <Session2 />,
   },
   {
     id: 6,
-    path: "/mentor-resources?path=resources",
+    path: "/mentor-resources",
     label: "Resources",
     iconDark: <ResourcesIcon />,
     iconLight: <Resources2 />,
   },
   {
     id: 7,
-    path: "/mentor-communities?path=communities",
+    path: "/mentor-community",
     label: "Communities",
     iconDark: <CommunitiesIcon />,
     iconLight: <Communities2 />,
@@ -97,7 +97,7 @@ export const sidebarMentorLinks: SidebarLinksProps[] = [
   },
   {
     id: 10,
-    path: "/mentor-reviews?path=reviews",
+    path: "/mentor-reviews",
     label: "Reviews",
     iconDark: <ReviewsIcon />,
     iconLight: "",
@@ -107,38 +107,38 @@ export const sidebarMentorLinks: SidebarLinksProps[] = [
 export const sidebarMenteeLinks: SidebarLinksProps[] = [
   {
     id: 1,
-    path: "/mentee-profile?path=home",
+    path: "/mentee-profile",
     label: "Home",
     iconDark: HomeIcon(),
   },
 
   {
     id: 2,
-    path: "/mentee-messages?path=messages",
+    path: "/mentee-messages",
     label: "Messages",
     iconDark: MessageIcon(),
   },
   {
     id: 3,
-    path: "/mentee-booking?path=bookings",
+    path: "/mentee-booking",
     label: "Bookings",
     iconDark: BookingIcon(),
   },
   {
     id: 4,
-    path: "/mentee-sessions?path=sessions",
+    path: "/mentee-sessions",
     label: "Sessions",
     iconDark: Sessions(),
   },
   {
     id: 5,
-    path: "/mentee-resources?path=resources",
+    path: "/mentee-resources",
     label: "Resources",
     iconDark: ResourcesIcon(),
   },
   {
     id: 6,
-    path: "/mentee-communities?path=communities",
+    path: "/mentee-communities",
     label: "Communities",
     iconDark: CommunitiesIcon(),
   },

@@ -229,6 +229,14 @@ export function RecurringSessionForm({
   sessionType,
   placeholder,
 }: SessionFormProps) {
+  const [successful, setSuccessful] = useState<boolean>(false);
+  const closeSuccessModal = (): void => {
+    setSuccessful(false);
+  };
+
+  const openSuccessModal = (): void => {
+    setSuccessful(true);
+  };
   return (
     <div className="p-0 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
       <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
@@ -296,6 +304,7 @@ export function RecurringSessionForm({
               Cancel
             </Button>
             <Button
+              onClick={openSuccessModal}
               className="p-4 w-full md:w-[20%]"
               variant="primary"
               type="button"
@@ -305,6 +314,15 @@ export function RecurringSessionForm({
           </div>
         </form>
       </div>
+      {successful && (
+        <SuccessModal
+          isOpen={successful}
+          closeModal={closeSuccessModal}
+          title="Session Creation Successful!"
+          content="You have successfully created a session"
+          buttontext="Return to dashboard"
+        />
+      )}
     </div>
   );
 }
