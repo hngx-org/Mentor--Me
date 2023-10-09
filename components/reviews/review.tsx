@@ -25,7 +25,7 @@ const ItemComponent = ({ item }: any) => (
         {item.quality3}
       </div>
     </div>
-    <div className="flex w-[380px] xl:w-[450px] md:w-[400px] h-[42px] items-start gap-x-[103px] lg:gap-x-[133px] xl:gap-x-[233px] md:gap-x-[150px]">
+    <div className="flex w-[380px] xl:w-[500px] md:w-[400px] h-[42px] items-start gap-x-[103px] lg:gap-x-[133px] xl:gap-x-[253px] md:gap-x-[150px]">
       <div className="flex flex-row justify-center w-[171px] h-[42px] items-center gap-x-[8px]">
         <Image src={Image1} width={300} height={200} alt="avatar" />
         <div className="flex flex-col items-center">

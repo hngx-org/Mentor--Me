@@ -2,14 +2,14 @@ import React from "react";
 import Image from "next/image";
 
 import Link from "next/link";
-import { mentorCardHero, mentorCardAvatar } from "@/public";
+import { mentorCardHero, mentorCardAvatar, verified } from "@/public";
 
 import { CalenderIcon, ClockIcon, IconVerfied } from "@/public/SVGs";
 import { Button } from "../buttons/button";
 // import Button from "@/components/ui/Button";
 
 const MentorCard = () => (
-  <div className="mentorCard w-[90%] h-fit border border-Neutra10 lg:rounded-[8px] rounded-[5px] pb-3 flex flex-col flex-shrink-0">
+  <div className="mentorCard w-[90%] min-w-[182px] h-fit border border-Neutra10 lg:rounded-[8px] rounded-[5px] pb-3 flex flex-col flex-shrink-0">
     <div className="card h-full w-full font-Hanken flex flex-col gap-3 lg:gap-3 items-center">
       <Image
         alt="members"
@@ -18,8 +18,8 @@ const MentorCard = () => (
         height={183}
         className="block lg:w-[100%] lg:aspect-[298/183]object-cover "
       />
-      <div className="info px-2 lg:px-[14px] lg:gap-[10px] flex flex-col gap-[8px] ">
-        <div className="w-fit flex gap-1 flex-col justify-center text-center">
+      <div className="info px-2 lg:px-[14px] lg:gap-[10px] flex flex-col gap-[4px] ">
+        <div className="w-fit flex lg:gap-1 flex-col justify-center text-center">
           <div className="flex gap-1 items-center">
             <Image
               alt="members"
@@ -28,13 +28,20 @@ const MentorCard = () => (
               height={24}
               className="block xl:w-[24px] xl:h-[24px] w-[12px] h-[12px]"
             />
-            <p className="text-NeutalBase font-semibold xl:text-[18px] text-[12px] leading-[14px] ">
+            <p className="text-NeutalBase font-semibold xl:text-[18px] text-[12px] lg:leading-[14px] leading-none ">
               Shade Mayowa
             </p>
 
-            <IconVerfied className="lg:w-6 w-3 aspect-square" />
+            {/* <IconVerfied className="lg:w-6 w-3 aspect-square" /> */}
+            <Image
+              alt="members"
+              src={verified}
+              width={24}
+              height={24}
+              className="block xl:w-[24px] xl:h-[24px] w-[12px] h-[12px]"
+            />
           </div>
-          <p className="text-Neutra30 font-normal lg:text-xs text-[10px]">
+          <p className="text-Neutra30 font-normal lg:text-xs text-[10px] leading-none">
             CEO, Webmasters Inc
           </p>
         </div>
@@ -57,12 +64,12 @@ const MentorCard = () => (
           Explore the fascinating world of AI with hands-on demos and
           discussions. Learn the basics from industry experts.
         </div>
-        <div className="border-b border-Neutra10 border-[.5px] " />
+        <div className="border-b border-Neutra10 border-[.25px] lg:flex hidden  " />
       </div>
       <Link href="/mentee-communities/forums">
         <button
           type="button"
-          className="text-[10px]  whitespace-nowrap px-[50px]   py-[16px]  bg-white border  border-NeutalBase text-NeutalBase flex items-center gap-x-1 rounded-[8px]"
+          className="text-[10px]  whitespace-nowrap md:px-[50px]   md:py-[16px] px-[45px]   py-[6px] bg-white border  border-NeutalBase text-NeutalBase flex items-center gap-x-1 rounded-[8px]"
         >
           Join ClassRoom
         </button>

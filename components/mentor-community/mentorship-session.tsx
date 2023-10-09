@@ -23,7 +23,7 @@ const MentorshipSessionCard = ({
   description,
   sessionImg,
 }: Props) => (
-  <div className="border-[1px] border-solid border-Neutra20 overflow-hidden rounded-lg md:max-w-[18.625rem] flex flex-col">
+  <div className="border-[1px] border-solid border-Neutra20 overflow-hidden rounded-lg md:max-w-[18.625rem] flex flex-col self-start">
     {/* Image */}
     <div className="max-h-[11.4375rem] w-full basis-0">
       <Image

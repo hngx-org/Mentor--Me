@@ -18,7 +18,7 @@ const AboutMentorCard = ({
   rating,
   review,
 }: aboutCardType) => (
-  <div className="flex-1 border border-Neutra10 rounded-lg min-w-[200px]">
+  <div className="flex-1 border border-Neutra10 rounded-[10px] lg:min-w-[250px] min-w-[300px]">
     <Image width={500} height={150} src={img} alt="article image" />
     <div className="p-3 flex flex-col gap-1">
       <h5 className="font-semibold text-sm font-Hanken"> {type}</h5>
