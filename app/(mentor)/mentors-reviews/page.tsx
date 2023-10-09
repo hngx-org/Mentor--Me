@@ -14,6 +14,8 @@ import {
 
 import MobileSideBar from "@/components/mentor/MobileSiderBar";
 import MentorSideBar from "@/components/SideBar/MentorSideBar";
+import SidebarMentor from "@/components/mentor/SidebarMentor";
+import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
 
 const data = [
   {
@@ -94,8 +96,7 @@ export default function MentorReviews() {
   return (
     <div className="flex">
       <div>
-        {" "}
-        <MentorSideBar />
+        <SidebarMentor />
         <MobileSideBar />{" "}
       </div>
       <div className="bg-[#FBFBFB]">
@@ -176,14 +177,7 @@ export default function MentorReviews() {
 
             <div className="flex">
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart
-                  data={data}
-                  margin={{
-                    top: 20,
-
-                    bottom: 5,
-                  }}
-                >
+                <BarChart data={data}>
                   <XAxis dataKey="name" />
                   <YAxis />
                   <Tooltip />
