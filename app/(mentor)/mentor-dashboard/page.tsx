@@ -10,7 +10,7 @@ import MentorSideBar from "@/components/SideBar/MentorSideBar";
 import Modal from "@/components/mentor-dashboard/Modal";
 
 const page = () => {
-  const [isVerified, setIsVerified] = useState<boolean>(false);
+  const [isVerified, setIsVerified] = useState<boolean>(true);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div className="">
