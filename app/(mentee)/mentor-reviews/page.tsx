@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import SidebarMentor from "@/components/mentor/SidebarMentor";
+import HeaderAfterSignUp from "@/components/mentor-profile-verification/HeaderAfterSignUp";
 import {
   DashboardMenteeProfileImg,
   DashboardMenteeProfileVerifiedmark,
@@ -45,6 +47,11 @@ export default function MentorReviews() {
   const numbers = [1, 2, 3, 4, 5];
 
   return (
+     <div className="w-full flex bg-white text-black h-full lg:pb-0 pb-14">
+        <div className="hidden lg:block">
+          <SidebarMentor />
+        </div>
+        
     <div className="bg-white flex flex-col overflow-hidden">
       <Image className="w-full" src={DashboardCoverBg} alt="cover-img" />
       <div className=" flex-col items-start gap-y-[35px]">
@@ -247,6 +254,7 @@ export default function MentorReviews() {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 }
