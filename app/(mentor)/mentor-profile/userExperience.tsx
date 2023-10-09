@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import { EditIcon, WhereLogo } from "@/public";
 
-
 const UserExperience = () => (
   <div className=" mt-14 lg:mt-10 md:mt-10 lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 ml-10 mb-20">
     <div className="">
@@ -47,7 +46,9 @@ const UserExperience = () => (
               </h4>
               <p>Webmaster Inc.</p>
             </div>
-            <p className="bg-gray-300 border px-3 py-2 rounded-lg font-Hanken">Present</p>
+            <p className="bg-gray-300 border px-3 py-2 rounded-lg font-Hanken">
+              Present
+            </p>
           </div>
         </div>
         <div className=" flex items-center gap-3 mt-4">
@@ -59,7 +60,9 @@ const UserExperience = () => (
               </h4>
               <p>Bachelor of Science in Computer Science</p>
             </div>
-            <p className="bg-gray-300 border px-3 py-2 rounded-lg font-Hanken">July 2023 - Dec 2023</p>
+            <p className="bg-gray-300 border px-3 py-2 rounded-lg font-Hanken">
+              July 2023 - Dec 2023
+            </p>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from 'react';
+
+import React, { useState } from "react";
 import Image from "next/image";
 import {
   Star,
@@ -68,7 +69,9 @@ const UserHero = () => {
           />
           <div className="flex">
             <button
-              onClick={() => { setshowEditProfile(true) }}
+              onClick={() => {
+                setshowEditProfile(true);
+              }}
               type="button"
               className=" inline-flex h-14 px-10 py-5 items-center border-[0.5px] rounded-lg border-gray-900"
             >
@@ -77,10 +80,9 @@ const UserHero = () => {
           </div>
         </div>
       </div>
-      {
-        showEditProfile &&
+      {showEditProfile && (
         <EditProfile onClose={() => setshowEditProfile(false)} />
-      }
+      )}
     </div>
   );
 };
