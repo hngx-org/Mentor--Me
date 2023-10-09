@@ -12,28 +12,27 @@ export default function Pagination({
   onPageChange,
 }: PaginationProps) {
   const renderPageNumbers = () => {
-    const pageNumbers = [];
+    const pageNumbers: number[] = [];
 
-    for (let i = 0; i < totalPages; i++) {
-      pageNumbers.push(
-        <button
-          key={i}
-          onClick={() => onPageChange(i)}
-          className="{i === currentPage ? 'active': ''}"
-        >
-          {i}
-        </button>
-      );
-    }
+    // for (let i = 0; i < totalPages; i++) {
+    //   pageNumbers.push(
+    //     <button
+    //       key={i}
+    //       onClick={() => onPageChange(i)}
+    //       className="{i === currentPage ? 'active': ''}"
+    //     >
+    //       {i}
+    //     </button>
+    //   );
+    // }
     return pageNumbers;
   };
 
   const [onClicked, setOnClicked] = useState(2);
   const linkStyle = "font-semibold text-lg cursor-pointer";
   const activeStyle =
-    linkStyle +
-    " md:bg-Accent1 px2 py2 md:px-[8px] md:py-[4px] md:text-white rounded-[9px] transition";
-  const nonActiveStyle = linkStyle + " text-black";
+    "font-semibold text-lg cursor-pointer md:bg-Accent1 px2 py2 md:px-[8px] md:py-[4px] md:text-white rounded-[9px] transition";
+  const nonActiveStyle = "font-semibold text-lg cursor-pointer text-black";
 
   const numClicked = (num: number) => {
     setOnClicked(num);
@@ -66,12 +65,14 @@ export default function Pagination({
         </button>
         <div className="flex items-center gap-3 lg:gap-5">
           <button
+            type="button"
             className={onClicked === 1 ? activeStyle : nonActiveStyle}
             onClick={() => numClicked(1)}
           >
             1
           </button>
           <button
+            type="button"
             onClick={() => numClicked(2)}
             className={onClicked === 2 ? activeStyle : nonActiveStyle}
             // className=" font-bold cursor-pointer md:bg-Accent1 px-2 py-2 md:px-4 md:py-2 md:text-white rounded-[9999999px]"
@@ -79,6 +80,7 @@ export default function Pagination({
             2
           </button>
           <button
+            type="button"
             onClick={() => numClicked(3)}
             className={onClicked === 3 ? activeStyle : nonActiveStyle}
             // className="hidden lg:flex cursor-pointer"
@@ -86,14 +88,18 @@ export default function Pagination({
             3
           </button>
           <button
+            type="button"
             onClick={() => numClicked(4)}
             className={onClicked === 4 ? activeStyle : nonActiveStyle}
             // className="hidden lg:flex cursor-pointer"
           >
             4
           </button>
-          <button className=" cursor-pointer">...</button>
+          <button type="button" className=" cursor-pointer">
+            ...
+          </button>
           <button
+            type="button"
             onClick={() => numClicked(10)}
             className={onClicked === 10 ? activeStyle : nonActiveStyle}
           >
