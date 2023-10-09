@@ -59,7 +59,7 @@ const BigMentorShipCard = () => (
 
       <button
         type="button"
-        className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px]   w-fittext-white border  bg-NeutalBase flex items-center gap-x-1 rounded-[8px]"
+        className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px]   w-fittext-white border  bg-NeutalBase flex items-center gap-x-1 rounded-[8px] w-fit text-white"
       >
         {" "}
         Join ClassRoom

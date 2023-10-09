@@ -6,20 +6,29 @@ import BigDiscussionCard from "@/components/mentee-communities/BigDiscussionCard
 
 import { membersCardAvatar } from "@/public";
 import messageedit from "../../../../public/assets/Icons/mentee-communities/messageEdit.svg";
-import { Button } from "@/components/buttons/button";
+import HomeNavBar from "@/components/homeNavbar";
+import Footer from "@/components/Footer";
+// import { Button } from "@/components/buttons/button";
 
 type Props = {
   join: boolean;
 };
 export default function Forums(): React.ReactElement {
   return (
-    <div className="forums startDiscussion joinDiscussion lg:px-[85px] max-w-[100vw] md:px-12 px-6 flex flex-col  gap-y-8 lg:pt-10 pt-4">
-      <div className="search border border-[#CCCCCC]  lg:w-[599px] w-[40%] md:py-2 md:px-3 p-[16px] rounded-[6px] ml-[2vw] ">
+    <div className="forums startDiscussion joinDiscussion lg:px-[85px] max-w-[100vw] md:px-12 px-6 flex flex-col  gap-y-8 ">
+      <HomeNavBar />
+      <div className="search border border-[#CCCCCC] mt-1 md:mt-[0] md:w-[60vw]  lg:w-[40vw] w-[60%] pl-[16px] py-[16px] rounded-[6px] md:mx-auto ml-6 md:ml-auto flex lg:mb-[64px] mb-6 ">
         <input
           type="text"
           className=" text-[14px] font-normal leading-[20.3px] text-Neutra20 w-full font-Inter outline-0 "
           placeholder="Search for community"
-        />
+        />{" "}
+        {/* <button
+          type="button"
+          className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px]  text-white border  bg-NeutalBase flex items-center gap-x-1 rounded-[8px] h-full"
+        >
+          Search
+        </button> */}
       </div>
 
       <div className="heading flex  md:flex-row flex-col gap-y-6 md:items-center">
@@ -81,6 +90,7 @@ export default function Forums(): React.ReactElement {
       <BigDiscussionCard mentor={false} />
       <BigDiscussionCard mentor={false} />
       <BigDiscussionCard mentor={false} />
+      <Footer />
     </div>
   );
 }

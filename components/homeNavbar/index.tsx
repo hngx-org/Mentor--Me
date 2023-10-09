@@ -6,12 +6,12 @@ import {
   ShoppingIcon,
 } from "@/public/SVGs";
 
-type HomeNavProps = {
+interface HomeNavProps {
   isUserLogin?: boolean;
-};
+}
 
 // const HomeNavBar: FC = ({ isUserLogin = true }: HomeNavProps) =>
-const HomeNavBar: FC = ({ isUserLogin = false }: HomeNavProps) => (
+const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => (
   <nav className="flex justify-between items-center py-[2rem] w-9/10  mx-auto bg-[#FFFF] cursor-pointer">
     <svg
       width="195"
@@ -36,7 +36,7 @@ const HomeNavBar: FC = ({ isUserLogin = false }: HomeNavProps) => (
         <li>Resources</li>
       </ul>
     ) : (
-      <ul className="hidden lg:block lg:flex items-center gap-10  font-Hanken">
+      <ul className="hidden lg:flex items-center gap-10  font-Hanken">
         <li className="text-[#565656] text-[0.8rem]">Find a Mentor</li>
         <li className="text-[#565656] text-[0.8rem]">Become a Mentor</li>
         <li className="text-[#565656] text-[0.8rem]">Community </li>
@@ -97,6 +97,21 @@ export default HomeNavBar;
 
 // const HomeNavBar: FC = ({ isUserLogin = true }: HomeNavProps) => (
 //   <nav className="flex justify-between items-center py-5 px-3 bg-[#FFFF] cursor-pointer">
+
+// import {
+//   NotificationIcon,
+//   NotifyIcon,
+//   ProfileIcon,
+//   ShoppingIcon,
+// } from "@/public/SVGs";
+
+// type HomeNavProps = {
+//   isUserLogin?: boolean;
+// };
+
+// const HomeNavBar: FC = ({ isUserLogin = true }: HomeNavProps) => (
+//   <nav className="flex justify-between items-center py-5 px-3 bg-[#FFFF] cursor-pointer">
+
 //     <svg
 //       width="195"
 //       height="31"
@@ -161,6 +176,59 @@ export default HomeNavBar;
 //         </button>
 //       </div>
 //     )}
+
+//     {isUserLogin ? (
+//       <ul className=" items-center gap-10  font-Hanken hidden lg:flex text-NeutalBase ">
+//         <li className="font-[700] border-b-[3px] border-black">Home</li>
+//         <li>DashNoard</li>
+//         <li>Community </li>
+
+//         <li>Resources</li>
+//       </ul>
+//     ) : (
+//       <ul className=" items-center gap-10  font-Hanken hidden lg:flex text-NeutalBase">
+//         <li className="font-[700] border-b-[3px] border-black">
+//           Find a Mentor
+//         </li>
+//         <li>Become a Mentor</li>
+//         <li>Community </li>
+
+//         <li>Resources</li>
+//       </ul>
+//     )}
+//     {isUserLogin ? (
+//       <div className="flex items-center gap-5 text-NeutalBase">
+//         <span className="hidden md:flex">
+//           <ShoppingIcon />
+//         </span>
+//         <NotificationIcon />
+
+//         <div className="flex items-center gap-2">
+//           <ProfileIcon />
+//           <div className=" md:flex flex-col  font-Inter hidden ">
+//             <span className=" text-[11px]">Funmi Oladapo</span>
+
+//             <span className=" text-[10px]">C++ Developer</span>
+//           </div>
+//         </div>
+//       </div>
+//     ) : (
+//       <div className="flex gap-2">
+//         <button
+//           type="button"
+//           className="text-black  bg-white rounded-[7px] border-[1px] text-[13px] w-[90px]  border-black p-2 "
+//         >
+//           Log in
+//         </button>
+//         <button
+//           type="button"
+//           className="bg-[#121212] text-white rounded-[8px] w-[90px] p-2 text-[13px] "
+//         >
+//           Sign up
+//         </button>
+//       </div>
+//     )}
+
 //   </nav>
 // );
 
