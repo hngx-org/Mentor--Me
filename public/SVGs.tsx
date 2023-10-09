@@ -1,6 +1,41 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
+export const FilterIcon = (props?: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={30}
+    height={31}
+    fill="none"
+    {...props}
+  >
+    <path
+      stroke="#fff"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeMiterlimit={10}
+      strokeWidth={1.5}
+      d="m16.762 26.47-1.763 1.137c-1.637 1.013-3.912-.125-3.912-2.15V18.77c0-.888-.5-2.025-1.013-2.65l-4.8-5.05c-.637-.638-1.137-1.763-1.137-2.525v-2.9c0-1.513 1.137-2.65 2.525-2.65h16.675a2.534 2.534 0 0 1 2.525 2.525v2.775c0 1.012-.638 2.275-1.263 2.9"
+    />
+    <path
+      stroke="#fff"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeMiterlimit={10}
+      strokeWidth={1.5}
+      d="M27.04 18.92a5.857 5.857 0 0 1-.863 3.062 5.886 5.886 0 0 1-5.075 2.875 5.913 5.913 0 0 1-5.075-2.875 5.825 5.825 0 0 1-.863-3.063 5.943 5.943 0 0 1 5.938-5.937 5.943 5.943 0 0 1 5.937 5.937ZM22.684 20.47l-3.137-3.138M22.66 17.37l-3.137 3.137"
+    />
+    <path
+      stroke="#fff"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeMiterlimit={10}
+      strokeWidth={1.5}
+      d="M25.862 5.507v2.775c0 1.012-.638 2.275-1.263 2.912l-2.2 1.938c-.412-.1-.85-.15-1.3-.15a5.943 5.943 0 0 0-5.937 5.937c0 1.113.312 2.163.862 3.063a5.601 5.601 0 0 0 1.875 1.912v.425c0 .763-.5 1.775-1.137 2.15l-1.763 1.138c-1.637 1.012-3.912-.125-3.912-2.15v-6.688c0-.887-.513-2.025-1.013-2.65l-4.8-5.05c-.625-.637-1.137-1.775-1.137-2.525V5.632c0-1.513 1.137-2.65 2.525-2.65h16.675a2.534 2.534 0 0 1 2.525 2.525Z"
+    />
+  </svg>
+);
+
 export const BlackStar = (props?: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
