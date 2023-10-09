@@ -2,7 +2,8 @@
 export { default as sessionHope } from "./assets/images/mentee-sessions/session-hope.png";
 export { default as sessionPatricia } from "./assets/images/mentee-sessions/session-patricia.png";
 export { default as sessionShaolin } from "./assets/images/mentee-sessions/session-shaolin.png";
-export { default as sessionCalender } from "./assets/images/mentee-sessions/calendar.png";
+export { default as sessionMaurice } from "./assets/images/mentee-sessions/session-maurice.png";
+export { default as sessionKaplan } from "./assets/images/mentee-sessions/session-kaplan.png";
 // Facemojis for Sessions Mentee
 export { default as faceMoji1 } from "./assets/images/mentee-sessions/facemojis/facemoji.png";
 export { default as faceMoji2 } from "./assets/images/mentee-sessions/facemojis/facemoji-2.png";

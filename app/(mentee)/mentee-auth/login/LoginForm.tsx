@@ -4,11 +4,11 @@ import Image from "next/image";
 
 import Link from "next/link";
 
-import auth from "../../../../public/assets/images/auth.jpeg";
+import auth from "@/public/assets/images/auth.jpeg";
 
-import google from "../../../../public/assets/images/goggle.svg";
+import google from "@/public/assets/images/goggle.svg";
 
-import facebook from "../../../../public/assets/images/facebook.svg";
+import facebook from "@/public/assets/images/facebook.svg";
 
 import Input from "@/components/inputs/input";
 
