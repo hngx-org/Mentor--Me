@@ -1,12 +1,6 @@
 "use client";
 
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  MouseEvent,
-  KeyboardEvent,
-} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   PlusIcon,
   MymodalComponent,
@@ -19,7 +13,7 @@ function AddNewSession() {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const closeModalOnOutsideClick = (event: MouseEvent<Document>) => {
+    const closeModalOnOutsideClick = (event: MouseEvent) => {
       if (
         modalRef.current &&
         !modalRef.current.contains(event.target as Node)
@@ -28,7 +22,7 @@ function AddNewSession() {
       }
     };
 
-    const handleKeyDown = (event: KeyboardEvent<Document>) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         closeModal();
       }
