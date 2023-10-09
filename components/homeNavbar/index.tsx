@@ -97,6 +97,7 @@ export default HomeNavBar;
 
 // const HomeNavBar: FC = ({ isUserLogin = true }: HomeNavProps) => (
 //   <nav className="flex justify-between items-center py-5 px-3 bg-[#FFFF] cursor-pointer">
+
 // import {
 //   NotificationIcon,
 //   NotifyIcon,
@@ -110,6 +111,7 @@ export default HomeNavBar;
 
 // const HomeNavBar: FC = ({ isUserLogin = true }: HomeNavProps) => (
 //   <nav className="flex justify-between items-center py-5 px-3 bg-[#FFFF] cursor-pointer">
+
 //     <svg
 //       width="195"
 //       height="31"
@@ -174,6 +176,7 @@ export default HomeNavBar;
 //         </button>
 //       </div>
 //     )}
+
 //     {isUserLogin ? (
 //       <ul className=" items-center gap-10  font-Hanken hidden lg:flex text-NeutalBase ">
 //         <li className="font-[700] border-b-[3px] border-black">Home</li>
@@ -225,8 +228,8 @@ export default HomeNavBar;
 //         </button>
 //       </div>
 //     )}
+
 //   </nav>
 // );
 
-// export default HomeNavBar;
 // export default HomeNavBar;

@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
 import Link from "next/link";
+
 import Image from "next/image";
+
 // import Button from "@/components/ui/Button"
 import { CloseIcon } from "@/public/SVGs";
 import UploadIcon from "../../public/assets/Icons/mentee-communities/UploadImageIcon.svg";
@@ -54,10 +56,15 @@ const CreateDiscussionModal = () => (
 
         <div className="buttons flex w-full justify-between">
           {/* <Button
+
             variant="primary"
             title="Upload Image"
             iconPresent={UploadIcon}
             className="whitespace-nowrap text-[16px] text-Accent1 border-dashed border-Accent1 px-[30px] py-[15px] xl:max-w-[200px]  "
+
+          
+          
+
           /> */}
           <button
             type="button"
@@ -68,10 +75,13 @@ const CreateDiscussionModal = () => (
           </button>
           <Link href="/mentee-communities/forums">
             {/* <Button
+
               variant="primary"
               type="submit"
               title="Post"
               className="whitespace-nowrap text-[16px]  px-[40px] py-[20px] xl:max-w-fit "
+
+
             /> */}
 
             <button
