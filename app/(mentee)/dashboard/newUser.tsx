@@ -1,4 +1,6 @@
 import { FC } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 import CheckedIcon from "@/svgs/CheckedIcon";
 import Calendarcomponent from "../mentee-booking/components/booking-session/Calender";
@@ -61,7 +63,9 @@ const NewMentee: FC = () => {
           <h2 className="text-xl font-semibold leading-10">
             Top mentors suggestions for you
           </h2>
-          <p className="cursor-pointer text-[#008080] pl-6">View All</p>
+          <Link href="/dashboard/explore">
+            <p className="cursor-pointer text-[#008080] pl-6">View All</p>
+          </Link>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 pb-6">
