@@ -10,7 +10,7 @@ import {
 
 const Resource = () => (
   <div>
-    <div className="w-full h-[304px] flex flex-col justify-center items-center gap-[17px] p-3  bg-Neutra50">
+    <div className="w-full  flex flex-col justify-center items-center gap-[17px] p-3 py-[62px]  bg-Neutra50">
       <h1 className="font-Inter text-[26px] sm:text-[32px] font-medium text-center text-white bg-Neutra50">
         UX Principles for Designers
       </h1>
