@@ -17,8 +17,8 @@ const ExploreMentee: NextPage = () => {
         <li
           className={
             activeTab === "All"
-              ? "border-[#008080] border-b-[5px] mr-8 cursor-pointer hover:opacity-30"
-              : "mr-8 cursor-pointer hover:opacity-30 border-b-[5px] border-transparent"
+              ? "border-[#008080] border-b-[3px] mr-8 cursor-pointer hover:opacity-30"
+              : "mr-8 cursor-pointer hover:opacity-30 border-b-[3px] border-transparent"
           }
           aria-hidden
           onClick={() => setActiveTab("All")}
@@ -28,8 +28,8 @@ const ExploreMentee: NextPage = () => {
         <li
           className={
             activeTab === "Design"
-              ? "border-[#008080] border-b-[5px] mr-8 cursor-pointer hover:opacity-30"
-              : "mr-8 cursor-pointer hover:opacity-30 border-b-[5px] border-transparent"
+              ? "border-[#008080] border-b-[3px] mr-8 cursor-pointer hover:opacity-30"
+              : "mr-8 cursor-pointer hover:opacity-30 border-b-[3px] border-transparent"
           }
           aria-hidden
           onClick={() => setActiveTab("Design")}
@@ -39,8 +39,8 @@ const ExploreMentee: NextPage = () => {
         <li
           className={
             activeTab === "Marketing"
-              ? "border-[#008080] mr-8 cursor-pointer hover:opacity-30"
-              : "mr-8 cursor-pointer hover:opacity-30 border-b-[5px] border-transparent"
+              ? "border-[#008080] mr-8 border-b-[3px] cursor-pointer hover:opacity-30"
+              : "mr-8 cursor-pointer hover:opacity-30 border-b-[3px] border-transparent"
           }
           aria-hidden
           onClick={() => setActiveTab("Marketing")}
@@ -50,8 +50,8 @@ const ExploreMentee: NextPage = () => {
         <li
           className={
             activeTab === "Business"
-              ? "border-[#008080] mr-8 cursor-pointer hover:opacity-30"
-              : "mr-8 cursor-pointer hover:opacity-30 border-b-[5px] border-transparent"
+              ? "border-[#008080] mr-8 border-b-[3px] cursor-pointer hover:opacity-30"
+              : "mr-8 cursor-pointer hover:opacity-30 border-b-[3px] border-transparent"
           }
           aria-hidden
           onClick={() => setActiveTab("Business")}
@@ -61,8 +61,8 @@ const ExploreMentee: NextPage = () => {
         <li
           className={
             activeTab === "Career"
-              ? "border-[#008080] mr-8 cursor-pointer hover:opacity-30"
-              : "mr-8 cursor-pointer hover:opacity-30 border-b-[5px] border-transparent"
+              ? "border-[#008080] mr-8 border-b-[3px] cursor-pointer hover:opacity-30"
+              : "mr-8 cursor-pointer hover:opacity-30 border-b-[3px] border-transparent"
           }
           aria-hidden
           onClick={() => setActiveTab("Career")}
@@ -71,7 +71,7 @@ const ExploreMentee: NextPage = () => {
         </li>
       </ul>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 pb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 pb-24 md:pb-6">
         {menteeDashboardData.map((data) => (
           <MenteeCard {...data} />
         ))}
