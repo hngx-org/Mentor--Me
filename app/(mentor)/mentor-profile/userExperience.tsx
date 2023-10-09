@@ -30,6 +30,7 @@ const UserExperience = () => (
           +11
         </p>
       </div>
+
       <div>
         <h3 className=" mt-8 font-Inter text-base font-medium text-black mb-4 ">
           Experience{" "}
@@ -66,6 +67,7 @@ const UserExperience = () => (
           </div>
         </div>
       </div>
+
     </div>
     <div className=" lg:w-[480px] lg:h-[250px]  md:w-[380px] md:h-[250px] w-[300px] px-10 py-2 md:ml-3 border-[0.5px] rounded-lg mt-10">
       <div className=" mt-2 flex lg:gap-72 md:gap-48 gap-24">
