@@ -59,7 +59,7 @@ const OTPForm = () => {
             />
           </div>
         </div>
-        <div className="col-span-3  px-6  sm:px-32">
+        <div className="col-span-3  px-6  sm:px-16">
           <div className="mt-6">
             <h2 className="text-[#2A2A2A] font-Gladiora text-3xl">Mentor Me</h2>
             <h4 className="font-Inter font-medium text-[#121212] text-xl mt-10">
