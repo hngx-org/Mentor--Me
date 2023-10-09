@@ -102,7 +102,7 @@ export default function Card() {
             {/* View Profile */}
             <button
               type="button"
-              className=" cursorpointer ml-auto mr-auto flex justify-center items-center font-Hanken text-Accent1 text-base"
+              className=" cursorpointer ml-auto mr-auto flex justify-center items-center font-Hanken text-Accent1 text-base hover:opacity-50 transition-opacity"
             >
               View Profile
             </button>
