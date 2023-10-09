@@ -3,7 +3,7 @@ import Link from "next/link";
 import MentorCard from "./MentorCard";
 
 const MentorGrid = () => (
-  <div className="mentorGrid lg:mt-[64px] md:mt[40px] mt-[23px] mx-[2vw]   text-NeutalBase font-Inter overflow-hidden">
+  <div className="mentorGrid lg:mt-[64px] md:mt[40px] mt-[23px] mx-[6vw]   text-NeutalBase font-Inter overflow-hidden">
     <div className="title  lg:flex justify-between border-b border-Neutra10 pb-[14.5px] pt-[2.5]  mb-10 w-full hidden  ">
       <h2 className="  font-medium text-[24px] leading-[28.8px]  w-fit ">
         Free Mentorship Sessions

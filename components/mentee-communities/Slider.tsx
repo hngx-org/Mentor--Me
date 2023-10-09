@@ -74,7 +74,7 @@ text-NeutalBase font-Inter overflow-hidden "
         }}
       >
         {slideInfo.map((item, index) => (
-          <div className="flex-shrink-0 w-fit xl:px-[14px] lg:px-[4px]">
+          <div className="flex-shrink-0 w-fit xl:px-[14px] lg:px-[4px] lg:gap-x-2">
             {/* {item} */}
             <DiscussionCards
               id={Number(Date.now()) + index}
