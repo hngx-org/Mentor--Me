@@ -61,9 +61,9 @@ const CreateDiscussionModal = () => (
           /> */}
           <button
             type="button"
-            className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[10px] whitespace-nowrap px-[30px]   py-[10px] text-Accent1 bg-Accent6 border-0"
+            className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] lg:text-[16px] text-[10px] whitespace-nowrap px-[30px]   py-[10px] text-Accent1 bg-Accent6 border-0"
           >
-            <Image alt="i" width={20} height={20} src={UploadIcon} />
+            <Image alt="i" width={24} height={24} src={UploadIcon} />
             Upload Image
           </button>
           <Link href="/mentee-communities/forums">
@@ -76,7 +76,7 @@ const CreateDiscussionModal = () => (
 
             <button
               type="button"
-              className="text-white border-dashed bg-NeutalBase flex items-center gap-x-1 rounded-[8px] text-[10px] whitespace-nowrap px-[30px]   py-[10px]  "
+              className="text-white border-dashed bg-NeutalBase flex items-center gap-x-1 rounded-[8px] lg:text-[16px] text-[10px]  whitespace-nowrap px-[30px]   py-[10px]  "
             >
               Post
             </button>
