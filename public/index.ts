@@ -40,6 +40,8 @@ export { default as instaggram } from "./assets/Icons/instinstagramforprofile.pn
 export { default as updatee } from "./assets/Icons/upload_icon.png";
 export { default as EditIcon } from "./assets/Icons/iconamoon_edit-thin.png";
 
+export { default as MentorSchedule } from "./assets/images/MentorSchedule/photocard.png";
+
 // Image exports for explore page
 export { default as MentorImg1 } from "./assets/images/explore-page/mentor1.png";
 export { default as MentorImg2 } from "./assets/images/explore-page/mentor2.png";
