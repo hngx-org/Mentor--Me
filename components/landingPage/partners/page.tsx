@@ -18,7 +18,7 @@ export default function Partners() {
             alt=""
             width={176}
             height={46.93}
-            className="w-[90px] md:w-[176px] px-[0.5rem] mb-[1rem] md:mb-0"
+            className="w-[98px] md:w-[176px] px-[0.6rem] mb-[1rem] md:mb-0"
           />
 
           <Image
@@ -26,7 +26,7 @@ export default function Partners() {
             alt=""
             width={168}
             height={40}
-            className="w-[90px] md:w-[168px] px-[0.5rem] mb-[1rem] md:mb-0"
+            className="w-[98px] md:w-[168px] px-[0.6rem] mb-[1rem] md:mb-0"
           />
 
           <Image
@@ -34,7 +34,7 @@ export default function Partners() {
             alt=""
             width={176}
             height={33.88}
-            className="w-[90px] md:w-[176px] px-[0.5rem] mb-[1rem] md:mb-0"
+            className="w-[98px] md:w-[176px] px-[0.6rem] mb-[1rem] md:mb-0"
           />
 
           <Image
@@ -42,7 +42,7 @@ export default function Partners() {
             alt=""
             width={168}
             height={56}
-            className="w-[90px] md:w-[168px] px-[0.5rem] mb-[1rem] md:mb-0"
+            className="w-[98px] md:w-[168px] px-[0.6rem] mb-[1rem] md:mb-0"
           />
 
           <Image
@@ -50,7 +50,7 @@ export default function Partners() {
             alt=""
             width={200}
             height={44}
-            className="w-[90px] md:w-[200px] px-[0.5rem] mb-[1rem] md:mb-0"
+            className="w-[98px] md:w-[200px] px-[0.6rem] mb-[1rem] md:mb-0"
           />
         </div>
       </div>

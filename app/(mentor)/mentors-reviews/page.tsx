@@ -11,79 +11,82 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+
+import MobileSideBar from "@/components/mentor/MobileSiderBar";
 import HomeNavBar from "@/components/HomeNavbar copy";
+import SidebarMentor from "@/components/mentor/SidebarMentor";
 
 const data = [
   {
     name: "April",
-    uv: 4000,
-    pv: 2400,
+    "Secondirst Half": 4000,
+    "First Half": 2400,
     amt: 2400,
   },
   {
     name: "May",
-    uv: 3000,
-    pv: 1398,
+    "Secondirst Half": 3000,
+    "First Half": 1398,
     amt: 2210,
   },
   {
     name: "june",
-    uv: 2000,
-    pv: 9800,
+    "Secondirst Half": 2000,
+    "First Half": 9800,
     amt: 2290,
   },
   {
     name: "july",
-    uv: 2780,
-    pv: 3908,
+    "Secondirst Half": 2780,
+    "First Half": 3908,
     amt: 2000,
   },
   {
     name: "august",
-    uv: 1890,
-    pv: 4800,
+    "Secondirst Half": 1890,
+    "First Half": 4800,
     amt: 2181,
   },
   {
     name: "september",
-    uv: 2390,
-    pv: 3800,
+    "Secondirst Half": 2390,
+    "First Half": 3800,
     amt: 2500,
   },
   {
     name: "october",
-    uv: 3490,
-    pv: 4300,
+    "Secondirst Half": 3490,
+    "First Half": 4300,
     amt: 2100,
   },
   {
     name: "november",
-    uv: 4000,
-    pv: 2400,
+    "Secondirst Half": 4000,
+    "First Half": 2400,
     amt: 2400,
   },
   {
     name: "december",
-    uv: 3000,
-    pv: 1398,
+    "Secondirst Half": 3000,
+    "First Half": 1398,
     amt: 2210,
   },
   {
     name: "january",
-    uv: 2000,
-    pv: 9800,
+    "Secondirst Half": 2000,
+    "First Half": 9800,
     amt: 2290,
   },
   {
     name: "febuary",
-    uv: 2780,
-    pv: 3908,
+    "Secondirst Half": 2780,
+    "First Half": 3908,
     amt: 2000,
   },
   {
     name: "march",
-    uv: 1890,
-    pv: 4800,
+    "Secondirst Half": 1890,
+    "First Half": 4800,
     amt: 2181,
   },
 ];
@@ -91,6 +94,8 @@ const data = [
 export default function MentorReviews() {
   return (
     <div className="bg-[#FBFBFB]">
+      <HomeNavBar />
+      <MobileSideBar />
       <div className=" md:m-2">
         <div className="border rounded-lg shadow-lg md:m-1 lg:m-5">
           <div className="flex block  justify-between p-3 border-b">
@@ -173,8 +178,8 @@ export default function MentorReviews() {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="pv" stackId="a" fill="#2A2A2A" />
-                <Bar dataKey="uv" stackId="a" fill="#808080" />
+                <Bar dataKey="First Half" stackId="a" fill="#2A2A2A" />
+                <Bar dataKey="Secondirst Half" stackId="a" fill="#808080" />
               </BarChart>
             </ResponsiveContainer>
           </div>
