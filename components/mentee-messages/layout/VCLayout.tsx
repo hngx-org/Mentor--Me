@@ -12,10 +12,10 @@ import VCMessageBubble from "../VCMessageBubble";
 export default function VCLayout() {
   return (
     <div className=" h-[100dvh] flex  w-[100%] overflow-clip ">
-      <div className="w-[65%]  h-[100%]">
+      <div className=" w-[100%] sm:w-[65%]  h-[100%]">
         <VCLHS />
       </div>
-      <div className=" flex flex-col  h-[100%] w-fit max-w-[500px]  px-6">
+      <div className=" flex flex-col  h-[100%] w-fit max-w-[500px]  px-6 hidden sm:flex">
         <div className="h-[80%] overflow-scroll hide-message-layout-scroll px-4 ">
           <VCRHS />
         </div>
