@@ -11,7 +11,6 @@ import PreviousSessionsCall from "./PreviousSessionsCall";
 import MobileSideBar from "../mentor/MobileSiderBar";
 import SidebarMentor from "../mentor/SidebarMentor";
 import MenteeNavBar from "../menteeTopNav";
-import successBanner from "./successBanner";
 
 function Schedule() {
   return (
