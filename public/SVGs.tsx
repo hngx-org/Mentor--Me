@@ -1,6 +1,40 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
+export const BlackStar = (props?: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={12}
+    height={11}
+    fill="none"
+    {...props}
+  >
+    <path
+      fill="#121212"
+      d="m5.519 0 1.875 3.375 3.643.827-2.483 2.912L8.929 11 5.52 9.425 2.108 11l.375-3.886L0 4.202l3.643-.827L5.519 0Z"
+    />
+  </svg>
+);
+
+export const ZoneIcon = (props?: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={16}
+    height={16}
+    fill="none"
+    {...props}
+  >
+    <path
+      fill="#565656"
+      d="M7.999 15.167A7.173 7.173 0 0 1 .832 8 7.173 7.173 0 0 1 7.999.833 7.173 7.173 0 0 1 15.165 8 7.173 7.173 0 0 1 8 15.167Zm0-13.334A6.174 6.174 0 0 0 1.832 8c0 3.4 2.767 6.167 6.167 6.167S14.165 11.4 14.165 8 11.4 1.833 8 1.833Z"
+    />
+    <path
+      fill="#565656"
+      d="M10.475 10.62a.446.446 0 0 1-.253-.073L8.155 9.313c-.513-.306-.893-.98-.893-1.573V5.007c0-.273.226-.5.5-.5.273 0 .5.227.5.5V7.74c0 .24.2.594.406.713l2.067 1.234a.5.5 0 0 1 .173.687.514.514 0 0 1-.433.246Z"
+    />
+  </svg>
+);
+
 export const EmojiIcon = () => (
   <svg
     width="16"
@@ -44,40 +78,6 @@ export const DocumentIcon = () => (
       strokeWidth="1.25"
       strokeLinecap="round"
       strokeLinejoin="round"
-    />
-  </svg>
-);
-
-export const BlackStar = (props?: SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={12}
-    height={11}
-    fill="none"
-    {...props}
-  >
-    <path
-      fill="#121212"
-      d="m5.519 0 1.875 3.375 3.643.827-2.483 2.912L8.929 11 5.52 9.425 2.108 11l.375-3.886L0 4.202l3.643-.827L5.519 0Z"
-    />
-  </svg>
-);
-
-export const ZoneIcon = (props?: SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={16}
-    height={16}
-    fill="none"
-    {...props}
-  >
-    <path
-      fill="#565656"
-      d="M7.999 15.167A7.173 7.173 0 0 1 .832 8 7.173 7.173 0 0 1 7.999.833 7.173 7.173 0 0 1 15.165 8 7.173 7.173 0 0 1 8 15.167Zm0-13.334A6.174 6.174 0 0 0 1.832 8c0 3.4 2.767 6.167 6.167 6.167S14.165 11.4 14.165 8 11.4 1.833 8 1.833Z"
-    />
-    <path
-      fill="#565656"
-      d="M10.475 10.62a.446.446 0 0 1-.253-.073L8.155 9.313c-.513-.306-.893-.98-.893-1.573V5.007c0-.273.226-.5.5-.5.273 0 .5.227.5.5V7.74c0 .24.2.594.406.713l2.067 1.234a.5.5 0 0 1 .173.687.514.514 0 0 1-.433.246Z"
     />
   </svg>
 );
@@ -273,60 +273,19 @@ export const VideoIcon = ({ color }: { color?: string }) => (
     />
   </svg>
 );
-
-export const VerifiedBadge = (props?: SVGProps<SVGSVGElement>) => (
+export const SearchIcon = () => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={24}
-    height={24}
+    width="18"
+    height="18"
+    viewBox="0 0 18 18"
     fill="none"
-    {...props}
-  >
-    <path fill="url(#a)" d="M0 0h24v24H0z" />
-    <defs>
-      <pattern
-        id="a"
-        width={1}
-        height={1}
-        patternContentUnits="objectBoundingBox"
-      >
-        <use transform="scale(.00195)" />
-      </pattern>
-    </defs>
-  </svg>
-);
-
-export const FilterIcon = (props?: SVGProps<SVGSVGElement>) => (
-  <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={30}
-    height={31}
-    fill="none"
-    {...props}
   >
     <path
-      stroke="#fff"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeMiterlimit={10}
-      strokeWidth={1.5}
-      d="m16.762 26.47-1.763 1.137c-1.637 1.013-3.912-.125-3.912-2.15V18.77c0-.888-.5-2.025-1.013-2.65l-4.8-5.05c-.637-.638-1.137-1.763-1.137-2.525v-2.9c0-1.513 1.137-2.65 2.525-2.65h16.675a2.534 2.534 0 0 1 2.525 2.525v2.775c0 1.012-.638 2.275-1.263 2.9"
-    />
-    <path
-      stroke="#fff"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeMiterlimit={10}
-      strokeWidth={1.5}
-      d="M27.04 18.92a5.857 5.857 0 0 1-.863 3.062 5.886 5.886 0 0 1-5.075 2.875 5.913 5.913 0 0 1-5.075-2.875 5.825 5.825 0 0 1-.863-3.063 5.943 5.943 0 0 1 5.938-5.937 5.943 5.943 0 0 1 5.937 5.937ZM22.684 20.47l-3.137-3.138M22.66 17.37l-3.137 3.137"
-    />
-    <path
-      stroke="#fff"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeMiterlimit={10}
-      strokeWidth={1.5}
-      d="M25.862 5.507v2.775c0 1.012-.638 2.275-1.263 2.912l-2.2 1.938c-.412-.1-.85-.15-1.3-.15a5.943 5.943 0 0 0-5.937 5.937c0 1.113.312 2.163.862 3.063a5.601 5.601 0 0 0 1.875 1.912v.425c0 .763-.5 1.775-1.137 2.15l-1.763 1.138c-1.637 1.012-3.912-.125-3.912-2.15v-6.688c0-.887-.513-2.025-1.013-2.65l-4.8-5.05c-.625-.637-1.137-1.775-1.137-2.525V5.632c0-1.513 1.137-2.65 2.525-2.65h16.675a2.534 2.534 0 0 1 2.525 2.525Z"
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M8.25 1.5C4.52208 1.5 1.5 4.52208 1.5 8.25C1.5 11.9779 4.52208 15 8.25 15C9.84376 15 11.3085 14.4476 12.4633 13.5239L15.2197 16.2803C15.5126 16.5732 15.9874 16.5732 16.2803 16.2803C16.5732 15.9874 16.5732 15.5126 16.2803 15.2197L13.5239 12.4633C14.4476 11.3085 15 9.84376 15 8.25C15 4.52208 11.9779 1.5 8.25 1.5ZM3 8.25C3 5.35051 5.35051 3 8.25 3C11.1495 3 13.5 5.35051 13.5 8.25C13.5 11.1495 11.1495 13.5 8.25 13.5C5.35051 13.5 3 11.1495 3 8.25Z"
+      fill="#CCCCCC"
     />
   </svg>
 );

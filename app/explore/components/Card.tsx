@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { MentorCardPage } from "../../../lib/exploreconts/constants";
-import { BlackStar, VerifiedBadge, ZoneIcon } from "@/public/SVGs";
+import { BlackStar, ZoneIcon } from "@/public/SVGs";
 
 export default function Card() {
   return (
