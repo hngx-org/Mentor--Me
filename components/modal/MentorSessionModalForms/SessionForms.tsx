@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import SuccessModal from "@/components/modal/SuccessModal";
 // import SuccessModal fro../SuccessModaldal";
 import SelectInputType from "./SelectInputType";
+import MentorCalendar from "./MentorCalendar";
 import { Button } from "@/components/buttons/button";
 
 type SessionFormProps = {
@@ -13,23 +14,36 @@ type SessionFormProps = {
   placeholder?: string;
 };
 
+interface CalendarFunctions {
+  onClose: () => void;
+  onShowSuccessModal: () => void;
+}
+
 export function FreeSessionForm({
   labelName,
   isRequired,
   sessionType,
   placeholder,
 }: SessionFormProps) {
-  // const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
+  const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
   const closeSuccessModal = (): void => {
     setSuccessful(false);
+  };
+  const closeCalendar = (): void => {
+    setCalendarVisible(false);
+    setSuccessful(true);
   };
 
   const openSuccessModal = (): void => {
     setSuccessful(true);
   };
+  const openCalendar = (): void => {
+    setCalendarVisible(true);
+  };
   return (
-    <div className="p-0 bg-[#1d1c1c57] bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
+    <div className="p-0 bg-[#1d1c1c57]  bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
       <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
         <div className=" w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3">
           <h1 className="text-left font-bold text-[1.5rem] sm:text-[2rem] text-[#08051e]">
@@ -95,7 +109,7 @@ export function FreeSessionForm({
               Cancel
             </Button>
             <Button
-              onClick={openSuccessModal}
+              onClick={openCalendar}
               className="p-4 w-full md:w-[20%]"
               variant="primary"
               type="button"
@@ -105,7 +119,12 @@ export function FreeSessionForm({
           </div>
         </form>
       </div>
-
+      {CalendarVisible && (
+        <MentorCalendar
+          onClose={closeCalendar}
+          onShowSuccessModal={openSuccessModal}
+        />
+      )}
       {successful && (
         <SuccessModal
           isOpen={successful}
@@ -119,22 +138,31 @@ export function FreeSessionForm({
   );
 }
 
-export function OneOffSessionForm({
+export function OnOffSessionForm({
   labelName,
   isRequired,
   sessionType,
   placeholder,
 }: SessionFormProps) {
+  const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
+  const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
   const closeSuccessModal = (): void => {
     setSuccessful(false);
+  };
+  const closeCalendar = (): void => {
+    setCalendarVisible(false);
+    setSuccessful(true);
   };
 
   const openSuccessModal = (): void => {
     setSuccessful(true);
   };
+  const openCalendar = (): void => {
+    setCalendarVisible(true);
+  };
   return (
-    <div className="p-0 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
+    <div className="p-0 bg-[#1d1c1c57]  bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
       <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
         <div className=" w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3">
           <h1 className="text-left font-bold text-[1.5rem] sm:text-[2rem] text-[#08051e]">
@@ -158,10 +186,10 @@ export function OneOffSessionForm({
             placeholder="Tell us a little about this session"
           />
           <SelectInputType
-            labelText="Session type"
+            labelText="Attendees limit"
             isRequired
-            selectId="session-type"
-            selectName="session-type"
+            selectId="attendees-limit"
+            selectName="attendees-limit"
             placeholder="Select from the options"
           />
           <SelectInputType
@@ -200,7 +228,7 @@ export function OneOffSessionForm({
               Cancel
             </Button>
             <Button
-              onClick={openSuccessModal}
+              onClick={openCalendar}
               className="p-4 w-full md:w-[20%]"
               variant="primary"
               type="button"
@@ -210,6 +238,12 @@ export function OneOffSessionForm({
           </div>
         </form>
       </div>
+      {CalendarVisible && (
+        <MentorCalendar
+          onClose={closeCalendar}
+          onShowSuccessModal={openSuccessModal}
+        />
+      )}
       {successful && (
         <SuccessModal
           isOpen={successful}
@@ -229,16 +263,25 @@ export function RecurringSessionForm({
   sessionType,
   placeholder,
 }: SessionFormProps) {
+  const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
+  const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
   const closeSuccessModal = (): void => {
     setSuccessful(false);
+  };
+  const closeCalendar = (): void => {
+    setCalendarVisible(false);
+    setSuccessful(true);
   };
 
   const openSuccessModal = (): void => {
     setSuccessful(true);
   };
+  const openCalendar = (): void => {
+    setCalendarVisible(true);
+  };
   return (
-    <div className="p-0 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
+    <div className="p-0 bg-[#1d1c1c57]  bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
       <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
         <div className=" w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3">
           <h1 className="text-left font-bold text-[1.5rem] sm:text-[2rem] text-[#08051e]">
@@ -262,25 +305,25 @@ export function RecurringSessionForm({
             placeholder="Tell us a little about this session"
           />
           <SelectInputType
-            labelText="Session type"
+            labelText="Attendees limit"
             isRequired
-            selectId="session-type"
-            selectName="session-type"
+            selectId="attendees-limit"
+            selectName="attendees-limit"
             placeholder="Select from the options"
           />
           <SelectInputType
-            labelText="Number of session"
+            labelText="Time"
             isRequired
-            selectId="number-of-session"
-            selectName="number-of-session"
-            placeholder="Select..."
+            selectId="time"
+            selectName="time"
+            placeholder="Select the time of the day"
           />
           <SelectInputType
-            labelText="Occurrence"
+            labelText="Date"
             isRequired
-            selectId="occurrence"
-            selectName="occurrence"
-            placeholder="How often will you like to have this session"
+            selectId="date"
+            selectName="date"
+            placeholder="Choose a date"
           />
           <SelectInputType
             labelText="Select relevant topics"
@@ -304,7 +347,7 @@ export function RecurringSessionForm({
               Cancel
             </Button>
             <Button
-              onClick={openSuccessModal}
+              onClick={openCalendar}
               className="p-4 w-full md:w-[20%]"
               variant="primary"
               type="button"
@@ -314,6 +357,12 @@ export function RecurringSessionForm({
           </div>
         </form>
       </div>
+      {CalendarVisible && (
+        <MentorCalendar
+          onClose={closeCalendar}
+          onShowSuccessModal={openSuccessModal}
+        />
+      )}
       {successful && (
         <SuccessModal
           isOpen={successful}
