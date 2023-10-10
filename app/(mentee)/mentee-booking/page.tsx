@@ -95,11 +95,13 @@ export default function MenteeBooking() {
 
   const tabs = [
     {
+      id: 1,
       name: "Overview",
       isActive: search === "bookings",
       link: "/mentee-booking?path=bookings",
     },
     {
+      id: 2,
       name: "Reviews",
       isActive: search === "reviews",
       link: "/mentor-reviews?path=reviews",
@@ -121,7 +123,7 @@ export default function MenteeBooking() {
           <div className="flex-grow border-t border-Neutra30" />
           <div className="flex gap-8">
             {tabs.map((item, i) => (
-              <Link href={item.link}>
+              <Link href={item.link} key={item.id}>
                 <p
                   className={`font-Inter font-medium text-right ${
                     item.isActive && "border-b-4 border-Accent1 pb-1"
