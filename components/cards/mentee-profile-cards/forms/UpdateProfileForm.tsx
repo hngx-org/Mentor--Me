@@ -75,7 +75,13 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
         </p>
         <div className="flex items-center gap-4">
           <div className="relative  ">
-            <div className="h-[130px] w-[130px] bg-gradient-to-b from-[#ff0d82] via-[#da0303] to-[#ff960d] rounded-full p-1 overflow-hidden">
+            <div
+              className={`h-[130px] w-[130px] bg-gradient-to-b ${
+                isDark
+                  ? "from-[#0d62ff] via-[#00ffb7] to-[#ffcc00] "
+                  : "from-[#ff0d82] via-[#da0303] to-[#ff960d]"
+              }  rounded-full p-1 overflow-hidden`}
+            >
               <Image
                 src={
                   file ? URL.createObjectURL(file) : MenteeDashboardProfileImg
