@@ -102,7 +102,7 @@ export default function MenteeBooking() {
     {
       name: "Reviews",
       isActive: search === "reviews",
-      link: "/mentee-booking?path=reviews",
+      link: "/mentor-reviews?path=reviews",
       reviews: "6",
     },
   ];
