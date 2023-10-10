@@ -342,7 +342,22 @@ export const SearchIcon = () => (
     />
   </svg>
 );
-
+export const EditIconDark = (props?: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    fill="none"
+    {...props}
+  >
+    <path
+      stroke="#fff"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="m15 6 3 3m-5 11h8M5 16l-1 4 4-1L19.586 7.414a2 2 0 0 0 0-2.828l-.172-.172a2 2 0 0 0-2.828 0L5 16Z"
+    />
+  </svg>
+);
 export const EditIcon = (props?: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -352,7 +367,7 @@ export const EditIcon = (props?: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="#565656"
+      stroke="#000"
       strokeLinecap="round"
       strokeLinejoin="round"
       d="m15 6 3 3m-5 11h8M5 16l-1 4 4-1L19.586 7.414a2 2 0 0 0 0-2.828l-.172-.172a2 2 0 0 0-2.828 0L5 16Z"

@@ -107,7 +107,7 @@ export const sidebarMentorLinks: SidebarLinksProps[] = [
 export const sidebarMenteeLinks: SidebarLinksProps[] = [
   {
     id: 1,
-    path: "/mentee-profile?path=Home",
+    path: "/dashboard?path=Home",
     label: "Home",
     iconDark: HomeIcon(),
   },

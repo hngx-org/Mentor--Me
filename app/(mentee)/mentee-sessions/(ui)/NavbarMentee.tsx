@@ -4,17 +4,23 @@ import { NotificationBingIcon } from "@/public/SVGs";
 
 export type NavbarMenteeProps = {
   path?: string | null;
+  action?: string | null;
   username?: string;
   imgSrc?: string;
   jobTitle?: string;
 };
 export const NavbarMentee = ({
   path,
+  action,
   username,
   imgSrc,
   jobTitle,
 }: NavbarMenteeProps) => (
-  <nav className="flex w-full justify-between px-3 items-center  py-4 border-b-2 border-gray-200 row-start-1 row-end-2 col-start-2 col-end-3">
+  <nav
+    className={`flex w-full justify-between px-3 items-center  py-4 border-b-2 border-gray-200 row-start-1 row-end-2 col-start-2 col-end-3 ${
+      action === "edit-profile" ? "hidden" : ""
+    }`}
+  >
     <h3 className="uppercase  font-Hanken font-[700] text-[24px]">
       {path || "[PathName Here]"}
     </h3>
