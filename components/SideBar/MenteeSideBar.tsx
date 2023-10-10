@@ -18,7 +18,7 @@ export default function MenteeSideBar({
 }: SideBarMentorProps & { path?: string | null | undefined }) {
   return (
     <section
-      className={`hidden w-[274px]  p-5 min-h-screen h-full fixed 2xl:absolute lg:flex left-0 top-0 border-[1px] ${
+      className={`hidden w-[274px]  p-5 min-h-screen h-full fixed lg:flex left-0 top-0 border-[1px] ${
         light ? "bg-[#fff]" : " bg-[#000]"
       }`}
     >
