@@ -2,9 +2,11 @@
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { MenteeDashboardProfileImg } from "@/public";
 import { EditIcon } from "@/public/SVGs";
 import Button from "@/app/(mentee)/mentee-sessions/(ui)/VxrcelBtn";
+import UpdateProfileForm from "./forms/UpdateProfileForm";
 
 type UpdateProfileTabsProp = {
   id: number;
@@ -25,7 +27,7 @@ const updateProfileTabs: UpdateProfileTabsProp[] = [
   {
     id: 3,
     title: "Social links",
-    tab: "social links",
+    tab: "social_links",
   },
 ];
 export default function UpdateProfile() {
@@ -51,8 +53,14 @@ export default function UpdateProfile() {
   };
 
   return (
-    <div className="w-full justify-center  flex flex-col items-start gap-8 mt-8">
-      <div>
+    <div className="w-full justify-start  flex flex-col items-start gap-8 h-full min-h-screen relative   px-4 pb-16 sm:pb-0 ">
+      <Link
+        href="/mentee-profile?path=profile"
+        className="absolute top-5 right-5 h-[40px] w-[40px] flex justify-center items-center bg-black"
+      >
+        <button className="text-white text-2xl font-medium">X</button>
+      </Link>
+      <div className="pt-10 sm:pt-16 text-Neutra50 font-medium text-lg font-Inter">
         <p>Update your profile details</p>
       </div>
       <div className="flex gap-4 w-full justify-between max-w-[400px]">
@@ -65,7 +73,7 @@ export default function UpdateProfile() {
             }`}
             key={session.id}
             onClick={() => {
-              router.push(`?tab=${session.tab}`, {
+              router.push(`?action=edit-profile&tab=${session.tab}`, {
                 scroll: false,
               });
               setActiveTab(session.tab);
@@ -75,105 +83,7 @@ export default function UpdateProfile() {
           </button>
         ))}
       </div>
-      {activeTab === "basic-info" && (
-        <div className="flex gap-4 flex-col">
-          <p>Change profile photo</p>
-          <div className="flex items-center gap-4">
-            <div className="relative  ">
-              <Image
-                src={MenteeDashboardProfileImg}
-                alt="cover"
-                width={130}
-                height={130}
-              />
-              <div className="absolute bottom-2 right-0 h-8 w-8 rounded-lg bg-white flex items-center justify-center">
-                <EditIcon />
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <p>Select a file</p>
-              <p>Make sure the file is below 2mb</p>
-            </div>
-          </div>
-          <form
-            onSubmit={handleSubmit}
-            className="w-full flex flex-col gap-10 items-center text-white "
-          >
-            <input
-              type="text"
-              placeholder="First Name"
-              name="name"
-              id="name"
-              value={formData.name}
-              required
-              className="w-full p-2 outline-none rounded-md bg-transparent border-2 border-gray-500 py-3 focus:border-primary focus:valid:border-green-400  transition-all duration-300"
-              min={2}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  [e.target.name]: e.target.value,
-                })
-              }
-            />
-            <input
-              id="phone"
-              type="number"
-              value={formData.phone}
-              placeholder="Phone Number"
-              name="phone"
-              required
-              pattern="^[+]?[0-9]{10,15}$"
-              className="w-full p-2 outline-none rounded-md bg-transparent border-2 border-gray-500 py-3 focus:border-primary focus:valid:border-green-400  transition-all duration-300"
-              min={10}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  [e.target.name]: e.target.value.trim(),
-                })
-              }
-            />
-            <input
-              type="text"
-              placeholder="Email"
-              name="email"
-              id="email"
-              value={formData.email}
-              required
-              className="w-full p-2 outline-none rounded-md bg-transparent border-2 border-gray-500 py-3 focus:border-primary focus:valid:border-green-400 transition-all duration-300"
-              min={2}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  [e.target.name]: e.target.value,
-                })
-              }
-            />
-            <textarea
-              placeholder="Bio......"
-              name="message"
-              required
-              id="mesage"
-              value={formData.message}
-              className="w-full h-[160px] md:h-[120px] p-2 outline-none rounded-md bg-transparent border-2 border-gray-500 py-3 resize-none focus:border-primary focus:valid:border-green-400 transition-all duration-300"
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  [e.target.name]: e.target.value,
-                })
-              }
-            />
-
-            <div className="w-full flex justify-end">
-              <Button
-                title="Update"
-                type="submit"
-                variant="primary"
-                className="py-2 sm:px-10 sm:py-4"
-              />
-            </div>
-          </form>
-        </div>
-      )}
+      {activeTab === "basic-info" && <UpdateProfileForm />}
     </div>
   );
 }
