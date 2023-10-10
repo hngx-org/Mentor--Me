@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
 
 import { NavbarMentee } from "../mentee-sessions/(ui)/NavbarMentee";
@@ -18,7 +18,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <main className="lg:ml-[274px]">
         <NavbarMentee path={pathParams} action={actionParams} />
 
-        <MobileSideBar />
+        <MobileSideBar action={actionParams} />
         {children}
       </main>
     </>

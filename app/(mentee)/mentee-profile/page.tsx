@@ -53,7 +53,7 @@ export default function MenteeProfilePage() {
   return (
     <>
       {paramsAction === "edit-profile" ? (
-        <div className="w-full justify-center flex relative sm:pl-10 lg:pl-20">
+        <div className="w-full justify-center flex relative ">
           <UpdateProfile />
         </div>
       ) : (
@@ -76,7 +76,7 @@ export default function MenteeProfilePage() {
                   height={130}
                 />
                 <div
-                  className="absolute bottom-2 right-0 h-8 w-8 rounded-lg bg-white flex items-center justify-center"
+                  className="absolute bottom-2 right-0 h-8 w-8 rounded-lg bg-white flex items-center justify-center cursor-pointer"
                   onClick={() => router.push("?action=edit-profile")}
                 >
                   <EditIcon />

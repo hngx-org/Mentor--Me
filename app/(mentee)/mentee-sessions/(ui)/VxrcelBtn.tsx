@@ -26,7 +26,7 @@ const getVariant = (variant = "primary"): string => {
       return "bg-[#121212]  text-white  text-[16px] font-[500]     rounded-[6px] sm:rounded-[8px] hover:bg-[#2A2A2A]  font-Inter";
 
     case "secondary":
-      return "bg-[#FFFF]  text-[#000] text-[16px] font-[500]  border-[1.5px]  border-[#121212]  rounded-[6px] sm:rounded-[8px]    font-Inter hover:opacity-80";
+      return "bg-[#FFF]  text-[#000] text-[16px] font-[500]  border-[1.5px]  border-[#121212]  rounded-[6px] sm:rounded-[8px]    font-Inter hover:opacity-80";
 
     default:
       return "bg-[#121212]-500 hover:bg-violet-700 text-white shadow shadow-violet-600/25 hover:shadow-violet-600/75";
