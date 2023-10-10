@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { newResources, resourceLinks } from "./constants";
 
@@ -10,6 +10,12 @@ import ResourceCard from "./ResourceCard";
 const Explore = () => {
   const resourceContainerRef = useRef<HTMLDivElement | null>(null);
   const resourceContainerRef2 = useRef<HTMLDivElement | null>(null);
+
+  const [activeLink, setActiveLink] = useState<number | null>(1);
+
+  const handleLinkClick = (id: number) => {
+    setActiveLink(id);
+  };
 
   const scrollLeft = () => {
     if (resourceContainerRef.current) {
@@ -36,12 +42,13 @@ const Explore = () => {
   return (
     <div className="w-full p-6 overflow-hidden">
       <div className="flex gap-3 md:gap-[60px] mb-6">
-        {resourceLinks.map((link, index) => (
+        {resourceLinks.map((link) => (
           <Link
             key={link.id}
             href={link.to}
+            onClick={() => handleLinkClick(link.id)}
             className={`font-Hanken text-lg ${
-              index === 0
+              link.id === activeLink
                 ? "text-NeutalBase border-b-[4px] border-Accent1"
                 : "text-Neutra30"
             }`}
