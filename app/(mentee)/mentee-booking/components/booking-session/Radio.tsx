@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import Image from "next/image";
 import { check } from "@/public";
@@ -22,9 +20,9 @@ const RadioButton: React.FC<RadioButtonProps> = ({
   return (
     <label
       htmlFor="radio"
-      className="flex gap-5 items-center cursor-pointer border border-black py-1 px-6 rounded-lg "
+      className="flex gap-4 items-center cursor-pointer border border-black py-2 px-6 rounded-lg  "
     >
-      <p className="font-normal text-base mb-3">{label}</p>
+      <p className="font-normal text-base">{label}</p>
       <input
         id="radio"
         type="radio"
@@ -34,9 +32,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
         className="hidden"
       />
       <div className="w-6 h-6 border rounded-full flex items-center justify-center border-gray-400 transition duration-300">
-        {isChecked && (
-          <Image src={check} alt="Checkmark" className="w-full h-full" />
-        )}
+        {isChecked && <Image src={check} alt="Checkmark" className="w-full" />}
       </div>
     </label>
   );
