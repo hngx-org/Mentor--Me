@@ -60,13 +60,13 @@ export default function MentorTypes() {
               className="block mb-[2rem] mx-auto"
             />
 
-            <Image
+            {/* <Image
               src={MentorImageTwo}
               alt=""
               width={372}
               height={200}
               className="block mb-[2rem] mx-auto"
-            />
+            /> */}
           </div>
         </div>
 
@@ -110,13 +110,13 @@ export default function MentorTypes() {
               className="block mb-[2rem] mx-auto"
             />
 
-            <Image
+            {/* <Image
               src={MentorImageFour}
               alt=""
               width={372}
               height={200}
               className="block mb-[2rem] mx-auto"
-            />
+            /> */}
           </div>
         </div>
       </div>
