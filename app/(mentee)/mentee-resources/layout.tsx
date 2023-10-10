@@ -13,7 +13,7 @@ export default function RootLayout({
       <MenteeSideBar />
       <MobileSideBar />
 
-      <main className="md:ml-[280px]">
+      <main className="lg:ml-[280px]">
         <MenteeNavBar />
         {children}
       </main>
