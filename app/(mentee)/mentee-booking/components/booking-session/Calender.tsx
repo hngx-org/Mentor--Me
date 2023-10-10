@@ -28,7 +28,7 @@ const Calendarcomponent = () => {
       <DayPicker
         mode="multiple"
         selected={selectedDay}
-        max={20}
+        max={30}
         onSelect={setSelectedDay}
         modifiersClassNames={{
           selected: "my-selected",
