@@ -14,10 +14,9 @@ const page = () => {
   const [isVerified, setIsVerified] = useState<boolean>(true);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
-    <div className="flex">
-      <div className="min-w-240px h-screen">
-        <MentorSideBar />
-      </div>
+    <div className="grid grid-cols-[auto,_minmax(0,_1fr)] grid-rows-[auto,_1fr]">
+      <MentorSideBar />
+
       <div>
         <MenteeNavBar />
         <div className="w-full px-5 py-10 lg:p-20 bg-[#f9fafc]">
