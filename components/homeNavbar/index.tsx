@@ -89,15 +89,15 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
           )}
 
           {isUserLogin ? (
-            <div className="flex items-center gap-5 text-NeutalBase">
-              <span className="hidden md:flex">
+            <div className=" md:flex hidden items-center gap-5 text-NeutalBase">
+              <span className="flex">
                 <ShoppingIcon />
               </span>
               <NotificationIcon />
 
               <div className="flex items-center gap-2">
                 <ProfileIcon />
-                <div className=" md:flex flex-col  font-Inter hidden ">
+                <div className=" flex flex-col  font-Inter  ">
                   <span className=" text-[11px]">Funmi Oladapo</span>
 
                   <span className=" text-[10px]">C++ Developer</span>
@@ -130,7 +130,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
       <div
         className={`lg:hidden ${
           toggleMenu ? "flex" : "hidden"
-        } flex flex-col items-start h-[100vh]  pl-3 w-[57%]  left-0 bg-white shadow-xl  fixed h-[100vh] z-[10] top-[99px] 
+        } flex flex-col items-start h-[100vh]  pl-3 w-[57%] max-w-[300px] left-0 bg-white shadow-xl  fixed h-[100vh] z-[10] top-[99px] 
         `}
       >
         <ul className="flex flex-col mt-[2rem] gap-7 justify-between  font-[400] text-[18px] leading-[24px] w-9/10  cursor-pointer">
@@ -164,7 +164,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
             </Link>
           </li>
 
-          <li className="text-[12px] text-Inter">
+          <li className="text-[12px] text-Inter  hover:bg-black hover:text-white hover:p-2 rounded">
             <Link
               href="/mentor-resources"
               className="text-[#565656] text-[0.8rem]"
@@ -175,18 +175,23 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
           </li>
 
           <div className="flex gap-2 flex-col ">
-            <button
-              type="button"
-              className="text-black  bg-white  rounded-[7px] border-[1px] text-[13px] w-[120px]  border-black p-2 "
-            >
-              <Link href="welcome/login"> Log in</Link>
-            </button>
-            <button
-              type="button"
-              className="bg-[#121212] text-white rounded-[8px] w-[120px] p-2 text-[13px] "
-            >
-              <Link href="welcome/signup"> Sign up</Link>
-            </button>
+            <Link href="welcome/login">
+              <button
+                type="button"
+                className="text-black  bg-white  rounded-[7px] border-[1px] text-[13px] w-[120px]  border-black p-2 "
+              >
+                Log in
+              </button>
+            </Link>
+
+            <Link href="welcome/signup">
+              <button
+                type="button"
+                className="bg-[#121212] text-white rounded-[8px] w-[120px] p-2 text-[13px] "
+              >
+                Sign up
+              </button>
+            </Link>
           </div>
         </ul>
       </div>

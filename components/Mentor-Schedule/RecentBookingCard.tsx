@@ -26,7 +26,7 @@ function RecentBookingCard({
         </h4>
 
         {/* card begins here */}
-        <div className="w-[182px] h-[240px] flex flex-col jutify-center align-center shadow-md md:w-[280px] md:h-[328px] border border-neutral-300 rounded-lg">
+        <div className="w-[182px] h-[240px] flex flex-col jutify-center align-center md:w-[280px] md:h-[328px] border border-neutral-300 rounded-lg">
           <div className="w-[160px] md:w-[280px] p-3 pt-4 mx-auto md:pt-8">
             <div className="w-full h-66.34px md:h-[86px] flex flex-col justify-between">
               <p className="font-inter text-sm text-stone-500">{category}</p>
@@ -37,7 +37,7 @@ function RecentBookingCard({
             </div>
             <div className="w-[100px] h-[60px] flex justify-center gap-2 item-center mx-auto mt-2 md:mt-5">
               <div className="flex flex-col items-center">
-                <p className="text-[36px] md:text-[47px] border-r-2 border-nuetral-500px pr-1">
+                <p className="text-[36px] md:text-[47px] font-inter border-r-2 border-nuetral-500px pr-1">
                   {date}
                 </p>
                 <p className="text-base md:text-lg mt-[-12px] font-Inter">

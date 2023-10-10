@@ -9,6 +9,7 @@
   --background-end-rgb: 255, 255, 255;
   --font-gladiora: "Gladiora", sans-serif;
 }
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
