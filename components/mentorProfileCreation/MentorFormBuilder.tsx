@@ -41,7 +41,7 @@ export default function MentorFormBuilder({
                 type="text"
                 placeholder={input.placeholder}
                 id={input.placeholder}
-                // required
+                required
               />
 
               {input.nature === "dropdown" ? (
