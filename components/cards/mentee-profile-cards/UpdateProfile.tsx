@@ -79,9 +79,9 @@ export default function UpdateProfile() {
       >
         <button className="text-white text-2xl font-medium">X</button>
       </Link>
-      <div className="absolute top-5 left-5 h-[40px] w-[40px] flex justify-center items-center ">
+      <div className="absolute top-5 left-5 h-[40px] w-[60px] flex justify-center items-center ">
         <div
-          className={`w-[36px] h-[20px] p-[2px] ${
+          className={`w-[50px] h-[20px] p-[2px] ${
             isDark
               ? "bg-white before:bg-black before:scale-105"
               : "before:bg-white bg-NeutalBase"
