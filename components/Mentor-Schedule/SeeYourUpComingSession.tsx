@@ -41,7 +41,7 @@ function SeeYourUpComingSession() {
 
   return (
     <div>
-      <div className="flex justify-start gap-8 items-center ">
+      <div className="flex justify-start gap-4 lg:gap-8 items-center ">
         {feedFromApi.map((feed) => (
           <UpcomingSessionCard key={feed.id} {...feed} />
         ))}
