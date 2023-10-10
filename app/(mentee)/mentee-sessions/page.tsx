@@ -47,9 +47,7 @@ const sessionsTabs: SessionsTabsProps[] = [
 ];
 export default function AllSession() {
   const [activeTab, setActiveTab] = useState<string | null | undefined>("");
-  const handleUpdateDate = (dates: Date[] | Date | undefined) => {
-    // console.log(dates);
-  };
+
   const router = useRouter();
   const params = useSearchParams().get("tab");
 
@@ -104,10 +102,7 @@ export default function AllSession() {
               </div>
               <div className="flex  2xl:w-full xl:flex-col xl:justify-center items-start lg:items-center justify-between max-lg:w-full gap-10 lg:gap-6 lg:mt-10 max-sm:flex-col lg:ml-10">
                 <div className="w-full   lg:max-w-[430px] xl:max-w-[500px] lg:justify-start flex max-sm:justify-center cursor-pointer">
-                  <Calendarcomponent
-                    updateDate={handleUpdateDate}
-                    unAvailableDates={[new Date()]}
-                  />
+                  <Calendarcomponent />
                 </div>
                 <div className="flex flex-col w-full lg:max-w-[330px] xl:max-w-[500px] ">
                   <p className="text-NeutalBase font-Inter font-medium text-[18px]">

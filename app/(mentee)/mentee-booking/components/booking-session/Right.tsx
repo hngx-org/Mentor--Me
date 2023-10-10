@@ -52,18 +52,11 @@ const MentorProfileRight = () => {
     setSelectedValue(value);
   };
 
-  const handleUpdateDate = (dates: Date[] | Date | undefined) => {
-    // console.log(dates);
-  };
-
   return (
     <div className="space-y-10">
       <div className="">
         <p className="font-Hanken font-bold text-lg mb-3">Available Sessions</p>
-        <Calendarcomponent
-          updateDate={handleUpdateDate}
-          unAvailableDates={[new Date()]}
-        />
+        <Calendarcomponent />
       </div>
       <div>
         <p className="font-Hanken font-bold text-lg mb-3">
@@ -108,9 +101,9 @@ const MentorProfileRight = () => {
       <NotesTextarea notes={notes} onChange={handleNotesChange} />
       <div className="flex justify-center !py-20">
         <Button
-          className="!text-[10px] !px-28 !py-3 "
+          className="text-[10px] px-28 py-3 "
           variant="primary"
-          paddingLess={false}
+          paddingLess
         >
           Book A Session
         </Button>
