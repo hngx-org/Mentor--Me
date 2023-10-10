@@ -16,6 +16,7 @@ import MobileSideBar from "@/components/mentor/MobileSiderBar";
 import MentorSideBar from "@/components/SideBar/MentorSideBar";
 import SidebarMentor from "@/components/mentor/SidebarMentor";
 import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
+import { NavbarMentee } from "@/app/(mentee)/mentee-sessions/(ui)/NavbarMentee";
 
 const data = [
   {
@@ -94,14 +95,12 @@ const data = [
 
 export default function MentorReviews() {
   return (
-    <div className="flex">
-      <div>
-        <SidebarMentor />
-        <MobileSideBar />{" "}
-      </div>
-      <div className="bg-[#FBFBFB]">
+    <div>
+      <div className="bg-[#FBFBFB] lg:ms-[18rem]">
+        <MentorSideBar />
+        <NavbarMentee path="Reviews" />
         <div className=" md:m-2 grid grid-2">
-          <div className=" border-2 rounded-lg md:m-1 lg:m-5">
+          <div className=" border-2 w-100 rounded-lg md:m-1 lg:m-5">
             <div className="flex justify-between p-3 border-b">
               <div className="font-inter font-[500] ">
                 {" "}
@@ -175,7 +174,7 @@ export default function MentorReviews() {
               </div>
             </div>
 
-            <div className="">
+            <div>
               <ResponsiveContainer width="96%" height={300}>
                 <BarChart
                   data={data}

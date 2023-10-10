@@ -34,7 +34,7 @@ const Header = () => (
           />
         </div>
 
-        <div className="space-y-1">
+        <div className="space-y-1 pt-2">
           <h2 className="text-2xl font-Hanken font-semibold text-Neutra50">
             Shade Mayowa
           </h2>
