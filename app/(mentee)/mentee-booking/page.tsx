@@ -121,7 +121,7 @@ export default function MenteeBooking() {
             experience spans across industries from B2B, Fin-tech Industries
           </p>
           <div className="flex-grow border-t border-Neutra30" />
-          <div className="flex gap-8">
+          <div className="flex gap-8 items-center">
             {tabs.map((item, i) => (
               <Link href={item.link} key={item.id}>
                 <p
@@ -209,7 +209,7 @@ export default function MenteeBooking() {
           {achievement.map((achieve) => (
             <div
               key={achieve.id}
-              className="flex flex-wrap justify-between items-center"
+              className="flex justify-between items-center "
             >
               <div className="flex gap-4 sm:gap-8">
                 <Image src={achieve.photos} alt="" />
