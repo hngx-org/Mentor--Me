@@ -9,7 +9,7 @@ function Footer() {
           <input
             type="text"
             placeholder="Enter Email"
-            className="w-[388px] p-3 rounded-l-md outline-none border"
+            className="w-4/5 md:w-full max-w-[388px] p-3 rounded-l-md outline-none border"
           />
           <button
             type="button"

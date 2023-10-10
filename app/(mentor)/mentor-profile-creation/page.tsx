@@ -399,7 +399,7 @@ function SuccessModal() {
         /> */}
 
         <Button variant="primary" className="w-full py-2 xl:max-w-[initial]">
-          Verify account
+          <a href="/profile-verification">Verify account</a>
         </Button>
         <p className="text-base font-Hanken text-center cursor-pointer">
           I&apos;ll do this later

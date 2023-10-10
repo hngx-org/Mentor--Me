@@ -21,7 +21,7 @@ function UpcomingSessionCard({
     <div>
       <div>
         {/* Container for the card */}
-        <div className="w-[182px] h-[240px] flex flex-col jutify-center align-center md:w-[280px] md:h-[328px] border border-neutral-300 rounded-lg">
+        <div className="w-[182px] h-[240px] flex flex-col shadow-md jutify-center align-center md:w-[280px] md:h-[328px] border border-neutral-300 rounded-lg">
           {/* Card content */}
           <div className="w-[160px] md:w-[280px] p-3 pt-4 mx-auto md:pt-8">
             {/* Content section */}
