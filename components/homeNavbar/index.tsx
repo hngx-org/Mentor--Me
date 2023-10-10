@@ -18,7 +18,7 @@ interface HomeNavProps {
 }
 
 // const HomeNavBar: FC = ({ isUserLogin = true }: HomeNavProps) =>
-const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = true }) => {
+const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
   const [toggleMenu, setToggleMenu] = React.useState<boolean>(false);
   const [dropdown, setDropdown] = React.useState<boolean>(false);
 
@@ -46,8 +46,10 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = true }) => {
 
       {isUserLogin ? (
         <div className=" items-center gap-10  font-Hanken hidden md:flex text-NeutalBase ">
-          <li className="font-[700] border-b-[3px] border-black">Home</li>
-          <li>Dashboard</li>
+          <Link href="" className="font-[700] border-b-[3px] border-black">
+            Home
+          </Link>
+          <Link href="">Dashboard</Link>
           <Link
             href="/mentor-communities"
             className="text-[#565656] text-[12px]"
@@ -119,7 +121,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = true }) => {
       <div
         className={`  md:hidden ${
           toggleMenu ? "flex" : "hidden"
-        } flex flex-col items-start   gap-10  min-w-[60%]  left-0 bg-white shadow-xl  px-5 fixed h-[100vh] z-[100] top-0 
+        } flex flex-col items-start   gap-10 w-[70%]  left-0 bg-white shadow-xl  px-5 fixed h-[100vh] z-[100] top-0 
         `}
       >
         <Link href="/">
@@ -138,7 +140,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = true }) => {
           </svg>
         </Link>
         {!isUserLogin && (
-          <ul className="flex flex-col  gap-7 justify-between  font-[400] text-[18px] leading-[24px] w-[45%]  cursor-pointer">
+          <ul className="flex flex-col  gap-7 justify-between  font-[400] text-[18px] leading-[24px] w-[45%]  cursor-pointer list-none">
             <li className="text-[12px] text-Inter  hover:bg-black hover:text-white hover:p-2 rounded">
               <Link href="/" onClick={handleToggleMenu}>
                 Find a mentor
@@ -189,7 +191,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = true }) => {
         )}
 
         {isUserLogin && (
-          <ul className="flex flex-col  gap-7 justify-between  font-[400] text-[18px] leading-[24px] w-[45%]  cursor-pointer">
+          <ul className="flex flex-col  gap-7 justify-between  font-[400] text-[18px] leading-[24px] w-[50%]  cursor-pointer list-none">
             <li className="text-[12px] text-Inter hover:bg-black hover:text-white hover:p-2 rounded ">
               <Link href="/" onClick={handleToggleMenu}>
                 Home
@@ -198,7 +200,6 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = true }) => {
 
             <li className="text-[12px] text-Inter  hover:bg-black hover:text-white hover:p-2 rounded">
               <Link href="dashboard" onClick={handleToggleMenu}>
-                {" "}
                 Dashboard
               </Link>
             </li>
@@ -228,12 +229,12 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = true }) => {
               </span>
               <NotificationIcon />
 
-              <div className="flex items-center gap-2">
+              <div className="flex  justify-between ">
                 <ProfileIcon />
-                <div className="flex flex-col  font-Inter  ">
-                  <span className=" text-[8px]">Funmi Oladapo</span>
+                <div className="flex flex-col  font-Inter   ">
+                  <span className=" text-[10px]">Funmi Oladapo</span>
 
-                  <span className=" text-[8px]">C++ Developer</span>
+                  <span className=" text-[10px]">C++ Developer</span>
                 </div>
               </div>
             </div>
