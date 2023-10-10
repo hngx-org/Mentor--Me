@@ -10,6 +10,7 @@ export default function FilterPopup({ onClose }: PopupProps) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
     setSelected(event.target.value);
   };
 
