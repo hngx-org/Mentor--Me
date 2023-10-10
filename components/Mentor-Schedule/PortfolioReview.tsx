@@ -12,7 +12,7 @@ interface PortfolioReviewProps {
 function PortfolioReview({ time, mode }: PortfolioReviewProps) {
   return (
     <div>
-      <div className="h-[223px] shadow-md w-[182px] bg-Accent1 rounded-lg flex justify-center items-end md:w-[295px] lg:h-[235px] ml-4">
+      <div className="h-[223px] w-[182px] bg-Accent1 rounded-lg flex justify-center items-end md:w-[295px] lg:h-[235px] ml-4">
         <div className="h-[218px] w-[182px] bg-white rounded-lg border border-slate-100 p-2 flex justify-between flex-col md:w-[295px] lg:pb-6 lg:h-[230px]">
           <div className="flex justify-between item-center p-2 mt-2">
             <h3 className="font-Hanken font-bold text-base">
