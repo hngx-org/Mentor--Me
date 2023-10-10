@@ -110,7 +110,7 @@ export default function MenteeBooking() {
   ];
 
   return (
-    <div className="w-full space-y-1">
+    <div className="w-full space-y-1 pb-10">
       <Header />
       <div className="flex flex-col gap-10 sm:flex-row px-2 sm:px-5">
         {" "}
