@@ -13,6 +13,7 @@ import OverviewCard from "@/components/cards/mentee-profile-cards/OverviewCard";
 import { DashboardCoverBg, MenteeDashboardProfileImg } from "@/public";
 import { EditIcon, GoNextArrowIcon, NaijaFlagIcon } from "@/public/SVGs";
 import Button from "../mentee-sessions/(ui)/VxrcelBtn";
+import UpdateProfile from "@/components/cards/mentee-profile-cards/UpdateProfile";
 
 type MenuProfileProps = {
   id: number;
@@ -47,7 +48,12 @@ export default function MenteeProfilePage() {
   }, [params]);
 
   return (
-    <section className="w-full max-lg:pb-16">
+    <section className="w-full max-lg:pb-16 relative">
+      <div className="fixed min-h-screen w-full flex justify-center top-0 p-8 sm:p-16  z-40 bg-[#fff]">
+        <div className="flex w-full h-full ">
+          <UpdateProfile />
+        </div>
+      </div>
       <div className="flex w-full max-sm:h-[150px]">
         <Image src={DashboardCoverBg} alt="cover" width={2000} height={500} />
       </div>

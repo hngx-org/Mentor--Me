@@ -14,13 +14,13 @@ export type QualityProps = {
 };
 
 export type IReview = {
-  id: string;
+  id?: string;
   date: string;
   comment: string;
-  quality1: string;
-  quality2: string;
-  quality3: string;
-  avatar?: string;
+  qualities: string[];
+
+  avatar?: string | StaticImageData;
+
   name: string;
   track: string;
   role: string;
@@ -178,9 +178,12 @@ export const reviewsArr: IReview[] = [
     date: "August 31, 2023",
     comment:
       "Talk to Shade if you want to have an honest and friendly space to help you untangle. She was very constructive answered all my questions super clearly with a lot of details, and gave quite some food for thought on how to improve my processes as well. Highly recommended for everyone who's looking for the expertise Shade has!",
-    quality1: "Technically competent",
-    quality2: "Amazing Problem Solver",
-    quality3: "Very motivational",
+    qualities: [
+      "Technically competent",
+      "Amazing Problem Solver",
+      "Very motivational",
+    ],
+
     avatar: "../../public/assets/Image.png",
     name: "Salma Paralluelo",
     track: "Product Designer",
@@ -191,9 +194,11 @@ export const reviewsArr: IReview[] = [
     date: "August 31, 2023",
     comment:
       "Talk to Shade if you want to have an honest and friendly space to help you untangle. She was very constructive answered all my questions super clearly with a lot of details, and gave quite some food for thought on how to improve my processes as well. Highly recommended for everyone who's looking for the expertise Shade has!",
-    quality1: "Technically competent",
-    quality2: "Amazing Problem Solver",
-    quality3: "Very motivational",
+    qualities: [
+      "Technically competent",
+      "Amazing Problem Solver",
+      "Very motivational",
+    ],
     avatar: "../../public/assets/Image.png",
     name: "Salma Paralluelo",
     track: "Product Designer",
@@ -204,9 +209,11 @@ export const reviewsArr: IReview[] = [
     date: "August 31, 2023",
     comment:
       "Talk to Shade if you want to have an honest and friendly space to help you untangle. She was very constructive answered all my questions super clearly with a lot of details, and gave quite some food for thought on how to improve my processes as well. Highly recommended for everyone who's looking for the expertise Shade has!",
-    quality1: "Technically competent",
-    quality2: "Amazing Problem Solver",
-    quality3: "Very motivational",
+    qualities: [
+      "Technically competent",
+      "Amazing Problem Solver",
+      "Very motivational",
+    ],
     avatar: "../../public/assets/Image.png",
     name: "Salma Paralluelo",
     track: "Product Designer",
@@ -217,9 +224,11 @@ export const reviewsArr: IReview[] = [
     date: "August 31, 2023",
     comment:
       "Talk to Shade if you want to have an honest and friendly space to help you untangle. She was very constructive answered all my questions super clearly with a lot of details, and gave quite some food for thought on how to improve my processes as well. Highly recommended for everyone who's looking for the expertise Shade has!",
-    quality1: "Technically competent",
-    quality2: "Amazing Problem Solver",
-    quality3: "Very motivational",
+    qualities: [
+      "Technically competent",
+      "Amazing Problem Solver",
+      "Very motivational",
+    ],
     avatar: "../../public/assets/Image.png",
     name: "Salma Paralluelo",
     track: "Product Designer",

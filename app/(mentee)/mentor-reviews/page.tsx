@@ -49,12 +49,7 @@ export default function MentorReviews() {
 
   return (
     <div className="w-full flex bg-white text-black h-full lg:pb-0 pb-14">
-      <div className="hidden lg:block fixed top-0">
-        <MenteeSideBar />
-      </div>
-      <div className="bg-white flex flex-col overflow-hidden lg:ml-[270px]">
-        <MenteeNavBar />
-
+      <div className="bg-white flex flex-col overflow-hidden ">
         <Image className="w-full" src={DashboardCoverBg} alt="cover-img" />
         <div className=" flex-col items-start gap-y-[35px]">
           <div className="inline-flex justify-center  w-full gap-x-4 relative px-[69px] sm:px-12 md:px-8 lg:px-10 xl:pl-12">
@@ -130,14 +125,14 @@ export default function MentorReviews() {
           </div>
           <div className="flex flex-col text-center p-[15px] xl:p-[50px] gap-y-[35px]">
             <div className="inline-flex w-[188px] items-center gap-x-[29px]">
-              <Link href="https://mentor-me-lake.vercel.app/mentee-booking">
+              <Link href="/mentee-booking?path=bookings">
                 <p className="text-Neutra30 font-Inter text-18 font-normal leading-[120%]">
                   Overview
                 </p>
               </Link>
 
               <div className="flex  justify-center w-[96px] h-[25px] items-start border-b-[3px] border-Accent1 rounded-8 gap-x-[4px] b">
-                <Link href="https://mentor-me-lake.vercel.app/mentor-reviews?path=reviews">
+                <Link href="/mentor-reviews?path=reviews">
                   <p className="text-black font-Inter text-18 font-semibold leading-[120%]">
                     Reviews
                   </p>
@@ -148,55 +143,55 @@ export default function MentorReviews() {
               </div>
             </div>
             <div className="inline-flex flex-col w-full items-start">
-              <div className="flex flex-row flex-wrap max-w-[720px] gap-x-[2px] sm:gap-x-[12px] xl:gap-x-[52px] xl:gap-y-[40px] ">
+              <div className="flex flex-row flex-wrap max-w-[720px] gap-x-[2px] sm:gap-x-[12px] xl:gap-x-[52px] gap-y-[15px] xl:gap-y-[40px] ">
                 {qualityArr.map((item) => (
                   <div
                     key={item.id}
                     className="flex flex-col justify-center items-start gap-y-[20px]"
                   >
-                    <div className="flex flex-row w-[327px] items-center gap-[53px] sm:gap-x-[110px] md:gap-x-[200px] xl:gap-x-[103px">
-                      <p className=" h-[24px] text-#121212 font-Hanken text-[12px] font-normal  leading-[120%]">
+                    <div className="flex flex-row xl:w-[250px] w-[350px] items-center gap-y-[100px] gap-x-[120px]  sm:gap-x-[110px] md:gap-x-[200px] xl:gap-x-[110px]">
+                      <p className="text-#121212 xl:w-[550px] font-Hanken text-[12px] font-normal  leading-[120%]">
                         {item.title}
                       </p>
                       <p className="w-[67px] h-[14px] text-#121212 font-Hanken text-[12px] font-normal  leading-[120%]">
                         {item.rating}
                       </p>
                     </div>
-                    <div className=" w-full xl:w-[331px] sm:w-[260px] md:w-[131px] h-[5px] rounded-[8px] bg-Accent1" />
+                    <div className=" w-[275px] xl:w-[331px] sm:w-[260px] md:w-[131px] h-[5px] rounded-[8px] bg-Accent1" />
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="flex flex-col items-start gap-y-[20px] my-[10px] xl:my-[50px]">
+            <div className="flex flex-col items-start gap-y-[20px] my-[10px] xl:my-[50px] w-full">
               <div className="flex flex-col items-start gap-y-4">
-                <p className="w-[190px] text-#121212 font-Hanken text-[24px] font-semibold  leading-[120%]">
+                <p className="w-[190px] text-#121212 font-Hanken text-[24px] font-semibold ">
                   People often say
                 </p>
-                <div className="flex flex-wrap max-w-[711px] items-start gap-x-[16px]">
-                  <div className="flex w-[98px] bg-black p-[6.5px] justify-center items-center rounded-[8px] border border-Neutra20 text-white">
+                <div className="flex  items-center gap-2 sm:gap-4 text-sm sm:text-[18px] max-sm:flex-wrap ">
+                  <p className="flex bg-black px-2 p-[6.5px] justify-center items-center rounded-[8px] border border-Neutra20 text-white">
                     All
-                  </div>
-                  <div className="flex w-[164px] bg-white p-[6.5px] justify-center items-center rounded-[8px] border border-Neutra20 text-black">
+                  </p>
+                  <p className="flex  bg-white p-[6.5px] justify-center items-center rounded-[8px] border border-Neutra20 text-black">
                     Analytical
-                  </div>
-                  <div className="flex w-[164px] bg-white p-[6.5px] justify-center items-center rounded-[8px] border border-Neutra20 text-black">
+                  </p>
+                  <p className="flex  bg-white p-[6.5px] justify-center items-center rounded-[8px] border border-Neutra20 text-black">
                     Positive Attitude
-                  </div>
-                  <div className="flex w-[164px] bg-white p-[6.5px] justify-center items-center rounded-[8px] border border-Neutra20 text-black">
+                  </p>
+                  <p className="flex  bg-white p-[6.5px] justify-center items-center rounded-[8px] border border-Neutra20 text-black">
                     Constructive
-                  </div>
-                  <div className="flex w-[57px] p-[6.5px] justify-center items-center rounded-[8px] border border-Neutra20 text-black">
+                  </p>
+                  <p className="flex p-[6.5px] justify-center items-center rounded-[8px] border border-Neutra20 text-black">
                     <RightArrowIcon />
-                  </div>
+                  </p>
                 </div>
               </div>
               <p className="text-#121212 font-Hanken text-[24px] font-semibold leading-[120%]">
                 Real experience with mentor
               </p>
-              <div className="flex flex-wrap mx-[auto] items-start gap-[20px] w-full">
+              <div className="flex flex-col mx-[5px] items-center sm:items-start gap-[30px] w-full">
                 {reviewsArr.map((item) => (
-                  <ItemComponent item={item} />
+                  <ItemComponent key={item.id} {...item} />
                 ))}
               </div>
             </div>
@@ -204,52 +199,47 @@ export default function MentorReviews() {
         </div>
 
         <div className="flex justify-center w-full items-center my-[50px] xl:my-4 ">
-          <div className="w-[153px] xl:w-[673px] flex justify-center items-center  rounded-[50px] border border-Neutra20 gap-x-[10px] xl:gap-x-[50px]">
+          <div className="w-full max-w-[673px] flex justify-center sm:justify-between items-center  rounded-[50px] border border-Neutra20 sm:px-4 gap-1">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               type="button"
-              className={`flex flex-row justify-center items-center gap-x-[5px] py-2 px-4 rounded-md ${
-                currentPage === 1
-                  ? "bg-white text-gray-500"
-                  : "bg-white text-black"
+              className={`flex flex-row justify-center items-center  py-2 px-4  ${
+                currentPage === 1 ? "opacity-50" : ""
               }`}
             >
-              <LeftIcon
-                className={`rounded-[50%] ${
-                  currentPage === 1
-                    ? "bg-gray-500 text-gray-500"
-                    : "bg-black text-white"
-                }`}
-              />{" "}
-              <div>Prev</div>
+              <LeftIcon /> <div className="hidden sm:block">Prev</div>
             </button>
-            <span className="text-lg font-semibold">
-              <ul className="flex flex-row w-[150px] p-[10px] xl:p-[20px] xl:w-[250px] items-center gap-x-[5px] xl:gap-x-[15px]">
-                {numbers.map((number, index) => (
-                  <span
-                    className={
-                      number === 3
-                        ? "flex w-[42px] text-white text-[30px] p-[5.5px] rounded-full bg-Accent1"
-                        : " w-[64px] bg-white p-[2.5px] text-[20px] items-center font-normal font-Inter text-black leading-[120%]"
-                    }
-                  >
-                    {number}
-                  </span>
-                ))}
-              </ul>
-            </span>
+
+            <div className="flex flex-row   xl:max-w-[250px] items-center sm:gap-2 ">
+              {numbers.map((number, index) => (
+                <button
+                  type="button"
+                  key={number}
+                  onClick={() => handlePageChange(number)}
+                  className={`${
+                    currentPage === number
+                      ? "bg-Accent1 text-white text-[30px]"
+                      : "bg-white"
+                  }
+                    
+                        flex sm:w-[64px] sm:h-[64px] h-[40px] w-[40px]  p-[2.5px] text-[20px] items-center justify-center font-normal font-Inter text-black 
+                  rounded-full`}
+                >
+                  <span>{number}</span>
+                </button>
+              ))}
+            </div>
+
             <button
               onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
+              disabled={currentPage === numbers.length}
               type="button"
               className={`flex flex-row justify-center items-center gap-x-[5px] py-2 px-4 rounded-md  ${
-                currentPage === totalPages
-                  ? "bg-white text-gray-500"
-                  : "bg-white text-black"
+                currentPage === numbers.length ? "opacity-50" : ""
               }`}
             >
-              <div>Next</div>
+              <div className="hidden sm:block">Next</div>
 
               <RightIcon
                 className={`rounded-[50%] ${
