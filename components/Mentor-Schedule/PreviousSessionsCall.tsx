@@ -59,7 +59,7 @@ function PreviousSessionsCall() {
         ))}
       </div>
 
-      <div className="hidden lg:flex lg:justify-start hover:overflow-auto overflow-hidden lg:gap-4 items-center mt-7 ">
+      <div className="hidden lg:flex lg:justify-start overflow-hidden lg:gap-4 items-center mt-7 ">
         {SliceThreeFromData.map((info) => (
           <PreviousSessionsCard key={info.id} {...info} />
         ))}
