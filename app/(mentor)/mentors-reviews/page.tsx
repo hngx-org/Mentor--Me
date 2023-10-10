@@ -175,13 +175,18 @@ export default function MentorReviews() {
               </div>
             </div>
 
-            <div className="flex">
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={data}>
+            <div className="">
+              <ResponsiveContainer width="96%" height={300}>
+                <BarChart
+                  data={data}
+                  margin={{
+                    top: 20,
+                  }}
+                >
                   <XAxis dataKey="name" />
                   <YAxis />
                   <Tooltip />
-                  <Legend wrapperStyle={{ top: 0, left: 100 }} />
+                  <Legend wrapperStyle={{ top: 0, left: 0 }} />
                   <Bar dataKey="First Half" stackId="a" fill="#2A2A2A" />
                   <Bar dataKey="Secondirst Half" stackId="a" fill="#808080" />
                 </BarChart>
@@ -238,8 +243,8 @@ export default function MentorReviews() {
           </div>
         </div>
         <div className="grid lg:grid-cols-3 xl:grid-cols-4  md:grid-cols-3 ">
-          <div className="card py-5 m-3">
-            <div className="text-center  shadow-lg pt-5">
+          <div className="card py-5 m-3 border-2 rounded-lg">
+            <div className="text-center   pt-5">
               <svg
                 className="flex w-70 mx-auto"
                 width="132"
@@ -289,8 +294,8 @@ export default function MentorReviews() {
             </div>
           </div>
 
-          <div className="card py-5 m-3">
-            <div className="text-center  shadow-lg pt-5">
+          <div className="card py-5 m-3 border-2 rounded-lg">
+            <div className="text-center  pt-5">
               <svg
                 className="flex  w-70 mx-auto"
                 width="132"
@@ -340,8 +345,8 @@ export default function MentorReviews() {
             </div>
           </div>
 
-          <div className="card py-5 m-3">
-            <div className="text-center  shadow-lg pt-5">
+          <div className="card py-5 m-3 border-2 rounded-lg">
+            <div className="text-center pt-5">
               <svg
                 className="flex w-70 mx-auto"
                 width="132"
@@ -391,8 +396,8 @@ export default function MentorReviews() {
             </div>
           </div>
 
-          <div className="card py-5 m-3">
-            <div className=" text-center  shadow-lg pt-5">
+          <div className="card py-5 m-3 border-2 rounded-lg">
+            <div className=" text-center   pt-5">
               <svg
                 className="flex w-70 mx-auto"
                 width="132"
@@ -442,8 +447,8 @@ export default function MentorReviews() {
             </div>
           </div>
 
-          <div className="card py-5 m-3">
-            <div className=" text-center  shadow-lg pt-5">
+          <div className="card py-5 m-3 border-2 rounded-lg">
+            <div className=" text-center pt-5">
               <svg
                 className="flex w-70 mx-auto"
                 width="132"
@@ -493,8 +498,8 @@ export default function MentorReviews() {
             </div>
           </div>
 
-          <div className="card py-5 m-3">
-            <div className="text-center  shadow-lg pt-5">
+          <div className="card py-5 m-3 border-2 rounded-lg">
+            <div className="text-center pt-5">
               <svg
                 className="flex w-70 mx-auto"
                 width="132"
@@ -544,8 +549,8 @@ export default function MentorReviews() {
             </div>
           </div>
 
-          <div className="card py-5 m-3">
-            <div className="text-center  shadow-lg pt-5">
+          <div className="card py-5 m-3 border-2 rounded-lg">
+            <div className="text-center pt-5">
               <svg
                 className="flex w-70 mx-auto"
                 width="132"
@@ -595,8 +600,8 @@ export default function MentorReviews() {
             </div>
           </div>
 
-          <div className="card py-5 m-3">
-            <div className="text-center  shadow-lg pt-5">
+          <div className="card py-5 m-3 border-2 rounded-lg">
+            <div className="text-center pt-5">
               <svg
                 className="flex w-70 mx-auto"
                 width="132"
