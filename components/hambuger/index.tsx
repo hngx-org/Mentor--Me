@@ -28,7 +28,7 @@ export default function Hambuger({ isOpen }: HProps) {
     opacity: `${isOpen ? 0 : 1}`,
     width: "2rem",
     height: "0.25rem",
-    transition: "all 0.3s linear",
+    transition: "all 0.1s linear",
     borderRadius: "10px",
     transformOrigin: "1px",
     backgroundColor: "black",
