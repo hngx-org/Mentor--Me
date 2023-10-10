@@ -13,12 +13,12 @@ import {
 import { sidebarMenteeLinks } from "@/lib/Constant";
 
 export default function MenteeSideBar({
-  light,
+  light = false,
   path,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
   return (
     <section
-      className={`hidden w-[274px]  p-5 min-h-screen h-full fixed lg:flex left-0 top-0 border-[1px] ${
+      className={`hidden w-[274px]  p-5 min-h-screen h-full fixed 2xl:absolute lg:flex left-0 top-0 border-[1px] ${
         light ? "bg-[#fff]" : " bg-[#000]"
       }`}
     >
@@ -34,9 +34,9 @@ export default function MenteeSideBar({
                 <Link key={link.id} href={link.path} prefetch>
                   <li
                     className={`flex gap-3  ${
-                      light && path === link.label.toLowerCase()
+                      light && path === link.label
                         ? "bg-[#E5FFFF]"
-                        : !light && path === link.label.toLowerCase()
+                        : path === link.label
                         ? " bg-Neutra50"
                         : ""
                     } rounded-[5px] p-2 items-center`}
