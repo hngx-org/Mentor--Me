@@ -107,38 +107,38 @@ export const sidebarMentorLinks: SidebarLinksProps[] = [
 export const sidebarMenteeLinks: SidebarLinksProps[] = [
   {
     id: 1,
-    path: "/mentee-profile",
+    path: "/mentee-profile?path=Home",
     label: "Home",
     iconDark: HomeIcon(),
   },
 
   {
     id: 2,
-    path: "/mentee-messages",
+    path: "/mentee-messages?path=Messages",
     label: "Messages",
     iconDark: MessageIcon(),
   },
   {
     id: 3,
-    path: "/mentee-booking",
+    path: "/mentee-booking?path=Bookings",
     label: "Bookings",
     iconDark: BookingIcon(),
   },
   {
     id: 4,
-    path: "/mentee-sessions",
+    path: "/mentee-sessions?path=Sessions",
     label: "Sessions",
     iconDark: Sessions(),
   },
   {
     id: 5,
-    path: "/mentee-resources",
+    path: "/mentee-resources?path=Resources",
     label: "Resources",
     iconDark: ResourcesIcon(),
   },
   {
     id: 6,
-    path: "/mentee-communities",
+    path: "/mentee-communities?path=Communities",
     label: "Communities",
     iconDark: CommunitiesIcon(),
   },
