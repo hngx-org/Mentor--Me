@@ -35,8 +35,8 @@ export default function Modal({ isOpen, setIsOpen }: ModalProps) {
         open={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-[#020202c8]">
-          <Dialog.Panel className="w-[90%] lg:w-1/2 rounded bg-white p-7 text-Neutral60">
+        <div className="fixed inset-0 w-screen items-center p-4 bg-[#020202c8] flex">
+          <Dialog.Panel className="w-[90%] lg:w-2/3 rounded bg-white p-10 text-Neutral60 m-auto">
             <Dialog.Title className="flex items-center justify-between mb-7">
               <p className="font-Inter text-lg font-medium">Session Details</p>
               <button
@@ -48,7 +48,7 @@ export default function Modal({ isOpen, setIsOpen }: ModalProps) {
               </button>
             </Dialog.Title>
             <Dialog.Description>
-              <div className="grid grid-cols-2 gap-5 mb-10 justify-between font-Hanken w-full">
+              <div className="grid grid-cols-2 gap-5 mb-10 justify-between items-center font-Hanken w-full">
                 <div>
                   <p className="text-Neutra30">Name of Mentee</p>
                   <p>{modalData.mentee_name}</p>

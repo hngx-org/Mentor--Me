@@ -148,21 +148,21 @@ export default function MentorReviews() {
               </div>
             </div>
             <div className="inline-flex flex-col w-full items-start">
-              <div className="flex flex-row flex-wrap max-w-[720px] gap-x-[2px] sm:gap-x-[12px] xl:gap-x-[52px] xl:gap-y-[40px] ">
+              <div className="flex flex-row flex-wrap max-w-[720px] gap-x-[2px] sm:gap-x-[12px] xl:gap-x-[52px] gap-y-[15px] xl:gap-y-[40px] ">
                 {qualityArr.map((item) => (
                   <div
                     key={item.id}
                     className="flex flex-col justify-center items-start gap-y-[20px]"
                   >
-                    <div className="flex flex-row w-[327px] items-center gap-[53px] sm:gap-x-[110px] md:gap-x-[200px] xl:gap-x-[103px">
-                      <p className=" h-[24px] text-#121212 font-Hanken text-[12px] font-normal  leading-[120%]">
+                    <div className="flex flex-row xl:w-[250px] w-[350px] items-center gap-y-[100px] gap-x-[120px]  sm:gap-x-[110px] md:gap-x-[200px] xl:gap-x-[110px]">
+                      <p className="text-#121212 xl:w-[550px] font-Hanken text-[12px] font-normal  leading-[120%]">
                         {item.title}
                       </p>
                       <p className="w-[67px] h-[14px] text-#121212 font-Hanken text-[12px] font-normal  leading-[120%]">
                         {item.rating}
                       </p>
                     </div>
-                    <div className=" w-full xl:w-[331px] sm:w-[260px] md:w-[131px] h-[5px] rounded-[8px] bg-Accent1" />
+                    <div className=" w-[275px] xl:w-[331px] sm:w-[260px] md:w-[131px] h-[5px] rounded-[8px] bg-Accent1" />
                   </div>
                 ))}
               </div>
@@ -173,7 +173,7 @@ export default function MentorReviews() {
                 <p className="w-[190px] text-#121212 font-Hanken text-[24px] font-semibold  leading-[120%]">
                   People often say
                 </p>
-                <div className="flex flex-wrap max-w-[711px] items-start gap-x-[16px]">
+                <div className="flex flex-wrap max-w-[711px] items-start gap-y-[10px] gap-x-[16px]">
                   <div className="flex w-[98px] bg-black p-[6.5px] justify-center items-center rounded-[8px] border border-Neutra20 text-white">
                     All
                   </div>
@@ -194,7 +194,7 @@ export default function MentorReviews() {
               <p className="text-#121212 font-Hanken text-[24px] font-semibold leading-[120%]">
                 Real experience with mentor
               </p>
-              <div className="flex flex-wrap mx-[auto] items-start gap-[20px] w-full">
+              <div className="flex flex-wrap mx-[5px] items-start gap-[30px] w-full">
                 {reviewsArr.map((item) => (
                   <ItemComponent item={item} />
                 ))}

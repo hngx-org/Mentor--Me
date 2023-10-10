@@ -42,7 +42,7 @@ export default function MentorProfileVerification() {
 
   const handleSubmit = () => {
     setShowModal(true);
-    setVerificationStatus("pending");
+    setVerificationStatus("approved");
     setStep(0);
     setFormSubmitted(true);
   };
@@ -134,7 +134,7 @@ export default function MentorProfileVerification() {
                     )}
 
                     {verificationStatus === "approved" && (
-                      <div className="flex flex-col justify-center items-center ml-5">
+                      <div className="flex flex-col justify-center items-center lg:ml-5 ml-0 lg:mt-0 mt-6">
                         <div className="w-full bg-[#e0fff0] py-3 px-4 border-t-4 border-[#386a20]">
                           <div className="flex justify-between">
                             <p className="flex font-Inter font-[600] text-[16px] text-Success60">
@@ -155,7 +155,7 @@ export default function MentorProfileVerification() {
                           className="mt-10"
                         />
                         <div className="md:px-8 px-3 mt-8">
-                          <h5 className=" font-Hanken text-[24px] font-[700]">
+                          <h5 className=" font-Hanken text-[24px] font-[700]  text-center">
                             Your application has been approved!
                           </h5>
                           <p className="font-Hanken text-[16px] font-[400] text-Neutra40">
@@ -167,14 +167,14 @@ export default function MentorProfileVerification() {
                             className="mt-5 w-full py-3 text-center font-Inter font-500 text-[16px]"
                             paddingLess
                           >
-                            Go to dashboard
+                            <a href="/mentor-dashboard"> Go to dashboard</a>
                           </Button>
                         </div>
                       </div>
                     )}
 
                     {verificationStatus === "rejected" && (
-                      <div className="flex flex-col justify-center items-center ml-5">
+                      <div className="flex flex-col justify-center items-center lg:ml-5 ml-0 lg:mt-0 mt-6">
                         <div className="w-full bg-[#ffdcdc] py-3 px-4 border-t-4 border-[#e53535]">
                           <div className="flex justify-between">
                             <p className="flex font-Inter font-[600] text-[16px] text-Error60">
