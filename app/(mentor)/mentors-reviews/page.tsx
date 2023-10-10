@@ -101,7 +101,7 @@ export default function MentorReviews() {
       </div>
       <div className="bg-[#FBFBFB]">
         <div className=" md:m-2 grid grid-2">
-          <div className="border rounded-lg shadow-lg md:m-1 lg:m-5">
+          <div className=" border-2 rounded-lg md:m-1 lg:m-5">
             <div className="flex justify-between p-3 border-b">
               <div className="font-inter font-[500] ">
                 {" "}
