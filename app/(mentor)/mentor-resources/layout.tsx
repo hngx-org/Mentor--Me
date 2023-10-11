@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
 
-import HomeNavBar from "@/components/HomeNavbar copy";
 import MobileSideBar from "@/components/MobileSideBar";
 import MentorSideBar from "@/components/SideBar/MentorSideBar";
+import HomeNavBar from "@/components/homeNavbar";
 
 export default function MentorResourcesLayout({
   children,

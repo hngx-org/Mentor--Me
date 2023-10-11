@@ -6,8 +6,12 @@ import {
   ResourcesMobile,
 } from "@/public/SVGs";
 
-const MobileSideBar = () => (
-  <nav className="w-full flex justify-center fixed bottom-0     z-10   items-center lg:hidden cursor-pointer shadow-xl bg-[#ffff] ">
+const MobileSideBar = ({ action }: { action?: string | null }) => (
+  <nav
+    className={`w-full  justify-center fixed bottom-0     z-10   items-center lg:hidden cursor-pointer shadow-xl bg-[#ffff] ${
+      action === "edit-profile" ? "hidden" : "flex"
+    }`}
+  >
     <div className="w-[90%] flex   justify-between  items-center ">
       <Link href="/" className="flex flex-col  justify-center  items-center">
         <MobileHomeIcon />

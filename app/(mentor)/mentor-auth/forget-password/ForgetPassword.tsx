@@ -38,7 +38,7 @@ const ResetPassword = () => {
             />
           </div>
         </div>
-        <div className="col-span-3  px-4  lg:px-6 xl:px-32">
+        <div className="col-span-3  px-4  lg:px-6 xl:px-16">
           <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
             Mentor Me
           </h2>
