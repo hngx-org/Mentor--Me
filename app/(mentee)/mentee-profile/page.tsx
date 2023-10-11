@@ -7,7 +7,7 @@
 
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Commendations from "@/components/cards/mentee-profile-cards/Commendations";
 import MyMentorsCard from "@/components/cards/mentee-profile-cards/MyMentorsCard";
 import OverviewCard from "@/components/cards/mentee-profile-cards/OverviewCard";
@@ -16,6 +16,7 @@ import { DashboardCoverBg, MenteeDashboardProfileImg } from "@/public";
 import { EditIcon, GoNextArrowIcon, NaijaFlagIcon } from "@/public/SVGs";
 import Button from "../mentee-sessions/(ui)/VxrcelBtn";
 import UpdateProfile from "@/components/cards/mentee-profile-cards/UpdateProfile";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 type MenuProfileProps = {
   id: number;
@@ -53,9 +54,11 @@ export default function MenteeProfilePage() {
   return (
     <>
       {paramsAction === "edit-profile" ? (
-        <div className="w-full justify-center flex relative ">
-          <UpdateProfile />
-        </div>
+        <Suspense fallback={<LoadingSpinner />}>
+          <div className="w-full justify-center flex relative ">
+            <UpdateProfile />
+          </div>
+        </Suspense>
       ) : (
         <section className="w-full max-lg:pb-16 relative">
           <div className="flex w-full max-sm:h-[150px]">
@@ -69,12 +72,14 @@ export default function MenteeProfilePage() {
           <div className="flex w-full justify-between items-center px-6 lg:px-8 max-lg:flex-col max-lg:items-start max-lg:gap-6 2xl:px-32">
             <div className="flex items-center gap-6  w-full max-lg:flex-col max-lg:items-start max-lg:gap-6">
               <div className="relative -mt-12 ">
-                <Image
-                  src={MenteeDashboardProfileImg}
-                  alt="cover"
-                  width={130}
-                  height={130}
-                />
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Image
+                    src={MenteeDashboardProfileImg}
+                    alt="cover"
+                    width={130}
+                    height={130}
+                  />
+                </Suspense>
                 <div
                   className="absolute bottom-2 right-0 h-8 w-8 rounded-lg bg-white flex items-center justify-center cursor-pointer"
                   onClick={() => router.push("?action=edit-profile")}
@@ -104,7 +109,7 @@ export default function MenteeProfilePage() {
               />
             </div>
           </div>
-          <div className=" flex w-full justify-center max-lg:flex-col-reverse px-4 sm:px-6 lg:px-8 2xl:px-32 lg:gap-8 xl:gap-16 2xl:gap-28">
+          <div className=" flex w-full justify-center max-xl:flex-col px-4 sm:px-6 lg:px-8 2xl:px-32 lg:gap-8 xl:gap-16 2xl:gap-28 max-xl:pb-8">
             <div className="flex flex-col  w-full ">
               <div className="flex mt-10 max-lg:w-full ">
                 <div className="flex flex-col w-full ">
@@ -160,7 +165,7 @@ export default function MenteeProfilePage() {
                   <GoNextArrowIcon />
                 </p>
                 <div className="flex relative w-full h-[10px] bg-Neutra10">
-                  <div className="w-[30%] absolute top-0 left-0 h-full bg-Accent1 " />
+                  <div className="w-[30%] absolute top-0 left-0 h-full bg-gradient-to-r from-[#03bf7a] to-[#00ffaa] " />
                 </div>
                 <p className=" font-Inter font-medium text-[15px] text-Neutra50">
                   Community Statistics

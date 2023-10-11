@@ -90,10 +90,10 @@ export default function AllSession() {
             </p>
           </div>
           {activeTab === "upcoming" && (
-            <div className="flex w-full max-xl:flex-col max-xl:gap-10">
+            <div className="flex w-full h-full max-xl:flex-col max-xl:gap-10">
               <div
-                className={`flex w-full flex-col gap-6 overflow-y-auto  ${
-                  upcomingSessions.length > 3 ? "max-h-[760px] pb-4" : ""
+                className={`flex w-full h-full flex-col gap-6 sm:gap-8 overflow-y-auto sm:pb-20  ${
+                  upcomingSessions.length > 3 ? "max-h-[760px] pb-4 " : ""
                 }`}
               >
                 {upcomingSessions.map((session) => (
