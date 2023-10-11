@@ -100,11 +100,7 @@ const MentorProfileRight = () => {
       />
       <NotesTextarea notes={notes} onChange={handleNotesChange} />
       <div className="flex justify-center !py-20">
-        <Button
-          className="text-[10px] px-28 py-3 "
-          variant="primary"
-          paddingLess
-        >
+        <Button className="text-[10px] w-2/3 p-3" variant="primary" paddingLess>
           Book A Session
         </Button>
       </div>
