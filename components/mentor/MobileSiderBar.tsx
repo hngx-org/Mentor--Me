@@ -4,6 +4,7 @@ import {
   HomeIcon,
   MobileSession,
   ResourcesIcon,
+  EarningIcon,
 } from "@/public/SVGs";
 
 export default function MobileSideBar() {
@@ -39,6 +40,14 @@ export default function MobileSideBar() {
             <ResourcesIcon />
             <span className="text-[12px] text-[#ABABAB]  font-[400] font-Hanken">
               Resource center
+            </span>
+          </div>
+        </Link>
+        <Link href="/mentee-earnings?path=earnings">
+          <div className="flex flex-col  justify-center  items-center">
+            <EarningIcon />
+            <span className="text-[12px] text-[#ABABAB]  font-[400] font-Hanken">
+              Earnings
             </span>
           </div>
         </Link>
