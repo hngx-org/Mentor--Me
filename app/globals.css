@@ -18,6 +18,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  -webkit-tap-highlight-color: transparent;
 }
 
 .hide-message-layout-scroll::-webkit-scrollbar {

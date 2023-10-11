@@ -20,7 +20,7 @@ function RecentBookingCard({
 }: RecentbookingFromApi) {
   return (
     <div>
-      <div>
+      <div className="hidden">
         <h4 className="text-lg font-bold font-Hanken mb-8 mt-3">
           Recent Bookings
         </h4>
