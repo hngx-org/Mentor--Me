@@ -9,58 +9,79 @@ import { EditIcon, EditIconDark } from "@/public/SVGs";
 import Button from "@/app/(mentee)/mentee-sessions/(ui)/VxrcelBtn";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
+type formProps = {
+  name: string;
+  bio: string;
+  gender: string;
+  image: File | undefined;
+};
+
 const MAX_SIZE = 2 * 1024 * 1024; // 2MB in bytes
 export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState<File>();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<formProps>({
     name: "",
     gender: "select",
     bio: "",
+    image: file,
   });
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleEditClick = () => {
-    // @ts-ignore
-    fileInputRef.current.click();
-  };
+  // const handleEditClick = () => {
+  //   // @ts-ignore
+  //   fileInputRef.current.click();
+  // };
   const isDisabled =
     !formData.name || formData.gender === "select" || formData.bio.length < 30;
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
     e.preventDefault();
     if (!file) return;
 
     if (file.size > MAX_SIZE) {
       console.error("Image size exceeds 2MB. Please upload a smaller image.");
+      setIsLoading(false); // Make sure to set loading state to false in this case
       return;
     }
 
     try {
       const data = new FormData();
-      data.set("file", file);
+      data.append("image", file); // Use append instead of set
+      data.append("name", formData.name);
+      data.append("gender", formData.gender);
+      data.append("bio", formData.bio);
 
-      const res = await fetch("/api/upload_image", {
+      const res = await fetch("/api/form-upload", {
         method: "POST",
         body: data,
+        headers: {
+          // Set the Content-Type header to allow the server to properly parse the FormData
+          // 'multipart/form-data' is the content type used for file uploads
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       // handle the error
-      if (!res.ok) throw new Error(await res.text());
-      if (res.ok) {
-        console.log(res);
+      if (!res.ok) {
+        throw new Error(await res.text());
+      } else {
+        console.log("Upload successful:", res);
       }
-    } catch (e: any) {
+    } catch (error) {
       // Handle other errors here
-      console.error(e);
+      console.error(error);
     } finally {
-      setFile(undefined);
+      setIsLoading(false);
+      setFormData({
+        name: "",
+        gender: "select",
+        bio: "",
+        image: undefined,
+      });
     }
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
   };
 
   return (
@@ -73,41 +94,45 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
         >
           Change profile photo
         </p>
-        <div className="flex items-center gap-4">
-          <div className="relative  ">
-            <div
-              className={`h-[130px] w-[130px] bg-gradient-to-b ${
-                isDark
-                  ? "from-[#0d62ff] via-[#00ffb7] to-[#ffcc00] "
-                  : "from-[#ff0d82] via-[#da0303] to-[#ff960d]"
-              }  rounded-full p-1 overflow-hidden`}
-            >
-              <Image
-                src={
-                  file ? URL.createObjectURL(file) : MenteeDashboardProfileImg
-                }
-                alt="cover"
-                width={130}
-                height={130}
-                className="rounded-full object-contain"
-              />
-            </div>
-            <div
-              className={`absolute bottom-2 right-0 h-8 w-8 rounded-lg  flex items-center justify-center cursor-pointer ${
-                isDark ? "bg-black border-[1px] border-gray-300" : "bg-white"
-              }`}
-            >
-              <form onSubmit={onSubmit}>
-                <label
-                  htmlFor="file"
-                  onClick={handleEditClick}
-                  className="cursor-pointer"
-                >
+
+        <form
+          onSubmit={handleSubmit}
+          className="w-full flex flex-col gap-4 sm:gap-6  "
+        >
+          <div className="flex items-center gap-4">
+            <div className="relative  ">
+              <div
+                className={`h-[130px] w-[130px] bg-gradient-to-b ${
+                  isDark
+                    ? "from-[#0d62ff] via-[#00ffb7] to-[#ffcc00] "
+                    : "from-[#ff0d82] via-[#da0303] to-[#ff960d]"
+                }  rounded-full p-1 overflow-hidden`}
+              >
+                <Image
+                  src={
+                    formData.image
+                      ? URL.createObjectURL(formData.image)
+                      : MenteeDashboardProfileImg
+                  }
+                  alt="cover"
+                  width={130}
+                  height={130}
+                  className="rounded-full object-contain"
+                />
+              </div>
+              <div
+                className={`absolute bottom-2 right-0 h-8 w-8 rounded-lg  flex items-center justify-center cursor-pointer ${
+                  isDark ? "bg-black border-[1px] border-gray-300" : "bg-white"
+                }`}
+              >
+                <label htmlFor="image" className="cursor-pointer">
                   {isDark ? <EditIconDark /> : <EditIcon />}
 
                   <input
                     type="file"
-                    name="file"
+                    name="image"
+                    id="image"
+                    accept="image/*"
                     ref={fileInputRef}
                     className="hidden"
                     onChange={(e) => {
@@ -123,45 +148,44 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                       }
 
                       if (e.currentTarget.files && e.currentTarget.files[0]) {
-                        setFile(e.currentTarget.files[0]);
+                        setFormData({
+                          ...formData,
+                          image: e.currentTarget.files[0],
+                        });
                       }
                     }}
                   />
                 </label>
-              </form>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <p
+                className={`${
+                  isDark ? "text-white" : "text-Neutra50"
+                } font-medium text-[16px]`}
+              >
+                Select a file
+              </p>
+              <p
+                className={`${
+                  isDark ? "text-gray-300" : "text-Neutra50"
+                } font-Hanken text-[14px]`}
+              >
+                Make sure the file is below 2mb
+              </p>
             </div>
           </div>
-          <div className="flex flex-col">
-            <p
-              className={`${
-                isDark ? "text-white" : "text-Neutra50"
-              } font-medium text-[16px]`}
-            >
-              Select a file
-            </p>
-            <p
-              className={`${
-                isDark ? "text-gray-300" : "text-Neutra50"
-              } font-Hanken text-[14px]`}
-            >
-              Make sure the file is below 2mb
-            </p>
-          </div>
-        </div>
-        <form
-          onSubmit={handleSubmit}
-          className="w-full flex flex-col gap-4 sm:gap-6  mt-6 sm:mt-10 "
-        >
           <div
             className={`flex  flex-col w-full gap-4 sm:gap-10 ${
               isDark && "text-white "
             }`}
           >
             <label htmlFor="name">
-              <p className="flex items-start">
+              <p className="flex items-start mb-2">
                 <span>Your full name</span>
                 <span className="text-red-500 font-medium text-sm">*</span>
               </p>
+
               <input
                 type="text"
                 placeholder="Your full name"
@@ -169,7 +193,11 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 value={formData.name}
                 id="name"
                 required
-                className="w-full p-2 outline-none rounded-md bg-transparent border border-Neutra10 py-3 focus:border-primary focus:valid:border-green-400  transition-all duration-300"
+                className={`w-full p-2 outline-none rounded-xl bg-transparent border  py-3 focus:border-primary focus:valid:border-green-400  transition-all duration-300 ${
+                  isDark
+                    ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059]"
+                    : "border-Neutra10"
+                } `}
                 min={2}
                 onChange={(e) =>
                   setFormData({
@@ -182,7 +210,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
 
             {/* Select gender */}
             <label htmlFor="gender">
-              <p className="flex items-start">
+              <p className="flex items-start mb-2">
                 <span>Select gender</span>
                 <span className="text-red-500 font-medium text-sm">*</span>
               </p>
@@ -190,9 +218,11 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 id="gender"
                 required
                 name="gender"
-                className={`w-full p-2 outline-none rounded-md ${
-                  isDark && "bg-black"
-                } border border-Neutra10 py-3 focus:border-primary focus:valid:border-green-400  transition-all duration-300`}
+                className={`w-full p-2 outline-none rounded-xl  border  py-3 focus:border-primary focus:valid:border-green-400  transition-all duration-300 ${
+                  isDark
+                    ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059] bg-black"
+                    : "border-Neutra10 bg-transparent"
+                } `}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
@@ -210,7 +240,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
             </label>
 
             <label htmlFor="bio">
-              <p className="flex items-start">
+              <p className="flex items-start mb-2">
                 <span>Bio</span>
                 <span className="text-red-500 font-medium text-sm">*</span>
               </p>
@@ -220,7 +250,11 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 required
                 id="bio"
                 value={formData.bio}
-                className="w-full h-[180px]  p-2 outline-none rounded-md bg-transparent border border-Neutra10 py-3 resize-none focus:border-primary focus:valid:border-green-400 transition-all duration-300"
+                className={`w-full h-[180px] p-2 outline-none rounded-xl bg-transparent border  py-3 focus:border-primary focus:valid:border-green-400  transition-all duration-300 resize-none ${
+                  isDark
+                    ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059]"
+                    : "border-Neutra10"
+                } `}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
@@ -243,7 +277,16 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
               disabled={isDisabled}
               loading={isLoading}
               variant={isDark ? "secondary" : "primary"}
-              className="py-4 px-8"
+              className={`${
+                isDark
+                  ? "!bg-transparent border-gray-200 brightness-125"
+                  : "py-4 px-8 "
+              }`}
+              titleClassName={`${
+                isDark
+                  ? "my-3 mx-6 bg-gradient-to-r from-[#0d62ff] via-[#00ffb7] to-[#ff00fb]  w-fit  bg-clip-text text-transparent text-xl tracking-wide "
+                  : ""
+              }`}
             />
           </div>
         </form>
