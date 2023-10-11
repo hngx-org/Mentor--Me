@@ -14,7 +14,7 @@ type ButtonProps = {
   iconHeight?: number;
   iconWidth?: number;
   alt?: string;
-  titleClassName?: ButtonHTMLAttributes<HTMLButtonElement>["className"];
+  titleClassName?: ButtonHTMLAttributes<HTMLSpanElement>["className"];
   onclick?: () => void;
   fullWidth?: boolean;
   loading?: boolean;

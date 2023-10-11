@@ -75,9 +75,17 @@ export default function UpdateProfile() {
     >
       <Link
         href="/mentee-profile?path=profile"
-        className="absolute top-5 right-5 h-[40px] w-[40px] flex justify-center items-center bg-black"
+        className="absolute top-5 right-5 h-[40px] w-[40px] flex justify-center items-center bg-black hover:bg-transparent group/close transition-all duration-300"
       >
-        <button className="text-white text-2xl font-medium">X</button>
+        <p
+          className={`before:transition-all duration-300 before:font-bold before:hidden relative before:absolute before:content-['Close?'] group-hover/close:before:block before:top-1 before:right-0 before:text-xl ${
+            isDark ? "text-white/80" : "text-Neutra40"
+          }`}
+        >
+          <button className="text-white text-2xl font-medium group-hover/close:opacity-0">
+            X
+          </button>
+        </p>
       </Link>
       <div className="absolute top-5 left-5 h-[40px] w-[60px] flex justify-center items-center ">
         <div
@@ -92,7 +100,7 @@ export default function UpdateProfile() {
         />
       </div>
       <div
-        className={`pt-16  font-medium text-lg font-Inter ${
+        className={`pt-16 select-none  font-medium text-xl font-Inter ${
           isDark
             ? "font-semibold uppercase bg-gradient-to-r from-[#0d62ff] via-[#00ffb7] to-[#ff00fb] bg-clip-text text-transparent"
             : "text-Neutra50"
@@ -100,11 +108,17 @@ export default function UpdateProfile() {
       >
         <p>Update your profile details</p>
       </div>
-      <div className="flex gap-4 w-full justify-between sm:max-w-[400px] px-2">
+      <div
+        className={`flex gap-4 w-full justify-between sm:max-w-[400px] px-2 sm:p-4 ${
+          isDark ? "border-gray-800 border-t border-b" : ""
+        }`}
+      >
         {updateProfileTabs.map((session) => (
           <button
             className={`${
-              isDark ? "text-white" : "text-Neutra40"
+              isDark && activeTab === session.tab
+                ? "text-white"
+                : "text-Neutra40"
             } cursor-pointer capitalize text-[14px] sm:text-[18px] font-Hanken pb-2 border-b-[2px] border-[#f9fafc]   ${
               activeTab === session.tab && !isDark
                 ? "!border-Accent1 text-black font-medium"

@@ -277,8 +277,15 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
               disabled={isDisabled}
               loading={isLoading}
               variant={isDark ? "secondary" : "primary"}
-              className={`py-4 px-8 ${
-                isDark ? "!bg-transparent border-gray-200 !text-gray-200" : ""
+              className={`${
+                isDark
+                  ? "!bg-transparent border-gray-200 brightness-125"
+                  : "py-4 px-8 "
+              }`}
+              titleClassName={`${
+                isDark
+                  ? "my-3 mx-6 bg-gradient-to-r from-[#0d62ff] via-[#00ffb7] to-[#ff00fb]  w-fit  bg-clip-text text-transparent text-xl tracking-wide "
+                  : ""
               }`}
             />
           </div>
