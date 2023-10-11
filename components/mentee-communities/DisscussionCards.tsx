@@ -14,25 +14,25 @@ type Props = {
   id: number;
 };
 
-const DiscussionCards: React.FC<Props> = ({ title, members, desc, id = 1 }) => (
-  <div className="discussioncard  flex flex-col flex-shrink-0 lg:pt-4 lg:px-[19px] lg:pb-[30px] px-2 py-4 border border-Neutra10 lg:rounded-[8px] rounded-[6.2px] justify-center items-center  gap-2 lg:max-w-[295px]   lg:w-[18vw] md:w-[23vw] w-[40vw]  md:min-h-[220px]  h-fit   ">
-    <div className="text flex flex-col xl:gap-[14px] gap-2 font-Hanken xl:mb-[45px] text-left">
-      <p className=" text-NeutalBase font-semibold xl:text-[24px] text-[14px] leading-[28.8px]  ">
+const DiscussionCards: React.FC<Props> = ({ title, members, desc, id }) => (
+  <div className="discussioncard  flex flex-col flex-shrink-0 lg:pt-4 lg:px-[19px] lg:pb-[30px] px-2 py-4 border border-Neutra10 lg:rounded-[8px] rounded-[6.2px] justify-center items-center  gap-4 lg:gap-[35px] xl:gap-[45px] xl:max-w-[295px] lg:max-w-[225px]  max-w-[182px] xl:w-[295px]  lg:w-[225px] w-[182px]   lg:min-h-[220px]  h-fit   ">
+    <div className="text flex flex-col xl:gap-[14px] lg:gap-[10px] gap-2 font-Hanken  text-left">
+      <p className=" text-NeutalBase font-semibold xl:text-[24px] lg:text-[19px] text-[14px] leading-[120%]  ">
         {title}
       </p>
 
-      <div className=" text-Accent1 font-medium xl:text-[16px] text-[10px] leading-[19.2px]  flex xl:gap-2 gap-[4.9px] items-center relative">
+      <div className=" text-Accent1 font-medium xl:text-[16px] lg:text-[13px] text-[10px] leading-[110%]  flex xl:gap-2 lg:gap-[0] gap-[4.9px] items-center relative">
         <Image
           alt="members"
           src={membersCardAvatar}
-          width={56}
-          height={24}
-          className="block xl:w-[56px] xl:h-[24px] w-[26px] h-[12px]"
+          width={36}
+          height={20}
+          className="flex  xl:h-6 xl:w-[56] h-4 w-9 lg:h-[22px]  lg:w-[51px] "
         />{" "}
         <span className="xl:underline"> {`${members} Members`}</span>
       </div>
 
-      <p className=" text-Neutra50 font-normal xl:text-[18px] xl:leading-[21.6px] text-[10px] leading-[14.4px] ">
+      <p className=" text-Neutra50 font-normal xl:text-[18px] lg:text-[14px] text-[10px] leading-[130%] ">
         {desc}
       </p>
     </div>
@@ -45,7 +45,7 @@ const DiscussionCards: React.FC<Props> = ({ title, members, desc, id = 1 }) => (
     <Link href="/mentee-communities/forums">
       <button
         type="button"
-        className="text-[10px]  whitespace-nowrap px-[30px]   py-[16px]  bg-white border  border-NeutalBase text-NeutalBase flex items-center gap-x-1 rounded-[8px]"
+        className="text-[10px] lg:text-[16px] font-Inter whitespace-nowrap px-[38px]  py-[10.5px] lg:py-[16px]  bg-white border font-medium  border-NeutalBase text-NeutalBase flex items-center gap-x-1 rounded-[8px]"
       >
         Join Discussion
       </button>
