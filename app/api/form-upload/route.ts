@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
 
   const path = `/uploads/${image.name}`;
   await writeFile(path, buffer);
-  console.log(`Uploaded file: ${path}`);
+  //console.log(`Uploaded file: ${path}`);
 
   return NextResponse.json({ success: true });
 }

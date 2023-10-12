@@ -7,10 +7,6 @@ import CardDetails from "@/components/CardDetails";
 import CardReview from "@/components/CardReview";
 import CardProcess from "@/components/CardProcess";
 import CardSuccess from "@/components/CardSuccess";
-import { useRouter } from "next/router";
-import SidebarMentor from "@/components/mentor/SidebarMentor";
-import MobileSideBar from "@/components/mentor/MobileSiderBar";
-import MenteeNavBar from "@/components/menteeTopNav";
 import Layout from "@/components/Layout";
 
 
@@ -29,7 +25,7 @@ export default function EarningPage() {
     setStep((Step) => Step + 1);
   };
 
-  const handleUserDetailsChange = (updatedUserDetails) => {
+  const handleUserDetailsChange = (updatedUserDetails: React.SetStateAction<{ paymentMethod: string; name: string; accountDetails: string; bankName: string; amount: string; }>) => {
     setUserDetails(updatedUserDetails);
   };
 
@@ -40,8 +36,6 @@ export default function EarningPage() {
       {step === 2 && (
         <CardSelect
           onSetStep={handleNext}
-          userDetails={userDetails}
-          setUserDetails={handleUserDetailsChange}
         />
       )}
       {step === 3 && (
@@ -58,7 +52,7 @@ export default function EarningPage() {
         <CardReview
           onSetStep={handleNext}
           userDetails={userDetails}
-          setUserDetails={handleUserDetailsChange}
+          
         />
       )}
       {step === 5 && <CardProcess onSetStep={handleNext} />}

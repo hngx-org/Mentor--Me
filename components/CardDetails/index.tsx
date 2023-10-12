@@ -21,15 +21,13 @@ export default function CardDetails(props:CardReviewProps) {
   const [formComplete, setFormComplete] = useState(false);
 
   // Effect to check if the form is complete whenever user details change
-  useEffect(() => {
-    const isFormComplete =
-      userDetails.paymentMethod &&
-      userDetails.name &&
-      userDetails.accountDetails &&
-      userDetails.bankName &&
-      userDetails.amount;
-    setFormComplete(isFormComplete);
-  }, [userDetails]);
+  const isFormComplete = !!(
+  userDetails.paymentMethod &&
+  userDetails.name &&
+  userDetails.accountDetails &&
+  userDetails.bankName &&
+  userDetails.amount
+);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
