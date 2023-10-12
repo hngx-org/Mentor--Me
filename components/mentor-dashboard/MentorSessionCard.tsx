@@ -20,7 +20,10 @@ const MentorSessionCard = ({
   min,
   setIsOpen,
 }: cardType) => (
-  <div className="border-Neutra10 border rounded-lg bg-white py-5 lg:py-10 px-3 flex flex-col gap-2 lg:gap-3">
+  <div
+   
+    className="border-Neutra10 border rounded-lg bg-white py-5 lg:py-10 px-3 flex flex-col gap-2 lg:gap-3 col-span-1"
+  >
     <p className="text-Neutra30 text-sm font-normal font-Hanken">{types}</p>
     <h5 className="text-base md:text-lg text-[#121212] font-medium">{name}</h5>
     <p className="text-Neutra30 text-sm font-normal font-Hanken">{location}</p>
