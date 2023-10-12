@@ -58,7 +58,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
               </Link>
 
               <Link
-                href="/mentor-resources"
+                href="/mentee-resources/explore?path=Explores"
                 className="text-[#565656] text-[0.8rem]"
               >
                 Resources
@@ -80,7 +80,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
                 Community
               </Link>
               <Link
-                href="/mentor-resources"
+                href="/mentee-resources/explore?path=Explores"
                 className="text-[#565656] text-[0.8rem]"
               >
                 Resources
@@ -166,7 +166,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
 
           <li className="text-[12px] text-Inter  hover:bg-black hover:text-white hover:p-2 rounded">
             <Link
-              href="/mentor-resources"
+              href="/mentee-resources/explore?path=Explores"
               className="text-[#565656] text-[0.9rem]"
               onClick={handleToggleMenu}
             >
