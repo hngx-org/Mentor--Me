@@ -4,7 +4,7 @@
 // The MenteeFormBuilder renders the forms for each screen, while accepting data from the formData.js file
 // The MenteeProgressBar renders the progress bar in each screen based on a state variable called currForm
 // The left side of the screen houses an svg element and a Container div which has the 4 forms. Each form is shown based on the state of currForm
-// The Container div has 4 divs, in which each div houses the heading, progressbar and the form itself
+// The Container div has 3 divs, in which each div houses the heading, progressbar and the form itself
 
 import React, { useEffect, useRef, useState } from "react";
 
