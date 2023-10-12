@@ -39,7 +39,7 @@ function PortfolioCard() {
   return (
     <div>
       {/* for wider screens, two data is displayed */}
-      <div className="hidden lg:flex flex-colspace-around">
+      <div className="hidden lg:flex flex-colspace-around gap-6">
         {slicedTwoData.map((data) => (
           <PortfolioReview key={data.id} {...data} />
         ))}

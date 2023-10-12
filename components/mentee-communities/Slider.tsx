@@ -35,7 +35,7 @@ const Slider: React.FC<Props> = ({ slideInfo }) => {
 
   return (
     <div
-      className="discussion-section relative lg:mt-[98px] md:mt[40px] mt-[23px]  flex flex-col lg:mx-[6vw] md:mx-[9vw] mx-[7vw]
+      className="discussion-section relative lg:mt-[98px] md:mt[40px] mt-[23px]  flex flex-col mx-auto 
 text-NeutalBase font-Inter overflow-hidden "
       // style={{marginLeft:`${}`}}
     >
@@ -66,7 +66,11 @@ text-NeutalBase font-Inter overflow-hidden "
       </h2>
 
       <div
-        className={`${styles.slider} flex gap-3  transition-all  duration-300 transform  lg:w-fit md:w-fit ml-[vw] overflow-x-auto lg:gap-[57px] md:gap-x-10 gap-x-6`}
+        // md:gap-x-10 gap-x-6  gap-3 w-182px
+        // gap-x = (total width - sum of width of slides) /  (number of slides-1)
+
+        className={`${styles.slider} flex  transition-all  duration-300 transform   gap-x-[30px] sm:gap-x-[15px]  md:gap-x-[calc(42.5vw-274px)] lg:gap-x-[calc(33.33vw-351px)] xl:gap-x-[calc(31.33vw-394px)] 2xl:gap-x-[calc(30vw-394px)]
+ md:w-fit  overflow-x-auto  `}
         style={{
           transform: `translateX(calc(-${
             (currentIndex * 3) / slideInfo.length

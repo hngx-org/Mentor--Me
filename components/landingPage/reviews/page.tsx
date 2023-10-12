@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import AyraStar from "../../../public/assets/images/landing-page/ayra-star.png";
 import Chioma from "../../../public/assets/images/landing-page/chioma.png";
 import David from "../../../public/assets/images/landing-page/david.png";
@@ -157,7 +158,7 @@ export default function Reviews() {
           type="button"
           className="bg-[black] text-[white] text-[0.7rem] font-medium w-4/5 md:w-1/6 max-w-[169px] py-[1.1rem] md:py-[0.8rem] rounded-[8px] outline-none"
         >
-          Get Started
+          <Link href="welcome/signup"> Get Started</Link>
         </button>
       </div>
     </section>

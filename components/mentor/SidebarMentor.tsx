@@ -14,7 +14,7 @@ export default function SidebarMentor({ light = false }: SideBarMentorProps) {
   return (
     <section
       className={`w-[274px] border-[1px]  p-7 h-[900px] relative ${
-        light ? "bg-[#fff]" : " bg-[#000]"
+        light ? "bg-[#fff]" : " bg-[#000] hidden lg:block"
       }`}
     >
       <div className="flex flex-col">

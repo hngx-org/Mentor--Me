@@ -37,7 +37,7 @@ const aboutMentorDetails = [
 ];
 
 const AboutMentor = () => (
-  <div className="mt-10">
+  <div className="mt-10 mb-5 md:mb-0">
     <div className="flex items-center justify-between mb-5">
       <h5 className="text-2xl font-Inter font-medium text-[#1c0028]">
         More about me!
@@ -54,10 +54,12 @@ const AboutMentor = () => (
         </button>
       </div>
     </div>
-    <div className="flex gap-10 overflow-x-scroll">
-      {aboutMentorDetails.map((detail) => (
-        <AboutMentorCard {...detail} key={detail.id} />
-      ))}
+    <div className="overflow-x-scroll">
+      <div className="flex items-center gap-5 lg:first-letter:gap-10 w-[] lg:w-full overflow-x-scroll">
+        {aboutMentorDetails.map((detail) => (
+          <AboutMentorCard {...detail} key={detail.id} />
+        ))}
+      </div>
     </div>
   </div>
 );

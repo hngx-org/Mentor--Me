@@ -14,7 +14,7 @@ export { default as membersCardAvatar } from "./assets/images/mentee-communities
 export { default as mentorCardHero } from "./assets/images/mentee-communities/mentoreCardHero.svg";
 export { default as mentorCardAvatar } from "./assets/images/mentee-communities/mentorCardAvatar.svg";
 export { default as bigDiscussionCardHero } from "./assets/images/mentee-communities/bigDisscussionCardHero.svg";
-// export { default as messageedit } from "./assets/Icons/mentee-communities/messageEdit.svg"
+export { default as messageedit } from "./assets/Icons/mentee-communities/messageEdit.svg";
 
 export { default as DashboardCoverBg } from "./assets/images/mentee-profile-screen/cover-bg.png";
 export { default as MenteeDashboardProfileImg } from "./assets/images/mentee-profile-screen/my-profile.png";
@@ -50,6 +50,8 @@ export { default as Facebuk } from "./assets/Icons/facebookforprofile.png";
 export { default as instaggram } from "./assets/Icons/instinstagramforprofile.png";
 export { default as updatee } from "./assets/Icons/upload_icon.png";
 export { default as EditIcon } from "./assets/Icons/iconamoon_edit-thin.png";
+export { default as CloseIcon } from "./assets/Icons/iconoir_cancel.png";
+export { default as WhereLogo } from "./assets/Icons/logoidontKnow.png";
 
 export { default as MentorSchedule } from "./assets/images/MentorSchedule/photocard.png";
 
@@ -77,3 +79,12 @@ export { default as achieve1 } from "./assets/images/mentee-booking/4969a6a6e7a8
 export { default as check } from "./assets/images/mentee-booking/tick-circle.svg";
 export { default as link } from "./assets/images/mentee-booking/SVG.svg";
 export { default as clock } from "./assets/images/mentee-booking/clock.svg";
+
+//  images for checkout and cart page
+export const CardRectangle1 = "assets/images/cart/cardRectangle1.png";
+export const CardRectangle2 = "assets/images/cart/cardRectangle2.png";
+export const CardRectangle3 = "assets/images/cart/cardRectangle3.png";
+export const CartImgPath1 = "assets/images/cart/cart1.png";
+export const CartImgPath2 = "assets/images/cart/cart2.png";
+export const CartImgPath3 = "assets/images/cart/cart3.png";
+export const SuccessImg = "assets/images/cart/success-img.png";
