@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 import WalletDetails from "@/components/WalletDetails";
 import CardSelect from "@/components/CardSelect";
 import CardDetails from "@/components/CardDetails";
@@ -8,8 +8,13 @@ import CardReview from "@/components/CardReview";
 import CardProcess from "@/components/CardProcess";
 import CardSuccess from "@/components/CardSuccess";
 import { useRouter } from "next/router";
+import SidebarMentor from "@/components/mentor/SidebarMentor";
+import MobileSideBar from "@/components/mentor/MobileSiderBar";
+import MenteeNavBar from "@/components/menteeTopNav";
+import Layout from "@/components/Layout";
 
-export default function Earnings() {
+
+export default function EarningPage() {
   const [step, setStep] = useState(1);
   const [userDetails, setUserDetails] = useState({
     paymentMethod: "",
@@ -21,7 +26,7 @@ export default function Earnings() {
 
 
   const handleNext = () => {
-    setStep((prevStep) => prevStep + 1);
+    setStep((Step) => Step + 1);
   };
 
   const handleUserDetailsChange = (updatedUserDetails) => {
@@ -29,7 +34,8 @@ export default function Earnings() {
   };
 
   return (
-    <>
+    <Layout>
+    
       {step === 1 && <WalletDetails onSetStep={handleNext} />}
       {step === 2 && (
         <CardSelect
@@ -57,6 +63,6 @@ export default function Earnings() {
       )}
       {step === 5 && <CardProcess onSetStep={handleNext} />}
       {step === 6 && <CardSuccess onSetStep={handleNext} />}
-    </>
+    </Layout>
   );
 }

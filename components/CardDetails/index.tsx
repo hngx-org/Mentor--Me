@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from 'next/router';
+import React, { useState, useEffect, Dispatch, SetStateAction  } from "react";
+import { useRouter, } from 'next/router';
+
 
 interface CardReviewProps {
-  onSetStep(arg0: number): void;
+  // onSetStep(arg0: number): void;
+  onSetStep: Dispatch<SetStateAction<number>>;
   userDetails: {
     paymentMethod: string;
     name: string;
@@ -36,6 +38,10 @@ export default function CardDetails(props:CardReviewProps) {
       [name]: value,
     }));
   };
+
+  function onSetStep(arg0: number) {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <div className="p-11">
@@ -131,10 +137,10 @@ export default function CardDetails(props:CardReviewProps) {
       <div className="flex justify-end mt-6">
         <button
           className="px-4 py-2 bg-gray-100 text-black rounded  border-black hover:bg-red-300 hover:border-red-700 mr-2"
-          onClick={() => {{
-            props.onSetStep(1)
-          }
-        }}
+          onClick={() => {
+            // Add logic for cancel action here
+            onSetStep(1); // Go back to CardDetails step
+          }}
         >
           Cancel
         </button>

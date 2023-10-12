@@ -88,7 +88,7 @@ export default function CardReview(props: CardReviewProps) {
           Cancel
         </button>
         <button
-          className="px-3 py-2 text-lg bg-black text-white-100 rounded hover:bg-blue-700 ml-2"
+          className="px-3 py-2 text-lg bg-black text-white-100 rounded hover:bg-blue-700 ml-2" style={{color:"white"}}
           onClick={handleContinueClick}
         >
           Finish

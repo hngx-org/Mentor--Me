@@ -9,7 +9,7 @@ import CardReview from "@/components/CardReview";
 import CardProcess from "@/components/CardProcess";
 import CardSuccess from "@/components/CardSuccess";
 
-export default function Earnings() {
+export default function EarningsPage() {
   const [step, setStep] = useState(1);
   const [userDetails, setUserDetails] = useState({
     paymentMethod: "",
