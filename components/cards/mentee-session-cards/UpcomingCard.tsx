@@ -1,7 +1,14 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from "next/image";
 
+import { Dispatch, SetStateAction } from "react";
 import { UpcomingSessionProp } from "@/lib/constants/constants";
 import Button from "@/app/(mentee)/mentee-sessions/(ui)/VxrcelBtn";
+
+type SuccessReminderProps = {
+  openModal: Dispatch<SetStateAction<boolean>>;
+};
 
 export default function UpcomingCard({
   name,
@@ -11,7 +18,8 @@ export default function UpcomingCard({
   rescheduleBtn,
   reminderBtn,
   imgSrc,
-}: UpcomingSessionProp) {
+  openModal,
+}: UpcomingSessionProp & SuccessReminderProps) {
   return (
     <div className="flex w-full sm:max-w-[90%] sm:ml-4 px-4 sm:px-6 xl:px-8 pb-6 pt-8 border border-Neutra10 rounded-xl gap-6 flex-col sm:flex-row hover:shadow-2xl shadow-black/20 transition-all duration-300">
       <div className="max-w-[120px]">
@@ -41,12 +49,14 @@ export default function UpcomingCard({
             variant="secondary"
             fullWidth
           />
-          <Button
-            className="px-4 py-2 border-Neutra50"
-            title={reminderBtn}
-            variant="primary"
-            fullWidth
-          />
+          <div className="w-full" role="dialog" onClick={() => openModal(true)}>
+            <Button
+              className="px-4 py-2 border-Neutra50"
+              title={reminderBtn}
+              variant="primary"
+              fullWidth
+            />
+          </div>
         </div>
       </div>
     </div>
