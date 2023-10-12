@@ -5,7 +5,6 @@ import { useSearchParams } from "next/navigation";
 import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
 
 import { NavbarMentee } from "../mentee-sessions/(ui)/NavbarMentee";
-import MobileSideBar from "@/components/MobileSideBar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const searchParams = useSearchParams().get("path");
@@ -17,7 +16,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <main className="lg:ml-[274px]">
         <NavbarMentee path={searchParams} />
 
-        <MobileSideBar />
         {children}
       </main>
     </>
