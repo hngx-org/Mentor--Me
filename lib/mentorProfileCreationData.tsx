@@ -19,20 +19,20 @@ const form1Arr = [
     label: "Email Address",
     placeholder: "Email Address",
     nature: "",
-    type: "",
+    type: "email",
   },
   {
     id: 3,
     label: "What gender do you identify as?",
-    placeholder: "Select Gender",
+    placeholder: "Male, Female, Rather not say, etc",
     nature: "dropdown",
     type: "",
   },
   {
     id: 4,
     label: "Which city / country do you live in?",
-    placeholder: "Select City/ Country",
-    nature: "dropdown",
+    placeholder: "Nigeria, New York, London etc",
+    nature: "",
     type: "",
   },
 ];
@@ -78,14 +78,14 @@ const form2Arr = [
     label: "LInkedIn Profile",
     placeholder: "Link",
     nature: "",
-    type: "",
+    type: "url",
   },
   {
     id: 7,
     label: "Other Links",
     placeholder: "Link",
     nature: "dropdown",
-    type: "",
+    type: "url",
   },
   {
     id: 8,
@@ -116,7 +116,7 @@ const form3Arr = [
     label: "Year of Graduation",
     placeholder: "2023",
     nature: "dropdown",
-    type: "",
+    type: "number",
   },
 ];
 
