@@ -35,10 +35,10 @@ const DiscussionSlider: React.FC<Props> = ({ slideInfo }) => {
 
   const handleNextClick = () => {
     if (currentIndex * 4 < slideInfo.length - 4) {
-      console.log("clicked");
+      // console.log("clicked");
       setCurrentIndex(currentIndex + 1);
     }
-    console.log(currentIndex * 4);
+    // console.log(currentIndex * 4);
   };
 
   return (
