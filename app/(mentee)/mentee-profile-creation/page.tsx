@@ -9,13 +9,11 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
-import styles from "./page.tailwind.css";
 
 import MentorMeIcon from "@/svgs/MentorMeIcon";
 
 import {
   MentorCreationProfileIcon,
-  MentorCreationPlusIcon,
   MentorCreationTopEllipse,
   MentorCreationBottomEllipse,
   MentorCreationWoman,
@@ -93,7 +91,7 @@ export default function MentorProfileCreation() {
 
   return (
     // Overall container for the whole page
-    <div className={`lg:flex-row flex  ${styles.scroll} relative bg-white`}>
+    <div className="lg:flex-row flex overflow-y-scroll relative bg-white">
       {/* overlay that shows behind the modal */}
       <button
         aria-label="hide/show overlay"
