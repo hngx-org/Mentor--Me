@@ -20,7 +20,7 @@ interface FormData {
   attendeesLimit?: number;
   time?: number;
   date?: number;
-  topics?: number;
+  topics?: string;
 }
 interface CalendarFunctions {
   onClose: () => void;
@@ -73,7 +73,7 @@ export function FreeSessionForm({
       setCalendarVisible(true);
     } else {
       setError("All fields are required");
-      console.log("All fields are required");
+      // console.log("All fields are required");
     }
   };
   return (
@@ -252,7 +252,7 @@ export function OneOffSessionForm({
       setCalendarVisible(true);
     } else {
       setError("All fields are required");
-      console.log("All fields are required");
+      // console.log("All fields are required");
     }
   };
   return (
@@ -431,7 +431,7 @@ export function RecurringSessionForm({
       setCalendarVisible(true);
     } else {
       setError("All fields are required");
-      console.log("All fields are required");
+      // console.log("All fields are required");
     }
   };
   return (
