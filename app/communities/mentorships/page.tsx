@@ -1,5 +1,6 @@
 import React from "react";
 
+import { mentorCardAvatar, mentorCardHero } from "@/public";
 import BigMentorShipCard from "@/components/mentee-communities/BigMentorShipCard";
 import MentorCard from "@/components/mentee-communities/MentorCard";
 
@@ -33,21 +34,167 @@ export default function FreeMentorship() {
 
       {/* text */}
       <div className=" hidden lg:flex flex-col gap-y-8">
-        <BigMentorShipCard />
-        <BigMentorShipCard />
-        <BigMentorShipCard />
-        <BigMentorShipCard />
-        <BigMentorShipCard />
-        <BigMentorShipCard />
-        <BigMentorShipCard />
-        <BigMentorShipCard />
+        <BigMentorShipCard
+          id={9408}
+          mentorCardHero={mentorCardHero}
+          mentorImage={mentorCardAvatar}
+          mentorName="Shade Mayowa"
+          verfied
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Introduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />
+        <BigMentorShipCard
+          id={9408}
+          mentorCardHero={mentorCardHero}
+          mentorImage={mentorCardAvatar}
+          mentorName="Shade Mayowa"
+          verfied
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Introduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />
+        <BigMentorShipCard
+          id={9408}
+          mentorCardHero={mentorCardHero}
+          mentorImage={mentorCardAvatar}
+          mentorName="Shade Mayowa"
+          verfied
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Introduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />
+        <BigMentorShipCard
+          id={9408}
+          mentorCardHero={mentorCardHero}
+          mentorImage={mentorCardAvatar}
+          mentorName="Shade Mayowa"
+          verfied
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Introduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />
+        <BigMentorShipCard
+          id={9408}
+          mentorCardHero={mentorCardHero}
+          mentorImage={mentorCardAvatar}
+          mentorName="Shade Mayowa"
+          verfied
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Introduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />
+        <BigMentorShipCard
+          id={9408}
+          mentorCardHero={mentorCardHero}
+          mentorImage={mentorCardAvatar}
+          mentorName="Shade Mayowa"
+          verfied
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Introduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />
+        <BigMentorShipCard
+          id={9408}
+          mentorCardHero={mentorCardHero}
+          mentorImage={mentorCardAvatar}
+          mentorName="Shade Mayowa"
+          verfied
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Introduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />
+        <BigMentorShipCard
+          id={9408}
+          mentorCardHero={mentorCardHero}
+          mentorImage={mentorCardAvatar}
+          mentorName="Shade Mayowa"
+          verfied
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Introduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />
       </div>
       <h1 className="lg:hidden md:ml-7 ml-5 font-Inter font-medium text-[16px] leading-[22.4px] ">
         Free Mentorship Sessions
       </h1>
       <div className="grid lg:hidden  md:grid-cols-3 grid-cols-2 md:ml-7 ml-5 gap-y-5 md:gap-y-8">
-        <MentorCard /> <MentorCard /> <MentorCard /> <MentorCard />{" "}
-        <MentorCard /> <MentorCard />
+        <MentorCard
+          id={85}
+          mentorName="Shade Mayowa"
+          verify={false}
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Intorduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />{" "}
+        <MentorCard
+          id={85}
+          mentorName="Shade Mayowa"
+          verify={false}
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Intorduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />{" "}
+        <MentorCard
+          id={85}
+          mentorName="Shade Mayowa"
+          verify={false}
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Intorduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />{" "}
+        <MentorCard
+          id={85}
+          mentorName="Shade Mayowa"
+          verify={false}
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Intorduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />{" "}
+        <MentorCard
+          id={85}
+          mentorName="Shade Mayowa"
+          verify={false}
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Intorduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />{" "}
+        <MentorCard
+          id={85}
+          mentorName="Shade Mayowa"
+          verify={false}
+          mentorPostion="CEO, Webmasters Inc"
+          date="28th, Sept"
+          time="12:30pm"
+          title="Intorduction to AI"
+          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
+        />
       </div>
       <Footer />
     </div>

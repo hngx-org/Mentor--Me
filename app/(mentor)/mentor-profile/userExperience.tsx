@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { EditIcon } from "@/public";
+import { EditIcon, WhereLogo } from "@/public";
 
 const UserExperience = () => (
   <div className=" mt-14 lg:mt-10 md:mt-10 lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 ml-10 mb-20">
@@ -29,6 +29,43 @@ const UserExperience = () => (
         <p className=" h-12 w-fit px-10 py-2 items-center border-[0.5px] rounded-lg border-gray-300">
           +11
         </p>
+      </div>
+
+      <div>
+        <h3 className=" mt-8 font-Inter text-base font-medium text-black mb-4 ">
+          Experience{" "}
+          <span className="rounded-full px-2 py-1 h-4 w-5 bg-Accent1 text-white">
+            2
+          </span>
+        </h3>
+        <div className=" flex items-center gap-3 ">
+          <Image src={WhereLogo} width={30} height={20} alt="alogo" />
+          <div className=" inline-flex gap-32 items-center">
+            <div>
+              <h4 className="font-Inter text-base font-semibold text-black ">
+                CEO
+              </h4>
+              <p>Webmaster Inc.</p>
+            </div>
+            <p className="bg-gray-300 border px-3 py-2 rounded-lg font-Hanken">
+              Present
+            </p>
+          </div>
+        </div>
+        <div className=" flex items-center gap-3 mt-4">
+          <Image src={WhereLogo} width={30} height={20} alt="aloho" />
+          <div className=" inline-flex gap-20 items-center">
+            <div>
+              <h4 className="font-Inter text-base font-semibold text-black">
+                UI/UX design
+              </h4>
+              <p>Bachelor of Science in Computer Science</p>
+            </div>
+            <p className="bg-gray-300 border px-3 py-2 rounded-lg font-Hanken">
+              July 2023 - Dec 2023
+            </p>
+          </div>
+        </div>
       </div>
     </div>
     <div className=" lg:w-[480px] lg:h-[250px]  md:w-[380px] md:h-[250px] w-[300px] px-10 py-2 md:ml-3 border-[0.5px] rounded-lg mt-10">

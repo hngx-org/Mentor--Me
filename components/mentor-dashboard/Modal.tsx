@@ -35,8 +35,8 @@ export default function Modal({ isOpen, setIsOpen }: ModalProps) {
         open={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        <div className="fixed inset-0 w-screen items-center p-4 bg-[#020202c8] flex overflow-y-auto">
-          <Dialog.Panel className="w-[90%] lg:w-2/3 rounded bg-white p-10 text-Neutral60 m-auto overflow-y-scroll">
+        <div className="fixed inset-0 w-screen p-4 bg-[#020202c8] flex items-center justify-center overflow-y-auto">
+          <Dialog.Panel className="w-[98%] lg:w-2/3 rounded bg-white p-5 md:p-10 text-Neutral60 m-auto overflow-y-auto h-[400px] md:h-auto">
             <Dialog.Title className="flex items-center justify-between mb-7 ">
               <p className="font-Inter text-lg font-medium">Session Details</p>
               <button

@@ -19,17 +19,17 @@ function PreviousSessionsCard({
 }: CardApiReturn) {
   return (
     <div>
-      <div className="w-[182px] h-[270px] md:w-[295px] rounded-xl md:h-[361px] border-2 border-neutral-300 mb-10">
-        <div className="w-[182px] h-[109.8px] md:w-[295px] md:h-[183px] overflow-hidden">
+      <div className=" h-[270px] rounded-xl md:h-[310px] border-2 sm:max-width-[500px] lg:max-w-[280px] border-neutral-300 mb-5">
+        <div className="h-[109.8px] md:h-[183px] overflow-hidden">
           <Image
             alt="th"
             src={imageFromServer}
-            width={295}
+            width={220}
             height={300}
             className="object-contain"
           />
         </div>
-        <div className=" h-[90.6px] text-neutral-600 text-xs md:h-[66px] text-left p-2 md:p-4">
+        <div className=" text-neutral-600 lg:mt-[-40px] md:mt-[-40px] text-xs md:h-[66px] text-left p-2 md:p-4">
           <h5 className="font-Hanken font-bold text-base md:text-lg text-black">
             {SessionTitle}
           </h5>
@@ -43,10 +43,10 @@ function PreviousSessionsCard({
           </div>
         </div>
         <div>
-          <hr className="w-[150px] md:w-[263.32px] mx-auto md:mt-7" />
+          <hr className="mx-auto md:mt-7" />
           <Button
             variant="outline-primary"
-            className="bg-[#FFFF] ml-[12px] min-w-[152px] md:min-w-[200px] md:ml-[44px] hover:bg-black hover:text-white mt-3 md:mt-3 text-[#000] text-[16px] font-[500]  border-[1.5px]  border-[#121212]  rounded-[6px] sm:rounded-[8px]  font-Hanken w-[152px] h-[40px] md:w-[200px]"
+            className="bg-[#FFFF] mx-auto py-2 px-4 hover:bg-black hover:text-white mt-3 md:mt-3 text-[#000] text-[16px] font-[500]  border-[1.5px]  border-[#121212]  rounded-[6px] sm:rounded-[8px]  font-Hanken w-[152px] h-[40px] md:w-[200px]"
           >
             View Details
           </Button>

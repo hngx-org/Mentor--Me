@@ -60,9 +60,9 @@ function AddNewSession() {
         }}
         role="button"
         tabIndex={0}
-        className="w-[182px] min-w-[170px] h-[223px] rounded-lg border-neutral-400 border flex justify-center items-center md:w-[295px] lg:w-[295px] lg:h-[235px]"
+        className=" rounded-lg h-[223px] w-full px-5 border-neutral-400 border flex justify-center items-center"
       >
-        <div className="h-[98px] w-[138px] text-center flex flex-col items-center justify-between">
+        <div className="text-center flex flex-col space-x-1 items-center gap-1 justify-between">
           <h4 className="font-Hanken text-base text-neutral-950 font-bold leading-4">
             Add a new session
           </h4>
