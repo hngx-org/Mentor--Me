@@ -68,7 +68,7 @@ export default function MentorProfileVerification() {
   };
 
   const handleSubmit = () => {
-    console.log("FormData", formData);
+    // console.log("FormData", formData);
     setShowModal(true);
     setVerificationStatus("approved");
     setStep(0);
