@@ -10,11 +10,22 @@ const config: Config = {
     extend: {
       animation: {
         shimmer: "shimmer 1.5s infinite",
+        slideLeft: "slideLeft 1s ease forwards",
       },
       keyframes: {
         shimmer: {
           "100%": {
             transform: "translateX(100%)",
+          },
+        },
+        slideLeft: {
+          "50%": {
+            opacity: "0.7",
+            transform: "translateX(0)",
+          },
+          "100%": {
+            transform: "translateX(0)",
+            opacity: "1",
           },
         },
       },
