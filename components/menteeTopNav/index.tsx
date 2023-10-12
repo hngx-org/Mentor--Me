@@ -9,6 +9,7 @@ const MenteeNavBar: FC = () => (
     </ul>
 
     <div className="flex items-center gap-5 text-NeutalBase">
+      <ShoppingIcon />
       <NotificationIcon />
 
       <div className="flex items-center gap-2">

@@ -20,10 +20,6 @@ export default function FilterPopup({ onClose }: PopupProps) {
     onClose();
   };
 
-  const handleUpdateDate = (dates: Date[] | Date | undefined) => {
-    // console.log(dates);
-  };
-
   return (
     <div className="absolute top-20 right-5 md:top-16 md:right-0 drop-shadow-2xl bg-white shadow-md rounded-md p-6 w-fit md:w-[400px] space-y-8">
       <div className="relative flex flex-col">
@@ -117,10 +113,7 @@ export default function FilterPopup({ onClose }: PopupProps) {
       <div className="flex flex-col space-y-5 justify-center ml3">
         <h1 className="font-Inter font-medium text-lg">Availability</h1>
         <div className="flex justify-center">
-          <Calendarcomponent
-            updateDate={handleUpdateDate}
-            unAvailableDates={[new Date()]}
-          />
+          <Calendarcomponent />
         </div>
       </div>
       <button

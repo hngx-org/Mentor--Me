@@ -14,7 +14,7 @@ export { default as membersCardAvatar } from "./assets/images/mentee-communities
 export { default as mentorCardHero } from "./assets/images/mentee-communities/mentoreCardHero.svg";
 export { default as mentorCardAvatar } from "./assets/images/mentee-communities/mentorCardAvatar.svg";
 export { default as bigDiscussionCardHero } from "./assets/images/mentee-communities/bigDisscussionCardHero.svg";
-// export { default as messageedit } from "./assets/Icons/mentee-communities/messageEdit.svg"
+export { default as messageedit } from "./assets/Icons/mentee-communities/messageEdit.svg";
 
 export { default as DashboardCoverBg } from "./assets/images/mentee-profile-screen/cover-bg.png";
 export { default as MenteeDashboardProfileImg } from "./assets/images/mentee-profile-screen/my-profile.png";
@@ -50,6 +50,8 @@ export { default as Facebuk } from "./assets/Icons/facebookforprofile.png";
 export { default as instaggram } from "./assets/Icons/instinstagramforprofile.png";
 export { default as updatee } from "./assets/Icons/upload_icon.png";
 export { default as EditIcon } from "./assets/Icons/iconamoon_edit-thin.png";
+export { default as CloseIcon } from "./assets/Icons/iconoir_cancel.png";
+export { default as WhereLogo } from "./assets/Icons/logoidontKnow.png";
 
 export { default as MentorSchedule } from "./assets/images/MentorSchedule/photocard.png";
 

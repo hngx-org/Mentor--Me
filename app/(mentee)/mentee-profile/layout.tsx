@@ -1,24 +1,26 @@
 "use client";
 
-import React from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import React, { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
 
 import { NavbarMentee } from "../mentee-sessions/(ui)/NavbarMentee";
 import MobileSideBar from "@/components/MobileSideBar";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const searchParams = useSearchParams().get("path");
+  const pathParams = useSearchParams().get("path");
+  const actionParams = useSearchParams().get("action");
 
   return (
     <>
-      <MenteeSideBar path={searchParams} />
+      <MenteeSideBar path={pathParams} />
 
       <main className="lg:ml-[274px]">
-        <NavbarMentee path={searchParams} />
+        <NavbarMentee path={pathParams} action={actionParams} />
 
-        <MobileSideBar />
-        {children}
+        <MobileSideBar action={actionParams} />
+        <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
       </main>
     </>
   );

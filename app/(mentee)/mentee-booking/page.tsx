@@ -95,20 +95,22 @@ export default function MenteeBooking() {
 
   const tabs = [
     {
+      id: 1,
       name: "Overview",
       isActive: search === "bookings",
       link: "/mentee-booking?path=bookings",
     },
     {
+      id: 2,
       name: "Reviews",
       isActive: search === "reviews",
-      link: "/mentee-booking?path=reviews",
+      link: "/mentor-reviews?path=reviews",
       reviews: "6",
     },
   ];
 
   return (
-    <div className="w-full space-y-1">
+    <div className="w-full space-y-1 pb-10">
       <Header />
       <div className="flex flex-col gap-10 sm:flex-row px-2 sm:px-5">
         {" "}
@@ -119,9 +121,9 @@ export default function MenteeBooking() {
             experience spans across industries from B2B, Fin-tech Industries
           </p>
           <div className="flex-grow border-t border-Neutra30" />
-          <div className="flex gap-8">
+          <div className="flex gap-8 items-center">
             {tabs.map((item, i) => (
-              <Link href={item.link}>
+              <Link href={item.link} key={item.id}>
                 <p
                   className={`font-Inter font-medium text-right ${
                     item.isActive && "border-b-4 border-Accent1 pb-1"
@@ -207,7 +209,7 @@ export default function MenteeBooking() {
           {achievement.map((achieve) => (
             <div
               key={achieve.id}
-              className="flex flex-wrap justify-between items-center"
+              className="flex justify-between items-center "
             >
               <div className="flex gap-4 sm:gap-8">
                 <Image src={achieve.photos} alt="" />
