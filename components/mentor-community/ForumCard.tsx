@@ -1,5 +1,12 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
+"use client";
+
+import React, { useEffect, useRef } from "react";
+import { useIntersectionObserver } from "usehooks-ts";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Discussion, Member } from "@/app/(mentor)/mentor-community/data";
 
 interface Props {
@@ -7,6 +14,9 @@ interface Props {
   name: string;
   members: Member[];
   description: string;
+  discussLength: number;
+  setIsLastCard: React.Dispatch<React.SetStateAction<boolean>>;
+  index: number;
   //   discussions: Discussion[];
 }
 
@@ -17,12 +27,37 @@ export type CommunityDiscussions = {
   discussions: Discussion[];
 };
 
-const CommunityCard = ({ name, members, description, slug }: Props) => {
+const Forum = ({
+  name,
+  members,
+  description,
+  slug,
+  discussLength,
+  index,
+  setIsLastCard,
+}: Props) => {
+  const discussionRef = useRef<HTMLDivElement | null>(null);
+  const pathname = usePathname();
+  const entry = useIntersectionObserver(discussionRef, {
+    threshold: 0.9,
+  });
+  const isVisible = !!entry?.isIntersecting;
   const noOfMembers = members.length.toString();
   const membersPhoto = members.slice(0, 3);
 
+  useEffect(() => {
+    if (index === discussLength - 1 && isVisible) {
+      setIsLastCard(true);
+    } else if (index === 0 && isVisible) {
+      setIsLastCard(false);
+    }
+  }, [isVisible]);
+
   return (
-    <div className="flex flex-col gap-4 justify-between max-w-[18.4375rem] border-[1px] border-solid border-Neutra10 rounded-lg p-6 shrink-0">
+    <div
+      ref={discussionRef}
+      className="flex flex-col gap-4 justify-between max-w-[18.4375rem] border-[1px] border-solid border-Neutra10 rounded-lg p-6 shrink-0"
+    >
       <h3 className="text-sm font-medium md:text-2xl md:font-semibold font-Inter md:font-Hanken text-NeutalBase">
         {name}
       </h3>
@@ -58,7 +93,11 @@ const CommunityCard = ({ name, members, description, slug }: Props) => {
         {description}
       </p>
       <Link
-        href={`/mentor-community/${slug}`}
+        href={`${
+          pathname === "/communities"
+            ? "/welcome/login"
+            : `/mentor-community/${slug}`
+        }`}
         className="text-xs text-center md:text-base border-solid border-[1px] p-4 md:py-5 md:px-10 w-full md:w-fit mx-auto border-NeutalBase rounded-lg font-medium font-Inter"
       >
         Join Discussion
@@ -67,4 +106,4 @@ const CommunityCard = ({ name, members, description, slug }: Props) => {
   );
 };
 
-export default CommunityCard;
+export default Forum;
