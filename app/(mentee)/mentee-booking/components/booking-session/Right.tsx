@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import Image from "next/image";
 import RadioButton from "./Radio";
@@ -24,14 +23,6 @@ const MentorProfileRight = () => {
     { id: "6", time: "11:30AM" },
   ];
 
-  const options = [
-    { label: "GMT", value: "GMT" },
-    { label: "WAT", value: "WAT" },
-    { label: "EST", value: "EST" },
-    { label: "GST", value: "GST" },
-  ];
-
-  const [selectedValue, setSelectedValue] = useState<string>("GMT");
   const [selectedPlan, setSelectedPlan] = useState<string>("");
   const [selectedPricing, setSelectedPricing] = useState<string>("");
   const [notes, setNotes] = useState<string>("");
@@ -46,10 +37,6 @@ const MentorProfileRight = () => {
 
   const handleNotesChange = (value: string) => {
     setNotes(value);
-  };
-
-  const handleRadioChange = (value: string) => {
-    setSelectedValue(value);
   };
 
   return (
@@ -78,17 +65,7 @@ const MentorProfileRight = () => {
       <div>
         {" "}
         <p className="font-Hanken font-bold text-lg mb-3">Time Zones</p>
-        <div className="flex flex-wrap gap-8 ">
-          {options.map((option) => (
-            <RadioButton
-              key={option.value}
-              label={option.label}
-              value={option.value}
-              selectedValue={selectedValue}
-              onSelect={handleRadioChange}
-            />
-          ))}
-        </div>
+        <RadioButton />
       </div>
       <SubscriptionPlan
         selectedPlan={selectedPlan}

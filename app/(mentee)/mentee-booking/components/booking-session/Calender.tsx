@@ -23,7 +23,7 @@ const Calendarcomponent = () => {
 `;
 
   return (
-    <div className="max-w-fit border-[0.5px] border-Accent1 rounded-xl">
+    <div>
       <style>{css}</style>
       <DayPicker
         mode="multiple"
@@ -36,6 +36,16 @@ const Calendarcomponent = () => {
         }}
         modifiersStyles={{
           disabled: { fontSize: "75%" },
+        }}
+        styles={{
+          root: {
+            minWidth: "fit-content",
+            maxWidth: "fit-content",
+            border: "1px solid #ABABAB",
+            borderRadius: "10px",
+            padding: ".5em",
+            margin: "0",
+          },
         }}
       />
     </div>
