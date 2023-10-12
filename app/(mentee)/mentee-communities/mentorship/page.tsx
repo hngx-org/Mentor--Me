@@ -1,5 +1,6 @@
 import React from "react";
 
+import { verify } from "crypto";
 import { mentorCardAvatar, mentorCardHero } from "@/public";
 import BigMentorShipCard from "@/components/mentee-communities/BigMentorShipCard";
 import MentorCard from "@/components/mentee-communities/MentorCard";
@@ -7,6 +8,81 @@ import HomeNavBar from "@/components/homeNavbar";
 import Footer from "@/components/Footer";
 
 export default function FreeMentorship() {
+  const mentorInfo = [
+    {
+      id: 9408,
+      mentorName: "Shade Mayowa",
+      verify: true,
+      mentorPostion: "CEO, Webmasters Inc",
+      mentorAvatar: mentorCardAvatar,
+      cardHero: mentorCardHero,
+      date: "28th, Sept",
+      time: "12:30pm",
+      title: "Intorduction to AI",
+      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
+    },
+    {
+      id: 9408,
+      mentorName: "Shade Mayowa",
+      verify: true,
+      mentorPostion: "CEO, Webmasters Inc",
+      mentorAvatar: mentorCardAvatar,
+      cardHero: mentorCardHero,
+      date: "28th, Sept",
+      time: "12:30pm",
+      title: "Intorduction to AI",
+      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
+    },
+    {
+      id: 9408,
+      mentorName: "Shade Mayowa",
+      verify: true,
+      mentorPostion: "CEO, Webmasters Inc",
+      mentorAvatar: mentorCardAvatar,
+      cardHero: mentorCardHero,
+      date: "28th, Sept",
+      time: "12:30pm",
+      title: "Intorduction to AI",
+      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
+    },
+    {
+      id: 94408,
+      mentorName: "Shade Mayowa",
+      verify: true,
+      mentorPostion: "CEO, Webmasters Inc",
+      mentorAvatar: mentorCardAvatar,
+      cardHero: mentorCardHero,
+      date: "28th, Sept",
+      time: "12:30pm",
+      title: "Intorduction to AI",
+      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
+    },
+    {
+      id: 94068,
+      mentorName: "Shade Mayowa",
+      verify: true,
+      mentorPostion: "CEO, Webmasters Inc",
+      mentorAvatar: mentorCardAvatar,
+      cardHero: mentorCardHero,
+      date: "28th, Sept",
+      time: "12:30pm",
+      title: "Intorduction to AI",
+      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
+    },
+    {
+      id: 94078,
+      mentorName: "Shade Mayowa",
+      verify: true,
+      mentorPostion: "CEO, Webmasters Inc",
+      mentorAvatar: mentorCardAvatar,
+      cardHero: mentorCardHero,
+      date: "28th, Sept",
+      time: "12:30pm",
+      title: "Intorduction to AI",
+      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
+    },
+  ];
+
   return (
     <div className="freeMentorship">
       <HomeNavBar />
@@ -27,149 +103,41 @@ export default function FreeMentorship() {
 
       {/* text */}
       <div className=" hidden lg:flex flex-col gap-y-8 px-[100px]">
-        <BigMentorShipCard
-          id={9408}
-          mentorCardHero={mentorCardHero}
-          mentorImage={mentorCardAvatar}
-          mentorName="Shade Mayowa"
-          verfied
-          mentorPostion="CEO, Webmasters Inc"
-          date="28th, Sept"
-          time="12:30pm"
-          title="Introduction to AI"
-          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
-        />
-        <BigMentorShipCard
-          id={9408}
-          mentorCardHero={mentorCardHero}
-          mentorImage={mentorCardAvatar}
-          mentorName="Shade Mayowa"
-          verfied
-          mentorPostion="CEO, Webmasters Inc"
-          date="28th, Sept"
-          time="12:30pm"
-          title="Introduction to AI"
-          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
-        />
-        <BigMentorShipCard
-          id={9408}
-          mentorCardHero={mentorCardHero}
-          mentorImage={mentorCardAvatar}
-          mentorName="Shade Mayowa"
-          verfied
-          mentorPostion="CEO, Webmasters Inc"
-          date="28th, Sept"
-          time="12:30pm"
-          title="Introduction to AI"
-          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
-        />
-        <BigMentorShipCard
-          id={9408}
-          mentorCardHero={mentorCardHero}
-          mentorImage={mentorCardAvatar}
-          mentorName="Shade Mayowa"
-          verfied
-          mentorPostion="CEO, Webmasters Inc"
-          date="28th, Sept"
-          time="12:30pm"
-          title="Introduction to AI"
-          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
-        />
-        <BigMentorShipCard
-          id={9408}
-          mentorCardHero={mentorCardHero}
-          mentorImage={mentorCardAvatar}
-          mentorName="Shade Mayowa"
-          verfied
-          mentorPostion="CEO, Webmasters Inc"
-          date="28th, Sept"
-          time="12:30pm"
-          title="Introduction to AI"
-          desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
-        />
+        {mentorInfo.map((item) => (
+          <BigMentorShipCard
+            id={item.id}
+            mentorName={item.mentorName}
+            mentorPostion={item.mentorPostion}
+            verify={item.verify}
+            mentorImage={item.mentorAvatar}
+            mentorCardHero={item.cardHero}
+            date={item.date}
+            time={item.time}
+            title={item.title}
+            desc={item.desc}
+          />
+        ))}
       </div>
       <h1 className="lg:hidden  mx-auto min-w-[400px] w-[80vw] font-Inter font-medium text-[16px] leading-[22.4px] pb-[15px]">
         Free Mentorship Sessions
       </h1>
       <div className="grid lg:hidden  md:grid-cols-3 grid-cols-2  gap-y-5 md:gap-y-8 mx-auto min-w-[400px] w-[80vw]">
-        <div className="w-full flex justify-center ">
-          <MentorCard
-            id={9408}
-            mentorName="Shade Mayowa"
-            verify={false}
-            mentorPostion="CEO, Webmasters Inc"
-            date="28th, Sept"
-            time="12:30pm"
-            title="Introduction to AI"
-            desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
-          />
-        </div>
-
-        <div className="w-full flex justify-center ">
-          {" "}
-          <MentorCard
-            id={9458}
-            mentorName="Shade Mayowa"
-            verify={false}
-            mentorPostion="CEO, Webmasters Inc"
-            date="28th, Sept"
-            time="12:30pm"
-            title="Intorduction to AI"
-            desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
-          />
-        </div>
-        <div className="w-full flex justify-center ">
-          <MentorCard
-            id={9418}
-            mentorName="Shade Mayowa"
-            verify={false}
-            mentorPostion="CEO, Webmasters Inc"
-            date="28th, Sept"
-            time="12:30pm"
-            title="Intorduction to AI"
-            desc=""
-          />
-        </div>
-
-        <div className="w-full flex justify-center ">
-          {" "}
-          <MentorCard
-            id={9486}
-            mentorName="Shade Mayowa"
-            verify={false}
-            mentorPostion="CEO, Webmasters Inc"
-            date="28th, Sept"
-            time="12:30pm"
-            title="Intorduction to AI"
-            desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
-          />
-        </div>
-
-        <div className="w-full flex justify-center ">
-          <MentorCard
-            id={9448}
-            mentorName="Shade Mayowa"
-            verify={false}
-            mentorPostion="CEO, Webmasters Inc"
-            date="28th, Sept"
-            time="12:30pm"
-            title="Intorduction to AI"
-            desc=""
-          />
-        </div>
-
-        <div className="w-full flex justify-center ">
-          <MentorCard
-            id={85}
-            mentorName="Shade Mayowa"
-            verify={false}
-            mentorPostion="CEO, Webmasters Inc"
-            date="28th, Sept"
-            time="12:30pm"
-            title="Intorduction to AI"
-            desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
-          />
-        </div>
+        {mentorInfo.map((item) => (
+          <div className="w-full flex justify-center ">
+            <MentorCard
+              id={item.id}
+              mentorName={item.mentorName}
+              verify={item.verify}
+              mentorPostion={item.mentorPostion}
+              mentorAvatar={item.mentorAvatar}
+              cardHero={item.cardHero}
+              date={item.date}
+              time={item.time}
+              title={item.title}
+              desc={item.desc}
+            />
+          </div>
+        ))}
       </div>
       <Footer />
     </div>

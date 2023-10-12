@@ -2,6 +2,9 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { EmptyStarIcon, FilledStarIcon } from "@/public/SVGs";
 
+// removed h-[378px] from div(card) to make the height equal
+// changed justify-center to justify-between to there wouldn't be spaces on the top and bottom of the 1st, 3rd, 4th, 6th cards
+
 interface Card {
   id: number;
   src: StaticImageData;
@@ -21,7 +24,7 @@ const ResourceCard = ({
   rate,
   reviews,
 }: Card) => (
-  <div className="w-full max-w-[397px] h-[378px] flex flex-col justify-center items-center gap-4 rounded-lg shadow-md flex-shrink-0">
+  <div className="w-full max-w-[397px] flex flex-col justify-between gap-4 items-center rounded-lg shadow-md flex-shrink-0">
     <Image
       src={src}
       alt={title}

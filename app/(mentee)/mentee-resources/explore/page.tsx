@@ -8,6 +8,8 @@ import { BackwardIcon, ForwardIcon } from "@/public/SVGs";
 import ResourceCard from "./ResourceCard";
 import Container from "../Container";
 
+// added text-[1rem] and set it to large text at lg:text-lg
+
 const Explore = () => {
   const resourceContainerRef = useRef<HTMLDivElement | null>(null);
   const resourceContainerRef2 = useRef<HTMLDivElement | null>(null);
@@ -49,7 +51,7 @@ const Explore = () => {
               key={link.id}
               href={link.to}
               onClick={() => handleLinkClick(link.id)}
-              className={`font-Hanken text-lg ${
+              className={`font-Hanken text-[1rem] lg:text-lg ${
                 link.id === activeLink
                   ? "text-NeutalBase border-b-[4px] border-Accent1"
                   : "text-Neutra30"

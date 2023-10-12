@@ -13,6 +13,8 @@ type Props = {
   mentorName: string;
   verify: boolean;
   mentorPostion: string;
+  cardHero: string;
+  mentorAvatar: string;
   date: string;
   time: string;
   title: string;
@@ -24,6 +26,8 @@ const MentorCard: React.FC<Props> = ({
   mentorName,
   verify,
   mentorPostion,
+  cardHero,
+  mentorAvatar,
   date,
   time,
   title,
@@ -33,7 +37,7 @@ const MentorCard: React.FC<Props> = ({
     <div className="card h-full w-full font-Hanken flex flex-col gap-3 lg:gap-3 items-center">
       <Image
         alt="members"
-        src={mentorCardHero}
+        src={cardHero}
         width={298}
         height={183}
         className="flex lg:w-[100%] lg:aspect-[298/183]object-cover "
@@ -43,13 +47,12 @@ const MentorCard: React.FC<Props> = ({
           <div className="flex gap-1 items-center">
             <Image
               alt="members"
-              src={mentorCardAvatar}
-              width={24}
+              src={mentorAvatar}
               height={24}
               className="block xl:w-[24px] xl:h-[24px] w-[12px] h-[12px]"
             />
             <p className="text-NeutalBase font-semibold xl:text-[18px] text-[12px] lg:leading-[14px] leading-none ">
-              Shade Mayowa
+              {mentorName}
             </p>
 
             {/* <IconVerfied className="lg:w-6 w-3 aspect-square" /> */}
@@ -66,27 +69,26 @@ const MentorCard: React.FC<Props> = ({
             )}
           </div>
           <p className="text-Neutra30 font-normal lg:text-xs text-[10px] leading-none">
-            CEO, Webmasters Inc
+            {mentorPostion}
           </p>
         </div>
         <div className="time flex lg:gap-[10px] lg:justify-normal justify-between xl:text-xs text-[10px] font-norm">
           <div className="w-fit flex gap-x-[3px] items-center">
             {" "}
             <CalenderIcon className=" w-[13px] aspect-square" />{" "}
-            <span className="">28th Sept</span>{" "}
+            <span className="">{date}</span>{" "}
           </div>
           <div className="w-fit flex gap-x-[3px] items-center">
             {" "}
             <ClockIcon className=" w-[13px] aspect-square" />{" "}
-            <span className="">12:30pm</span>{" "}
+            <span className="">{time}</span>{" "}
           </div>
         </div>
         <div className="topic font-semibold xl:text-[18px] text-[12px] lg:leading-[21.6px] leading-[16px]">
-          Introduction to AI
+          {title}
         </div>
         <div className="desc font-normal xl:text-[12px] xl:leading-[14.4px] text-[10px] leading-[12px] ">
-          Explore the fascinating world of AI with hands-on demos and
-          discussions. Learn the basics from industry experts.
+          {desc}
         </div>
         <div className="border-b border-Neutra10 border-[.25px] lg:flex hidden  " />
       </div>
