@@ -23,6 +23,7 @@ import Calendarcomponent from "../mentee-booking/components/booking-session/Cale
 import Button from "./(ui)/VxrcelBtn";
 import Loading from "./loading";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
+import SuccessReminder from "@/components/modal/mentee-session/SuccessReminder";
 
 type SessionsTabsProps = {
   id: number;
@@ -50,6 +51,7 @@ const sessionsTabs: SessionsTabsProps[] = [
 
 export default function AllSession() {
   const [activeTab, setActiveTab] = useState<string | null | undefined>("");
+  const [isReminder, setIsReminder] = useState(false);
 
   const router = useRouter();
   const params = useSearchParams().get("tab");
@@ -59,7 +61,14 @@ export default function AllSession() {
   }, [params]);
 
   return (
-    <section className="bg-[#f9fafc] h-full w-full flex-col flex  pt-10 lg:pt-12 sm:min-h-screen pb-16 ">
+    <section className="bg-[#f9fafc] h-full w-full flex-col flex  pt-10 lg:pt-12 sm:min-h-screen pb-12 ">
+      {isReminder && (
+        <Suspense fallback={<LoadingSpinner />}>
+          <div className="min-h-screen h-screen top-0 left-0 w-full fixed z-[9999] flex justify-center items-center bg-black/80">
+            <SuccessReminder closeModal={setIsReminder} />
+          </div>
+        </Suspense>
+      )}
       <div className="flex items-center gap-10 !max-lg:w-full border-b-[1px] border-Neutra10 px-4 sm:px-6 lg:px-8 2xl:px-24 select-none">
         {sessionsTabs.map((session) => (
           <p
@@ -70,7 +79,7 @@ export default function AllSession() {
             }`}
             key={session.id}
             onClick={() => {
-              router.push(`?path=sessions&tab=${session.tab}`, {
+              router.push(`?path=Sessions&tab=${session.tab}`, {
                 scroll: false,
               });
               setActiveTab(session.tab);
@@ -80,7 +89,7 @@ export default function AllSession() {
           </p>
         ))}
       </div>
-      <div className="flex flex-col xl:flex-row w-full justify-between mt-8 px-4 sm:px-6 lg:px-8 2xl:px-20 gap-8 xl:gap-2 overflow-x-hidden">
+      <div className="flex flex-col xl:flex-row w-full justify-between mt-8 px-4 sm:px-6 lg:px-8 2xl:px-20 gap-8 xl:gap-2 overflow-x-hidden ">
         <div className="flex flex-col w-full">
           <div className="mb-6">
             <p className="capitalize font-medium">
@@ -101,7 +110,11 @@ export default function AllSession() {
                   }`}
                 >
                   {upcomingSessions.map((session) => (
-                    <UpcomingCard key={session.id} {...session} />
+                    <UpcomingCard
+                      openModal={setIsReminder}
+                      key={session.id}
+                      {...session}
+                    />
                   ))}
                 </div>
                 <div className="flex  2xl:w-full xl:flex-col xl:justify-center items-start lg:items-center justify-between max-lg:w-full gap-10 lg:gap-6 lg:mt-10 max-sm:flex-col lg:ml-10 pb-10">
@@ -164,8 +177,8 @@ export default function AllSession() {
           {activeTab === "cancelled" && (
             <Suspense fallback={<Loading />}>
               <div
-                className={`pb-10 flex w-full flex-col gap-10 overflow-y-auto translate-x-[100px] lg:translate-x-[500px] opacity-0 animate-slideLeft ${
-                  cancelledSessions.length > 3 ? "max-h-[760px] pb-4" : ""
+                className={`pb-10 sm:pb-16 flex w-full flex-col gap-10 overflow-y-auto translate-x-[100px] lg:translate-x-[500px] opacity-0 animate-slideLeft ${
+                  cancelledSessions.length > 3 ? "max-h-[760px] " : ""
                 }`}
               >
                 {cancelledSessions.map((session) => (
