@@ -130,15 +130,15 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
       <div
         className={`lg:hidden ${
           toggleMenu ? "flex" : "hidden"
-        } flex flex-col items-start h-[100vh]  pl-3 w-[57%] max-w-[300px] left-0 bg-white shadow-xl  fixed h-[100vh] z-[10] top-[99px] 
+        } flex flex-col items-start h-[100vh]  pl-3 w-[57%] max-w-[300px] left-0 bg-white shadow-xl  fixed h-[100vh] z-[10] top-[77px] 
         `}
       >
-        <ul className="flex flex-col mt-[2rem] gap-7 justify-between  font-[400] text-[18px] leading-[24px] w-9/10  cursor-pointer">
+        <ul className="flex flex-col mt-[2rem] gap-7 justify-between  font-[400] text-[18px] leading-[28px] w-9/10  cursor-pointer">
           <li className="text-[12px] text-Inter">
             <Link
               href="/explore"
               onClick={handleToggleMenu}
-              className="text-[#565656] text-[0.8rem]"
+              className="text-[#565656] text-[0.9rem]"
             >
               Find a mentor
             </Link>
@@ -148,7 +148,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
             <Link
               href=""
               onClick={handleToggleMenu}
-              className="text-[#565656] text-[0.8rem]"
+              className="text-[#565656] text-[0.9rem]"
             >
               {" "}
               Become a mentor
@@ -157,7 +157,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
           <li className="text-[12px] text-Inter">
             <Link
               href="/mentee-communities"
-              className="text-[#565656] text-[0.8rem]"
+              className="text-[#565656] text-[0.9rem]"
               onClick={handleToggleMenu}
             >
               Community
@@ -167,18 +167,18 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
           <li className="text-[12px] text-Inter  hover:bg-black hover:text-white hover:p-2 rounded">
             <Link
               href="/mentor-resources"
-              className="text-[#565656] text-[0.8rem]"
+              className="text-[#565656] text-[0.9rem]"
               onClick={handleToggleMenu}
             >
               Resources
             </Link>
           </li>
 
-          <div className="flex gap-2 flex-col ">
+          <div className="flex gap-2 flex-col mt-[1rem]">
             <Link href="welcome/login">
               <button
                 type="button"
-                className="text-black  bg-white  rounded-[7px] border-[1px] text-[13px] w-[120px]  border-black p-2 "
+                className="text-black  bg-white  rounded-[7px] border-[1px] text-[0.9rem] w-[120px]  border-black p-2.5 "
               >
                 Log in
               </button>
@@ -187,7 +187,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
             <Link href="welcome/signup">
               <button
                 type="button"
-                className="bg-[#121212] text-white rounded-[8px] w-[120px] p-2 text-[13px] "
+                className="bg-[#121212] text-white rounded-[8px] w-[120px] p-2.5 text-[0.9rem] "
               >
                 Sign up
               </button>

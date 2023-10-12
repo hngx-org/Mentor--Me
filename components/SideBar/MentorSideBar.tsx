@@ -26,7 +26,7 @@ export default function MentorSideBar({
 }: SideBarMentorProps) {
   return (
     <section
-      className={`w-[274px] min-h-screen border-[1px] fixed left-0 top-0 h-full  p-5 hidden lg:flex ${
+      className={`w-[274px] min-h-screen border-[1px] fixed left-0 top-0 h-full p-5 hidden lg:flex ${
         light ? "bg-[#fff]" : "bg-[#000]"
       } ${className}`}
     >
