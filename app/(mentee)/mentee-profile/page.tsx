@@ -136,14 +136,8 @@ export default function MenteeProfilePage() {
                   <div className="w-full h-full ">
                     {activeTab === "overview" && (
                       <OverviewCard
-                        desc="I'm Henrietta Okonkwo, a rising star in the world of product
-								design. I bring to the table a deep-seated passion for innovation and
-								an unwavering commitment to precision in my work.In my journey as a
-								web developer, I have come to understand the importance of
-								collaboration between design and development. The synergy between our
-								fields often leads to-mdx digital experiences. Your passion
-								for innovation resonates deeply with me, as it mirrors the ethos of
-								the web development community."
+                        desc="I’m Henrietta Okonkwo, a rising star in the world of product design, I bring to the table a deep-seated passion for innovation and an unwavering commitment to precision in my work.
+Armed with my background in graphic design, I’m on a personal mission to connect with experienced mentors who can help me hone my design skills and infuse fresh perspectives into my craft."
                         expertise="UI Design"
                         experience="Product Designer 3 years"
                         workPlace="Federal University of Science Technology, Owerri"
