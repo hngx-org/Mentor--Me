@@ -1,8 +1,24 @@
 import React from "react";
 import Link from "next/link";
 import MentorCard from "./MentorCard";
+import { mentorCardAvatar } from "@/public";
 
-const MentorGrid = () => (
+type PropsObj = {
+  id: number;
+  mentorName: string;
+  verify: boolean;
+  mentorPostion: string;
+  cardHero: string;
+  mentorAvatar: string;
+  date: string;
+  time: string;
+  title: string;
+  desc: string;
+};
+
+type Props = { mentorInfo: PropsObj[] };
+
+const MentorGrid: React.FC<Props> = ({ mentorInfo }) => (
   <div className="mentorGrid lg:mt-[64px] md:mt[40px] mt-[23px]    text-NeutalBase font-Inter overflow-hidden">
     <div className="title  lg:flex justify-between border-b border-Neutra10 pb-[14.5px] pt-[2.5]  mb-10 w-full hidden  ">
       <h2 className="  font-medium text-[24px] leading-[28.8px]  w-fit ">
@@ -35,70 +51,23 @@ const MentorGrid = () => (
       <MentorCard />
     </div> */}
     <div
-      className={`${"imi"} flex  transition-all  duration-300 transform   gap-x-[30px] sm:gap-x-[15px]  md:gap-x-[calc(42.5vw-274px)] lg:gap-x-[calc(33.33vw-351px)] xl:gap-x-[calc(31.33vw-394px)] 2xl:gap-x-[calc(30vw-394px)]
+      className={`${"imi"} flex  transition-all  duration-300 transform   gap-x-[25px] sm:gap-x-[40px]  md:gap-x-[calc(40px)] lg:gap-x-[calc(50px)] xl:gap-x-[calc(45px)] 2xl:gap-x-[calc(60px)]
  md:w-fit  overflow-x-auto `}
     >
-      {" "}
-      <MentorCard
-        id={9408}
-        mentorName="Shade Mayowa"
-        verify
-        mentorPostion="CEO, Webmasters Inc"
-        date="28th, Sept"
-        time="12:30pm"
-        title="Intorduction to AI"
-        desc=""
-      />
-      <MentorCard
-        id={9458}
-        mentorName="Shade Mayowa"
-        verify={false}
-        mentorPostion="CEO, Webmasters Inc"
-        date="28th, Sept"
-        time="12:30pm"
-        title="Intorduction to AI"
-        desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
-      />
-      <MentorCard
-        id={9418}
-        mentorName="Shade Mayowa"
-        verify
-        mentorPostion="CEO, Webmasters Inc"
-        date="28th, Sept"
-        time="12:30pm"
-        title="Intorduction to AI"
-        desc=""
-      />
-      <MentorCard
-        id={9486}
-        mentorName="Shade Mayowa"
-        verify={false}
-        mentorPostion="CEO, Webmasters Inc"
-        date="28th, Sept"
-        time="12:30pm"
-        title="Intorduction to AI"
-        desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
-      />
-      <MentorCard
-        id={9448}
-        mentorName="Shade Mayowa"
-        verify
-        mentorPostion="CEO, Webmasters Inc"
-        date="28th, Sept"
-        time="12:30pm"
-        title="Intorduction to AI"
-        desc=""
-      />
-      <MentorCard
-        id={85}
-        mentorName="Shade Mayowa"
-        verify={false}
-        mentorPostion="CEO, Webmasters Inc"
-        date="28th, Sept"
-        time="12:30pm"
-        title="Intorduction to AI"
-        desc="Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts."
-      />
+      {mentorInfo.map((item) => (
+        <MentorCard
+          id={item.id}
+          mentorName={item.mentorName}
+          verify={item.verify}
+          mentorPostion={item.mentorPostion}
+          mentorAvatar={item.mentorAvatar}
+          cardHero={item.cardHero}
+          date={item.date}
+          time={item.time}
+          title={item.title}
+          desc={item.desc}
+        />
+      ))}
     </div>
   </div>
 );
