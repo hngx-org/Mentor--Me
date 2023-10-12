@@ -342,7 +342,22 @@ export const SearchIcon = () => (
     />
   </svg>
 );
-
+export const EditIconDark = (props?: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    fill="none"
+    {...props}
+  >
+    <path
+      stroke="#fff"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="m15 6 3 3m-5 11h8M5 16l-1 4 4-1L19.586 7.414a2 2 0 0 0 0-2.828l-.172-.172a2 2 0 0 0-2.828 0L5 16Z"
+    />
+  </svg>
+);
 export const EditIcon = (props?: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -352,7 +367,7 @@ export const EditIcon = (props?: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="#565656"
+      stroke="#000"
       strokeLinecap="round"
       strokeLinejoin="round"
       d="m15 6 3 3m-5 11h8M5 16l-1 4 4-1L19.586 7.414a2 2 0 0 0 0-2.828l-.172-.172a2 2 0 0 0-2.828 0L5 16Z"
@@ -1395,7 +1410,7 @@ export const LeftIcon = (props: SVGProps<SVGSVGElement>) => (
       <path
         id="Vector"
         d="M30 55C16.225 55 5 43.775 5 30C5 16.225 16.225 5 30 5C43.775 5 55 16.225 55 30C55 43.775 43.775 55 30 55ZM34.475 22.5C35.2 21.775 35.2 20.575 34.475 19.85C34.1 19.475 33.625 19.3 33.15 19.3C32.675 19.3 32.2 19.475 31.825 19.85L23 28.675C22.275 29.4 22.275 30.6 23 31.325L31.825 40.15C32.55 40.875 33.75 40.875 34.475 40.15C35.2 39.425 35.2 38.225 34.475 37.5L26.975 30L34.475 22.5Z"
-        fill="#818181"
+        fill="#2A2A2A"
       />
     </g>
   </svg>

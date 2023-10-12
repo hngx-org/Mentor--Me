@@ -285,7 +285,7 @@ export function RecurringSessionForm({
       <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
         <div className=" w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3">
           <h1 className="text-left font-bold text-[1.5rem] sm:text-[2rem] text-[#08051e]">
-            Create a Free Session
+            Create a Recurring Session
           </h1>
           <p className="text-gray-500">Create a session that best suits you!</p>
         </div>

@@ -56,7 +56,7 @@ export default function OverviewCard({
           variant="secondary"
         />
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap- w-full max-xl:max-w-[500px]">
         <div className=" w-full flex justify-between">
           <p className="text-Neutra50 font-bold text-[18px] font-Hanken">
             Experience
