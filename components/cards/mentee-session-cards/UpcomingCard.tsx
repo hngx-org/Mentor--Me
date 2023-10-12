@@ -13,7 +13,7 @@ export default function UpcomingCard({
   imgSrc,
 }: UpcomingSessionProp) {
   return (
-    <div className="flex w-full px-4 sm:px-6 xl:px-8 pb-6 pt-8 border border-Neutra10 rounded-xl gap-6 flex-col sm:flex-row">
+    <div className="flex w-full sm:max-w-[90%] sm:ml-4 px-4 sm:px-6 xl:px-8 pb-6 pt-8 border border-Neutra10 rounded-xl gap-6 flex-col sm:flex-row hover:shadow-2xl shadow-black/20 transition-all duration-300">
       <div className="max-w-[120px]">
         <Image src={imgSrc} alt="cover" width={77} height={77} />
       </div>

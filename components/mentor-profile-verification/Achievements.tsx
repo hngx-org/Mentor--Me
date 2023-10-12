@@ -1,11 +1,26 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, ChangeEvent } from "react";
 import { ButtonControlProps } from "./types";
 import { Button } from "../buttons/button";
 
 export default function Achievements({
   onNext,
   onPrev,
+  setFormData,
 }: ButtonControlProps): ReactElement {
+  const handleInputChange = (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = event.target;
+    setFormData?.((prevData) => ({
+      ...prevData,
+      achievements: {
+        ...prevData.achievements,
+        [name]: value,
+      },
+    }));
+  };
   return (
     <div className="pt-6 md:ml-10 ml-3 md:flex md:flex-col">
       <h1 className="font-Hanken font-[600] text-[24px] text-[Neutra40]">
@@ -17,7 +32,7 @@ export default function Achievements({
       </p>
 
       <form className="mt-4">
-        <div className="mb-4 lg:w-3/5 md:w-10/12 w-[97%]">
+        <div className="mb-4 lg:w-3/5 md:w-11/12 w-[97%]">
           <label
             className="font-Inter font-[500] text-NeutalBase text-[14px] mb-2"
             htmlFor="achievementName"
@@ -28,12 +43,13 @@ export default function Achievements({
               id="achievementName"
               name="achievementName"
               type="text"
+              onChange={handleInputChange}
               placeholder="Achievement/Award Name"
             />
           </label>
         </div>
 
-        <div className="mb-4 lg:w-3/5 md:w-10/12 w-[97%]">
+        <div className="mb-4 lg:w-3/5 md:w-11/12 w-[97%]">
           <label
             className="font-Inter font-[500] text-NeutalBase text-[14px] mb-2"
             htmlFor="issuingOrganization"
@@ -45,11 +61,12 @@ export default function Achievements({
               type="text"
               placeholder="Goggle"
               name="issuingOrganization"
+              onChange={handleInputChange}
             />
           </label>
         </div>
 
-        <div className="mb-4 lg:w-3/5 md:w-10/12 w-[97%]">
+        <div className="mb-4 lg:w-3/5 md:w-11/12 w-[97%]">
           <label
             className="font-Inter font-[500] text-NeutalBase text-[14px] mb-2"
             htmlFor="yearReceived"
@@ -58,6 +75,7 @@ export default function Achievements({
             <select
               name="yearReceived"
               id="yearReceived"
+              onChange={handleInputChange}
               className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
             >
               <option>2023</option>
@@ -66,15 +84,16 @@ export default function Achievements({
             </select>
           </label>
         </div>
-        <div className="mb-4 lg:w-3/5 md:w-10/12 w-[97%]">
+        <div className="mb-4 lg:w-3/5 md:w-11/12 w-[97%]">
           <label
             className="font-Inter font-[500] text-NeutalBase text-[14px] mb-2"
-            htmlFor="acievementDesc"
+            htmlFor="achievementDesc"
           >
             Brief Description
             <textarea
-              name="acievementDesc"
-              id="acievementDesc"
+              name="achievementDesc"
+              id="achievementDesc"
+              onChange={handleInputChange}
               cols={30}
               rows={6}
               className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
@@ -83,7 +102,7 @@ export default function Achievements({
           </label>
         </div>
       </form>
-      <div className="lg:w-3/5 md:w-10/12 w-[97%] flex justify-between gap-4">
+      <div className="lg:w-3/5 md:w-11/12 w-[97%] flex justify-between gap-4">
         <Button
           variant="outline-primary"
           className="py-2 px-12 font-Inter font-500 text-[16px]"

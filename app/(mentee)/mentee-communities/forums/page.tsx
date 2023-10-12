@@ -4,8 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import BigDiscussionCard from "@/components/mentee-communities/BigDiscussionCard";
 
-import { membersCardAvatar } from "@/public";
-import messageedit from "../../../../public/assets/Icons/mentee-communities/messageEdit.svg";
+import {
+  bigDiscussionCardHero,
+  membersCardAvatar,
+  mentorCardAvatar,
+  messageedit,
+} from "@/public";
 import HomeNavBar from "@/components/homeNavbar";
 import Footer from "@/components/Footer";
 // import { Button } from "@/components/buttons/button";
@@ -50,8 +54,8 @@ export default function Forums(): React.ReactElement {
           </div>
 
           <p className=" text-Neutra50 font-normal lg:text-[18px] lg:leading-[21.6px] text-[14px] leading-[14.4px] w-[90%]">
-            Connect with industry-leading mentors in science and technology.
-            Explore the cutting edge together.
+            Connect with mentors in free classrooms and share their experiences
+            and insights with Mentor me
           </p>
         </div>
         <div className="largeButton lg:flex hidden">
@@ -86,10 +90,38 @@ export default function Forums(): React.ReactElement {
         </div>
       </div>
 
-      <BigDiscussionCard mentor />
-      <BigDiscussionCard mentor={false} />
-      <BigDiscussionCard mentor={false} />
-      <BigDiscussionCard mentor={false} />
+      <BigDiscussionCard
+        mentor
+        heroCard={bigDiscussionCardHero}
+        image={mentorCardAvatar}
+        name="Shade Mayowa"
+        title="My take on Augmented Reality (AR)"
+        desc="AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary."
+      />
+      <BigDiscussionCard
+        mentor={false}
+        heroCard={bigDiscussionCardHero}
+        image={mentorCardAvatar}
+        name="Shant Baddie"
+        title="My take on Augmented Reality (AR)"
+        desc="AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary."
+      />
+      <BigDiscussionCard
+        mentor={false}
+        heroCard={bigDiscussionCardHero}
+        image={mentorCardAvatar}
+        name="Shant Baddie"
+        title="My take on Augmented Reality (AR)"
+        desc="AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary."
+      />
+      <BigDiscussionCard
+        mentor={false}
+        heroCard={bigDiscussionCardHero}
+        image={mentorCardAvatar}
+        name="Shant Baddie"
+        title="My take on Augmented Reality (AR)"
+        desc="AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary."
+      />
       <Footer />
     </div>
   );
