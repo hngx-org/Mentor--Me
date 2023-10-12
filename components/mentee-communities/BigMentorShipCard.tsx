@@ -9,7 +9,7 @@ type Props = {
   mentorCardHero: string;
   mentorImage: string;
   mentorName: string;
-  verfied: boolean;
+  verify: boolean;
   mentorPostion: string;
   date: string;
   time: string;
@@ -22,7 +22,7 @@ const BigMentorShipCard: React.FC<Props> = ({
   mentorCardHero,
   mentorImage,
   mentorName,
-  verfied,
+  verify,
   mentorPostion,
   date,
   time,

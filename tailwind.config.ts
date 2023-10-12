@@ -11,8 +11,14 @@ const config: Config = {
       animation: {
         shimmer: "shimmer 1.5s infinite",
         slideLeft: "slideLeft 1s ease forwards",
+        loadspin: "loadspin 1.5s linear infinite",
       },
       keyframes: {
+        loadspin: {
+          "100%": {
+            transform: "rotate(360deg)",
+          },
+        },
         shimmer: {
           "100%": {
             transform: "translateX(100%)",
