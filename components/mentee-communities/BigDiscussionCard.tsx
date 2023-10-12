@@ -9,9 +9,8 @@ import { Button } from "../buttons/button";
 type Props = {
   mentor: boolean;
   heroCard: string;
-
   name: string;
-  image: string;
+  image: any;
   title: string;
   desc: string;
 };
@@ -31,7 +30,7 @@ export default function BigDiscussionCard({
         <div className="image overflow-hidden aspect-square lg:w-[295px] w-[320px] max-w-[90vw] rounded-[10px] flex flex-shrink-0">
           <Image
             alt="members"
-            src={heroCard}
+            src={bigDiscussionCardHero}
             width={295}
             height={382}
             className="block w-[100%] aspect-[298/382] object-cover  "
@@ -44,7 +43,7 @@ export default function BigDiscussionCard({
           <div className="flex lg:gap-4 gap-2 items-center">
             <Image
               alt="members"
-              src={image}
+              src={mentorCardAvatar}
               width={37}
               height={37}
               className="block lg:w-[37px] lg:h-[37px] w-[24px] h-[24px]"

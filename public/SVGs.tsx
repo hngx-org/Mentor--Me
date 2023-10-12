@@ -374,7 +374,13 @@ export const EditIcon = (props?: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-export const CloseIcon = (props: SVGProps<SVGSVGElement>) => (
+export const CloseIcon = ({
+  props,
+  fillColor,
+}: {
+  props?: SVGProps<SVGSVGElement>;
+  fillColor?: string;
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={14}
@@ -384,7 +390,7 @@ export const CloseIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      fill="#000"
+      fill={fillColor || "#000"}
       d="M13.3.71a.996.996 0 0 0-1.41 0L7 5.59 2.11.7A.997.997 0 1 0 .7 2.11L5.59 7 .7 11.89a.997.997 0 0 0 1.41 1.41L7 8.41l4.89 4.89a.997.997 0 0 0 1.41-1.41L8.41 7l4.89-4.89c.38-.38.38-1.02 0-1.4Z"
     />
   </svg>
