@@ -25,7 +25,7 @@ export default function MentorProfileHeader() {
           <div className="flex justify-center space-x-4 min-w-fit py-2 items-center">
             <p>icon </p>
             <Button
-              variant={"outline-primary"}
+              variant="outline-primary"
               paddingLess
               className="px-1  sm:px-2 sm:py-2 "
             >
