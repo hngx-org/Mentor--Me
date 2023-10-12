@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, ChangeEvent } from "react";
 import { ButtonControlProps } from "./types";
 import { UploadIcon } from "@/public/SVGs";
 import { Button } from "../buttons/button";
@@ -6,8 +6,38 @@ import { Button } from "../buttons/button";
 export default function Identification({
   onPrev,
   handleSubmit,
+  setFormData,
 }: ButtonControlProps): ReactElement {
   const [selectedFileName, setSelectedFileName] = useState("");
+  const handleInputChange = (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = event.target;
+    setFormData?.((prevData) => ({
+      ...prevData,
+      identification: {
+        ...prevData.identification,
+        [name]: value,
+      },
+    }));
+  };
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { type, files } = event.target;
+
+    if (type === "file" && files) {
+      setFormData?.((prevData) => ({
+        ...prevData,
+        identification: {
+          ...prevData.identification,
+          uploadID: files[0], // Update the graduationFile property with the selected file
+        },
+      }));
+      setSelectedFileName(files[0].name);
+    }
+  };
   return (
     <div className="pt-6 md:ml-10 ml-3  md:flex md:flex-col">
       <h1 className="font-Hanken font-[600] text-[24px] text-[Neutra40]">
@@ -18,7 +48,7 @@ export default function Identification({
       </p>
 
       <form className="mt-4">
-        <div className="mb-4 lg:w-3/5 md:w-10/12 w-[97%]">
+        <div className="mb-4 lg:w-3/5 md:w-11/12 w-[97%]">
           <label
             className="font-Inter font-[500] text-NeutalBase text-[14px] mb-2"
             htmlFor="fullname"
@@ -29,11 +59,13 @@ export default function Identification({
               id="fullname"
               type="text"
               placeholder="Jane Doe"
+              name="fullname"
+              onChange={handleInputChange}
             />
           </label>
         </div>
 
-        <div className="mb-4 lg:w-3/5 md:w-10/12 w-[97%]">
+        <div className="mb-4 lg:w-3/5 md:w-11/12 w-[97%]">
           <label
             className="font-Inter font-[500] text-NeutalBase text-[14px] mb-2"
             htmlFor="dateofBirth"
@@ -44,11 +76,13 @@ export default function Identification({
               id="dateofBirth"
               type="date"
               placeholder="Jane Doe"
+              name="dateofBirth"
+              onChange={handleInputChange}
             />
           </label>
         </div>
 
-        <div className="mb-4 lg:w-3/5 md:w-10/12 w-[97%]">
+        <div className="mb-4 lg:w-3/5 md:w-11/12 w-[97%]">
           <label
             className="font-Inter font-[500] text-NeutalBase text-[14px] mb-2"
             htmlFor="idType"
@@ -57,6 +91,7 @@ export default function Identification({
             <select
               name="idType"
               id="idType"
+              onChange={handleInputChange}
               className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
             >
               <option>Internationl Passport</option>
@@ -65,7 +100,7 @@ export default function Identification({
             </select>
           </label>
         </div>
-        <div className="mb-4 lg:w-3/5 md:w-10/12 w-[97%]">
+        <div className="mb-4 lg:w-3/5 md:w-11/12 w-[97%]">
           <label
             className="font-Inter font-[500] text-NeutalBase text-[14px] mb-2"
             htmlFor="idNumber"
@@ -76,11 +111,13 @@ export default function Identification({
               id="idNumber"
               type="text"
               placeholder="XY127Uy8"
+              name="idNumber"
+              onChange={handleInputChange}
             />
           </label>
         </div>
 
-        <div className="mb-4 lg:w-3/5 md:w-10/12 w-[97%]">
+        <div className="mb-4 lg:w-3/5 md:w-11/12 w-[97%]">
           <p className="font-Inter font-[500] text-NeutalBase text-[14px] mb-2">
             Upload Government Issued ID
           </p>
@@ -97,13 +134,7 @@ export default function Identification({
                 name="uploadID"
                 id="uploadID"
                 accept=".pdf, .png, .jpeg, .jpg"
-                onChange={(e) => {
-                  if (e.target.files && e.target.files.length > 0) {
-                    setSelectedFileName(e.target.files[0].name);
-                  } else {
-                    setSelectedFileName("");
-                  }
-                }}
+                onChange={handleFileChange}
               />
             </label>
 
@@ -123,7 +154,7 @@ export default function Identification({
         </div>
       </form>
 
-      <div className="lg:w-3/5 md:w-10/12 w-[97%] flex justify-between gap-4">
+      <div className="lg:w-3/5 md:w-11/12 w-[97%] flex justify-between gap-4">
         <Button
           variant="outline-primary"
           className="py-2 px-12 font-Inter font-500 text-[16px]"
