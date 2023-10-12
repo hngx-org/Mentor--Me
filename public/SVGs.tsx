@@ -1,6 +1,78 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
+export const ListViewIcon = ({
+  props,
+  strokeColor,
+}: {
+  props?: SVGProps<SVGSVGElement>;
+  strokeColor?: string;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke={strokeColor || "currentColor"}
+    {...props}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+    />
+  </svg>
+);
+export const EyeViewIcon = ({
+  props,
+  strokeColor,
+}: {
+  props?: SVGProps<SVGSVGElement>;
+  strokeColor?: string;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke={strokeColor || "currentColor"}
+    {...props}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+    />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+    />
+  </svg>
+);
+
+export const GridViewIcon = ({
+  props,
+  strokeColor,
+}: {
+  props?: SVGProps<SVGSVGElement>;
+  strokeColor?: string;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke={strokeColor || "currentColor"}
+    {...props}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"
+    />
+  </svg>
+);
 export const GoNextArrowIcon = (props?: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -374,7 +446,13 @@ export const EditIcon = (props?: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-export const CloseIcon = (props: SVGProps<SVGSVGElement>) => (
+export const CloseIcon = ({
+  props,
+  fillColor,
+}: {
+  props?: SVGProps<SVGSVGElement>;
+  fillColor?: string;
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={14}
@@ -384,7 +462,7 @@ export const CloseIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      fill="#000"
+      fill={fillColor || "#000"}
       d="M13.3.71a.996.996 0 0 0-1.41 0L7 5.59 2.11.7A.997.997 0 1 0 .7 2.11L5.59 7 .7 11.89a.997.997 0 0 0 1.41 1.41L7 8.41l4.89 4.89a.997.997 0 0 0 1.41-1.41L8.41 7l4.89-4.89c.38-.38.38-1.02 0-1.4Z"
     />
   </svg>
@@ -2277,6 +2355,84 @@ export const LoadingIcon = () => (
     <path
       d="M32.5239 17.6626C32.818 14.2159 31.9871 10.7667 30.1558 7.83202C28.3245 4.89731 25.5915 2.63514 22.3662 1.38454C19.141 0.133947 15.5973 -0.0377067 12.2663 0.895308C8.9353 1.82832 5.99638 3.81575 3.89002 6.55972C1.78366 9.3037 0.623322 12.6564 0.582905 16.1154C0.542488 19.5744 1.62417 22.9533 3.66584 25.7457C5.70751 28.5382 8.59918 30.5937 11.9075 31.6043C15.2158 32.6149 18.7625 32.5261 22.0161 31.3512L20.5009 27.1553C18.1545 28.0026 15.5967 28.0667 13.2108 27.3379C10.8249 26.609 8.73945 25.1266 7.26704 23.1127C5.79462 21.0989 5.01453 18.6621 5.04368 16.1675C5.07283 13.673 5.90965 11.255 7.42872 9.27613C8.94778 7.29723 11.0673 5.86393 13.4695 5.19106C15.8718 4.51818 18.4275 4.64198 20.7534 5.54388C23.0794 6.44579 25.0505 8.07723 26.3712 10.1937C27.6918 12.3102 28.291 14.7976 28.079 17.2833L32.5239 17.6626Z"
       fill="#008080"
+    />
+  </svg>
+);
+export const EditIconMentorProfile = () => (
+  <svg
+    width="19"
+    height="18"
+    viewBox="0 0 19 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M12 2.9997L15 5.9997M10 16.9997H18M2 12.9997L1 16.9997L5 15.9997L16.586 4.4137C16.9609 4.03864 17.1716 3.53003 17.1716 2.9997C17.1716 2.46937 16.9609 1.96075 16.586 1.5857L16.414 1.4137C16.0389 1.03876 15.5303 0.828125 15 0.828125C14.4697 0.828125 13.9611 1.03876 13.586 1.4137L2 12.9997Z"
+      stroke="#565656"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+export const CertificationIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M4.25977 11.0195V15.9895C4.25977 17.8095 4.25977 17.8095 5.97977 18.9695L10.7098 21.6995C11.4198 22.1095 12.5798 22.1095 13.2898 21.6995L18.0198 18.9695C19.7398 17.8095 19.7398 17.8095 19.7398 15.9895V11.0195C19.7398 9.19945 19.7398 9.19945 18.0198 8.03945L13.2898 5.30945C12.5798 4.89945 11.4198 4.89945 10.7098 5.30945L5.97977 8.03945C4.25977 9.19945 4.25977 9.19945 4.25977 11.0195Z"
+      stroke="#121212"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M17.5 7.63V5C17.5 3 16.5 2 14.5 2H9.5C7.5 2 6.5 3 6.5 5V7.56"
+      stroke="#121212"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M12.6298 10.9909L13.1998 11.8809C13.2898 12.0209 13.4898 12.1609 13.6398 12.2009L14.6598 12.4609C15.2898 12.6209 15.4598 13.1609 15.0498 13.6609L14.3798 14.4709C14.2798 14.6009 14.1998 14.8309 14.2098 14.9909L14.2698 16.0409C14.3098 16.6909 13.8498 17.0209 13.2498 16.7809L12.2698 16.3909C12.1198 16.3309 11.8698 16.3309 11.7198 16.3909L10.7398 16.7809C10.1398 17.0209 9.67978 16.6809 9.71978 16.0409L9.77978 14.9909C9.78978 14.8309 9.70978 14.5909 9.60978 14.4709L8.93978 13.6609C8.52978 13.1609 8.69978 12.6209 9.32978 12.4609L10.3498 12.2009C10.5098 12.1609 10.7098 12.0109 10.7898 11.8809L11.3598 10.9909C11.7198 10.4509 12.2798 10.4509 12.6298 10.9909Z"
+      stroke="#121212"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+export const EducationIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M10.0495 2.53028L4.02953 6.46028C2.09953 7.72028 2.09953 10.5403 4.02953 11.8003L10.0495 15.7303C11.1295 16.4403 12.9095 16.4403 13.9895 15.7303L19.9795 11.8003C21.8995 10.5403 21.8995 7.73028 19.9795 6.47028L13.9895 2.54028C12.9095 1.82028 11.1295 1.82028 10.0495 2.53028Z"
+      stroke="#121212"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M5.62914 13.0801L5.61914 17.7701C5.61914 19.0401 6.59914 20.4001 7.79914 20.8001L10.9891 21.8601C11.5391 22.0401 12.4491 22.0401 13.0091 21.8601L16.1991 20.8001C17.3991 20.4001 18.3791 19.0401 18.3791 17.7701V13.1301"
+      stroke="#121212"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M21.4004 15V9"
+      stroke="#121212"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

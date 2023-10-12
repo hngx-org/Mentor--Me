@@ -279,7 +279,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
               variant={isDark ? "secondary" : "primary"}
               className={`${
                 isDark
-                  ? "!bg-transparent border-gray-200 brightness-125"
+                  ? "!bg-transparent border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059] brightness-125"
                   : "py-4 px-8 "
               }`}
               titleClassName={`${

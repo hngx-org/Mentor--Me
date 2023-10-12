@@ -6,7 +6,7 @@ interface PropType {
 }
 const UnverifiedMentorCard = ({ setIsVerified, isVerified }: PropType) => (
   <>
-    <div className="mb-10">
+    <div className="mb-10 hidden md:block">
       <h2 className="font-bold font-Hanken lg:leading-[54px] text-Neutral60 lg:text-5xl">
         Welcome Shade! 👋
       </h2>
