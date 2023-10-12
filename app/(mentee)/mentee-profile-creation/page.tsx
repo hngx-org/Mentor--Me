@@ -9,7 +9,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "./page.tailwind.css";
 
 import MentorMeIcon from "@/svgs/MentorMeIcon";
 
