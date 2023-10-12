@@ -15,28 +15,29 @@ const RadioButton: React.FC = () => {
       {options.map((option) => (
         <label
           key={option}
+          htmlFor={option}
           className="flex gap-4 items-center cursor-pointer border border-black py-2 px-6 rounded-lg"
         >
           <p className="font-normal text-base">{option}</p>
           <input
             type="radio"
+            id={option}
+            name="radio-group"
             value={option}
             checked={option === selectedOption}
             onChange={handleRadioChange}
             style={{ display: "none" }} // Hide the default radio button
           />
 
-          <div
+          <button
+            type="button" // Add the type attribute with the value "button"
+            onClick={() => setSelectedOption(option)}
             className="w-6 h-6 border rounded-full flex items-center justify-center border-gray-400 transition duration-300"
-            onClick={() => {
-              setSelectedOption(option);
-              console.log(option);
-            }} // Make the label clickable
           >
             {option === selectedOption && (
               <Image src={check} alt="Checkmark" className="w-full" />
             )}
-          </div>
+          </button>
         </label>
       ))}
     </div>
