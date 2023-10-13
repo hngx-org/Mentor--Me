@@ -5,19 +5,35 @@ import {
   EditIconMentorProfile,
   EducationIcon,
 } from "@/public/SVGs";
+import ProgressBar from "../progressBar/ProgressBar";
+import { ModalState } from "@/app/(mentor)/mentor-profile/page";
 
 export default function ProfileDetailsCardContainer({
   heading,
   items,
+  openModal,
 }: {
   heading: string;
   items: InfoCardProps[];
+  openModal?: React.Dispatch<React.SetStateAction<ModalState>>;
 }) {
   return (
     <div className="w-[100%] flex flex-col h-fit ">
       <div className="w-[100%] flex justify-between">
         <p className="text-lg font-bold text-Neutral60 capitalize">{heading}</p>
-        <EditIconMentorProfile />
+        <span
+          onClick={() => {
+            if (openModal) {
+              openModal({
+                state: "basic info",
+                isOpen: true,
+              });
+            }
+          }}
+          role="presentation"
+        >
+          <EditIconMentorProfile />
+        </span>
       </div>
 
       {items.map((item) => (
@@ -61,7 +77,6 @@ function getIcons(
 export function InfoCard({ type, heading, text }: InfoCardProps) {
   return (
     <div className="w-[100%]  flex space-x-5 h-fit items-center my-2">
-      {/* {type && getIcons(type)} */}
       {getIcons(type)}
       <div>
         <p className="text-lg  font-[500] text-Neutra50">{heading}</p>
@@ -76,12 +91,7 @@ export function BioCard({ text }: { text: string }) {
     <div className="w-[100%]  flex space-x-5 h-fit items-center my-2">
       <div>
         <p className="text-lg font-bold font-[#000]"> Bio</p>
-        <p className="text-Neutra40">
-          {text} Experienced product designer with over 5 years of experience in
-          developing and implementing successful digital assets for leading
-          companies. Passionate about mentoring and helping others achieve their
-          career goals.
-        </p>
+        <p className="text-Neutra40">{text || "Click to add Bio"}</p>
       </div>
     </div>
   );
@@ -110,14 +120,55 @@ export function SkillSCard({ skills }: { skills: string[] }) {
 export function OverViewCard({
   text,
   subText,
+  label,
 }: {
   text: string;
   subText: string;
+  label: string;
 }) {
   return (
     <div className="w-[104px] h-fit sm:w-[144px] border border-Neutral20 p-3 rounded-[6px] text-center space-y-4 m-2">
       <p className="text-xs">{subText}</p>
-      <p className="font-bold text-2xl text-Neutral50">{text} </p>
+      <p className="font-bold text-2xl text-Neutral50 flex items-center justify-center">
+        {text} <span className="text-xs font-normal mx-1"> {label}</span>
+      </p>
+    </div>
+  );
+}
+
+type AvailableSessionCardProps = {
+  timezone: string;
+  availableDays: string;
+};
+export function AvailableSessionCard({
+  timezone,
+  availableDays,
+}: AvailableSessionCardProps) {
+  return (
+    <div className="border borderNeutral10 p-6 w-[100%] h-fit rounded-[8px]">
+      <div className="flex w-[100%] justify-between  px-2">
+        <p> Availability</p> <EditIconMentorProfile />
+      </div>
+      <div className="flex w-[100%] justify-between text-xs border borderNeutral10 rounded-[6px] px-4 py-3  m-2 items-center">
+        <p>Preferred Meeting Times</p>
+        <p className="w-[50%]">{availableDays}</p>
+      </div>
+      <div className="flex w-[100%] justify-between text-xs border borderNeutral10 rounded-[6px] px-4 py-3  m-2 items-center">
+        <p className="w-fit">Time zone</p>
+        <p className="w-[50%]"> {timezone} </p>
+      </div>
+    </div>
+  );
+}
+type SessionsProgressCardProps = {
+  progress: number;
+};
+export function SessionsProgressCard({ progress }: SessionsProgressCardProps) {
+  return (
+    <div className="border borderNeutral10 p-6 w-[100%] h-fit rounded-[8px]">
+      <p className="text-xs font-bold my-2"> Complete your Sessions</p>
+      <ProgressBar progress={progress} rounded />
+      <p> {progress}%</p>
     </div>
   );
 }
