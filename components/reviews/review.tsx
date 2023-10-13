@@ -4,9 +4,9 @@ import Image1 from "../../public/assets/images/mentee-review-screen/Image (1).pn
 const ItemComponent = ({ item }: any) => (
   <div
     key={item.id}
-    className="flex p-[15px] xl:p-[17px] md:p-6 flex-col justify-center w-[375px] md:w-[545px] items-start xl:w-[549.5px] xl:h-[353px]  gap-8 self-stretch rounded-[8px] border border-Neutra20 bg-white"
+    className="flex p-[15px] xl:p-[17px] md:p-6 flex-col justify-center w-[375px] sm:w-[450px] md:w-[545px] items-start xl:w-[549.5px] xl:h-[353px]  gap-8 self-stretch rounded-[8px] border border-Neutra20 bg-white"
   >
-    <div className="flex flex-col lg:w-[520px] md:w-[520px] xl:w-[520px] w-[350px] text-left gap-y-4">
+    <div className="flex flex-col sm:w-[430px] lg:w-[520px] md:w-full xl:w-[520px] w-[350px] text-left gap-y-4">
       <p className="text-Neutra40 font-Inter text-[14px] font-medium leading-[145%]">
         {item.date}
       </p>

@@ -225,6 +225,71 @@ export const reviewsArr: IReview[] = [
     track: "Product Designer",
     role: "Mentee",
   },
+  {
+    id: "5",
+    date: "August 31, 2023",
+    comment:
+      "Talk to Shade if you want to have an honest and friendly space to help you untangle. She was very constructive answered all my questions super clearly with a lot of details, and gave quite some food for thought on how to improve my processes as well. Highly recommended for everyone who's looking for the expertise Shade has!",
+    quality1: "Technically competent",
+    quality2: "Amazing Problem Solver",
+    quality3: "Very motivational",
+    avatar: "../../public/assets/Image.png",
+    name: "Salma Paralluelo",
+    track: "Product Designer",
+    role: "Mentee",
+  },
+  {
+    id: "6",
+    date: "August 31, 2023",
+    comment:
+      "Talk to Shade if you want to have an honest and friendly space to help you untangle. She was very constructive answered all my questions super clearly with a lot of details, and gave quite some food for thought on how to improve my processes as well. Highly recommended for everyone who's looking for the expertise Shade has!",
+    quality1: "Technically competent",
+    quality2: "Amazing Problem Solver",
+    quality3: "Very motivational",
+    avatar: "../../public/assets/Image.png",
+    name: "Salma Paralluelo",
+    track: "Product Designer",
+    role: "Mentee",
+  },
+  {
+    id: "7",
+    date: "August 31, 2023",
+    comment:
+      "Talk to Shade if you want to have an honest and friendly space to help you untangle. She was very constructive answered all my questions super clearly with a lot of details, and gave quite some food for thought on how to improve my processes as well. Highly recommended for everyone who's looking for the expertise Shade has!",
+    quality1: "Technically competent",
+    quality2: "Amazing Problem Solver",
+    quality3: "Very motivational",
+    avatar: "../../public/assets/Image.png",
+    name: "Salma Paralluelo",
+    track: "Product Designer",
+    role: "Mentee",
+  },
+  {
+    id: "8",
+    date: "August 31, 2023",
+    comment:
+      "Talk to Shade if you want to have an honest and friendly space to help you untangle. She was very constructive answered all my questions super clearly with a lot of details, and gave quite some food for thought on how to improve my processes as well. Highly recommended for everyone who's looking for the expertise Shade has!",
+    quality1: "Technically competent",
+    quality2: "Amazing Problem Solver",
+    quality3: "Very motivational",
+    avatar: "../../public/assets/Image.png",
+    name: "Salma Paralluelo",
+    track: "Product Designer",
+    role: "Mentee",
+  },
+  {
+    id: "9",
+    date: "August 31, 2023",
+    comment:
+      "Talk to Shade if you want to have an honest and friendly space to help you untangle. She was very constructive answered all my questions super clearly with a lot of details, and gave quite some food for thought on how to improve my processes as well. Highly recommended for everyone who's looking for the expertise Shade has!",
+    quality1: "Technically competent",
+    quality2: "Amazing Problem Solver",
+    quality3: "Very motivational",
+    avatar: "../../public/assets/Image.png",
+    name: "Salma Paralluelo",
+    track: "Product Designer",
+    role: "Mentee",
+  },
 ];
 
 export const qualityArr: QualityProps[] = [
