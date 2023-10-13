@@ -36,14 +36,14 @@ const AfterBookings: FC = () => (
           <h2 className="text-xl font-semibold leading-10">
             Top mentors suggestions for you
           </h2>
-          <Link href="/dashboard/explore">
+          <Link href="/dashboard/explore?path=Explore">
             <p className="cursor-pointer text-[#008080] pl-6">View All</p>
           </Link>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 pb-6">
         {menteeDashboardData.map((data) => (
-          <MenteeCard {...data} />
+          <MenteeCard key={data.id} {...data} />
         ))}
       </div>
     </div>

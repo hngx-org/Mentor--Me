@@ -5,7 +5,8 @@
 //  The buttons trigger the change of the currForm state from here using props. Which in turn changes which form is shown
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { MentorCreationArrDown } from "@/public";
+import { useMentorContext } from "@/app/(mentor)/mentor-profile-creation/MentorContext";
+import formData from "@/lib/mentorProfileCreationData";
 
 interface myProps {
   children?: any;
@@ -20,7 +21,49 @@ export default function MentorFormBuilder({
   handleBack,
   handleClick,
 }: myProps) {
+  const { formInputs, setFormInputs } = useMentorContext();
   const form = useRef(null);
+  const [isFull, setIsFull] = useState(false);
+  const [textLength, setTextLength] = useState(0);
+
+  function checkTextArea(e: any) {
+    const words = e.target.value;
+
+    // this gets the number of words by getting the value from the textarea, splitting it into an array with the " " as demacation
+    // It then gets all the words that aren't and empty string
+    const numWords = words.split(" ").filter((word: any) => word !== "");
+
+    setTextLength(numWords.length);
+
+    if (numWords.length > 250) {
+      setIsFull(true);
+    } else {
+      setIsFull(false);
+    }
+
+    // update the general state holding the input values
+    setFormInputs((prevData: any) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  }
+
+  function handleInput(e: any) {
+    setIsFull(false);
+    let value: any = "";
+    if (e.target.type === "number") {
+      value = Number(e.target.value);
+    } else {
+      value = e.target.value;
+    }
+    // console.log(e.target.type);
+    // update the general state holding the input values
+    setFormInputs((prevData: any) => ({
+      ...prevData,
+      [e.target.name]: value,
+    }));
+    // console.log(formInputs);
+  }
 
   return (
     <form ref={form} className="flex flex-col gap-6">
@@ -30,7 +73,7 @@ export default function MentorFormBuilder({
           return (
             <div key={input.id} className="flex flex-col gap-2 relative z-[1]">
               <label
-                htmlFor={input.placeholder}
+                htmlFor={input.label}
                 className="font-Inter text-Neutral60 font-[500]"
               >
                 {input.label}
@@ -38,21 +81,33 @@ export default function MentorFormBuilder({
 
               <input
                 className="w-full border-[#d0d5dd] border-[1px] rounded-md p-4 placeholder:text-[#98A2B3] "
-                type="text"
+                type={input.type}
                 placeholder={input.placeholder}
-                id={input.placeholder}
+                id={input.label}
                 required
+                // list={input.listName}
+                autoComplete="off"
+                onInput={handleInput}
+                name={input.apiName}
               />
 
-              {input.nature === "dropdown" ? (
-                <Image
-                  className="absolute right-4 translate-y-[-50%] top-[70%]"
-                  src={MentorCreationArrDown}
-                  alt="arrow-down"
-                />
+              {/* {input.nature === "dropdown" ? (
+                <>
+                  <Image
+                    className="absolute right-4 translate-y-[-50%] top-[70%]"
+                    src={MentorCreationArrDown}
+                    alt="arrow-down"
+                  />
+
+                  <div>
+                    
+                  </div>
+
+                  
+                </>
               ) : (
                 ""
-              )}
+              )} */}
             </div>
           );
 
@@ -73,8 +128,23 @@ export default function MentorFormBuilder({
               cols={30 as number}
               rows={10 as number}
               placeholder="Write something"
+              onInput={checkTextArea}
+              name={input.label}
+              required
             />
-            <p className="font-Inter text-Neutra30">Not more than 250 words</p>
+
+            <div className="flex justify-between items-center">
+              <p className="font-Inter text-Neutra30">
+                Not more than 250 words
+              </p>
+              <div className="flex flex-col items-center">
+                <p className={`${isFull ? "text-[red]" : ""}`}>
+                  {!isFull
+                    ? `${250 - Number(textLength)} words left`
+                    : "too many words"}
+                </p>
+              </div>
+            </div>
           </div>
         );
       })}
@@ -100,7 +170,11 @@ export default function MentorFormBuilder({
             e.preventDefault();
             const valid = (form.current! as HTMLFormElement).reportValidity();
 
-            if (valid) {
+            if (isFull) {
+              alert("You have too many words, please reduce them");
+            }
+
+            if (valid && !isFull) {
               handleClick();
             }
           }}

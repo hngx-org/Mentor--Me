@@ -4,8 +4,12 @@ import Link from "next/link";
 
 import Image from "next/image";
 
+import { Metadata } from "next";
 import mentee from "@/public/assets/images/mentee.jpeg";
 
+export const metadata: Metadata = {
+  title: "Sign Up.",
+};
 const page = () => (
   <div className="sm:px-16 px-6">
     <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">Mentor Me</h2>

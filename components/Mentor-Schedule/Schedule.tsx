@@ -10,7 +10,7 @@ import SeeYourUpComingSession from "./SeeYourUpComingSession";
 import PreviousSessionsCall from "./PreviousSessionsCall";
 import MobileSideBar from "../mentor/MobileSiderBar";
 import SidebarMentor from "../mentor/SidebarMentor";
-import MenteeNavBar from "../menteeTopNav";
+import MentorTopNav from "../mentorTopNav";
 import Footer from "../Footer";
 import MobileAppear from "./MobileAppear";
 
@@ -23,7 +23,7 @@ function Schedule() {
       <SidebarMentor />
 
       <div className="w-full overflow-scroll max-h-full">
-        <MenteeNavBar />
+        <MentorTopNav />
         <MobileAppear />
         {/* Mobile header ends */}
 

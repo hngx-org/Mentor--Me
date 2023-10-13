@@ -8,21 +8,32 @@ import { Button } from "../buttons/button";
 
 type Props = {
   mentor: boolean;
+  heroCard: string;
+  name: string;
+  image: any;
+  title: string;
+  desc: string;
 };
 
 export default function BigDiscussionCard({
   mentor,
+  image,
+  heroCard,
+  name,
+
+  title,
+  desc,
 }: Props): React.ReactElement {
   return (
-    <div className="bigDiscussioncard flex flex-col lg:flex-row border py-4 pl-4 pr-[30px] rounded-[10px] gap-x-9 gap-y-4">
+    <div className="bigDiscussioncard flex flex-col lg:flex-row border py-4 md:pl-4 md:pr-[30px] px-auto rounded-[10px] gap-x-9 gap-y-4">
       {mentor && (
-        <div className="image overflow-hidden aspect-square lg:w-[295px] w-[320px] rounded-[10px] flex flex-shrink-0">
+        <div className="image overflow-hidden aspect-square lg:w-[295px] w-[320px] max-w-[90vw] rounded-[10px] flex flex-shrink-0">
           <Image
             alt="members"
             src={bigDiscussionCardHero}
             width={295}
             height={382}
-            className="block w-[100%] aspect-[298/382] object-cover "
+            className="block w-[100%] aspect-[298/382] object-cover  "
           />
         </div>
       )}
@@ -39,7 +50,7 @@ export default function BigDiscussionCard({
             />
             <div className="">
               <p className="text-NeutalBase font-semibold lg:text-[18px] text-[14px] leading-[20px]  lg:mb-2">
-                Shade Mayowa
+                {name}
               </p>
               <p className="text-Neutra30 font-normal lg:text-xs text-[10px]">
                 {mentor ? "Mentor" : "Student"}
@@ -49,51 +60,40 @@ export default function BigDiscussionCard({
         </div>
         <div className="text flex flex-col gap-2">
           <div className="topic font-medium lg:text-[24px] text-[14px] lg:leading-[28.8px] leading-[20px]">
-            My take on Augmented Reality (AR)
+            {title}
           </div>
           <div className="desc font-normal lg:text-[17px] lg:leading-[21.6px] text-[12px] leading-[14.4px] ">
-            AR enhances our everyday experiences by overlaying digital elements
-            onto the real world. Through AR, your smartphone becomes a window to
-            a new dimension. Imagine exploring a historic city, and with a
-            simple glance through your device, historical figures come to life,
-            sharing stories and insights. AR is revolutionizing education,
-            gaming, and even shopping, making the ordinary extraordinary.
+            {desc}
           </div>
         </div>{" "}
-        <div className="largeButton lg:flex hidden ">
+        <div className="largeButton">
           {" "}
-          <div className="buttons gap-5 flex">
+          <div className="buttons lg:gap-5 gap-4 flex">
             <button
               type="button"
-              className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[16px] whitespace-nowrap px-[30px]   py-[10px] text-Accent1 bg-Accent6 border-0"
+              className="  flex items-center gap-x-1 rounded-[4px] lg:rounded-[8px] lg:text-[16px] text-[12px] whitespace-nowrap lg:px-[30px]   lg:py-[10px] px-[2px]   py-[10px] text-Accent1  border-0"
             >
-              <Image alt="icon" width={24} height={24} src={messageIcon} />
+              <Image
+                alt="icon"
+                width={24}
+                height={24}
+                src={messageIcon}
+                className="lg:w-6 lg:h-6 h-4 w-4"
+              />
               14 Comments
             </button>
             <button
               type="button"
-              className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[16px] whitespace-nowrap px-[30px]   py-[10px] text-Accent1 bg-Accent6 border-0"
+              className="  flex items-center gap-x-1 rounded-[4px] lg:rounded-[8px] lg:text-[16px] text-[12px] whitespace-nowrap lg:px-[30px]   lg:py-[10px] px-[2px]   py-[10px] text-Accent1  border-0"
             >
-              <Image alt="icon" width={24} height={24} src={sendIcon} />
+              <Image
+                alt="icon"
+                width={24}
+                height={24}
+                src={sendIcon}
+                className="lg:w-6 lg:h-6 h-4 w-4"
+              />
               Share
-            </button>
-          </div>
-        </div>
-        <div className="smallButton lg:hidden flex mt-2 ">
-          <div className="buttons gap-2 flex">
-            <button
-              type="button"
-              className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[10px] whitespace-nowrap px-[15px]   py-[6px] text-Accent1 bg-Accent6 border-0"
-            >
-              <Image alt="icon" width={15} height={15} src={messageIcon} />
-              Join ClassRoom
-            </button>
-            <button
-              type="button"
-              className=" border-NeutalBase  flex items-center gap-x-1 rounded-[8px] text-[6px] whitespace-nowrap px-[15px]   py-[10px] text-Accent1 bg-Accent6 border-0"
-            >
-              <Image alt="icon" width={15} height={15} src={sendIcon} />
-              Join ClassRoom
             </button>
           </div>
         </div>

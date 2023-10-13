@@ -31,7 +31,7 @@ export default function Pagination({
   const [onClicked, setOnClicked] = useState(2);
   const linkStyle = "font-semibold text-lg cursor-pointer";
   const activeStyle =
-    "font-semibold text-lg cursor-pointer md:bg-Accent1 px2 py2 md:px-[8px] md:py-[4px] md:text-white rounded-[9px] transition";
+    "font-semibold text-lg cursor-pointer md:bg-Accent1 px2 py2 md:px[8px] md:py[4px] md:px-[16px] md:py-[8px] md:text-white rounded-[9999px] transition";
   const nonActiveStyle = "font-semibold text-lg cursor-pointer text-black";
 
   const numClicked = (num: number) => {
