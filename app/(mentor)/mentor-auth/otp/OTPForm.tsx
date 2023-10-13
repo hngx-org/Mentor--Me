@@ -14,7 +14,7 @@ import Modal from "@/components/modal/Modal";
 import generateKey from "@/lib/generatekey";
 
 const OTPForm = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [otp, setOTP] = useState(["", "", "", "", "", ""]);
   const otpInputs: Array<React.RefObject<HTMLInputElement | null>> = Array(6)
     .fill(null)
