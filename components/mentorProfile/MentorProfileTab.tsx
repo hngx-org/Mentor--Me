@@ -125,7 +125,7 @@ function BasicInfoTab() {
         />
       </div>
       <div className="flex w-[100%] h-fit justify-end py-5">
-        <Button variant="primary"> update profile</Button>
+        <Button variant="primary">update profile</Button>
       </div>
     </div>
   );
