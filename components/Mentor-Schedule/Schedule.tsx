@@ -18,15 +18,15 @@ function Schedule() {
   return (
     <div className="flex w-[100vw] h-[100vh] overflow-clip">
       {/* Mobile sidebar */}
-      <MobileSideBar />
 
       <SidebarMentor />
 
       <div className="w-full overflow-scroll max-h-full">
         <MentorTopNav />
-        <MobileAppear />
-        {/* Mobile header ends */}
 
+        <MobileSideBar />
+        {/* Mobile header ends */}
+        <MobileAppear />
         {/* Body of the page */}
         <section className="container md:p-10 w-full p-6 sm:py-8 sm:px-10 mx-auto">
           {/* My schedule segment */}
