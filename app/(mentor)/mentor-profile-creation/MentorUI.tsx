@@ -207,7 +207,7 @@ export function MentorProfileCreationForms() {
 
         <div className="flex items-start relative gap-[100px] w-[100%] max-h-[100%] overflow-x-hidden">
           {/* form 1 */}
-          <div className="form-container mt-[-10px] sm:mt-0 w-[100%] h-[100%] sm:pt-0 overflow-y-scroll absolute p-4 sm:p-10 pt-0 ">
+          <form className="form-container mt-[-10px] sm:mt-0 w-[100%] h-[100%] sm:pt-0 overflow-y-scroll absolute p-4 sm:p-10 pt-0 ">
             <HeadingBuild
               currForm={currForm}
               content=" Set up your profile in a few steps and Let’s get started!"
@@ -270,7 +270,7 @@ export function MentorProfileCreationForms() {
                 move("back");
               }}
             />
-          </div>
+          </form>
           {/* form 1 */}
 
           {/* form 2 */}

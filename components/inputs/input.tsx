@@ -10,6 +10,7 @@ interface InputProps {
   type?: string;
   disabled?: boolean;
   required?: boolean;
+  name?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -18,6 +19,7 @@ const Input: React.FC<InputProps> = ({
   type,
   disabled,
   required,
+  name,
 }) => {
   const isPasswordInput = type === "password";
 
