@@ -18,14 +18,14 @@ export default function MenteeSideBar({
 }: SideBarMentorProps & { path?: string | null | undefined }) {
   return (
     <section
-      className={`hidden w-[274px]  p-5 min-h-screen h-full fixed lg:flex left-0 top-0 border-[1px] ${
-        light ? "bg-[#fff]" : " bg-[#000]"
+      className={`hidden w-[274px] border-[1px] p-7 h-[100vh] fixed left-0 ${
+        light ? "bg-[#fff]" : " bg-[#000] hidden lg:block"
       }`}
     >
       <div className="flex flex-col justify-between h-full">
         <div>
           <div className="w-full pl-3">{light ? <Logo2 /> : <LogoIcon />}</div>
-          <div className="mt-10 2xl:mt-28 ">
+          <div className="mt-10 2xl:mt-20 ">
             <p className="font-Inter text-[14px]  leading-[20.3px] font-[500]   text-Neutra30 pl-3">
               MENU
             </p>
@@ -58,7 +58,7 @@ export default function MenteeSideBar({
 
         <div className="my-4 border-t-2 border-Neutra40 ">
           <ul className=" px-3  py-1 flex flex-col  cursor-pointer">
-            <Link href="/mentee-settings?path=settings">
+            {/* <Link href="/mentee-settings?path=settings">
               <li
                 className={`flex gap-2 rounded-[5px] p-2 items-center ${
                   light && path === "settings"
@@ -73,34 +73,33 @@ export default function MenteeSideBar({
                   Setting
                 </span>
               </li>
-            </Link>
-            <li className="flex gap-3  rounded-[5px] p-2">
-              <LogoutIcon />
-              <span className="font-Inter text-[11px] font-[500]  text-Error50">
+            </Link> */}
+            <li className="flex gap-3 rounded-[5px] p-2">
+              <span>
+                <LogoutIcon />
+              </span>
+              <span className="  font-Inter text-[14px] font-[500]  text-Error50">
                 LogOut
               </span>
             </li>
           </ul>
         </div>
 
-        <div
-          className={`${
-            path === "profile" ? "border border-[#E5FFFF] rounded-2xl" : ""
-          }`}
-        >
-          <Link href="/mentee-profile?path=profile" prefetch>
-            <ul className="  cursor-pointer   ">
-              <li className="flex gap-3 items-center  p-2">
+        <div className=" relative bottom-4">
+          <ul className="  cursor-pointer   ">
+            <li className="flex gap-3 items-center p-2">
+              <span>
                 <ProfileIcon />
-                <span className="  font-Inter tetx-[10px] font-[500]   text-Neutra30">
-                  <span className={`${path === "profile" ? "text-white" : ""}`}>
-                    Funmi Oladapo
-                  </span>
-                  <br /> funmi@zurimp.com
+              </span>
+              <span className="  font-Inter text-[14px] font-[500]   text-Neutra30">
+                <span className={`${light ? "text-[#000]" : " text-Neutra30"}`}>
+                  {" "}
+                  Funmi Oladapo
                 </span>
-              </li>
-            </ul>
-          </Link>
+                <br /> funmi@zurimp.com
+              </span>
+            </li>
+          </ul>
         </div>
       </div>
     </section>

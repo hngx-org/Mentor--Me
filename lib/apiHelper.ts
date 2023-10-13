@@ -26,8 +26,8 @@ export async function checkUser(data: loginDataType) {
       data
     );
 
-    console.log(res);
+    // console.log(res);
   } catch (err) {
-    console.log("error");
+    // console.log("error");
   }
 }
