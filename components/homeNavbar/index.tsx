@@ -28,7 +28,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
 
   return (
     <>
-      <header className="bg-[white] block fixed top-0 w-full z-[10] shadow-sm">
+      <header className="bg-[white] block fixed top-0 w-full z-[20] shadow-sm">
         <nav className="bg-[white] flex justify-between items-center py-[1.5rem] w-9/10  mx-auto bg-[#FFFF] cursor-pointer z-[10]">
           <Link href="/">
             <svg
@@ -130,7 +130,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
       <div
         className={`lg:hidden ${
           toggleMenu ? "flex" : "hidden"
-        } flex flex-col items-start h-[100vh]  pl-3 w-[57%] max-w-[300px] left-0 bg-white shadow-xl  fixed h-[100vh] z-[10] top-[77px] 
+        } flex flex-col items-start h[100vh]  pl-3 w-[57%] max-w-[300px] left-0 bg-white shadow-xl  fixed h-[100vh] z-[10] top-[77px] 
         `}
       >
         <ul className="flex flex-col mt-[2rem] gap-7 justify-between  font-[400] text-[18px] leading-[28px] w-9/10  cursor-pointer">

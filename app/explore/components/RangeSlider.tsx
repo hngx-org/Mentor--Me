@@ -6,6 +6,7 @@ export default function RangeSlider() {
   const [value, setValue] = useState<number>(10);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log(Number(event.target.value));
     setValue(Number(event.target.value));
   };
   return (
@@ -26,6 +27,10 @@ export default function RangeSlider() {
           onChange={handleInputChange}
           className="w-full"
         />
+        {/* <input
+          type="range"
+          className="appearance-none bg-transparent [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-black/25 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[50px] [&::-webkit-slider-thumb]:w-[50px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-purple-500"
+        /> */}
       </div>
     </div>
   );
