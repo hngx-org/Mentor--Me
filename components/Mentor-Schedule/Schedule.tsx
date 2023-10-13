@@ -18,20 +18,23 @@ function Schedule() {
   return (
     <div className="flex w-[100vw] h-[100vh] overflow-clip">
       {/* Mobile sidebar */}
-      <MobileSideBar />
 
-
-      <div className=" hidden fixed ml-[-6px] mt-[-3px]  lg:block">
-        <SidebarMentor />
-      </div>
-      <MentorTopNav />
-
-
-      <SidebarMentor />
-
-      <div className="w-full overflow-scroll max-h-full">
-        
-        <MobileAppear />
+      <div className="lg:ml-[274px]">
+        <div className=" w-full mx-auto bg-NeutalBase flex justify-center items-center pb-4 lg:hidden">
+          <div className="flex justify-between flex-col items-center gap-4 px-8 min-h-[96px]">
+            <p className="text-[#fff] text-base text-center px-4 font-Inter">
+              Get started with MentorMe Long term mentorship program
+            </p>
+            <form>
+              <input
+                placeholder="Placeholder"
+                className="max-w-[374px] py-1.5 px-3 placeholder-gray-500 rounded-md border-none ring-2 ring-gray-300 focus:ring-gray-500 focus:ring-2"
+                name="search"
+                type="text"
+              />
+            </form>
+          </div>
+        </div>
         {/* Mobile header ends */}
 
         {/* Body of the page */}

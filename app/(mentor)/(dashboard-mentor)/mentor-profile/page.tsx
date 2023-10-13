@@ -48,8 +48,9 @@ export default function ProfilePage() {
   return (
     <div className="h-[100vh] w-[100vw] overflow-scroll ">
       <MentorProfileHeader
-        userName="shade mayorwa"
-        userRole="Product designer"
+        userName={user.name || "Shade Mayowa"}
+        email={user.email || ""}
+        userRole="Product Designer"
         userRating={4}
       />
       <MentorProfileMainLayout>
