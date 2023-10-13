@@ -36,7 +36,7 @@ const AfterBookings: FC = () => (
           <h2 className="text-xl font-semibold leading-10">
             Top mentors suggestions for you
           </h2>
-          <Link href="/dashboard/explore">
+          <Link href="/dashboard/explore?path=Explore">
             <p className="cursor-pointer text-[#008080] pl-6">View All</p>
           </Link>
         </div>

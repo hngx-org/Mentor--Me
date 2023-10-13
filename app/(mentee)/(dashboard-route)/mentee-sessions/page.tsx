@@ -24,7 +24,7 @@ import Button from "./(ui)/VxrcelBtn";
 import Loading from "./loading";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import SuccessReminder from "@/components/modal/mentee-session/SuccessReminder";
-import { EyeViewIcon, GridViewIcon, ListViewIcon } from "@/public/SVGs";
+import { GridViewIcon, ListViewIcon } from "@/public/SVGs";
 
 type SessionsTabsProps = {
   id: number;
