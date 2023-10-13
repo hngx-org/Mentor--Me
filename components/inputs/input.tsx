@@ -10,6 +10,9 @@ interface InputProps {
   type?: string;
   disabled?: boolean;
   required?: boolean;
+  value?: string;
+  error?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -18,6 +21,9 @@ const Input: React.FC<InputProps> = ({
   type,
   disabled,
   required,
+  value,
+  error,
+  onChange,
 }) => {
   const isPasswordInput = type === "password";
 
@@ -41,8 +47,10 @@ const Input: React.FC<InputProps> = ({
       </label>
       <div className="relative">
         <input
+          onChange={onChange}
           autoComplete="off"
           id={id}
+          value={value}
           disabled={disabled}
           required={required}
           placeholder=""
