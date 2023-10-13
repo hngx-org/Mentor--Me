@@ -7,6 +7,7 @@
 // The Container div has 5 divs, in which each div houses the heading, progressbar and the form itself
 
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 import Image from "next/image";
 import styles from "./page.module.css";
@@ -36,10 +37,24 @@ const form3Arr = formData[2];
 const form4Arr = formData[3];
 const form5Arr = formData[4];
 
-export default function MentorProfileCreationForms() {
+export function MentorProfileCreationForms() {
+  const { formInputs, setFormInputs } = useMentorContext();
   const [currForm, setCurrForm] = useState(0);
   const [isModalShown, setIsModalShown] = useState(false);
-  const { formInputs, setFormInputs } = useMentorContext();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const select1 = useRef<HTMLInputElement>(null);
+  const select2 = useRef<HTMLInputElement>(null);
+  const select3 = useRef<HTMLInputElement>(null);
+  const image1 = useRef<HTMLImageElement>(null);
+  const image2 = useRef<HTMLImageElement>(null);
+  const image3 = useRef<HTMLImageElement>(null);
+
+  const [files, setFiles] = useState({
+    file1: "",
+    file2: "",
+    file3: "",
+  });
 
   const forms = [
     {
@@ -51,6 +66,31 @@ export default function MentorProfileCreationForms() {
     { id: 4, heading: "How would you like to be introduced?" },
     { id: 5, heading: "Your mentorship  details" },
   ];
+
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTI5NTFhNDI2OTQzZGIyZjliNjA1MzQiLCJyb2xlIjoibWVudG9yIiwiZW1haWwiOiJheW9ib2x1Zm9yZXZlckBnbWFpbC5jb20iLCJpYXQiOjE2OTcyMDcyODAsImV4cCI6MTY5OTcyNzI4MH0.mCu-QOvo_K8ykakiVv8hwOqrZohh9H02khquIdXRycI";
+
+  function submitData() {
+    const customHeaders = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    axios
+      .post(
+        "https://mentormee-api.onrender.com/mentors/create-profile",
+        formInputs,
+        { headers: customHeaders }
+      )
+      .then((response) => {
+        // Handle the response
+        // console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle any errors
+        // console.error(error);
+      });
+  }
 
   useEffect(() => {
     const forms = document.querySelectorAll(".form-container");
@@ -71,6 +111,23 @@ export default function MentorProfileCreationForms() {
     });
   }, [currForm]);
 
+  useEffect(() => {
+    if (files.file1) {
+      // @ts-ignore
+      image1.current!.src = URL.createObjectURL(files.file1);
+    }
+
+    if (files.file2) {
+      // @ts-ignore
+      image2.current!.src = URL.createObjectURL(files.file2);
+    }
+
+    if (files.file3) {
+      // @ts-ignore
+      image3.current!.src = URL.createObjectURL(files.file3);
+    }
+  }, [files]);
+
   function move(motion: string) {
     // console.log(forms);
     if (currForm <= 0 && motion === "back") {
@@ -79,59 +136,41 @@ export default function MentorProfileCreationForms() {
       setCurrForm(currForm - 1);
     }
 
+    if (currForm === 1 && files.file2 === "") {
+      alert("please upload a certificate");
+      return;
+    }
+
     if (currForm < forms.length - 1 && motion === "forward") {
       setCurrForm(currForm + 1);
     } else if (currForm === forms.length - 1 && motion === "forward") {
       // setCurrForm(0);
+      submitData();
       setIsModalShown(true);
     }
   }
-  const select1 = useRef<HTMLInputElement>(null);
-  const select2 = useRef<HTMLInputElement>(null);
-  const select3 = useRef<HTMLInputElement>(null);
 
   function selectFile(element: any) {
     element.click();
   }
-  const stringData = "This is some text that you want to convert into a Blob";
-
-  // Convert the string into a Blob
-  const blob = new Blob([stringData], { type: "text/plain" });
-  const [files, setFiles] = useState({
-    file1: { name: "", lastModifiedDate: "" },
-    file2: { name: "", lastModifiedDate: "" },
-    file3: { name: "", lastModifiedDate: "" },
-  });
-  // const [files, setFiles] = useState({ file1: {}, file2: {}, file3: {} });
-  const [isLoaded, setIsLoaded] = useState(false);
-  const image1 = useRef<HTMLImageElement>(null);
-  const image2 = useRef<HTMLImageElement>(null);
-  const image3 = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    if (files.file1.name) {
-      // @ts-ignore
-      image1.current!.src = URL.createObjectURL(files.file1);
-    }
-
-    if (files.file2.name) {
-      // @ts-ignore
-      image2.current!.src = URL.createObjectURL(files.file2);
-    }
-
-    if (files.file3.name) {
-      // @ts-ignore
-      image3.current!.src = URL.createObjectURL(files.file3);
-    }
-  }, [files]);
-
   function showFile(e: any) {
     setIsLoaded(true);
-    // if (file[0].size > 150000) return;
+
+    if ([...e.target.files][0].size > 2 * 1024 * 1024) {
+      alert("Image size exceeds 2MB. Please upload a smaller image.");
+      return;
+    }
     setFiles((prevFile) => ({
       ...prevFile,
-      [e.target.name]: [...e.target.files][0],
+      [e.target.id]: [...e.target.files][0],
     }));
+
+    setFormInputs((prevData: any) => ({
+      ...prevData,
+      [e.target.name]: e.target.files[0].name,
+    }));
+
+    // console.log(formInputs);
   }
 
   return (
@@ -185,14 +224,14 @@ export default function MentorProfileCreationForms() {
                   src={MentorCreationProfileIcon}
                   alt="profile"
                   className={`${
-                    files.file1.name ? "hidden" : "block"
+                    files.file1 ? "hidden" : "block"
                   } mr-[20px] max-w-[60px] `}
                 />
                 <img
                   ref={image1}
                   src=""
                   alt=""
-                  className=" mr-[20px] max-w-[60px]"
+                  className=" mr-[20px] max-w-[100px]"
                 />
 
                 {/* {files.file1 && } */}
@@ -202,7 +241,9 @@ export default function MentorProfileCreationForms() {
                     className="hidden"
                     type="file"
                     onChange={showFile}
-                    name="file1"
+                    id="file1"
+                    name="profile_img"
+                    required
                   />
                   <button
                     type="button"
@@ -256,11 +297,10 @@ export default function MentorProfileCreationForms() {
 
                     <input
                       className="w-full border-[#d0d5dd] border-[1px] rounded-md p-4 placeholder:text-[#98A2B3]"
-                      type="url"
+                      type="text"
                       placeholder="Link"
                       id="certification"
-                      name="certification file"
-                      required
+                      name="certification_link"
                       onInput={(e: any) => {
                         setFormInputs((prevData: any) => ({
                           ...prevData,
@@ -275,7 +315,8 @@ export default function MentorProfileCreationForms() {
                     className="hidden"
                     type="file"
                     onChange={showFile}
-                    name="file2"
+                    id="file2"
+                    name="certification_file"
                   />
 
                   <button
@@ -296,7 +337,12 @@ export default function MentorProfileCreationForms() {
                     alt=""
                     className=" mr-[20px] max-w-[200px] w-[80%]"
                   />
-                  <p>{files.file2 && files.file2.name}</p>
+                  <p>
+                    {
+                      // @ts-ignore
+                      files.file2 && files.file2.name
+                    }
+                  </p>
                 </div>
               </div>
             </MentorFormBuilder>
@@ -332,7 +378,8 @@ export default function MentorProfileCreationForms() {
                   className="hidden"
                   type="file"
                   onChange={showFile}
-                  name="file3"
+                  id="file3"
+                  name="education_file"
                 />
 
                 <button
@@ -357,7 +404,14 @@ export default function MentorProfileCreationForms() {
                     alt=""
                     className=" mr-[20px] max-w-[200px] w-[80%]"
                   />
-                  <p>{files.file3 && files.file3.name}</p>
+                  {/* 
+                  <p>
+                    {
+                      // @ts-ignore
+
+                      files.files3 && files.file3.name
+                    }
+                  </p> */}
                 </div>
               </div>
             </MentorFormBuilder>
@@ -470,7 +524,7 @@ interface myProps {
   currForm: any;
 }
 
-function HeadingBuild({ content, currForm }: myProps) {
+export function HeadingBuild({ content, currForm }: myProps) {
   return (
     <div className="sticky top-0 bg-white left-0  py-2  mb-4 flex flex-col z-[2] ">
       <h2 className="font-Hanken font-bold text-3xl mb-4">{content}</h2>
@@ -478,7 +532,7 @@ function HeadingBuild({ content, currForm }: myProps) {
     </div>
   );
 }
-function SuccessModal() {
+export function SuccessModal() {
   return (
     <div className="text-lg sm:text-2xl flex flex-col gap-6 w-[90%] max-w-[480px] fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] z-[20] bg-white rounded-md shadow-xl p-8">
       <div className="flex flex-col items-center">

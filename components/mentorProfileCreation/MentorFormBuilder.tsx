@@ -50,11 +50,19 @@ export default function MentorFormBuilder({
 
   function handleInput(e: any) {
     setIsFull(false);
+    let value: any = "";
+    if (e.target.type === "number") {
+      value = Number(e.target.value);
+    } else {
+      value = e.target.value;
+    }
+    // console.log(e.target.type);
     // update the general state holding the input values
     setFormInputs((prevData: any) => ({
       ...prevData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: value,
     }));
+    // console.log(formInputs);
   }
 
   return (
@@ -76,11 +84,11 @@ export default function MentorFormBuilder({
                 type={input.type}
                 placeholder={input.placeholder}
                 id={input.label}
-                required
+                // required
                 // list={input.listName}
                 autoComplete="off"
                 onInput={handleInput}
-                name={input.label}
+                name={input.apiName}
               />
 
               {/* {input.nature === "dropdown" ? (
@@ -161,6 +169,10 @@ export default function MentorFormBuilder({
           onClick={(e) => {
             e.preventDefault();
             const valid = (form.current! as HTMLFormElement).reportValidity();
+
+            if (isFull) {
+              alert("You have too many words, please reduce them");
+            }
 
             if (valid && !isFull) {
               handleClick();

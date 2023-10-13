@@ -10,7 +10,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { MentorProvider } from "./MentorContext";
 
-import MentorProfileCreationForms from "./MentorUI";
+import { MentorProfileCreationForms } from "./MentorUI";
 
 export default function MentorPage() {
   return (
