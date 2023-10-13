@@ -1,3 +1,5 @@
+// "use client";
+
 import React from "react";
 import DiscussionSlider from "@/components/mentee-communities/DiscussionSlider";
 import MentorGrid from "@/components/mentee-communities/MentorGrid";
@@ -6,9 +8,117 @@ import Footer from "@/components/Footer";
 import { SearchIcon } from "@/public/assets/Icons/mentor-communities";
 import SidebarMentor from "@/components/mentor/SidebarMentor";
 import { mentorCardAvatar, mentorCardHero } from "@/public";
+import { get, post } from "@/lib/apiHelper";
 
 const MenteeCommunities: React.FC = () => {
   const isLoggedIn = false;
+  const sliderInfo = [
+    {
+      title: "Member Math",
+      members: 13,
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
+      id: 12,
+    },
+    {
+      title: "Member Math",
+      members: 13,
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
+      id: 13,
+    },
+    {
+      title: "Member Math",
+      members: 13,
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
+      id: 15,
+    },
+    {
+      title: "Member Math",
+      members: 13,
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
+      id: 15,
+    },
+    {
+      title: "Member Math",
+      members: 13,
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
+      id: 17,
+    },
+  ];
+  const mentorInfo = [
+    {
+      id: 9408,
+      mentorName: "Shade Mayowa",
+      verify: true,
+      mentorPostion: "CEO, Webmasters Inc",
+      mentorAvatar: mentorCardAvatar,
+      cardHero: mentorCardHero,
+      date: "28th, Sept",
+      time: "12:30pm",
+      title: "Intorduction to AI",
+      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
+    },
+    {
+      id: 9408,
+      mentorName: "Shade Mayowa",
+      verify: true,
+      mentorPostion: "CEO, Webmasters Inc",
+      mentorAvatar: mentorCardAvatar,
+      cardHero: mentorCardHero,
+      date: "28th, Sept",
+      time: "12:30pm",
+      title: "Intorduction to AI",
+      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
+    },
+    {
+      id: 9408,
+      mentorName: "Shade Mayowa",
+      verify: true,
+      mentorPostion: "CEO, Webmasters Inc",
+      mentorAvatar: mentorCardAvatar,
+      cardHero: mentorCardHero,
+      date: "28th, Sept",
+      time: "12:30pm",
+      title: "Intorduction to AI",
+      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
+    },
+    {
+      id: 94408,
+      mentorName: "Shade Mayowa",
+      verify: true,
+      mentorPostion: "CEO, Webmasters Inc",
+      mentorAvatar: mentorCardAvatar,
+      cardHero: mentorCardHero,
+      date: "28th, Sept",
+      time: "12:30pm",
+      title: "Intorduction to AI",
+      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
+    },
+    {
+      id: 94068,
+      mentorName: "Shade Mayowa",
+      verify: true,
+      mentorPostion: "CEO, Webmasters Inc",
+      mentorAvatar: mentorCardAvatar,
+      cardHero: mentorCardHero,
+      date: "28th, Sept",
+      time: "12:30pm",
+      title: "Intorduction to AI",
+      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
+    },
+    {
+      id: 94078,
+      mentorName: "Shade Mayowa",
+      verify: true,
+      mentorPostion: "CEO, Webmasters Inc",
+      mentorAvatar: mentorCardAvatar,
+      cardHero: mentorCardHero,
+      date: "28th, Sept",
+      time: "12:30pm",
+      title: "Intorduction to AI",
+      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
+    },
+  ];
+
   // const widthOfSlider = (
   //   widthOfSlides: number,
   //   colGap: number,
@@ -18,8 +128,63 @@ const MenteeCommunities: React.FC = () => {
   //     noOfSlides * widthOfSlides + colGap * (noOfSlides - 1) + 2;
   //   return sliderWidth;
   // };
+
+  // fetch start
+  // const [albums, setAlbums] = React.useState([] as any[]);
+
+  // React.useEffect(() => {
+  //   // declare the data fetching function
+  //   // const fetchData = async () => {
+  //   //   const data = await get("https://jsonplaceholder.typicode.com/albums");
+  //   //   return data;
+  //   // };
+
+  //   // call the function
+  //   // fetchData()
+  //   //   .then((res) => setAlbums(res))
+  //   //   // make sure to catch any error
+  //   //   .catch(console.error);
+
+  //   // async function getData() {
+  //   //   try {
+  //   //     const response = await get(
+  //   //       "https://jsonplaceholder.typicode.com/albums"
+  //   //     );
+  //   //     setAlbums(response);
+  //   //   } catch (error) {
+  //   //     console.error("Error:", error);
+  //   //   }
+  //   // }
+  //   // getData(); '
+
+  //   // post
+
+  //   // const data = {
+  //   //   email: "test@tjjj.com",
+  //   //   password: "Password",
+  //   //   role: "mentor",
+  //   // };
+  //   // async function checkUser() {
+  //   //   try {
+  //   //     const res = await post(
+  //   //       "https://mentormee-api.onrender.com/auth/register",
+  //   //       data
+  //   //     );
+
+  //   //     console.log(res);
+  //   //   } catch (err) {
+  //   //     console.log("error");
+  //   //   }
+  //   // }
+  //   // checkUser();
+  // }, []);
+
   return (
     <div className="w-full">
+      {/* {albums.map((album) => (
+        <span className="text-red-700">{album.title}</span>
+      ))} */}
+
       <HomeNavBar />
       <div className="flex w-full md:w-fit">
         {" "}
@@ -47,242 +212,27 @@ const MenteeCommunities: React.FC = () => {
           Search
         </button>
       </div> */}
+
           {isLoggedIn ? (
             <div className="isloggedInSLider">
               {" "}
               <div className=" w-[396px] sm:w-[406px]  md:w-[628px] lg:w-[calc(777px)] xl:w-[calc(977px)] 2xl:w-[calc(1362px)]   border border-transparent  mx-auto overflow-hidden">
                 {" "}
-                <DiscussionSlider
-                  slideInfo={[
-                    {
-                      title: "Member Math",
-                      members: 13,
-                      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
-                      id: 12,
-                    },
-                    {
-                      title: "Member Math",
-                      members: 13,
-                      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
-                      id: 13,
-                    },
-                    {
-                      title: "Member Math",
-                      members: 13,
-                      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
-                      id: 15,
-                    },
-                    {
-                      title: "Member Math",
-                      members: 13,
-                      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
-                      id: 15,
-                    },
-                    {
-                      title: "Member Math",
-                      members: 13,
-                      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
-                      id: 17,
-                    },
-                  ]}
-                />
+                <DiscussionSlider slideInfo={sliderInfo} />
               </div>
               <div className=" w-[396px] sm:w-[406px]  md:w-[628px] lg:w-[calc(777px)] xl:w-[calc(977px)] 2xl:w-[calc(1362px)]  border border-transparent  mx-auto overflow-hidden">
-                <MentorGrid
-                  mentorInfo={[
-                    {
-                      id: 9408,
-                      mentorName: "Shade Mayowa",
-                      verify: true,
-                      mentorPostion: "CEO, Webmasters Inc",
-                      mentorAvatar: mentorCardAvatar,
-                      cardHero: mentorCardHero,
-                      date: "28th, Sept",
-                      time: "12:30pm",
-                      title: "Intorduction to AI",
-                      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-                    },
-                    {
-                      id: 9408,
-                      mentorName: "Shade Mayowa",
-                      verify: true,
-                      mentorPostion: "CEO, Webmasters Inc",
-                      mentorAvatar: mentorCardAvatar,
-                      cardHero: mentorCardHero,
-                      date: "28th, Sept",
-                      time: "12:30pm",
-                      title: "Intorduction to AI",
-                      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-                    },
-                    {
-                      id: 9408,
-                      mentorName: "Shade Mayowa",
-                      verify: true,
-                      mentorPostion: "CEO, Webmasters Inc",
-                      mentorAvatar: mentorCardAvatar,
-                      cardHero: mentorCardHero,
-                      date: "28th, Sept",
-                      time: "12:30pm",
-                      title: "Intorduction to AI",
-                      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-                    },
-                    {
-                      id: 94408,
-                      mentorName: "Shade Mayowa",
-                      verify: true,
-                      mentorPostion: "CEO, Webmasters Inc",
-                      mentorAvatar: mentorCardAvatar,
-                      cardHero: mentorCardHero,
-                      date: "28th, Sept",
-                      time: "12:30pm",
-                      title: "Intorduction to AI",
-                      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-                    },
-                    {
-                      id: 94068,
-                      mentorName: "Shade Mayowa",
-                      verify: true,
-                      mentorPostion: "CEO, Webmasters Inc",
-                      mentorAvatar: mentorCardAvatar,
-                      cardHero: mentorCardHero,
-                      date: "28th, Sept",
-                      time: "12:30pm",
-                      title: "Intorduction to AI",
-                      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-                    },
-                    {
-                      id: 94078,
-                      mentorName: "Shade Mayowa",
-                      verify: true,
-                      mentorPostion: "CEO, Webmasters Inc",
-                      mentorAvatar: mentorCardAvatar,
-                      cardHero: mentorCardHero,
-                      date: "28th, Sept",
-                      time: "12:30pm",
-                      title: "Intorduction to AI",
-                      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-                    },
-                  ]}
-                />
+                <MentorGrid mentorInfo={mentorInfo} />
               </div>
             </div>
           ) : (
             <div className="">
               {" "}
-              <div className=" w-[396px] sm:w-[628px]  md:w-[860px] lg:w-[calc(1052px)] xl:w-[calc(1352px)] 2xl:w-[calc(1717px)]   border border-transparent  mx-auto overflow-hidden">
+              <div className=" w-[396px] sm:w-[628px]  md:w-[860px] lg:w-[calc(1052px)] xl:w-[calc(1352px)] 2xl:w-[calc(1362px)]   border border-transparent  mx-auto overflow-hidden">
                 {" "}
-                <DiscussionSlider
-                  slideInfo={[
-                    {
-                      title: "Member Math",
-                      members: 13,
-                      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
-                      id: 12,
-                    },
-                    {
-                      title: "Member Math",
-                      members: 13,
-                      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
-                      id: 13,
-                    },
-                    {
-                      title: "Member Math",
-                      members: 13,
-                      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
-                      id: 15,
-                    },
-                    {
-                      title: "Member Math",
-                      members: 13,
-                      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
-                      id: 15,
-                    },
-                    {
-                      title: "Member Math",
-                      members: 13,
-                      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
-                      id: 17,
-                    },
-                  ]}
-                />
+                <DiscussionSlider slideInfo={sliderInfo} />
               </div>
-              <div className=" w-[396px] sm:w-[628px]  md:w-[860px] lg:w-[calc(1052px)] xl:w-[calc(1352px)] 2xl:w-[calc(1717px)]   border border-transparent  mx-auto overflow-hidden">
-                <MentorGrid
-                  mentorInfo={[
-                    {
-                      id: 9408,
-                      mentorName: "Shade Mayowa",
-                      verify: true,
-                      mentorPostion: "CEO, Webmasters Inc",
-                      mentorAvatar: mentorCardAvatar,
-                      cardHero: mentorCardHero,
-                      date: "28th, Sept",
-                      time: "12:30pm",
-                      title: "Intorduction to AI",
-                      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-                    },
-                    {
-                      id: 9408,
-                      mentorName: "Shade Mayowa",
-                      verify: true,
-                      mentorPostion: "CEO, Webmasters Inc",
-                      mentorAvatar: mentorCardAvatar,
-                      cardHero: mentorCardHero,
-                      date: "28th, Sept",
-                      time: "12:30pm",
-                      title: "Intorduction to AI",
-                      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-                    },
-                    {
-                      id: 9408,
-                      mentorName: "Shade Mayowa",
-                      verify: true,
-                      mentorPostion: "CEO, Webmasters Inc",
-                      mentorAvatar: mentorCardAvatar,
-                      cardHero: mentorCardHero,
-                      date: "28th, Sept",
-                      time: "12:30pm",
-                      title: "Intorduction to AI",
-                      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-                    },
-                    {
-                      id: 94408,
-                      mentorName: "Shade Mayowa",
-                      verify: true,
-                      mentorPostion: "CEO, Webmasters Inc",
-                      mentorAvatar: mentorCardAvatar,
-                      cardHero: mentorCardHero,
-                      date: "28th, Sept",
-                      time: "12:30pm",
-                      title: "Intorduction to AI",
-                      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-                    },
-                    {
-                      id: 94068,
-                      mentorName: "Shade Mayowa",
-                      verify: true,
-                      mentorPostion: "CEO, Webmasters Inc",
-                      mentorAvatar: mentorCardAvatar,
-                      cardHero: mentorCardHero,
-                      date: "28th, Sept",
-                      time: "12:30pm",
-                      title: "Intorduction to AI",
-                      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-                    },
-                    {
-                      id: 94078,
-                      mentorName: "Shade Mayowa",
-                      verify: true,
-                      mentorPostion: "CEO, Webmasters Inc",
-                      mentorAvatar: mentorCardAvatar,
-                      cardHero: mentorCardHero,
-                      date: "28th, Sept",
-                      time: "12:30pm",
-                      title: "Intorduction to AI",
-                      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-                    },
-                  ]}
-                />
+              <div className=" w-[396px] sm:w-[628px]  md:w-[860px] lg:w-[calc(1052px)] xl:w-[calc(1352px)] 2xl:w-[calc(1362px)]   border border-transparent  mx-auto overflow-hidden">
+                <MentorGrid mentorInfo={mentorInfo} />
               </div>
             </div>
           )}
