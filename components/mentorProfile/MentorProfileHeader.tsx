@@ -8,6 +8,7 @@ type MentorProfileHeaderProps = {
   userRole: string;
   userRating: number;
   userId?: string;
+  email?: string;
 };
 
 export default function MentorProfileHeader({
@@ -15,6 +16,7 @@ export default function MentorProfileHeader({
   userRating,
   userRole,
   userId,
+  email,
 }: MentorProfileHeaderProps) {
   return (
     <div className="w-[100%] h-[294px]   relative flex flex-col  ">
@@ -32,8 +34,11 @@ export default function MentorProfileHeader({
         </div>
         <div className=" w-[100%] flex flex-col items-center sm:flex-row sm:justify-between px-2 ">
           <div className="flex  flex-col items-center sm:items-start w-[100%]">
-            <p className="text-Neutra60 font-[700] text-lg">{userName}</p>
+            <p className="text-Neutra60 font-[700] text-lg capitalize">
+              {userName}
+            </p>
             <p className="text-Neutra40 text-sm"> {userRole}</p>
+            <p className="text-Neutra40 text-sm"> {email}</p>
           </div>
           <div className="flex justify-center space-x-4 min-w-fit py-2 items-center">
             <ShareIcon />
