@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import Image from "next/image";
 
@@ -11,14 +11,27 @@ import auth from "../../../../public/assets/images/auth.jpeg";
 import Modal from "@/components/modal/Modal";
 import generateKey from "@/lib/generatekey";
 
+interface User {
+  _id: string;
+  email: string;
+  // You can add other properties if needed
+}
+
 const OTPForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [otp, setOTP] = useState(["", "", "", "", "", ""]);
-  const otpInputs: Array<React.RefObject<HTMLInputElement | null>> = Array(6)
+  const otpInputs = Array(6)
     .fill(null)
-    .map(() => useRef(null));
+    .map(() => useRef<HTMLInputElement | null>(null));
+  const [user, setUser] = useState<User>({ _id: "", email: "" });
 
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedUser = JSON.parse(localStorage.getItem("user") || "{}");
+      setUser(savedUser);
+    }
+  }, []);
+
   const router = useRouter();
 
   const closeModal = (): void => {
@@ -33,11 +46,14 @@ const OTPForm = () => {
   function hashEmail(email: string) {
     const [username, domain] = email.split("@");
 
-    const hashedUsername =
-      username.substring(0, 2) + "*".repeat(username.length - 4);
+    // Ensure at least 2 characters are visible, and mask the rest
+    const visibleChars = Math.min(2, username.length);
+    const maskedChars = username.length - visibleChars;
 
-    const hashedEmail = `${hashedUsername} "@" ${domain}`;
+    const maskedUsername =
+      username.substring(0, visibleChars) + "*".repeat(maskedChars);
 
+    const hashedEmail = `${maskedUsername}@${domain}`;
     return hashedEmail;
   }
 
