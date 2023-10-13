@@ -4,7 +4,7 @@ import { Button } from "../buttons/button";
 
 export default function MentorProfileHeader() {
   return (
-    <div className="w-[100%] h-[294px]   relative flex flex-col ">
+    <div className="w-[100%] h-[294px]   relative flex flex-col  ">
       <div className="h-[50%] w-[100%]  bg-blue-500 bg-[url('/assets/mentor-profileBanner.png')] bg-cover bg-no-repeat" />
       <div className="h-[50%] w-[100%] bg-white " />
       <div className=" w-[80%]   h-fit flex  flex-col items-center space-y-2 sm:space-x-2  sm:flex-row self-center absolute  top-[100px] sm:top-[80px] ">
