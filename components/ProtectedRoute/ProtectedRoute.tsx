@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import AuthCtx from "@/context/AuthCtx";
 
@@ -13,9 +13,11 @@ export default function ProtectedRoute({
   const ctx = useContext(AuthCtx);
   const id = ctx?.userAuth.id;
 
-  if (!id) {
-    router.replace("/welcome/login");
-  }
+  useEffect(() => {
+    if (!id) {
+      router.replace("/welcome/login");
+    }
+  }, [id]);
 
   return children;
 }
