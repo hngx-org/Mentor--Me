@@ -110,13 +110,13 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
                 type="button"
                 className="text-black  bg-white rounded-[7px] border-[1px] text-[13px] w-[90px]  border-black p-2 "
               >
-                <Link href="welcome/login"> Log in</Link>
+                <Link href="/welcome/login"> Log in</Link>
               </button>
               <button
                 type="button"
                 className="bg-[#121212] text-white rounded-[8px] w-[90px] p-2 text-[13px] "
               >
-                <Link href="welcome/signup"> Sign up</Link>
+                <Link href="/welcome/signup"> Sign up</Link>
               </button>
             </div>
           )}
