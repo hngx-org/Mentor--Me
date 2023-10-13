@@ -16,7 +16,7 @@ import MobileSideBar from "@/components/mentor/MobileSiderBar";
 import MentorSideBar from "@/components/SideBar/MentorSideBar";
 import SidebarMentor from "@/components/mentor/SidebarMentor";
 import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
-import { NavbarMentee } from "@/app/(mentee)/mentee-sessions/(ui)/NavbarMentee";
+import { NavbarMentee } from "@/components/menteeTopNav/NavbarMentee";
 
 const data = [
   {
