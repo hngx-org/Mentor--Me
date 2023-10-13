@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import MentorProfileHeader from "@/components/mentorProfile/MentorProfileHeader";
 import ProfileDetailsCardContainer, {
   AvailableSessionCard,
@@ -7,11 +9,19 @@ import ProfileDetailsCardContainer, {
   SkillSCard,
 } from "@/components/mentorProfile/ProfileDetailCard";
 import MentorProfileMainLayout from "@/components/mentorProfile/mentorProfileMainLayout";
-
 import OverViewCardLayout from "@/components/mentorProfile/MentorProfilelayouts";
 import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
 
+export type ModalState = {
+  state: "basic info" | "Experience/ Certification" | "Social links";
+  isOpen: boolean;
+};
+
 export default function ProfilePage() {
+  const [modal, setModal] = useState<ModalState>({
+    state: "basic info",
+    isOpen: false,
+  });
   return (
     <div className="h-[100vh] w-[100vw] overflow-scroll ">
       <MentorProfileHeader
@@ -35,6 +45,7 @@ export default function ProfilePage() {
               type: "certification",
             },
           ]}
+          openModal={setModal}
         />
         <SkillSCard
           skills={[
@@ -64,6 +75,7 @@ export default function ProfilePage() {
               type: "experience",
             },
           ]}
+          openModal={setModal}
         />
 
         <ProfileDetailsCardContainer
@@ -75,6 +87,7 @@ export default function ProfilePage() {
               type: "education",
             },
           ]}
+          openModal={setModal}
         />
         <AvailableSessionCard
           timezone=" Greenwich Mean Time (GMT)"
@@ -84,7 +97,9 @@ export default function ProfilePage() {
         <OverViewCardLayout heading="impact at a glance" />
         <SessionsProgressCard progress={10} />
       </MentorProfileMainLayout>
-      {/* <MentorProfileModal /> */}
+      {modal.isOpen && (
+        <MentorProfileModal onClose={setModal} state={modal.state} />
+      )}
     </div>
   );
 }

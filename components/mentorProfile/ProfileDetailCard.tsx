@@ -6,19 +6,34 @@ import {
   EducationIcon,
 } from "@/public/SVGs";
 import ProgressBar from "../progressBar/ProgressBar";
+import { ModalState } from "@/app/(mentor)/mentor-profile/page";
 
 export default function ProfileDetailsCardContainer({
   heading,
   items,
+  openModal,
 }: {
   heading: string;
   items: InfoCardProps[];
+  openModal?: React.Dispatch<React.SetStateAction<ModalState>>;
 }) {
   return (
     <div className="w-[100%] flex flex-col h-fit ">
       <div className="w-[100%] flex justify-between">
         <p className="text-lg font-bold text-Neutral60 capitalize">{heading}</p>
-        <EditIconMentorProfile />
+        <span
+          onClick={() => {
+            if (openModal) {
+              openModal({
+                state: "basic info",
+                isOpen: true,
+              });
+            }
+          }}
+          role="presentation"
+        >
+          <EditIconMentorProfile />
+        </span>
       </div>
 
       {items.map((item) => (
