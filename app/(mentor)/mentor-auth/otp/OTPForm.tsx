@@ -14,7 +14,6 @@ import generateKey from "@/lib/generatekey";
 interface User {
   _id: string;
   email: string;
-  // You can add other properties if needed
 }
 
 const OTPForm = () => {
@@ -46,7 +45,6 @@ const OTPForm = () => {
   function hashEmail(email: string) {
     const [username, domain] = email.split("@");
 
-    // Ensure at least 2 characters are visible, and mask the rest
     const visibleChars = Math.min(2, username.length);
     const maskedChars = username.length - visibleChars;
 

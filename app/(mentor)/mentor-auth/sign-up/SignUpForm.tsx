@@ -17,8 +17,6 @@ import facebook from "../../../../public/assets/images/facebook.svg";
 import Input from "@/components/inputs/input";
 
 import { Button } from "@/components/buttons/button";
-
-import formData from "@/lib/mentorProfileCreationData";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Label from "@/components/label/Label";
 
@@ -76,7 +74,10 @@ const SignUpForm = () => {
         if (response.ok) {
           const data = await response.json();
 
-          localStorage.setItem("user", JSON.stringify(data?.data));
+          if (typeof window !== "undefined") {
+            localStorage.setItem("user", JSON.stringify(data?.data));
+          }
+
           router.push("/mentor-auth/otp");
           setErrors({ ...errors, labelErr: "" });
         } else {
@@ -134,7 +135,7 @@ const SignUpForm = () => {
                 error={errors.password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              {errors.labelErr && <Label message={errors.labelErr} accent="" />}
+              {errors.labelErr && <Label message={errors.labelErr} />}
             </div>
             <p className="font-Hanken text-[#565656] text-sm my-3">
               {" "}
