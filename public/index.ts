@@ -53,7 +53,6 @@ export { default as EditIcon } from "./assets/Icons/iconamoon_edit-thin.png";
 export { default as CloseIcon } from "./assets/Icons/iconoir_cancel.png";
 export { default as WhereLogo } from "./assets/Icons/logoidontKnow.png";
 
-
 export { default as MentorSchedule } from "./assets/images/MentorSchedule/photocard.png";
 
 // Image exports for explore page
@@ -89,4 +88,3 @@ export const CartImgPath1 = "assets/images/cart/cart1.png";
 export const CartImgPath2 = "assets/images/cart/cart2.png";
 export const CartImgPath3 = "assets/images/cart/cart3.png";
 export const SuccessImg = "assets/images/cart/success-img.png";
-
