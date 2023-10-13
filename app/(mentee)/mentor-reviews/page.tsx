@@ -199,7 +199,7 @@ export default function MentorReviews() {
               <p className="text-#121212 font-Hanken text-[24px] font-semibold leading-[120%]">
                 Real experience with mentor
               </p>
-              <div className="flex flex-col mx-[5px] items-center sm:items-start gap-[30px] w-full">
+              <div className="flex flex-wrap xl:items-start items-center justify-center xl:justify-start  gap-[30px] w-full">
                 {reviewsArr.map((item) => (
                   <ItemComponent key={item.id} {...item} />
                 ))}
