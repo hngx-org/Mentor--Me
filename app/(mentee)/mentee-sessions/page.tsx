@@ -51,31 +51,36 @@ const sessionsTabs: SessionsTabsProps[] = [
 ];
 
 export default function AllSession({
-  searchParams: { path = "Sessions", tabs = "upcoming", View = "List" },
+  searchParams: { path },
 }: {
-  searchParams: {
-    path?: string | null;
-    tabs?: string | null;
-    View?: string | null;
-  };
+  searchParams: { path?: string };
 }) {
+  const [activeView, setActiveView] = useState("");
+  const [activeTab, setActiveTab] = useState<string | null | undefined>("");
+
+  const paramsView = useSearchParams().get("View");
+  const paramsTabs = useSearchParams().get("tabs");
   const router = useRouter();
 
   const [isReminder, setIsReminder] = useState(false);
-  const [isView, setIsView] = useState(true);
+  const [isView, setIsView] = useState(false);
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
       const getView = localStorage.getItem("view");
+
       if (getView) {
         router.push(`?path=Sessions&View=${getView}`);
+        setActiveView(getView);
       }
     }
   }, []);
   // save to local storage
 
   useEffect(() => {
-    localStorage.setItem("view", View === "List" ? "List" : "Grid");
-  }, [View]);
+    localStorage.setItem("view", paramsView || "List");
+    setActiveView(paramsView || "List");
+    setActiveTab(paramsTabs || "upcoming");
+  }, [paramsView, paramsTabs]);
 
   return (
     <section className="bg-[#f9fafc] h-full w-full flex-col flex  pt-10 lg:pt-12 sm:min-h-screen pb-12 ">
@@ -90,15 +95,18 @@ export default function AllSession({
         {sessionsTabs.map((session) => (
           <p
             className={`hover:text-Accent1 cursor-pointer capitalize text-[14px] sm:text-[18px] font-Hanken pb-2 border-b-[2px] border-[#f9fafc]  text-Neutra40 ${
-              tabs === session.tab
+              activeTab === session.tab
                 ? "!border-Accent1 text-black font-medium"
                 : ""
             }`}
             key={session.id}
             onClick={() => {
-              router.push(`?path=${path}&View=${View}&tabs=${session.tab}`, {
-                scroll: false,
-              });
+              router.push(
+                `?path=${path}&View=${activeView}&tabs=${session.tab}`,
+                {
+                  scroll: false,
+                }
+              );
             }}
           >
             {session.title}
@@ -107,17 +115,17 @@ export default function AllSession({
       </div>
       <div
         className={`flex flex-col ${
-          View === "List" ? "xl:flex-row" : ""
+          activeView === "List" ? "xl:flex-row" : ""
         }  w-full justify-between mt-8 px-4 sm:px-6 lg:px-8  gap-8 xl:gap-2 overflow-x-hidden `}
       >
         <div className="flex flex-col w-full">
           <div className="mb-6 w-full flex items-center justify-between ">
             <p className="capitalize font-medium">
-              {tabs === "cancelled"
+              {activeTab === "cancelled"
                 ? "All Cancelled"
-                : tabs === "history"
+                : activeTab === "history"
                 ? "All "
-                : tabs}{" "}
+                : activeTab}{" "}
               Sessions
             </p>
 
@@ -127,19 +135,21 @@ export default function AllSession({
             >
               <button
                 type="button"
-                title={View === "List" ? "change to Grid?" : "change to List?"}
-                disabled={tabs === "history"}
+                title={
+                  activeView === "List" ? "change to Grid?" : "change to List?"
+                }
+                disabled={activeTab === "history"}
                 onClick={() => setIsView((prev) => !prev)}
                 className={`border border-Neutra20 px-2 p-1 text-lg font-medium font-Hanken flex items-center gap-1  transition-all duration-300 relative 
                 ${
-                  tabs === "history"
+                  activeTab === "history"
                     ? "opacity-50 !cursor-not-allowed"
                     : "cursor-pointer hover:bg-black hover:text-Neutra10"
                 }
                 ${isView ? "!bg-black text-Neutra10 z-[9999]" : ""}`}
               >
                 <span>View</span>
-                {View === "List" ? (
+                {activeView === "List" ? (
                   <ListViewIcon
                     props={{ className: "cursor-pointer w-6 h-6" }}
                   />
@@ -159,14 +169,20 @@ export default function AllSession({
                   <div className="flex flex-col  h-[80px] w-[100px] absolute top-10 right-0 justify-center items-center z-[9999] border border-Neutra20  text-lg font-medium font-Hanken   rounded-xl mt-4 bg-black text-Neutra10 shadow-[0_0_20px_rgba(0,0,0,0.3)] before:absolute before:content-[''] before:h-[20px] before:w-[20px] before:bg-black before:-top-2 before:rotate-45 before:right-6 before:z-[-1] px-1">
                     <button
                       type="button"
-                      disabled={View === "List"}
+                      disabled={activeView === "List"}
                       className={`${
-                        View === "List" ? "opacity-50 !cursor-not-allowed" : ""
+                        activeView === "List"
+                          ? "opacity-50 !cursor-not-allowed"
+                          : ""
                       } flex items-center w-full justify-start gap-4 border-b border-Neutra50 pb-1 hover:bg-gray-800/60 px-2 p-1`}
                       onClick={() => {
-                        router.push(`?path=${path}&View=List&tabs=${tabs}`, {
-                          scroll: false,
-                        });
+                        setActiveView("List");
+                        router.push(
+                          `?path=${path}&View=List&tabs=${activeTab}`,
+                          {
+                            scroll: false,
+                          }
+                        );
                         setIsView(false);
                       }}
                     >
@@ -176,15 +192,21 @@ export default function AllSession({
                       <span>List</span>
                     </button>
                     <button
-                      disabled={View === "Grid"}
+                      disabled={activeView === "Grid"}
                       type="button"
                       className={`${
-                        View === "Grid" ? "opacity-50 !cursor-not-allowed" : ""
+                        activeView === "Grid"
+                          ? "opacity-50 !cursor-not-allowed"
+                          : ""
                       } flex items-center w-full justify-start gap-4 pt-1 hover:bg-gray-800/60 px-2 p-1`}
                       onClick={() => {
-                        router.push(`?path=${path}&View=Grid&tabs=${tabs}`, {
-                          scroll: false,
-                        });
+                        setActiveView("Grid");
+                        router.push(
+                          `?path=${path}&View=Grid&tabs=${activeTab}`,
+                          {
+                            scroll: false,
+                          }
+                        );
                         setIsView(false);
                       }}
                     >
@@ -198,16 +220,18 @@ export default function AllSession({
               )}
             </div>
           </div>
-          {tabs === "upcoming" && (
+          {activeTab === "upcoming" && (
             <Suspense fallback={<Loading />}>
               <div
                 className={`flex w-full h-full ${
-                  View === "Grid" ? "flex-col" : "max-xl:flex-col max-xl:gap-10"
+                  activeView === "Grid"
+                    ? "flex-col"
+                    : "max-xl:flex-col max-xl:gap-10"
                 }   translate-x-[100px] lg:translate-x-[500px] opacity-0 animate-slideLeft`}
               >
                 <div
                   className={`${
-                    View === "Grid"
+                    activeView === "Grid"
                       ? "grid grid-cols-1 md:grid-cols-2"
                       : "flex-col flex"
                   }  w-full h-full  gap-6 sm:gap-y-8 overflow-y-auto pb-10 sm:pb-20  ${
@@ -219,20 +243,20 @@ export default function AllSession({
                       openModal={setIsReminder}
                       key={session.id}
                       {...session}
-                      getView={View}
+                      getView={activeView}
                     />
                   ))}
                 </div>
                 <div
                   className={`flex ${
-                    View === "Grid"
+                    activeView === "Grid"
                       ? "2xl:px-16"
                       : "2xl:w-full xl:flex-col xl:justify-center"
                   }      items-start lg:items-center justify-between max-lg:w-full gap-10 lg:gap-6 lg:mt-10 max-sm:flex-col lg:ml-10 pb-10 mt-4`}
                 >
                   <div
                     className={`${
-                      View === "Grid" ? "w-fit" : ""
+                      activeView === "Grid" ? "w-fit" : ""
                     } w-fit   lg:max-w-[430px] xl:max-w-[500px] lg:justify-start flex max-sm:justify-center cursor-pointer sm:hover:shadow-[0px_0px_40px_rgba(0,0,0,0.2)] transition-all duration-300`}
                   >
                     <Calendarcomponent />
@@ -290,11 +314,11 @@ export default function AllSession({
               </div>
             </Suspense>
           )}
-          {tabs === "cancelled" && (
+          {activeTab === "cancelled" && (
             <Suspense fallback={<Loading />}>
               <div
                 className={`${
-                  View === "Grid"
+                  activeView === "Grid"
                     ? "grid grid-cols-1 md:grid-cols-2"
                     : "flex-col flex"
                 } pb-10 sm:pb-16 flex w-full flex-col gap-10 overflow-y-auto translate-x-[100px] lg:translate-x-[500px] opacity-0 animate-slideLeft ${
@@ -302,12 +326,16 @@ export default function AllSession({
                 }`}
               >
                 {cancelledSessions.map((session) => (
-                  <CancelledCard getView={View} key={session.id} {...session} />
+                  <CancelledCard
+                    getView={activeView}
+                    key={session.id}
+                    {...session}
+                  />
                 ))}
               </div>
             </Suspense>
           )}
-          {tabs === "history" && (
+          {activeTab === "history" && (
             <Suspense fallback={<LoadingSpinner />}>
               <div className="w-full flex flex-col  border  border-Neutra10 rounded-xl  translate-x-[100px] lg:translate-x-[500px] opacity-0 animate-slideLeft">
                 <div className="grid grid-cols-4 w-full sm:gap-10 gap-4 border-b border-Neutra10 h-full sm:pl-8 pl-2 py-2 sm:py-6 font-Inter font-medium text-[12px] sm:text-[18px] text-NeutalBase ">
