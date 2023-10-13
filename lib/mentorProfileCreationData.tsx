@@ -13,27 +13,31 @@ const form1Arr = [
     placeholder: "Full name",
     nature: "input",
     type: "text",
+    apiName: "full_name",
   },
   {
     id: 2,
     label: "Email Address",
     placeholder: "Email Address",
     nature: "",
-    type: "",
+    type: "email",
+    apiName: "email",
   },
   {
     id: 3,
     label: "What gender do you identify as?",
-    placeholder: "Select Gender",
+    placeholder: "Male, Female, Rather not say, etc",
     nature: "dropdown",
     type: "",
+    apiName: "gender",
   },
   {
     id: 4,
     label: "Which city / country do you live in?",
-    placeholder: "Select City/ Country",
-    nature: "dropdown",
+    placeholder: "Nigeria, New York, London etc",
+    nature: "",
     type: "",
+    apiName: "country_city",
   },
 ];
 
@@ -44,6 +48,7 @@ const form2Arr = [
     placeholder: "Job title",
     nature: "input",
     type: "text",
+    apiName: "job_title",
   },
   {
     id: 2,
@@ -51,6 +56,7 @@ const form2Arr = [
     placeholder: "Company/Organization",
     nature: "dropdown",
     type: "",
+    apiName: "company",
   },
   {
     id: 3,
@@ -58,13 +64,15 @@ const form2Arr = [
     placeholder: "Industry/Field of Expertise",
     nature: "dropdown",
     type: "",
+    apiName: "industry",
   },
   {
     id: 4,
     label: "Years of Experience",
     placeholder: "Years of Experience",
     nature: "dropdown",
-    type: "",
+    type: "number",
+    apiName: "yearsOfExp",
   },
   {
     id: 5,
@@ -72,27 +80,31 @@ const form2Arr = [
     placeholder: "Skils",
     nature: "dropdown",
     type: "",
+    apiName: "skills",
   },
   {
     id: 6,
     label: "LInkedIn Profile",
     placeholder: "Link",
     nature: "",
-    type: "",
+    type: "url",
+    apiName: "linkedin",
   },
   {
     id: 7,
     label: "Other Links",
     placeholder: "Link",
     nature: "dropdown",
-    type: "",
+    type: "url",
+    apiName: "other_links",
   },
   {
     id: 8,
     label: "Certifications",
-    placeholder: "Certifications",
+    placeholder: "Certified Developer",
     nature: "",
     type: "",
+    apiName: "certifications",
   },
 ];
 
@@ -103,6 +115,7 @@ const form3Arr = [
     placeholder: "Bachelor’s Degree",
     nature: "dropdown",
     type: "",
+    apiName: "degree",
   },
   {
     id: 2,
@@ -110,13 +123,15 @@ const form3Arr = [
     placeholder: "University of California",
     nature: "dropdown",
     type: "",
+    apiName: "institution",
   },
   {
     id: 3,
     label: "Year of Graduation",
     placeholder: "2023",
     nature: "dropdown",
-    type: "",
+    type: "number",
+    apiName: "year_of_graduation",
   },
 ];
 
@@ -127,6 +142,7 @@ const form4Arr = [
     placeholder: "",
     nature: "",
     type: "textarea",
+    apiName: "introduction",
   },
 ];
 
@@ -137,6 +153,7 @@ const form5Arr = [
     placeholder: "List if applicable",
     nature: "",
     type: "",
+    apiName: "mentoring_experience",
   },
   {
     id: 2,
@@ -144,6 +161,7 @@ const form5Arr = [
     placeholder: "UI/UX",
     nature: "dropdown",
     type: "",
+    apiName: "mentorship_type",
   },
   {
     id: 3,
@@ -151,6 +169,7 @@ const form5Arr = [
     placeholder: "6 hours per week",
     nature: "dropdown",
     type: "",
+    apiName: "mentorship_availability",
   },
   {
     id: 4,
@@ -158,6 +177,7 @@ const form5Arr = [
     placeholder: "6:00pm to 8:00pm",
     nature: "dropdown",
     type: "",
+    apiName: "preferred_startTime",
   },
   {
     id: 5,
@@ -165,6 +185,7 @@ const form5Arr = [
     placeholder: "Weekdays - Monday to Friday",
     nature: "dropdown",
     type: "",
+    apiName: "preferred_days",
   },
 ];
 
