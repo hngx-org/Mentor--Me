@@ -73,6 +73,7 @@ const Modal: FC<ModalProps> = ({
                   variant="primary"
                   paddingLess
                   className="w-full h-[48px]"
+                  onClick={closeModal}
                 >
                   {buttontext}
                 </Button>
