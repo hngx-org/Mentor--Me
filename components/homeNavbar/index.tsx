@@ -18,7 +18,7 @@ interface HomeNavProps {
 }
 
 // const HomeNavBar: FC = ({ isUserLogin = true }: HomeNavProps) =>
-const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
+const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = true }) => {
   const [toggleMenu, setToggleMenu] = React.useState<boolean>(false);
   const [dropdown, setDropdown] = React.useState<boolean>(false);
 
@@ -50,14 +50,11 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
             Home
           </Link>
           <Link href="">Dashboard</Link>
-          <Link
-            href="/mentor-communities"
-            className="text-[#565656] text-[12px]"
-          >
+          <Link href="/mentor-communities" className="text-[#565656] ">
             Community
           </Link>
 
-          <Link href="/mentor-resources" className="text-[#565656] text-[12px]">
+          <Link href="/mentor-resources" className="text-[#565656] ">
             Resources
           </Link>
         </div>
