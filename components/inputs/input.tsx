@@ -10,6 +10,9 @@ interface InputProps {
   type?: string;
   disabled?: boolean;
   required?: boolean;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -18,6 +21,9 @@ const Input: React.FC<InputProps> = ({
   type,
   disabled,
   required,
+  value,
+  onChange,
+  error,
 }) => {
   const isPasswordInput = type === "password";
 
@@ -33,12 +39,17 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <div className="w-full">
-      <label
-        className="text-xs text-[#565656] font-medium font-Inter"
-        htmlFor={id}
-      >
-        {label}
-      </label>
+      <div className="flex items-center justify-between">
+        {" "}
+        <label
+          className="text-xs text-[#565656] font-medium font-Inter"
+          htmlFor={id}
+        >
+          {label}
+        </label>
+        {error && <p className="text-ErrorBase text-sm">{error}</p>}
+      </div>
+
       <div className="relative">
         <input
           autoComplete="off"
@@ -46,8 +57,10 @@ const Input: React.FC<InputProps> = ({
           disabled={disabled}
           required={required}
           placeholder=""
+          value={value}
           type={values.isPasswordVisible && isPasswordInput ? "text" : type}
           className=" sm:h-[48px] h-[42px] pl-2 outline-none w-[100%]  border-[1px] border-[#CCC] rounded-lg"
+          onChange={(e) => onChange?.(e)}
         />
         {isPasswordInput && (
           <button
