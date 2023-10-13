@@ -2455,3 +2455,80 @@ export const EducationIcon = () => (
     />
   </svg>
 );
+export const ShareIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M13.6997 7.41699C16.6997 7.67533 17.9247 9.21699 17.9247 12.592V12.7003C17.9247 16.4253 16.4331 17.917 12.7081 17.917H7.28307C3.55807 17.917 2.06641 16.4253 2.06641 12.7003V12.592C2.06641 9.24199 3.27474 7.70033 6.22474 7.42533"
+      stroke="#292D32"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10 12.4999V3.0166"
+      stroke="#292D32"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M12.7923 4.87467L10.0007 2.08301L7.20898 4.87467"
+      stroke="#292D32"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+export const FilledStarICon = () => (
+  <svg
+    width="13"
+    height="14"
+    viewBox="0 0 13 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M6.18556 0.3125L8.28815 4.4162L12.3711 5.4213L9.58762 8.96262L10.0085 13.6875L6.18556 11.7725L2.36267 13.6875L2.7835 8.96262L0 5.4213L4.08297 4.4162L6.18556 0.3125Z"
+      fill="#FFCB45"
+    />
+  </svg>
+);
+export const UnfilledStarIcon = () => (
+  <svg
+    width="13"
+    height="14"
+    viewBox="0 0 13 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M6.81447 0.3125L8.91706 4.4162L13 5.4213L10.2165 8.96262L10.6374 13.6875L6.81447 11.7725L2.99158 13.6875L3.41241 8.96262L0.628906 5.4213L4.71188 4.4162L6.81447 0.3125Z"
+      fill="#D9D9D9"
+    />
+  </svg>
+);
+
+export const ModalCloseIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 18 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M5.06836 12.9319L9.00061 8.99963L12.9329 12.9319M12.9329 5.06738L8.99986 8.99963L5.06836 5.06738"
+      stroke="#7B7F84"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
