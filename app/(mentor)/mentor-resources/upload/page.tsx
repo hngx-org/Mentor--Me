@@ -2,11 +2,20 @@
 
 import React, { ReactNode, useState } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { CaretIcon } from "@/public/SVGs";
+import DropDown from "@/components/DropDown";
 
 export default function UploadResourcesPage() {
   const [courseDescription, setCourseDescription] = useState("");
+  const [isCategoryDropDownExpanded, setIsCategoryDropDownExpanded] =
+    useState(false);
+  const [isCourseTypeDropDownExpanded, setIsCourseTypeDropDownExpanded] =
+    useState(false);
+  const [selectedOptionIdx, setSelectedOptionIdx] = useState(-1);
+  const courseTypeOptions = ["JavaScript", "TypeScript", "C++", "C#"];
+
   return (
     <form className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white">
       <h1 className="capitalize font-Inter font-medium text-2xl mb-8 text-NeutalBase">
@@ -42,7 +51,19 @@ export default function UploadResourcesPage() {
           {courseDescription.length}/200
         </p>
       </Input>
-      <Input title="Category" htmlFor="category">
+      <Input
+        title="Category"
+        htmlFor="category"
+        extraElements={
+          isCourseTypeDropDownExpanded && (
+            <DropDown
+              dropDownOptions={courseTypeOptions}
+              setSelectedOptionIdx={setSelectedOptionIdx}
+              selectedOptionIdx={selectedOptionIdx}
+            />
+          )
+        }
+      >
         <input
           type="text"
           id="category"
@@ -50,17 +71,43 @@ export default function UploadResourcesPage() {
           placeholder="select category"
           className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal"
         />
-        <CaretIcon className=" cursor-pointer" />
+        <motion.span
+          onClick={() => setIsCategoryDropDownExpanded((prev) => !prev)}
+          animate={{ rotate: isCategoryDropDownExpanded ? 0 : -180 }}
+        >
+          <CaretIcon className=" cursor-pointer" />
+        </motion.span>
       </Input>
-      <Input title="Course Type" htmlFor="course-type">
+      <Input
+        title="Course Type"
+        htmlFor="course-type"
+        extraElements={
+          <AnimatePresence>
+            {isCourseTypeDropDownExpanded && (
+              <DropDown
+                dropDownOptions={courseTypeOptions}
+                setSelectedOptionIdx={setSelectedOptionIdx}
+                selectedOptionIdx={selectedOptionIdx}
+              />
+            )}
+          </AnimatePresence>
+        }
+      >
         <input
           type="text"
           id="course-type"
           name="course-type"
+          disabled
+          value={courseTypeOptions[selectedOptionIdx]}
           placeholder="select course type"
-          className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal"
+          className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
         />
-        <CaretIcon className="cursor-pointer" />
+        <motion.span
+          onClick={() => setIsCourseTypeDropDownExpanded((prev) => !prev)}
+          animate={{ rotate: isCourseTypeDropDownExpanded ? 0 : -180 }}
+        >
+          <CaretIcon className="cursor-pointer" />
+        </motion.span>
       </Input>
       <div className="mb-4">
         <p className="capitalize text-Neutral60 font-Inter font-medium mb-2 text-lg">
@@ -118,10 +165,12 @@ const Input = ({
   title,
   htmlFor,
   children,
+  extraElements = null,
 }: {
   title: string;
   htmlFor: string;
   children: ReactNode;
+  extraElements?: ReactNode;
 }) => (
   <div className="mb-6 last:mb-0 relative">
     <p className="capitalize text-Neutral60 font-Inter font-medium mb-2 text-lg">
@@ -133,5 +182,6 @@ const Input = ({
     >
       {children}
     </label>
+    {extraElements}
   </div>
 );
