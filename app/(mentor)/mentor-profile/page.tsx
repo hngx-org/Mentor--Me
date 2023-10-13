@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MentorProfileHeader from "@/components/mentorProfile/MentorProfileHeader";
 import ProfileDetailsCardContainer, {
   AvailableSessionCard,
@@ -18,10 +18,33 @@ export type ModalState = {
 };
 
 export default function ProfilePage() {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+  });
   const [modal, setModal] = useState<ModalState>({
     state: "basic info",
     isOpen: false,
   });
+
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const getUser = localStorage.getItem("user");
+      if (getUser) {
+        try {
+          const newUser = JSON.parse(getUser);
+          const [username, domain] = newUser.email.split("@");
+          setUser({
+            name: username,
+            email: newUser.email,
+          });
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      }
+    }
+  }, []);
+  console.log(user);
   return (
     <div className="h-[100vh] w-[100vw] overflow-scroll ">
       <MentorProfileHeader
