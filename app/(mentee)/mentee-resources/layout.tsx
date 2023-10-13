@@ -12,25 +12,27 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const ctx = useContext(AuthCtx);
+  // const ctx = useContext(AuthCtx);
   // ctx?.setUserAuth({ id: "_kisi", token: "dfgpsps" });
-  const id = ctx?.userAuth.id;
+  // const id = ctx?.userAuth.id;
   // console.log(id);
 
-  return !id ? (
+  // return !id ? ()
+  return (
     <main className="pt-[7rem]">
       <HomeNavBar />
       {children}
     </main>
-  ) : (
-    <>
-      <MobileSideBar />
-      <MenteeSideBar />
-
-      <main className="lg:ml-[274px]">
-        <MenteeNavBar />
-        {children}
-      </main>
-    </>
   );
+  // ) : (
+  //   <>
+  //     <MobileSideBar />
+  //     <MenteeSideBar />
+
+  //     <main className="lg:ml-[274px]">
+  //       <MenteeNavBar />
+  //       {children}
+  //     </main>
+  //   </>
+  // );
 }

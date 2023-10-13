@@ -1,3 +1,5 @@
+"use client";
+
 import SearchCommunitySearchbar from "@/components/mentor-community/searchcommunity-searchbar";
 import {
   DiscussionForums,

@@ -81,7 +81,7 @@ const Explore = () => {
             {newResources.map((res) => (
               <ResourceCard
                 key={res.id}
-                id={res.id}
+                // id={res.id}
                 src={res.poster}
                 title={res.title}
                 author={res.author}
@@ -114,7 +114,7 @@ const Explore = () => {
             {newResources.map((res) => (
               <ResourceCard
                 key={res.id}
-                id={res.id}
+                // id={res.id}
                 src={res.poster}
                 title={res.title}
                 author={res.author}
