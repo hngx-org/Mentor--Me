@@ -8,8 +8,6 @@ import { useRouter } from "next/navigation";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
 
-import { Button } from "@/components/buttons/button";
-
 import Modal from "@/components/modal/Modal";
 import generateKey from "@/lib/generatekey";
 
