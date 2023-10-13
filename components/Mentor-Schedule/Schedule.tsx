@@ -17,13 +17,8 @@ function Schedule() {
   return (
     <div>
       {/* Mobile sidebar */}
-      <MobileSideBar />
-      <div className=" hidden fixed ml-[-6px] mt-[-3px]  lg:block">
-        <SidebarMentor />
-      </div>
-      <MentorTopNav />
 
-      <div className="lg:ml-[274px]">
+      <div>
         <div className=" w-full mx-auto bg-NeutalBase flex justify-center items-center pb-4 lg:hidden">
           <div className="flex justify-between flex-col items-center gap-4 px-8 min-h-[96px]">
             <p className="text-[#fff] text-base text-center px-4 font-Inter">
