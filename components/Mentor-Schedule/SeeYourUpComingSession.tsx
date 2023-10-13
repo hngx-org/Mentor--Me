@@ -26,7 +26,7 @@ function SeeYourUpComingSession() {
       category: "Design Virtual",
       id: 2,
       location: "Lagos Nigeria",
-      date: "21",
+      date: "25",
       name: "Folalolu Goodluck",
     },
     {
@@ -34,22 +34,30 @@ function SeeYourUpComingSession() {
       category: "Design Virtual",
       id: 2,
       location: "Lagos Nigeria",
-      date: "21",
+      date: "22",
+      name: "Folalolu Goodluck",
+    },
+    {
+      time: "90",
+      category: "Design Virtual",
+      id: 2,
+      location: "Lagos Nigeria",
+      date: "30",
       name: "Folalolu Goodluck",
     },
     // domie data
   ]);
-  const sliceTwo = feedFromApi.slice(0, 2); // to make sure it is only two cards that render
-  const sliceThree = feedFromApi.slice(0, 3);
+  const sliceTwo = feedFromApi.slice(0, 2); // to make sure it is only two cards that render for smaller screens
+  const sliceThree = feedFromApi.slice(0, 3); // render three for larger screens
 
   return (
     <div>
-      <div className="flex lg:hidden w-full justify-center md:justify-start space-x-2 flex-wrap gap-4 box-border  items-center ">
+      <div className="lg:hidden w-full grid grid-cols-2 gap-3 box-border">
         {sliceTwo.map((feed) => (
           <UpcomingSessionCard key={feed.id} {...feed} />
         ))}
       </div>
-      <div className="hidden lg:flex flex-wrap gap-7 w-full md:justify-start items-center ">
+      <div className="hidden lg:grid lg:grid-cols-3 gap-4">
         {sliceThree.map((feed) => (
           <UpcomingSessionCard key={feed.id} {...feed} />
         ))}
