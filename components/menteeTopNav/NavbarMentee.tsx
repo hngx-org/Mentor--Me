@@ -25,7 +25,7 @@ export const NavbarMentee = ({
   jobTitle,
 }: NavbarMenteeProps) => {
   const [scrollY, setScrollY] = useState(0);
-  const [isView, setIsView] = useState(true);
+  const [isView, setIsView] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
