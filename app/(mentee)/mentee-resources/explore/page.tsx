@@ -8,8 +8,6 @@ import { BackwardIcon, ForwardIcon } from "@/public/SVGs";
 import ResourceCard from "./ResourceCard";
 import Container from "../Container";
 
-// added text-[1rem] and set it to large text at lg:text-lg
-
 const Explore = () => {
   const resourceContainerRef = useRef<HTMLDivElement | null>(null);
   const resourceContainerRef2 = useRef<HTMLDivElement | null>(null);

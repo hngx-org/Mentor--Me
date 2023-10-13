@@ -126,7 +126,7 @@ export const sidebarMenteeLinks: SidebarLinksProps[] = [
   // },
   {
     id: 4,
-    path: "/mentee-sessions?path=Sessions",
+    path: "/mentee-sessions?path=Sessions&View=List",
     label: "Sessions",
     iconDark: Sessions(),
   },
