@@ -3,6 +3,15 @@ import Link from "next/link";
 import { BookIcon } from "@/public/SVGs";
 import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
 
+export async function generateMetadata({
+  searchParams: { path },
+}: {
+  searchParams: { path?: string | null };
+}) {
+  return {
+    title: path || "Resources",
+  };
+}
 const Resources = () => (
   <ProtectedRoute>
     <div className="w-full max-w-[447px] h-[calc(100vh-100px)] flex flex-col justify-center items-center mx-auto px-2 ">

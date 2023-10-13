@@ -1,5 +1,3 @@
-"use client";
-
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { EmptyStarIcon, FilledStarIcon } from "@/public/SVGs";
