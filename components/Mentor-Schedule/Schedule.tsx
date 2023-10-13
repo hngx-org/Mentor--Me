@@ -10,7 +10,7 @@ import SeeYourUpComingSession from "./SeeYourUpComingSession";
 import PreviousSessionsCall from "./PreviousSessionsCall";
 import MobileSideBar from "../mentor/MobileSiderBar";
 import SidebarMentor from "../mentor/SidebarMentor";
-import MenteeNavBar from "../menteeTopNav";
+import MentorTopNav from "../mentorTopNav";
 import Footer from "../Footer";
 
 function Schedule() {
@@ -21,7 +21,7 @@ function Schedule() {
       <div className=" hidden fixed ml-[-6px] mt-[-3px]  lg:block">
         <SidebarMentor />
       </div>
-      <MenteeNavBar />
+      <MentorTopNav />
 
       <div className="lg:ml-[274px]">
         <div className=" w-full mx-auto bg-NeutalBase flex justify-center items-center pb-4 lg:hidden">

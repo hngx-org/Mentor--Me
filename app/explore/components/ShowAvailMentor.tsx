@@ -2,9 +2,9 @@ import React from "react";
 
 export default function ShowAvailMentor() {
   return (
-    <div className="hidden lg:block bg-white rounded-lg py-3 px-4">
+    <div className=" lg:bg-white rounded-lg md:py-3 md:px-4">
       <div className="flex justify-between items-center gap-5">
-        <span className=" text-base font-normal font-Hanken text-[#121212]">
+        <span className=" text-base font-normal font-Hanken text-white lg:text-[#121212]">
           Show Available Mentors for the day
         </span>
         <label

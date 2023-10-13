@@ -21,7 +21,7 @@ export default function FilterPopup({ onClose }: PopupProps) {
   };
 
   return (
-    <div className="absolute top-20 right-5 md:top-16 md:right-0 drop-shadow-2xl bg-white shadow-md rounded-md p-6 w-fit md:w-[400px] space-y-8">
+    <div className=" z-10 container mx-auto absolute top20 top-16 right-0 right5 md:top-16 md:right-0 drop-shadow-2xl bg-white shadow-md rounded-md p-6 w-fit md:w-[400px] space-y-8">
       <div className="relative flex flex-col">
         <button
           type="button"
