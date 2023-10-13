@@ -1,20 +1,24 @@
 import React from "react";
-import UserHero from "./userHero";
-import UserDetails from "./userDetails";
-import UserExperience from "./userExperience";
 import MentorProfileHeader from "@/components/mentorProfile/MentorProfileHeader";
 import ProfileDetailsCardContainer, {
+  AvailableSessionCard,
   BioCard,
+  SessionsProgressCard,
   SkillSCard,
 } from "@/components/mentorProfile/ProfileDetailCard";
 import MentorProfileMainLayout from "@/components/mentorProfile/mentorProfileMainLayout";
-import ProgressBar from "@/components/progressBar/ProgressBar";
+
 import OverViewCardLayout from "@/components/mentorProfile/MentorProfilelayouts";
+import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
 
 export default function ProfilePage() {
   return (
     <div className="h-[100vh] w-[100vw] overflow-scroll ">
-      <MentorProfileHeader />
+      <MentorProfileHeader
+        userName="shade mayorwa"
+        userRole="Product designer"
+        userRating={4}
+      />
       <MentorProfileMainLayout>
         <BioCard text="" />
         <ProfileDetailsCardContainer
@@ -72,9 +76,15 @@ export default function ProfilePage() {
             },
           ]}
         />
+        <AvailableSessionCard
+          timezone=" Greenwich Mean Time (GMT)"
+          availableDays="Mondays - Wednesdays, 
+11:00am - 2:00pm"
+        />
         <OverViewCardLayout heading="impact at a glance" />
-        <OverViewCardLayout heading="availabity" />
+        <SessionsProgressCard progress={10} />
       </MentorProfileMainLayout>
+      {/* <MentorProfileModal /> */}
     </div>
   );
 }
