@@ -26,14 +26,14 @@ export const AuthCtxProvider = ({
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    const userId = localStorage.getItem("UserID");
-    if (userId) {
-      console.log(userId);
-    } else {
-      console.log("not logged in");
-    }
-  }, []);
+  // useEffect(() => {
+  //   const userId = localStorage.getItem("UserID");
+  //   if (userId) {
+  //     console.log(userId);
+  //   } else {
+  //     console.log("not logged in");
+  //   }
+  // }, []);
 
   const login = () => {
     // const url = process.env.NEXT_PUBLIC_API_LOGIN_URL;
