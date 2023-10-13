@@ -13,7 +13,7 @@ export default function MentorProfileModal({
   state,
 }: MentorProfileModalProps) {
   return (
-    <div className="w-[100svw] h-[100svh]  absolute top-[0px] overflow-clip ">
+    <div className="w-[100vw] h-[100vh] absolute top-[0px] overflow-clip ">
       <div
         className="bg-[#2A2A2A] opacity-80 w-[100%] h-[100%] flex p-10"
         onClick={(e) => {
@@ -24,9 +24,9 @@ export default function MentorProfileModal({
         }}
         role="presentation"
       />
-      <div className="  w-[80%] h-[80%] sm:w-[50%]  sm: p-10 sm:px-20 sm:h-[100%] bg-white absolute flex flex-col top-10 right-10 sm:top-0 sm:right-0  overflow-scroll p-4 items-center ">
+      <div className="  w-[90%] h-[80%] md:right-10 lg:w-[50%]  lg:p-2 lg:px-10 lg:h-[100%] bg-white absolute flex flex-col top-10 right-5 lg:top-0 lg:right-0  overflow-scroll p-2 items-center hide-message-layout-scroll">
         <div
-          className="flex w-[100%] justify-end my-2 sm:my-10 "
+          className="flex w-[100%] justify-end my-4 "
           onClick={(e) => {
             onClose({
               state: "basic info",
@@ -37,7 +37,7 @@ export default function MentorProfileModal({
         >
           <ModalCloseIcon />
         </div>
-        <p className="font-bold text-Neutra50">Update your profile Details</p>
+        <p className="font-bold text-Neutra50 ">Update your profile Details</p>
         <MentorProfileTabLayout modalState={state} />
       </div>
     </div>
