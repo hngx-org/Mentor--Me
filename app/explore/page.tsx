@@ -12,9 +12,9 @@ export default function page() {
     <main className="bg[white] text[black] containr mxauto p2 hscreen">
       <HomeNavBar />
       <FilterContainer />
-      <div className="md:hidden ml-10">
+      {/* <div className="md:hidden ml-10">
         <Filter />
-      </div>
+      </div> */}
       <CardContainer />
       <PaginatedItem />
       <Footer />

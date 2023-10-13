@@ -1,21 +1,25 @@
 "use client";
 
-import Link from "next/link";
 import React, { useState } from "react";
 import AboutMentor from "@/components/mentor-dashboard/AboutMentor";
 import MentorSession from "@/components/mentor-dashboard/MentorSession";
 import UnverifiedMentorCard from "@/components/mentor-dashboard/UnverifiedMentorCard";
-import Footer from "@/components/Footer";
-import MentorSideBar from "@/components/SideBar/MentorSideBar";
 import Modal from "@/components/mentor-dashboard/Modal";
+import FilterBar from "@/components/mentor-dashboard/FilterBar";
 
 const page = () => {
-  const [isVerified, setIsVerified] = useState<boolean>(true);
+  const [isVerified, setIsVerified] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div className="">
-      <div className="w-full px-5 py-10 lg:p-20 bg-[#f9fafc]">
-        {!isVerified && <UnverifiedMentorCard />}
+      <div className="px-5 py-10 lg:p-10 bg-[#f9fafc]">
+        <FilterBar />
+        {!isVerified && (
+          <UnverifiedMentorCard
+            isVerified={isVerified}
+            setIsVerified={setIsVerified}
+          />
+        )}
         <MentorSession
           isVerified={isVerified}
           isOpen={isOpen}
@@ -23,7 +27,6 @@ const page = () => {
         />
         <AboutMentor />
       </div>
-      <Footer />
       <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );

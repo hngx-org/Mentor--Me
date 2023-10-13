@@ -12,37 +12,45 @@ interface RecentbookingFromApi {
   date: number | string;
 }
 function SeeYourUpComingSession() {
-  const [feedFromApi, setFeedFromApi] = useState<RecentbookingFromApi[]>([]);
-
-  useEffect(() => {
-    // Fetch data from the server or set the initial data here
-    const initialData: RecentbookingFromApi[] = [
-      {
-        time: "90",
-        category: "Design Virtual",
-        id: 1,
-        location: "Lagos Nigeria",
-        date: "21",
-        name: "Folalolu Goodluck",
-      },
-      {
-        time: "90",
-        category: "Design Virtual",
-        id: 2,
-        location: "Lagos Nigeria",
-        date: "21",
-        name: "Folalolu Goodluck",
-      },
-      // domie data
-    ];
-    const sliceTwo = initialData.slice(0, 2); // to make sure it is only two cards that render
-    setFeedFromApi(sliceTwo);
-  }, []);
+  const [feedFromApi, setFeedFromApi] = useState<RecentbookingFromApi[]>([
+    {
+      time: "90",
+      category: "Design Virtual",
+      id: 1,
+      location: "Lagos Nigeria",
+      date: "21",
+      name: "Folalolu Goodluck",
+    },
+    {
+      time: "90",
+      category: "Design Virtual",
+      id: 2,
+      location: "Lagos Nigeria",
+      date: "21",
+      name: "Folalolu Goodluck",
+    },
+    {
+      time: "90",
+      category: "Design Virtual",
+      id: 2,
+      location: "Lagos Nigeria",
+      date: "21",
+      name: "Folalolu Goodluck",
+    },
+    // domie data
+  ]);
+  const sliceTwo = feedFromApi.slice(0, 2); // to make sure it is only two cards that render
+  const sliceThree = feedFromApi.slice(0, 3);
 
   return (
     <div>
-      <div className="flex justify-start gap-8 items-center ">
-        {feedFromApi.map((feed) => (
+      <div className="flex lg:hidden w-full justify-center md:justify-start space-x-2 flex-wrap gap-4 box-border  items-center ">
+        {sliceTwo.map((feed) => (
+          <UpcomingSessionCard key={feed.id} {...feed} />
+        ))}
+      </div>
+      <div className="hidden lg:flex flex-wrap gap-7 w-full md:justify-start items-center ">
+        {sliceThree.map((feed) => (
           <UpcomingSessionCard key={feed.id} {...feed} />
         ))}
       </div>

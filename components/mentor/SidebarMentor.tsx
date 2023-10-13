@@ -3,7 +3,7 @@
 "use client";
 
 import Link from "next/link";
-import { sidebarMentorLinks } from "@/lib/constants";
+import { sidebarMentorLinks } from "@/lib/Constant";
 import { LogoIcon, LogoutIcon, ProfileIcon, SettingIcon } from "@/public/SVGs";
 
 export type SideBarMentorProps = {
@@ -13,8 +13,8 @@ export type SideBarMentorProps = {
 export default function SidebarMentor({ light = false }: SideBarMentorProps) {
   return (
     <section
-      className={`w-[274px] border-[1px]  p-7 h-[900px] relative ${
-        light ? "bg-[#fff]" : " bg-[#000]"
+      className={`w-[274px] border-[1px]  p-7 h-[100vh] relative ${
+        light ? "bg-[#fff]" : " bg-[#000] hidden lg:block"
       }`}
     >
       <div className="flex flex-col">
@@ -57,7 +57,7 @@ export default function SidebarMentor({ light = false }: SideBarMentorProps) {
 
         <div className="my-10 border-t-2 border-Neutra40">
           <ul className=" px-3  py-4 flex flex-col gap-4 cursor-pointer">
-            <li className="flex gap-3 rounded-[5px] p-2">
+            {/* <li className="flex gap-3 rounded-[5px] p-2">
               <span>
                 <SettingIcon />
               </span>
@@ -68,7 +68,7 @@ export default function SidebarMentor({ light = false }: SideBarMentorProps) {
               >
                 Settings
               </span>
-            </li>
+            </li> */}
             <li className="flex gap-3 rounded-[5px] p-2">
               <span>
                 <LogoutIcon />

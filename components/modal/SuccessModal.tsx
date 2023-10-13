@@ -4,11 +4,13 @@ import { FC } from "react";
 
 import Image from "next/image";
 
+import Link from "next/link";
+
 import { Dialog, Transition } from "@headlessui/react";
 
-import { Button } from "../buttons/button";
-
 import check from "../../public/assets/images/check.png";
+
+import { Button } from "../buttons/button";
 
 interface ModalProps {
   isOpen: boolean;
@@ -69,13 +71,15 @@ const SuccessModal: FC<ModalProps> = ({
                 <p className="text-center my-6 font-Hanken text-base">
                   {content}
                 </p>
-                <Button
-                  variant="primary"
-                  paddingLess
-                  className="w-full h-[48px]"
-                >
-                  {buttontext}
-                </Button>
+                <Link className="w-full" href="/mentor-schedule">
+                  <Button
+                    variant="primary"
+                    paddingLess
+                    className="w-full h-[48px]"
+                  >
+                    {buttontext}
+                  </Button>
+                </Link>
               </div>
             </Dialog.Panel>
           </Transition.Child>
