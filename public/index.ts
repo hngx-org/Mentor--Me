@@ -5,6 +5,7 @@ export { default as sessionShaolin } from "./assets/images/mentee-sessions/sessi
 export { default as sessionMaurice } from "./assets/images/mentee-sessions/session-maurice.png";
 export { default as sessionKaplan } from "./assets/images/mentee-sessions/session-kaplan.png";
 // Facemojis for Sessions Mentee
+export { default as bellCheckedIcon } from "./assets/images/mentee-sessions/bell-check-icon.png";
 export { default as faceMoji1 } from "./assets/images/mentee-sessions/facemojis/facemoji.png";
 export { default as faceMoji2 } from "./assets/images/mentee-sessions/facemojis/facemoji-2.png";
 export { default as faceMoji3 } from "./assets/images/mentee-sessions/facemojis/facemoji-3.png";
@@ -14,7 +15,7 @@ export { default as membersCardAvatar } from "./assets/images/mentee-communities
 export { default as mentorCardHero } from "./assets/images/mentee-communities/mentoreCardHero.svg";
 export { default as mentorCardAvatar } from "./assets/images/mentee-communities/mentorCardAvatar.svg";
 export { default as bigDiscussionCardHero } from "./assets/images/mentee-communities/bigDisscussionCardHero.svg";
-// export { default as messageedit } from "./assets/Icons/mentee-communities/messageEdit.svg"
+export { default as messageedit } from "./assets/Icons/mentee-communities/messageEdit.svg";
 
 export { default as DashboardCoverBg } from "./assets/images/mentee-profile-screen/cover-bg.png";
 export { default as MenteeDashboardProfileImg } from "./assets/images/mentee-profile-screen/my-profile.png";

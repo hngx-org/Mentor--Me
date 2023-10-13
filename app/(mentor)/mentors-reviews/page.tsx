@@ -16,7 +16,7 @@ import MobileSideBar from "@/components/mentor/MobileSiderBar";
 import MentorSideBar from "@/components/SideBar/MentorSideBar";
 import SidebarMentor from "@/components/mentor/SidebarMentor";
 import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
-import { NavbarMentee } from "@/app/(mentee)/mentee-sessions/(ui)/NavbarMentee";
+import { NavbarMentee } from "@/components/menteeTopNav/NavbarMentee";
 
 const data = [
   {
@@ -107,10 +107,7 @@ export default function MentorReviews() {
                 <span className="text-[#272D37]">
                   Mentee Satisfaction Rate
                 </span>{" "}
-                <span
-                  className="text-[
-#121212]"
-                >
+                <span className="text-[#121212]">
                   <select className="cursor-pointer bg-[#F0F0F0]">
                     <option>This Year</option>
                   </select>
@@ -284,7 +281,7 @@ export default function MentorReviews() {
                 {" "}
                 <h1>
                   {" "}
-                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4 font-medium font-Inter rounded-full">
+                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4  font-Inter rounded-full">
                     Jd
                   </span>{" "}
                   John Doe
@@ -335,7 +332,7 @@ export default function MentorReviews() {
                 {" "}
                 <h1>
                   {" "}
-                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4 font-medium font-Inter rounded-full">
+                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4  font-Inter rounded-full">
                     Jd
                   </span>{" "}
                   John Doe
@@ -386,7 +383,7 @@ export default function MentorReviews() {
                 {" "}
                 <h1>
                   {" "}
-                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4 font-medium font-Inter rounded-full">
+                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4  font-Inter rounded-full">
                     Jd
                   </span>{" "}
                   John Doe
@@ -437,7 +434,7 @@ export default function MentorReviews() {
                 {" "}
                 <h1>
                   {" "}
-                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4 font-medium font-Inter rounded-full">
+                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4  font-Inter rounded-full">
                     Jd
                   </span>{" "}
                   John Doe
@@ -488,7 +485,7 @@ export default function MentorReviews() {
                 {" "}
                 <h1>
                   {" "}
-                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4 font-medium font-Inter rounded-full">
+                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4  font-Inter rounded-full">
                     Jd
                   </span>{" "}
                   John Doe
@@ -539,7 +536,7 @@ export default function MentorReviews() {
                 {" "}
                 <h1>
                   {" "}
-                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4 font-medium font-Inter rounded-full">
+                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4  font-Inter rounded-full">
                     Jd
                   </span>{" "}
                   John Doe
@@ -590,7 +587,7 @@ export default function MentorReviews() {
                 {" "}
                 <h1>
                   {" "}
-                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4 font-medium font-Inter rounded-full">
+                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4  font-Inter rounded-full">
                     Jd
                   </span>{" "}
                   John Doe
@@ -641,7 +638,7 @@ export default function MentorReviews() {
                 {" "}
                 <h1>
                   {" "}
-                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4 font-medium font-Inter rounded-full">
+                  <span className="bg-[#F0FFFF] text-[#101928] font-[400] p-4  font-Inter rounded-full">
                     Jd
                   </span>{" "}
                   John Doe

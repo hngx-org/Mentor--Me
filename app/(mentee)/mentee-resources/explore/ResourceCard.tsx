@@ -21,7 +21,7 @@ const ResourceCard = ({
   rate,
   reviews,
 }: Card) => (
-  <div className="w-full max-w-[397px] h-[378px] flex flex-col justify-center items-center gap-4 rounded-lg shadow-md flex-shrink-0">
+  <div className="w-full max-w-[397px] flex flex-col justify-between gap-4 items-center rounded-lg shadow-md flex-shrink-0">
     <Image
       src={src}
       alt={title}
@@ -57,12 +57,14 @@ const ResourceCard = ({
             Buy Now
           </button>
         </Link>
-        <button
-          type="button"
-          className="font-Hanken w-[112px] text-NeutralBase rounded-lg bg-white h-10 mb-4 border border-[#121212]"
-        >
-          Add to Cart
-        </button>
+        <Link href={`/mentee-resources/explore/${id}?path=resources`}>
+          <button
+            type="button"
+            className="font-Hanken w-[112px] text-NeutralBase rounded-lg bg-white h-10 mb-4 border border-[#121212]"
+          >
+            Add to Cart
+          </button>
+        </Link>
       </div>
     </div>
   </div>

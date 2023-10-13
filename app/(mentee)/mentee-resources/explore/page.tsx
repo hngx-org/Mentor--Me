@@ -49,7 +49,7 @@ const Explore = () => {
               key={link.id}
               href={link.to}
               onClick={() => handleLinkClick(link.id)}
-              className={`font-Hanken text-lg ${
+              className={`font-Hanken text-[1rem] lg:text-lg ${
                 link.id === activeLink
                   ? "text-NeutalBase border-b-[4px] border-Accent1"
                   : "text-Neutra30"

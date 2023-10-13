@@ -1,20 +1,33 @@
-import React from "react";
+"use client";
+
+import React, { useContext } from "react";
 import MobileSideBar from "@/components/MobileSideBar";
 import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
-import MenteeNavBar from "@/components/menteeTopNav";
+
+import HomeNavBar from "@/components/homeNavbar";
+import AuthCtx from "@/context/AuthCtx";
+import { NavbarMentee } from "@/components/menteeTopNav/NavbarMentee";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
+  const ctx = useContext(AuthCtx);
+  const id = ctx?.userAuth.id;
+
+  return !id ? (
+    <main className="pt-[7rem]">
+      <HomeNavBar />
+      {children}
+    </main>
+  ) : (
     <>
-      <MenteeSideBar />
       <MobileSideBar />
+      <MenteeSideBar />
 
       <main className="lg:ml-[274px]">
-        <MenteeNavBar />
+        <NavbarMentee />
         {children}
       </main>
     </>
