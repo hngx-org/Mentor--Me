@@ -8,6 +8,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 import Image from "next/image";
 import styles from "./page.module.css";
@@ -301,6 +302,7 @@ export function MentorProfileCreationForms() {
                       placeholder="Link"
                       id="certification"
                       name="certification_link"
+                      required
                       onInput={(e: any) => {
                         setFormInputs((prevData: any) => ({
                           ...prevData,
@@ -557,12 +559,16 @@ export function SuccessModal() {
           className="w-full py-2 xl:max-w-[initial] !text-white"
         /> */}
 
-        <Button variant="primary" className="w-full py-2 xl:max-w-[initial]">
-          Verify account
-        </Button>
-        <p className="text-base font-Hanken text-center cursor-pointer">
-          I&apos;ll do this later
-        </p>
+        <Link href="mentor-profile">
+          <Button variant="primary" className="w-full py-2 xl:max-w-[initial]">
+            Verify account
+          </Button>
+        </Link>
+        <Link href="mentor-profile">
+          <p className="text-base font-Hanken text-center cursor-pointer">
+            I&apos;ll do this later
+          </p>
+        </Link>
       </div>
     </div>
   );

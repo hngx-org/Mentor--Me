@@ -84,7 +84,7 @@ export default function MentorFormBuilder({
                 type={input.type}
                 placeholder={input.placeholder}
                 id={input.label}
-                // required
+                required
                 // list={input.listName}
                 autoComplete="off"
                 onInput={handleInput}
