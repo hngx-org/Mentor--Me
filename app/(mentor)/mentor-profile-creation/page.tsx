@@ -17,5 +17,5 @@ export default function MentorPage() {
     <MentorProvider>
       <MentorProfileCreationForms />
     </MentorProvider>
- );
+  );
 }
