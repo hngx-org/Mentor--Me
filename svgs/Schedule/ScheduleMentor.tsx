@@ -168,3 +168,19 @@ export const CorretIcon = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
+export const MobileSearchIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={18}
+    height={18}
+    fill="none"
+    {...props}
+  >
+    <path
+      fill="#818181"
+      fillRule="evenodd"
+      d="M8.168.667a7.5 7.5 0 1 0 4.681 13.36l3.063 3.063a.834.834 0 0 0 1.179-1.179l-3.063-3.063A7.5 7.5 0 0 0 8.168.667Zm-5.833 7.5a5.833 5.833 0 1 1 11.666 0 5.833 5.833 0 0 1-11.666 0Z"
+      clipRule="evenodd"
+    />
+  </svg>
+);

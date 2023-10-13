@@ -12,37 +12,53 @@ interface RecentbookingFromApi {
   date: number | string;
 }
 function SeeYourUpComingSession() {
-  const [feedFromApi, setFeedFromApi] = useState<RecentbookingFromApi[]>([]);
-
-  useEffect(() => {
-    // Fetch data from the server or set the initial data here
-    const initialData: RecentbookingFromApi[] = [
-      {
-        time: "90",
-        category: "Design Virtual",
-        id: 1,
-        location: "Lagos Nigeria",
-        date: "21",
-        name: "Folalolu Goodluck",
-      },
-      {
-        time: "90",
-        category: "Design Virtual",
-        id: 2,
-        location: "Lagos Nigeria",
-        date: "21",
-        name: "Folalolu Goodluck",
-      },
-      // domie data
-    ];
-    const sliceTwo = initialData.slice(0, 2); // to make sure it is only two cards that render
-    setFeedFromApi(sliceTwo);
-  }, []);
+  const [feedFromApi, setFeedFromApi] = useState<RecentbookingFromApi[]>([
+    {
+      time: "90",
+      category: "Design Virtual",
+      id: 1,
+      location: "Lagos Nigeria",
+      date: "21",
+      name: "Folalolu Goodluck",
+    },
+    {
+      time: "90",
+      category: "Design Virtual",
+      id: 2,
+      location: "Lagos Nigeria",
+      date: "25",
+      name: "Folalolu Goodluck",
+    },
+    {
+      time: "90",
+      category: "Design Virtual",
+      id: 2,
+      location: "Lagos Nigeria",
+      date: "22",
+      name: "Folalolu Goodluck",
+    },
+    {
+      time: "90",
+      category: "Design Virtual",
+      id: 2,
+      location: "Lagos Nigeria",
+      date: "30",
+      name: "Folalolu Goodluck",
+    },
+    // domie data
+  ]);
+  const sliceTwo = feedFromApi.slice(0, 2); // to make sure it is only two cards that render for smaller screens
+  const sliceThree = feedFromApi.slice(0, 3); // render three for larger screens
 
   return (
     <div>
-      <div className="flex justify-start gap-8 items-center ">
-        {feedFromApi.map((feed) => (
+      <div className="lg:hidden w-full grid grid-cols-2 gap-3 box-border">
+        {sliceTwo.map((feed) => (
+          <UpcomingSessionCard key={feed.id} {...feed} />
+        ))}
+      </div>
+      <div className="hidden lg:grid lg:grid-cols-3 gap-4">
+        {sliceThree.map((feed) => (
           <UpcomingSessionCard key={feed.id} {...feed} />
         ))}
       </div>

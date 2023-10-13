@@ -10,28 +10,25 @@ import SeeYourUpComingSession from "./SeeYourUpComingSession";
 import PreviousSessionsCall from "./PreviousSessionsCall";
 import MobileSideBar from "../mentor/MobileSiderBar";
 import SidebarMentor from "../mentor/SidebarMentor";
-import MenteeNavBar from "../menteeTopNav";
+import MentorTopNav from "../mentorTopNav";
+import Footer from "../Footer";
+import MobileAppear from "./MobileAppear";
 
 function Schedule() {
   return (
-    <div>
+    <div className="flex w-[100vw] h-[100vh] overflow-clip">
       {/* Mobile sidebar */}
-      <MobileSideBar />
-      <div className="fixed ml-[-6px] mt-[-3px] hidden lg:block">
-        <SidebarMentor />
-      </div>
-      <MenteeNavBar />
-      {/* Mobile search */}
+
       <div className="lg:ml-[274px]">
-        <div className="w-full mx-auto bg-NeutalBase min-h-[128px] flex justify-center items-center lg:hidden">
-          <div className="flex justify-between flex-col items-center gap-4 w-[calc(100%-54px)] h-[96px]">
+        <div className=" w-full mx-auto bg-NeutalBase flex justify-center items-center pb-4 lg:hidden">
+          <div className="flex justify-between flex-col items-center gap-4 px-8 min-h-[96px]">
             <p className="text-[#fff] text-base text-center px-4 font-Inter">
               Get started with MentorMe Long term mentorship program
             </p>
             <form>
               <input
                 placeholder="Placeholder"
-                className="max-w-md min-w-[374px] w-full py-1.5 px-3 placeholder-gray-500 rounded-md border-none ring-2 ring-gray-300 focus:ring-gray-500 focus:ring-2"
+                className="max-w-[374px] py-1.5 px-3 placeholder-gray-500 rounded-md border-none ring-2 ring-gray-300 focus:ring-gray-500 focus:ring-2"
                 name="search"
                 type="text"
               />
@@ -41,7 +38,7 @@ function Schedule() {
         {/* Mobile header ends */}
 
         {/* Body of the page */}
-        <section className="contianer p-10">
+        <section className="container md:p-10 w-full p-6 sm:py-8 sm:px-10 mx-auto">
           {/* My schedule segment */}
           <div className="flex justify-between items-center">
             <h1 className="text-[32px] font-Hanken font-bold sm:text-[38px] md:text-[46px]">
@@ -52,7 +49,7 @@ function Schedule() {
                 {/* Link to mentor profile */}
                 <Button
                   variant="outline-primary"
-                  className="text-[10px] shadow-md px-4 py-3 min-w-[140px]"
+                  className="text-[10px] hover:shadow-md px-4 py-3 min-w-[140px]"
                   title="Return to profile"
                   type="button"
                 >
@@ -77,7 +74,7 @@ function Schedule() {
                 </p>
               </div>
             </div>
-            <div className="h-[29px] hover:bg-Accent1 cursor-pionter lg:hover:bg-white">
+            <div className="h-[29px] hover:bg-Accent1 hidden cursor-pionter lg:hover:bg-white">
               <div className="hover:border-b h-[26px] border-1 border-Accent1-500 bg-white">
                 <p className="hover:text-Accent1 cursor-pointer hover:font-bold">
                   Calendar
@@ -87,45 +84,55 @@ function Schedule() {
           </div>
           <hr className="max-w-[380px] h-1 lg:max-w-[606px]" />
           {/* My sessions */}
-          <h3 className="text-lg font-Hanken text-neutral-950 font-semibold mt-3 md:mt-6 lg:mt-7 md:font-inter md:font-medium md:text-[32px]">
+          <h3 className="text-lg font-Hanken text-neutral-950 font-semibold mt-3 md:mt-6 lg:mt-7 md:font-inter md:font-medium lg:mb-10 md:text-[32px]">
             My Sessions
           </h3>
           <div className="flex justify-between items-center lg:hidden">
-            <p className="text-xs font-Hanken font-normal">
+            <p className="text-xs font-Hanken font-normal lg:mb-5 mb-3">
               View, share, and create new sessions
             </p>
-            <ArrowRightIcon />
-          </div>
-          <div className="container flex md:justify-start hover:overflow-auto overflow-hidden items-center mt-6 md:mt-8  ml-[-10px] gap-4 lg:gap-4 lg:max-w-[993px] mx-auto">
-            {/* PortfolioCard component */}
-            <PortfolioCard />
-            {/* AddNewSession component */}
-            <div id="modal">
-              <AddNewSession />
+            <div className="hidden">
+              <ArrowRightIcon />
             </div>
           </div>
+          <div className="hidden lg:block mt-4">
+            {" "}
+            <PortfolioCard />
+          </div>
+          <div className="container lg:hidden mt-4 grid grid-cols-2 gap-3">
+            <PortfolioCard />
+
+            <AddNewSession />
+          </div>
           {/* Upcoming session */}
-          <h3 className="text-lg lg:mt-20 font-Hanken text-neutral-950 font-semibold mt-3 md:mt-6 lg:mb-[-10px] md:font-inter md:font-medium md:text-[32px]">
+          <h3 className="text-lg lg:mt-20 font-Hanken text-neutral-950 font-semibold mt-6 lg:mb-[30px] md:font-inter md:font-medium md:text-[32px]">
             Upcoming Sessions{" "}
             <span className="hidden lg:inline-block">with Mentees</span>
           </h3>
-          <div className="flex justify-between items-center lg:hidden">
+          <div className="flex justify-between items-center lg:hidden mt-1">
             <p className="text-xs font-Hanken font-normal">
               View your upcoming sessions
             </p>
-            <ArrowRightIcon />
+            <div className="hidden">
+              <ArrowRightIcon />
+            </div>
           </div>
-          <div className="flex md:gap-8 g-7 justify-start items-center mt-4">
+          <div className="mt-4">
             <div className="hidden lg:inline-block">
               {/* RecentBooking component */}
               <RecentBooking />
             </div>
             <div>
-              <h4 className="hidden text-base font-bold font-Hanken text-Accent1 mb-8 mt-3 lg:block">
-                See All
-              </h4>
+              <div className="hidden md-8 mt-3 space-x-4">
+                <h4 className="text-base font-bold font-Hanken">
+                  Recent Session
+                </h4>
+                <h4 className="text-base font-bold font-Hanken text-Accent1">
+                  See All
+                </h4>
+              </div>
+
               <div>
-                {/* SeeYourUpComingSession component */}
                 <SeeYourUpComingSession />
               </div>
             </div>
@@ -135,13 +142,15 @@ function Schedule() {
           <h3 className="text-lg font-Hanken lg:mt-20 text-neutral-950 font-semibold mt-3 md:mt-6  md:font-inter md:font-medium md:text-[32px]">
             Previous Sessions
           </h3>
-          <div className="flex justify-between items-center lg:hidden">
+          <div className="flex justify-between items-center mt-1 lg:hidden">
             <p className="text-xs font-Hanken font-normal">
               Explore your previous sessions with mentees
             </p>
-            <ArrowRightIcon />
+            <div className="hidden">
+              <ArrowRightIcon />
+            </div>
           </div>
-          {/* PreviousSessionsCall component */}
+
           <div className="mb-3">
             <PreviousSessionsCall />
           </div>

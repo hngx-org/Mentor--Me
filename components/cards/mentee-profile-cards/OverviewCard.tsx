@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AwardIcon, EditIcon } from "@/public/SVGs";
-import Button from "@/app/(mentee)/mentee-sessions/(ui)/VxrcelBtn";
+import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 
 type Props = {
   desc: string;
@@ -21,15 +21,15 @@ export default function OverviewCard({
         <h2 className="text-Neutral50 font-bold font-Hanken text-[18px]">
           Bio:
         </h2>
-        <p className="text-Neutral50 font-Hanken text-[16px] w-full max-w-[500px]">
-          {desc.length >= 200 && showMore ? `${desc.slice(0, 200)}....` : desc}
+        <p className="text-Neutra50 font-Hanken text-[16px] w-full max-w-[500px] tracking-wide">
+          {desc.length >= 180 && showMore ? `${desc.slice(0, 180)}....` : desc}
         </p>
-        {desc.length >= 200 && (
+        {desc.length >= 180 && (
           <div>
             {showMore ? (
               <button
                 type="button"
-                className="text-Accent1 font-Hanken text-[16px]"
+                className="text-Accent2 font-Hanken text-[16px] font-medium"
                 onClick={() => setshowMore(false)}
               >
                 Show More
@@ -37,7 +37,7 @@ export default function OverviewCard({
             ) : (
               <button
                 type="button"
-                className="text-Accent1 font-Hanken text-[16px]"
+                className="text-Accent1 font-Hanken text-[16px] font-medium"
                 onClick={() => setshowMore(true)}
               >
                 Show Less
@@ -56,7 +56,7 @@ export default function OverviewCard({
           variant="secondary"
         />
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap- w-full max-xl:max-w-[500px]">
         <div className=" w-full flex justify-between">
           <p className="text-Neutra50 font-bold text-[18px] font-Hanken">
             Experience

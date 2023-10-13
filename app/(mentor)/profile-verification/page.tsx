@@ -25,12 +25,39 @@ import {
 import { Button } from "@/components/buttons/button";
 import MentorSideBar from "@/components/SideBar/MentorSideBar";
 import MobileSideBar from "@/components/MobileSideBar";
+import { FormData } from "@/components/mentor-profile-verification/types";
 
 export default function MentorProfileVerification() {
   const [step, setStep] = useState(0);
   const [verificationStatus, setVerificationStatus] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formData, setFormData] = useState<FormData>({
+    certificates: {
+      certificationName: "",
+      issuingInstitution: "",
+      graduationYear: "",
+      graduationFile: null,
+    },
+    qualifications: {
+      qualification: "",
+      yearsExperience: "",
+      qualificationDesc: "",
+    },
+    achievements: {
+      achievementName: "",
+      issuingOrganization: "",
+      yearReceived: "",
+      achievementDesc: "",
+    },
+    identification: {
+      fullname: "",
+      dateofBirth: "",
+      idType: "",
+      idNumber: "",
+      uploadID: null,
+    },
+  });
 
   const handleNextStep = () => {
     setStep(step + 1);
@@ -41,6 +68,7 @@ export default function MentorProfileVerification() {
   };
 
   const handleSubmit = () => {
+    // console.log("FormData", formData);
     setShowModal(true);
     setVerificationStatus("approved");
     setStep(0);
@@ -48,11 +76,11 @@ export default function MentorProfileVerification() {
   };
   return (
     <>
-      <div className="w-full flex bg-white text-black h-full lg:pb-0 pb-14">
-        <div className="hidden lg:block">
+      <div className="w-full flex bg-white text-black h-full lg:pb-0 pb-14 ">
+        <div className="lg:w-1/4 hidden lg:block ">
           <MentorSideBar />
         </div>
-        <div className="w-full h-full">
+        <div className="lg:w-[90%] w-full h-full">
           <HeaderAfterSignUp step={step} />
 
           <div className="content my-5 flex flex-col items-center">
@@ -80,23 +108,31 @@ export default function MentorProfileVerification() {
                         <Image src={Amico} alt="amico" />
 
                         <div className="md:px-8 px-3 mt-8">
-                          <h5 className="font-Hanken text-[24px] font-[700]">
+                          <h5 className="font-Hanken text-[24px] font-[700] lg:text-left text-center">
                             Verify your profile in a few steps and let’s get
                             started!
                           </h5>
-                          <p className="font-Hanken text-[16px] font-[400] text-Neutra40">
+                          <p className="font-Hanken text-[16px] font-[400] text-Neutra40 lg:text-left text-center">
                             This application should take no more than 5 - 10
                             minutes. Please complete the following information
                             to verify your qualifications and expertise as a
                             mentor.
                             <br />
                           </p>
-                          <p className="mt-2 font-Hanken text-[16px] font-[400] text-Neutra40">
+                          <p className="mt-2 font-Hanken text-[16px] font-[400] text-Neutra40 lg:text-left text-center">
                             Your credentials will be reviewed to ensure the
                             highest level of professionalism and quality
                             guidance. Your profile will be verified between 24 -
                             48 hours.
                           </p>
+                          <Button
+                            variant="primary"
+                            className="mt-5 w-full py-3 text-center font-Inter font-500 text-[16px]"
+                            paddingLess
+                            onClick={handleNextStep}
+                          >
+                            Proceed
+                          </Button>
                         </div>
                       </div>
                     )}
@@ -208,23 +244,35 @@ export default function MentorProfileVerification() {
                   </>
                 )}
 
-                {step === 1 && <Certificates onNext={handleNextStep} />}
+                {step === 1 && (
+                  <Certificates
+                    onNext={handleNextStep}
+                    setFormData={setFormData}
+                    formData={formData}
+                  />
+                )}
                 {step === 2 && (
                   <Qualifications
                     onNext={handleNextStep}
                     onPrev={handlePrevStep}
+                    setFormData={setFormData}
+                    formData={formData}
                   />
                 )}
                 {step === 3 && (
                   <Achievements
                     onNext={handleNextStep}
                     onPrev={handlePrevStep}
+                    setFormData={setFormData}
+                    formData={formData}
                   />
                 )}
                 {step === 4 && (
                   <Identification
                     onPrev={handlePrevStep}
                     handleSubmit={handleSubmit}
+                    setFormData={setFormData}
+                    formData={formData}
                   />
                 )}
               </div>

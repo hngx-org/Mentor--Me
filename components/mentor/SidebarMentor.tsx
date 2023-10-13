@@ -3,45 +3,54 @@
 "use client";
 
 import Link from "next/link";
-import { sidebarMentorLinks } from "@/lib/constants";
+import { sidebarMentorLinks } from "@/lib/Constant";
 import { LogoIcon, LogoutIcon, ProfileIcon, SettingIcon } from "@/public/SVGs";
 
 export type SideBarMentorProps = {
   light?: boolean;
 };
 
-export default function SidebarMentor({ light = false }: SideBarMentorProps) {
+export default function SidebarMentor({
+  light,
+  path,
+}: SideBarMentorProps & { path?: string | null | undefined }) {
   return (
     <section
-      className={`w-[274px] border-[1px]  p-7 h-[900px] relative ${
-        light ? "bg-[#fff]" : " bg-[#000] hidden lg:block"
+      className={`hidden w-[274px]  p-5 min-h-screen h-full fixed lg:flex left-0 top-0 ${
+        light ? "bg-[#fff]" : " bg-[#000]"
       }`}
     >
-      <div className="flex flex-col">
-        <div className="">{light ? "" : <LogoIcon />}</div>
+      <div className="flex flex-col h-full justify-between">
+        {/* <div className="h-[82px]">
+					<LogoIcon />
+				</div> */}
 
         {/* menu */}
 
         <div>
-          {/* <div className="w-full pl-3">
+          <div className="w-full pl-3">
             <LogoIcon />
-          </div> */}
+          </div>
           <div className="mt-20">
-            <p className="font-Inter text-[14px] leading-[20.3px] font-[500] text-Neutra30 pl-3">
+            <p className="  font-Inter tetx-[14px]  leading-[20.3px] font-[500]   text-Neutra30 pl-3">
               MENU
             </p>
-            <ul className="px-3 py-4  gap-4 cursor-pointer">
+            <ul className="l px-3  py-4  gap-4 cursor-pointer text-xl">
               {sidebarMentorLinks.map((link) => (
                 <Link key={link.id} href={link.path} prefetch>
                   <li
-                    className={`flex gap-3 mt-4  ${
-                      light ? "bg-[#E5FFFF]" : ""
+                    className={`flex gap-3  ${
+                      light && path === link.label.toLowerCase()
+                        ? "bg-[#E5FFFF]"
+                        : !light && path === link.label.toLowerCase()
+                        ? " bg-Neutra50"
+                        : ""
                     } rounded-[5px] p-2 items-center`}
                   >
                     <span>{link.iconDark}</span>
 
                     <span
-                      className={` font-Inter text-[14px] font-[500] ${
+                      className={` font-Inter tetx-[14px] font-[500] ${
                         light ? "text-[#008080]" : "text-[#fff]"
                       } `}
                     >
@@ -55,25 +64,27 @@ export default function SidebarMentor({ light = false }: SideBarMentorProps) {
         </div>
         {/* logout */}
 
-        <div className="my-10 border-t-2 border-Neutra40">
-          <ul className=" px-3  py-4 flex flex-col gap-4 cursor-pointer">
-            <li className="flex gap-3 rounded-[5px] p-2">
-              <span>
-                <SettingIcon />
-              </span>
-              <span
-                className={`font-Inter text-[14px] font-[500] ${
-                  light ? "text-[#40444B]" : "text-[#fff]"
-                } `}
+        <div className="my-6 border-t-2 border-Neutra40 ">
+          <ul className=" px-3  py-1 flex flex-col  cursor-pointer">
+            <Link href="/mentee-settings?path=settings">
+              <li
+                className={`flex gap-2 rounded-[5px] p-2 items-center ${
+                  light && path === "settings"
+                    ? "bg-[#E5FFFF]"
+                    : !light && path === "settings"
+                    ? " bg-Neutra50"
+                    : ""
+                }`}
               >
-                Settings
-              </span>
-            </li>
-            <li className="flex gap-3 rounded-[5px] p-2">
-              <span>
-                <LogoutIcon />
-              </span>
-              <span className="  font-Inter text-[14px] font-[500]  text-Error50">
+                <SettingIcon />
+                <span className=" font-Inter tetx-[11px] font-[500]  rounded-[5px] p-2 text-white">
+                  Setting
+                </span>
+              </li>
+            </Link>
+            <li className="flex gap-3  rounded-[5px] p-2">
+              <LogoutIcon />
+              <span className="  font-Inter tetx-[11px] font-[500]  text-Error50">
                 LogOut
               </span>
             </li>
@@ -81,22 +92,19 @@ export default function SidebarMentor({ light = false }: SideBarMentorProps) {
         </div>
         {/* profile */}
 
-        <div className=" absolute bottom-3">
+        <Link href="/mentor-profile?path=profile" prefetch>
           <ul className="  cursor-pointer   ">
-            <li className="flex gap-3 items-center p-2">
-              <span>
-                <ProfileIcon />
-              </span>
-              <span className="  font-Inter text-[14px] font-[500]   text-Neutra30">
-                <span className={`${light ? "text-[#000]" : " text-Neutra30"}`}>
-                  {" "}
+            <li className="flex gap-3 items-center  p-1">
+              <ProfileIcon />
+              <span className="  font-Inter tetx-[10px] font-[500]   text-Neutra30">
+                <span className={`${path === "profile" ? "text-white" : ""}`}>
                   Funmi Oladapo
                 </span>
                 <br /> funmi@zurimp.com
               </span>
             </li>
           </ul>
-        </div>
+        </Link>
       </div>
     </section>
   );

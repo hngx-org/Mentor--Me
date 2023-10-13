@@ -47,7 +47,7 @@ const MentorSession = ({ isVerified, setIsOpen, isOpen }: mentorProps) => (
         </h3>
         {isVerified && (
           <Link
-            className="rounded-lg border border-[hsl(0,0%,7%)] px-5 py-2 text-sm"
+            className="rounded-lg border border-[hsl(0,0%,7%)] px-2 lg:px-5 py-2 text-xs  md:text-sm hidden md:block"
             href="#"
           >
             Go to Dashboard
@@ -66,14 +66,16 @@ const MentorSession = ({ isVerified, setIsOpen, isOpen }: mentorProps) => (
         </button>
       </div>
     </div>
-    <div className="grid grid-cols-2 gap-5 lg:grid-cols-3 lg:gap-10 mt-7">
-      {mentorSessionsDetail.map((session) => (
-        <MentorSessionCard
-          setIsOpen={setIsOpen}
-          {...session}
-          key={session.id}
-        />
-      ))}
+    <div className="overflow-x-hidden w-[100%]">
+      <div className="grid  md:grid-cols-2 lg:grid-cols-3  gap-5 lg:gap-10 mt-7">
+        {mentorSessionsDetail.map((session) => (
+          <MentorSessionCard
+            setIsOpen={setIsOpen}
+            {...session}
+            key={session.id}
+          />
+        ))}
+      </div>
     </div>
   </div>
 );
