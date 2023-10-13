@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { MenteeDashboardProfileImg } from "@/public";
 import { EditIcon } from "@/public/SVGs";
-import Button from "@/app/(mentee)/mentee-sessions/(ui)/VxrcelBtn";
+
 import UpdateProfileForm from "./forms/UpdateProfileForm";
 
 type UpdateProfileTabsProp = {

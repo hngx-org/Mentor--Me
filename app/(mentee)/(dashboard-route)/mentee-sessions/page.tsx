@@ -148,7 +148,7 @@ export default function AllSession({
                 }
                 ${isView ? "!bg-black text-Neutra10 z-[9999]" : ""}`}
               >
-                <span>View</span>
+                <span>Views</span>
                 {activeView === "List" ? (
                   <ListViewIcon
                     props={{ className: "cursor-pointer w-6 h-6" }}

@@ -1,4 +1,11 @@
+import React from "react";
 import { StaticImageData } from "next/image";
+import {
+  CommunitIconMobile,
+  MobileHomeIcon,
+  MobileSession,
+  ResourcesMobile,
+} from "@/public/SVGs";
 import {
   sessionHope,
   sessionKaplan,
@@ -6,6 +13,13 @@ import {
   sessionPatricia,
   sessionShaolin,
 } from "@/public";
+
+export type MobileSidebarProps = {
+  id: number;
+  label: string;
+  icon: React.ReactNode;
+  link: string;
+};
 
 export type QualityProps = {
   id: number;
@@ -169,6 +183,33 @@ export const cancelledSessions: UpcomingSessionProp[] = [
     reminderBtn: "Contact Mentor",
     imgSrc: sessionKaplan,
     underline: true,
+  },
+];
+
+export const mobileSidebarLinks: MobileSidebarProps[] = [
+  {
+    id: 1,
+    label: "Home",
+    icon: MobileHomeIcon(),
+    link: "/dashboard?path=Home",
+  },
+  {
+    id: 2,
+    label: "Sessions",
+    icon: MobileSession(),
+    link: "/mentee-sessions?path=Sessions",
+  },
+  {
+    id: 3,
+    label: "Communities",
+    icon: CommunitIconMobile(),
+    link: "/mentee-communities?path=Communities",
+  },
+  {
+    id: 4,
+    label: "Resources",
+    icon: ResourcesMobile(),
+    link: "/mentee-resources?path=Resources",
   },
 ];
 

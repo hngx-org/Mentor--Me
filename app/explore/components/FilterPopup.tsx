@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import RangeSlider from "./RangeSlider";
-import Calendarcomponent from "@/app/(mentee)/mentee-booking/components/booking-session/Calender";
+import Calendarcomponent from "@/app/(mentee)/(dashboard-route)/mentee-booking/components/booking-session/Calender";
 
 type PopupProps = {
   onClose: () => void;

@@ -1,5 +1,6 @@
 // "use client";
 
+import { Metadata } from "next";
 import React from "react";
 import DiscussionSlider from "@/components/mentee-communities/DiscussionSlider";
 import MentorGrid from "@/components/mentee-communities/MentorGrid";
@@ -9,6 +10,10 @@ import { SearchIcon } from "@/public/assets/Icons/mentor-communities";
 import SidebarMentor from "@/components/mentor/SidebarMentor";
 import { mentorCardAvatar, mentorCardHero } from "@/public";
 import { get, post } from "@/lib/apiHelper";
+
+export const metadata: Metadata = {
+  title: "Communities",
+};
 
 const MenteeCommunities: React.FC = () => {
   const isLoggedIn = false;

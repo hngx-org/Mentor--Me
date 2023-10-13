@@ -4,7 +4,12 @@ import Link from "next/link";
 
 import Image from "next/image";
 
+import { Metadata } from "next";
 import mentee from "@/public/assets/images/mentee.jpeg";
+
+export const metadata: Metadata = {
+  title: "Login",
+};
 
 const page = () => (
   <div className="sm:px-16 px-6">
