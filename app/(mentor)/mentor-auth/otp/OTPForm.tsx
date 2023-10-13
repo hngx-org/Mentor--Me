@@ -35,7 +35,7 @@ const OTPForm = () => {
 
   const closeModal = (): void => {
     setIsOpen(false);
-    router.push("/login");
+    router.push("/mentor-auth/login");
   };
 
   const openModal = (): void => {
