@@ -4,8 +4,8 @@ import React from "react";
 import { useSearchParams } from "next/navigation";
 import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
 
-import { NavbarMentee } from "../mentee-sessions/(ui)/NavbarMentee";
 import MobileSideBar from "@/components/MobileSideBar";
+import { NavbarMentee } from "@/components/menteeTopNav/NavbarMentee";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const searchParams = useSearchParams().get("path");
