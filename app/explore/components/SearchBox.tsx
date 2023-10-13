@@ -1,8 +1,9 @@
 import React from "react";
+import Filter from "./Filter";
 
 export default function SearchBox() {
   return (
-    <div className="bg-white rounded-lg py-5 px-4 min-w-[375px] ">
+    <div className="bg-white rounded-lg py-2 px-4 md:py-5 md:px-4 md:min-w-[375px] lg:min-w-[455px]">
       <div className="flex justify-between items-center">
         <span className=" mr-3">
           <svg
@@ -24,6 +25,9 @@ export default function SearchBox() {
           type="text"
           className="w[80%] w-full bg-transparent outline-none font-Inter font-normal text-sm text-[#101928]"
         />
+        <div className="-mr5 ml-2 lg:hidden">
+          <Filter />
+        </div>
       </div>
     </div>
   );

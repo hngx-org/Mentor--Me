@@ -8,15 +8,12 @@ import ProfileDetailsCardContainer, {
   SkillSCard,
 } from "@/components/mentorProfile/ProfileDetailCard";
 import MentorProfileMainLayout from "@/components/mentorProfile/mentorProfileMainLayout";
+import ProgressBar from "@/components/progressBar/ProgressBar";
+import OverViewCardLayout from "@/components/mentorProfile/MentorProfilelayouts";
 
 export default function ProfilePage() {
   return (
-    <div className="h-[100vh] w-[100vw]">
-      {/* <UserHero />
-      <UserDetails />
-
-      <UserExperience /> */}
-
+    <div className="h-[100vh] w-[100vw] overflow-scroll ">
       <MentorProfileHeader />
       <MentorProfileMainLayout>
         <BioCard text="" />
@@ -55,15 +52,28 @@ export default function ProfilePage() {
             {
               text: "Webmaster Inc.",
               heading: "CEO ",
-              type: "certification",
+              type: "experience",
             },
             {
               text: "futurLabs",
               heading: "Ui/Ux design intern",
-              type: "certification",
+              type: "experience",
             },
           ]}
         />
+
+        <ProfileDetailsCardContainer
+          heading="Education"
+          items={[
+            {
+              text: "University of Lagos. 2013 - 2017",
+              heading: "B.Sc Computer Science ",
+              type: "education",
+            },
+          ]}
+        />
+        <OverViewCardLayout heading="impact at a glance" />
+        <OverViewCardLayout heading="availabity" />
       </MentorProfileMainLayout>
     </div>
   );

@@ -1,5 +1,6 @@
-import React from "react";
+"use client";
 
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import BigDiscussionCard from "@/components/mentee-communities/BigDiscussionCard";
@@ -13,6 +14,7 @@ import {
 } from "@/public";
 import HomeNavBar from "@/components/homeNavbar";
 import Footer from "@/components/Footer";
+import CreateDiscussionModal from "@/components/mentee-communities/CreateDiscussionModal";
 // import { Button } from "@/components/buttons/button";
 
 type Props = {
@@ -43,9 +45,14 @@ const slideInfo = [
 ];
 
 export default function Forums(): React.ReactElement {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="">
       {" "}
+      {isModalOpen && (
+        <CreateDiscussionModal onClose={() => setIsModalOpen(false)} />
+      )}
       <HomeNavBar />{" "}
       <div className="forums startDiscussion joinDiscussion lg:px-[85px] max-w-[100vw] md:px-12 px-6 flex flex-col  gap-y-8 ">
         <div className="search border border-[#CCCCCC] mt-1 md:mt-[0] md:w-[60vw]  lg:w-[40vw] w-[60%] pl-[16px] py-[16px] rounded-[6px] ml-6 md:ml-0 flex lg:mb-[64px] mb-6 ">
@@ -85,35 +92,28 @@ export default function Forums(): React.ReactElement {
               experiences and insights with Mentor me
             </p>
           </div>
-          <div className="largeButton lg:flex hidden">
-            <Link href="/mentee-communities/forums/new-discussion">
-              {/* <Button
+          <div className="largeButton ">
+            {/* <Button
               variant="primary"
               className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px] xl:max-w-fit  l"
               type="button"
               title="Start a disscussion"
               iconPresent={messageedit}
             /> */}
-              <button
-                type="button"
-                className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px]  text-white border  bg-NeutalBase flex items-center gap-x-1 rounded-[8px]"
-              >
-                {" "}
-                <Image alt="icon" width={20} height={20} src={messageedit} />
-                Start a disscussion
-              </button>
-            </Link>
-          </div>
-          <div className="smallButton lg:hidden flex">
-            {" "}
-            <Link href="/mentee-communities/forums/new-discussion">
-              <button
-                type="button"
-                className="whitespace-nowrap px-[40px]   py-[16px]    h-fit  w-fit flex lg:hidden text-white border  bg-NeutalBase items-center rounded-[8px]"
-              >
-                Start a disscussion
-              </button>
-            </Link>
+            <button
+              type="button"
+              className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px]  text-white border  bg-NeutalBase flex items-center gap-x-1 rounded-[8px]"
+              onClick={() => setIsModalOpen(true)}
+            >
+              <Image
+                alt="icon"
+                width={20}
+                height={20}
+                src={messageedit}
+                className="lg:flex hidden"
+              />
+              Start a disscussion
+            </button>
           </div>
         </div>
 
