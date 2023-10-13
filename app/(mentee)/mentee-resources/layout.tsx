@@ -13,9 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const ctx = useContext(AuthCtx);
-  // ctx?.setUserAuth({ id: "_kisi", token: "dfgpsps" });
   const id = ctx?.userAuth.id;
-  // console.log(id);
 
   return !id ? (
     <main className="pt-[7rem]">
