@@ -6,8 +6,9 @@ import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { MenteeDashboardProfileImg } from "@/public";
 import { EditIcon, EditIconDark } from "@/public/SVGs";
-import Button from "@/app/(mentee)/mentee-sessions/(ui)/VxrcelBtn";
+
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
+import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 
 type formProps = {
   name: string;

@@ -24,7 +24,7 @@ import Button from "./(ui)/VxrcelBtn";
 import Loading from "./loading";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import SuccessReminder from "@/components/modal/mentee-session/SuccessReminder";
-import { EyeViewIcon, GridViewIcon, ListViewIcon } from "@/public/SVGs";
+import { GridViewIcon, ListViewIcon } from "@/public/SVGs";
 
 type SessionsTabsProps = {
   id: number;
@@ -148,7 +148,7 @@ export default function AllSession({
                 }
                 ${isView ? "!bg-black text-Neutra10 z-[9999]" : ""}`}
               >
-                <span>View</span>
+                <span>Views</span>
                 {activeView === "List" ? (
                   <ListViewIcon
                     props={{ className: "cursor-pointer w-6 h-6" }}

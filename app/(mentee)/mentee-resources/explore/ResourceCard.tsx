@@ -6,6 +6,7 @@ import Link from "next/link";
 import { EmptyStarIcon, FilledStarIcon } from "@/public/SVGs";
 // import AuthCtx from "@/context/AuthCtx";
 
+
 interface Card {
   // id: number;
   src: StaticImageData;
@@ -16,9 +17,8 @@ interface Card {
   reviews: number;
 }
 
-const ResourceCard = ({ src, title, price, author, rate, reviews }: Card) => (
-  // const ctx = useContext(AuthCtx);
-  // const userId = ctx?.userAuth.id;
+
+const ResourceCard = ({id, src, title, price, author, rate, reviews }: Card) => (
 
   <div className="w-full max-w-[397px] flex flex-col justify-between gap-4 items-center rounded-lg shadow-md flex-shrink-0">
     <Image
@@ -48,14 +48,8 @@ const ResourceCard = ({ src, title, price, author, rate, reviews }: Card) => (
         <span> {reviews} reviews</span>
       </div>
       <div className="flex gap-4 mb-4">
-        <Link
-          href={
-            // !userId
-            //   ? "/welcome/signup"
-            //   : `/mentee-resources/explore/${id}?path=resources`
-            "#"
-          }
-        >
+
+        <Link href={`/mentee-resources/explore/${id}?path=resources`}>
           <button
             type="button"
             className="font-Inter w-[112px] text-white rounded-lg bg-NeutalBase h-10 mb-4"
@@ -63,14 +57,8 @@ const ResourceCard = ({ src, title, price, author, rate, reviews }: Card) => (
             Buy Now
           </button>
         </Link>
-        <Link
-          href={
-            // !userId
-            //   ? "/welcome/signup"
-            //   : `/mentee-resources/explore/${id}?path=resources`
-            "#"
-          }
-        >
+
+        <Link href={`/mentee-resources/explore/${id}?path=resources`}>
           <button
             type="button"
             className="font-Hanken w-[112px] text-NeutralBase rounded-lg bg-white h-10 mb-4 border border-[#121212]"

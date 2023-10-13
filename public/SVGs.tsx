@@ -795,6 +795,30 @@ export const SettingIcon = (props?: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+export const LogoutMenteeIcon = ({
+  props,
+  className,
+  color,
+}: {
+  props?: SVGProps<SVGSVGElement>;
+  className?: string;
+  color?: string;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke={color || "#DB4A45"}
+    className={className}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+    />
+  </svg>
+);
 export const LogoutIcon = (props?: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -1476,6 +1500,7 @@ export const LeftIcon = (props: SVGProps<SVGSVGElement>) => (
     height="60"
     viewBox="0 0 60 60"
     fill="none"
+    enableBackground="black"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="arrow-circle-left">
@@ -1746,11 +1771,11 @@ export const MobileSession = (props?: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="#ABABAB"
+      stroke="#000"
       d="M22.5 12c0 5.52-4.48 10-10 10s-10-4.48-10-10 4.48-10 10-10 10 4.48 10 10Z"
     />
     <path
-      stroke="#ABABAB"
+      stroke="#000"
       d="m16.21 15.18-3.1-1.85c-.54-.32-.98-1.09-.98-1.72v-4.1"
     />
   </svg>
@@ -1783,7 +1808,8 @@ export const MobileHomeIcon = (props?: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      fill="#121212"
+      fill="none"
+      stroke="#000"
       d="m21.33 8.01-6.55-5.24c-1.28-1.02-3.28-1.03-4.55-.01L3.68 8.01c-.94.75-1.51 2.25-1.31 3.43l1.26 7.54C3.92 20.67 5.49 22 7.2 22h10.6c1.69 0 3.29-1.36 3.58-3.03l1.26-7.54c.18-1.17-.39-2.67-1.31-3.42ZM13.25 18c0 .41-.34.75-.75.75s-.75-.34-.75-.75v-3c0-.41.34-.75.75-.75s.75.34.75.75v3Z"
     />
   </svg>
@@ -1798,7 +1824,7 @@ export const CommunitIconMobile = (props?: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="#565656"
+      stroke="#000"
       d="M15 5.967a.504.504 0 0 0-.158 0 2.144 2.144 0 0 1-2.067-2.15A2.15 2.15 0 1 1 15 5.967ZM14.142 12.034c1.142.191 2.4-.009 3.284-.6 1.175-.784 1.175-2.067 0-2.85-.892-.592-2.167-.792-3.309-.592M4.973 5.967a.504.504 0 0 1 .159 0 2.144 2.144 0 0 0 2.066-2.15c0-1.192-.958-2.15-2.15-2.15a2.15 2.15 0 0 0-.075 4.3ZM5.833 12.034c-1.142.191-2.4-.009-3.284-.6-1.175-.784-1.175-2.067 0-2.85.892-.592 2.167-.792 3.309-.592M10 12.192a.507.507 0 0 0-.158 0 2.144 2.144 0 0 1-2.067-2.15 2.15 2.15 0 1 1 4.3 0c-.008 1.166-.925 2.116-2.075 2.15ZM7.575 14.817c-1.175.783-1.175 2.067 0 2.85 1.333.891 3.516.891 4.85 0 1.175-.784 1.175-2.067 0-2.85-1.325-.883-3.517-.883-4.85 0Z"
     />
   </svg>
@@ -1813,7 +1839,7 @@ export const ResourcesMobile = (props?: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="#565656"
+      stroke="#000"
       d="M18.333 13.95V3.892c0-1-.817-1.742-1.809-1.659h-.05c-1.75.15-4.408 1.042-5.891 1.975l-.142.092a.923.923 0 0 1-.883 0l-.209-.125c-1.483-.925-4.133-1.808-5.883-1.95a1.64 1.64 0 0 0-1.8 1.658V13.95c0 .8.65 1.55 1.45 1.65l.242.033c1.808.242 4.6 1.159 6.2 2.034l.033.016c.225.125.583.125.8 0 1.6-.883 4.4-1.808 6.217-2.05l.275-.033c.8-.1 1.45-.85 1.45-1.65ZM10 4.575v12.5M6.459 7.075H4.584M7.084 9.575h-2.5"
     />
   </svg>
@@ -2424,6 +2450,83 @@ export const EducationIcon = () => (
     <path
       d="M21.4004 15V9"
       stroke="#121212"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+export const ShareIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M13.6997 7.41699C16.6997 7.67533 17.9247 9.21699 17.9247 12.592V12.7003C17.9247 16.4253 16.4331 17.917 12.7081 17.917H7.28307C3.55807 17.917 2.06641 16.4253 2.06641 12.7003V12.592C2.06641 9.24199 3.27474 7.70033 6.22474 7.42533"
+      stroke="#292D32"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10 12.4999V3.0166"
+      stroke="#292D32"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M12.7923 4.87467L10.0007 2.08301L7.20898 4.87467"
+      stroke="#292D32"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+export const FilledStarICon = () => (
+  <svg
+    width="13"
+    height="14"
+    viewBox="0 0 13 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M6.18556 0.3125L8.28815 4.4162L12.3711 5.4213L9.58762 8.96262L10.0085 13.6875L6.18556 11.7725L2.36267 13.6875L2.7835 8.96262L0 5.4213L4.08297 4.4162L6.18556 0.3125Z"
+      fill="#FFCB45"
+    />
+  </svg>
+);
+export const UnfilledStarIcon = () => (
+  <svg
+    width="13"
+    height="14"
+    viewBox="0 0 13 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M6.81447 0.3125L8.91706 4.4162L13 5.4213L10.2165 8.96262L10.6374 13.6875L6.81447 11.7725L2.99158 13.6875L3.41241 8.96262L0.628906 5.4213L4.71188 4.4162L6.81447 0.3125Z"
+      fill="#D9D9D9"
+    />
+  </svg>
+);
+
+export const ModalCloseIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 18 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M5.06836 12.9319L9.00061 8.99963L12.9329 12.9319M12.9329 5.06738L8.99986 8.99963L5.06836 5.06738"
+      stroke="#7B7F84"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
