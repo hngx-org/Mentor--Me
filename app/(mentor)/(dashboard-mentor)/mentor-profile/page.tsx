@@ -44,7 +44,7 @@ export default function ProfilePage() {
       }
     }
   }, []);
-  console.log(user);
+
   return (
     <div className="h-[100vh] w-[100vw] overflow-scroll ">
       <MentorProfileHeader

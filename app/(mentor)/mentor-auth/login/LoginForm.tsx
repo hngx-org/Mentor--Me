@@ -72,17 +72,6 @@ export default function LoginForm() {
                 Log in
               </Button>
             </form>
-            <Link href="/mentor-auth/forget-password">
-              {" "}
-              <p className="font-Hanken text-[#008080] flex justify-end text-sm my-3">
-                Forget Password?
-              </p>
-            </Link>
-            <Link href="/mentor-profile-creation">
-              <Button variant="primary" paddingLess className="w-full h-[48px]">
-                Log in
-              </Button>
-            </Link>
 
             <div className="flex justify-center w-full">
               <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
