@@ -4,7 +4,7 @@ import { MobileSearchIcon } from "@/svgs/Schedule/ScheduleMentor";
 function MobileAppear() {
   return (
     <div>
-      <div className="container w-full bg-NeutalBase pb-4 lg:hidden">
+      <div className="w-full bg-NeutalBase pb-4 lg:hidden mx-auto">
         <div className="flex justify-between flex-col items-center gap-4 min-h-[96px]">
           <p className="text-[#fff] text-base text-center px-4 pt-2 font-Inter">
             Get started with MentorMe Long term mentorship program

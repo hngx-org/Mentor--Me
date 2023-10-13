@@ -16,17 +16,13 @@ import MobileAppear from "./MobileAppear";
 
 function Schedule() {
   return (
-    <div className="flex w-[100vw] h-[100vh] overflow-clip">
-      {/* Mobile sidebar */}
-
+    <div>
       <SidebarMentor />
 
-      <div className="w-full overflow-scroll max-h-full">
-        <MentorTopNav />
-
-        <MobileSideBar />
-        {/* Mobile header ends */}
+      <div>
         <MobileAppear />
+        {/* Mobile header ends */}
+
         {/* Body of the page */}
         <section className="container md:p-10 w-full p-6 sm:py-8 sm:px-10 mx-auto">
           {/* My schedule segment */}
@@ -141,7 +137,7 @@ function Schedule() {
             </div>
           </div>
 
-          <div className="mb-3">
+          <div className="mb-5">
             <PreviousSessionsCall />
           </div>
         </section>
