@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
 
-import HomeNavBar from "@/components/HomeNavbar copy";
+import MentorTopNav from "@/components/mentorTopNav";
 import MobileSideBar from "@/components/MobileSideBar";
-import MentorSideBar from "@/components/SideBar/MentorSideBar";
+import SidebarMentor from "@/components/mentor/SidebarMentor";
 
 export default function MentorCommLayout({
   children,
@@ -12,10 +12,10 @@ export default function MentorCommLayout({
   return (
     <main className="grid grid-cols-[auto,_minmax(0,_1fr)] grid-rows-[auto,_1fr]">
       <div className="col-start-2 col-end-3 row-start-1 row-end-2">
-        <HomeNavBar />
+        <MentorTopNav />
       </div>
-      <section className="col-start-1 col-end-2 row-span-full">
-        <MentorSideBar className="sticky top-0" />
+      <section className="col-start-1 col-end-2 sticky top-0 h-[100vh] row-span-full">
+        <SidebarMentor />
       </section>
       <MobileSideBar />
       <section className="col-start-2 col-end-3 row-start-2 row-end-3">
