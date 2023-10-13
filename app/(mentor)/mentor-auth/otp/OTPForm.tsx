@@ -4,10 +4,11 @@ import React, { useState, useRef } from "react";
 
 import Image from "next/image";
 
+import { useRouter } from "next/navigation";
+
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import { Button } from "@/components/buttons/button";
-import { useRouter } from "next/navigation";
 
 import Modal from "@/components/modal/Modal";
 import generateKey from "@/lib/generatekey";
@@ -37,7 +38,7 @@ const OTPForm = () => {
     const hashedUsername =
       username.substring(0, 2) + "*".repeat(username.length - 4);
 
-    const hashedEmail = hashedUsername + "@" + domain;
+    const hashedEmail = `${hashedUsername} "@" ${domain}`;
 
     return hashedEmail;
   }
@@ -64,7 +65,9 @@ const OTPForm = () => {
         const data = await response.json();
         openModal();
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error", error);
+    }
   };
 
   const resendEmail = async () => {
@@ -80,7 +83,9 @@ const OTPForm = () => {
           }),
         }
       );
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error", error);
+    }
   };
 
   const handleInputChange = (
@@ -150,11 +155,15 @@ const OTPForm = () => {
               ))}
             </div>
 
-            <p className="font-Hanken text-[#565656] text-sm my-5 ">
+            <p className="font-Hanken text-[#565656] text-sm my-5 flex">
               Didn’t receive OTP?{" "}
-              <span onClick={resendEmail} className="text-[#008080]">
+              <button
+                type="button"
+                onClick={resendEmail}
+                className="text-[#008080]"
+              >
                 Resend
-              </span>
+              </button>
             </p>
           </div>
         </div>

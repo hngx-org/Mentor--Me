@@ -6,6 +6,8 @@ import Image from "next/image";
 
 import Link from "next/link";
 
+import { useRouter } from "next/navigation";
+
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import google from "../../../../public/assets/images/goggle.svg";
@@ -15,7 +17,7 @@ import facebook from "../../../../public/assets/images/facebook.svg";
 import Input from "@/components/inputs/input";
 
 import { Button } from "@/components/buttons/button";
-import { useRouter } from "next/navigation";
+
 import formData from "@/lib/mentorProfileCreationData";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Label from "@/components/label/Label";
@@ -81,15 +83,11 @@ const SignUpForm = () => {
           const error = await response.json();
           setErrors({ ...errors, labelErr: error?.message });
         }
-
-        console.log(response);
       } catch (error) {
         console.error("Error:", error);
       } finally {
         setIsLoading(false);
       }
-    } else {
-      console.log("Form has validation errors. Please correct them.");
     }
   };
 
