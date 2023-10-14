@@ -4,7 +4,8 @@ import type { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Inter, Hanken_Grotesk as HankenGrotesk } from "next/font/google";
-import AuthProvider from "@/components/AuthProvider/AuthProvider";
+// import AuthProvider from "@/components/AuthProvider/AuthProvider";
+import AuthContextProvider from "@/context/AuthContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,7 +43,7 @@ export default function RootLayout({
           pauseOnHover
           theme="light"
         />
-        <AuthProvider>{children}</AuthProvider>
+        <AuthContextProvider>{children}</AuthContextProvider>
       </body>
     </html>
   );

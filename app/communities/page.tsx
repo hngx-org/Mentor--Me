@@ -1,13 +1,13 @@
+"use client";
+
 import React from "react";
-import {
-  DiscussionForums,
-  MentorshipSessions,
-} from "@/components/mentor-community";
+import { DiscussionForums } from "@/components/mentor-community";
 import HomeNavBar from "@/components/homeNavbar";
 import { SearchIcon } from "@/public/assets/Icons/mentor-communities";
 import Footer from "@/components/Footer";
 import { mentorCardAvatar, mentorCardHero } from "@/public";
 import MentorGrid from "@/components/mentee-communities/MentorGrid";
+// import useAuth from "@/context/useAuth";
 
 const mentorInfo = [
   {
@@ -85,6 +85,9 @@ const mentorInfo = [
 ];
 
 const CommunityPage = () => (
+  // const { data, message, success } = useAuth();
+  // console.log(data);
+
   <section className="w-full h-full">
     {/* Search Bar */}
     <div>
@@ -126,5 +129,4 @@ const CommunityPage = () => (
     <Footer />
   </section>
 );
-
 export default CommunityPage;
