@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export default async function uploadResource(
   prevState: any,
@@ -10,8 +11,14 @@ export default async function uploadResource(
     title: formData.get("course-title"),
     courseDescription: formData.get("course-description"),
     category: formData.get("category"),
-    courseType: formData.get("course-type"),
+    coursetype: formData.get("course-type"),
     price: formData.get("price"),
+    ratings: "0.0",
+    reviews: "0",
+    currency: "N",
+    name: "Olamilekan",
+    role: "Frontend Developer",
+    company: "Self employed",
   };
 
   try {
@@ -24,6 +31,7 @@ export default async function uploadResource(
     });
     const data = await res.json();
     revalidatePath("/mentor-resources");
+    redirect("/mentor-resources");
   } catch (e) {
     const rand = "";
   }
