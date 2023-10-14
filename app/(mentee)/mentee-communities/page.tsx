@@ -10,6 +10,21 @@ import SidebarMentor from "@/components/mentor/SidebarMentor";
 import { mentorCardAvatar, mentorCardHero } from "@/public";
 import { get, getMentorInfo, post } from "@/lib/apiHelper";
 
+type MentorDataType = {
+  date: string;
+  firstname: string;
+  timezone: string;
+  review: number;
+  nextAvailable: string;
+  topic: string;
+  contentImage: string;
+  id: string;
+  time: string;
+  title: string;
+  content: string;
+  lastname: string;
+};
+
 const MenteeCommunities: React.FC = () => {
   const isLoggedIn = false;
   const sliderInfo = [
@@ -156,7 +171,8 @@ const MenteeCommunities: React.FC = () => {
     },
   ];
 
-  const [mentorInfo2, setMentorInfo2] = useState([]);
+  const [mentorInfo2, setMentorInfo2] = useState([] as MentorDataType[]);
+
   useEffect(() => {
     getMentorInfo(setMentorInfo2);
   }, []);
