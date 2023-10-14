@@ -42,7 +42,7 @@ export default function LoginForm() {
       setIsValid(false);
     } else {
       setIsValid(true);
-      console.log(formData);
+      // console.log(formData);
       try {
         const response = await axios.post(
           "https://mentormee-api.onrender.com/auth/login",
@@ -52,11 +52,11 @@ export default function LoginForm() {
           }
         );
         window.location.href = "/dashboard";
-        alert("Suceess");
+        // alert("Suceess");
       } catch (error) {
         // Handle error
-        console.error("An error occurred: ", error);
-        alert(error);
+        // console.error("An error occurred: ", error);
+        // alert(error);
       }
     }
   };
