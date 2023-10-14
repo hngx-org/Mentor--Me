@@ -22,6 +22,7 @@ const DiscussionCard = ({ image, author, title, description }: Props) => (
           src={image!}
           alt={title}
           className="md:w-full md:h-full object-cover"
+          placeholder="blur"
         />
       </div>
     ) : (
