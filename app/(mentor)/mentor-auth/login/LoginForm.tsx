@@ -52,9 +52,10 @@ export default function LoginForm() {
 
     if (form.checkValidity() === false) {
       setIsValid(false);
-    } else {
-      setIsValid(true);
-      axios
+      return;
+    }
+    try {
+      await axios
         .post("https://mentormee-api.onrender.com/auth/login", {
           // .post("http://localhost:4000/auth/login", {
           email: formData.email,
@@ -75,6 +76,10 @@ export default function LoginForm() {
             toast(err?.response?.data?.message || "something went wrong");
           }
         });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
