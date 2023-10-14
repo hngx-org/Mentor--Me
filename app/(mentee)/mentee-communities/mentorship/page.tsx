@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 
 import { verify } from "crypto";
 import { mentorCardAvatar, mentorCardHero } from "@/public";
@@ -6,83 +8,32 @@ import BigMentorShipCard from "@/components/mentee-communities/BigMentorShipCard
 import MentorCard from "@/components/mentee-communities/MentorCard";
 import HomeNavBar from "@/components/homeNavbar";
 import Footer from "@/components/Footer";
+import { getMentorInfo } from "@/lib/apiHelper";
+
+type MentorDataType = {
+  date: string;
+  firstname: string;
+  timezone: string;
+  review: number;
+  nextAvailable: string;
+  topic: string;
+  contentImage: string;
+  id: string;
+  time: string;
+  title: string;
+  content: string;
+  lastname: string;
+};
 
 export default function FreeMentorship() {
-  const mentorInfo = [
-    {
-      id: 9408,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 9408,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 9408,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 94408,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 94068,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 94078,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-  ];
+  const [mentorInfo, setMentorInfo] = useState([] as MentorDataType[]);
+  useEffect(() => {
+    getMentorInfo(setMentorInfo);
+  }, []);
 
+  function capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   return (
     <div className="freeMentorship">
       <HomeNavBar />
@@ -106,15 +57,17 @@ export default function FreeMentorship() {
         {mentorInfo.map((item) => (
           <BigMentorShipCard
             id={item.id}
-            mentorName={item.mentorName}
-            mentorPostion={item.mentorPostion}
-            verify={item.verify}
-            mentorImage={item.mentorAvatar}
-            mentorCardHero={item.cardHero}
+            mentorName={`${capitalizeFirstLetter(
+              item.firstname
+            )} ${capitalizeFirstLetter(item.lastname)}`}
+            verify
+            mentorPostion={capitalizeFirstLetter(item.title)}
+            mentorImage={mentorCardAvatar}
+            CardHero={mentorCardHero}
             date={item.date}
             time={item.time}
-            title={item.title}
-            desc={item.desc}
+            title={capitalizeFirstLetter(item.topic)}
+            desc={capitalizeFirstLetter(item.content)}
           />
         ))}
       </div>
@@ -126,15 +79,17 @@ export default function FreeMentorship() {
           <div className="w-full flex justify-center ">
             <MentorCard
               id={item.id}
-              mentorName={item.mentorName}
-              verify={item.verify}
-              mentorPostion={item.mentorPostion}
-              mentorAvatar={item.mentorAvatar}
-              cardHero={item.cardHero}
+              mentorName={`${capitalizeFirstLetter(
+                item.firstname
+              )} ${capitalizeFirstLetter(item.lastname)}`}
+              verify
+              mentorPostion={capitalizeFirstLetter(item.title)}
+              mentorAvatar={mentorCardAvatar}
+              cardHero={item.contentImage}
               date={item.date}
               time={item.time}
-              title={item.title}
-              desc={item.desc}
+              title={capitalizeFirstLetter(item.topic)}
+              desc={capitalizeFirstLetter(item.content)}
             />
           </div>
         ))}

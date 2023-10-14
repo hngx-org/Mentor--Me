@@ -31,3 +31,13 @@ export async function checkUser(data: loginDataType) {
     console.log("error");
   }
 }
+
+export const getMentorInfo = async (setData) => {
+  const data = await get(
+    "https://cardbackendhngx.onrender.com/api/get_data"
+  ).catch((err) => console.error(err, "Error fetching Mentor data "));
+  setData(data);
+  console.log(data);
+
+  return data;
+};

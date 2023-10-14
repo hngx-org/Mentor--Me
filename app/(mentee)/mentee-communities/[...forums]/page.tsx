@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import BigDiscussionCard from "@/components/mentee-communities/BigDiscussionCard";
 import big from "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg";
 
@@ -21,31 +22,36 @@ type Props = {
   join: boolean;
 };
 
-const slideInfo = [
-  {
-    mentor: true,
-    name: "Shant Baddie",
-    heroCard:
-      "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
-    image: { mentorCardAvatar },
-    title: "My take on Augmented Reality (AR)",
-    desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
-    id: 17,
-  },
-  {
-    mentor: false,
-    name: "Shant Baddie",
-    heroCard:
-      "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
-    image: { mentorCardAvatar },
-    title: "My take on Augmented Reality (AR)",
-    desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
-    id: 17,
-  },
-];
-
 export default function Forums(): React.ReactElement {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const parmas = useParams();
+  const disscussionId = useParams().forums[1];
+
+  console.log(disscussionId);
+
+  const slideInfo = [
+    {
+      mentor: true,
+      name: "Shant Baddie",
+      heroCard:
+        "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
+      image: { mentorCardAvatar },
+      title: "My take on Augmented Reality (AR)",
+      desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
+      id: 17,
+    },
+    {
+      mentor: false,
+      name: "Shant Baddie",
+      heroCard:
+        "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
+      image: { mentorCardAvatar },
+      title: "My take on Augmented Reality (AR)",
+      desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
+      id: 17,
+    },
+  ];
 
   return (
     <div className="">

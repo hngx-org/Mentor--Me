@@ -9,7 +9,7 @@ import { Button } from "../buttons/button";
 // import Button from "@/components/ui/Button";
 
 type Props = {
-  id: number;
+  id: string;
   mentorName: string;
   verify: boolean;
   mentorPostion: string;
@@ -37,12 +37,12 @@ const MentorCard: React.FC<Props> = ({
     <div className="card h-full w-full font-Hanken flex flex-col gap-3 lg:gap-3 items-center">
       <Image
         alt="members"
-        src={cardHero}
+        src={mentorCardHero}
         width={298}
         height={183}
         className="flex lg:w-[100%] lg:aspect-[298/183]object-cover "
       />
-      <div className="info px-2 lg:px-[14px] lg:gap-[10px] flex flex-col gap-[4px] ">
+      <div className="info w-full px-2 lg:px-[14px] lg:gap-[10px] flex flex-col gap-[4px] ">
         <div className="w-fit flex lg:gap-1 gap-[3px] flex-col justify-center text-center">
           <div className="flex gap-1 items-center">
             <Image
@@ -87,7 +87,7 @@ const MentorCard: React.FC<Props> = ({
         <div className="topic font-semibold xl:text-[18px] text-[12px] lg:leading-[21.6px] leading-[16px]">
           {title}
         </div>
-        <div className="desc font-normal xl:text-[12px] xl:leading-[14.4px] text-[10px] leading-[12px] ">
+        <div className="desc font-normal xl:text-[12px] text-[10px] leading-[120%]  h-[48px] xl:h-[57.6px] overflow-clip ">
           {desc}
         </div>
         <div className="border-b border-Neutra10 border-[.25px] lg:flex hidden  " />

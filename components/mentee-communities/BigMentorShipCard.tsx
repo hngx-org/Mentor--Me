@@ -2,11 +2,12 @@ import React from "react";
 import Image from "next/image";
 
 import { CalenderIcon, ClockIcon } from "@/public/SVGs";
+import { mentorCardAvatar, mentorCardHero } from "@/public";
 // import Button from "@/components/ui/Button";
 
 type Props = {
-  id: number;
-  mentorCardHero: string;
+  id: string | number;
+  CardHero: string;
   mentorImage: string;
   mentorName: string;
   verify: boolean;
@@ -19,7 +20,7 @@ type Props = {
 
 const BigMentorShipCard: React.FC<Props> = ({
   id,
-  mentorCardHero,
+  CardHero,
   mentorImage,
   mentorName,
   verify,
@@ -49,7 +50,7 @@ const BigMentorShipCard: React.FC<Props> = ({
         <div className="flex gap-1 items-center">
           <Image
             alt="members"
-            src={mentorImage}
+            src={mentorCardAvatar}
             width={37}
             height={37}
             className="lg:w-[30px] aspect-square xl:w-[37px]"
@@ -75,7 +76,9 @@ const BigMentorShipCard: React.FC<Props> = ({
         </div>
       </div>
 
-      <div className="desc font-normal xl:text-2xl lg:text-[18px] ">{desc}</div>
+      <div className="desc font-normal xl:text-2xl lg:text-[18px] xl:h-[96px] h-[54px] overflow-clip">
+        {desc}
+      </div>
 
       <button
         type="button"

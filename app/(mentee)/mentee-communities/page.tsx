@@ -1,6 +1,6 @@
-// "use client";
+"use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DiscussionSlider from "@/components/mentee-communities/DiscussionSlider";
 import MentorGrid from "@/components/mentee-communities/MentorGrid";
 import HomeNavBar from "@/components/homeNavbar";
@@ -8,117 +8,160 @@ import Footer from "@/components/Footer";
 import { SearchIcon } from "@/public/assets/Icons/mentor-communities";
 import SidebarMentor from "@/components/mentor/SidebarMentor";
 import { mentorCardAvatar, mentorCardHero } from "@/public";
-import { get, post } from "@/lib/apiHelper";
+import { get, getMentorInfo, post } from "@/lib/apiHelper";
 
 const MenteeCommunities: React.FC = () => {
   const isLoggedIn = false;
   const sliderInfo = [
     {
-      title: "Member Math",
+      title: "Tech Titans",
       members: 13,
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
+      desc: "Connect with industry-leading mentors in science and technology. Explore the cutting edge together.",
       id: 12,
+      slideComments: [
+        {
+          mentor: true,
+          name: "Shant Baddie",
+          heroCard:
+            "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
+          image: { mentorCardAvatar },
+          title: "My take on Augmented Reality (AR)",
+          desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
+          commentid: 1,
+        },
+        {
+          mentor: false,
+          name: "Shant Baddie",
+          heroCard:
+            "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
+          image: { mentorCardAvatar },
+          title: "My take on Augmented Reality (AR)",
+          desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
+          commentid: 1,
+        },
+      ],
     },
     {
-      title: "Member Math",
+      title: "Business Mavericks",
       members: 13,
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
+      desc: "Navigate the world of business with mentors who have walked the path to success.",
       id: 13,
+      slideComments: [
+        {
+          mentor: true,
+          name: "Shant Baddie",
+          heroCard:
+            "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
+          image: { mentorCardAvatar },
+          title: "My take on Augmented Reality (AR)",
+          desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
+          commentid: 1,
+        },
+        {
+          mentor: false,
+          name: "Shant Baddie",
+          heroCard:
+            "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
+          image: { mentorCardAvatar },
+          title: "My take on Augmented Reality (AR)",
+          desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
+          commentid: 1,
+        },
+      ],
     },
     {
-      title: "Member Math",
+      title: "Math Masters",
       members: 13,
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
+      desc: "Conquer mathematics with mentors who simplify complex equations.",
       id: 15,
+      slideComments: [
+        {
+          mentor: true,
+          name: "Shant Baddie",
+          heroCard:
+            "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
+          image: { mentorCardAvatar },
+          title: "My take on Augmented Reality (AR)",
+          desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
+          commentid: 1,
+        },
+        {
+          mentor: false,
+          name: "Shant Baddie",
+          heroCard:
+            "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
+          image: { mentorCardAvatar },
+          title: "My take on Augmented Reality (AR)",
+          desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
+          commentid: 1,
+        },
+      ],
     },
     {
-      title: "Member Math",
+      title: "Minding Living",
       members: 13,
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
-      id: 15,
+      desc: "Embrace mindfulness and mental well-being with mentors who nurture your inner peace.",
+      id: 16,
+      slideComments: [
+        {
+          mentor: true,
+          name: "Shant Baddie",
+          heroCard:
+            "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
+          image: { mentorCardAvatar },
+          title: "My take on Augmented Reality (AR)",
+          desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
+          commentid: 1,
+        },
+        {
+          mentor: false,
+          name: "Shant Baddie",
+          heroCard:
+            "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
+          image: { mentorCardAvatar },
+          title: "My take on Augmented Reality (AR)",
+          desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
+          commentid: 1,
+        },
+      ],
     },
     {
-      title: "Member Math",
+      title: "Lorem Ipsum",
       members: 13,
       desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, ab",
       id: 17,
-    },
-  ];
-  const mentorInfo = [
-    {
-      id: 9408,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 9408,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 9408,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 94408,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 94068,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 94078,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
+      slideComments: [
+        {
+          mentor: true,
+          name: "Shant Baddie",
+          heroCard:
+            "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
+          image: { mentorCardAvatar },
+          title: "My take on Augmented Reality (AR)",
+          desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
+          commentid: 1,
+        },
+
+        {
+          mentor: false,
+          name: "Shant Baddie",
+          heroCard:
+            "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
+          image: { mentorCardAvatar },
+          title: "My take on Augmented Reality (AR)",
+          desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
+          commentid: 1,
+        },
+      ],
     },
   ];
 
+  const [mentorInfo2, setMentorInfo2] = useState([]);
+  useEffect(() => {
+    getMentorInfo(setMentorInfo2);
+  }, []);
+
+  // console.log(mentorInfo2);
   // const widthOfSlider = (
   //   widthOfSlides: number,
   //   colGap: number,
@@ -221,7 +264,7 @@ const MenteeCommunities: React.FC = () => {
                 <DiscussionSlider slideInfo={sliderInfo} />
               </div>
               <div className=" w-[396px] sm:w-[406px]  md:w-[628px] lg:w-[calc(777px)] xl:w-[calc(977px)] 2xl:w-[calc(1362px)]  border border-transparent  mx-auto overflow-hidden">
-                <MentorGrid mentorInfo={mentorInfo} />
+                <MentorGrid mentorInfo={mentorInfo2} />
               </div>
             </div>
           ) : (
@@ -232,7 +275,7 @@ const MenteeCommunities: React.FC = () => {
                 <DiscussionSlider slideInfo={sliderInfo} />
               </div>
               <div className=" w-[396px] sm:w-[628px]  md:w-[860px] lg:w-[calc(1052px)] xl:w-[calc(1352px)] 2xl:w-[calc(1362px)]   border border-transparent  mx-auto overflow-hidden">
-                <MentorGrid mentorInfo={mentorInfo} />
+                <MentorGrid mentorInfo={mentorInfo2} />
               </div>
             </div>
           )}
