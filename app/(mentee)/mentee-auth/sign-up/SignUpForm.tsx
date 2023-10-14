@@ -54,7 +54,7 @@ export default function SignUpForm() {
         window.location.href = "/mentee-profile-creation";
       } catch (error) {
         // Handle error
-        console.error("An error occurred: ", error);
+        // console.error("An error occurred: ", error);
       }
     }
   };

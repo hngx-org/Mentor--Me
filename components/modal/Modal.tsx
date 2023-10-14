@@ -20,11 +20,11 @@ interface ModalProps {
   title?: string;
 }
 
-const pathName: string = window.location.pathname.slice(13);
+// const pathName: string = window.location.pathname.slice(13);
 // console.log(pathName)
 
-const linkHref =
-  pathName === "forget-password" ? window.location.href : "/mentor-auth/login";
+// const linkHref =
+//   pathName === "forget-password" ? window.location.href : "/mentor-auth/login";
 
 const Modal: FC<ModalProps> = ({
   isOpen,
@@ -78,7 +78,7 @@ const Modal: FC<ModalProps> = ({
                 <p className="text-center my-6 font-Hanken text-base">
                   {content}
                 </p>
-                <Link href={linkHref}>
+                <Link href="/welcome/login">
                   <Button
                     variant="primary"
                     paddingLess
