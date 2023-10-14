@@ -32,10 +32,10 @@ export default async function MentorResources() {
         <div className="mentor-resources-scroll flex overflow-y-auto gap-4 pb-4">
           {data.map((resource: any) => (
             <ResourceCard
-              key={resource.id}
+              key={resource._id}
               title={resource.title}
               description={resource?.description}
-              resourceId={resource.id}
+              resourceId={resource._id}
               price={resource.price}
               reviewCount={resource.reviews}
               stars={resource.ratings}
@@ -51,10 +51,10 @@ export default async function MentorResources() {
         <div className="mentor-resources-scroll flex overflow-y-auto gap-4 pb-4">
           {data.map((resource: any) => (
             <ResourceCard
-              key={resource.id}
+              key={resource._id}
               title={resource.title}
               description={resource?.description}
-              resourceId={resource.id}
+              resourceId={resource._id}
               price={resource.price}
               reviewCount={resource.reviews}
               stars={resource.ratings}

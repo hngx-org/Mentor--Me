@@ -84,7 +84,9 @@ export default function UploadResourcesPage() {
           id="category"
           name="category"
           required
-          disabled
+          onKeyDown={(e) => {
+            e.preventDefault();
+          }}
           value={courseTypeOptions[selectedCategoryOptionIdx]}
           placeholder="select category"
           className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
@@ -115,8 +117,10 @@ export default function UploadResourcesPage() {
           type="text"
           id="course-type"
           name="course-type"
+          onKeyDown={(e) => {
+            e.preventDefault();
+          }}
           required
-          disabled
           value={courseTypeOptions[selectedOptionIdx]}
           placeholder="select course type"
           className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
