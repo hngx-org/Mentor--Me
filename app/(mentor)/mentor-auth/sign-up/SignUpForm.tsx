@@ -6,8 +6,6 @@ import Image from "next/image";
 
 import Link from "next/link";
 
-import { useRouter } from "next/navigation";
-
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import google from "../../../../public/assets/images/goggle.svg";
@@ -17,6 +15,7 @@ import facebook from "../../../../public/assets/images/facebook.svg";
 import Input from "@/components/inputs/input";
 
 import { Button } from "@/components/buttons/button";
+import { BackwardIcon } from "@/public/SVGs";
 
 export default function SignUpForm() {
   const [isValid, setIsValid] = React.useState(true);
@@ -34,10 +33,17 @@ export default function SignUpForm() {
             />
           </div>
         </div>
-        <div className="col-span-3  px-4  lg:px-6 xl:px-16">
-          <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
-            Mentor Me
-          </h2>
+        <div className="col-span-3  px-4  lg:px-6 xl:px-16 mb-4">
+          <div className="flex justify-between items-center">
+            <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
+              <a href="/"> Mentor Me</a>
+            </h2>
+
+            <a href="/welcome/login" className="flex">
+              {" "}
+              <BackwardIcon /> <span className="ms-2">Go back</span>
+            </a>
+          </div>
           <div className="flex justify-center flex-col">
             <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
               Sign Up

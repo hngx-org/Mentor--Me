@@ -53,6 +53,7 @@ const Input: React.FC<InputProps> = ({
           autoComplete="off"
           id={id}
           value={value}
+          name={name}
           disabled={disabled}
           required={required}
           placeholder=""

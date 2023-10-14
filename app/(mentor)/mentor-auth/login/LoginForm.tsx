@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 import Image from "next/image";
@@ -13,9 +15,11 @@ import facebook from "../../../../public/assets/images/facebook.svg";
 import Input from "@/components/inputs/input";
 
 import { Button } from "@/components/buttons/button";
+import { BackwardIcon } from "@/public/SVGs";
 
 export default function LoginForm() {
   const [isValid, setIsValid] = React.useState(true);
+
   return (
     <div>
       <div className="w-full h-[100vh] grid grid-cols-1 lg:grid-cols-6  overflow-hidden">
@@ -30,9 +34,16 @@ export default function LoginForm() {
           </div>
         </div>
         <div className="col-span-3  px-4  lg:px-6 xl:px-16">
-          <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
-            Mentor Me
-          </h2>
+          <div className="flex justify-between items-center">
+            <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
+              <a href="/"> Mentor Me</a>
+            </h2>
+
+            <a href="/welcome/login" className="flex">
+              {" "}
+              <BackwardIcon /> <span className="ms-2">Go back</span>
+            </a>
+          </div>
           <div className="flex justify-center flex-col">
             <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
               Welcome Back
