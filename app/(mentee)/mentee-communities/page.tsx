@@ -1,8 +1,7 @@
 "use client";
 
+import { Metadata } from "next";
 import React from "react";
-
-import MenteeCommunities from "./MenteeCommunity";
 
 const page = () => <MenteeCommunities />;
 

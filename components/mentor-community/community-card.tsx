@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Discussion, Member } from "@/app/(mentor)/mentor-community/data";
+import {
+  Discussion,
+  Member,
+} from "@/app/(mentor)/(dashboard-mentor)/mentor-community/data";
 
 interface Props {
   slug: string;

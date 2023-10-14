@@ -39,7 +39,7 @@ export default function Achievements({
           >
             Achievement/Award Name
             <input
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
               id="achievementName"
               name="achievementName"
               type="text"
@@ -56,7 +56,7 @@ export default function Achievements({
           >
             Issuing Organization
             <input
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
               id="issuingOrganization"
               type="text"
               placeholder="Goggle"
@@ -76,7 +76,7 @@ export default function Achievements({
               name="yearReceived"
               id="yearReceived"
               onChange={handleInputChange}
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
             >
               <option>2023</option>
               <option>2022</option>
@@ -96,7 +96,7 @@ export default function Achievements({
               onChange={handleInputChange}
               cols={30}
               rows={6}
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Provide a brief description of the achievement or award, including its significance and impact on your career."
             />
           </label>
