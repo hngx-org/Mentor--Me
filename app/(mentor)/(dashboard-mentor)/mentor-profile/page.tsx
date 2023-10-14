@@ -41,7 +41,7 @@ export default function ProfilePage() {
             email: newUser.email,
           });
         } catch (error) {
-          console.error("Error parsing JSON:", error);
+          // console.error("Error parsing JSON:", error);
         }
       }
     }

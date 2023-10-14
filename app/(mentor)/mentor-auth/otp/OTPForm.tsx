@@ -27,7 +27,7 @@ const OTPForm = () => {
           const newUser = JSON.parse(getUser);
           setUser(newUser);
         } catch (error) {
-          console.error("Error parsing JSON:", error);
+          // console.error("Error parsing JSON:", error);
         }
       }
     }
@@ -73,7 +73,7 @@ const OTPForm = () => {
         openModal();
       }
     } catch (error) {
-      console.error("Error", error);
+      // console.error("Error", error);
     }
   };
 
@@ -92,7 +92,7 @@ const OTPForm = () => {
         }
       );
     } catch (error) {
-      console.error("Error", error);
+      // console.error("Error", error);
     }
   };
 
