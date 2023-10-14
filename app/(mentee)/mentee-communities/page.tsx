@@ -178,73 +178,8 @@ const MenteeCommunities: React.FC = () => {
     getMentorInfo(setMentorInfo2);
   }, []);
 
-  // console.log(mentorInfo2);
-  // const widthOfSlider = (
-  //   widthOfSlides: number,
-  //   colGap: number,
-  //   noOfSlides: number
-  // ) => {
-  //   const sliderWidth =
-  //     noOfSlides * widthOfSlides + colGap * (noOfSlides - 1) + 2;
-  //   return sliderWidth;
-  // };
-
-  // fetch start
-  // const [albums, setAlbums] = React.useState([] as any[]);
-
-  // React.useEffect(() => {
-  //   // declare the data fetching function
-  //   // const fetchData = async () => {
-  //   //   const data = await get("https://jsonplaceholder.typicode.com/albums");
-  //   //   return data;
-  //   // };
-
-  //   // call the function
-  //   // fetchData()
-  //   //   .then((res) => setAlbums(res))
-  //   //   // make sure to catch any error
-  //   //   .catch(console.error);
-
-  //   // async function getData() {
-  //   //   try {
-  //   //     const response = await get(
-  //   //       "https://jsonplaceholder.typicode.com/albums"
-  //   //     );
-  //   //     setAlbums(response);
-  //   //   } catch (error) {
-  //   //     console.error("Error:", error);
-  //   //   }
-  //   // }
-  //   // getData(); '
-
-  //   // post
-
-  //   // const data = {
-  //   //   email: "test@tjjj.com",
-  //   //   password: "Password",
-  //   //   role: "mentor",
-  //   // };
-  //   // async function checkUser() {
-  //   //   try {
-  //   //     const res = await post(
-  //   //       "https://mentormee-api.onrender.com/auth/register",
-  //   //       data
-  //   //     );
-
-  //   //     console.log(res);
-  //   //   } catch (err) {
-  //   //     console.log("error");
-  //   //   }
-  //   // }
-  //   // checkUser();
-  // }, []);
-
   return (
     <div className="w-full">
-      {/* {albums.map((album) => (
-        <span className="text-red-700">{album.title}</span>
-      ))} */}
-
       <HomeNavBar />
       <div className="flex w-full md:w-fit">
         {" "}
@@ -255,23 +190,6 @@ const MenteeCommunities: React.FC = () => {
               with Mentor me
             </p>
           </div>
-          {/* <div className="search border border-[#CCCCCC]  w-[80vw] md:w-[50vw] lg:w-[57vw] pl-[16px]  rounded-[6px] md:mx-auto mx-[5vw] flex  items-center">
-        <span className="flex md:hidden pr-2 aspect-square h-[20px]">
-          {" "}
-          <SearchIcon />
-        </span>{" "}
-        <input
-          type="text"
-          className=" text-[14px] font-normal leading-[20.3px] text-Neutra20 w-full font-Inter outline-0 md:py-0 py-3 "
-          placeholder="Search for communi8ty"
-        />{" "}
-        <button
-          type="button"
-          className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px]  text-white border  bg-NeutalBase items-center gap-x-1 rounded-[8px] h-full hidden md:flex"
-        >
-          Search
-        </button>
-      </div> */}
 
           {isLoggedIn ? (
             <div className="isloggedInSLider">
