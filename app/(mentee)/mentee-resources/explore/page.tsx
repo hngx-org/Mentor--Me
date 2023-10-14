@@ -16,6 +16,7 @@ const Explore = () => {
   const [activeLink, setActiveLink] = useState<number | null>(1);
   const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const getResources = useCallback(async () => {
     setLoading(true);
@@ -24,11 +25,9 @@ const Explore = () => {
         "https://hngmentorme.onrender.com/api/resources"
       );
       const res = await result.json();
-      console.log(res);
-
       setData(res);
     } catch (error) {
-      console.log(error);
+      setError("An error message");
     } finally {
       setLoading(false);
     }
@@ -161,6 +160,7 @@ const Explore = () => {
             )}
           </div>
         </div>
+        {error && <p>{error}</p>}
       </div>
     </Container>
   );

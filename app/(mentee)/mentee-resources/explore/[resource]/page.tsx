@@ -19,6 +19,7 @@ const Resource = ({ params }: { params: { resource: string } }) => {
   const [data, setData] = useState<any>({});
   const [loading, setLoading] = useState<boolean>(false);
   const { resource: id } = params;
+  const [error, setError] = useState<string | null>(null);
 
   const getResource = useCallback(async () => {
     setLoading(true);
@@ -29,7 +30,7 @@ const Resource = ({ params }: { params: { resource: string } }) => {
       const res = await result.json();
       setData(res);
     } catch (error) {
-      console.log(error);
+      setError("An error message");
     } finally {
       setLoading(false);
     }
@@ -188,6 +189,7 @@ const Resource = ({ params }: { params: { resource: string } }) => {
               </div>
             </div>
           </div>
+          {error && <p>{error}</p>}
         </div>
       )}
     </ProtectedRoute>
