@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import Image from "next/image";
 
 import Link from "next/link";
 
+import { useRouter } from "next/navigation";
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import google from "../../../../public/assets/images/goggle.svg";
@@ -16,9 +17,40 @@ import Input from "@/components/inputs/input";
 
 import { Button } from "@/components/buttons/button";
 import { BackwardIcon } from "@/public/SVGs";
+import fetchData from "@/context/helper";
+import { ApiRes } from "@/context/AuthContext";
+// import { ApiRes } from "@/context/AuthContext";
 
 export default function SignUpForm() {
   const [isValid, setIsValid] = React.useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  const handleFormSubmission = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // const form = e.currentTarget;
+    // if (form.checkValidity() === false) {
+    //   e.preventDefault();
+    //   setIsValid(false);
+    // } else {
+    //   setIsValid(true);
+    //   window.location.href = "/mentor-profile-creation";
+    // }
+    const result = (await fetchData({
+      method: "POST",
+      url: process.env.NEXT_PUBLIC_API_REGISTER_URL,
+      body: {
+        email,
+        password,
+        role: "mentor",
+      },
+    })) as ApiRes;
+
+    if (result.success) {
+      router.push("/mentor-profile-creation");
+    }
+  };
 
   return (
     <div>
@@ -53,17 +85,7 @@ export default function SignUpForm() {
             </h5>
             <form
               className="flex flex-col gap-5"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const form = e.currentTarget;
-                if (form.checkValidity() === false) {
-                  e.preventDefault();
-                  setIsValid(false);
-                } else {
-                  setIsValid(true);
-                  window.location.href = "/mentor-profile-creation";
-                }
-              }}
+              onSubmit={handleFormSubmission}
             >
               <Input
                 id="email"
@@ -71,8 +93,17 @@ export default function SignUpForm() {
                 name="email"
                 required
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <Input id="password" label="Password" required type="password" />
+              <Input
+                id="password"
+                label="Password"
+                required
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
               <p className="font-Hanken text-[#565656] text-sm my-3">
                 {" "}
                 By clicking Sign Up, you agree to mentor.Me’s

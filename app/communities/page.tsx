@@ -100,63 +100,19 @@ const mentorInfo = [
 ];
 
 const CommunityPage = () => (
-  // const url = process.env.NEXT_PUBLIC_API_LOGIN_URL;
-  // Example request
+  // const url = process.env.NEXT_PUBLIC_API_REGISTER_URL;
+
   // const { data, error } = useFetch<ApiRes>({
   //   method: "POST",
   //   url,
   //   body: {
-  //     email: "johndoed@gmail.com",
-  //     password: "johndoe",
-  //   },
-  //   headers: {
-  //     "Content-Type": "application/json",
+  //     email: "johndod@gmail.com",
+  //     password: "johndo",
+  //     role: "mentor",
   //   },
   // });
-  // const { user, setUser, login } = useAuthContext();
-  // const { data } = login({
-  //   email: "johndoed@gmail.com",
-  //   password: "johndoe",
-  // }) as ApiRes;
 
-  // const url = process.env.NEXT_PUBLIC_API_LOGIN_URL;
-  // const { data } = useFetch<ApiRes>({
-  //   url,
-  //   method: "POST",
-  //   body: {
-  //     email: "johndoed@gmail.com",
-  //     password: "johndoe",
-  //   },
-  //   headers: { "Content-Type": "application/json" },
-  // });
-
-  // useEffect(() => {
-  // console.log(message);
-  // const url = process.env.NEXT_PUBLIC_API_LOGIN_URL;
-  // const bod = {
-  //   email: "johndoed@gmail.com",
-  //   password: "johndoe",
-  // };
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch(url!, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(bod),
-  //     });
-  //     const data = await response.json();
-  //     if (data) {
-  //       setUser("nice");
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-  // fetchData();
-  // console.log(user);
-  // }, [user]);
+  // console.log(data, error);
 
   <section className="w-full h-full">
     {/* Search Bar */}

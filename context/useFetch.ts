@@ -4,7 +4,7 @@ interface ReqOptions {
   url: string | undefined;
   method: "GET" | "POST";
   body?: string | Record<string, any>;
-  headers?: Record<string, string>;
+  // headers?: Record<string, string>;
 }
 
 export default function useFetch<T>(options: ReqOptions) {
@@ -19,7 +19,9 @@ export default function useFetch<T>(options: ReqOptions) {
         const response = await fetch(options.url!, {
           method: options.method,
           body: options.body && JSON.stringify(options.body),
-          headers: options.headers,
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
 
         if (!response.ok) {
