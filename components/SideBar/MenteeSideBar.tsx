@@ -63,33 +63,17 @@ export default function MenteeSideBar({
         </div>
 
         <div className="my-4 border-t-2 border-Neutra40 pt-4">
-          <ul className=" px-3  py-1 flex flex-col  cursor-pointer">
-            {/* <Link href="/mentee-settings?path=settings">
-              <li
-                className={`flex gap-2 rounded-[5px] p-2 items-center ${
-                  light && path === "settings"
-                    ? "bg-[#E5FFFF]"
-                    : !light && path === "settings"
-                    ? " bg-Neutra50"
-                    : ""
-                }`}
-              >
-                <SettingIcon />
-                <span className="font-Inter text-[11px] font-[500]  rounded-[5px] p-2 text-white">
-                  Setting
-                </span>
-              </li>
-            </Link> */}
-            <li className="flex gap-3 rounded-[5px] items-center">
-              <div className="h-7 w-7 rotate-180 xl:w-8 xl:h-8">
-                <LogoutMenteeIcon />
-              </div>
-
-              <span className="  font-Inter text-[14px] xl:text-xl font-[500]  text-Error50">
-                LogOut
-              </span>
-            </li>
-          </ul>
+          <Link
+            href="/welcome/login?path=login"
+            className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 "
+          >
+            <span className="h-7 w-7 !rotate-180 xl:w-8 xl:h-8 opacity-0 animate-slideLeft">
+              <LogoutMenteeIcon />
+            </span>
+            <span className="  font-Inter text-[14px] xl:text-xl font-[500]  text-Error50">
+              LogOut
+            </span>
+          </Link>
         </div>
 
         <div

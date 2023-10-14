@@ -203,7 +203,7 @@ export default function MentorProfileVerification() {
                             className="mt-5 w-full py-3 text-center font-Inter font-500 text-[16px]"
                             paddingLess
                           >
-                            <a href="/mentor-dashboard"> Go to dashboard</a>
+                            <a href="/mentor-profile"> Go to dashboard</a>
                           </Button>
                         </div>
                       </div>

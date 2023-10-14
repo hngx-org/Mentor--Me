@@ -13,6 +13,8 @@ import generateKey from "@/lib/generatekey";
 
 const OTPForm = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [userid, setUserId] = useState("");
   const [user, setUser] = useState<any>();
   const [otp, setOTP] = useState(["", "", "", "", "", ""]);
   const otpInputs: Array<React.RefObject<HTMLInputElement | null>> = Array(6)
@@ -21,11 +23,14 @@ const OTPForm = () => {
 
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
-      const getUser = localStorage.getItem("user");
+      const getUser = localStorage.getItem("Mentor");
+
       if (getUser) {
         try {
           const newUser = JSON.parse(getUser);
           setUser(newUser);
+          setEmail(newUser.data.email);
+          setUserId(newUser.data._id);
         } catch (error) {
           console.error("Error parsing JSON:", error);
         }
@@ -38,17 +43,20 @@ const OTPForm = () => {
     setIsOpen(true);
   };
 
-  function hashEmail(email: string) {
-    const [username, domain] = email.split("@");
+  // function hashEmail(email: string) {
+  //   if (!email) {
+  //     throw new Error("Email is required");
+  //   }
 
-    const hashedUsername =
-      username.substring(0, 2) + "*".repeat(username.length - 4);
+  //   const [username, domain] = email.split("@");
 
-    const hashedEmail = `${hashedUsername} "@" ${domain}`;
+  //   const hashedUsername =
+  //     username.substring(0, 2) + "*".repeat(username.length - 4);
 
-    return hashedEmail;
-  }
+  //   const hashedEmail = `${hashedUsername} "@" ${domain}`;
 
+  //   return hashedEmail;
+  // }
   const verifyEmail = async () => {
     const enteredOTP = otpInputs.map(
       (inputRef) => inputRef.current?.value || ""
@@ -63,7 +71,7 @@ const OTPForm = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             // @ts-ignore
-            userId: user?._id,
+            userId: userid,
             verificationCode: otpCode,
           }),
         }
@@ -73,7 +81,7 @@ const OTPForm = () => {
         openModal();
       }
     } catch (error) {
-      console.error("Error", error);
+      // console.error("Error", error);
     }
   };
 
@@ -86,13 +94,13 @@ const OTPForm = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             // @ts-ignore
-            userId: user?._id,
+            userId: userid,
             isNewUser: true,
           }),
         }
       );
     } catch (error) {
-      console.error("Error", error);
+      // console.error("Error", error);
     }
   };
 
@@ -138,7 +146,8 @@ const OTPForm = () => {
             </h4>
             <h5 className="text-[#808080] text-sm font-Hanken mt-2 mb-10">
               Please enter the 6 digit code sent to{" "}
-              {user && hashEmail(user?.email)}
+              {/* {user && hashEmail(user?.email)} */}
+              {email}
             </h5>
 
             <div className="flex  space-x-5">
@@ -182,7 +191,7 @@ const OTPForm = () => {
         isOpen={isOpen}
         closeModal={() => {
           setIsOpen(false);
-          router.push("/mentor-profile?path=profile", { scroll: true });
+          router.push("/mentor-profile-creation", { scroll: true });
         }}
         content="You have successfully verified your account"
         buttontext="Continue"

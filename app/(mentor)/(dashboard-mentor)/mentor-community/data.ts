@@ -43,7 +43,7 @@ export type discussionComms = {
 };
 
 // These are mocked data, chose to mock the data as the design contained a fixed dataset it would realistically be coming from an API
-// The images used were used were used because they have different dimensions from the ones in the design(these have fixed dimensions and don't vary which would be less realistic)
+// These images used were because they have different dimensions from the ones in the design(those have fixed dimensions and don't vary which would be less realistic)
 export const discussionCommunities: Community[] = [
   {
     slug: "techtitans",

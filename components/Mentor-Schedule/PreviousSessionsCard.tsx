@@ -20,7 +20,7 @@ function PreviousSessionsCard({
   return (
     <div>
       <div className=" h-[270px] rounded-xl lg:h-[328px] border-2 max-w-[295px] border-neutral-300 mb-5 grid grid-rows-6 grid-cols-3">
-        <div className="max-h-[170px] min-h-[125px] lg:h-[160px] overflow-hidden col-span-full row-start-1">
+        <div className="max-h-[170px] min-h-[125px] lg:h-[150px] overflow-hidden col-span-full row-start-1">
           <Image
             alt="th"
             src={imageFromServer}
@@ -30,7 +30,7 @@ function PreviousSessionsCard({
           />
         </div>
         <div className=" text-neutral-600 text-xs md:h-[66px] text-left p-2 md:p-4 col-span-full self-center row-start-4">
-          <h5 className="font-Hanken font-bold text-base md:text-lg text-black">
+          <h5 className="font-Hanken font-bold text-base md:text-lg text-black mt-[4px]">
             {SessionTitle}
           </h5>
           <p className="mb-1">
