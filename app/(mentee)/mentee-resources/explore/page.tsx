@@ -24,6 +24,8 @@ const Explore = () => {
         "https://hngmentorme.onrender.com/api/resources"
       );
       const res = await result.json();
+      console.log(res);
+
       setData(res);
     } catch (error) {
       console.log(error);
@@ -86,7 +88,7 @@ const Explore = () => {
             <h1 className="font-Inter text-2xl text-[#1C0028]">
               New Resources
             </h1>
-            <div className="hidden md:flex gap-4">
+            <div className="flex gap-4">
               <button title="btn" type="button" onClick={scrollLeft}>
                 <BackwardIcon />
               </button>
@@ -97,7 +99,7 @@ const Explore = () => {
           </div>
           <div
             ref={resourceContainerRef}
-            className="flex flex-col sm:flex-row gap-6 w-full 
+            className="flex gap-6 w-full 
           overflow-hidden scroll-smooth"
           >
             {loading ? (
@@ -125,7 +127,7 @@ const Explore = () => {
             <h1 className="font-Inter text-2xl text-[#1C0028]">
               Top Rated Resources
             </h1>
-            <div className="hidden md:flex gap-4">
+            <div className="flex gap-4">
               <button title="btn" type="button" onClick={scrollLeft2}>
                 <BackwardIcon />
               </button>
@@ -136,7 +138,7 @@ const Explore = () => {
           </div>
           <div
             ref={resourceContainerRef2}
-            className="flex flex-col sm:flex-row gap-6 w-full 
+            className="flex gap-6 w-full 
           overflow-hidden scroll-smooth"
           >
             {loading ? (

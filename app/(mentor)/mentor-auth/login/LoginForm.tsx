@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useContext } from "react";
 
 import Image from "next/image";
 
@@ -22,6 +22,7 @@ import Input from "@/components/inputs/input";
 
 import { Button } from "@/components/buttons/button";
 import { BackwardIcon } from "@/public/SVGs";
+import AuthCtx from "@/context/AuthCtx";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -30,6 +31,7 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
+  const ctx = useContext(AuthCtx);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -54,10 +56,17 @@ export default function LoginForm() {
           password: formData.password,
           role: "mentor",
         })
-        .then(() => {
+        .then((res) => {
           router.push("/dashboard");
+          ctx?.setUserAuth({
+            id: res?.data.data.user._id,
+            token: res?.data.data.token,
+          });
+          console.log(ctx?.userAuth);
         })
         .catch((err) => {
+          console.log(err);
+
           if (err.response.status === 406) {
             localStorage.setItem("Mentee", JSON.stringify(err.response.data));
 
