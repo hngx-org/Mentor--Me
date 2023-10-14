@@ -4,7 +4,13 @@
 
 import Link from "next/link";
 import { sidebarMentorLinks } from "@/lib/Constant";
-import { LogoIcon, LogoutIcon, ProfileIcon, SettingIcon } from "@/public/SVGs";
+import {
+  LogoIcon,
+  LogoutIcon,
+  LogoutMenteeIcon,
+  ProfileIcon,
+  SettingIcon,
+} from "@/public/SVGs";
 
 export type SideBarMentorProps = {
   light?: boolean;
@@ -64,31 +70,18 @@ export default function SidebarMentor({
         </div>
         {/* logout */}
 
-        <div className="my-6 border-t-2 border-Neutra40 ">
-          <ul className=" px-3  py-1 flex flex-col  cursor-pointer">
-            <Link href="/mentee-settings?path=settings">
-              <li
-                className={`flex gap-2 rounded-[5px] p-2 items-center ${
-                  light && path === "settings"
-                    ? "bg-[#E5FFFF]"
-                    : !light && path === "settings"
-                    ? " bg-Neutra50"
-                    : ""
-                }`}
-              >
-                <SettingIcon />
-                <span className=" font-Inter tetx-[11px] font-[500]  rounded-[5px] p-2 text-white">
-                  Setting
-                </span>
-              </li>
-            </Link>
-            <li className="flex gap-3  rounded-[5px] p-2">
-              <LogoutIcon />
-              <span className="  font-Inter tetx-[11px] font-[500]  text-Error50">
-                LogOut
-              </span>
-            </li>
-          </ul>
+        <div className="py-6 border-t-2 border-Neutra40 ">
+          <Link
+            href="/welcome/login?path=login"
+            className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 "
+          >
+            <span className="h-7 w-7 !rotate-180 xl:w-8 xl:h-8 opacity-0 animate-slideLeft">
+              <LogoutMenteeIcon />
+            </span>
+            <span className="  font-Inter text-[14px] xl:text-xl font-[500]  text-Error50">
+              LogOut
+            </span>
+          </Link>
         </div>
         {/* profile */}
 

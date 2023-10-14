@@ -47,6 +47,7 @@ export default function UpdateProfile() {
 
   const router = useRouter();
   const params = useSearchParams().get("tab");
+  const paramsAction = useSearchParams().get("action");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,7 +75,11 @@ export default function UpdateProfile() {
       }`}
     >
       <Link
-        href="/mentee-profile?path=profile"
+        href={
+          paramsAction === "edit-mentor"
+            ? "/mentor-profile?path=profile"
+            : "/mentee-profile?path=profile"
+        }
         className="absolute top-5 right-5 h-[40px] w-[40px] flex justify-center items-center bg-black hover:bg-transparent group/close transition-all duration-300"
       >
         <p

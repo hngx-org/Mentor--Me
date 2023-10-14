@@ -139,6 +139,7 @@ export default function FreeMentorship() {
           </div>
         ))}
       </div>
+      <div className="footer h-[7rem] w-full bg-transparent" />
       <Footer />
     </div>
   );

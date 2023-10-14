@@ -1,18 +1,41 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { newResources, resourceLinks } from "./constants";
-
+import { resourceLinks } from "./constants";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import { BackwardIcon, ForwardIcon } from "@/public/SVGs";
+import ResourceOne from "@/public/assets/resource_one.png";
+import ResourceTwo from "@/public/assets/resource_two.png";
 import ResourceCard from "./ResourceCard";
 import Container from "../Container";
 
 const Explore = () => {
   const resourceContainerRef = useRef<HTMLDivElement | null>(null);
   const resourceContainerRef2 = useRef<HTMLDivElement | null>(null);
-
   const [activeLink, setActiveLink] = useState<number | null>(1);
+  const [data, setData] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const getResources = useCallback(async () => {
+    setLoading(true);
+    try {
+      const result = await fetch(
+        "https://hngmentorme.onrender.com/api/resources"
+      );
+      const res = await result.json();
+      setData(res);
+    } catch (error) {
+      setError("An error message");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    getResources();
+  }, []);
 
   const handleLinkClick = (id: number) => {
     setActiveLink(id);
@@ -64,7 +87,7 @@ const Explore = () => {
             <h1 className="font-Inter text-2xl text-[#1C0028]">
               New Resources
             </h1>
-            <div className="hidden md:flex gap-4">
+            <div className="flex gap-4">
               <button title="btn" type="button" onClick={scrollLeft}>
                 <BackwardIcon />
               </button>
@@ -75,29 +98,35 @@ const Explore = () => {
           </div>
           <div
             ref={resourceContainerRef}
-            className="flex flex-col sm:flex-row gap-6 w-full 
-          overflow-hidden scroll-smooth"
+            className="flex gap-6 w-full 
+          overflow-scroll scroll-smooth"
           >
-            {newResources.map((res) => (
-              <ResourceCard
-                key={res.id}
-                id={res.id}
-                src={res.poster}
-                title={res.title}
-                author={res.author}
-                rate={res.rate}
-                price={res.price}
-                reviews={res.reviews}
-              />
-            ))}
+            {loading ? (
+              <div className="w-full flex justify-center items-center">
+                <LoadingSpinner />
+              </div>
+            ) : (
+              data?.map((res: any, i: number) => (
+                <ResourceCard
+                  key={res._id}
+                  id={res._id}
+                  src={i % 2 ? ResourceOne : ResourceTwo}
+                  title={res.title}
+                  author={`${res.name} | ${res.role}, ${res.company}`}
+                  rate={res.rating}
+                  price={res.price}
+                  reviews={res.reviews}
+                />
+              ))
+            )}
           </div>
         </div>
-        <div className="mt-[56px]">
+        <div className="mt-[56px] mb-10">
           <div className="w-full flex justify-between items-center mb-6">
             <h1 className="font-Inter text-2xl text-[#1C0028]">
               Top Rated Resources
             </h1>
-            <div className="hidden md:flex gap-4">
+            <div className="flex gap-4">
               <button title="btn" type="button" onClick={scrollLeft2}>
                 <BackwardIcon />
               </button>
@@ -108,23 +137,30 @@ const Explore = () => {
           </div>
           <div
             ref={resourceContainerRef2}
-            className="flex flex-col sm:flex-row gap-6 w-full 
-          overflow-hidden scroll-smooth"
+            className="flex gap-6 w-full 
+          overflow-scroll scroll-smooth"
           >
-            {newResources.map((res) => (
-              <ResourceCard
-                key={res.id}
-                id={res.id}
-                src={res.poster}
-                title={res.title}
-                author={res.author}
-                rate={res.rate}
-                price={res.price}
-                reviews={res.reviews}
-              />
-            ))}
+            {loading ? (
+              <div className="w-full flex justify-center items-center">
+                <LoadingSpinner />
+              </div>
+            ) : (
+              data?.map((res: any, i: number) => (
+                <ResourceCard
+                  key={res._id}
+                  id={res._id}
+                  src={i % 2 ? ResourceOne : ResourceTwo}
+                  title={res.title}
+                  author={`${res.name} | ${res.role}, ${res.company}`}
+                  rate={res.rating}
+                  price={res.price}
+                  reviews={res.reviews}
+                />
+              ))
+            )}
           </div>
         </div>
+        {error && <p>{error}</p>}
       </div>
     </Container>
   );

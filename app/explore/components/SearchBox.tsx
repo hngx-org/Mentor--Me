@@ -1,7 +1,71 @@
-import React from "react";
+import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import Filter from "./Filter";
+import { MentorCardPage } from "@/lib/exploreconts/constants";
 
-export default function SearchBox() {
+interface CardProps {
+  id?: string;
+  title: string;
+  content?: string;
+  time?: string;
+  firstname: string;
+  lastname: string;
+  date?: string;
+  topic?: string;
+  review?: string;
+  contentImage?: string;
+  timezone?: string;
+  nextAvailable: string;
+}
+interface SearchBoxProps {
+  cards: CardProps[];
+  // setSearchResults: React.Dispatch<React.SetStateAction<CardProps[]>>;
+  // setFilteredResults: React.Dispatch<React.SetStateAction<CardProps[]>>;
+  setSearchResults: Dispatch<React.SetStateAction<CardProps[]>>;
+  setFilteredResults: Dispatch<React.SetStateAction<CardProps[]>>;
+}
+export default function SearchBox({
+  cards,
+  setSearchResults,
+  setFilteredResults,
+}: SearchBoxProps) {
+  // {info, setSearchResults}
+
+  // const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (!event.target.value) return setSearchResults(cards);
+  //   const resultArray = cards.filter(
+  //     (card) =>
+  //       card.firstname.includes(event.target.value) ||
+  //       card.lastname.includes(event.target.value)
+  //   );
+  //   setSearchResults(resultArray);
+  //   console.log(event.target.value);
+  //   // console.log(cards.firstname);
+  //   console.log(setSearchResults);
+  // };
+
+  const [searchTerm, setSearchTerm] = useState("");
+  //  added this
+  // const [filteredResults, setFilteredResults] = useState<CardProps[]>([]);
+
+  useEffect(() => {
+    // Filter the cards based on the search term and update the search results
+    // const filteredResults = cards.filter(
+    //   (card) =>
+    //     card.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    //     card.lastname.toLowerCase().includes(searchTerm.toLowerCase())
+    // );
+    const filtered = cards.filter(
+      (card) =>
+        card.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        card.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        card.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // setSearchResults(filteredResults);
+    setSearchResults(filtered);
+    setFilteredResults(filtered);
+  }, [searchTerm, cards, setSearchResults]);
+
   return (
     <div className="bg-white rounded-lg py-2 px-4 md:py-5 md:px-4 md:min-w-[375px] lg:min-w-[455px]">
       <div className="flex justify-between items-center">
@@ -23,6 +87,10 @@ export default function SearchBox() {
         </span>
         <input
           type="text"
+          placeholder="Search by name or role "
+          // onChange={handleSearchChange}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm}
           className="w[80%] w-full bg-transparent outline-none font-Inter font-normal text-sm text-[#101928]"
         />
         <div className="-mr5 ml-2 lg:hidden">

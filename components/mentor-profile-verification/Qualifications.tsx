@@ -62,7 +62,7 @@ export default function Qualifications({
               id="qualification"
               onChange={handleInputChange}
               required
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
             >
               <option>Product Designer</option>
               <option>Frontend Developer</option>
@@ -90,7 +90,7 @@ export default function Qualifications({
               id="yearsExperience"
               onChange={handleInputChange}
               required
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
             >
               <option>Less than a year</option>
               <option>1+ year</option>
@@ -116,7 +116,7 @@ export default function Qualifications({
               rows={6}
               required
               onChange={handleInputChange}
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
               placeholder=" Please provide details about your qualifications and expertise below. This information helps us verify your qualifications as a mentor on our platform."
             />
             {validated && !formData?.qualifications?.qualificationDesc && (

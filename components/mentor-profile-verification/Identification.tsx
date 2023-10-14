@@ -73,7 +73,7 @@ export default function Identification({
           >
             Full Legal Name
             <input
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
               id="fullname"
               type="text"
               placeholder="Jane Doe"
@@ -96,7 +96,7 @@ export default function Identification({
           >
             Date of Birth
             <input
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
               id="dateofBirth"
               type="date"
               placeholder="Jane Doe"
@@ -123,7 +123,7 @@ export default function Identification({
               id="idType"
               required
               onChange={handleInputChange}
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
             >
               <option>Internationl Passport</option>
               <option>Drivers Liscense</option>
@@ -143,7 +143,7 @@ export default function Identification({
           >
             ID Number
             <input
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
               id="idNumber"
               type="text"
               placeholder="XY127Uy8"
