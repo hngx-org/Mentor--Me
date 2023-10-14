@@ -1,13 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, Suspense } from "react";
-import Link from "next/link";
-import { EditIcon, ProfileImage } from "@/public";
+import { useState, useEffect } from "react";
 
 import { ShareIcon } from "@/public/SVGs";
-import LoadingSpinner from "../loaders/LoadingSpinner";
-import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
+import { Button } from "../buttons/button";
 
 type MentorProfileHeaderProps = {
   userName: string;
@@ -72,6 +69,13 @@ export default function MentorProfileHeader({
           </div>
           <div className="flex justify-center space-x-4 min-w-fit py-2 items-center">
             <ShareIcon />
+            <Button
+              variant="outline-primary"
+              paddingLess
+              className="px-1  sm:px-2 sm:py-2 "
+            >
+              Edit profile
+            </Button>
           </div>
         </div>
       </div>

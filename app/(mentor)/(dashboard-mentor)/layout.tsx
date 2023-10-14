@@ -15,7 +15,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const actionParams = useSearchParams().get("action");
 
   return (
-    <>
+    <ProtectedRoute>
       <SidebarMentor path={pathParams} />
 
       <main className="lg:ml-[274px]">
@@ -24,7 +24,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <MobileSideBar path={pathParams} action={actionParams} />
         <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
       </main>
-    </>
+    </ProtectedRoute>
   );
 };
 
