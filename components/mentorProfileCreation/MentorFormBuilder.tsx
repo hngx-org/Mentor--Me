@@ -169,7 +169,7 @@ export default function MentorFormBuilder({
 
             if (valid && !isFull) {
               handleClick();
-              console.log(formInputs);
+              // console.log(formInputs);
             }
           }}
         >
