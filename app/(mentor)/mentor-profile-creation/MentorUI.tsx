@@ -78,10 +78,10 @@ export function MentorProfileCreationForms() {
         // console.log("you have been registered");
       })
       .catch((error) => {
-        setIsRegistered(false);
+        // setIsRegistered(false);
         // console.log("theres an error in your form");
         // Handle any errors
-        alert(error.response.data.message);
+        console.log(error.response.data.message);
       });
   }
 

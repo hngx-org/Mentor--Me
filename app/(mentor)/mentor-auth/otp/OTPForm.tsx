@@ -23,7 +23,7 @@ const OTPForm = () => {
 
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
-      const getUser = localStorage.getItem("Mentee");
+      const getUser = localStorage.getItem("Mentor");
 
       if (getUser) {
         try {
@@ -32,7 +32,7 @@ const OTPForm = () => {
           setEmail(newUser.data.email);
           setUserId(newUser.data._id);
         } catch (error) {
-          // console.error("Error parsing JSON:", error);
+          console.error("Error parsing JSON:", error);
         }
       }
     }
