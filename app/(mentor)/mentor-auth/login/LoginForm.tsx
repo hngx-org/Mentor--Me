@@ -63,11 +63,11 @@ export default function LoginForm() {
           role: "mentor",
         })
         .then(() => {
-          router.push("/dashboard");
+          router.push("/mentor-profile-creation");
         })
         .catch((err) => {
           if (err.response.status === 406) {
-            localStorage.setItem("Mentee", JSON.stringify(err.response.data));
+            localStorage.setItem("Mentor", JSON.stringify(err.response.data));
 
             router.push("/mentor-auth/otp");
           } else {
