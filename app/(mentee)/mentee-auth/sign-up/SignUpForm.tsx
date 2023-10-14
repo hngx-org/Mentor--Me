@@ -8,6 +8,8 @@ import Link from "next/link";
 
 import axios from "axios";
 
+import { useRouter } from "next/navigation";
+
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import google from "../../../../public/assets/images/goggle.svg";
@@ -20,6 +22,7 @@ import { Button } from "@/components/buttons/button";
 import { BackwardIcon } from "@/public/SVGs";
 
 export default function SignUpForm() {
+  const router = useRouter();
   const [isValid, setIsValid] = React.useState(true);
   const [formData, setFormData] = React.useState({
     email: "",
@@ -51,10 +54,10 @@ export default function SignUpForm() {
             role: "mentee",
           }
         );
-        window.location.href = "/mentee-profile-creation";
+        router.push("/mentee-auth/otp");
       } catch (error) {
         // Handle error
-        // console.error("An error occurred: ", error);
+        console.error("An error occurred: ", error);
       }
     }
   };
