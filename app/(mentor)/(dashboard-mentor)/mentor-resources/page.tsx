@@ -6,7 +6,7 @@ import { StarIcon } from "@/public/SVGs";
 export default async function MentorResources() {
   const res = await fetch("https://hngmentorme.onrender.com/api/resources");
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error(res.statusText);
   }
   const data = await res.json();
 
