@@ -56,10 +56,10 @@ export default function MentorProfileTabLayout({
       </div>
       {active === "basic info" && <BasicInfoTab />}
       {active === "Experience/ Certification" && (
-        <p className="h-[100%] flex justify-center my-20 ">in progress</p>
+        <p className="h-[100%] flex justify-center ">in progress</p>
       )}
       {active === "Social links" && (
-        <p className="h-[100%] flex justify-center my-20 "> in progress</p>
+        <p className="h-[100%] flex justify-center "> in progress</p>
       )}
     </div>
   );
