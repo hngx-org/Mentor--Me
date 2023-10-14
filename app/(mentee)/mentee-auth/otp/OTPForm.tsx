@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import Image from "next/image";
+
+import { useRouter } from "next/navigation";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
 
@@ -12,6 +14,8 @@ import Modal from "@/components/modal/Modal";
 import generateKey from "@/lib/generatekey";
 
 const OTPForm = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const closeModal = (): void => {
@@ -26,6 +30,18 @@ const OTPForm = () => {
     .fill(null)
     .map(() => useRef(null));
 
+  useEffect(() => {
+    const storedData = localStorage.getItem("Mentee");
+    // Check if the storedData is not null before parsing
+    if (storedData !== null) {
+      const MenteeData = JSON.parse(storedData);
+      setEmail(MenteeData.data.email);
+      // console.log("Mentee", MenteeData.data._id);
+      // router.push("/mentee-auth/otp");
+    } else {
+      console.error("Stored data is null");
+    }
+  }, []); // empty dependency array to ensure it only runs once on mount
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -66,7 +82,7 @@ const OTPForm = () => {
               OTP Verification
             </h4>
             <h5 className="text-[#808080] text-sm font-Hanken mt-2 mb-10">
-              Please enter the 6 digit code sent to funmi.iny***@gmail.com
+              Please enter the 6 digit code sent to {email}
             </h5>
 
             <div className="flex  space-x-5">
