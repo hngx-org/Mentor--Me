@@ -48,18 +48,17 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
 
           {isUserLogin ? (
             <div className=" items-center gap-10  font-Hanken hidden lg:flex text-NeutalBase ">
-              <li className="font-[700] border-b-[3px] border-black">Home</li>
-              <li>Dashboard</li>
-              <Link
-                href="/mentee-communities"
-                className="text-[#565656] text-[0.8rem]"
-              >
+              <Link href="" className="font-[700] border-b-[3px] border-black">
+                Home
+              </Link>
+              <Link href="">Dashboard</Link>
+              <Link href="/mentee-communities" className="text-[#565656] ">
                 Community
               </Link>
 
               <Link
                 href="/mentee-resources/explore?path=Explores"
-                className="text-[#565656] text-[0.8rem]"
+                className="text-[#565656] "
               >
                 Resources
               </Link>
