@@ -564,7 +564,7 @@ export function SuccessModal() {
             Verify account
           </Button>
         </Link>
-        <Link href="mentor-profile">
+        <Link href="mentor-profile?path=profile" prefetch>
           <p className="text-base font-Hanken text-center cursor-pointer">
             I&apos;ll do this later
           </p>

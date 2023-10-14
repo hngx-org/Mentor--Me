@@ -19,7 +19,10 @@ export type ModalState = {
   isOpen: boolean;
 };
 
+const baseUrl = "https://mentormee-api.onrender.com";
+
 export default function ProfilePage() {
+  const [currMentor, setCurrMentor] = useState<any>();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -28,25 +31,25 @@ export default function ProfilePage() {
     state: "basic info",
     isOpen: false,
   });
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTI5NTFhNDI2OTQzZGIyZjliNjA1MzQiLCJyb2xlIjoibWVudG9yIiwiZW1haWwiOiJheW9ib2x1Zm9yZXZlckBnbWFpbC5jb20iLCJpYXQiOjE2OTcyMDcyODAsImV4cCI6MTY5OTcyNzI4MH0.mCu-QOvo_K8ykakiVv8hwOqrZohh9H02khquIdXRycI";
+  const getCurrentMentor = async () => {
+    const currMent = await fetch(`${baseUrl}/mentors/get-current`, {
+      method: "GET",
+      redirect: "follow",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.text())
+      .then((data) => setCurrMentor(data));
+  };
 
   useEffect(() => {
-    if (typeof localStorage !== "undefined") {
-      const getUser = localStorage.getItem("user");
-      if (getUser) {
-        try {
-          const newUser = JSON.parse(getUser);
-          const [username, domain] = newUser.email.split("@");
-          setUser({
-            name: username,
-            email: newUser.email,
-          });
-        } catch (error) {
-          // console.error("Error parsing JSON:", error);
-        }
-      }
-    }
+    getCurrentMentor();
   }, []);
-
+  console.log(currMentor);
   return (
     <div className="h-[100vh] w-[100vw] overflow-scroll ">
       <MentorProfileHeader
