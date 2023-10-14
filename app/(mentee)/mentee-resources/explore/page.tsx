@@ -100,7 +100,7 @@ const Explore = () => {
           <div
             ref={resourceContainerRef}
             className="flex gap-6 w-full 
-          overflow-hidden scroll-smooth"
+          overflow-scroll scroll-smooth"
           >
             {loading ? (
               <div className="w-full flex justify-center items-center">
@@ -122,7 +122,7 @@ const Explore = () => {
             )}
           </div>
         </div>
-        <div className="mt-[56px]">
+        <div className="mt-[56px] mb-10">
           <div className="w-full flex justify-between items-center mb-6">
             <h1 className="font-Inter text-2xl text-[#1C0028]">
               Top Rated Resources
@@ -139,7 +139,7 @@ const Explore = () => {
           <div
             ref={resourceContainerRef2}
             className="flex gap-6 w-full 
-          overflow-hidden scroll-smooth"
+          overflow-scroll scroll-smooth"
           >
             {loading ? (
               <div className="w-full flex justify-center items-center">
