@@ -191,7 +191,7 @@ const OTPForm = () => {
         isOpen={isOpen}
         closeModal={() => {
           setIsOpen(false);
-          router.push("/mentor-profile?path=profile", { scroll: true });
+          router.push("/mentor-profile-creation", { scroll: true });
         }}
         content="You have successfully verified your account"
         buttontext="Continue"

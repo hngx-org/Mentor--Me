@@ -64,12 +64,10 @@ export default function LoginForm() {
           password: formData.password,
           role: "mentor",
         })
-        .then((res) => {
+        .then((response) => {
+          console.log(response.data);
+          localStorage.setItem("Mentor", JSON.stringify(response.data));
           router.push("/mentor-profile-creation");
-          ctx?.setUserAuth({
-            id: res?.data.data.user._id,
-            token: res?.data.data.token,
-          });
         })
         .catch((err) => {
           console.log(err);
@@ -153,11 +151,12 @@ export default function LoginForm() {
                 )}
                 <Button
                   title="Log in"
+                  type="submit"
                   variant="primary"
                   className="w-full h-[48px]"
                   fullWidth
-                  loading={isLoading}
-                  disabled={isDisabled}
+                  // loading={isLoading}
+                  // disabled={isDisabled}
                 />
               </div>
             </form>
