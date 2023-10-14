@@ -27,8 +27,6 @@ const Resource = ({ params }: { params: { resource: string } }) => {
         `https://hngmentorme.onrender.com/api/resources/${id}`
       );
       const res = await result.json();
-      console.log(res);
-
       setData(res);
     } catch (error) {
       console.log(error);
