@@ -118,7 +118,7 @@ export default function LoginForm() {
                 onChange={handleInputChange}
               />
 
-              <Link href="/mentor-auth/forget-password">
+              <Link href="/mentor-auth/forget-password?path=reset-password">
                 {" "}
                 <p className="font-Hanken text-[#008080] flex justify-end text-sm my-3">
                   Forget Password?
