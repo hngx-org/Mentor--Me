@@ -61,7 +61,7 @@ export default function SignUpForm() {
         .then((response) => {
           console.log(response.data);
           localStorage.setItem("Mentor", JSON.stringify(response.data));
-          // router.push("/mentor-auth/otp");
+          router.push("/mentor-auth/otp");
         })
         .catch((error) => {
           console.log(error);

@@ -54,7 +54,8 @@ export default function LoginForm() {
           password: formData.password,
           role: "mentee",
         })
-        .then(() => {
+        .then((response) => {
+          localStorage.setItem("Mentor", JSON.stringify(response.data));
           router.push("/dashboard");
         })
         .catch((err) => {
