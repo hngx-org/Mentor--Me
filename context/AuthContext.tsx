@@ -17,11 +17,7 @@ type UserData = {
 
 const AuthContext = createContext<AuthCtxType | null>(null);
 
-export const AuthContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [userData, setUserData] = useState<UserData>({
     email: "",
     token: "",

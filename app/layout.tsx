@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Inter, Hanken_Grotesk as HankenGrotesk } from "next/font/google";
-// import AuthProvider from "@/components/AuthProvider/AuthProvider";
 import AuthContextProvider from "@/context/AuthContext";
+// import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const inter = Inter({
   subsets: ["latin"],
