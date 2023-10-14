@@ -61,61 +61,20 @@ export default function ProfilePage() {
       <MentorProfileMainLayout>
         <BioCard text="" />
         <ProfileDetailsCardContainer
-          heading="skill/expertise"
-          items={[
-            {
-              text: "Google UX Certification",
-              heading: "Coursera",
-              type: "certification",
-            },
-            {
-              text: "Bachelor of Science in Computer Science",
-              heading: "ABXYZ University",
-              type: "certification",
-            },
-          ]}
+          heading="certicifications"
+          items={[]}
           openModal={setModal}
         />
-        <SkillSCard
-          skills={[
-            "Leadership",
-            "User Experience",
-            "UX Research",
-            "Figma",
-            "Sketch",
-            "Leadership",
-            "User Experience",
-            "UX Research",
-            "Figma",
-            "Sketch",
-          ]}
-        />
+        <SkillSCard skills={[]} />
         <ProfileDetailsCardContainer
           heading="Experience"
-          items={[
-            {
-              text: "Webmaster Inc.",
-              heading: "CEO ",
-              type: "experience",
-            },
-            {
-              text: "futurLabs",
-              heading: "Ui/Ux design intern",
-              type: "experience",
-            },
-          ]}
+          items={[]}
           openModal={setModal}
         />
 
         <ProfileDetailsCardContainer
           heading="Education"
-          items={[
-            {
-              text: "University of Lagos. 2013 - 2017",
-              heading: "B.Sc Computer Science ",
-              type: "education",
-            },
-          ]}
+          items={[]}
           openModal={setModal}
         />
         <AvailableSessionCard
