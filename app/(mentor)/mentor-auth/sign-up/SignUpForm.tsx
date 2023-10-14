@@ -6,6 +6,10 @@ import Image from "next/image";
 
 import Link from "next/link";
 
+import axios from "axios";
+
+import { useRouter } from "next/navigation";
+
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import google from "../../../../public/assets/images/goggle.svg";
@@ -18,7 +22,45 @@ import { Button } from "@/components/buttons/button";
 import { BackwardIcon } from "@/public/SVGs";
 
 export default function SignUpForm() {
+  const router = useRouter();
   const [isValid, setIsValid] = React.useState(true);
+  const [formData, setFormData] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = e.currentTarget as HTMLFormElement;
+    if (form.checkValidity() === false) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+      try {
+        const response = await axios.post(
+          "https://mentormee-api.onrender.com/auth/register",
+          {
+            email: formData.email,
+            password: formData.password,
+            role: "mentor",
+          }
+        );
+        localStorage.setItem("Mentor", JSON.stringify(response.data));
+        router.push("/mentor-auth/otp");
+      } catch (error) {
+        // Handle error
+        console.error("An error occurred: ", error);
+      }
+    }
+  };
 
   return (
     <div>
@@ -51,28 +93,23 @@ export default function SignUpForm() {
             <h5 className="text-[#808080] text-base font-Hanken mt-2 mb-5">
               Create an account
             </h5>
-            <form
-              className="flex flex-col gap-5"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const form = e.currentTarget;
-                if (form.checkValidity() === false) {
-                  e.preventDefault();
-                  setIsValid(false);
-                } else {
-                  setIsValid(true);
-                  window.location.href = "/mentor-profile-creation";
-                }
-              }}
-            >
+            <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
               <Input
                 id="email"
                 label="Email Address"
-                name="email"
                 required
                 type="email"
+                name="email"
+                onChange={handleInputChange}
               />
-              <Input id="password" label="Password" required type="password" />
+              <Input
+                id="password"
+                label="Password"
+                name="password"
+                required
+                type="password"
+                onChange={handleInputChange}
+              />
               <p className="font-Hanken text-[#565656] text-sm my-3">
                 {" "}
                 By clicking Sign Up, you agree to mentor.Me’s
