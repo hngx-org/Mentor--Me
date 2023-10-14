@@ -43,7 +43,7 @@ export default function ProfilePage() {
       },
     })
       .then((res) => res.text())
-      .then((data) => setCurrMentor(data));
+      .then((data) => setCurrMentor(JSON.parse(data)));
   };
 
   useEffect(() => {
