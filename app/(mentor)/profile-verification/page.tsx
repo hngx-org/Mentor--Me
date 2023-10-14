@@ -203,7 +203,7 @@ export default function MentorProfileVerification() {
                             className="mt-5 w-full py-3 text-center font-Inter font-500 text-[16px]"
                             paddingLess
                           >
-                            <a href="/mentor-dashboard"> Go to dashboard</a>
+                            <a href="/mentor-profile"> Go to dashboard</a>
                           </Button>
                         </div>
                       </div>
@@ -248,6 +248,7 @@ export default function MentorProfileVerification() {
                   <Certificates
                     onNext={handleNextStep}
                     setFormData={setFormData}
+                    formData={formData}
                   />
                 )}
                 {step === 2 && (
@@ -255,6 +256,7 @@ export default function MentorProfileVerification() {
                     onNext={handleNextStep}
                     onPrev={handlePrevStep}
                     setFormData={setFormData}
+                    formData={formData}
                   />
                 )}
                 {step === 3 && (
@@ -262,6 +264,7 @@ export default function MentorProfileVerification() {
                     onNext={handleNextStep}
                     onPrev={handlePrevStep}
                     setFormData={setFormData}
+                    formData={formData}
                   />
                 )}
                 {step === 4 && (
@@ -269,6 +272,7 @@ export default function MentorProfileVerification() {
                     onPrev={handlePrevStep}
                     handleSubmit={handleSubmit}
                     setFormData={setFormData}
+                    formData={formData}
                   />
                 )}
               </div>

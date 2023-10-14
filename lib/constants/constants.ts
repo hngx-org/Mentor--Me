@@ -1,4 +1,11 @@
+import React from "react";
 import { StaticImageData } from "next/image";
+import {
+  CommunitIconMobile,
+  MobileHomeIcon,
+  MobileSession,
+  ResourcesMobile,
+} from "@/public/SVGs";
 import {
   sessionHope,
   sessionKaplan,
@@ -6,6 +13,13 @@ import {
   sessionPatricia,
   sessionShaolin,
 } from "@/public";
+
+export type MobileSidebarProps = {
+  id: number;
+  label: string;
+  icon: React.ReactNode;
+  link: string;
+};
 
 export type QualityProps = {
   id: number;
@@ -172,6 +186,33 @@ export const cancelledSessions: UpcomingSessionProp[] = [
   },
 ];
 
+export const mobileSidebarLinks: MobileSidebarProps[] = [
+  {
+    id: 1,
+    label: "Home",
+    icon: MobileHomeIcon(),
+    link: "/dashboard?path=Home",
+  },
+  {
+    id: 2,
+    label: "Sessions",
+    icon: MobileSession(),
+    link: "/mentee-sessions?path=Sessions",
+  },
+  {
+    id: 3,
+    label: "Communities",
+    icon: CommunitIconMobile(),
+    link: "/mentee-communities?path=Communities",
+  },
+  {
+    id: 4,
+    label: "Resources",
+    icon: ResourcesMobile(),
+    link: "/mentee-resources?path=Resources",
+  },
+];
+
 export const reviewsArr: IReview[] = [
   {
     id: "1",
@@ -221,6 +262,21 @@ export const reviewsArr: IReview[] = [
   },
   {
     id: "4",
+    date: "August 31, 2023",
+    comment:
+      "Talk to Shade if you want to have an honest and friendly space to help you untangle. She was very constructive answered all my questions super clearly with a lot of details, and gave quite some food for thought on how to improve my processes as well. Highly recommended for everyone who's looking for the expertise Shade has!",
+    qualities: [
+      "Technically competent",
+      "Amazing Problem Solver",
+      "Very motivational",
+    ],
+    avatar: "../../public/assets/Image.png",
+    name: "Salma Paralluelo",
+    track: "Product Designer",
+    role: "Mentee",
+  },
+  {
+    id: "5",
     date: "August 31, 2023",
     comment:
       "Talk to Shade if you want to have an honest and friendly space to help you untangle. She was very constructive answered all my questions super clearly with a lot of details, and gave quite some food for thought on how to improve my processes as well. Highly recommended for everyone who's looking for the expertise Shade has!",

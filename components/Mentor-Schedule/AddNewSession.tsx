@@ -60,7 +60,7 @@ function AddNewSession() {
         }}
         role="button"
         tabIndex={0}
-        className=" rounded-lg h-[223px] w-full px-5 border-neutral-400 border flex justify-center items-center"
+        className=" rounded-lg h-[223px] w-full  px-2 border-neutral-400 border max-w-[295px] lg:h-[235px] flex justify-center items-center"
       >
         <div className="text-center flex flex-col space-x-1 items-center gap-1 justify-between">
           <h4 className="font-Hanken text-base text-neutral-950 font-bold leading-4">

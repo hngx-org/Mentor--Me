@@ -33,7 +33,7 @@ export type SidebarLinksProps = {
 export const sidebarMentorLinks: SidebarLinksProps[] = [
   {
     id: 1,
-    path: "/mentor-profile",
+    path: "/mentor-dashboard?path=Home",
     label: "Home",
     iconDark: <HomeIcon />,
     iconLight: <HomeIcon2 />,
@@ -62,21 +62,21 @@ export const sidebarMentorLinks: SidebarLinksProps[] = [
   // },
   {
     id: 5,
-    path: "/mentor-schedule",
+    path: "/mentor-schedule?path=sessions",
     label: "Sessions",
     iconDark: <Sessions />,
     iconLight: <Session2 />,
   },
   {
     id: 6,
-    path: "/mentor-resources",
+    path: "/mentor-resources?path=resources",
     label: "Resources",
     iconDark: <ResourcesIcon />,
     iconLight: <Resources2 />,
   },
   {
     id: 7,
-    path: "/mentor-community",
+    path: "/mentor-community?path=communities",
     label: "Communities",
     iconDark: <CommunitiesIcon />,
     iconLight: <Communities2 />,

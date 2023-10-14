@@ -53,13 +53,13 @@ function PreviousSessionsCall() {
 
   return (
     <div>
-      <div className="flex justify-center md:justify-start flex-wrap gap-2 md:gap-4 items-center lg:hidden mt-5">
+      <div className="grid grid-cols-2 gap-3 lg:hidden mt-5">
         {SliceTwoFromData.map((info) => (
           <PreviousSessionsCard key={info.id} {...info} />
         ))}
       </div>
 
-      <div className="hidden lg:flex md:justify-start overflow-hidden lg:gap-4 items-center mt-7 ">
+      <div className="hidden lg:grid grid-cols-3 gap-4 mt-7 ">
         {SliceThreeFromData.map((info) => (
           <PreviousSessionsCard key={info.id} {...info} />
         ))}

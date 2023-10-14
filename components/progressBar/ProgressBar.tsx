@@ -8,7 +8,7 @@ type ProgressBarProps = {
   totalSteps?: number;
   rounded?: boolean;
   progress?: number;
-  progressBgColor: string;
+  progressBgColor?: string;
 };
 // this takes progress or steps(completed and total step)
 // it give more precedence to progress , i.e if you pass it progress it would use that and not derive the
@@ -25,7 +25,7 @@ export default function ProgressBar({
   const getProgress = () => {
     if (progress) setProgress(`w-[${progress}%]`);
     if (totalSteps && stepCompleted) setProgress(`w-[${progress}%]`);
-    console.log(progress);
+    // console.log(progress);
   };
   useEffect(() => {
     getProgress();
@@ -37,7 +37,7 @@ export default function ProgressBar({
       } ${styles}`}
     >
       <div
-        className={`${progressBgColor || "bg-Accent1"}   h-[100%] ${
+        className={`${progressBgColor || "bg-Accent2"}   h-[100%] ${
           rounded && "rounded-full"
         }  ${progressBar} w-[10%]`}
       />

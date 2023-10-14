@@ -74,7 +74,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
                 Become a Mentor
               </Link>
               <Link
-                href="/mentee-communities"
+                href="/communities"
                 className="text-[#565656] text-[0.8rem]"
               >
                 Community
@@ -156,7 +156,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
           </li>
           <li className="text-[12px] text-Inter">
             <Link
-              href="/mentee-communities"
+              href="/communities"
               className="text-[#565656] text-[0.9rem]"
               onClick={handleToggleMenu}
             >

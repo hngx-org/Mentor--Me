@@ -8,7 +8,7 @@ export const ArrowLeftIcon = () => (
   >
     <path
       d="M13.5582 8.40063L4.95898 16.9998L13.5582 25.599"
-      stroke="#818181"
+      stroke="currentcolor"
       strokeWidth="2.125"
       strokeMiterlimit="10"
       strokeLinecap="round"
@@ -16,7 +16,7 @@ export const ArrowLeftIcon = () => (
     />
     <path
       d="M29.0417 17H5.19922"
-      stroke="#818181"
+      stroke="currentcolor"
       strokeWidth="2.125"
       strokeMiterlimit="10"
       strokeLinecap="round"
@@ -35,7 +35,7 @@ export const ArrowRightIcon = () => (
   >
     <path
       d="M20.4414 8.40063L29.0406 16.9998L20.4414 25.599"
-      stroke="#008080"
+      stroke="currentcolor"
       strokeWidth="2.125"
       strokeMiterlimit="10"
       strokeLinecap="round"
@@ -43,7 +43,7 @@ export const ArrowRightIcon = () => (
     />
     <path
       d="M4.95898 17H28.8015"
-      stroke="#008080"
+      stroke="currentcolor"
       strokeWidth="2.125"
       strokeMiterlimit="10"
       strokeLinecap="round"
@@ -170,10 +170,10 @@ export const CalendarIcon = () => (
   </svg>
 );
 
-export const VerifiedIcon = () => (
+export const IsVerifiedIcon = () => (
   <svg
-    width="24"
-    height="24"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

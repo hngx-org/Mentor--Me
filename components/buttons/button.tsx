@@ -37,7 +37,7 @@ export const Button = ({
   variant,
   square,
   paddingLess,
-  type = "button",
+  // type = "button",
   imgSrc,
   imgAlt = "",
   iconPresent,
@@ -45,8 +45,8 @@ export const Button = ({
   ...props
 }: IButtonProps) => (
   <button
-    {...props}
     type="button"
+    {...props}
     onClick={onClick}
     className={`
           ${getVariant(variant)}  transition duration-75  ${

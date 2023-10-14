@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import PortfolioReview from "./PortfolioReview";
+import AddNewSession from "./AddNewSession";
 
 interface PortfolioContent {
   time: number;
@@ -39,10 +40,11 @@ function PortfolioCard() {
   return (
     <div>
       {/* for wider screens, two data is displayed */}
-      <div className="hidden lg:flex flex-colspace-around gap-6">
+      <div className="hidden lg:grid lg:grid-cols-3 gap-4">
         {slicedTwoData.map((data) => (
           <PortfolioReview key={data.id} {...data} />
-        ))}
+        ))}{" "}
+        <AddNewSession />
       </div>
       {/* for smaller screens, only one is displayed */}
       <div className=" lg:hidden">

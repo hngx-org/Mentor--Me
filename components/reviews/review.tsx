@@ -21,7 +21,7 @@ const ItemComponent = ({
       </p>
     </div>
     <div className="flex w-full flex-wrap items-start gap-4">
-      {qualities.map((quality) => (
+      {qualities?.map((quality) => (
         <div
           key={quality}
           className="flex w-full py-2 sm:max-w-[210px]  font-semibold p-[3.625px] justify-center items-center  rounded-[8px] border border-Neutra20"

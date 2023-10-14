@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { DashboardMenteeNavImg } from "@/public";
-import { BulletIcon, NotifyIcon } from "@/public/SVGs";
+import { BulletIcon, NotificationBingIcon } from "@/public/SVGs";
 
 interface Steps {
   step: number;
@@ -36,7 +36,7 @@ export default function HeaderAfterSignUp({ step }: Steps) {
 
       <div className="flex items-center gap-5">
         <span className="md:block hidden">
-          <NotifyIcon />
+          <NotificationBingIcon />
         </span>
 
         <div className="flex items-center gap-2">

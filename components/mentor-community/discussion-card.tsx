@@ -1,9 +1,9 @@
 import Image, { StaticImageData } from "next/image";
-import { Member } from "@/app/(mentor)/mentor-community/data";
 import {
   CommentsIcon,
   ShareIcon,
 } from "@/public/assets/Icons/mentor-communities";
+import { Member } from "@/app/(mentor)/(dashboard-mentor)/mentor-community/data";
 
 interface Props {
   image?: StaticImageData;
@@ -22,6 +22,7 @@ const DiscussionCard = ({ image, author, title, description }: Props) => (
           src={image!}
           alt={title}
           className="md:w-full md:h-full object-cover"
+          placeholder="blur"
         />
       </div>
     ) : (

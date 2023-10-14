@@ -3,13 +3,12 @@
 //  This component accepts 2 components : 1. MenteeFormBuilder 2. MenteeProgressBar
 // The MenteeFormBuilder renders the forms for each screen, while accepting data from the formData.js file
 // The MenteeProgressBar renders the progress bar in each screen based on a state variable called currForm
-// The left side of the screen houses an svg element and a Container div which has the 5 forms. Each form is shown based on the state of currForm
-// The Container div has 5 divs, in which each div houses the heading, progressbar and the form itself
+// The left side of the screen houses an svg element and a Container div which has the 4 forms. Each form is shown based on the state of currForm
+// The Container div has 4 divs, in which each div houses the heading, progressbar and the form itself
 
 import React, { useEffect, useRef, useState } from "react";
-
+import axios from "axios";
 import Image from "next/image";
-
 import MentorMeIcon from "@/svgs/MentorMeIcon";
 
 import {
@@ -26,15 +25,31 @@ import MenteeFormBuilder from "@/components/menteeProfileCreation/MenteeFormBuil
 import { Button } from "@/components/buttons/button";
 
 import formData from "@/lib/menteeProfileCreationData";
+import { MenteeProvider, useMenteeContext } from "./MenteeContext";
 
 const form1Arr = formData[0];
 const form2Arr = formData[1];
 const form3Arr = formData[2];
 const form4Arr = formData[3];
 
-export default function MentorProfileCreation() {
+export default function MenteeProfileCreation() {
+  const { formInputs, setFormInputs } = useMenteeContext();
   const [currForm, setCurrForm] = useState(0);
   const [isModalShown, setIsModalShown] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const select1 = useRef<HTMLInputElement>(null);
+  const select2 = useRef<HTMLInputElement>(null);
+  const select3 = useRef<HTMLInputElement>(null);
+  const image1 = useRef<HTMLImageElement>(null);
+  const image2 = useRef<HTMLImageElement>(null);
+  const image3 = useRef<HTMLImageElement>(null);
+
+  const [files, setFiles] = useState({
+    file1: "",
+    file2: "",
+    file3: "",
+  });
 
   const forms = [
     {
@@ -48,6 +63,31 @@ export default function MentorProfileCreation() {
     },
     { id: 4, heading: "Complete your registration and get started" },
   ];
+
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTI5NTFhNDI2OTQzZGIyZjliNjA1MzQiLCJyb2xlIjoibWVudG9yIiwiZW1haWwiOiJheW9ib2x1Zm9yZXZlckBnbWFpbC5jb20iLCJpYXQiOjE2OTcyMDcyODAsImV4cCI6MTY5OTcyNzI4MH0.mCu-QOvo_K8ykakiVv8hwOqrZohh9H02khquIdXRycI";
+
+  function submitData() {
+    const customHeaders = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    axios
+      .post(
+        "https://mentormee-api.onrender.com/mentee/create-profile",
+        formInputs,
+        { headers: customHeaders }
+      )
+      .then((response) => {
+        // Handle the response
+        // console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle any errors
+        // console.error(error);
+      });
+  }
 
   useEffect(() => {
     const forms = document.querySelectorAll(".form-container");
@@ -68,6 +108,23 @@ export default function MentorProfileCreation() {
     });
   }, [currForm]);
 
+  useEffect(() => {
+    if (files.file1) {
+      // @ts-ignore
+      image1.current!.src = URL.createObjectURL(files.file1);
+    }
+
+    if (files.file2) {
+      // @ts-ignore
+      image2.current!.src = URL.createObjectURL(files.file2);
+    }
+
+    if (files.file3) {
+      // @ts-ignore
+      image3.current!.src = URL.createObjectURL(files.file3);
+    }
+  }, [files]);
+
   function move(motion: string) {
     // console.log(forms);
     if (currForm <= 0 && motion === "back") {
@@ -80,17 +137,37 @@ export default function MentorProfileCreation() {
       setCurrForm(currForm + 1);
     } else if (currForm === forms.length - 1 && motion === "forward") {
       // setCurrForm(0);
+      submitData();
       setIsModalShown(true);
     }
   }
-  const select = useRef<HTMLInputElement>(null);
 
   function selectFile(element: any) {
     element.click();
   }
 
+  function showFile(e: any) {
+    setIsLoaded(true);
+
+    if ([...e.target.files][0].size > 2 * 1024 * 1024) {
+      alert("Image size exceeds 2MB. Please upload a smaller image.");
+      return;
+    }
+    setFiles((prevFile) => ({
+      ...prevFile,
+      [e.target.id]: [...e.target.files][0],
+    }));
+
+    setFormInputs((prevData: any) => ({
+      ...prevData,
+      [e.target.name]: e.target.files[0].name,
+    }));
+
+    // console.log(formInputs);
+  }
+
   return (
-    // Overall container for the whole page
+    // Overall container for whole page
     <div className="lg:flex-row flex overflow-y-scroll relative bg-white">
       {/* overlay that shows behind the modal */}
       <button
@@ -139,14 +216,32 @@ export default function MentorProfileCreation() {
                 <Image
                   src={MentorCreationProfileIcon}
                   alt="profile"
-                  className="mr-[20px] max-w-[60px]"
+                  className={`${
+                    files.file1 ? "hidden" : "block"
+                  } mr-[20px] max-w-[60px] `}
                 />
+                <img
+                  ref={image1}
+                  src=""
+                  alt=""
+                  className=" mr-[20px] max-w-[100px]"
+                />
+
+                {/* {files.file1 && } */}
                 <div className="flex flex-col">
-                  <input ref={select} className="hidden" type="file" />
+                  <input
+                    ref={select1}
+                    className="hidden"
+                    type="file"
+                    onChange={showFile}
+                    id="file1"
+                    name="profile_img"
+                    required
+                  />
                   <button
                     type="button"
                     onClick={() => {
-                      selectFile(select.current);
+                      selectFile(select1.current);
                     }}
                     className="text-Accent1 cursor-pointer font-Inter font-[500] w-fit"
                   >
@@ -315,7 +410,7 @@ function SuccessModal() {
         /> */}
 
         <Button variant="primary" className="w-full py-2 l:max-w-[initial]">
-          <a href="/mentee-profile">Continue to Home</a>
+          <a href="/">Continue to Home</a>
         </Button>
       </div>
     </div>

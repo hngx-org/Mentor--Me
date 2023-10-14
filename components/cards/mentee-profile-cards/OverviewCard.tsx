@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AwardIcon, EditIcon } from "@/public/SVGs";
-import Button from "@/app/(mentee)/mentee-sessions/(ui)/VxrcelBtn";
+import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 
 type Props = {
   desc: string;

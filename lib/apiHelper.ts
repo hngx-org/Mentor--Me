@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import React from "react";
 
 export const get = (url: string) =>
@@ -34,23 +35,23 @@ type loginDataType = { email: string; password: string };
 //   }
 // }
 
-// export async function authenticateUser(credentials: loginDataType) {
-//   try {
-//     // Send a POST request to your authentication endpoint
-//     const response = await post("/auth/login", credentials); // Replace with your actual endpoint and credentials
-//     if (response.status === 200) {
-//       // Authentication successful
-//       return true;
-//     }
-//     // Authentication failed
-//     return false;
-//   } catch (error) {
-//     console.error("Error authenticating user:", error);
-//     return false;
-//   }
-// }
+export async function authenticateUser(credentials: loginDataType) {
+  try {
+    // Send a POST request to your authentication endpoint
+    const response = await post("/auth/login", credentials); // Replace with your actual endpoint and credentials
+    if (response.status === 200) {
+      // Authentication successful
+      return true;
+    }
+    // Authentication failed
+    return false;
+  } catch (error) {
+    console.error("Error authenticating user:", error);
+    return false;
+  }
+}
 
-function transformMentorData(originalData) {
+function transformMentorData() {
   return {
     id: originalData.id,
     mentorName: `${originalData.firstname} ${originalData.lastname}`,
@@ -89,9 +90,9 @@ export const fetchMentorData = async () => {
       const data = await response.json();
       console.log(data);
 
-      let mentorData = [];
+      const mentorData = [];
 
-      return data; // Update the mentorInfo state with the received data
+      return data;
     }
     console.error("Failed to fetch mentor data");
   } catch (error) {
