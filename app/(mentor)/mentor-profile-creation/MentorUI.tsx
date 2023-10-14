@@ -162,7 +162,6 @@ export function MentorProfileCreationForms() {
             }}
           />
 
-
           {/* form 1 */}
 
           {/* form 2 */}
@@ -297,13 +296,12 @@ export function SuccessModal() {
           className="w-full py-2 xl:max-w-[initial] !text-white"
         /> */}
 
-
         <Link href="mentor-profile" className="w-full">
           <Button variant="primary" className="w-full py-2 xl:max-w-[initial]">
             Verify account
           </Button>
         </Link>
-        <Link href="mentor-profile">
+        <Link href="mentor-profile?path=profile" prefetch>
           <p className="text-base font-Hanken text-center cursor-pointer">
             I&apos;ll do this later
           </p>
