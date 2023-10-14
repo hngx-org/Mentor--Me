@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import {
   DiscussionForums,
   MentorshipSessions,
@@ -8,6 +10,19 @@ import { SearchIcon } from "@/public/assets/Icons/mentor-communities";
 import Footer from "@/components/Footer";
 import { mentorCardAvatar, mentorCardHero } from "@/public";
 import MentorGrid from "@/components/mentee-communities/MentorGrid";
+import { useAuthContext } from "@/context/AuthContext";
+import useFetch from "@/context/useFetch";
+
+type ApiRes = {
+  message: string;
+  data: {
+    id: string;
+    email: string;
+    emailVerified: boolean;
+    role: string;
+  };
+  success: boolean;
+};
 
 const mentorInfo = [
   {
@@ -85,6 +100,64 @@ const mentorInfo = [
 ];
 
 const CommunityPage = () => (
+  // const url = process.env.NEXT_PUBLIC_API_LOGIN_URL;
+  // Example request
+  // const { data, error } = useFetch<ApiRes>({
+  //   method: "POST",
+  //   url,
+  //   body: {
+  //     email: "johndoed@gmail.com",
+  //     password: "johndoe",
+  //   },
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // });
+  // const { user, setUser, login } = useAuthContext();
+  // const { data } = login({
+  //   email: "johndoed@gmail.com",
+  //   password: "johndoe",
+  // }) as ApiRes;
+
+  // const url = process.env.NEXT_PUBLIC_API_LOGIN_URL;
+  // const { data } = useFetch<ApiRes>({
+  //   url,
+  //   method: "POST",
+  //   body: {
+  //     email: "johndoed@gmail.com",
+  //     password: "johndoe",
+  //   },
+  //   headers: { "Content-Type": "application/json" },
+  // });
+
+  // useEffect(() => {
+  // console.log(message);
+  // const url = process.env.NEXT_PUBLIC_API_LOGIN_URL;
+  // const bod = {
+  //   email: "johndoed@gmail.com",
+  //   password: "johndoe",
+  // };
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch(url!, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(bod),
+  //     });
+  //     const data = await response.json();
+  //     if (data) {
+  //       setUser("nice");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+  // fetchData();
+  // console.log(user);
+  // }, [user]);
+
   <section className="w-full h-full">
     {/* Search Bar */}
     <div>

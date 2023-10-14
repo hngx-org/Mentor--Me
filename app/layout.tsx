@@ -2,7 +2,8 @@ import React from "react";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Hanken_Grotesk as HankenGrotesk } from "next/font/google";
-import AuthProvider from "@/components/AuthProvider/AuthProvider";
+import AuthContextProvider from "@/context/AuthContext";
+// import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${hanken.variable}`}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthContextProvider>{children}</AuthContextProvider>
       </body>
     </html>
   );
