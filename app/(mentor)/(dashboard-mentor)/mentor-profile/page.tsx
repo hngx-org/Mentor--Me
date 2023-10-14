@@ -51,7 +51,7 @@ export default function ProfilePage() {
   }, []);
   console.log(currMentor);
   return (
-    <div className="h-[100vh] w-[100vw] overflow-scroll ">
+    <div className="h-[100%] w-[100%] pb-10 relative ">
       <MentorProfileHeader
         userName={user.name || "Shade Mayowa"}
         email={user.email || ""}
