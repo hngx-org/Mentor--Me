@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+import { useParams } from "next/navigation";
+
 import BigDiscussionCard from "@/components/mentee-communities/BigDiscussionCard";
 import big from "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg";
 
@@ -14,44 +17,54 @@ import {
 } from "@/public";
 import HomeNavBar from "@/components/homeNavbar";
 import Footer from "@/components/Footer";
+
 import CreateDiscussionModal from "@/components/mentee-communities/CreateDiscussionModal";
+import { useMenteeCommunity } from "@/context/MenteeContext/MenteeCommunityContext";
+
 // import { Button } from "@/components/buttons/button";
 
 type Props = {
   join: boolean;
+  params: {};
 };
 
-const slideInfo = [
-  {
-    mentor: true,
-    name: "Shant Baddie",
-    heroCard:
-      "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
-    image: { mentorCardAvatar },
-    title: "My take on Augmented Reality (AR)",
-    desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
-    id: 17,
-  },
-  {
-    mentor: false,
-    name: "Shant Baddie",
-    heroCard:
-      "../../../../public/assets/images/mentee-communities/bigDisscussionCardHero.svg",
-    image: { mentorCardAvatar },
-    title: "My take on Augmented Reality (AR)",
-    desc: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
-    id: 17,
-  },
-];
-
-export default function Forums(): React.ReactElement {
+export default function MenteeForums(): React.ReactElement<Props> {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const parmas = useParams();
+  const disscussionId = useParams().forums[1];
+
+  // eslint-disable-next-line prefer-const
+  let isLoggedIn = true;
+
+  console.log(disscussionId);
+  const data = useMenteeCommunity();
+  let retrievedSliderInfo;
+  let sliderInfo = data.sliderInfo;
+
+  const sliderInfoJSON = localStorage.getItem("sliderInfo");
+  if (sliderInfoJSON) {
+    retrievedSliderInfo = JSON?.parse(sliderInfoJSON);
+    if (retrievedSliderInfo.length > data.sliderInfo) {
+      sliderInfo = retrievedSliderInfo;
+    }
+  }
+
+  // eslint-disable-next-line prefer-destructuring
+
+  function getObjectById(idToFind: string) {
+    const foundObject = sliderInfo.find((item) => item.id === Number(idToFind));
+    return foundObject || null; // Return null if no matching object is found
+  }
+  const currentDiscussion = getObjectById(disscussionId);
 
   return (
     <div className="">
-      {" "}
-      {isModalOpen && (
-        <CreateDiscussionModal onClose={() => setIsModalOpen(false)} />
+      {isLoggedIn && isModalOpen && (
+        <CreateDiscussionModal
+          onClose={() => setIsModalOpen(false)}
+          isLoggedIn={isLoggedIn}
+        />
       )}
       <HomeNavBar />{" "}
       <div className="forums startDiscussion joinDiscussion lg:px-[85px] max-w-[100vw] md:px-12 px-6 flex flex-col  gap-y-8 ">
@@ -73,7 +86,7 @@ export default function Forums(): React.ReactElement {
           {" "}
           <div className="title flex flex-col xl:gap-[14px] gap-2 font-Hanken xl:mb-[45px] text-left lg:w-[70%]">
             <p className=" text-NeutalBase font-semibold lg:text-[32px] text-[18px] lg:leading-[38px] leading-5  ">
-              Tech Titans
+              {currentDiscussion?.title}
             </p>
 
             <div className=" text-Accent1 font-medium lg:text-[18px] text-[10px] leading-[22px]  flex  lg:gap-2 gap-[8px] items-center relative">
@@ -84,42 +97,48 @@ export default function Forums(): React.ReactElement {
                 height={24}
                 className="block lg:w-[56px] lg:h-[24px] w-[26px] h-[12px]"
               />{" "}
-              <span className=""> {`${13} Members`}</span>
+              <span className="">
+                {" "}
+                {`${currentDiscussion?.members} Members`}
+              </span>
             </div>
 
             <p className=" text-Neutra50 font-normal lg:text-[18px] lg:leading-[21.6px] text-[14px] leading-[14.4px] w-[90%]">
-              Connect with mentors in free classrooms and share their
-              experiences and insights with Mentor me
+              {currentDiscussion?.desc}
             </p>
           </div>
-          <div className="largeButton ">
-            {/* <Button
+          {isLoggedIn && (
+            <div className="largeButton ">
+              {/* <Button
               variant="primary"
               className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px] xl:max-w-fit  l"
               type="button"
               title="Start a disscussion"
               iconPresent={messageedit}
             /> */}
-            <button
-              type="button"
-              className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px]  text-white border  bg-NeutalBase flex items-center gap-x-1 rounded-[8px]"
-              onClick={() => setIsModalOpen(true)}
-            >
-              <Image
-                alt="icon"
-                width={20}
-                height={20}
-                src={messageedit}
-                className="lg:flex hidden"
-              />
-              Start a disscussion
-            </button>
-          </div>
+
+              <button
+                type="button"
+                className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px]  text-white border  bg-NeutalBase flex items-center gap-x-1 rounded-[8px]"
+                onClick={() => setIsModalOpen(true)}
+              >
+                <Image
+                  alt="icon"
+                  width={20}
+                  height={20}
+                  src={messageedit}
+                  className="lg:flex hidden"
+                />
+                Start a disscussion
+              </button>
+            </div>
+          )}
         </div>
 
-        {slideInfo.map((item) => (
+        {currentDiscussion?.slideComments.map((item, i) => (
           <BigDiscussionCard
-            key={item.id}
+            // eslint-disable-next-line react/no-array-index-key
+            key={item.commentid + i}
             mentor={item.mentor}
             // heroCard={item.heroCard}
             // image={item.image}

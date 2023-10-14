@@ -92,7 +92,7 @@ text-NeutalBase font-Inter overflow-hidden "
           <div className="flex-shrink-0 w-fit " key={item.id}>
             {/* {item} */}
             <DiscussionCards
-              id={Number(Date.now()) + item.id}
+              id={item.id}
               title={item.title}
               members={item.members}
               desc={item.desc}
