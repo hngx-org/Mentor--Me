@@ -16,8 +16,6 @@ import styles from "./page.module.css";
 import MentorMeIcon from "@/svgs/MentorMeIcon";
 
 import {
-  MentorCreationProfileIcon,
-  MentorCreationPlusIcon,
   MentorCreationTopEllipse,
   MentorCreationBottomEllipse,
   MentorCreationWoman,
@@ -26,36 +24,24 @@ import {
 } from "@/public";
 
 import MentorProgressBar from "@/components/mentorProfileCreation/MentorProgressBar";
-import MentorFormBuilder from "@/components/mentorProfileCreation/MentorFormBuilder";
 import { Button } from "@/components/buttons/button";
-
-import formData from "@/lib/mentorProfileCreationData";
-import { MentorProvider, useMentorContext } from "./MentorContext";
-
-const form1Arr = formData[0];
-const form2Arr = formData[1];
-const form3Arr = formData[2];
-const form4Arr = formData[3];
-const form5Arr = formData[4];
+import Form1 from "./Form1";
+import Form2 from "./Form2";
+import Form3 from "./Form3";
+import Form4 from "./Form4";
+import Form5 from "./Form5";
+import { useMentorContext } from "./MentorContext";
 
 export function MentorProfileCreationForms() {
-  const { formInputs, setFormInputs } = useMentorContext();
-  const [currForm, setCurrForm] = useState(0);
+  const {
+    formInputs,
+    currForm,
+    setCurrForm,
+    files,
+    isRegistered,
+    setIsRegistered,
+  } = useMentorContext();
   const [isModalShown, setIsModalShown] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  const select1 = useRef<HTMLInputElement>(null);
-  const select2 = useRef<HTMLInputElement>(null);
-  const select3 = useRef<HTMLInputElement>(null);
-  const image1 = useRef<HTMLImageElement>(null);
-  const image2 = useRef<HTMLImageElement>(null);
-  const image3 = useRef<HTMLImageElement>(null);
-
-  const [files, setFiles] = useState({
-    file1: "",
-    file2: "",
-    file3: "",
-  });
 
   const forms = [
     {
@@ -69,7 +55,7 @@ export function MentorProfileCreationForms() {
   ];
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTI5NTFhNDI2OTQzZGIyZjliNjA1MzQiLCJyb2xlIjoibWVudG9yIiwiZW1haWwiOiJheW9ib2x1Zm9yZXZlckBnbWFpbC5jb20iLCJpYXQiOjE2OTcyMDcyODAsImV4cCI6MTY5OTcyNzI4MH0.mCu-QOvo_K8ykakiVv8hwOqrZohh9H02khquIdXRycI";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTJhNGRjZDI4ZjdiYjU2YzhkODNjMWUiLCJyb2xlIjoibWVudG9yIiwiZW1haWwiOiJtdXN0eWhlcmN1bGVzQGdtYWlsLmNvbSIsImlhdCI6MTY5NzI3MTQzMCwiZXhwIjoxNjk5NzkxNDMwfQ.znNQ0QPV5qHLCX73mLA_cojOzt-0WFah_xXOMLr1Dfc";
 
   function submitData() {
     const customHeaders = {
@@ -85,17 +71,22 @@ export function MentorProfileCreationForms() {
       )
       .then((response) => {
         // Handle the response
-        // console.log(response.data);
+        // console.log(response);
+        setIsRegistered(true);
+        setIsModalShown(true);
+
+        // console.log("you have been registered");
       })
       .catch((error) => {
+        setIsRegistered(false);
+        // console.log("theres an error in your form");
         // Handle any errors
-        // console.error(error);
+        alert(error.response.data.message);
       });
   }
 
   useEffect(() => {
     const forms = document.querySelectorAll(".form-container");
-    // console.log(forms);
     forms.forEach((form: any, i: number, arr: any) => {
       form.style.transform = `translateX(${100 * (i - currForm)}%)`;
       form.style.opacity = "0";
@@ -112,23 +103,6 @@ export function MentorProfileCreationForms() {
     });
   }, [currForm]);
 
-  useEffect(() => {
-    if (files.file1) {
-      // @ts-ignore
-      image1.current!.src = URL.createObjectURL(files.file1);
-    }
-
-    if (files.file2) {
-      // @ts-ignore
-      image2.current!.src = URL.createObjectURL(files.file2);
-    }
-
-    if (files.file3) {
-      // @ts-ignore
-      image3.current!.src = URL.createObjectURL(files.file3);
-    }
-  }, [files]);
-
   function move(motion: string) {
     // console.log(forms);
     if (currForm <= 0 && motion === "back") {
@@ -137,41 +111,12 @@ export function MentorProfileCreationForms() {
       setCurrForm(currForm - 1);
     }
 
-    if (currForm === 1 && files.file2 === "") {
-      alert("please upload a certificate");
-      return;
-    }
-
     if (currForm < forms.length - 1 && motion === "forward") {
       setCurrForm(currForm + 1);
     } else if (currForm === forms.length - 1 && motion === "forward") {
       // setCurrForm(0);
       submitData();
-      setIsModalShown(true);
     }
-  }
-
-  function selectFile(element: any) {
-    element.click();
-  }
-  function showFile(e: any) {
-    setIsLoaded(true);
-
-    if ([...e.target.files][0].size > 2 * 1024 * 1024) {
-      alert("Image size exceeds 2MB. Please upload a smaller image.");
-      return;
-    }
-    setFiles((prevFile) => ({
-      ...prevFile,
-      [e.target.id]: [...e.target.files][0],
-    }));
-
-    setFormInputs((prevData: any) => ({
-      ...prevData,
-      [e.target.name]: e.target.files[0].name,
-    }));
-
-    // console.log(formInputs);
   }
 
   return (
@@ -207,269 +152,58 @@ export function MentorProfileCreationForms() {
 
         <div className="flex items-start relative gap-[100px] w-[100%] max-h-[100%] overflow-x-hidden">
           {/* form 1 */}
-          <div className="form-container mt-[-10px] sm:mt-0 w-[100%] h-[100%] sm:pt-0 overflow-y-scroll absolute p-4 sm:p-10 pt-0 ">
-            <HeadingBuild
-              currForm={currForm}
-              content=" Set up your profile in a few steps and Let’s get started!"
-            />
-
-            {/* container to upload picture */}
-            <div className="mb-8">
-              <p className="mb-2 text-xl font-Inter text-Neutral60 font-semibold">
-                Upload profile photo
-              </p>
-
-              {/* container for selecting a file from pc */}
-              <div className="flex items-center">
-                <Image
-                  src={MentorCreationProfileIcon}
-                  alt="profile"
-                  className={`${
-                    files.file1 ? "hidden" : "block"
-                  } mr-[20px] max-w-[60px] `}
-                />
-                <img
-                  ref={image1}
-                  src=""
-                  alt=""
-                  className=" mr-[20px] max-w-[100px]"
-                />
-
-                {/* {files.file1 && } */}
-                <div className="flex flex-col">
-                  <input
-                    ref={select1}
-                    className="hidden"
-                    type="file"
-                    onChange={showFile}
-                    id="file1"
-                    name="profile_img"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => {
-                      selectFile(select1.current);
-                    }}
-                    className="text-Accent1 cursor-pointer font-Inter font-[500] w-fit"
-                  >
-                    Select a file
-                  </button>
-                  <p className="text-sm font-Hanken text-Neutra30">
-                    Make sure the file is below 2mb
-                  </p>
-                </div>
-              </div>
-            </div>
-            <MentorFormBuilder
-              content={form1Arr}
-              handleClick={() => {
-                move("forward");
-              }}
-              handleBack={() => {
-                move("back");
-              }}
-            />
-          </div>
+          <Form1
+            handleMoveForward={() => {
+              move("forward");
+            }}
+            handleMoveBack={() => {
+              move("back");
+            }}
+          />
           {/* form 1 */}
 
           {/* form 2 */}
-          <div className="form-container mt-[-10px] sm:mt-0 w-[100%] h-[100%] sm:pt-0 pt-0 overflow-y-scroll opacity-0  absolute p-4 sm:p-10">
-            <HeadingBuild
-              currForm={currForm}
-              content="Good job! let’s us know a little bit more"
-            />
-
-            <MentorFormBuilder
-              content={form2Arr}
-              handleClick={() => {
-                move("forward");
-              }}
-              handleBack={() => {
-                move("back");
-              }}
-            >
-              <div className="flex flex-col">
-                <div className="flex items-center justify-between">
-                  <div className="flex flex-col gap-2 w-[70%]">
-                    <p className="font-Inter text-Neutral60 font-[500]">
-                      Certification file
-                    </p>
-
-                    <input
-                      className="w-full border-[#d0d5dd] border-[1px] rounded-md p-4 placeholder:text-[#98A2B3]"
-                      type="text"
-                      placeholder="Link"
-                      id="certification"
-                      name="certification_link"
-                      required
-                      onInput={(e: any) => {
-                        setFormInputs((prevData: any) => ({
-                          ...prevData,
-                          [e.target.name]: e.target.value,
-                        }));
-                      }}
-                    />
-                  </div>
-
-                  <input
-                    ref={select2}
-                    className="hidden"
-                    type="file"
-                    onChange={showFile}
-                    id="file2"
-                    name="certification_file"
-                  />
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      selectFile(select2.current);
-                    }}
-                    className="text-Accent1 font-semibold mt-6 cursor-pointer text-center"
-                  >
-                    choose file to upload
-                  </button>
-                </div>
-
-                <div>
-                  <img
-                    ref={image2}
-                    src=""
-                    alt=""
-                    className=" mr-[20px] max-w-[200px] w-[80%]"
-                  />
-                  <p>
-                    {
-                      // @ts-ignore
-                      files.file2 && files.file2.name
-                    }
-                  </p>
-                </div>
-              </div>
-            </MentorFormBuilder>
-          </div>
+          <Form2
+            handleMoveForward={() => {
+              move("forward");
+            }}
+            handleMoveBack={() => {
+              move("back");
+            }}
+          />
           {/* form 2 */}
 
           {/* form 3 */}
-          <div className="form-container mt-[-10px] sm:mt-0 w-[100%] h-[100%] sm:pt-0 pt-0 overflow-y-scroll opacity-0  absolute p-4 sm:p-10">
-            <HeadingBuild
-              currForm={currForm}
-              content="Tell us about your educational level"
-            />
-
-            <MentorFormBuilder
-              content={form3Arr}
-              handleClick={() => {
-                move("forward");
-              }}
-              handleBack={() => {
-                move("back");
-              }}
-            >
-              <div className="flex flex-col w-full gap-8">
-                <div className="flex items-center justify-start gap-4">
-                  <input type="checkbox" className="mt-[6px]" />
-                  <p className="text-[#121212] font-medium">
-                    currently in school
-                  </p>
-                </div>
-
-                <input
-                  ref={select3}
-                  className="hidden"
-                  type="file"
-                  onChange={showFile}
-                  id="file3"
-                  name="education_file"
-                />
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    selectFile(select3.current);
-                  }}
-                  className="flex items-center ml-[-7px] gap-2 text-Accent1 font-medium cursor-pointer"
-                >
-                  <Image
-                    src={MentorCreationPlusIcon}
-                    alt="+"
-                    className="max-w-[30px]"
-                  />
-                  <p>Add other educational qualifications</p>
-                </button>
-
-                <div>
-                  <img
-                    ref={image3}
-                    src=""
-                    alt=""
-                    className=" mr-[20px] max-w-[200px] w-[80%]"
-                  />
-                  {/* 
-                  <p>
-                    {
-                      // @ts-ignore
-
-                      files.files3 && files.file3.name
-                    }
-                  </p> */}
-                </div>
-              </div>
-            </MentorFormBuilder>
-          </div>
+          <Form3
+            handleMoveForward={() => {
+              move("forward");
+            }}
+            handleMoveBack={() => {
+              move("back");
+            }}
+          />
           {/* form 3 */}
 
           {/* form 4 */}
-          <div className="form-container mt-[-10px] sm:mt-0 w-[100%] h-[100%] sm:pt-0 pt-0 overflow-y-scroll opacity-0  absolute p-4 sm:p-10">
-            <HeadingBuild
-              currForm={currForm}
-              content="How would you like to be introduced?"
-            />
-
-            <p className="text-Neutral60 font-Inter font-medium text-lg">
-              You are just one last step away from being a mentor and connecting
-              with mentees all over the world! In this step, let us know
-              something about you.
-            </p>
-            <MentorFormBuilder
-              content={form4Arr}
-              handleClick={() => {
-                move("forward");
-              }}
-              handleBack={() => {
-                move("back");
-              }}
-            />
-          </div>
+          <Form4
+            handleMoveForward={() => {
+              move("forward");
+            }}
+            handleMoveBack={() => {
+              move("back");
+            }}
+          />
           {/* form 4 */}
 
           {/* form 5 */}
-          <div className="form-container w-[100%] h-[100%] sm:pt-0 pt-0 overflow-y-scroll opacity-0  absolute p-4 sm:p-10">
-            <HeadingBuild
-              currForm={currForm}
-              content="Your mentorship details"
-            />
-
-            <MentorFormBuilder
-              content={form5Arr}
-              handleClick={() => {
-                move("forward");
-              }}
-              handleBack={() => {
-                move("back");
-              }}
-            >
-              <div className="flex items-center justify-start gap-2">
-                <input type="checkbox" className="mt-[6px]" />
-                <p className="font-medium font-Inter ">
-                  By filling this form, you agree to MentorMe’s{" "}
-                  <span className="text-Accent1">Privacy policy</span> and{" "}
-                  <span className="text-Accent1">Terms of use</span>.
-                </p>
-              </div>
-            </MentorFormBuilder>
-          </div>
+          <Form5
+            handleMoveForward={() => {
+              move("forward");
+            }}
+            handleMoveBack={() => {
+              move("back");
+            }}
+          />
           {/* form 5 */}
         </div>
 
@@ -534,6 +268,7 @@ export function HeadingBuild({ content, currForm }: myProps) {
     </div>
   );
 }
+
 export function SuccessModal() {
   return (
     <div className="text-lg sm:text-2xl flex flex-col gap-6 w-[90%] max-w-[480px] fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] z-[20] bg-white rounded-md shadow-xl p-8">
@@ -559,7 +294,7 @@ export function SuccessModal() {
           className="w-full py-2 xl:max-w-[initial] !text-white"
         /> */}
 
-        <Link href="mentor-profile">
+        <Link href="mentor-profile" className="w-full">
           <Button variant="primary" className="w-full py-2 xl:max-w-[initial]">
             Verify account
           </Button>
