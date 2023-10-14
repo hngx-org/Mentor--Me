@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { Dispatch, SetStateAction } from "react";
 import { UpcomingSessionProp } from "@/lib/constants/constants";
-import Button from "@/app/(mentee)/mentee-sessions/(ui)/VxrcelBtn";
+import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 
 type SuccessReminderProps = {
   openModal: Dispatch<SetStateAction<boolean>>;

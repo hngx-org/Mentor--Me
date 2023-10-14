@@ -13,9 +13,9 @@ export default function OverViewCardLayout({
       <p className="capitalize font-bold"> {heading}</p>
       <ProgressBar progress={50} rounded progressBgColor="bg-Accent2" />
       <div className="flex flex-wrap w-[100%] h-[100%] ">
-        <OverViewCard text="25%" subText="Average Attendence" />
-        <OverViewCard text="25%" subText="Total learning hours" />
-        <OverViewCard text="25%" subText="Sessions completed " />
+        <OverViewCard text="25" subText="Average Attendence" label="%" />
+        <OverViewCard text="12" subText="Total learning hours" label="hours" />
+        <OverViewCard text="2" subText="Sessions completed " label="" />
       </div>
     </div>
   );
