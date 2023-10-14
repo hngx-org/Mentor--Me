@@ -59,7 +59,7 @@ export default function LoginForm() {
         })
         .catch((err) => {
           if (err.response.status === 406) {
-            localStorage.setItem("Mentee", JSON.stringify(err.response.data));
+            localStorage.setItem("Mentor", JSON.stringify(err.response.data));
 
             router.push("/mentor-auth/otp");
           } else {
