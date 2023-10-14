@@ -28,7 +28,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
 
   return (
     <>
-      <header className="bg-[white] block fixed top-0 w-full z-[10] shadow-sm">
+      <header className="bg-[white] block fixed top-0 w-full z-[20] shadow-sm">
         <nav className="bg-[white] flex justify-between items-center py-[1.5rem] w-9/10  mx-auto bg-[#FFFF] cursor-pointer z-[10]">
           <Link href="/">
             <svg
@@ -74,7 +74,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
                 Become a Mentor
               </Link>
               <Link
-                href="/mentee-communities"
+                href="/communities"
                 className="text-[#565656] text-[0.8rem]"
               >
                 Community
@@ -110,13 +110,13 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
                 type="button"
                 className="text-black  bg-white rounded-[7px] border-[1px] text-[13px] w-[90px]  border-black p-2 "
               >
-                <Link href="welcome/login"> Log in</Link>
+                <Link href="/welcome/login"> Log in</Link>
               </button>
               <button
                 type="button"
                 className="bg-[#121212] text-white rounded-[8px] w-[90px] p-2 text-[13px] "
               >
-                <Link href="welcome/signup"> Sign up</Link>
+                <Link href="/welcome/signup"> Sign up</Link>
               </button>
             </div>
           )}
@@ -130,7 +130,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
       <div
         className={`lg:hidden ${
           toggleMenu ? "flex" : "hidden"
-        } flex flex-col items-start h-[100vh]  pl-3 w-[57%] max-w-[300px] left-0 bg-white shadow-xl  fixed h-[100vh] z-[10] top-[77px] 
+        } flex flex-col items-start h[100vh]  pl-3 w-[57%] max-w-[300px] left-0 bg-white shadow-xl  fixed h-[100vh] z-[10] top-[77px] 
         `}
       >
         <ul className="flex flex-col mt-[2rem] gap-7 justify-between  font-[400] text-[18px] leading-[28px] w-9/10  cursor-pointer">
@@ -156,7 +156,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
           </li>
           <li className="text-[12px] text-Inter">
             <Link
-              href="/mentee-communities"
+              href="/communities"
               className="text-[#565656] text-[0.9rem]"
               onClick={handleToggleMenu}
             >

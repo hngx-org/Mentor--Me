@@ -2,9 +2,6 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { EmptyStarIcon, FilledStarIcon } from "@/public/SVGs";
 
-// removed h-[378px] from div(card) to make the height equal
-// changed justify-center to justify-between to there wouldn't be spaces on the top and bottom of the 1st, 3rd, 4th, 6th cards
-
 interface Card {
   id: number;
   src: StaticImageData;
@@ -60,12 +57,14 @@ const ResourceCard = ({
             Buy Now
           </button>
         </Link>
-        <button
-          type="button"
-          className="font-Hanken w-[112px] text-NeutralBase rounded-lg bg-white h-10 mb-4 border border-[#121212]"
-        >
-          Add to Cart
-        </button>
+        <Link href={`/mentee-resources/explore/${id}?path=resources`}>
+          <button
+            type="button"
+            className="font-Hanken w-[112px] text-NeutralBase rounded-lg bg-white h-10 mb-4 border border-[#121212]"
+          >
+            Add to Cart
+          </button>
+        </Link>
       </div>
     </div>
   </div>

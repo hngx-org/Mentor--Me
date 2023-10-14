@@ -7,8 +7,10 @@ export default function Identification({
   onPrev,
   handleSubmit,
   setFormData,
+  formData,
 }: ButtonControlProps): ReactElement {
   const [selectedFileName, setSelectedFileName] = useState("");
+  const [validated, setValidated] = useState(false);
   const handleInputChange = (
     event: ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -47,7 +49,23 @@ export default function Identification({
         Please provide the required details below for identity verification.
       </p>
 
-      <form className="mt-4">
+      <form
+        className="mt-4"
+        noValidate
+        onSubmit={(e) => {
+          e.preventDefault();
+          const form = e.currentTarget;
+          if (form.checkValidity() === false) {
+            setValidated(true);
+
+            return;
+          }
+
+          if (handleSubmit) {
+            handleSubmit();
+          }
+        }}
+      >
         <div className="mb-4 lg:w-3/5 md:w-11/12 w-[97%]">
           <label
             className="font-Inter font-[500] text-NeutalBase text-[14px] mb-2"
@@ -55,14 +73,20 @@ export default function Identification({
           >
             Full Legal Name
             <input
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
               id="fullname"
               type="text"
               placeholder="Jane Doe"
               name="fullname"
               onChange={handleInputChange}
+              required
             />
           </label>
+          {validated && !formData?.identification?.fullname && (
+            <p className="font-Inter font-[500] text-Error40 text-[10px]">
+              Please enter your Legal Name
+            </p>
+          )}
         </div>
 
         <div className="mb-4 lg:w-3/5 md:w-11/12 w-[97%]">
@@ -72,13 +96,19 @@ export default function Identification({
           >
             Date of Birth
             <input
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
               id="dateofBirth"
               type="date"
               placeholder="Jane Doe"
               name="dateofBirth"
               onChange={handleInputChange}
+              required
             />
+            {validated && !formData?.identification?.dateofBirth && (
+              <p className="font-Inter font-[500] text-Error40 text-[10px]">
+                Please enter your date of birth
+              </p>
+            )}
           </label>
         </div>
 
@@ -91,13 +121,19 @@ export default function Identification({
             <select
               name="idType"
               id="idType"
+              required
               onChange={handleInputChange}
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
             >
               <option>Internationl Passport</option>
               <option>Drivers Liscense</option>
               <option>National ID(NIN)</option>
             </select>
+            {validated && !formData?.identification?.idType && (
+              <p className="font-Inter font-[500] text-Error40 text-[10px]">
+                Please select government issued ID
+              </p>
+            )}
           </label>
         </div>
         <div className="mb-4 lg:w-3/5 md:w-11/12 w-[97%]">
@@ -107,14 +143,20 @@ export default function Identification({
           >
             ID Number
             <input
-              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3 text-Neutra20 font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
+              className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
               id="idNumber"
               type="text"
               placeholder="XY127Uy8"
               name="idNumber"
+              required
               onChange={handleInputChange}
             />
           </label>
+          {validated && !formData?.identification?.idNumber && (
+            <p className="font-Inter font-[500] text-Error40 text-[10px]">
+              Please enter the ID Number
+            </p>
+          )}
         </div>
 
         <div className="mb-4 lg:w-3/5 md:w-11/12 w-[97%]">
@@ -133,10 +175,16 @@ export default function Identification({
                 className="hidden"
                 name="uploadID"
                 id="uploadID"
+                required
                 accept=".pdf, .png, .jpeg, .jpg"
                 onChange={handleFileChange}
               />
             </label>
+            {validated && !formData?.identification?.dateofBirth && (
+              <p className="font-Inter font-[500] text-Error40 text-[10px]">
+                Please upload ID file
+              </p>
+            )}
 
             <p className="mt-2 font-Hanken text-[12px] font-[400] text-Neutra40">
               {selectedFileName && `Selected File: ${selectedFileName}`}
@@ -152,26 +200,27 @@ export default function Identification({
             </div>
           </div>
         </div>
-      </form>
 
-      <div className="lg:w-3/5 md:w-11/12 w-[97%] flex justify-between gap-4">
-        <Button
-          variant="outline-primary"
-          className="py-2 px-12 font-Inter font-500 text-[16px]"
-          onClick={onPrev}
-        >
-          Back
-        </Button>
-        <Button
-          variant="primary"
-          className="py-2 px-12 font-Inter font-500 text-[16px]"
-          onClick={handleSubmit}
-          data-te-toggle="modal"
-          data-te-target="#successModal"
-        >
-          Submit
-        </Button>
-      </div>
+        <div className="lg:w-3/5 md:w-11/12 w-[97%] flex justify-between gap-4">
+          <Button
+            variant="outline-primary"
+            className="py-2 px-12 font-Inter font-500 text-[16px]"
+            onClick={onPrev}
+            type="button"
+          >
+            Back
+          </Button>
+          <Button
+            variant="primary"
+            type="submit"
+            className="py-2 px-12 font-Inter font-500 text-[16px]"
+            data-te-toggle="modal"
+            data-te-target="#successModal"
+          >
+            Submit
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }

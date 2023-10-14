@@ -9,7 +9,7 @@ export default function Card() {
       {MentorCardPage.map((details) => (
         <div
           key={details.id}
-          className=" w-[330px] md:w-[280px] lg:w-[295px] h-[435px] md:h-[400px] overflow-hidden container mx-auto border-[0.5px] border-[#ABABAB] rounded-lg mt-10"
+          className=" w-[330px] md:w-[280px] lg:w-[295px] h-[420px] lg:h-[435px] overflow-hidden container mx-auto border-[0.5px] border-[#ABABAB] rounded-lg mt-6"
         >
           <Image
             src={details.imgSrc}
@@ -102,7 +102,7 @@ export default function Card() {
             {/* View Profile */}
             <button
               type="button"
-              className=" cursorpointer ml-auto mr-auto flex justify-center items-center font-Hanken text-Accent1 text-base hover:opacity-50 transition-opacity"
+              className=" cursorpointer mlauto mrauto w-full mt-5 flex justify-center items-center font-Hanken text-Accent1 text-base hover:opacity-50 transition-opacity lg:border lg:border-[#121212] lg:py-[10px] lg:px[32px] lg:px-[40px] lg:rounded-[8px] lg:flex"
             >
               View Profile
             </button>
