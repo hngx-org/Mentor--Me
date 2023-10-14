@@ -57,13 +57,15 @@ export function MentorProfileCreationForms() {
   // Moved tokenString to a scope where it can be accessed
   let token = ""; // declare token variable
 
-  const getUser = localStorage.getItem("Mentor");
-  if (getUser) {
-    try {
-      const newUser = JSON.parse(getUser);
-      token = newUser.data.token; // assign token value here
-    } catch (error) {
-      console.error("Error parsing JSON:", error);
+  if (typeof window !== "undefined") {
+    const getUser = localStorage.getItem("Mentor");
+    if (getUser) {
+      try {
+        const newUser = JSON.parse(getUser);
+        token = newUser.data.token; // assign token value here
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
     }
   }
 
