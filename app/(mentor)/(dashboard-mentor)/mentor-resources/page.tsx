@@ -3,18 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { StarIcon } from "@/public/SVGs";
 
-const resources = Array(8).fill({
-  title: "Collaboration in the workspace",
-  description:
-    "Working with a group of product team can be challenging. It is this essential that each team member works together to facilitate the production of functional and usable ...",
-  resourceId: "my-resource",
-  price: 14000,
-  reviewCount: 429,
-  stars: 4.5,
-});
-
 export default async function MentorResources() {
   const res = await fetch("https://hngmentorme.onrender.com/api/resources");
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
   const data = await res.json();
 
   return (
@@ -32,13 +25,13 @@ export default async function MentorResources() {
         <div className="mentor-resources-scroll flex overflow-y-auto gap-4 pb-4">
           {data.map((resource: any) => (
             <ResourceCard
-              key={resource._id}
-              title={resource.title}
+              key={resource?._id}
+              title={resource?.title}
               description={resource?.description}
-              resourceId={resource._id}
-              price={resource.price}
-              reviewCount={resource.reviews}
-              stars={resource.ratings}
+              resourceId={resource?._id}
+              price={resource?.price}
+              reviewCount={resource?.reviews}
+              stars={resource?.ratings}
               previewImage="/assets/images/mentor-upload-resource/resource-card.jpg"
             />
           ))}
@@ -51,13 +44,13 @@ export default async function MentorResources() {
         <div className="mentor-resources-scroll flex overflow-y-auto gap-4 pb-4">
           {data.map((resource: any) => (
             <ResourceCard
-              key={resource._id}
-              title={resource.title}
+              key={resource?._id}
+              title={resource?.title}
               description={resource?.description}
-              resourceId={resource._id}
-              price={resource.price}
-              reviewCount={resource.reviews}
-              stars={resource.ratings}
+              resourceId={resource?._id}
+              price={resource?.price}
+              reviewCount={resource?.reviews}
+              stars={resource?.ratings}
               previewImage="/assets/images/mentor-upload-resource/resource-card.jpg"
             />
           ))}
