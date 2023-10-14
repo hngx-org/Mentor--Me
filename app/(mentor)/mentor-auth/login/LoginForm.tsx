@@ -52,27 +52,34 @@ export default function LoginForm() {
 
     if (form.checkValidity() === false) {
       setIsValid(false);
-    } else {
-      setIsValid(true);
-      axios
+      return;
+    }
+    try {
+      await axios
         .post("https://mentormee-api.onrender.com/auth/login", {
           // .post("http://localhost:4000/auth/login", {
           email: formData.email,
           password: formData.password,
           role: "mentor",
         })
-        .then(() => {
-          router.push("/dashboard");
+        .then((response) => {
+          console.log(response.data);
+          localStorage.setItem("Mentor", JSON.stringify(response.data));
+          router.push("/mentor-profile-creation");
         })
         .catch((err) => {
           if (err.response.status === 406) {
-            localStorage.setItem("Mentee", JSON.stringify(err.response.data));
+            localStorage.setItem("Mentor", JSON.stringify(err.response.data));
 
             router.push("/mentor-auth/otp");
           } else {
             toast(err?.response?.data?.message || "something went wrong");
           }
         });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -140,11 +147,12 @@ export default function LoginForm() {
                 )}
                 <Button
                   title="Log in"
+                  type="submit"
                   variant="primary"
                   className="w-full h-[48px]"
                   fullWidth
-                  loading={isLoading}
-                  disabled={isDisabled}
+                  // loading={isLoading}
+                  // disabled={isDisabled}
                 />
               </div>
             </form>
