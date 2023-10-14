@@ -12,6 +12,9 @@ export default async function uploadResource(
     category: formData.get("category"),
     courseType: formData.get("course-type"),
     price: formData.get("price"),
+    name: "Olamilekan",
+    role: "Frontend Developer",
+    company: "Self employed",
   };
 
   try {

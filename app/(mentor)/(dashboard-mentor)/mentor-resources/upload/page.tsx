@@ -27,7 +27,7 @@ export default function UploadResourcesPage() {
   return (
     <form
       action={formAction}
-      className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white"
+      className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white pt-10"
     >
       <h1 className="capitalize font-Inter font-medium text-2xl mb-8 text-NeutalBase">
         upload resources
