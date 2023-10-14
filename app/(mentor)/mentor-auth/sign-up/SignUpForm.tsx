@@ -24,6 +24,7 @@ import { BackwardIcon } from "@/public/SVGs";
 export default function SignUpForm() {
   const router = useRouter();
   const [isValid, setIsValid] = React.useState(true);
+
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
@@ -44,21 +45,20 @@ export default function SignUpForm() {
       setIsValid(false);
     } else {
       setIsValid(true);
-      try {
-        const response = await axios.post(
-          "https://mentormee-api.onrender.com/auth/register",
-          {
-            email: formData.email,
-            password: formData.password,
-            role: "mentor",
-          }
-        );
-        localStorage.setItem("Mentor", JSON.stringify(response.data));
-        router.push("/mentor-auth/otp");
-      } catch (error) {
-        // Handle error
-        console.error("An error occurred: ", error);
-      }
+      axios
+        .post("https://mentormee-api.onrender.com/auth/register", {
+          email: formData.email,
+          password: formData.password,
+          role: "mentor",
+        })
+        .then((response) => {
+          console.log(response.data);
+          localStorage.setItem("Mentor", JSON.stringify(response.data));
+          // router.push("/mentor-auth/otp");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
