@@ -8,15 +8,7 @@ import { discussionComms, discussionCommunitites } from "../data";
 import { MsgEditIcon } from "@/public/assets/Icons/mentor-communities";
 import DiscussionCard from "@/components/mentor-community/discussion-card";
 
-type Params = {
-  slug: string;
-};
-
-interface Props {
-  params: Params;
-}
-
-const DiscussionsPage = ({ params }: Props) => {
+const DiscussionsPage = ({ params }: { params: { slug: string } }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -28,7 +20,7 @@ const DiscussionsPage = ({ params }: Props) => {
           <SearchCommunitySearchbar />
         </section>
         {/* Community info */}
-        <section className="p-6 md:p-12 md:flex justify-between items-center">
+        <section className="p-6 md:p-12 md:flex gap-4 justify-between items-center">
           {/* Info */}
           <div className="flex flex-col gap-2">
             <h1 className="font-bold text-[1.125rem] font-Hanken md:text-[2rem]">
@@ -40,7 +32,7 @@ const DiscussionsPage = ({ params }: Props) => {
             {/* Member info */}
             <div className="flex">
               {/* Member Pfps */}
-              <div className="flex items-center isolate">
+              <div className="flex items-center">
                 {/* iamge */}
                 {discussionCommunitites[
                   params.slug as keyof discussionComms
@@ -98,7 +90,7 @@ const DiscussionsPage = ({ params }: Props) => {
           </button>
         </section>
         {/* Discussion list */}
-        <section className="p-8 flex flex-col gap-4 md:p-14">
+        <section className="p-8 pb-[3rem] flex flex-col gap-4 md:p-14">
           {discussionCommunitites[
             params.slug as keyof discussionComms
           ].discussions.map((item) => (
