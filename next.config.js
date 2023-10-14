@@ -9,10 +9,9 @@ const nextConfig = {
         pathname: "/7.x/**",
       },
     ],
-
-    experimental: {
-      serverActions: true,
-    },
+  },
+  experimental: {
+    serverActions: true,
   },
 };
 
