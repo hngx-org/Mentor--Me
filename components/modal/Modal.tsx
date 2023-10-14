@@ -6,6 +6,7 @@ import Image from "next/image";
 
 import Link from "next/link";
 
+// @ts-ignore
 import { Dialog, Transition } from "@headlessui/react";
 
 import { Button } from "../buttons/button";
