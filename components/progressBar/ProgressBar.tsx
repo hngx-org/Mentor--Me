@@ -25,7 +25,6 @@ export default function ProgressBar({
   const getProgress = () => {
     if (progress) setProgress(`w-[${progress}%]`);
     if (totalSteps && stepCompleted) setProgress(`w-[${progress}%]`);
-    console.log(progress);
   };
   useEffect(() => {
     getProgress();

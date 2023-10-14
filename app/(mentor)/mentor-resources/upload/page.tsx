@@ -3,9 +3,14 @@
 import React, { ReactNode, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  experimental_useFormState as useFormState,
+  experimental_useFormStatus as useFormStatus,
+} from "react-dom";
 
 import { CaretIcon } from "@/public/SVGs";
 import DropDown from "@/components/DropDown";
+import uploadResource from "./actions";
 
 export default function UploadResourcesPage() {
   const [courseDescription, setCourseDescription] = useState("");
@@ -14,10 +19,16 @@ export default function UploadResourcesPage() {
   const [isCourseTypeDropDownExpanded, setIsCourseTypeDropDownExpanded] =
     useState(false);
   const [selectedOptionIdx, setSelectedOptionIdx] = useState(-1);
+  const [selectedCategoryOptionIdx, setSelectedCategoryOptionIdx] =
+    useState(-1);
   const courseTypeOptions = ["JavaScript", "TypeScript", "C++", "C#"];
-
+  const [state, formAction] = useFormState(uploadResource, { message: "" });
+  const { pending } = useFormStatus();
   return (
-    <form className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white">
+    <form
+      action={formAction}
+      className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white"
+    >
       <h1 className="capitalize font-Inter font-medium text-2xl mb-8 text-NeutalBase">
         upload resources
       </h1>
@@ -26,6 +37,7 @@ export default function UploadResourcesPage() {
           type="text"
           name="course-title"
           id="course-title"
+          required
           placeholder="input course title"
           className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal"
         />
@@ -34,6 +46,7 @@ export default function UploadResourcesPage() {
         <textarea
           name="course-description"
           id="course-description"
+          required
           placeholder="Input course description"
           value={courseDescription}
           onChange={(e) => {
@@ -55,21 +68,26 @@ export default function UploadResourcesPage() {
         title="Category"
         htmlFor="category"
         extraElements={
-          isCourseTypeDropDownExpanded && (
-            <DropDown
-              dropDownOptions={courseTypeOptions}
-              setSelectedOptionIdx={setSelectedOptionIdx}
-              selectedOptionIdx={selectedOptionIdx}
-            />
-          )
+          <AnimatePresence>
+            {isCategoryDropDownExpanded && (
+              <DropDown
+                dropDownOptions={courseTypeOptions}
+                setSelectedOptionIdx={setSelectedCategoryOptionIdx}
+                selectedOptionIdx={selectedCategoryOptionIdx}
+              />
+            )}
+          </AnimatePresence>
         }
       >
         <input
           type="text"
           id="category"
           name="category"
+          required
+          disabled
+          value={courseTypeOptions[selectedCategoryOptionIdx]}
           placeholder="select category"
-          className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal"
+          className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
         />
         <motion.span
           onClick={() => setIsCategoryDropDownExpanded((prev) => !prev)}
@@ -97,6 +115,7 @@ export default function UploadResourcesPage() {
           type="text"
           id="course-type"
           name="course-type"
+          required
           disabled
           value={courseTypeOptions[selectedOptionIdx]}
           placeholder="select course type"
@@ -113,45 +132,20 @@ export default function UploadResourcesPage() {
         <p className="capitalize text-Neutral60 font-Inter font-medium mb-2 text-lg">
           upload file
         </p>
-        <div className="border-[#9C9CA7] bg-[#F9F9F9] border-dashed border-[1px] rounded-[6px] px-4 py-7 text-center">
-          <Image
-            width={30}
-            height={30}
-            className=" w-11 mx-auto"
-            src="/assets/images/mentor-upload-resource/folders.png"
-            alt="folders-icon"
-          />
-          <div className="text-[#2F3033] font-semibold max-w-[163px] mx-auto mt-3 mb-2">
-            Drop your files here or{" "}
-            <label
-              htmlFor="upload-file"
-              className="text-Accent1 cursor-pointer"
-            >
-              click here
-              <input
-                type="file"
-                id="upload-file"
-                name="upload-file"
-                className="hidden"
-              />
-            </label>{" "}
-            to upload
-          </div>
-          <p className="text-[#9C9CA7]">
-            Accepted formats (mp4, xls, pdf, csv, ppt). Maximum of 15MB
-          </p>
-        </div>
+        <DragArea />
       </div>
       <Input title="price" htmlFor="price">
         <input
           type="number"
           name="price"
           id="price"
+          required
           placeholder="Input the price"
           className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:font-normal"
         />
       </Input>
       <button
+        aria-disabled={pending}
         type="submit"
         className="font-Inter mb-4 font-medium capitalize cursor-pointer bg-NeutalBase py-3 px-5 w-full rounded-[8px] border-none outline-none text-white"
       >
@@ -161,6 +155,60 @@ export default function UploadResourcesPage() {
   );
 }
 
+const DragArea = () => {
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
+  return (
+    <div
+      className={`${
+        isDraggingOver
+          ? "border-Accent1 border-[3px]"
+          : "border-[#9C9CA7] border-[1px]"
+      } bg-[#F9F9F9] border-dashed rounded-[6px] px-4 py-7 text-center`}
+      onDragEnter={(e) => {
+        e.preventDefault();
+        setIsDraggingOver(true);
+      }}
+      onDragLeaveCapture={(e) => {
+        e.preventDefault();
+        if (e.target !== e.currentTarget) return;
+        setIsDraggingOver(false);
+      }}
+      onDropCapture={(e) => {
+        e.preventDefault();
+        setIsDraggingOver(false);
+
+        const file = e.dataTransfer.files[0];
+      }}
+      onDragOver={(e) => {
+        e.preventDefault();
+      }}
+    >
+      <Image
+        width={30}
+        height={30}
+        className=" w-11 mx-auto"
+        src="/assets/images/mentor-upload-resource/folders.png"
+        alt="folders-icon"
+      />
+      <div className="text-[#2F3033] font-semibold max-w-[163px] mx-auto mt-3 mb-2">
+        Drop your files here or{" "}
+        <label htmlFor="upload-file" className="text-Accent1 cursor-pointer">
+          click here
+          <input
+            type="file"
+            id="upload-file"
+            name="upload-file"
+            className="hidden"
+          />
+        </label>{" "}
+        to upload
+      </div>
+      <p className="text-[#9C9CA7]">
+        Accepted formats (mp4, xls, pdf, csv, ppt). Maximum of 15MB
+      </p>
+    </div>
+  );
+};
 const Input = ({
   title,
   htmlFor,
