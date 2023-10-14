@@ -26,20 +26,14 @@ const Page = () => {
 
   return (
     <div className="sm:px-16 px-6">
-      <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">Mentor Me</h2>
-      {isBrowser && (
-        <button
-          className="mt-5 text-[#2A2A2A] cursor-pointer"
-          onClick={handleGoBack}
-          type="button"
-        >
-          <div className="flex">
-            {" "}
-            <BackwardIcon /> <span className="ms-2">Go back</span>
-          </div>
-        </button>
-      )}
-      <div className="flex flex-col gap-8 font-Hanken justify-center items-center h-[80vh]">
+      <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
+        <a href="/">Mentor Me</a>
+      </h2>
+      <a href="/" className="flex mt-5 text-[#2A2A2A] cursor-pointer">
+        {" "}
+        <BackwardIcon /> <span className="ms-2">Go back</span>
+      </a>
+      <div className="flex flex-col gap-8 font-Hanken justify-center items-center md:h-[80vh] h-[100vh] md:my-[0px] my-[160px]">
         <h4 className="font-semibold md:text-[28px] text-base text-[#000]">
           How do you want to get involved?
         </h4>
