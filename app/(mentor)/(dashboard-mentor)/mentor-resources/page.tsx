@@ -18,7 +18,7 @@ export default async function MentorResources() {
   const data = await res.json();
 
   return (
-    <div className="bg-white p-4">
+    <div className="bg-white p-4 pt-10">
       <Link
         className="bg-[#121212] px-5 py-3 rounded-[6px] cursor-pointer text-white ml-auto mb-8 block w-max"
         href="/mentor-resources/upload"
@@ -30,16 +30,18 @@ export default async function MentorResources() {
           new resources
         </h2>
         <div className="mentor-resources-scroll flex overflow-y-auto gap-4 pb-4">
-          {resources.map((resource) => {
-            const key = Math.random();
-            return (
-              <ResourceCard
-                {...resource}
-                key={key}
-                previewImage="/assets/images/mentor-upload-resource/resource-card.jpg"
-              />
-            );
-          })}
+          {data.map((resource: any) => (
+            <ResourceCard
+              key={resource._id}
+              title={resource.title}
+              description={resource?.description}
+              resourceId={resource._id}
+              price={resource.price}
+              reviewCount={resource.reviews}
+              stars={resource.ratings}
+              previewImage="/assets/images/mentor-upload-resource/resource-card.jpg"
+            />
+          ))}
         </div>
       </div>
       <div className="mt-8">
@@ -47,16 +49,18 @@ export default async function MentorResources() {
           top rated resources
         </h2>
         <div className="mentor-resources-scroll flex overflow-y-auto gap-4 pb-4">
-          {resources.map((resource) => {
-            const key = Math.random();
-            return (
-              <ResourceCard
-                {...resource}
-                key={key}
-                previewImage="/assets/images/mentor-upload-resource/resource-card.jpg"
-              />
-            );
-          })}
+          {data.map((resource: any) => (
+            <ResourceCard
+              key={resource._id}
+              title={resource.title}
+              description={resource?.description}
+              resourceId={resource._id}
+              price={resource.price}
+              reviewCount={resource.reviews}
+              stars={resource.ratings}
+              previewImage="/assets/images/mentor-upload-resource/resource-card.jpg"
+            />
+          ))}
         </div>
       </div>
     </div>

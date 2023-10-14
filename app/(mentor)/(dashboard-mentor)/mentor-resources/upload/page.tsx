@@ -27,7 +27,7 @@ export default function UploadResourcesPage() {
   return (
     <form
       action={formAction}
-      className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white"
+      className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white pt-10"
     >
       <h1 className="capitalize font-Inter font-medium text-2xl mb-8 text-NeutalBase">
         upload resources
@@ -84,7 +84,9 @@ export default function UploadResourcesPage() {
           id="category"
           name="category"
           required
-          disabled
+          onKeyDown={(e) => {
+            e.preventDefault();
+          }}
           value={courseTypeOptions[selectedCategoryOptionIdx]}
           placeholder="select category"
           className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
@@ -115,8 +117,10 @@ export default function UploadResourcesPage() {
           type="text"
           id="course-type"
           name="course-type"
+          onKeyDown={(e) => {
+            e.preventDefault();
+          }}
           required
-          disabled
           value={courseTypeOptions[selectedOptionIdx]}
           placeholder="select course type"
           className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
