@@ -23,7 +23,8 @@ interface ModalProps {
 const pathName: string = window.location.pathname.slice(13);
 // console.log(pathName)
 
-const linkHref = pathName === "forget-password" ? "" : "/mentor-auth/login";
+const linkHref =
+  pathName === "forget-password" ? window.location.href : "/mentor-auth/login";
 
 const Modal: FC<ModalProps> = ({
   isOpen,

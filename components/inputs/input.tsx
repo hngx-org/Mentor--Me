@@ -22,6 +22,7 @@ const Input: React.FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
   type,
   disabled,
   required,
+  name,
   error,
   value,
   onChange,
