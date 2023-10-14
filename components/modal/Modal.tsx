@@ -17,6 +17,7 @@ interface ModalProps {
   closeModal: () => void;
   content: string;
   buttontext: string; // Add a prop for the text content
+  title?: string;
 }
 
 const pathName: string = window.location.pathname.slice(13);
@@ -24,7 +25,13 @@ const pathName: string = window.location.pathname.slice(13);
 
 const linkHref = pathName === "forget-password" ? "" : "/mentor-auth/login";
 
-const Modal: FC<ModalProps> = ({ isOpen, closeModal, content, buttontext }) => (
+const Modal: FC<ModalProps> = ({
+  isOpen,
+  closeModal,
+  content,
+  buttontext,
+  title,
+}) => (
   <Transition appear show={isOpen}>
     <Dialog as="div" className="relative z-10" onClose={closeModal}>
       <Transition.Child
@@ -65,7 +72,7 @@ const Modal: FC<ModalProps> = ({ isOpen, closeModal, content, buttontext }) => (
                   />
                 </div>
                 <h4 className="font-Inter text-[#37A85D] text-lg text-center font-medium">
-                  Reset Link Sent
+                  {title}
                 </h4>
                 <p className="text-center my-6 font-Hanken text-base">
                   {content}

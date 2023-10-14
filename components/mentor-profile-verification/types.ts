@@ -1,9 +1,9 @@
 import React, { ReactEventHandler } from "react";
 
 export interface ButtonControlProps {
-  onNext?: ReactEventHandler;
+  onNext?: () => void;
   onPrev?: ReactEventHandler;
-  handleSubmit?: ReactEventHandler;
+  handleSubmit?: () => void;
   formData?: FormData; // Add this prop for formData
   setFormData?: React.Dispatch<React.SetStateAction<FormData>>;
 }

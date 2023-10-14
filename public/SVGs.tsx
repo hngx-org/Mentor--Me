@@ -1500,6 +1500,7 @@ export const LeftIcon = (props: SVGProps<SVGSVGElement>) => (
     height="60"
     viewBox="0 0 60 60"
     fill="none"
+    enableBackground="black"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="arrow-circle-left">
