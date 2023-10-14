@@ -54,6 +54,7 @@ export default function SignUpForm() {
             role: "mentee",
           }
         );
+        localStorage.setItem("Mentee", JSON.stringify(response.data));
         router.push("/mentee-auth/otp");
       } catch (error) {
         // Handle error

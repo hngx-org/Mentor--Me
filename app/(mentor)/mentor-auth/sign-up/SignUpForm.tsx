@@ -53,6 +53,7 @@ export default function SignUpForm() {
             role: "mentor",
           }
         );
+        localStorage.setItem("Mentee", JSON.stringify(response.data));
         router.push("/mentor-auth/otp");
       } catch (error) {
         // Handle error
