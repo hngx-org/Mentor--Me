@@ -13,7 +13,10 @@ const resources = Array(8).fill({
   stars: 4.5,
 });
 
-export default function MentorResources() {
+export default async function MentorResources() {
+  const res = await fetch("https://hngmentorme.onrender.com/api/resources");
+  const data = await res.json();
+
   return (
     <div className="bg-white p-4">
       <Link
