@@ -8,6 +8,7 @@
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState, useEffect, Suspense } from "react";
+import Link from "next/link";
 import Commendations from "@/components/cards/mentee-profile-cards/Commendations";
 import MyMentorsCard from "@/components/cards/mentee-profile-cards/MyMentorsCard";
 import OverviewCard from "@/components/cards/mentee-profile-cards/OverviewCard";
@@ -98,7 +99,8 @@ export default function MenteeProfilePage() {
                 </p>
               </div>
             </div>
-            <div
+            <Link
+              href="/mentee-profile?action=edit-profile"
               className="w-full max-w-fit "
               onClick={() => router.push("?action=edit-profile")}
             >
@@ -107,7 +109,7 @@ export default function MenteeProfilePage() {
                 title="Edit Profile"
                 variant="secondary"
               />
-            </div>
+            </Link>
           </div>
           <div className=" flex w-full justify-center max-xl:flex-col px-4 sm:px-6 lg:px-8 2xl:px-32 lg:gap-8 xl:gap-16 2xl:gap-28 max-xl:pb-8">
             <div className="flex flex-col  w-full ">

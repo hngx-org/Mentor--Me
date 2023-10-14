@@ -6,7 +6,6 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useMentorContext } from "@/app/(mentor)/mentor-profile-creation/MentorContext";
-import formData from "@/lib/mentorProfileCreationData";
 
 interface myProps {
   children?: any;
@@ -25,6 +24,7 @@ export default function MentorFormBuilder({
   const form = useRef(null);
   const [isFull, setIsFull] = useState(false);
   const [textLength, setTextLength] = useState(0);
+  const [isSelected, setIsSelected] = useState(false);
 
   function checkTextArea(e: any) {
     const words = e.target.value;
@@ -79,35 +79,28 @@ export default function MentorFormBuilder({
                 {input.label}
               </label>
 
-              <input
-                className="w-full border-[#d0d5dd] border-[1px] rounded-md p-4 placeholder:text-[#98A2B3] "
-                type={input.type}
-                placeholder={input.placeholder}
-                id={input.label}
-                required
-                // list={input.listName}
-                autoComplete="off"
-                onInput={handleInput}
-                name={input.apiName}
-              />
-
-              {/* {input.nature === "dropdown" ? (
-                <>
-                  <Image
-                    className="absolute right-4 translate-y-[-50%] top-[70%]"
-                    src={MentorCreationArrDown}
-                    alt="arrow-down"
-                  />
-
-                  <div>
-                    
-                  </div>
-
-                  
-                </>
+              {input.nature === "dropdown" ? (
+                <SelectComponent
+                  dropList={input.dropList}
+                  label={input.label}
+                  handleInput={(e) => {
+                    handleInput(e);
+                  }}
+                  placeholder={input.placeholder}
+                  apiName={input.apiName}
+                />
               ) : (
-                ""
-              )} */}
+                <input
+                  className="w-full border-[#d0d5dd] border-[1px] rounded-md p-4 placeholder:text-[#98A2B3] "
+                  type={input.type}
+                  placeholder={input.placeholder}
+                  id={input.label}
+                  required
+                  autoComplete="off"
+                  onInput={handleInput}
+                  name={input.apiName}
+                />
+              )}
             </div>
           );
 
@@ -176,6 +169,7 @@ export default function MentorFormBuilder({
 
             if (valid && !isFull) {
               handleClick();
+              // console.log(formInputs);
             }
           }}
         >
@@ -183,5 +177,47 @@ export default function MentorFormBuilder({
         </button>
       </div>
     </form>
+  );
+}
+
+interface selectProps {
+  label: any;
+  dropList: any;
+  handleInput: (e: any) => void;
+  placeholder: any;
+  apiName: any;
+}
+
+function SelectComponent({
+  label,
+  dropList,
+  handleInput,
+  placeholder,
+  apiName,
+}: selectProps) {
+  const [isSelected, setIsSelected] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("");
+  return (
+    <select
+      onInput={(e) => {
+        handleInput(e);
+        setIsSelected(true);
+        // @ts-ignore
+        setSelectedValue(e.target.value);
+      }}
+      className={`w-full border-[#d0d5dd] border-[1px] rounded-md  p-4 ${
+        isSelected ? "text-Neutral60" : "text-[#98A2B3]"
+      }`}
+      name={apiName}
+      required
+      value={selectedValue}
+    >
+      <option value="" disabled>
+        {placeholder}
+      </option>
+      {dropList.map((list: any) => (
+        <option key={list}>{list}</option>
+      ))}
+    </select>
   );
 }

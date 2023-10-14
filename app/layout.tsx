@@ -1,6 +1,8 @@
 import React from "react";
 import "./globals.css";
 import type { Metadata } from "next";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Inter, Hanken_Grotesk as HankenGrotesk } from "next/font/google";
 import AuthContextProvider from "@/context/AuthContext";
 // import AuthProvider from "@/components/AuthProvider/AuthProvider";
@@ -30,7 +32,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${hanken.variable}`}>
-        <AuthContextProvider>{children}</AuthContextProvider>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        {children}
       </body>
     </html>
   );
