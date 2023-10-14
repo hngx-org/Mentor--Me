@@ -8,7 +8,7 @@ export type SearchResult = {
   url: string;
   filename: string;
 };
-export default async function page() {
+export default async function CloudinaryImages() {
   // folder images example
   // .expression("mentor-communities*")
   const results = (await cloudinary.v2.search
