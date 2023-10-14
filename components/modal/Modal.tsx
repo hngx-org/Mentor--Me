@@ -4,6 +4,8 @@ import { FC } from "react";
 
 import Image from "next/image";
 
+import Link from "next/link";
+
 import { Dialog, Transition } from "@headlessui/react";
 
 import { Button } from "../buttons/button";
@@ -16,6 +18,12 @@ interface ModalProps {
   content: string;
   buttontext: string; // Add a prop for the text content
 }
+
+const pathName: string = window.location.pathname.slice(13);
+// console.log(pathName)
+
+const linkHref = pathName === "forget-password" ? "" : "/mentor-auth/login";
+
 const Modal: FC<ModalProps> = ({ isOpen, closeModal, content, buttontext }) => (
   <Transition appear show={isOpen}>
     <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -62,13 +70,15 @@ const Modal: FC<ModalProps> = ({ isOpen, closeModal, content, buttontext }) => (
                 <p className="text-center my-6 font-Hanken text-base">
                   {content}
                 </p>
-                <Button
-                  variant="primary"
-                  paddingLess
-                  className="w-full h-[48px]"
-                >
-                  {buttontext}
-                </Button>
+                <Link href={linkHref}>
+                  <Button
+                    variant="primary"
+                    paddingLess
+                    className="w-full h-[48px] px-[1rem]"
+                  >
+                    {buttontext}
+                  </Button>
+                </Link>
               </div>
             </Dialog.Panel>
           </Transition.Child>
