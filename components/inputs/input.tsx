@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { InputHTMLAttributes, useState } from "react";
 
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 
@@ -16,16 +16,17 @@ interface InputProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: React.FC<InputProps> = ({
+const Input: React.FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
   id,
   label,
   type,
   disabled,
   required,
   name,
-  value,
   error,
+  value,
   onChange,
+  ...props
 }) => {
   const isPasswordInput = type === "password";
 
@@ -59,6 +60,7 @@ const Input: React.FC<InputProps> = ({
           placeholder=""
           type={values.isPasswordVisible && isPasswordInput ? "text" : type}
           className=" sm:h-[48px] h-[42px] pl-2 outline-none w-[100%]  border-[1px] border-[#CCC] rounded-lg"
+          {...props}
         />
         {isPasswordInput && (
           <button
