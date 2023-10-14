@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import DiscussionSlider from "@/components/mentee-communities/DiscussionSlider";
 import MentorGrid from "@/components/mentee-communities/MentorGrid";
 import HomeNavBar from "@/components/homeNavbar";
@@ -9,6 +9,7 @@ import { SearchIcon } from "@/public/assets/Icons/mentor-communities";
 import SidebarMentor from "@/components/mentor/SidebarMentor";
 import { mentorCardAvatar, mentorCardHero } from "@/public";
 import { get, getMentorInfo, post } from "@/lib/apiHelper";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 type MentorDataType = {
   date: string;
@@ -280,7 +281,9 @@ const MenteeCommunities: React.FC = () => {
                 <DiscussionSlider slideInfo={sliderInfo} />
               </div>
               <div className=" w-[396px] sm:w-[406px]  md:w-[628px] lg:w-[calc(777px)] xl:w-[calc(977px)] 2xl:w-[calc(1362px)]  border border-transparent  mx-auto overflow-hidden">
-                <MentorGrid mentorInfo={mentorInfo2} />
+                <Suspense fallback={<LoadingSpinner />}>
+                  <MentorGrid mentorInfo={mentorInfo2} />
+                </Suspense>
               </div>
             </div>
           ) : (
@@ -291,12 +294,15 @@ const MenteeCommunities: React.FC = () => {
                 <DiscussionSlider slideInfo={sliderInfo} />
               </div>
               <div className=" w-[396px] sm:w-[628px]  md:w-[860px] lg:w-[calc(1052px)] xl:w-[calc(1352px)] 2xl:w-[calc(1362px)]   border border-transparent  mx-auto overflow-hidden">
-                <MentorGrid mentorInfo={mentorInfo2} />
+                <Suspense fallback={<LoadingSpinner />}>
+                  <MentorGrid mentorInfo={mentorInfo2} />
+                </Suspense>
               </div>
             </div>
           )}
         </div>
       </div>
+      <br />
       <Footer />
     </div>
   );
