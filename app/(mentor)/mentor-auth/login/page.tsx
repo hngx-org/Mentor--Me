@@ -1,11 +1,18 @@
+"use client";
+
 import React from "react";
 import { Metadata } from "next";
-import LoginForm from "./LoginForm";
-import FormWrap from "@/components/inputs/FormWrap";
+import dynamic from "next/dynamic";
 
-export const metadata: Metadata = {
-  title: "Login",
-};
+import FormWrap from "@/components/inputs/FormWrap";
+import LoginForm from "./LoginForm";
+
+// // const DynamicLoginForm = dynamic(() => import("./LoginForm"), {
+// //   ssr: false,
+// // });
+// export const metadata: Metadata = {
+// //   title: "Login",
+// // };
 const page = () => (
   <div>
     <FormWrap>

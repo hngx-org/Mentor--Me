@@ -152,6 +152,7 @@ export function MentorProfileCreationForms() {
 
         <div className="flex items-start relative gap-[100px] w-[100%] max-h-[100%] overflow-x-hidden">
           {/* form 1 */}
+
           <Form1
             handleMoveForward={() => {
               move("forward");
@@ -160,6 +161,8 @@ export function MentorProfileCreationForms() {
               move("back");
             }}
           />
+
+
           {/* form 1 */}
 
           {/* form 2 */}
@@ -293,6 +296,7 @@ export function SuccessModal() {
           title="Verify account"
           className="w-full py-2 xl:max-w-[initial] !text-white"
         /> */}
+
 
         <Link href="mentor-profile" className="w-full">
           <Button variant="primary" className="w-full py-2 xl:max-w-[initial]">
