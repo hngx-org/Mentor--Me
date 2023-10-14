@@ -49,7 +49,6 @@ export default function MentorProfileHeader({
   }, []);
 
   return (
-<<<<<<< HEAD
     <div className="w-[100%] h-[294px]   relative flex flex-col  ">
       <div className="h-[50%] w-[100%]  bg-blue-500 bg-[url('/assets/mentor-profileBanner.png')] bg-cover bg-no-repeat" />
       <div className="h-[50%] w-[100%]  bg-white" />
@@ -73,68 +72,9 @@ export default function MentorProfileHeader({
           </div>
           <div className="flex justify-center space-x-4 min-w-fit py-2 items-center">
             <ShareIcon />
-            <Button
-              variant="outline-primary"
-              paddingLess
-              className="px-1  sm:px-2 sm:py-2 "
-            >
-              Edit profile
-            </Button>
           </div>
         </div>
-=======
-    <section className="w-full max-lg:pb-16 relative">
-      <div className="flex w-full h-[230px] max-sm:h-[200px]">
-        <Image
-          src="/assets/mentor-profileBanner.png"
-          alt="cover"
-          width={2000}
-          height={500}
-        />
->>>>>>> dev
       </div>
-
-      {/* <div className="h-[50%] w-[100%]  bg-white" /> */}
-      <div className="flex w-full justify-between items-center max-sm:flex-col max-sm:items-start max-sm:pl-6">
-        <div className="flex items-center gap-6  w-full max-sm:flex-col max-sm:items-start max-lg:gap-6">
-          <div className="relative -mt-12 sm:pl-5">
-            <Suspense fallback={<LoadingSpinner />}>
-              {userName ? (
-                <div
-                  className="w-[200px] h-[200px] rounded-full text-white font-bold font-Hanken uppercase text-7xl flex items-center justify-center "
-                  style={{ backgroundColor: randomColor }}
-                >
-                  {userName[0]}
-                </div>
-              ) : (
-                <div
-                  className="w-[200px] h-[200px] rounded-full text-white font-bold font-Hanken uppercase text-7xl flex items-center justify-center "
-                  style={{ backgroundColor: randomColor }}
-                >
-                  <LoadingSpinner />
-                </div>
-              )}
-            </Suspense>
-          </div>
-          <div className="flex flex-col">
-            <p className="flex gap-4 font-Inter font-bold lg:text-[32px] text-Neutra50 items-center capitalize">
-              <span>{userName}</span>
-            </p>
-            <p className="uppercase">{userRole}</p>
-          </div>
-        </div>
-        <Link
-          href="/mentor-profile?action=edit-mentor"
-          className="sm:w-full max-sm:mt-4  flex justify-center items-center  gap-2"
-        >
-          <Button
-            className="px-4 py-2 "
-            title="Edit Profile"
-            variant="secondary"
-          />
-          <ShareIcon />
-        </Link>
-      </div>
-    </section>
+    </div>
   );
 }
