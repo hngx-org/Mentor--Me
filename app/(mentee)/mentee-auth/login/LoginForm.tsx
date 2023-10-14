@@ -6,8 +6,11 @@ import Image from "next/image";
 
 import Link from "next/link";
 
+import { useRouter } from "next/navigation";
+
 import axios from "axios";
 
+import { toast } from "react-toastify";
 import auth from "@/public/assets/images/auth.jpeg";
 
 import google from "@/public/assets/images/goggle.svg";
@@ -20,6 +23,7 @@ import { Button } from "@/components/buttons/button";
 import { BackwardIcon } from "@/public/SVGs";
 
 export default function LoginForm() {
+  const router = useRouter();
   const [isValid, setIsValid] = React.useState(true);
   const [formData, setFormData] = React.useState({
     email: "",
@@ -42,22 +46,22 @@ export default function LoginForm() {
       setIsValid(false);
     } else {
       setIsValid(true);
-      console.log(formData);
-      try {
-        const response = await axios.post(
-          "https://mentormee-api.onrender.com/auth/login",
-          {
-            email: formData.email,
-            password: formData.password,
+      axios
+        // .post("https://mentormee-api.onrender.com/auth/login", {
+        .post("http://localhost:4000/auth/login", {
+          email: formData.email,
+          password: formData.password,
+        })
+        .then(() => {
+          router.push("/dashboard");
+        })
+        .catch((err) => {
+          if (err.response.status === 406) {
+            router.push("/mentee-auth/otp");
+          } else {
+            toast(err?.response?.data?.message || "something went wrong");
           }
-        );
-        window.location.href = "/dashboard";
-        alert("Suceess");
-      } catch (error) {
-        // Handle error
-        console.error("An error occurred: ", error);
-        alert(error);
-      }
+        });
     }
   };
   return (
