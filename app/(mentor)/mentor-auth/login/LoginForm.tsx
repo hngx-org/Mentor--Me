@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useContext } from "react";
 
 import Image from "next/image";
 
@@ -23,6 +23,7 @@ import Input from "@/components/inputs/input";
 import { BackwardIcon } from "@/public/SVGs";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
+import AuthCtx from "@/context/AuthCtx";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -36,6 +37,7 @@ export default function LoginForm() {
     !formData.email.match(
       /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
     ) || formData.password.length < 8;
+  const ctx = useContext(AuthCtx);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -68,6 +70,8 @@ export default function LoginForm() {
           router.push("/mentor-profile-creation");
         })
         .catch((err) => {
+          console.log(err);
+
           if (err.response.status === 406) {
             localStorage.setItem("Mentor", JSON.stringify(err.response.data));
 
