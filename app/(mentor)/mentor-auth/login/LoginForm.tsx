@@ -6,6 +6,12 @@ import Image from "next/image";
 
 import Link from "next/link";
 
+import axios from "axios";
+
+import { useRouter } from "next/navigation";
+
+import { toast } from "react-toastify";
+
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import google from "../../../../public/assets/images/goggle.svg";
@@ -18,7 +24,50 @@ import { Button } from "@/components/buttons/button";
 import { BackwardIcon } from "@/public/SVGs";
 
 export default function LoginForm() {
+  const router = useRouter();
   const [isValid, setIsValid] = React.useState(true);
+  const [formData, setFormData] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSumbit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = e.currentTarget as HTMLFormElement;
+
+    if (form.checkValidity() === false) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+      axios
+        .post("https://mentormee-api.onrender.com/auth/login", {
+          // .post("http://localhost:4000/auth/login", {
+          email: formData.email,
+          password: formData.password,
+          role: "mentor",
+        })
+        .then(() => {
+          router.push("/dashboard");
+        })
+        .catch((err) => {
+          if (err.response.status === 406) {
+            localStorage.setItem("Mentee", JSON.stringify(err.response.data));
+
+            router.push("/mentor-auth/otp");
+          } else {
+            toast(err?.response?.data?.message || "something went wrong");
+          }
+        });
+    }
+  };
 
   return (
     <div>
@@ -51,22 +100,23 @@ export default function LoginForm() {
             <h5 className="text-[#808080] text-base font-Hanken mt-2 mb-5">
               Login into your account
             </h5>
-            <form
-              className="flex flex-col gap-5"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const form = e.currentTarget;
-                if (form.checkValidity() === false) {
-                  e.preventDefault();
-                  setIsValid(false);
-                } else {
-                  setIsValid(true);
-                  window.location.href = "/mentor-profile?path=profile";
-                }
-              }}
-            >
-              <Input id="email" label="Email Address" required type="email" />
-              <Input id="password" label="Password" required type="password" />
+            <form className="flex flex-col gap-5" onSubmit={handleSumbit}>
+              <Input
+                id="email"
+                label="Email Address"
+                required
+                type="email"
+                name="email"
+                onChange={handleInputChange}
+              />
+              <Input
+                id="password"
+                label="Password"
+                required
+                type="password"
+                name="password"
+                onChange={handleInputChange}
+              />
 
               <Link href="/mentor-auth/forget-password?path=reset-password">
                 {" "}

@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 
 import { toast } from "react-toastify";
+
 import auth from "@/public/assets/images/auth.jpeg";
 
 import google from "@/public/assets/images/goggle.svg";
@@ -51,12 +52,15 @@ export default function LoginForm() {
           // .post("http://localhost:4000/auth/login", {
           email: formData.email,
           password: formData.password,
+          role: "mentee",
         })
         .then(() => {
           router.push("/dashboard");
         })
         .catch((err) => {
           if (err.response.status === 406) {
+            localStorage.setItem("Mentee", JSON.stringify(err.response.data));
+
             router.push("/mentee-auth/otp");
           } else {
             toast(err?.response?.data?.message || "something went wrong");
