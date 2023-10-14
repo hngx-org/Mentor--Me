@@ -34,7 +34,7 @@ export default function LoginForm() {
   });
   const isDisabled =
     !formData.email.match(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/) ||
-    !formData.password;
+    formData.password.length < 8;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
