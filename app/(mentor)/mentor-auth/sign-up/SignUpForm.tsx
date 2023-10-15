@@ -31,10 +31,9 @@ export default function SignUpForm() {
     email: "",
     password: "",
   });
-  const isDisabled =
-    !formData.email.match(
-      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
-    ) || formData.password.length < 8;
+  const isDisabled = !formData.email.match(
+    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
+  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -131,7 +130,8 @@ export default function SignUpForm() {
                   </div>
                 )}
                 <Button
-                  title="Log in"
+                  title="Sign up"
+                  type="submit"
                   variant="primary"
                   className="w-full h-[48px]"
                   fullWidth
