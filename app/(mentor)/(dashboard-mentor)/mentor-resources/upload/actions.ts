@@ -30,9 +30,9 @@ export default async function uploadResource(
       },
     });
     const data = await res.json();
+    console.log(data);
     revalidatePath("/mentor-resources");
-    redirect("/mentor-resources");
   } catch (e) {
-    const rand = "";
+    console.log(e);
   }
 }

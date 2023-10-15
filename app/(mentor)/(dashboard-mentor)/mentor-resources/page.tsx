@@ -8,7 +8,22 @@ export default async function MentorResources() {
   if (!res.ok) {
     throw new Error(res.statusText);
   }
-  const data = await res.json();
+  const data: { createdAt: string; ratings: number }[] = await res.json();
+
+  const recentResources = data
+    ?.filter((resource) => {
+      const timeDifference =
+        new Date().getTime() - new Date(resource.createdAt).getTime();
+      return timeDifference <= 604800000;
+    })
+    ?.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+
+  const mostRatedResources = data
+    ?.sort((a, b) => +b.ratings - +a.ratings)
+    .slice(0, 20);
 
   return (
     <div className="bg-white p-4 pt-10">
@@ -23,7 +38,7 @@ export default async function MentorResources() {
           new resources
         </h2>
         <div className="mentor-resources-scroll flex overflow-y-auto gap-4 pb-4">
-          {data.map((resource: any) => (
+          {recentResources.map((resource: any) => (
             <ResourceCard
               key={resource?._id}
               title={resource?.title}
@@ -42,7 +57,7 @@ export default async function MentorResources() {
           top rated resources
         </h2>
         <div className="mentor-resources-scroll flex overflow-y-auto gap-4 pb-4">
-          {data.map((resource: any) => (
+          {mostRatedResources.map((resource: any) => (
             <ResourceCard
               key={resource?._id}
               title={resource?.title}
@@ -94,24 +109,26 @@ const ResourceCard = ({
         alt={title}
       />
       <div className="p-4">
-        <h3 className=" text-NeutalBase font-Inter font-medium text-xl mb-2">
+        <h3 className=" text-NeutalBase font-Inter capitalize font-medium text-xl mb-2">
           {title}
         </h3>
         <p className="font-Hanken text-Neutra40 font-normal">{description}</p>
         <Link
-          className="text-Accent1 font-Hanken capitalize cursor-pointer"
+          className="text-Accent1 font-Hanken capitalize cursor-pointer mt-2"
           href={`/mentor-resources/${resourceId}`}
         >
           view more
         </Link>
         <div className="font-Hanken font-normal text-NeutalBase flex items-center gap-4 my-2">
           <p className="flex items-center gap-3">
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            {stars}
+            {Array(5)
+              .fill("")
+              .map((_el, idx) => {
+                const filled = idx + 1 <= +stars;
+                const key = Math.random();
+                return <StarIcon filled={filled} key={key} />;
+              })}
+            {(+stars).toFixed(1)}
           </p>
           <div className="w-[1px] h-4 bg-NeutalBase" />
           <p>{reviewCount} reviews</p>
