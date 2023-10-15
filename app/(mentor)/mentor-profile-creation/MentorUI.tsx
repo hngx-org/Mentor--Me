@@ -88,7 +88,7 @@ export function MentorProfileCreationForms() {
       })
       .catch((error) => {
         // Handle any errors
-        console.log(error.response.data.message);
+        alert(error.response.data.message);
       });
   }
 
