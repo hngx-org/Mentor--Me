@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -39,7 +39,7 @@ export default function MentorProfileVerification() {
       certificationName: "",
       issuingInstitution: "",
       graduationYear: "",
-      graduationFile: "",
+      graduationFile: null,
     },
     qualifications: {
       qualification: "",
@@ -57,10 +57,19 @@ export default function MentorProfileVerification() {
       dateofBirth: "",
       idType: "",
       idNumber: "",
-      uploadID: "",
+      uploadID: null,
     },
   });
 
+  const handleNextStep = () => {
+    setStep(step + 1);
+  };
+
+  const handlePrevStep = () => {
+    setStep(step - 1);
+  };
+
+  // Moved tokenString to a scope where it can be accessed
   let token = ""; // declare token variable
 
   if (typeof window !== "undefined") {
@@ -74,14 +83,6 @@ export default function MentorProfileVerification() {
       }
     }
   }
-
-  const handleNextStep = () => {
-    setStep(step + 1);
-  };
-
-  const handlePrevStep = () => {
-    setStep(step - 1);
-  };
 
   const handleSubmit = async () => {
     try {

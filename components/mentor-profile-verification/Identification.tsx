@@ -30,22 +30,14 @@ export default function Identification({
     const { type, files } = event.target;
 
     if (type === "file" && files) {
-      // Handle file input change
-      const reader = new FileReader();
-      reader.readAsDataURL(files[0]);
-      reader.onloadend = () => {
-        const base64data = reader.result;
-        if (typeof base64data === "string") {
-          setFormData?.((prevData) => ({
-            ...prevData,
-            identification: {
-              ...prevData.identification,
-              uploadID: base64data, // Update graduationFile with the Base64 string
-            },
-          }));
-        }
-        setSelectedFileName(files[0].name);
-      };
+      setFormData?.((prevData) => ({
+        ...prevData,
+        identification: {
+          ...prevData.identification,
+          uploadID: files[0], // Update the graduationFile property with the selected file
+        },
+      }));
+      setSelectedFileName(files[0].name);
     }
   };
   return (
