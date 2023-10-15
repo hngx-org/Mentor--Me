@@ -1,7 +1,5 @@
-"use client";
-
 import { Metadata } from "next";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DiscussionSlider from "@/components/mentee-communities/DiscussionSlider";
 import MentorGrid from "@/components/mentee-communities/MentorGrid";
 import HomeNavBar from "@/components/homeNavbar";
