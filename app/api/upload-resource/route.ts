@@ -1,7 +1,8 @@
+/* eslint-disable import/prefer-default-export */
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
-export default async function POST(request: NextRequest) {
+export async function POST(request: NextRequest) {
   const formData = await request.formData();
   const resourceData = {
     category: formData.get("category"),
