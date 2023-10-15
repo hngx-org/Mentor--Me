@@ -36,26 +36,39 @@ export default function ProfilePage() {
     state: "basic info",
     isOpen: false,
   });
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTI5NTFhNDI2OTQzZGIyZjliNjA1MzQiLCJyb2xlIjoibWVudG9yIiwiZW1haWwiOiJheW9ib2x1Zm9yZXZlckBnbWFpbC5jb20iLCJpYXQiOjE2OTcyMDcyODAsImV4cCI6MTY5OTcyNzI4MH0.mCu-QOvo_K8ykakiVv8hwOqrZohh9H02khquIdXRycI";
+  let token = ""; // declare token variable
+
+  if (typeof window !== "undefined") {
+    const getUser = localStorage.getItem("Mentor");
+    if (getUser) {
+      try {
+        const newUser = JSON.parse(getUser);
+        token = newUser.data.token; // assign token value here
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
+    }
+  }
+
   const getCurrentMentor = async () => {
     try {
-      const currMent = await fetch(`${baseUrl}/mentors/get-current`, {
+      const response = await fetch(`${baseUrl}/mentors/get-current`, {
         method: "GET",
         redirect: "follow",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setUser(data?.data);
-        });
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data?.data); // Assuming you want to set the entire data object
+        console.log("Current Mentor", data?.data);
+      } else {
+        console.error("Failed to fetch current mentor data");
+      }
     } catch (error) {
-      console.log(error);
-    } finally {
-      // console.log(currMentor);
+      console.error("Error fetching current mentor data:", error);
     }
   };
   const getCurrent = async () => {
@@ -71,13 +84,15 @@ export default function ProfilePage() {
         .then((res) => res.json())
         .then((data) => {
           setCurrMentor(data?.data);
+          console.log("Current", data?.data); // Log the data directly from the response
         });
     } catch (error) {
       console.log(error);
     } finally {
-      // console.log(currMentor);
+      // Any code that needs to be executed regardless of success or failure can go here
     }
   };
+
   useEffect(() => {
     getCurrentMentor();
     getCurrent();
