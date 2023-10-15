@@ -6,6 +6,8 @@ import Image from "next/image";
 
 import Link from "next/link";
 
+import { ToastContainer, toast } from "react-toastify";
+
 import axios from "axios";
 
 import { useRouter } from "next/navigation";
@@ -64,6 +66,8 @@ export default function SignUpForm() {
         })
         .catch((error) => {
           console.log(error);
+          toast.error(error?.response?.data?.message || "something went wrong");
+          setIsLoading(false);
         });
     }
   };
@@ -174,6 +178,7 @@ export default function SignUpForm() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
