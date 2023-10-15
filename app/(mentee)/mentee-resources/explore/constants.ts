@@ -15,7 +15,7 @@ export const newResources = [
     id: 1,
     title: "Collaboration in the workspaces",
     author: "Dylan Matthias | UX Researcher, Microsoft",
-    rate: 4.5,
+    ratings: 4.5,
     reviews: 20,
     price: "2,500",
     poster: ResourceOne,
@@ -25,7 +25,7 @@ export const newResources = [
     id: 2,
     title: "Essentials of Business Management",
     author: "MaryAnn Clive I Project Manager, Netflix",
-    rate: 4.5,
+    ratings: 4.5,
     reviews: 20,
     price: "2,500",
     poster: ResourceTwo,
@@ -35,7 +35,7 @@ export const newResources = [
     id: 3,
     title: "UX Principles for Designers",
     author: "Blessing Derek I UX Auditor, Google",
-    rate: 4.5,
+    ratings: 4.5,
     reviews: 20,
     price: "2,500",
     poster: ResourceOne,
@@ -57,3 +57,8 @@ export const courseContents = [
   { id: 4, title: "Real time chat with instructor" },
   { id: 5, title: "Flexible Learning" },
 ];
+
+export const staticDescription =
+  "The secrets to creating great user experiences for your products and helping your organization satisfy users.";
+
+export const staticTitle = "UX Principles for Designers";
