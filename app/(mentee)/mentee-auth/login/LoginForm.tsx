@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 import axios from "axios";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import auth from "@/public/assets/images/auth.jpeg";
 
@@ -20,7 +20,7 @@ import facebook from "@/public/assets/images/facebook.svg";
 
 import Input from "@/components/inputs/input";
 
-import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
+import { Button } from "@/components/buttons/button";
 import { BackwardIcon } from "@/public/SVGs";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
@@ -32,10 +32,6 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
-
-  const isDisabled = !formData.email.match(
-    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
-  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -131,21 +127,20 @@ export default function LoginForm() {
                   Forget Password?
                 </p>
               </Link>
-              <div className="  flex relative justify-end">
+              <div className="flex relative justify-end">
                 {isLoading && (
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-1/2 z-30">
                     <LoadingSpinner />
                   </div>
                 )}
                 <Button
-                  title="Log in"
-                  type="submit"
                   variant="primary"
+                  paddingLess
                   className="w-full h-[48px]"
-                  fullWidth
-                  loading={isLoading}
-                  disabled={isDisabled}
-                />
+                  type="submit"
+                >
+                  Log in
+                </Button>
               </div>
             </form>
 
@@ -156,21 +151,23 @@ export default function LoginForm() {
             </div>
             <div className="flex flex-col gap-4">
               <Button
-                title="Sign up with Google"
-                variant="secondary"
-                className="w-full h-[48px] gap-4"
-                fullWidth
-                loading={isLoading}
-                icon={google}
-              />
+                variant="outline-primary"
+                paddingLess
+                className="w-full h-[48px]"
+                imgSrc={google}
+                imgAlt="google"
+              >
+                Log in with Google
+              </Button>
               <Button
-                title="Sign up with Facebook"
-                variant="secondary"
-                className="w-full h-[48px] gap-4"
-                fullWidth
-                loading={isLoading}
-                icon={facebook}
-              />
+                variant="outline-primary"
+                paddingLess
+                className="w-full h-[48px]"
+                imgSrc={facebook}
+                imgAlt="facebook"
+              >
+                Log in with Google
+              </Button>
             </div>
             <Link href="/mentee-auth/sign-up">
               <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
@@ -181,7 +178,6 @@ export default function LoginForm() {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 }
