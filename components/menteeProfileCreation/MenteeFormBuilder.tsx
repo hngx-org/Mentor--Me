@@ -86,7 +86,7 @@ export default function MenteeFormBuilder({
                   type={input.type}
                   placeholder={input.placeholder}
                   id={input.placeholder}
-                  // required
+                  required
                   onInput={handleInput}
                   name={input.apiName}
                 />
