@@ -9,81 +9,6 @@ import { mentorCardAvatar, mentorCardHero } from "@/public";
 import MentorGrid from "@/components/mentee-communities/MentorGrid";
 // import useAuth from "@/context/useAuth";
 
-const mentorInfo = [
-  {
-    id: 9408,
-    mentorName: "Shade Mayowa",
-    verify: true,
-    mentorPostion: "CEO, Webmasters Inc",
-    mentorAvatar: mentorCardAvatar,
-    cardHero: mentorCardHero,
-    date: "28th, Sept",
-    time: "12:30pm",
-    title: "Intorduction to AI",
-    desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-  },
-  {
-    id: 9408,
-    mentorName: "Shade Mayowa",
-    verify: true,
-    mentorPostion: "CEO, Webmasters Inc",
-    mentorAvatar: mentorCardAvatar,
-    cardHero: mentorCardHero,
-    date: "28th, Sept",
-    time: "12:30pm",
-    title: "Intorduction to AI",
-    desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-  },
-  {
-    id: 9408,
-    mentorName: "Shade Mayowa",
-    verify: true,
-    mentorPostion: "CEO, Webmasters Inc",
-    mentorAvatar: mentorCardAvatar,
-    cardHero: mentorCardHero,
-    date: "28th, Sept",
-    time: "12:30pm",
-    title: "Intorduction to AI",
-    desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-  },
-  {
-    id: 94408,
-    mentorName: "Shade Mayowa",
-    verify: true,
-    mentorPostion: "CEO, Webmasters Inc",
-    mentorAvatar: mentorCardAvatar,
-    cardHero: mentorCardHero,
-    date: "28th, Sept",
-    time: "12:30pm",
-    title: "Intorduction to AI",
-    desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-  },
-  {
-    id: 94068,
-    mentorName: "Shade Mayowa",
-    verify: true,
-    mentorPostion: "CEO, Webmasters Inc",
-    mentorAvatar: mentorCardAvatar,
-    cardHero: mentorCardHero,
-    date: "28th, Sept",
-    time: "12:30pm",
-    title: "Intorduction to AI",
-    desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-  },
-  {
-    id: 94078,
-    mentorName: "Shade Mayowa",
-    verify: true,
-    mentorPostion: "CEO, Webmasters Inc",
-    mentorAvatar: mentorCardAvatar,
-    cardHero: mentorCardHero,
-    date: "28th, Sept",
-    time: "12:30pm",
-    title: "Intorduction to AI",
-    desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-  },
-];
-
 const CommunityPage = () => (
   // const { data, message, success } = useAuth();
   // console.log(data);
@@ -123,7 +48,7 @@ const CommunityPage = () => (
     {/* Free mentorship sessions */}
     {/* <MentorshipSessions /> */}
     <div className=" w-[396px] sm:w-[628px]  md:w-[860px] lg:w-[calc(1052px)] xl:w-[calc(1352px)] 2xl:w-[calc(1362px)]   border border-transparent  mx-auto overflow-hidden">
-      <MentorGrid mentorInfo={mentorInfo} />
+      <MentorGrid />
     </div>
     <div className="footer h-[7rem] w-full bg-transparent" />
     <Footer />

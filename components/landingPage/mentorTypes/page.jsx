@@ -5,7 +5,15 @@ import MentorImageOne from "../../../public/assets/images/landing-page/mentorTyp
 import MentorImageTwo from "../../../public/assets/images/landing-page/mentorTypes-2.png";
 import MentorImageThree from "../../../public/assets/images/landing-page/mentorTypes-3.png";
 import MentorImageFour from "../../../public/assets/images/landing-page/mentorTypes-4.png";
+import Carousel from "@/components/Carousel";
 
+const imgCarousel = [
+  MentorImageOne,
+  MentorImageTwo,
+  MentorImageOne,
+  MentorImageFour,
+  MentorImageThree,
+];
 export default function MentorTypes() {
   return (
     <section className="pt-[3rem] pb-[5rem] my-[2rem] md:my-[5rem]">
@@ -20,7 +28,7 @@ export default function MentorTypes() {
       </div>
 
       <div className="w-9/10 md:w-5/6 mx-auto">
-        <div className="md:flex mb-[8rem] md:mb-0 justify-between items-center">
+        {/* <div className="md:flex mb-[8rem] md:mb-0 justify-between items-center">
           <div className="w-full md:w-1/3 mx-auto max-w-[426px] mb-[5rem] md:mb-[8rem]">
             <h3 className="text-[1.2rem] text-center md:text-left md:text-[1.6rem] font-semibold">
               Tech Experienced Mentors
@@ -60,15 +68,17 @@ export default function MentorTypes() {
               className="block mb-[2rem] mx-auto"
             />
 
-            {/* <Image
+            <Image
               src={MentorImageTwo}
               alt=""
               width={372}
               height={200}
               className="block mb-[2rem] mx-auto"
-            /> */}
+            />
           </div>
-        </div>
+        </div> */}
+
+        <Carousel imgCarousel={imgCarousel} />
 
         <div className="md:flex justify-between items-center">
           <div className="w-full md:w-1/3 mx-auto max-w-[426px] mb-[5rem] md:mb-[8rem]">
