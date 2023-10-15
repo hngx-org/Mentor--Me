@@ -10,7 +10,7 @@ const nextConfig = {
         pathname: "/7.x/**",
       },
     ],
-    domains: ["res.cloudinary.com"],
+    // domains: ["res.cloudinary.com"],
   },
 
   staticPageGenerationTimeout: 1000,

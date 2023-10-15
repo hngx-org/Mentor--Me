@@ -118,7 +118,6 @@ const ResourceCard = ({
         </p>
         <Link
           className="text-Accent1 font-Hanken capitalize cursor-pointer mt-auto"
-
           href={`/mentor-resources/${resourceId}`}
         >
           view more
