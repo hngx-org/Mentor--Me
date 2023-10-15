@@ -94,7 +94,7 @@ function Form3({ handleMoveForward, handleMoveBack }: myProps) {
           <div>
             <img
               ref={image3}
-              src=""
+              src="/"
               alt=""
               className=" mr-[20px] max-w-[200px] w-[80%]"
             />
