@@ -21,14 +21,12 @@ export default async function Resource({
     throw new Error(res.statusText);
   }
   const data = await res.json();
-  console.log(data);
   return (
     <div>
       <section className="bg-Neutral60 px-4 py-11 text-white font-Inter text-center">
         <h1 className="text-3xl font-medium capitalize">{data?.title}</h1>
         <p className="mt-5 mb-3 w-[min(446px,_100%)] mx-auto">
-          The secrets to creating great user experiences for your products, and
-          helping your organization satisfy users.
+          {data?.description}
         </p>
         <div className="flex items-center justify-center gap-3">
           <p className="flex items-center gap-1">
