@@ -84,7 +84,7 @@ const MentorCard: React.FC<Props> = ({
             <span className="">{time}</span>{" "}
           </div>
         </div>
-        <div className="topic font-semibold xl:text-[18px] text-[12px] lg:leading-[21.6px] leading-[16px]">
+        <div className="topic font-semibold xl:text-[18px] text-[12px] lg:leading-[21.6px] leading-[16px] lg:h-[21.6px] h-[16px] overflow-hidden whitespace-nowrap ">
           {title}
         </div>
         <div className="desc font-normal xl:text-[12px] text-[10px] leading-[120%]  h-[48px] xl:h-[57.6px] overflow-clip ">
