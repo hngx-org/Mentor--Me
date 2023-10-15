@@ -115,9 +115,9 @@ const Explore = () => {
                   src={res.imageUrl || ResourceOne}
                   title={res.title}
                   author={`${res.name} | ${res.role}, ${res.company}`}
-                  rate={res.rating}
                   price={res.price}
                   reviews={res.reviews}
+                  ratings={res.ratings}
                 />
               ))
             )}
@@ -153,10 +153,10 @@ const Explore = () => {
                   <ResourceCard
                     key={res._id}
                     id={res._id}
-                    src={res.imageUrl || ResourceTwo}
+                    src={res.imageUrl || i % 2 ? ResourceTwo : ResourceOne}
                     title={res.title}
                     author={`${res.name} | ${res.role}, ${res.company}`}
-                    rate={res.rating}
+                    ratings={res.ratings}
                     price={res.price}
                     reviews={res.reviews}
                   />
