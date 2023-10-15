@@ -2104,7 +2104,10 @@ export const EllipsisIcon = (props?: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-export const StarIcon = (props?: SVGProps<SVGSVGElement>) => (
+export const StarIcon = ({
+  filled = false,
+  ...props
+}: { filled?: boolean } & SVGProps<SVGSVGElement>) => (
   <svg
     width="13"
     height="12"
@@ -2115,7 +2118,7 @@ export const StarIcon = (props?: SVGProps<SVGSVGElement>) => (
   >
     <path
       d="M6.0625 0L8.10201 3.68183L12.0625 4.58359L9.3625 7.76085L9.7707 12L6.0625 10.2818L2.3543 12L2.7625 7.76085L0.0625 4.58359L4.02299 3.68183L6.0625 0Z"
-      fill="#CCCCCC"
+      fill={filled ? "#DFB300" : "#CCCCCC"}
     />
   </svg>
 );

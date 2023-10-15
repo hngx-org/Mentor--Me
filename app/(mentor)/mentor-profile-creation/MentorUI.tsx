@@ -84,15 +84,10 @@ export function MentorProfileCreationForms() {
       )
       .then((response) => {
         // Handle the response
-        // console.log(response);
         setIsRegistered(true);
         setIsModalShown(true);
-
-        // console.log("you have been registered");
       })
       .catch((error) => {
-        // setIsRegistered(false);
-        // console.log("theres an error in your form");
         // Handle any errors
         console.log(error.response.data.message);
         toast.error(error.response.data.message);
@@ -306,7 +301,7 @@ export function SuccessModal() {
         /> */}
 
         <Link href="/profile-verification" className="w-full">
-          <Button variant="primary" className="w-full py-2 xl:max-w-[initial]">
+          <Button variant="primary" className="w-full py-2 sm:!w-full">
             Verify account
           </Button>
         </Link>

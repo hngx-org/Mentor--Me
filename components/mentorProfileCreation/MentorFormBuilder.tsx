@@ -123,7 +123,7 @@ export default function MentorFormBuilder({
               rows={10 as number}
               placeholder="Write something"
               onInput={checkTextArea}
-              name={input.label}
+              name={input.apiName}
               required
             />
 

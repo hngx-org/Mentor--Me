@@ -9,10 +9,10 @@ const nextConfig = {
         pathname: "/7.x/**",
       },
     ],
+    domains: ["res.cloudinary.com"],
   },
-  experimental: {
-    serverActions: true,
-  },
+
+  staticPageGenerationTimeout: 1000,
 };
 
 module.exports = nextConfig;
