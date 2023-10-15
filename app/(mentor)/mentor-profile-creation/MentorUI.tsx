@@ -83,15 +83,10 @@ export function MentorProfileCreationForms() {
       )
       .then((response) => {
         // Handle the response
-        // console.log(response);
         setIsRegistered(true);
         setIsModalShown(true);
-
-        // console.log("you have been registered");
       })
       .catch((error) => {
-        // setIsRegistered(false);
-        // console.log("theres an error in your form");
         // Handle any errors
         console.log(error.response.data.message);
       });

@@ -68,11 +68,11 @@ export default function MenteeProfileCreationForms() {
       )
       .then((response) => {
         // Handle the response
-        // console.log(response.data);
+        setIsModalShown(true);
       })
       .catch((error) => {
         // Handle any errors
-        // console.error(error);
+        console.log(error.response.data.message);
       });
   }
 
@@ -115,7 +115,6 @@ export default function MenteeProfileCreationForms() {
     } else if (currForm === forms.length - 1 && motion === "forward") {
       // setCurrForm(0);
       submitData();
-      setIsModalShown(true);
     }
   }
 
@@ -195,7 +194,7 @@ export default function MenteeProfileCreationForms() {
                 />
                 <img
                   ref={image1}
-                  src=""
+                  src="/"
                   alt=""
                   className=" mr-[20px] max-w-[100px]"
                 />
