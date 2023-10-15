@@ -22,16 +22,22 @@ import Input from "@/components/inputs/input";
 
 import { Button } from "@/components/buttons/button";
 import { BackwardIcon } from "@/public/SVGs";
+import EmailValidator from "@/components/validator/email-validation";
+import NonEmptyValidator from "@/components/validator/nonEmpty-validation";
 
 export default function LoginForm() {
   const router = useRouter();
-  const [isValid, setIsValid] = React.useState(true);
+  const [isEmailValid, setisEmailValid] = React.useState(false);
+  const [isPasswordValid, setIsPasswordValid] = React.useState(true);
+  const [inputChanged, setInputChanged] = React.useState(false);
+
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputChanged(true);
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -44,9 +50,11 @@ export default function LoginForm() {
     const form = e.currentTarget as HTMLFormElement;
 
     if (form.checkValidity() === false) {
-      setIsValid(false);
+      setisEmailValid(false);
+      setIsPasswordValid(false);
     } else {
-      setIsValid(true);
+      setisEmailValid(true);
+      setIsPasswordValid(true);
       axios
         .post("https://mentormee-api.onrender.com/auth/login", {
           // .post("http://localhost:4000/auth/login", {
@@ -103,20 +111,29 @@ export default function LoginForm() {
               <Input
                 id="email"
                 label="Email Address"
-                required
                 type="email"
                 name="email"
                 onChange={handleInputChange}
               />
+              <EmailValidator
+                email={formData.email}
+                setIsValid={setisEmailValid}
+                onValidEmail={() => setisEmailValid(true)}
+                inputChanged={inputChanged}
+              />
               <Input
                 id="password"
                 label="Password"
-                required
                 type="password"
                 name="password"
                 onChange={handleInputChange}
               />
-
+              <NonEmptyValidator
+                text={formData.password}
+                setIsValid={setIsPasswordValid}
+                onValidText={() => setIsPasswordValid(true)}
+                inputChanged={inputChanged}
+              />
               <Link href="/mentee-auth/forget-password">
                 {" "}
                 <p className="font-Hanken text-[#008080] flex justify-end text-sm my-3">
@@ -127,8 +144,13 @@ export default function LoginForm() {
               <Button
                 variant="primary"
                 paddingLess
-                className="w-full h-[48px]"
+                className={`w-full h-[48px] ${
+                  !isEmailValid || !isPasswordValid
+                    ? "bg-gray-300 hover:bg-gray-400 cursor-not-allowed"
+                    : ""
+                }`}
                 type="submit"
+                disabled={!isEmailValid || !isPasswordValid}
               >
                 Log in
               </Button>
