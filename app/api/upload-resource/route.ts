@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
   const formData = await request.formData();
   const resourceData = {
     category: formData.get("category"),
-    courseDescription: formData.get("courseDescription")!,
+    description: formData.get("courseDescription")!,
     title: formData.get("title"),
     coursetype: formData.get("courseType"),
     price: formData.get("price"),
@@ -16,6 +16,7 @@ export async function POST(request: NextRequest) {
     name: "Olamilekan",
     role: "Frontend Developer",
     company: "Self employed",
+    image: "random",
   };
 
   try {
@@ -29,9 +30,13 @@ export async function POST(request: NextRequest) {
     const data = await res.json();
     console.log(data);
     revalidatePath("/mentor-resources");
+
+    if (data.error) {
+      return NextResponse.json({ success: false, message: data.error });
+    }
     return NextResponse.json({ success: true });
   } catch (e) {
     console.log(e);
-    return NextResponse.json({ error: "failed to upload resource" });
+    return NextResponse.json({ message: "failed to upload resource" });
   }
 }

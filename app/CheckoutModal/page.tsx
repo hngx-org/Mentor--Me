@@ -1,7 +1,7 @@
 import React from "react";
 import { WarningIcon, LoadingIcon } from "@/public/SVGs";
 
-export default function page() {
+export default function CheckoutModal() {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-[700px] h-[600px] bg-white rounded-[8px]">

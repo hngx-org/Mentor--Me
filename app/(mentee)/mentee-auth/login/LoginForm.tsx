@@ -1,3 +1,5 @@
+/* eslint-disable no-unsafe-optional-chaining */
+
 "use client";
 
 import React from "react";
@@ -27,6 +29,7 @@ import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 export default function LoginForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
+  const [user, setUser] = React.useState<any>();
   const [isValid, setIsValid] = React.useState(true);
   const [formData, setFormData] = React.useState({
     email: "",
@@ -58,8 +61,14 @@ export default function LoginForm() {
           role: "mentee",
         })
         .then((response) => {
+          setUser(response.data);
+
+          if (user?.data?.user && "profileLink" in user?.data?.user) {
+            router.replace("/dashboard?path=Home");
+          } else {
+            router.replace("/mentee-profile-creation");
+          }
           localStorage.setItem("Mentee", JSON.stringify(response.data));
-          router.push("/dashboard");
         })
         .catch((err) => {
           if (err.response.status === 406) {

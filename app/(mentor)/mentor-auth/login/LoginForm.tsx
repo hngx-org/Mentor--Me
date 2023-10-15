@@ -1,3 +1,5 @@
+/* eslint-disable no-unsafe-optional-chaining */
+
 "use client";
 
 import React, { useContext } from "react";
@@ -23,11 +25,11 @@ import Input from "@/components/inputs/input";
 import { BackwardIcon } from "@/public/SVGs";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
-import AuthCtx from "@/context/AuthCtx";
 
 export default function LoginForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
+  const [user, setUser] = React.useState<any>();
   const [isValid, setIsValid] = React.useState(true);
   const [formData, setFormData] = React.useState({
     email: "",
@@ -64,12 +66,17 @@ export default function LoginForm() {
           role: "mentor",
         })
         .then((response) => {
-          console.log(response.data);
+          setUser(response.data);
+
+          if (user?.data?.user && "profileLink" in user?.data?.user) {
+            router.replace("/mentor-profile?path=profile");
+          } else {
+            router.replace("/mentor-profile-creation");
+          }
           localStorage.setItem("Mentor", JSON.stringify(response.data));
-          router.push("/mentor-profile-creation");
         })
         .catch((err) => {
-          console.log(err);
+          toast(err);
 
           if (err.response.status === 406) {
             localStorage.setItem("Mentor", JSON.stringify(err.response.data));
@@ -79,8 +86,8 @@ export default function LoginForm() {
             toast(err?.response?.data?.message || "something went wrong");
           }
         });
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast(error);
     } finally {
       setIsLoading(false);
     }
