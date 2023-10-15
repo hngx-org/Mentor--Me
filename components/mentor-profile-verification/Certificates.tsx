@@ -23,14 +23,21 @@ export default function Certificates({
 
     if (type === "file" && files) {
       // Handle file input change
-      setFormData?.((prevData) => ({
-        ...prevData,
-        certificates: {
-          ...prevData.certificates,
-          graduationFile: files[0], // Update the graduationFile property with the selected file
-        },
-      }));
-      setSelectedFileName(files[0].name);
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        if (typeof base64data === "string") {
+          setFormData?.((prevData) => ({
+            ...prevData,
+            certificates: {
+              ...prevData.certificates,
+              graduationFile: base64data, // Update graduationFile with the Base64 string
+            },
+          }));
+        }
+        setSelectedFileName(files[0].name);
+      };
     } else {
       // Handle other input changes
       setFormData?.((prevData) => ({
