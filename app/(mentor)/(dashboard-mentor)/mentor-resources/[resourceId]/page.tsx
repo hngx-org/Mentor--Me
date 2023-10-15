@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { nanoid } from "nanoid";
 
 import {
   CaretIcon,
@@ -10,36 +9,50 @@ import {
   UpdateIcon,
 } from "@/public/SVGs";
 
-export default function Resource({
+export default async function Resource({
   params,
 }: {
   params: { resourceId: string };
 }) {
+  const res = await fetch(
+    `https://hngmentorme.onrender.com/api/resources/${params.resourceId}`
+  );
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+  const data = await res.json();
+  console.log(data);
   return (
     <div>
       <section className="bg-Neutral60 px-4 py-11 text-white font-Inter text-center">
-        <h1 className="text-3xl font-medium">UX Principles for Designers</h1>
+        <h1 className="text-3xl font-medium capitalize">{data?.title}</h1>
         <p className="mt-5 mb-3 w-[min(446px,_100%)] mx-auto">
           The secrets to creating great user experiences for your products, and
           helping your organization satisfy users.
         </p>
         <div className="flex items-center justify-center gap-3">
           <p className="flex items-center gap-1">
-            {Array(5).fill(<StarIcon key={nanoid()} />)} 4.5
+            {Array(5)
+              .fill("")
+              .map((_el, idx) => {
+                const filled = idx + 1 <= +(data?.ratings || 0);
+                const key = Math.random();
+                return <StarIcon filled={filled} key={key} />;
+              })}
+            {+(data?.ratings || 0).toFixed(1)}
           </p>{" "}
           <div className="w-[1px] h-4 bg-white" />
-          {/* BUG Fix this later (using nanoid as key) */}
-          <p>20 reviews</p>
+          <p>{data?.reviews} reviews</p>
         </div>
         <p className="my-3">
           Created by{" "}
           <Link href="/mentor-profile" className="text-Accent2">
-            Dylan Matthias
+            {data?.name}
           </Link>{" "}
         </p>
         <p className="flex items-center gap-2 justify-center">
           <UpdateIcon />
-          Last updated on 9/2023
+          Last updated on {convertDateFormat(data?.createdAt)}
         </p>
       </section>
       <section className="p-4 md:gap-4 md:items-start md:justify-between md:grid md:grid-rows-[repeat(2,_auto)] md:grid-cols-[1fr_350px] lg:gap-6">
@@ -76,10 +89,10 @@ export default function Resource({
               className="w-12 h-12 rounded-full row-span-full col-start-1 col-end-2"
             />
             <p className="text-NeutalBase row-start-1 row-end-2 col-start-2 col-end-3 w-max">
-              Dylan Matthias
+              {data?.name}
             </p>
             <p className="text-Neutra40 row-start-2 row-end-3 col-start-2 col-end-3 w-max">
-              UX Researcher at Amazon
+              {data?.role} at {data?.company}
             </p>
           </div>
           <p className=" text-Neutra40">
@@ -149,3 +162,10 @@ const CourseContent = ({ title }: { title: string }) => (
     {title}
   </p>
 );
+
+function convertDateFormat(dateString: string) {
+  const date = new Date(dateString);
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Adding 1 because getMonth is 0-based
+  const year = date.getFullYear().toString();
+  return `${month}/${year}`;
+}

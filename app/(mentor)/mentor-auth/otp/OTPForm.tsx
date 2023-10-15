@@ -6,17 +6,15 @@ import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import Modal from "@/components/modal/Modal";
 import generateKey from "@/lib/generatekey";
-import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 const OTPForm = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [userid, setUserId] = useState("");
   const [user, setUser] = useState<any>();
@@ -84,7 +82,7 @@ const OTPForm = () => {
         const data = await response.json();
         openModal();
       } else {
-        toast.error("Incorrect OTP! Try again");
+        alert("Incorrect Otp. Try Again");
       }
     } catch (error) {
       console.error("Error", error);
@@ -105,7 +103,6 @@ const OTPForm = () => {
           }),
         }
       );
-      toast.success("New OTP Sent");
     } catch (error) {
       // console.error("Error", error);
     }
@@ -128,7 +125,6 @@ const OTPForm = () => {
     }
 
     if (index === 5) {
-      setIsLoading(true);
       verifyEmail();
     }
   };
@@ -179,14 +175,6 @@ const OTPForm = () => {
                   className="w-10 h-10 border border-gray-300 rounded-md text-center text-2xl"
                 />
               ))}
-            </div>
-
-            <div>
-              {isLoading && (
-                <div className="absolute top-1/2 right-[20px] transform -translate-x-[50%] -translate-y-1/2 z-30">
-                  <LoadingSpinner />
-                </div>
-              )}
             </div>
 
             <p className="font-Hanken text-[#565656] text-sm my-5 flex">
