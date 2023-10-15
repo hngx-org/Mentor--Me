@@ -72,7 +72,7 @@ export default function MenteeProfileCreationForms() {
       })
       .catch((error) => {
         // Handle any errors
-        console.log(error.response.data.message);
+        alert(error.response.data.message);
       });
   }
 
