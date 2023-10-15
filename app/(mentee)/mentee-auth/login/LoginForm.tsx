@@ -51,34 +51,37 @@ export default function LoginForm() {
 
     if (form.checkValidity() === false) {
       setIsValid(false);
-    } else {
-      setIsValid(true);
-      axios
-        .post("https://mentormee-api.onrender.com/auth/login", {
-          // .post("http://localhost:4000/auth/login", {
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "https://mentormee-api.onrender.com/auth/login",
+        {
           email: formData.email,
           password: formData.password,
           role: "mentee",
-        })
-        .then((response) => {
-          setUser(response.data);
+        }
+      );
 
-          if (user?.data?.user && "profileLink" in user?.data?.user) {
-            router.replace("/dashboard?path=Home");
-          } else {
-            router.replace("/mentee-profile-creation");
-          }
-          localStorage.setItem("Mentee", JSON.stringify(response.data));
-        })
-        .catch((err) => {
-          if (err.response.status === 406) {
-            localStorage.setItem("Mentee", JSON.stringify(err.response.data));
+      setUser(response.data);
+      localStorage.setItem("Mentee", JSON.stringify(response.data));
 
-            router.push("/mentee-auth/otp");
-          } else {
-            toast(err?.response?.data?.message || "something went wrong");
-          }
-        });
+      const userProfileLink = "profileLink" in user?.data?.user;
+      if (user?.data?.user && userProfileLink) {
+        router.replace("/mentee-profile?path=profile");
+      } else {
+        router.replace("/mentee-profile-creation");
+      }
+    } catch (err: any) {
+      if (err.response && err.response.status === 406) {
+        localStorage.setItem("Mentee", JSON.stringify(err.response.data));
+        router.push("/mentee-auth/otp");
+      } else {
+        toast(err?.response?.data?.message || "something went wrong");
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
