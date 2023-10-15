@@ -19,7 +19,7 @@ export interface FormData {
     certificationName: string;
     issuingInstitution: string;
     graduationYear: string;
-    graduationFile: File | null;
+    graduationFile: string;
   };
 
   qualifications: {
@@ -38,6 +38,6 @@ export interface FormData {
     dateofBirth: string;
     idType: string;
     idNumber: string;
-    uploadID: File | null;
+    uploadID: string;
   };
 }
