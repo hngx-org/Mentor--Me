@@ -207,7 +207,7 @@ export default function MenteeProfileCreationForms() {
                     type="file"
                     onChange={showFile}
                     id="file1"
-                    name="profile_img"
+                    name="image"
                     required
                   />
                   <button

@@ -55,6 +55,8 @@ export default function MenteeFormBuilder({
     }));
   }
 
+  console.log(formInputs);
+
   return (
     <form ref={form} className="flex flex-col gap-6">
       {content.map((input: any) => {
