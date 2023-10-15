@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 
 import { toast } from "react-toastify";
+
 import auth from "@/public/assets/images/auth.jpeg";
 
 import google from "@/public/assets/images/goggle.svg";
@@ -21,9 +22,11 @@ import Input from "@/components/inputs/input";
 
 import { Button } from "@/components/buttons/button";
 import { BackwardIcon } from "@/public/SVGs";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 export default function LoginForm() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = React.useState(false);
   const [isValid, setIsValid] = React.useState(true);
   const [formData, setFormData] = React.useState({
     email: "",
@@ -39,6 +42,7 @@ export default function LoginForm() {
   };
 
   const handleSumbit = async (e: React.FormEvent) => {
+    setIsLoading(true);
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
 
@@ -51,12 +55,16 @@ export default function LoginForm() {
           // .post("http://localhost:4000/auth/login", {
           email: formData.email,
           password: formData.password,
+          role: "mentee",
         })
-        .then(() => {
+        .then((response) => {
+          localStorage.setItem("Mentee", JSON.stringify(response.data));
           router.push("/dashboard");
         })
         .catch((err) => {
           if (err.response.status === 406) {
+            localStorage.setItem("Mentee", JSON.stringify(err.response.data));
+
             router.push("/mentee-auth/otp");
           } else {
             toast(err?.response?.data?.message || "something went wrong");
@@ -119,15 +127,21 @@ export default function LoginForm() {
                   Forget Password?
                 </p>
               </Link>
-
-              <Button
-                variant="primary"
-                paddingLess
-                className="w-full h-[48px]"
-                type="submit"
-              >
-                Log in
-              </Button>
+              <div className="flex relative justify-end">
+                {isLoading && (
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-1/2 z-30">
+                    <LoadingSpinner />
+                  </div>
+                )}
+                <Button
+                  variant="primary"
+                  paddingLess
+                  className="w-full h-[48px]"
+                  type="submit"
+                >
+                  Log in
+                </Button>
+              </div>
             </form>
 
             <div className="flex justify-center w-full">

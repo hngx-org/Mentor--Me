@@ -8,17 +8,17 @@ const Calendarcomponent = () => {
   const css = `
   .my-selected:not([disabled]) { 
     font-weight: bold; 
-    border: 2px solid #ABABAB;
+    border: 2px solid #008080;
   }
   .my-selected:hover:not([disabled]) { 
-    border-color: #ABABAB;
+    border-color: #008080;
     color: black;
   }
   .my-today { 
     font-weight: bold;
     font-size: 100%; 
     color: white;
-    background-color: #ABABAB;
+    background-color: #008080;
   }
 `;
 
