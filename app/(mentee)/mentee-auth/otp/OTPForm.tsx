@@ -6,15 +6,19 @@ import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 
+import { ToastContainer, toast } from "react-toastify";
+
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import { Button } from "@/components/buttons/button";
 
 import Modal from "@/components/modal/Modal";
 import generateKey from "@/lib/generatekey";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 const OTPForm = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [userid, setUserId] = useState("");
   const [user, setUser] = useState<any>();
@@ -64,9 +68,12 @@ const OTPForm = () => {
       if (response.ok) {
         const data = await response.json();
         openModal();
+      } else {
+        toast.error("Incorrect OTP! Try again");
       }
     } catch (error) {
       // console.error("Error", error);
+      console.error("Error", error);
     }
   };
 
@@ -84,6 +91,7 @@ const OTPForm = () => {
           }),
         }
       );
+      toast.success("New OTP Sent");
     } catch (error) {
       // console.error("Error", error);
     }
@@ -109,6 +117,7 @@ const OTPForm = () => {
     }
 
     if (index === 5) {
+      setIsLoading(true);
       verifyEmail();
     }
   };
@@ -159,6 +168,14 @@ const OTPForm = () => {
               ))}
             </div>
 
+            <div>
+              {isLoading && (
+                <div className="absolute top-1/2 right-[20px] transform -translate-x-[50%] -translate-y-1/2 z-30">
+                  <LoadingSpinner />
+                </div>
+              )}
+            </div>
+
             <p className="font-Hanken text-[#565656] text-sm my-5 flex">
               Didn’t receive OTP?{" "}
               <button
@@ -182,6 +199,8 @@ const OTPForm = () => {
         buttontext="Continue"
         title="Great job"
       />
+
+      <ToastContainer />
     </div>
   );
 };

@@ -49,7 +49,7 @@ const ResourceCard = ({
         <span> {reviews} reviews</span>
       </div>
       <div className="flex gap-4 mb-4">
-        <Link href={`/mentee-resources/explore/${id}?path=resources`}>
+        <Link href={`/mentee-resources/explore/${id}`}>
           <button
             type="button"
             className="font-Inter w-[112px] text-white rounded-lg bg-NeutalBase h-10 mb-4"
@@ -57,7 +57,7 @@ const ResourceCard = ({
             Buy Now
           </button>
         </Link>
-        <Link href={`/mentee-resources/explore/${id}?path=resources`}>
+        <Link href={`/mentee-resources/explore/${id}`}>
           <button
             type="button"
             className="font-Hanken w-[112px] text-NeutralBase rounded-lg bg-white h-10 mb-4 border border-[#121212]"

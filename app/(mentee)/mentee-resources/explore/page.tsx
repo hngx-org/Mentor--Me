@@ -16,6 +16,7 @@ const Explore = () => {
   const [activeLink, setActiveLink] = useState<number | null>(1);
   const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const getResources = useCallback(async () => {
     setLoading(true);
@@ -26,7 +27,7 @@ const Explore = () => {
       const res = await result.json();
       setData(res);
     } catch (error) {
-      console.log(error);
+      setError("An error message");
     } finally {
       setLoading(false);
     }
@@ -86,7 +87,7 @@ const Explore = () => {
             <h1 className="font-Inter text-2xl text-[#1C0028]">
               New Resources
             </h1>
-            <div className="hidden md:flex gap-4">
+            <div className="flex gap-4">
               <button title="btn" type="button" onClick={scrollLeft}>
                 <BackwardIcon />
               </button>
@@ -97,8 +98,8 @@ const Explore = () => {
           </div>
           <div
             ref={resourceContainerRef}
-            className="flex flex-col sm:flex-row gap-6 w-full 
-          overflow-hidden scroll-smooth"
+            className="flex gap-6 w-full 
+          overflow-scroll scroll-smooth"
           >
             {loading ? (
               <div className="w-full flex justify-center items-center">
@@ -120,12 +121,12 @@ const Explore = () => {
             )}
           </div>
         </div>
-        <div className="mt-[56px]">
+        <div className="mt-[56px] mb-10">
           <div className="w-full flex justify-between items-center mb-6">
             <h1 className="font-Inter text-2xl text-[#1C0028]">
               Top Rated Resources
             </h1>
-            <div className="hidden md:flex gap-4">
+            <div className="flex gap-4">
               <button title="btn" type="button" onClick={scrollLeft2}>
                 <BackwardIcon />
               </button>
@@ -136,8 +137,8 @@ const Explore = () => {
           </div>
           <div
             ref={resourceContainerRef2}
-            className="flex flex-col sm:flex-row gap-6 w-full 
-          overflow-hidden scroll-smooth"
+            className="flex gap-6 w-full 
+          overflow-scroll scroll-smooth"
           >
             {loading ? (
               <div className="w-full flex justify-center items-center">
@@ -159,6 +160,7 @@ const Explore = () => {
             )}
           </div>
         </div>
+        {error && <p>{error}</p>}
       </div>
     </Container>
   );
