@@ -14,6 +14,7 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
+  staticPageGenerationTimeout: 1000,
 };
 
 module.exports = nextConfig;
