@@ -14,7 +14,19 @@ interface SelectInputProps
   children?: React.ReactNode;
 }
 
-function SelectInputType({
+interface TimeInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  labelText?: string;
+  InputId?: string;
+  type?: "time" | "datetime-local";
+  value?: string | number;
+  InputName?: string;
+  placeholder?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  isRequired?: boolean;
+  children?: React.ReactNode;
+}
+
+export function SelectInputType({
   selectName,
   selectId,
   isRequired = true,
@@ -56,4 +68,38 @@ function SelectInputType({
     </div>
   );
 }
-export default SelectInputType;
+
+export function TimeInputType({
+  isRequired = true,
+  onChange,
+  labelText,
+  placeholder,
+  InputName,
+  InputId,
+  type,
+  value,
+  children,
+}: TimeInputProps) {
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex flex-col justify-between">
+        <label htmlFor={labelText} className="font-[500] py-1">
+          {labelText}{" "}
+          {isRequired && <span className="text-Error50 font-bold">*</span>}
+        </label>
+        <div className="relative">
+          <input
+            type={type}
+            value={value}
+            id={InputId}
+            name={InputName}
+            placeholder={placeholder}
+            required={isRequired}
+            className=" first:text-gray-500 border rounded-lg sm:rounded-lg p-2 md:p-4 md:py-5 w-full focus:outline-none focus:border-gray-600 "
+            onChange={onChange}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}

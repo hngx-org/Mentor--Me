@@ -3,7 +3,7 @@
 import React, { useState, ChangeEvent, FormEvent, MouseEvent } from "react";
 import Link from "next/link";
 import SuccessModal from "@/components/modal/SuccessModal";
-import SelectInputType from "./SelectInputType";
+import { SelectInputType, TimeInputType } from "./SelectInputType";
 import MentorCalendar from "./MentorCalendar";
 import { Button } from "@/components/buttons/button";
 
@@ -52,6 +52,14 @@ export function FreeSessionForm({
       [name]: value,
     });
   };
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
   const closeSuccessModal = (): void => {
     setSuccessful(false);
   };
@@ -81,7 +89,7 @@ export function FreeSessionForm({
 
     // POSTING DATA
     const response = await fetch(
-      "http://localhost:3000/men-form-api/session-forms",
+      "https://hngmentorme.onrender.com/api/free-session",
       {
         method: "POST",
         body: JSON.stringify(formData),
@@ -151,7 +159,7 @@ export function FreeSessionForm({
             <option value="5">5</option>
             <option value="10">10</option>
           </SelectInputType>
-          <SelectInputType
+          {/* <SelectInputType
             labelText="Time"
             isRequired
             selectId="time"
@@ -163,8 +171,29 @@ export function FreeSessionForm({
             <option value="12pm">12pm</option>
             <option value="2pm">2pm</option>
             <option value="4pm">4pm</option>
-          </SelectInputType>
-          <SelectInputType
+          </SelectInputType> */}
+          <TimeInputType
+            labelText="Time"
+            type="time"
+            onChange={handleInputChange}
+            value={formData.time}
+            isRequired
+            InputId="time"
+            InputName="time"
+            placeholder="Select the time of the day"
+          />
+          <TimeInputType
+            labelText="Date"
+            type="datetime-local"
+            onChange={handleInputChange}
+            value={formData.date}
+            isRequired
+            InputId="date"
+            InputName="date"
+            placeholder="Select the date"
+          />
+
+          {/* <SelectInputType
             labelText="Date"
             isRequired
             selectId="date"
@@ -176,7 +205,7 @@ export function FreeSessionForm({
             <option value="October 15">October 15</option>
             <option value="October 22">Octoober 22</option>
             <option value="November 2">November 2</option>
-          </SelectInputType>
+          </SelectInputType> */}
           <SelectInputType
             labelText="Select relevant topics"
             isRequired
