@@ -110,7 +110,7 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
           <div>
             <img
               ref={image2}
-              src=""
+              src="/"
               alt=""
               className=" mr-[20px] max-w-[200px] w-[80%]"
             />

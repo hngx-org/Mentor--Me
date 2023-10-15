@@ -26,6 +26,29 @@ export default function MentorFormBuilder({
   const [isFull, setIsFull] = useState(false);
   const [textLength, setTextLength] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const getUser = localStorage.getItem("Mentor");
+      if (getUser) {
+        try {
+          const newUser = JSON.parse(getUser);
+          setEmail(newUser.data.user.email);
+          // @ts-ignore
+          setFormInputs((prevInps) => ({ ...prevInps, email }));
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      }
+    }
+
+    const emailField = document.querySelector('input[name="email"]');
+    // @ts-ignore
+    emailField.value = email;
+    // @ts-ignore
+    emailField.disabled = true;
+  }, [email]);
 
   function checkTextArea(e: any) {
     const words = e.target.value;

@@ -308,7 +308,7 @@ const form2Arr = [
     placeholder: "Enter Company/School",
     nature: "",
     type: "",
-    apiName: "company_school",
+    apiName: "company",
   },
   {
     id: 3,
@@ -327,16 +327,16 @@ const form3Arr = [
     placeholder: "Tell us about yourself, your goal and what you love",
     nature: "",
     type: "textarea",
-    apiName: "introduction",
+    apiName: "bio",
   },
-  // {
-  //   id: 2,
-  //   label: "What is your top goal right now?",
-  //   placeholder: "Type in your goal",
-  //   nature: "input",
-  //   type: "",
-  //   apiName: "goal",
-  // },
+  {
+    id: 2,
+    label: "What is your top goal right now?",
+    placeholder: "Type in your goal",
+    nature: "input",
+    type: "",
+    apiName: "goal",
+  },
 ];
 
 const form4Arr = [
@@ -354,7 +354,7 @@ const form4Arr = [
       "Product Management",
       "Video Editing",
     ],
-    apiName: "discipline",
+    apiName: "discipline_request",
   },
   {
     id: 2,
@@ -376,6 +376,7 @@ const form4Arr = [
       "C#",
     ],
     multiple: true,
+    apiName: "tools_request",
   },
   {
     id: 3,
@@ -393,7 +394,7 @@ const form4Arr = [
       "Soft skills",
     ],
     multiple: true,
-    apiName: "specific_skills",
+    apiName: "skills_request",
   },
   {
     id: 4,
@@ -653,7 +654,7 @@ const form4Arr = [
       "Åland Islands",
     ],
     multiple: true,
-    apiName: "mentor_country",
+    apiName: "country_request",
   },
 ];
 
