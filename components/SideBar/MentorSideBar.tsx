@@ -68,7 +68,7 @@ export default function MentorSideBar({
 
         <div className="mt-5 my-1 border-t-2 border-Neutra40">
           <Link
-            href="/welcome/login?path=login"
+            href="/"
             className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 "
           >
             <span className="h-7 w-7 rotate-180 xl:w-8 xl:h-8">

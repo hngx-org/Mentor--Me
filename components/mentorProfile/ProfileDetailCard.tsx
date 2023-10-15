@@ -36,11 +36,13 @@ export default function ProfileDetailsCardContainer({
         </span>
       </div>
 
-      {items.map((item) => (
-        <Fragment key={item.text}>
-          <InfoCard {...item} />
-        </Fragment>
-      ))}
+      {items.length >= 1 &&
+        items.map((item) => (
+          <Fragment key={item.text}>
+            <InfoCard {...item} />
+          </Fragment>
+        ))}
+      {items.length === 0 && <p> click to add {heading}</p>}
     </div>
   );
 }
@@ -101,13 +103,15 @@ export function SkillSCard({ skills }: { skills: string[] }) {
     <div className="w-[100%] flex flex-col  h-fit ">
       <p className="text-lg font-bold font-[#000]"> Skills/Expertise</p>
       <div className="flex w-[100%] flex-wrap">
-        {skills.slice(0, 5).map((item) => (
-          <Fragment key={item}>
-            <div className="border border-Neutral10 py-[8px] px-[10px] w-fit rounded-[8px] m-[5px]">
-              <p>{item}</p>
-            </div>
-          </Fragment>
-        ))}
+        {skills.length === 0 && <p> click to add skills</p>}
+        {skills.length > 1 &&
+          skills.slice(0, 5).map((item) => (
+            <Fragment key={item}>
+              <div className="border border-Neutral10 py-[8px] px-[10px] w-fit rounded-[8px] m-[5px]">
+                <p>{item}</p>
+              </div>
+            </Fragment>
+          ))}
         {skills.length > 5 && (
           <div className="border border-Neutral10 py-[8px] px-[10px] w-fit rounded-[8px] m-[5px]">
             <p> + {skills.length - 5}</p>

@@ -37,7 +37,6 @@ export default function LoginForm() {
     !formData.email.match(
       /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
     ) || formData.password.length < 8;
-  const ctx = useContext(AuthCtx);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
