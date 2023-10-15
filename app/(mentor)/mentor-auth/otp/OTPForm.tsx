@@ -6,6 +6,8 @@ import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 
+import { toast } from "react-toastify";
+
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import Modal from "@/components/modal/Modal";
@@ -79,9 +81,11 @@ const OTPForm = () => {
       if (response.ok) {
         const data = await response.json();
         openModal();
+      } else {
+        alert("Incorrect Otp. Try Again");
       }
     } catch (error) {
-      // console.error("Error", error);
+      console.error("Error", error);
     }
   };
 

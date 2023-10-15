@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useContext } from "react";
 
 import Image from "next/image";
 
@@ -23,6 +23,7 @@ import Input from "@/components/inputs/input";
 import { BackwardIcon } from "@/public/SVGs";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
+import AuthCtx from "@/context/AuthCtx";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -68,6 +69,8 @@ export default function LoginForm() {
           router.push("/mentor-profile-creation");
         })
         .catch((err) => {
+          console.log(err);
+
           if (err.response.status === 406) {
             localStorage.setItem("Mentor", JSON.stringify(err.response.data));
 
@@ -139,7 +142,7 @@ export default function LoginForm() {
                   Forget Password?
                 </p>
               </Link>
-              <div className="  flex relative justify-end">
+              <div className="  flex relative justify-end items-center">
                 {isLoading && (
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-1/2 z-30">
                     <LoadingSpinner />

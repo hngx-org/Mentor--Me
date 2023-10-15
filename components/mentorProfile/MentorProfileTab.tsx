@@ -65,7 +65,7 @@ export default function MentorProfileTabLayout({
   );
 }
 
-function ProfileCard() {
+function ProfileCard({ userName }: { userName: string }) {
   return (
     <div className="w-[100%] flex flex-col h-[100px] space-x-4 my-5">
       <p>change profile photo</p>
@@ -73,7 +73,7 @@ function ProfileCard() {
         <div className="w-[54px]  h-[54px] sm:w-[54px] sm:h-[54px]  rounded-full relative ">
           <Image
             style={{ objectFit: "cover", borderRadius: "100%" }}
-            src="/assets/mentor3.png"
+            src={`https://api.dicebear.com/7.x/initials/png?seed=${userName}`}
             fill
             alt="profile"
           />
@@ -108,7 +108,7 @@ function BasicInfoTab() {
   };
   return (
     <div className="w-[100%] px-2">
-      <ProfileCard />
+      <ProfileCard userName="shade mayowa" />
       <div className="w-[100%] h-[100%] space-y-5 text-Neutra50">
         <MentorProfileInput
           label="Your full name"
