@@ -4,6 +4,7 @@
 
 import Link from "next/link";
 
+import { useRouter } from "next/navigation";
 import { sidebarMentorLinks } from "@/lib/Constant";
 import {
   Logo2,
@@ -25,6 +26,7 @@ export default function MentorSideBar({
   path,
   className,
 }: SideBarMentorProps) {
+  const router = useRouter;
   return (
     <section
       className={`w-[274px] min-h-screen border-[1px] fixed left-0 top-0 h-full p-5 hidden lg:flex ${
@@ -68,7 +70,7 @@ export default function MentorSideBar({
 
         <div className="mt-5 my-1 border-t-2 border-Neutra40">
           <Link
-            href="/"
+            onClick={() => router.replace("/")}
             className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 "
           >
             <span className="h-7 w-7 rotate-180 xl:w-8 xl:h-8">

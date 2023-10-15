@@ -175,7 +175,6 @@ export default function Identification({
                 className="hidden"
                 name="uploadID"
                 id="uploadID"
-                required
                 accept=".pdf, .png, .jpeg, .jpg"
                 onChange={handleFileChange}
               />
