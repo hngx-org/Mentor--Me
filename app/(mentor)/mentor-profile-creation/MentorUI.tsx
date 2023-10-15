@@ -153,7 +153,10 @@ export function MentorProfileCreationForms() {
       <div className="flex flex-col w-[100%] lg:w-[50%] relative max-h-[100vh]">
         {/* mentor me logo */}
 
-        <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px] mb-[40px] sm:mb-[80px] sticky top-0 mt-5 sm:mx-10 mx-4" />
+        <a href="/">
+          {" "}
+          <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px] mb-[40px] sm:mb-[80px] sticky top-0 mt-5 sm:mx-10 mx-4" />
+        </a>
 
         {/* CONTAINER FOR THE FORMS */}
 

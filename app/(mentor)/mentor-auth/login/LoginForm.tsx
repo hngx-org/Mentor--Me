@@ -10,7 +10,7 @@ import axios from "axios";
 
 import { useRouter } from "next/navigation";
 
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
 
@@ -23,7 +23,6 @@ import Input from "@/components/inputs/input";
 import { BackwardIcon } from "@/public/SVGs";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
-import AuthCtx from "@/context/AuthCtx";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -33,10 +32,9 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
-  const isDisabled =
-    !formData.email.match(
-      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
-    ) || formData.password.length < 8;
+  const isDisabled = !formData.email.match(
+    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
+  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -53,24 +51,19 @@ export default function LoginForm() {
 
     if (form.checkValidity() === false) {
       setIsValid(false);
-      return;
-    }
-    try {
-      await axios
+    } else {
+      setIsValid(true);
+      axios
         .post("https://mentormee-api.onrender.com/auth/login", {
-          // .post("http://localhost:4000/auth/login", {
           email: formData.email,
           password: formData.password,
           role: "mentor",
         })
         .then((response) => {
-          console.log(response.data);
           localStorage.setItem("Mentor", JSON.stringify(response.data));
           router.push("/mentor-profile-creation");
         })
         .catch((err) => {
-          console.log(err);
-
           if (err.response.status === 406) {
             localStorage.setItem("Mentor", JSON.stringify(err.response.data));
 
@@ -79,10 +72,6 @@ export default function LoginForm() {
             toast(err?.response?.data?.message || "something went wrong");
           }
         });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -195,6 +184,8 @@ export default function LoginForm() {
           </div>
         </div>
       </div>
+
+      <ToastContainer />
     </div>
   );
 }
