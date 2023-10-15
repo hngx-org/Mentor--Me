@@ -87,7 +87,7 @@ const MentorCard: React.FC<Props> = ({
         <div className="topic font-semibold xl:text-[18px] text-[12px] lg:leading-[21.6px] leading-[16px]">
           {title}
         </div>
-        <div className="desc font-normal xl:text-[12px] text-[10px] leading-[120%]  h-[48px] xl:h-[57.6px] overflow-clip ">
+      <div className="desc font-normal xl:text-[12px] text-[10px] leading-[120%]  h-[48px] xl:h-[57.6px] overflow-clip ">
           {desc}
         </div>
         <div className="border-b border-Neutra10 border-[.25px] lg:flex hidden  " />
