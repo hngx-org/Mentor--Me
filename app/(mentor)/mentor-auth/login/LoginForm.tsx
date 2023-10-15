@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useContext } from "react";
 
 import Image from "next/image";
 
@@ -10,7 +10,7 @@ import axios from "axios";
 
 import { useRouter } from "next/navigation";
 
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
 
@@ -32,10 +32,9 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
-  const isDisabled =
-    !formData.email.match(
-      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
-    ) || formData.password.length < 8;
+  const isDisabled = !formData.email.match(
+    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
+  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -52,17 +51,16 @@ export default function LoginForm() {
 
     if (form.checkValidity() === false) {
       setIsValid(false);
-      return;
-    }
-    try {
-      await axios
+    } else {
+      setIsValid(true);
+      axios
         .post("https://mentormee-api.onrender.com/auth/login", {
-          // .post("http://localhost:4000/auth/login", {
           email: formData.email,
           password: formData.password,
           role: "mentor",
         })
-        .then(() => {
+        .then((response) => {
+          localStorage.setItem("Mentor", JSON.stringify(response.data));
           router.push("/mentor-profile-creation");
         })
         .catch((err) => {
@@ -74,10 +72,6 @@ export default function LoginForm() {
             toast(err?.response?.data?.message || "something went wrong");
           }
         });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -137,7 +131,7 @@ export default function LoginForm() {
                   Forget Password?
                 </p>
               </Link>
-              <div className="  flex relative justify-end">
+              <div className="  flex relative justify-end items-center">
                 {isLoading && (
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-1/2 z-30">
                     <LoadingSpinner />
@@ -145,11 +139,12 @@ export default function LoginForm() {
                 )}
                 <Button
                   title="Log in"
+                  type="submit"
                   variant="primary"
                   className="w-full h-[48px]"
                   fullWidth
-                  loading={isLoading}
-                  disabled={isDisabled}
+                  // loading={isLoading}
+                  // disabled={isDisabled}
                 />
               </div>
             </form>
@@ -189,6 +184,8 @@ export default function LoginForm() {
           </div>
         </div>
       </div>
+
+      <ToastContainer />
     </div>
   );
 }

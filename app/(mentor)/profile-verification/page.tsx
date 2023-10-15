@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 import HeaderAfterSignUp from "@/components/mentor-profile-verification/HeaderAfterSignUp";
 import {
   Amico,
@@ -37,7 +39,7 @@ export default function MentorProfileVerification() {
       certificationName: "",
       issuingInstitution: "",
       graduationYear: "",
-      graduationFile: null,
+      graduationFile: "",
     },
     qualifications: {
       qualification: "",
@@ -55,9 +57,23 @@ export default function MentorProfileVerification() {
       dateofBirth: "",
       idType: "",
       idNumber: "",
-      uploadID: null,
+      uploadID: "",
     },
   });
+
+  let token = ""; // declare token variable
+
+  if (typeof window !== "undefined") {
+    const getUser = localStorage.getItem("Mentor");
+    if (getUser) {
+      try {
+        const newUser = JSON.parse(getUser);
+        token = newUser.data.token; // assign token value here
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
+    }
+  }
 
   const handleNextStep = () => {
     setStep(step + 1);
@@ -67,12 +83,28 @@ export default function MentorProfileVerification() {
     setStep(step - 1);
   };
 
-  const handleSubmit = () => {
-    // console.log("FormData", formData);
-    setShowModal(true);
-    setVerificationStatus("approved");
-    setStep(0);
-    setFormSubmitted(true);
+  const handleSubmit = async () => {
+    try {
+      const url =
+        "https://mentormee-api.onrender.com/mentors/account-verification";
+
+      const response = await axios.post(url, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 200) {
+        setShowModal(true);
+        setVerificationStatus("pending");
+        setStep(0);
+        setFormSubmitted(true);
+      } else {
+        console.error("Unexpected status:", response.status);
+        toast.error("An error occurred. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
   return (
     <>
@@ -292,6 +324,7 @@ export default function MentorProfileVerification() {
           buttonText="Go to dashboard"
         />
       )}
+      <ToastContainer />
     </>
   );
 }

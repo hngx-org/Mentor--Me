@@ -6,6 +6,8 @@ import Image from "next/image";
 
 import Link from "next/link";
 
+import { ToastContainer, toast } from "react-toastify";
+
 import axios from "axios";
 
 import { useRouter } from "next/navigation";
@@ -26,14 +28,14 @@ export default function SignUpForm() {
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
   const [isValid, setIsValid] = React.useState(true);
+
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
   });
-  const isDisabled =
-    !formData.email.match(
-      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
-    ) || formData.password.length < 8;
+  const isDisabled = !formData.email.match(
+    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
+  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -51,23 +53,22 @@ export default function SignUpForm() {
       setIsValid(false);
     } else {
       setIsValid(true);
-      try {
-        const response = await axios.post(
-          "https://mentormee-api.onrender.com/auth/register",
-          {
-            email: formData.email,
-            password: formData.password,
-            role: "mentor",
-          }
-        );
-        localStorage.setItem("Mentor", JSON.stringify(response.data));
-        router.push("/mentor-auth/otp");
-      } catch (error) {
-        // Handle error
-        console.error("An error occurred: ", error);
-      } finally {
-        setIsLoading(false);
-      }
+      axios
+        .post("https://mentormee-api.onrender.com/auth/register", {
+          email: formData.email,
+          password: formData.password,
+          role: "mentor",
+        })
+        .then((response) => {
+          console.log(response.data);
+          localStorage.setItem("Mentor", JSON.stringify(response.data));
+          router.push("/mentor-auth/otp");
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error(error?.response?.data?.message || "something went wrong");
+          setIsLoading(false);
+        });
     }
   };
 
@@ -133,7 +134,8 @@ export default function SignUpForm() {
                   </div>
                 )}
                 <Button
-                  title="Log in"
+                  title="Sign up"
+                  type="submit"
                   variant="primary"
                   className="w-full h-[48px]"
                   fullWidth
@@ -176,6 +178,7 @@ export default function SignUpForm() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

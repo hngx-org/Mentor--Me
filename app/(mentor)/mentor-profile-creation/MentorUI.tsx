@@ -54,8 +54,20 @@ export function MentorProfileCreationForms() {
     { id: 5, heading: "Your mentorship  details" },
   ];
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTJhNGRjZDI4ZjdiYjU2YzhkODNjMWUiLCJyb2xlIjoibWVudG9yIiwiZW1haWwiOiJtdXN0eWhlcmN1bGVzQGdtYWlsLmNvbSIsImlhdCI6MTY5NzI3MTQzMCwiZXhwIjoxNjk5NzkxNDMwfQ.znNQ0QPV5qHLCX73mLA_cojOzt-0WFah_xXOMLr1Dfc";
+  // Moved tokenString to a scope where it can be accessed
+  let token = ""; // declare token variable
+
+  if (typeof window !== "undefined") {
+    const getUser = localStorage.getItem("Mentor");
+    if (getUser) {
+      try {
+        const newUser = JSON.parse(getUser);
+        token = newUser.data.token; // assign token value here
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
+    }
+  }
 
   function submitData() {
     const customHeaders = {
@@ -146,7 +158,10 @@ export function MentorProfileCreationForms() {
       <div className="flex flex-col w-[100%] lg:w-[50%] relative max-h-[100vh]">
         {/* mentor me logo */}
 
-        <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px] mb-[40px] sm:mb-[80px] sticky top-0 mt-5 sm:mx-10 mx-4" />
+        <a href="/">
+          {" "}
+          <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px] mb-[40px] sm:mb-[80px] sticky top-0 mt-5 sm:mx-10 mx-4" />
+        </a>
 
         {/* CONTAINER FOR THE FORMS */}
 
@@ -296,12 +311,12 @@ export function SuccessModal() {
           className="w-full py-2 xl:max-w-[initial] !text-white"
         /> */}
 
-        <Link href="mentor-profile" className="w-full">
+        <Link href="/profile-verification" className="w-full">
           <Button variant="primary" className="w-full py-2 xl:max-w-[initial]">
             Verify account
           </Button>
         </Link>
-        <Link href="mentor-profile?path=profile" prefetch>
+        <Link href="/mentor-profile" prefetch>
           <p className="text-base font-Hanken text-center cursor-pointer">
             I&apos;ll do this later
           </p>
