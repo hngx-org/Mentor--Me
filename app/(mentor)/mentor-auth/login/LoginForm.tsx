@@ -37,7 +37,6 @@ export default function LoginForm() {
     !formData.email.match(
       /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
     ) || formData.password.length < 8;
-  const ctx = useContext(AuthCtx);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -143,7 +142,7 @@ export default function LoginForm() {
                   Forget Password?
                 </p>
               </Link>
-              <div className="  flex relative justify-end">
+              <div className="  flex relative justify-end items-center">
                 {isLoading && (
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-1/2 z-30">
                     <LoadingSpinner />

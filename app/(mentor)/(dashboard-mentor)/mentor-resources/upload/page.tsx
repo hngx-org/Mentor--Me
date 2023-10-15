@@ -1,18 +1,20 @@
 "use client";
 
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  experimental_useFormState as useFormState,
-  experimental_useFormStatus as useFormStatus,
-} from "react-dom";
 
 import { CaretIcon } from "@/public/SVGs";
 import DropDown from "@/components/DropDown";
-import uploadResource from "./actions";
+
+const courseTypeOptions = ["JavaScript", "TypeScript", "C++", "C#"];
 
 export default function UploadResourcesPage() {
+  const courseTitleRef = useRef<HTMLInputElement>(null);
+  const courseDescriptionRef = useRef<HTMLTextAreaElement>(null);
+  const categoryRef = useRef<HTMLInputElement>(null);
+  const courseTypeRef = useRef<HTMLInputElement>(null);
+  const priceRef = useRef<HTMLInputElement>(null);
   const [courseDescription, setCourseDescription] = useState("");
   const [isCategoryDropDownExpanded, setIsCategoryDropDownExpanded] =
     useState(false);
@@ -21,12 +23,27 @@ export default function UploadResourcesPage() {
   const [selectedOptionIdx, setSelectedOptionIdx] = useState(-1);
   const [selectedCategoryOptionIdx, setSelectedCategoryOptionIdx] =
     useState(-1);
-  const courseTypeOptions = ["JavaScript", "TypeScript", "C++", "C#"];
-  const [state, formAction] = useFormState(uploadResource, { message: "" });
-  const { pending } = useFormStatus();
+
   return (
     <form
-      action={formAction}
+      onSubmit={(e) => {
+        e.preventDefault();
+        const resourceData: { [prop: string]: string } = {
+          category: categoryRef.current?.value!,
+          courseDescription: courseDescriptionRef.current?.value!,
+          title: courseTitleRef.current?.value!,
+          courseType: courseTypeRef.current?.value!,
+          price: priceRef.current?.value!,
+        };
+        const formData = new FormData();
+        Object.keys(resourceData).forEach((prop) => {
+          formData.append(prop, resourceData[prop]);
+        });
+        fetch("/api/upload-resource", {
+          method: "POST",
+          body: formData,
+        });
+      }}
       className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white pt-10"
     >
       <h1 className="capitalize font-Inter font-medium text-2xl mb-8 text-NeutalBase">
@@ -37,6 +54,7 @@ export default function UploadResourcesPage() {
           type="text"
           name="course-title"
           id="course-title"
+          ref={courseTitleRef}
           required
           placeholder="input course title"
           className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal"
@@ -46,6 +64,7 @@ export default function UploadResourcesPage() {
         <textarea
           name="course-description"
           id="course-description"
+          ref={courseDescriptionRef}
           required
           placeholder="Input course description"
           value={courseDescription}
@@ -83,6 +102,7 @@ export default function UploadResourcesPage() {
           type="text"
           id="category"
           name="category"
+          ref={categoryRef}
           required
           onKeyDown={(e) => {
             e.preventDefault();
@@ -117,6 +137,7 @@ export default function UploadResourcesPage() {
           type="text"
           id="course-type"
           name="course-type"
+          ref={courseTypeRef}
           onKeyDown={(e) => {
             e.preventDefault();
           }}
@@ -142,6 +163,7 @@ export default function UploadResourcesPage() {
         <input
           type="number"
           name="price"
+          ref={priceRef}
           id="price"
           required
           placeholder="Input the price"
@@ -149,7 +171,6 @@ export default function UploadResourcesPage() {
         />
       </Input>
       <button
-        aria-disabled={pending}
         type="submit"
         className="font-Inter mb-4 font-medium capitalize cursor-pointer bg-NeutalBase py-3 px-5 w-full rounded-[8px] border-none outline-none text-white"
       >
