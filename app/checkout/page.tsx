@@ -9,9 +9,9 @@ import {
   DropdownArrow,
   PayPal,
 } from "@/public/SVGs";
-import CheckoutModal from "@/app/CheckoutModal/page";
+import CheckoutModal from "../CheckoutModal/page";
 
-export default function page() {
+export default function Page() {
   // const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalClose, setIsModalClose] = useState(false);
