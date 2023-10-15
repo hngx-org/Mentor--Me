@@ -11,6 +11,7 @@ const nextConfig = {
       },
     ],
   },
+
   staticPageGenerationTimeout: 1000,
 };
 

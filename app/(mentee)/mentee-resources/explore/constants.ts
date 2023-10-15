@@ -57,3 +57,8 @@ export const courseContents = [
   { id: 4, title: "Real time chat with instructor" },
   { id: 5, title: "Flexible Learning" },
 ];
+
+export const staticDescription =
+  "The secrets to creating great user experiences for your products and helping your organization satisfy users.";
+
+export const staticTitle = "UX Principles for Designers";
