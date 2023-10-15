@@ -24,10 +24,12 @@ const Explore = () => {
       const result = await fetch(
         "https://hngmentorme.onrender.com/api/resources"
       );
-      const res = await result.json();
-      setData(res);
+      const resultData = await result.json();
+      console.log(resultData);
+      setData(resultData);
     } catch (error) {
-      setError("An error message");
+      const { message } = error as { message: string };
+      setError(`An error occurred. Please try again. ${message}`);
     } finally {
       setLoading(false);
     }
@@ -110,7 +112,7 @@ const Explore = () => {
                 <ResourceCard
                   key={res._id}
                   id={res._id}
-                  src={i % 2 ? ResourceOne : ResourceTwo}
+                  src={res.imageUrl || ResourceOne}
                   title={res.title}
                   author={`${res.name} | ${res.role}, ${res.company}`}
                   rate={res.rating}
@@ -145,18 +147,20 @@ const Explore = () => {
                 <LoadingSpinner />
               </div>
             ) : (
-              data?.map((res: any, i: number) => (
-                <ResourceCard
-                  key={res._id}
-                  id={res._id}
-                  src={i % 2 ? ResourceOne : ResourceTwo}
-                  title={res.title}
-                  author={`${res.name} | ${res.role}, ${res.company}`}
-                  rate={res.rating}
-                  price={res.price}
-                  reviews={res.reviews}
-                />
-              ))
+              [...data]
+                ?.reverse()
+                .map((res: any, i: number) => (
+                  <ResourceCard
+                    key={res._id}
+                    id={res._id}
+                    src={res.imageUrl || ResourceTwo}
+                    title={res.title}
+                    author={`${res.name} | ${res.role}, ${res.company}`}
+                    rate={res.rating}
+                    price={res.price}
+                    reviews={res.reviews}
+                  />
+                ))
             )}
           </div>
         </div>
