@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    domains: ["res.cloudinary.com"],
     remotePatterns: [
       {
         protocol: "https",
@@ -9,7 +10,7 @@ const nextConfig = {
         pathname: "/7.x/**",
       },
     ],
-    domains: ["res.cloudinary.com"],
+    // domains: ["res.cloudinary.com"],
   },
 
   staticPageGenerationTimeout: 1000,
