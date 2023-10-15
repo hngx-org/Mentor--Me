@@ -49,8 +49,6 @@ export default function MentorFormBuilder({
     emailField.disabled = true;
   }, [email]);
 
-  console.log(formInputs);
-
   function checkTextArea(e: any) {
     const words = e.target.value;
 

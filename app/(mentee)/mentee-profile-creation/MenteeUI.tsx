@@ -51,8 +51,20 @@ export default function MenteeProfileCreationForms() {
     { id: 4, heading: "Complete your registration and get started" },
   ];
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTI5NTFhNDI2OTQzZGIyZjliNjA1MzQiLCJyb2xlIjoibWVudG9yIiwiZW1haWwiOiJheW9ib2x1Zm9yZXZlckBnbWFpbC5jb20iLCJpYXQiOjE2OTcyMDcyODAsImV4cCI6MTY5OTcyNzI4MH0.mCu-QOvo_K8ykakiVv8hwOqrZohh9H02khquIdXRycI";
+  // Moved tokenString to a scope where it can be accessed
+  let token = ""; // declare token variable
+
+  if (typeof window !== "undefined") {
+    const getUser = localStorage.getItem("Mentee");
+    if (getUser) {
+      try {
+        const newUser = JSON.parse(getUser);
+        token = newUser.data.token; // assign token value here
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
+    }
+  }
 
   function submitData() {
     const customHeaders = {
