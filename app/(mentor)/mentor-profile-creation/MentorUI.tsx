@@ -83,17 +83,12 @@ export function MentorProfileCreationForms() {
       )
       .then((response) => {
         // Handle the response
-        // console.log(response);
         setIsRegistered(true);
         setIsModalShown(true);
-
-        // console.log("you have been registered");
       })
       .catch((error) => {
-        // setIsRegistered(false);
-        // console.log("theres an error in your form");
         // Handle any errors
-        console.log(error.response.data.message);
+        alert(error.response.data.message);
       });
   }
 
@@ -158,10 +153,7 @@ export function MentorProfileCreationForms() {
       <div className="flex flex-col w-[100%] lg:w-[50%] relative max-h-[100vh]">
         {/* mentor me logo */}
 
-        <a href="/">
-          {" "}
-          <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px] mb-[40px] sm:mb-[80px] sticky top-0 mt-5 sm:mx-10 mx-4" />
-        </a>
+        <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px] mb-[40px] sm:mb-[80px] sticky top-0 mt-5 sm:mx-10 mx-4" />
 
         {/* CONTAINER FOR THE FORMS */}
 
@@ -312,7 +304,7 @@ export function SuccessModal() {
         /> */}
 
         <Link href="/profile-verification" className="w-full">
-          <Button variant="primary" className="w-full py-2 xl:max-w-[initial]">
+          <Button variant="primary" className="w-full py-2 sm:!w-full">
             Verify account
           </Button>
         </Link>

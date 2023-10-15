@@ -1,17 +1,14 @@
-"use server";
-
+/* eslint-disable import/prefer-default-export */
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { NextRequest, NextResponse } from "next/server";
 
-export default async function uploadResource(
-  prevState: any,
-  formData: FormData
-) {
+export async function POST(request: NextRequest) {
+  const formData = await request.formData();
   const resourceData = {
-    title: formData.get("course-title"),
-    courseDescription: formData.get("course-description"),
     category: formData.get("category"),
-    coursetype: formData.get("course-type"),
+    courseDescription: formData.get("courseDescription")!,
+    title: formData.get("title"),
+    coursetype: formData.get("courseType"),
     price: formData.get("price"),
     ratings: "0.0",
     reviews: "0",
@@ -30,9 +27,11 @@ export default async function uploadResource(
       },
     });
     const data = await res.json();
+    console.log(data);
     revalidatePath("/mentor-resources");
-    redirect("/mentor-resources");
+    return NextResponse.json({ success: true });
   } catch (e) {
-    const rand = "";
+    console.log(e);
+    return NextResponse.json({ error: "failed to upload resource" });
   }
 }
