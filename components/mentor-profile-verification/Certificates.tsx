@@ -177,7 +177,6 @@ export default function Certificates({
                   name="graduationFile"
                   id={`graduationFile_${index}`}
                   accept=".pdf, .png, .jpeg, .jpg"
-                  required
                   onChange={handleInputChange}
                 />
               </label>

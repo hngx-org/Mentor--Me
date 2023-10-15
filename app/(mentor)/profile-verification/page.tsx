@@ -25,9 +25,9 @@ import {
   CancelIcon,
 } from "@/public/SVGs";
 import { Button } from "@/components/buttons/button";
-import MentorSideBar from "@/components/SideBar/MentorSideBar";
 import MobileSideBar from "@/components/MobileSideBar";
 import { FormData } from "@/components/mentor-profile-verification/types";
+import SidebarMentor from "@/components/mentor/SidebarMentor";
 
 export default function MentorProfileVerification() {
   const [step, setStep] = useState(0);
@@ -87,8 +87,36 @@ export default function MentorProfileVerification() {
     try {
       const url =
         "https://mentormee-api.onrender.com/mentors/account-verification";
+      const requestData = {
+        certificates: {
+          certificationName: formData.certificates.certificationName,
+          issuingInstitution: formData.certificates.issuingInstitution,
+          graduationYear: formData.certificates.graduationYear,
+          graduationFile: "file.png",
+        },
+        qualifications: {
+          qualification: formData.qualifications.qualification,
+          yearsExperience: formData.qualifications.yearsExperience,
+          qualificationDesc: formData.qualifications.qualificationDesc,
+        },
+        achievements: {
+          achievementName: formData.achievements.achievementName,
+          issuingOrganization: formData.achievements.issuingOrganization,
+          yearReceived: formData.achievements.yearReceived,
+          achievementDesc: formData.achievements.achievementDesc,
+        },
+        identification: {
+          fullName: formData.identification.fullname,
+          dateOfBirth: formData.identification.dateofBirth,
+          idType: formData.identification.idType,
+          idNumber: formData.identification.idNumber,
+          uploadID: "file.png",
+        },
+      };
 
-      const response = await axios.post(url, formData, {
+      console.log(requestData);
+
+      const response = await axios.post(url, requestData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -110,7 +138,7 @@ export default function MentorProfileVerification() {
     <>
       <div className="w-full flex bg-white text-black h-full lg:pb-0 pb-14 ">
         <div className="lg:w-1/4 hidden lg:block ">
-          <MentorSideBar />
+          <SidebarMentor />
         </div>
         <div className="lg:w-[90%] w-full h-full">
           <HeaderAfterSignUp step={step} />
