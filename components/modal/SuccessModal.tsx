@@ -6,6 +6,7 @@ import Image from "next/image";
 
 import Link from "next/link";
 
+// @ts-ignore
 import { Dialog, Transition } from "@headlessui/react";
 
 import check from "../../public/assets/images/check.png";

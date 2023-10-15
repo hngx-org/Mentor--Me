@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
+
+import Link from "next/link";
 
 import Image from "next/image";
 
@@ -15,6 +17,7 @@ import { Button } from "@/components/buttons/button";
 import Modal from "@/components/modal/Modal";
 
 const ResetPassword = () => {
+  const [email, setEmail] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const closeModal = (): void => {
@@ -23,6 +26,35 @@ const ResetPassword = () => {
 
   const openModal = (): void => {
     setIsOpen(true);
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
+  const handleSubmit = async () => {
+    const url =
+      "https://mentormee-api.onrender.com/auth/request-password-reset";
+
+    const requestData = {
+      email,
+    };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      // console.log('Success:', responseData);
+      openModal();
+    } else {
+      // console.error("Error", response.status, response.statusText)
+    }
   };
 
   return (
@@ -39,13 +71,17 @@ const ResetPassword = () => {
           </div>
         </div>
         <div className="col-span-3  px-4  lg:px-6 xl:px-16">
-          <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
-            Mentor Me
-          </h2>
-          <div className="flex items-center gap-2 my-5">
-            <Image src={back} width={20} height={20} alt="back-icon" />
-            <h5 className="font-Hanken text-[18px]">Back</h5>
-          </div>
+          <Link href="/">
+            <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
+              Mentor Me
+            </h2>
+          </Link>
+          <Link href="/mentor-auth/login">
+            <div className="flex items-center gap-2 my-5">
+              <Image src={back} width={20} height={20} alt="back-icon" />
+              <h5 className="font-Hanken text-[18px]">Back</h5>
+            </div>
+          </Link>
           <div className="flex justify-center flex-col">
             <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
               Forgot Password
@@ -60,6 +96,9 @@ const ResetPassword = () => {
                 label="Email Address"
                 required
                 type="email"
+                name="mentor-email"
+                value={email}
+                onChange={handleChange}
               />
             </div>
 
@@ -67,7 +106,7 @@ const ResetPassword = () => {
               variant="primary"
               paddingLess
               className="w-full h-[48px]"
-              onClick={openModal}
+              onClick={handleSubmit}
             >
               Reset Password
             </Button>

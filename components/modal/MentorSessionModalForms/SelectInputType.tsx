@@ -1,4 +1,6 @@
 import React, { SelectHTMLAttributes } from "react";
+import Image from "next/image";
+import { MentorCreationArrDown } from "@/public";
 
 interface SelectInputProps
   extends React.SelectHTMLAttributes<HTMLSelectElement> {
@@ -29,21 +31,27 @@ function SelectInputType({
           {labelText}{" "}
           {isRequired && <span className="text-Error50 font-bold">*</span>}
         </label>
-        <select
-          value={value}
-          id={selectId}
-          name={selectName}
-          placeholder="Give this session a name"
-          required={isRequired}
-          className="border text-gray-400 rounded-lg sm:rounded-lg p-2 pr-6 md:p-4 dm:py-5 w-full focus:outline-none focus:border-gray-600"
-          // onChange={(e: React.ChangeEvent<HTMLSelectElement>) => (e.target.value)}
-          onChange={onChange}
-        >
-          <option value="" className="text-gray-300 w-[80%]">
-            {placeholder || "select an option"}
-          </option>
-          {children}
-        </select>
+        <div className="relative">
+          <select
+            value={value}
+            id={selectId}
+            name={selectName}
+            placeholder="Give this session a name"
+            required={isRequired}
+            className="appearance-none first:text-gray-500 border rounded-lg sm:rounded-lg p-2 md:p-4 md:py-5 w-full focus:outline-none focus:border-gray-600"
+            onChange={onChange}
+          >
+            <option value="" disabled className="text-gray-300">
+              {placeholder || "select an option"}
+            </option>
+            {children}
+          </select>
+          <Image
+            className="absolute right-4 translate-y-[-50%] top-[50%] pointer-events-none"
+            src={MentorCreationArrDown}
+            alt="arrow-down"
+          />
+        </div>
       </div>
     </div>
   );
