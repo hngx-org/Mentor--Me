@@ -51,37 +51,35 @@ export default function LoginForm() {
 
     if (form.checkValidity() === false) {
       setIsValid(false);
-      return;
-    }
-
-    try {
-      const response = await axios.post(
-        "https://mentormee-api.onrender.com/auth/login",
-        {
+    } else {
+      setIsValid(true);
+      axios
+        .post("https://mentormee-api.onrender.com/auth/login", {
+          // .post("http://localhost:4000/auth/login", {
           email: formData.email,
           password: formData.password,
           role: "mentee",
-        }
-      );
+        })
+        .then((response) => {
+          setUser(response.data);
+          localStorage.setItem("Mentee", JSON.stringify(response.data));
 
-      setUser(response.data);
-      localStorage.setItem("Mentee", JSON.stringify(response.data));
+          const userProfileLink = "profileLink" in user?.data?.user;
+          if (user?.data?.user && userProfileLink) {
+            router.replace("/dashboard");
+          } else {
+            router.replace("/mentee-profile-creation");
+          }
+        })
+        .catch((err) => {
+          if (err.response && err.response.status === 406) {
+            localStorage.setItem("Mentee", JSON.stringify(err.response.data));
 
-      const userProfileLink = "profileLink" in user?.data?.user;
-      if (user?.data?.user && userProfileLink) {
-        router.replace("/mentee-profile?path=profile");
-      } else {
-        router.replace("/mentee-profile-creation");
-      }
-    } catch (err: any) {
-      if (err.response && err.response.status === 406) {
-        localStorage.setItem("Mentee", JSON.stringify(err.response.data));
-        router.push("/mentee-auth/otp");
-      } else {
-        toast(err?.response?.data?.message || "something went wrong");
-      }
-    } finally {
-      setIsLoading(false);
+            router.push("/mentee-auth/otp");
+          } else {
+            toast(err?.response?.data?.message || "something went wrong");
+          }
+        });
     }
   };
   return (
