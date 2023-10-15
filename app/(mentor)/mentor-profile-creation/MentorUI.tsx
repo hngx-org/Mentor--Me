@@ -308,7 +308,7 @@ export function SuccessModal() {
           className="w-full py-2 xl:max-w-[initial] !text-white"
         /> */}
 
-        <Link href="/profile-verification" className="w-full">
+        <Link href="mentor-profile" className="w-full">
           <Button variant="primary" className="w-full py-2 xl:max-w-[initial]">
             Verify account
           </Button>
