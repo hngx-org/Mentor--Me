@@ -2,8 +2,12 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { courseContents, courseTitles } from "../constants";
+import {
+  courseContents,
+  courseTitles,
+  staticDescription,
+  staticTitle,
+} from "../constants";
 import Profile from "@/public/assets/dylan.png";
 import {
   DownArrowIcon,
@@ -30,7 +34,8 @@ const Resource = ({ params }: { params: { resource: string } }) => {
       const res = await result.json();
       setData(res);
     } catch (error) {
-      setError("An error message");
+      const { message } = error as { message: string };
+      setError(`An error occurred. Please try again. ${message}`);
     } finally {
       setLoading(false);
     }
@@ -50,11 +55,10 @@ const Resource = ({ params }: { params: { resource: string } }) => {
         <div className="w-full pb-16">
           <div className="w-full  flex flex-col justify-center items-center gap-[17px] p-3 py-[62px]  bg-Neutra50">
             <h1 className="font-Inter text-[26px] sm:text-[32px] font-medium text-center text-white bg-Neutra50">
-              UX Principles for Designers
+              {data?.title || staticTitle}
             </h1>
             <p className="w-full max-w-[445px] font-Hanken text-white text-center">
-              The secrets to creating great user experiences for your products,
-              and helping your organization satisfy users.
+              {data?.description || staticDescription}
             </p>
             <div className="flex font-Hanken text-xs text-white items-center">
               <FilledStarIcon />

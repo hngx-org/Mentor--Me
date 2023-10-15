@@ -1,6 +1,10 @@
 // @ts-nocheck
+
+"use client";
+
 import Link from "next/link";
 
+import { useRouter } from "next/navigation";
 import { SideBarMentorProps } from "./SidebarMentor";
 import {
   Logo2,
@@ -17,6 +21,7 @@ export default function MenteeSideBar({
   light = false,
   path,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
+  const router = useRouter();
   return (
     <section
       className={`hidden w-[274px] border-[1px] py-7 px-4 min-h-screen h-screen fixed left-0 ${
@@ -64,7 +69,7 @@ export default function MenteeSideBar({
 
         <div className="my-4 border-t-2 border-Neutra40 pt-4">
           <Link
-            href="/welcome/login?path=login"
+            onClick={() => router.replace("/")}
             className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 "
           >
             <span className="h-7 w-7 !rotate-180 xl:w-8 xl:h-8 opacity-0 animate-slideLeft">

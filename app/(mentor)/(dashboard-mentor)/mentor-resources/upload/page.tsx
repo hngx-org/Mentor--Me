@@ -1,18 +1,23 @@
 "use client";
 
-import React, { ReactNode, useState } from "react";
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { toast } from "react-toastify";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  experimental_useFormState as useFormState,
-  experimental_useFormStatus as useFormStatus,
-} from "react-dom";
 
 import { CaretIcon } from "@/public/SVGs";
 import DropDown from "@/components/DropDown";
-import uploadResource from "./actions";
+
+const courseTypeOptions = ["JavaScript", "TypeScript", "C++", "C#"];
 
 export default function UploadResourcesPage() {
+  const courseTitleRef = useRef<HTMLInputElement>(null);
+  const courseDescriptionRef = useRef<HTMLTextAreaElement>(null);
+  const categoryRef = useRef<HTMLInputElement>(null);
+  const courseTypeRef = useRef<HTMLInputElement>(null);
+  const priceRef = useRef<HTMLInputElement>(null);
   const [courseDescription, setCourseDescription] = useState("");
   const [isCategoryDropDownExpanded, setIsCategoryDropDownExpanded] =
     useState(false);
@@ -21,12 +26,49 @@ export default function UploadResourcesPage() {
   const [selectedOptionIdx, setSelectedOptionIdx] = useState(-1);
   const [selectedCategoryOptionIdx, setSelectedCategoryOptionIdx] =
     useState(-1);
-  const courseTypeOptions = ["JavaScript", "TypeScript", "C++", "C#"];
-  const [state, formAction] = useFormState(uploadResource, { message: "" });
-  const { pending } = useFormStatus();
+
+  useEffect(() => {
+    function detectOuterClick(this: Document, ev: MouseEvent) {
+      if (!categoryRef.current?.parentElement?.contains(ev.target as Node)) {
+        setIsCategoryDropDownExpanded(false);
+      }
+      if (!courseTypeRef.current?.parentElement?.contains(ev.target as Node)) {
+        setIsCourseTypeDropDownExpanded(false);
+      }
+    }
+    document.addEventListener("click", detectOuterClick, true);
+
+    return () => {
+      document.removeEventListener("click", detectOuterClick);
+    };
+  }, []);
+
   return (
     <form
-      action={formAction}
+      onSubmit={async (e) => {
+        e.preventDefault();
+        const resourceData: { [prop: string]: string } = {
+          category: categoryRef.current?.value!,
+          courseDescription: courseDescriptionRef.current?.value!,
+          title: courseTitleRef.current?.value!,
+          courseType: courseTypeRef.current?.value!,
+          price: priceRef.current?.value!,
+        };
+        const formData = new FormData();
+        Object.keys(resourceData).forEach((prop) => {
+          formData.append(prop, resourceData[prop]);
+        });
+        const res = await fetch("/api/upload-resource", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await res.json();
+        if (data.success === true) {
+          toast("resource uploaded successfully");
+        } else {
+          toast(`Error: ${data.message}`);
+        }
+      }}
       className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white pt-10"
     >
       <h1 className="capitalize font-Inter font-medium text-2xl mb-8 text-NeutalBase">
@@ -37,6 +79,7 @@ export default function UploadResourcesPage() {
           type="text"
           name="course-title"
           id="course-title"
+          ref={courseTitleRef}
           required
           placeholder="input course title"
           className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal"
@@ -46,6 +89,7 @@ export default function UploadResourcesPage() {
         <textarea
           name="course-description"
           id="course-description"
+          ref={courseDescriptionRef}
           required
           placeholder="Input course description"
           value={courseDescription}
@@ -67,6 +111,11 @@ export default function UploadResourcesPage() {
       <Input
         title="Category"
         htmlFor="category"
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          setIsCategoryDropDownExpanded((prev) => !prev);
+        }}
         extraElements={
           <AnimatePresence>
             {isCategoryDropDownExpanded && (
@@ -83,16 +132,16 @@ export default function UploadResourcesPage() {
           type="text"
           id="category"
           name="category"
+          ref={categoryRef}
           required
           onKeyDown={(e) => {
             e.preventDefault();
           }}
           value={courseTypeOptions[selectedCategoryOptionIdx]}
           placeholder="select category"
-          className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
+          className="border-none cursor-pointer outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
         />
         <motion.span
-          onClick={() => setIsCategoryDropDownExpanded((prev) => !prev)}
           animate={{ rotate: isCategoryDropDownExpanded ? 0 : -180 }}
         >
           <CaretIcon className=" cursor-pointer" />
@@ -101,6 +150,11 @@ export default function UploadResourcesPage() {
       <Input
         title="Course Type"
         htmlFor="course-type"
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          setIsCourseTypeDropDownExpanded((prev) => !prev);
+        }}
         extraElements={
           <AnimatePresence>
             {isCourseTypeDropDownExpanded && (
@@ -117,16 +171,16 @@ export default function UploadResourcesPage() {
           type="text"
           id="course-type"
           name="course-type"
+          ref={courseTypeRef}
           onKeyDown={(e) => {
             e.preventDefault();
           }}
           required
           value={courseTypeOptions[selectedOptionIdx]}
           placeholder="select course type"
-          className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
+          className="border-none cursor-pointer outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
         />
         <motion.span
-          onClick={() => setIsCourseTypeDropDownExpanded((prev) => !prev)}
           animate={{ rotate: isCourseTypeDropDownExpanded ? 0 : -180 }}
         >
           <CaretIcon className="cursor-pointer" />
@@ -142,6 +196,7 @@ export default function UploadResourcesPage() {
         <input
           type="number"
           name="price"
+          ref={priceRef}
           id="price"
           required
           placeholder="Input the price"
@@ -149,7 +204,6 @@ export default function UploadResourcesPage() {
         />
       </Input>
       <button
-        aria-disabled={pending}
         type="submit"
         className="font-Inter mb-4 font-medium capitalize cursor-pointer bg-NeutalBase py-3 px-5 w-full rounded-[8px] border-none outline-none text-white"
       >
@@ -218,22 +272,29 @@ const Input = ({
   htmlFor,
   children,
   extraElements = null,
+  onClick,
 }: {
   title: string;
   htmlFor: string;
   children: ReactNode;
   extraElements?: ReactNode;
+  onClick?: React.MouseEventHandler<HTMLLabelElement> | undefined;
 }) => (
   <div className="mb-6 last:mb-0 relative">
     <p className="capitalize text-Neutral60 font-Inter font-medium mb-2 text-lg">
       {title}
     </p>
     <label
-      className="flex items-center gap-4 border-Neutra10 border-[1px] rounded-md px-4 py-4"
+      className="flex cursor-pointer items-center gap-4 border-Neutra10 border-[1px] rounded-md px-4 py-4"
       htmlFor={htmlFor}
+      onClick={onClick}
+      onKeyUp={() => {
+        console.log("ally rule");
+      }}
     >
       {children}
     </label>
+    {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */}
     {extraElements}
   </div>
 );

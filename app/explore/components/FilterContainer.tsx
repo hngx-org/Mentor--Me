@@ -18,7 +18,7 @@ export default function FilterContainer() {
     date?: string;
     topic?: string;
     review?: string;
-    contentImage?: string;
+    contentImage: string;
     timezone?: string;
     nextAvailable: string;
   }
