@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export const get = (url: string) =>
   fetch(url).then((response) => response.json());
 
@@ -31,3 +33,29 @@ export async function checkUser(data: loginDataType) {
     // console.log("error");
   }
 }
+
+type MentorDataType = {
+  date: string;
+  firstname: string;
+  timezone: string;
+  review: number;
+  nextAvailable: string;
+  topic: string;
+  contentImage: string;
+  id: string;
+  time: string;
+  title: string;
+  content: string;
+  lastname: string;
+};
+export const getMentorInfo = async (
+  setData: Dispatch<SetStateAction<MentorDataType[]>>
+) => {
+  const data = await get(
+    "https://cardbackendhngx.onrender.com/api/get_data"
+  ).catch((err) => console.error(err, "Error fetching Mentor data "));
+  setData(data);
+  console.log(data);
+
+  return data;
+};
