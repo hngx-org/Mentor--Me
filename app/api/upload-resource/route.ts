@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
     const data = await res.json();
     console.log(data);
     revalidatePath("/mentor-resources");
+
     if (data.error) {
       return NextResponse.json({ success: false, message: data.error });
     }
@@ -37,5 +38,6 @@ export async function POST(request: NextRequest) {
   } catch (e) {
     console.log(e);
     return NextResponse.json({ message: "failed to upload resource" });
+
   }
 }

@@ -108,6 +108,7 @@ const ResourceCard = ({
         src={previewImage}
         alt={title}
       />
+
       <div className="p-4 grid grid-rows-[max-content,_1fr,_repeat(3,_max-content)]">
         <h3 className=" text-NeutalBase font-Inter capitalize font-medium text-xl mb-2">
           {title}
@@ -117,6 +118,7 @@ const ResourceCard = ({
         </p>
         <Link
           className="text-Accent1 font-Hanken capitalize cursor-pointer mt-auto"
+
           href={`/mentor-resources/${resourceId}`}
         >
           view more

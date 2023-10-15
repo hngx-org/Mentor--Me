@@ -27,6 +27,7 @@ export default function UploadResourcesPage() {
   const [selectedCategoryOptionIdx, setSelectedCategoryOptionIdx] =
     useState(-1);
 
+
   useEffect(() => {
     function detectOuterClick(this: Document, ev: MouseEvent) {
       if (!categoryRef.current?.parentElement?.contains(ev.target as Node)) {
