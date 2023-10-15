@@ -100,7 +100,7 @@ const ResourceCard = ({
   };
   const formattedPrice = new Intl.NumberFormat("en-US", options).format(price);
   return (
-    <div className="w-[min(100%,_390px)] min-w-[327px] border-Neutra10 border-[1px] rounded-[8px] overflow-hidden shrink-0">
+    <div className="w-[min(100%,_390px)] grid grid-rows-[auto,_1fr] min-w-[327px] border-Neutra10 border-[1px] rounded-[8px] overflow-hidden shrink-0">
       <Image
         className="w-full aspect-[398/167] object-cover"
         width={398}
@@ -108,13 +108,15 @@ const ResourceCard = ({
         src={previewImage}
         alt={title}
       />
-      <div className="p-4">
+      <div className="p-4 grid grid-rows-[max-content,_1fr,_repeat(3,_max-content)]">
         <h3 className=" text-NeutalBase font-Inter capitalize font-medium text-xl mb-2">
           {title}
         </h3>
-        <p className="font-Hanken text-Neutra40 font-normal">{description}</p>
+        <p className="font-Hanken text-Neutra40 font-normal resource-card-description">
+          {description}
+        </p>
         <Link
-          className="text-Accent1 font-Hanken capitalize cursor-pointer mt-2"
+          className="text-Accent1 font-Hanken capitalize cursor-pointer mt-auto"
           href={`/mentor-resources/${resourceId}`}
         >
           view more
