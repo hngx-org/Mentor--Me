@@ -24,7 +24,7 @@ export default function ProtectedRoute({
 
   useEffect(() => {
     // Check if the user exists in the local storage
-    const user = localStorage.getItem("Mentee");
+    const user = localStorage.getItem("Mentee" || "Mentor");
     setUserExists(!!user);
 
     if (!user) {
