@@ -5,11 +5,11 @@ import { CalenderIcon, ClockIcon } from "@/public/SVGs";
 // import Button from "@/components/ui/Button";
 
 type Props = {
-  id: number;
+  id: number | string;
   mentorCardHero: string;
   mentorImage: string;
   mentorName: string;
-  verfied: boolean;
+  verify: boolean;
   mentorPostion: string;
   date: string;
   time: string;
@@ -22,7 +22,7 @@ const BigMentorShipCard: React.FC<Props> = ({
   mentorCardHero,
   mentorImage,
   mentorName,
-  verfied,
+  verify,
   mentorPostion,
   date,
   time,
@@ -75,7 +75,9 @@ const BigMentorShipCard: React.FC<Props> = ({
         </div>
       </div>
 
-      <div className="desc font-normal xl:text-2xl lg:text-[18px] ">{desc}</div>
+      <div className="desc font-normal xl:text-2xl lg:text-[18px] xl:h-[96px] h-[54px] overflow-clip">
+        {desc}
+      </div>
 
       <button
         type="button"

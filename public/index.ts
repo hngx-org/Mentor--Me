@@ -5,6 +5,7 @@ export { default as sessionShaolin } from "./assets/images/mentee-sessions/sessi
 export { default as sessionMaurice } from "./assets/images/mentee-sessions/session-maurice.png";
 export { default as sessionKaplan } from "./assets/images/mentee-sessions/session-kaplan.png";
 // Facemojis for Sessions Mentee
+export { default as bellCheckedIcon } from "./assets/images/mentee-sessions/bell-check-icon.png";
 export { default as faceMoji1 } from "./assets/images/mentee-sessions/facemojis/facemoji.png";
 export { default as faceMoji2 } from "./assets/images/mentee-sessions/facemojis/facemoji-2.png";
 export { default as faceMoji3 } from "./assets/images/mentee-sessions/facemojis/facemoji-3.png";
@@ -33,6 +34,8 @@ export { default as MentorCreationCheckMark } from "./assets/images/mentor-profi
 // Image exports for the mentee-review-screen
 export { default as DashboardMenteeProfileImg } from "./assets/images/mentee-review-screen/Ellipse 1 (1).png";
 export { default as DashboardMenteeProfileVerifiedmark } from "./assets/images/mentee-review-screen/verified (2) 1.png";
+export { default as Lefticon } from "./assets/Icons/mentor-reviews/arrow-circle-left (3).png";
+export { default as Righticon } from "./assets/Icons/mentor-reviews/arrow-circle-left (2).png";
 // Image exports for mentor profile verification screens
 
 export { default as Amico } from "./assets/images/amico.png";

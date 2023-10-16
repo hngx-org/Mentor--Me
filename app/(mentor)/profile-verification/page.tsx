@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 import HeaderAfterSignUp from "@/components/mentor-profile-verification/HeaderAfterSignUp";
 import {
   Amico,
@@ -23,9 +25,9 @@ import {
   CancelIcon,
 } from "@/public/SVGs";
 import { Button } from "@/components/buttons/button";
-import MentorSideBar from "@/components/SideBar/MentorSideBar";
 import MobileSideBar from "@/components/MobileSideBar";
 import { FormData } from "@/components/mentor-profile-verification/types";
+import SidebarMentor from "@/components/mentor/SidebarMentor";
 
 export default function MentorProfileVerification() {
   const [step, setStep] = useState(0);
@@ -67,18 +69,77 @@ export default function MentorProfileVerification() {
     setStep(step - 1);
   };
 
-  const handleSubmit = () => {
-    console.log("FormData", formData);
-    setShowModal(true);
-    setVerificationStatus("approved");
-    setStep(0);
-    setFormSubmitted(true);
+  // Moved tokenString to a scope where it can be accessed
+  let token = ""; // declare token variable
+
+  if (typeof window !== "undefined") {
+    const getUser = localStorage.getItem("Mentor");
+    if (getUser) {
+      try {
+        const newUser = JSON.parse(getUser);
+        token = newUser.data.token; // assign token value here
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
+    }
+  }
+
+  const handleSubmit = async () => {
+    try {
+      const url =
+        "https://mentormee-api.onrender.com/mentors/account-verification";
+      const requestData = {
+        certificates: {
+          certificationName: formData.certificates.certificationName,
+          issuingInstitution: formData.certificates.issuingInstitution,
+          graduationYear: formData.certificates.graduationYear,
+          graduationFile: "file.png",
+        },
+        qualifications: {
+          qualification: formData.qualifications.qualification,
+          yearsExperience: formData.qualifications.yearsExperience,
+          qualificationDesc: formData.qualifications.qualificationDesc,
+        },
+        achievements: {
+          achievementName: formData.achievements.achievementName,
+          issuingOrganization: formData.achievements.issuingOrganization,
+          yearReceived: formData.achievements.yearReceived,
+          achievementDesc: formData.achievements.achievementDesc,
+        },
+        identification: {
+          fullName: formData.identification.fullname,
+          dateOfBirth: formData.identification.dateofBirth,
+          idType: formData.identification.idType,
+          idNumber: formData.identification.idNumber,
+          uploadID: "file.png",
+        },
+      };
+
+      console.log(requestData);
+
+      const response = await axios.post(url, requestData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 200) {
+        setShowModal(true);
+        setVerificationStatus("pending");
+        setStep(0);
+        setFormSubmitted(true);
+      } else {
+        console.error("Unexpected status:", response.status);
+        toast.error("An error occurred. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
   return (
     <>
       <div className="w-full flex bg-white text-black h-full lg:pb-0 pb-14 ">
         <div className="lg:w-1/4 hidden lg:block ">
-          <MentorSideBar />
+          <SidebarMentor />
         </div>
         <div className="lg:w-[90%] w-full h-full">
           <HeaderAfterSignUp step={step} />
@@ -203,7 +264,7 @@ export default function MentorProfileVerification() {
                             className="mt-5 w-full py-3 text-center font-Inter font-500 text-[16px]"
                             paddingLess
                           >
-                            <a href="/mentor-dashboard"> Go to dashboard</a>
+                            <a href="/mentor-profile"> Go to dashboard</a>
                           </Button>
                         </div>
                       </div>
@@ -248,6 +309,7 @@ export default function MentorProfileVerification() {
                   <Certificates
                     onNext={handleNextStep}
                     setFormData={setFormData}
+                    formData={formData}
                   />
                 )}
                 {step === 2 && (
@@ -255,6 +317,7 @@ export default function MentorProfileVerification() {
                     onNext={handleNextStep}
                     onPrev={handlePrevStep}
                     setFormData={setFormData}
+                    formData={formData}
                   />
                 )}
                 {step === 3 && (
@@ -262,6 +325,7 @@ export default function MentorProfileVerification() {
                     onNext={handleNextStep}
                     onPrev={handlePrevStep}
                     setFormData={setFormData}
+                    formData={formData}
                   />
                 )}
                 {step === 4 && (
@@ -269,6 +333,7 @@ export default function MentorProfileVerification() {
                     onPrev={handlePrevStep}
                     handleSubmit={handleSubmit}
                     setFormData={setFormData}
+                    formData={formData}
                   />
                 )}
               </div>
@@ -288,6 +353,7 @@ export default function MentorProfileVerification() {
           buttonText="Go to dashboard"
         />
       )}
+      <ToastContainer />
     </>
   );
 }

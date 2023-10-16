@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent, MouseEvent } from "react";
+import Link from "next/link";
 import SuccessModal from "@/components/modal/SuccessModal";
-// import SuccessModal fro../SuccessModaldal";
 import SelectInputType from "./SelectInputType";
 import MentorCalendar from "./MentorCalendar";
 import { Button } from "@/components/buttons/button";
@@ -14,6 +14,14 @@ type SessionFormProps = {
   placeholder?: string;
 };
 
+interface FormData {
+  sessionName?: string;
+  description?: string;
+  attendeesLimit?: number;
+  time?: string;
+  date?: string;
+  topics?: string;
+}
 interface CalendarFunctions {
   onClose: () => void;
   onShowSuccessModal: () => void;
@@ -28,19 +36,67 @@ export function FreeSessionForm({
   const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
   const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [formData, setFormData] = useState<FormData>({
+    sessionName: "",
+    description: "",
+    attendeesLimit: 0,
+    date: "",
+    time: "",
+    topics: "",
+  });
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
   const closeSuccessModal = (): void => {
     setSuccessful(false);
   };
   const closeCalendar = (): void => {
     setCalendarVisible(false);
-    setSuccessful(true);
+    // setSuccessful(true);
   };
 
   const openSuccessModal = (): void => {
+    setCalendarVisible(false);
     setSuccessful(true);
   };
-  const openCalendar = (): void => {
-    setCalendarVisible(true);
+  const openCalendar = async (e: MouseEvent<HTMLButtonElement>) => {
+    // e.preventDefault();
+    const isFormValid = Object.values(formData).every((value) => value !== "");
+
+    if (isFormValid) {
+      setError("");
+      setCalendarVisible(true);
+    } else {
+      setError("All fields are required");
+      // console.log("All fields are required");
+    }
+
+    const data = formData;
+    console.log(JSON.stringify(data));
+
+    // POSTING DATA
+    const response = await fetch(
+      "http://localhost:3000/men-form-api/session-forms",
+      {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log("form submitted,", responseData);
+    } else {
+      console.error("submissiom failed");
+    }
   };
   return (
     <div className="p-0 bg-[#1d1c1c57]  bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
@@ -52,48 +108,88 @@ export function FreeSessionForm({
           <p className="text-gray-500">Create a session that best suits you!</p>
         </div>
         <form className="flex flex-col gap-3 sm:gap-6 py-3 rounded sm:px-12 w-full justify-between">
+          <span className="text-Error50 font-bold">{error}</span>
           <SelectInputType
             labelText="Session name"
             isRequired
-            selectId="session-name"
-            selectName="session-name"
+            selectId="sessionName"
+            selectName="sessionName"
             placeholder="Give this session a name"
-          />
+            value={formData.sessionName}
+            // onChange={(value) => handleSelectChange(value)}
+            onChange={handleSelectChange}
+          >
+            <option value="Design principles" className="text-black">
+              Design principles
+            </option>
+            <option value="Technical Writing 101">Technical Writing 101</option>
+          </SelectInputType>
           <SelectInputType
             labelText="Description"
             isRequired
-            selectId="Description"
-            selectName="Description"
+            selectId="description"
+            selectName="description"
             placeholder="Tell us a little about this session"
-          />
+            value={formData.description}
+            onChange={handleSelectChange}
+          >
+            <option value="Design principles">Design principles</option>
+            <option value="Getting started in technical writing">
+              Design principles
+            </option>
+          </SelectInputType>
           <SelectInputType
             labelText="Attendees limit"
             isRequired
-            selectId="attendees-limit"
-            selectName="attendees-limit"
+            selectId="attendeesLimit"
+            selectName="attendeesLimit"
             placeholder="Select from the options"
-          />
+            value={formData.attendeesLimit}
+            onChange={handleSelectChange}
+          >
+            <option value="2">2</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </SelectInputType>
           <SelectInputType
             labelText="Time"
             isRequired
             selectId="time"
             selectName="time"
             placeholder="Select the time of the day"
-          />
+            value={formData.time}
+            onChange={handleSelectChange}
+          >
+            <option value="12pm">12pm</option>
+            <option value="2pm">2pm</option>
+            <option value="4pm">4pm</option>
+          </SelectInputType>
           <SelectInputType
             labelText="Date"
             isRequired
             selectId="date"
             selectName="date"
             placeholder="Choose a date"
-          />
+            value={formData.date}
+            onChange={handleSelectChange}
+          >
+            <option value="October 15">October 15</option>
+            <option value="October 22">Octoober 22</option>
+            <option value="November 2">November 2</option>
+          </SelectInputType>
           <SelectInputType
             labelText="Select relevant topics"
             isRequired
             selectId="topics"
             selectName="topics"
             placeholder="Select some relevant topics this session"
-          />
+            value={formData.topics}
+            onChange={handleSelectChange}
+          >
+            <option value="Design">Design</option>
+            <option value="Development">Development</option>
+            <option value="Technical Writing">Technical Writing</option>
+          </SelectInputType>
           <div>
             <input type="checkbox" />
             <span className="px-2 text-gray-400">
@@ -101,13 +197,15 @@ export function FreeSessionForm({
             </span>
           </div>
           <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
-            <Button
-              className="p-4 w-full md:w-[20%]"
-              variant="outline-primary"
-              type="button"
-            >
-              Cancel
-            </Button>
+            <Link className="w-full" href="/mentor-schedule">
+              <Button
+                className="p-4 w-full md:w-[20%]"
+                variant="outline-primary"
+                type="button"
+              >
+                Cancel
+              </Button>
+            </Link>
             <Button
               onClick={openCalendar}
               className="p-4 w-full md:w-[20%]"
@@ -147,19 +245,45 @@ export function OneOffSessionForm({
   const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
   const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [formData, setFormData] = useState<FormData>({
+    sessionName: "",
+    description: "",
+    attendeesLimit: 0,
+    date: "",
+    time: "",
+    topics: "",
+  });
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
   const closeSuccessModal = (): void => {
     setSuccessful(false);
   };
   const closeCalendar = (): void => {
     setCalendarVisible(false);
-    setSuccessful(true);
+    // setSuccessful(true);
   };
 
   const openSuccessModal = (): void => {
+    setCalendarVisible(false);
     setSuccessful(true);
   };
   const openCalendar = (): void => {
-    setCalendarVisible(true);
+    // e.preventDefault();
+    const isFormValid = Object.values(formData).every((value) => value !== "");
+
+    if (isFormValid) {
+      setError("");
+      setCalendarVisible(true);
+    } else {
+      setError("All fields are required");
+      // console.log("All fields are required");
+    }
   };
   return (
     <div className="p-0 bg-[#1d1c1c57]  bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
@@ -171,48 +295,82 @@ export function OneOffSessionForm({
           <p className="text-gray-500">Create a session that best suits you!</p>
         </div>
         <form className="flex flex-col gap-3 sm:gap-6 py-3 rounded sm:px-12 w-full justify-between">
+          <span className="text-Error30 font-bold">{error}</span>
           <SelectInputType
             labelText="Session name"
             isRequired
-            selectId="session-name"
-            selectName="session-name"
+            selectId="sessionName"
+            selectName="sessionName"
             placeholder="Give this session a name"
-          />
+            value={formData.sessionName}
+            // onChange={(value) => handleSelectChange(value)}
+            onChange={handleSelectChange}
+          >
+            <option value="Design principles">Design principles</option>
+          </SelectInputType>
           <SelectInputType
             labelText="Description"
             isRequired
-            selectId="Description"
-            selectName="Description"
+            selectId="description"
+            selectName="description"
             placeholder="Tell us a little about this session"
-          />
+            value={formData.description}
+            onChange={handleSelectChange}
+          >
+            <option value="Design principles">Design principles</option>
+          </SelectInputType>
           <SelectInputType
             labelText="Attendees limit"
             isRequired
-            selectId="attendees-limit"
-            selectName="attendees-limit"
+            selectId="attendeesLimit"
+            selectName="attendeesLimit"
             placeholder="Select from the options"
-          />
+            value={formData.attendeesLimit}
+            onChange={handleSelectChange}
+          >
+            <option value="2">2</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </SelectInputType>
           <SelectInputType
             labelText="Time"
             isRequired
             selectId="time"
             selectName="time"
             placeholder="Select the time of the day"
-          />
+            value={formData.time}
+            onChange={handleSelectChange}
+          >
+            <option value="12pm">12pm</option>
+            <option value="2pm">2pm</option>
+            <option value="4pm">4pm</option>
+          </SelectInputType>
           <SelectInputType
             labelText="Date"
             isRequired
             selectId="date"
             selectName="date"
             placeholder="Choose a date"
-          />
+            value={formData.date}
+            onChange={handleSelectChange}
+          >
+            <option value="October 15">October 15</option>
+            <option value="October 22">Octoober 22</option>
+            <option value="November 2">November 2</option>
+          </SelectInputType>
           <SelectInputType
             labelText="Select relevant topics"
             isRequired
             selectId="topics"
             selectName="topics"
             placeholder="Select some relevant topics this session"
-          />
+            value={formData.topics}
+            onChange={handleSelectChange}
+          >
+            <option value="Design">Design</option>
+            <option value="Development">Development</option>
+            <option value="Technical Writing">Technical Writing</option>
+          </SelectInputType>
           <div>
             <input type="checkbox" />
             <span className="px-2 text-gray-400">
@@ -266,19 +424,45 @@ export function RecurringSessionForm({
   const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
   const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [formData, setFormData] = useState<FormData>({
+    sessionName: "",
+    description: "",
+    attendeesLimit: 0,
+    date: "",
+    time: "",
+    topics: "",
+  });
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
   const closeSuccessModal = (): void => {
     setSuccessful(false);
   };
   const closeCalendar = (): void => {
     setCalendarVisible(false);
-    setSuccessful(true);
+    // setSuccessful(true);
   };
 
   const openSuccessModal = (): void => {
+    setCalendarVisible(false);
     setSuccessful(true);
   };
   const openCalendar = (): void => {
-    setCalendarVisible(true);
+    // e.preventDefault();
+    const isFormValid = Object.values(formData).every((value) => value !== "");
+
+    if (isFormValid) {
+      setError("");
+      setCalendarVisible(true);
+    } else {
+      setError("All fields are required");
+      // console.log("All fields are required");
+    }
   };
   return (
     <div className="p-0 bg-[#1d1c1c57]  bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
@@ -290,48 +474,86 @@ export function RecurringSessionForm({
           <p className="text-gray-500">Create a session that best suits you!</p>
         </div>
         <form className="flex flex-col gap-3 sm:gap-6 py-3 rounded sm:px-12 w-full justify-between">
+          <span className="text-Error30 font-bold">{error}</span>
           <SelectInputType
             labelText="Session name"
             isRequired
-            selectId="session-name"
-            selectName="session-name"
+            selectId="sessionName"
+            selectName="sessionName"
             placeholder="Give this session a name"
-          />
+            value={formData.sessionName}
+            // onChange={(value) => handleSelectChange(value)}
+            onChange={handleSelectChange}
+          >
+            <option value="React Js / Vue Js">React Js / Vue Js</option>
+            <option value="Styling in Next Js">Styling in Next Js</option>
+          </SelectInputType>
           <SelectInputType
             labelText="Description"
             isRequired
-            selectId="Description"
-            selectName="Description"
+            selectId="description"
+            selectName="description"
             placeholder="Tell us a little about this session"
-          />
+            value={formData.description}
+            onChange={handleSelectChange}
+          >
+            <option value="React Js / Vue Js">React Js / Vue Js</option>
+            <option value="Proper styling in websites">
+              Proper styling in websites
+            </option>
+          </SelectInputType>
           <SelectInputType
             labelText="Attendees limit"
             isRequired
-            selectId="attendees-limit"
-            selectName="attendees-limit"
+            selectId="attendeesLimit"
+            selectName="attendeesLimit"
             placeholder="Select from the options"
-          />
+            value={formData.attendeesLimit}
+            onChange={handleSelectChange}
+          >
+            <option value="2">2</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </SelectInputType>
           <SelectInputType
             labelText="Time"
             isRequired
             selectId="time"
             selectName="time"
             placeholder="Select the time of the day"
-          />
+            value={formData.time}
+            onChange={handleSelectChange}
+          >
+            <option value="12pm">12pm</option>
+            <option value="2pm">2pm</option>
+            <option value="4pm">4pm</option>
+          </SelectInputType>
           <SelectInputType
             labelText="Date"
             isRequired
             selectId="date"
             selectName="date"
             placeholder="Choose a date"
-          />
+            value={formData.date}
+            onChange={handleSelectChange}
+          >
+            <option value="October 15">October 15</option>
+            <option value="October 22">Octoober 22</option>
+            <option value="November 2">November 2</option>
+          </SelectInputType>
           <SelectInputType
             labelText="Select relevant topics"
             isRequired
             selectId="topics"
             selectName="topics"
             placeholder="Select some relevant topics this session"
-          />
+            value={formData.topics}
+            onChange={handleSelectChange}
+          >
+            <option value="Design">Design</option>
+            <option value="Development">Development</option>
+            <option value="Technical Writing">Technical Writing</option>
+          </SelectInputType>
           <div>
             <input type="checkbox" />
             <span className="px-2 text-gray-400">

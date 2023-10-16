@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+// @ts-ignore
 import { Dialog, Transition } from "@headlessui/react";
 import { Button } from "../buttons/button";
 import { CloseIcon } from "@/public/SVGs";

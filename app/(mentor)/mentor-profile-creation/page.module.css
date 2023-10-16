@@ -18,3 +18,7 @@
 .scroll ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.scroll .inner-bar {
+  background-color: green;
+}

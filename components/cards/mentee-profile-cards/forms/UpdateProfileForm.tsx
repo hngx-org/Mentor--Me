@@ -6,8 +6,9 @@ import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { MenteeDashboardProfileImg } from "@/public";
 import { EditIcon, EditIconDark } from "@/public/SVGs";
-import Button from "@/app/(mentee)/mentee-sessions/(ui)/VxrcelBtn";
+
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
+import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 
 type formProps = {
   name: string;
@@ -279,7 +280,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
               variant={isDark ? "secondary" : "primary"}
               className={`${
                 isDark
-                  ? "!bg-transparent border-gray-200 brightness-125"
+                  ? "!bg-transparent border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059] brightness-125"
                   : "py-4 px-8 "
               }`}
               titleClassName={`${
