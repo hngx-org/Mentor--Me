@@ -16,12 +16,14 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuthCtx();
   const email = user?.email;
   const userName = user?.email?.split("@")[0];
-  const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${email}`;
   const nameParams = useSearchParams().get("name");
   const bioParams = useSearchParams().get("bio");
   const emailParams = useSearchParams().get("email");
   const mentorshipParams = useSearchParams().get("mentorship");
 
+  const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
+    nameParams || email
+  }`;
   return (
     <>
       <SidebarMentor path={pathParams} />
@@ -32,6 +34,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           action={actionParams}
           imgSrc={profileImg}
           username={userName}
+          name={nameParams}
+          bio={bioParams}
+          email={emailParams}
+          jobTitle={mentorshipParams}
         />
 
         <MobileSideBar path={pathParams} action={actionParams} />
