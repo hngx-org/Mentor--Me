@@ -363,7 +363,7 @@ interface myProps {
 function HeadingBuild({ content, currForm }: myProps) {
   return (
     <div className="sticky top-0 bg-white left-0  py-2  mb-4 flex flex-col z-[2] ">
-      <h2 className="font-Gladiora font-bold text-3xl mb-4">{content}</h2>
+      <h2 className="font-Hanken font-bold text-3xl mb-4">{content}</h2>
       <MenteeProgressBar currForm={currForm} />
     </div>
   );
