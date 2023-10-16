@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 import MentorMeIcon from "@/svgs/MentorMeIcon";
 
 import {
@@ -386,9 +387,12 @@ function SuccessModal() {
         proceed
       </p>
 
-      <Button variant="primary" className="w-full sm:!w-full py-2 ">
-        <a href="/">Continue to Home</a>
-      </Button>
+      <Link href="/dashboard">
+        {" "}
+        <Button variant="primary" className="w-full sm:!w-full py-2 ">
+          Continue to Home
+        </Button>
+      </Link>
     </div>
   );
 }

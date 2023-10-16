@@ -1,5 +1,3 @@
-// "use client";
-
 import { Metadata } from "next";
 import React from "react";
 import DiscussionSlider from "@/components/mentee-communities/DiscussionSlider";
@@ -9,10 +7,25 @@ import Footer from "@/components/Footer";
 import { SearchIcon } from "@/public/assets/Icons/mentor-communities";
 import SidebarMentor from "@/components/mentor/SidebarMentor";
 import { mentorCardAvatar, mentorCardHero } from "@/public";
-import { get, post } from "@/lib/apiHelper";
+import { get, getMentorInfo, post } from "@/lib/apiHelper";
 
 export const metadata: Metadata = {
   title: "Communities",
+};
+
+type MentorDataType = {
+  date: string;
+  firstname: string;
+  timezone: string;
+  review: number;
+  nextAvailable: string;
+  topic: string;
+  contentImage: string;
+  id: string;
+  time: string;
+  title: string;
+  content: string;
+  lastname: string;
 };
 
 const MenteeCommunities: React.FC = () => {
@@ -49,147 +62,10 @@ const MenteeCommunities: React.FC = () => {
       id: 17,
     },
   ];
-  const mentorInfo = [
-    {
-      id: 9408,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 9408,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 9408,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 94408,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 94068,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-    {
-      id: 94078,
-      mentorName: "Shade Mayowa",
-      verify: true,
-      mentorPostion: "CEO, Webmasters Inc",
-      mentorAvatar: mentorCardAvatar,
-      cardHero: mentorCardHero,
-      date: "28th, Sept",
-      time: "12:30pm",
-      title: "Intorduction to AI",
-      desc: "Explore the fascinating world of AI with hands-on demos and discussions. Learn the basics from industry experts.",
-    },
-  ];
-
-  // const widthOfSlider = (
-  //   widthOfSlides: number,
-  //   colGap: number,
-  //   noOfSlides: number
-  // ) => {
-  //   const sliderWidth =
-  //     noOfSlides * widthOfSlides + colGap * (noOfSlides - 1) + 2;
-  //   return sliderWidth;
-  // };
-
-  // fetch start
-  // const [albums, setAlbums] = React.useState([] as any[]);
-
-  // React.useEffect(() => {
-  //   // declare the data fetching function
-  //   // const fetchData = async () => {
-  //   //   const data = await get("https://jsonplaceholder.typicode.com/albums");
-  //   //   return data;
-  //   // };
-
-  //   // call the function
-  //   // fetchData()
-  //   //   .then((res) => setAlbums(res))
-  //   //   // make sure to catch any error
-  //   //   .catch(console.error);
-
-  //   // async function getData() {
-  //   //   try {
-  //   //     const response = await get(
-  //   //       "https://jsonplaceholder.typicode.com/albums"
-  //   //     );
-  //   //     setAlbums(response);
-  //   //   } catch (error) {
-  //   //     console.error("Error:", error);
-  //   //   }
-  //   // }
-  //   // getData(); '
-
-  //   // post
-
-  //   // const data = {
-  //   //   email: "test@tjjj.com",
-  //   //   password: "Password",
-  //   //   role: "mentor",
-  //   // };
-  //   // async function checkUser() {
-  //   //   try {
-  //   //     const res = await post(
-  //   //       "https://mentormee-api.onrender.com/auth/register",
-  //   //       data
-  //   //     );
-
-  //   //     console.log(res);
-  //   //   } catch (err) {
-  //   //     console.log("error");
-  //   //   }
-  //   // }
-  //   // checkUser();
-  // }, []);
+  // eslint-disable-next-line prefer-const
 
   return (
     <div className="w-full">
-      {/* {albums.map((album) => (
-        <span className="text-red-700">{album.title}</span>
-      ))} */}
-
       <HomeNavBar />
       <div className="flex w-full md:w-fit">
         {" "}
@@ -200,23 +76,6 @@ const MenteeCommunities: React.FC = () => {
               with Mentor me
             </p>
           </div>
-          {/* <div className="search border border-[#CCCCCC]  w-[80vw] md:w-[50vw] lg:w-[57vw] pl-[16px]  rounded-[6px] md:mx-auto mx-[5vw] flex  items-center">
-        <span className="flex md:hidden pr-2 aspect-square h-[20px]">
-          {" "}
-          <SearchIcon />
-        </span>{" "}
-        <input
-          type="text"
-          className=" text-[14px] font-normal leading-[20.3px] text-Neutra20 w-full font-Inter outline-0 md:py-0 py-3 "
-          placeholder="Search for communi8ty"
-        />{" "}
-        <button
-          type="button"
-          className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px]  text-white border  bg-NeutalBase items-center gap-x-1 rounded-[8px] h-full hidden md:flex"
-        >
-          Search
-        </button>
-      </div> */}
 
           {isLoggedIn ? (
             <div className="isloggedInSLider">
@@ -226,7 +85,7 @@ const MenteeCommunities: React.FC = () => {
                 <DiscussionSlider slideInfo={sliderInfo} />
               </div>
               <div className=" w-[396px] sm:w-[406px]  md:w-[628px] lg:w-[calc(777px)] xl:w-[calc(977px)] 2xl:w-[calc(1362px)]  border border-transparent  mx-auto overflow-hidden">
-                <MentorGrid mentorInfo={mentorInfo} />
+                <MentorGrid />
               </div>
             </div>
           ) : (
@@ -237,7 +96,7 @@ const MenteeCommunities: React.FC = () => {
                 <DiscussionSlider slideInfo={sliderInfo} />
               </div>
               <div className=" w-[396px] sm:w-[628px]  md:w-[860px] lg:w-[calc(1052px)] xl:w-[calc(1352px)] 2xl:w-[calc(1362px)]   border border-transparent  mx-auto overflow-hidden">
-                <MentorGrid mentorInfo={mentorInfo} />
+                <MentorGrid />
               </div>
             </div>
           )}

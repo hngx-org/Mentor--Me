@@ -2,7 +2,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import Image from "next/image";
 
@@ -28,7 +28,7 @@ import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 export default function LoginForm() {
   const router = useRouter();
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = React.useState<any>();
   const [isValid, setIsValid] = React.useState(true);
   const [formData, setFormData] = React.useState({
@@ -45,40 +45,36 @@ export default function LoginForm() {
   };
 
   const handleSumbit = async (e: React.FormEvent) => {
-    setIsLoading(true);
     e.preventDefault();
+    setIsLoading(true);
     const form = e.currentTarget as HTMLFormElement;
 
     if (form.checkValidity() === false) {
       setIsValid(false);
     } else {
       setIsValid(true);
-      axios
-        .post("https://mentormee-api.onrender.com/auth/login", {
-          // .post("http://localhost:4000/auth/login", {
-          email: formData.email,
-          password: formData.password,
-          role: "mentee",
-        })
-        .then((response) => {
-          setUser(response.data);
 
-          if (user?.data?.user && "profileLink" in user?.data?.user) {
-            router.replace("/dashboard?path=Home");
-          } else {
-            router.replace("/mentee-profile-creation");
+      try {
+        const response = await axios.post(
+          "https://mentormee-api.onrender.com/auth/login",
+          {
+            email: formData.email,
+            password: formData.password,
+            role: "mentee",
           }
-          localStorage.setItem("Mentee", JSON.stringify(response.data));
-        })
-        .catch((err) => {
-          if (err.response.status === 406) {
-            localStorage.setItem("Mentee", JSON.stringify(err.response.data));
+        );
+        localStorage.setItem("Mentee", JSON.stringify(response.data));
+        setUser(response.data);
 
-            router.push("/mentee-auth/otp");
-          } else {
-            toast(err?.response?.data?.message || "something went wrong");
-          }
-        });
+        router.replace("/mentee-profile-creation");
+      } catch (error: any) {
+        if (error.response && error.response.status === 406) {
+          localStorage.setItem("Mentee", JSON.stringify(error.response.data));
+          router.push("/mentee-auth/otp");
+        } else {
+          toast(error?.response?.data?.message || "something went wrong");
+        }
+      }
     }
   };
   return (
