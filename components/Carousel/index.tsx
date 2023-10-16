@@ -53,14 +53,11 @@ export default function Carousel({ imgCarousel, title, text }: any) {
           {imgCarousel.map((item: any, index: number) => (
             <div
               style={{ transform: `translateX(${-currentIndex}00%` }}
-              key={index}
-              // className={`block w-3/4 mx-auto xl:mx-0 max-w-[800px] mb-[2rem] xl:mb-0 xl:ml-[4rem]  xl:flex items-center xl:justify-between transition-transform gap-20
-
-              // }`}
+              key={item.id}
               className="flex justify-center gap-3 ease-in-out"
             >
               <Image
-                src={item}
+                src={item.img}
                 alt=""
                 width={500}
                 height={200}

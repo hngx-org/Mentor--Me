@@ -8,13 +8,30 @@ import MentorImageFour from "../../../public/assets/images/landing-page/mentorTy
 import Carousel from "@/components/Carousel";
 
 const imgCarousel = [
-  MentorImageOne,
-  MentorImageThree,
-  MentorImageFour,
-  MentorImageThree,
-  MentorImageOne,
-  MentorImageTwo,
-  MentorImageThree,
+  {
+    id: 1,
+    img: MentorImageOne,
+  },
+  {
+    id: 2,
+    img: MentorImageThree,
+  },
+  {
+    id: 3,
+    img: MentorImageFour,
+  },
+  {
+    id: 4,
+    img: MentorImageThree,
+  },
+  {
+    id: 5,
+    img: MentorImageOne,
+  },
+  {
+    id: 6,
+    img: MentorImageTwo,
+  },
 ];
 export default function MentorTypes() {
   return (
