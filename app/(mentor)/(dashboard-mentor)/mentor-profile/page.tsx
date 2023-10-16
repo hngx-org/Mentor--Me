@@ -18,6 +18,7 @@ import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import UpdateProfile from "@/components/cards/mentee-profile-cards/UpdateProfile";
 import useAuth from "@/context/useAuth";
+import Skeleton from "@/components/mentorProfile/Skeleton";
 
 export type ModalState = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -33,7 +34,10 @@ export default function ProfilePage() {
   const mentorshipType = data?.mentorship_type;
 
   const [currMentor, setCurrMentor] = useState<any>();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [user, setUser] = useState<any>({});
+  const [userDetails, setUserDetails] = useState({});
   const [userData, setUserData] = useState({
     username: "",
     bio: "",
@@ -80,38 +84,16 @@ export default function ProfilePage() {
           email: data?.data?.userDetails?.email,
           mentorship: data?.data?.mentorship_type,
         });
+        setLoading(false);
       } else {
         console.error("Failed to fetch current mentor data");
+        setLoading(false);
+        setError("there was a problem getting user");
       }
     } catch (error) {
       console.error("Error fetching current mentor data:", error);
-    } finally {
-      console.log(user);
     }
   };
-
-  console.log(user);
-  // const getCurrent = async () => {
-  //   try {
-  //     const currMent = await fetch(`${baseUrl}/users/get-current`, {
-  //       method: "GET",
-  //       redirect: "follow",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setCurrMentor(data?.data);
-  //         console.log("Current User", data?.data);
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     // Any code that needs to be executed regardless of success or failure can go here
-  //   }
-  // };
 
   useEffect(() => {
     getCurrentMentor();
@@ -129,144 +111,57 @@ export default function ProfilePage() {
   // console.log(userData);
   return (
     <>
-      {paramsAction === "edit-mentor" ? (
-        <Suspense fallback={<LoadingSpinner />}>
-          <div className="w-full justify-center flex relative ">
-            <UpdateProfile />
-          </div>
-        </Suspense>
-      ) : (
-        <div className=" w-full overflow-x-hidden ">
-          {user && user ? (
-            <MentorProfileHeader
-              userName={userData.username}
-              email=""
-              userRole={mentorshipType!}
-              userRating={4}
-              openModal={setModal}
-            />
-          ) : (
-            <MentorProfileHeader
-              userName="Shade Mayowa"
-              email=""
-              userRole="Product Designer"
-              userRating={4}
-              openModal={setModal}
-            />
-          )}
+      {loading && <Skeleton />}
 
-          {user && user ? (
-            <MentorProfileMainLayout>
-              <BioCard text={userData.bio} />
-              <ProfileDetailsCardContainer
-                heading="education"
-                items={[
-                  {
-                    text: data?.degree || "",
-                    heading: data?.institution || "",
-                    type: "certification",
-                  },
-                ]}
-                openModal={setModal}
-              />
-              <SkillSCard skills={[]} />
-              <ProfileDetailsCardContainer
-                heading="Experience"
-                items={[
-                  {
-                    type: "experience",
-                    text: data?.mentoring_experience || "",
-                  },
-                ]}
-                openModal={setModal}
-              />
-              {/* 
-              <ProfileDetailsCardContainer
-                heading="Education"
-                items={[]}
-                openModal={setModal}
-              /> */}
-              <AvailableSessionCard
-                timezone=" Greenwich Mean Time (GMT)"
-                availableDays={`${data?.preferred_days} ${user?.preferred_time}`}
-              />
-              <OverViewCardLayout heading="impact at a glance" />
-              <SessionsProgressCard progress={10} />
-            </MentorProfileMainLayout>
-          ) : (
-            <MentorProfileMainLayout>
-              <BioCard text="" />
-              <ProfileDetailsCardContainer
-                heading="skill/expertise"
-                items={[
-                  {
-                    text: "Google UX Certification",
-                    // heading: "Coursera",
-                    type: "certification",
-                  },
-                  {
-                    text: "Bachelor of Science in Computer Science",
-                    heading: "ABXYZ University",
-                    type: "certification",
-                  },
-                ]}
-                openModal={setModal}
-              />
-              <SkillSCard
-                skills={[
-                  "Leadership",
-                  "User Experience",
-                  "UX Research",
-                  "Figma",
-                  "Sketch",
-                  "Leadership",
-                  "User Experience",
-                  "UX Research",
-                  "Figma",
-                  "Sketch",
-                ]}
-              />
-              <ProfileDetailsCardContainer
-                heading="Experience"
-                items={[
-                  {
-                    text: "Webmaster Inc.",
-                    heading: "CEO ",
-                    type: "experience",
-                  },
-                  {
-                    text: "futurLabs",
-                    heading: "Ui/Ux design intern",
-                    type: "experience",
-                  },
-                ]}
-                openModal={setModal}
-              />
-
-              <ProfileDetailsCardContainer
-                heading="Education"
-                items={[
-                  {
-                    text: "University of Lagos. 2013 - 2017",
-                    heading: "B.Sc Computer Science ",
-                    type: "education",
-                  },
-                ]}
-                openModal={setModal}
-              />
-              <AvailableSessionCard
-                timezone=" Greenwich Mean Time (GMT)"
-                availableDays="Mondays - Wednesdays, 
-11:00am - 2:00pm"
-              />
-              <OverViewCardLayout heading="impact at a glance" />
-              <SessionsProgressCard progress={10} />
-            </MentorProfileMainLayout>
-          )}
-
+      {!loading && error && (
+        <div className="w-[100%] h-[80vh]  flex items-center   justify-center ">
+          <p> {error}</p>
+        </div>
+      )}
+      {!loading && user && (
+        <div className=" w-[100%] pb-10 h-fit">
+          <MentorProfileHeader
+            userName={userData.username || userData.email}
+            userRole={userData.mentorship}
+            userRating={4}
+            openModal={setModal}
+          />
           {modal.isOpen && (
             <MentorProfileModal onClose={setModal} state={modal.state} />
           )}
+          <MentorProfileMainLayout>
+            <BioCard text={userData.bio} />
+            <ProfileDetailsCardContainer
+              heading="certifications"
+              items={[
+                {
+                  type: "certification",
+                  heading: user.certifications,
+                },
+              ]}
+              openModal={setModal}
+            />
+            <ProfileDetailsCardContainer
+              heading="Education"
+              items={[
+                {
+                  heading: user.institution,
+                  type: "education",
+                  text: user.degree,
+                },
+              ]}
+              openModal={setModal}
+            />
+            <ProfileDetailsCardContainer heading="Experience" items={[]} />
+            <SkillSCard skills={user.skills.split(" ")} />
+            <AvailableSessionCard
+              timezone="Greenwich Mean Time (GMT)"
+              availableDays={user.preferred_days}
+              time={user.preferred_startTime}
+            />
+            <OverViewCardLayout heading="Impact at a glance" />
+            <SessionsProgressCard progress={10} />
+          </MentorProfileMainLayout>
         </div>
       )}
     </>

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Button } from "../buttons/button";
 import Selector from "../selector";
 
@@ -94,7 +94,6 @@ function ProfileCard({ userName }: { userName: string }) {
 function BasicInfoTab() {
   const [details, setDetail] = useState({
     bio: "",
-    gender: "",
     fullName: "",
   });
   const [selected, setSelected] = useState("");
@@ -108,6 +107,7 @@ function BasicInfoTab() {
       [name]: value,
     }));
   };
+
   return (
     <div className="w-[100%] px-2">
       <ProfileCard userName="shade mayowa" />

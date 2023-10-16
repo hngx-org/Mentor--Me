@@ -143,10 +143,12 @@ export function OverViewCard({
 type AvailableSessionCardProps = {
   timezone: string;
   availableDays: string;
+  time: string;
 };
 export function AvailableSessionCard({
   timezone,
   availableDays,
+  time,
 }: AvailableSessionCardProps) {
   return (
     <div className="border borderNeutral10 p-6 w-[100%] h-fit rounded-[8px]">
@@ -155,7 +157,9 @@ export function AvailableSessionCard({
       </div>
       <div className="flex w-[100%] justify-between text-xs border borderNeutral10 rounded-[6px] px-4 py-3  m-2 items-center">
         <p>Preferred Meeting Times</p>
-        <p className="w-[50%]">{availableDays}</p>
+        <p className="w-[50%]">
+          {availableDays} {time}
+        </p>
       </div>
       <div className="flex w-[100%] justify-between text-xs border borderNeutral10 rounded-[6px] px-4 py-3  m-2 items-center">
         <p className="w-fit">Time zone</p>
