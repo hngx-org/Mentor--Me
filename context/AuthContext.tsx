@@ -8,13 +8,22 @@ import React, {
   useMemo,
 } from "react";
 import { useReadLocalStorage } from "usehooks-ts";
+// import { useRouter } from "next/navigation";
 
 type AuthCtxType = {
+  // userData?: Data;
+  // setUserData: React.Dispatch<React.SetStateAction<Data | undefined>>;
   user: User | null;
   setUserData: React.Dispatch<React.SetStateAction<Data | undefined>>;
 };
 
-export type UserData = {
+// type UserData = {
+//   userId: string;
+//   token: string;
+//   email: string;
+// };
+
+type UserData = {
   token: string;
   user: {
     _id: string;
@@ -37,7 +46,7 @@ type Data = {
 interface User {
   name?: string;
   email?: string;
-  token?: string;
+  profession?: string;
 }
 
 const AuthContext = createContext<AuthCtxType | null>(null);
@@ -46,9 +55,18 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [userData, setUserData] = useState<Data | undefined>();
   const [user, setUser] = useState<User | null>({
     email: "",
-    token: "",
+    name: "",
+    profession: "",
   });
   const data: Data | null = useReadLocalStorage("Mentor" || "Mentee");
+  // const router = useRouter();
+
+  // const setUser = (data, value) => {
+  //   setUserData((prev) => ({
+  //     ...prev,
+  //     [data]: value,
+  //   }));
+  // };
 
   useEffect(() => {
     if (data) {
@@ -56,9 +74,12 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
       setUser((prev) => ({
         ...prev,
         email: data.data?.user.email,
-        token: data.data?.token,
       }));
+      return;
+      // router.replace("/mentor-dashboard/");
     }
+    // console.log(data);
+    console.log(userData);
   }, [userData]);
 
   const value = useMemo(() => ({ user, setUserData }), [userData]);
