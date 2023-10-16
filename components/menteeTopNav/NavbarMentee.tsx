@@ -86,7 +86,7 @@ export const NavbarMentee = ({
           <p>{jobTitle || "C++ Developer"}</p>
         </div>
         <div
-          className="cursor-pointer relative"
+          className="cursor-pointer relative overflow-hidden rounded-full"
           onClick={() => setIsView(!isView)}
           role="dialog"
         >
