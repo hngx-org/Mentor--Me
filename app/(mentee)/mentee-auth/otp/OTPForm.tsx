@@ -6,6 +6,8 @@ import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 
+import { toast } from "react-toastify";
+
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import { Button } from "@/components/buttons/button";
@@ -22,18 +24,17 @@ const OTPForm = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    if (typeof localStorage !== "undefined") {
+    if (typeof window !== "undefined") {
       const getUser = localStorage.getItem("Mentee");
 
       if (getUser) {
-        try {
-          const newUser = JSON.parse(getUser);
-          setUser(newUser);
-          setEmail(newUser.data.email);
-          setUserId(newUser.data._id);
-        } catch (error) {
-          console.error("Error parsing JSON:", error);
-        }
+        const newUser = JSON.parse(getUser);
+        setUser(newUser);
+        setEmail(newUser.email);
+        setUserId(newUser._id);
+      } else {
+        router.replace("/mentee-auth/login");
+        // console.error("Error parsing JSON:", error);
       }
     }
   }, []);
@@ -65,15 +66,18 @@ const OTPForm = () => {
         const data = await response.json();
         openModal();
       }
-    } catch (error) {
+    } catch (error: any) {
       // console.error("Error", error);
+      toast.error(error?.response?.data?.message || "Something went wrong");
     }
   };
 
-  const resendEmail = async () => {
+  const resendEmail = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     try {
       const response = await fetch(
         "https://mentormee-api.onrender.com/auth/request-email-verification",
+        // "http://localhost:4000/auth/request-email-verification",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -84,7 +88,8 @@ const OTPForm = () => {
           }),
         }
       );
-    } catch (error) {
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || "Something went wrong");
       // console.error("Error", error);
     }
   };
