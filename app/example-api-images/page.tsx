@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import React, { Suspense } from "react";
 import cloudinary from "cloudinary";
 import Image from "next/image";
@@ -24,8 +26,8 @@ export default async function CloudinaryImages() {
   console.log("=======================");
   console.log(results.resources);
   return results.resources ? (
-    <div className="flex flex-col w-full">
-      <div className="flex flex-col w-full justify-center items-center mb-6">
+    <div className="flex flex-col w-full px-4">
+      <div className="flex flex-col w-full justify-center items-center mb-6 gap-4">
         <p className="text-center my-8 font-bold text-3xl">
           Images from Cloudinary
         </p>
@@ -37,10 +39,24 @@ export default async function CloudinaryImages() {
           </span>{" "}
           folder
         </p>
+        <p className="text-2xl font-medium">
+          Replace the expression("resource_type:image")
+        </p>
+        <p className="text-2xl font-medium">
+          with your folder's name <br />
+          example: expression("mentor-communities*")
+        </p>
+        <div className="text-[#008080] bg-Accent1/10 rounded-xl px-1 break-words w-full max-w-[500px]">
+          <p>
+            ("mentor-communities*") const results = (await cloudinary.v2.search
+            .expression("resource_type:image") .sort_by("public_id", "desc")
+            .execute())
+          </p>
+        </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4">
         {results.resources.map((r) => (
-          <Suspense fallback={<Loading />}>
+          <Suspense key={r.public_id} fallback={<Loading />}>
             <div>
               <Image
                 key={r.public_id}
