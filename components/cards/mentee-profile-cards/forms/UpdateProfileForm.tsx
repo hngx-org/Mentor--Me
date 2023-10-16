@@ -4,9 +4,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from "next/image";
 import React, { useRef, useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
 import { MenteeDashboardProfileImg } from "@/public";
 import { EditIcon, EditIconDark } from "@/public/SVGs";
-
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 
@@ -42,37 +43,18 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
     e.preventDefault();
     if (!file) return;
 
-    if (file.size > MAX_SIZE) {
-      console.error("Image size exceeds 2MB. Please upload a smaller image.");
-      setIsLoading(false); // Make sure to set loading state to false in this case
-      return;
-    }
+    const formData = new FormData();
+    formData.append("file", file); // Use append instead of set
+    formData.append("uoload_preset", "nd2sr4np");
 
     try {
-      const data = new FormData();
-      data.append("image", file); // Use append instead of set
-      data.append("name", formData.name);
-      data.append("gender", formData.gender);
-      data.append("bio", formData.bio);
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dp5ysdt4c/image/upload",
+        formData
+      );
 
-      const res = await fetch("/api/form-upload", {
-        method: "POST",
-        body: data,
-        headers: {
-          // Set the Content-Type header to allow the server to properly parse the FormData
-          // 'multipart/form-data' is the content type used for file uploads
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      // handle the error
-      if (!res.ok) {
-        throw new Error(await res.text());
-      } else {
-        console.log("Upload successful:", res);
-      }
+      console.log(response);
     } catch (error) {
-      // Handle other errors here
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -83,6 +65,42 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
         image: undefined,
       });
     }
+
+    // try {
+    //   const data = new FormData();
+    //   data.append("image", file); // Use append instead of set
+    //   // data.append("name", formData.name);
+    //   // data.append("gender", formData.gender);
+    //   // data.append("bio", formData.bio);
+
+    //   // const res = await fetch("/api/form-upload", {
+    //   //   method: "POST",
+    //   //   body: data,
+    //   //   headers: {
+    //   //     // Set the Content-Type header to allow the server to properly parse the FormData
+    //   //     // 'multipart/form-data' is the content type used for file uploads
+    //   //     "Content-Type": "multipart/form-data",
+    //   //   },
+    //   // });
+
+    //   // handle the error
+    //   if (!res.ok) {
+    //     throw new Error(await res.text());
+    //   } else {
+    //     console.log("Upload successful:", res);
+    //   }
+    // } catch (error) {
+    //   // Handle other errors here
+    //   console.error(error);
+    // } finally {
+    //   setIsLoading(false);
+    //   setFormData({
+    //     name: "",
+    //     gender: "select",
+    //     bio: "",
+    //     image: undefined,
+    //   });
+    // }
   };
 
   return (
@@ -141,8 +159,15 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                         e.currentTarget.files &&
                         e.currentTarget.files[0].size > MAX_SIZE
                       ) {
-                        alert(
-                          "Image size exceeds 2MB. Please upload a smaller image."
+                        toast(
+                          "Image size exceeds 2MB. Please upload a smaller image.",
+                          {
+                            draggable: true,
+                            pauseOnFocusLoss: true,
+                            pauseOnHover: true,
+                            position: "top-center",
+                            updateId: "dismiss",
+                          }
                         );
 
                         return;
@@ -153,6 +178,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                           ...formData,
                           image: e.currentTarget.files[0],
                         });
+                        setFile(e.currentTarget.files[0]);
                       }
                     }}
                   />
