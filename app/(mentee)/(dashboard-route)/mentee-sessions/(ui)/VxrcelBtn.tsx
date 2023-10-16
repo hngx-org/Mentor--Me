@@ -55,9 +55,7 @@ export default function Button({
 					
 				 ${className} flex items-center justify-center gap-2 ${
            fullWidth ? "!w-full" : "xl:max-w-[140px]"
-         }  ${
-           (disabled || loading) && "opacity-60 bg-black/30 cursor-not-allowed"
-         }`}
+         }  ${(disabled || loading) && "opacity-60  cursor-not-allowed"}`}
       onClick={onclick}
     >
       {icon && (

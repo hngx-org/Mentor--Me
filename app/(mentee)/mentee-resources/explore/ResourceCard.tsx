@@ -8,7 +8,7 @@ interface Card {
   title: string;
   price: string;
   author: string;
-  rate: number;
+  ratings: number;
   reviews: number;
 }
 
@@ -18,7 +18,7 @@ const ResourceCard = ({
   title,
   price,
   author,
-  rate,
+  ratings,
   reviews,
 }: Card) => (
   <div className="w-full max-w-[397px] flex flex-col justify-between gap-4 items-center rounded-lg shadow-md flex-shrink-0">
@@ -27,7 +27,7 @@ const ResourceCard = ({
       alt={title}
       width={398}
       height={167}
-      className="w-full object-contain"
+      className="w-full h-[167px]"
     />
     <div className="w-full px-3 flex flex-col gap-4">
       <div>
@@ -40,16 +40,17 @@ const ResourceCard = ({
         N{price}
       </h1>
       <div className="flex font-Hanken text-xs text-NeutalBase">
-        <FilledStarIcon />
-        <FilledStarIcon />
-        <FilledStarIcon />
-        <FilledStarIcon />
-        <EmptyStarIcon />
-        <span className="mx-1">{rate} | </span>
+        {Array.from({ length: Math.min(ratings, 5) }, (_, index) => (
+          <FilledStarIcon key={index} />
+        ))}
+        {Array.from({ length: Math.max(5 - ratings, 0) }, (_, index) => (
+          <EmptyStarIcon key={index} />
+        ))}
+        <span className="mx-1">{ratings} | </span>
         <span> {reviews} reviews</span>
       </div>
       <div className="flex gap-4 mb-4">
-        <Link href={`/mentee-resources/explore/${id}?path=resources`}>
+        <Link href={`/mentee-resources/explore/${id}`}>
           <button
             type="button"
             className="font-Inter w-[112px] text-white rounded-lg bg-NeutalBase h-10 mb-4"
@@ -57,7 +58,7 @@ const ResourceCard = ({
             Buy Now
           </button>
         </Link>
-        <Link href={`/mentee-resources/explore/${id}?path=resources`}>
+        <Link href={`/mentee-resources/explore/${id}`}>
           <button
             type="button"
             className="font-Hanken w-[112px] text-NeutralBase rounded-lg bg-white h-10 mb-4 border border-[#121212]"
