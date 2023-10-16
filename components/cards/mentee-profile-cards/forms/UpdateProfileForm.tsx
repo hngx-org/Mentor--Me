@@ -19,6 +19,7 @@ type formProps = {
 
 const MAX_SIZE = 2 * 1024 * 1024; // 2MB in bytes
 export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
+  const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState<File>();
   const [formData, setFormData] = useState<formProps>({
@@ -83,6 +84,33 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
         image: undefined,
       });
     }
+  };
+
+  const url = "https://mentormee-api.onrender.com/mentee/update-profile";
+  const authToken = localStorage.getItem("authToken");
+
+  const handleUpdate = () => {
+    // Sending a PUT request to update the user's profile
+    fetch(url, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("PATCH request was successful");
+        } else {
+          console.error(
+            `PATCH request failed with status code ${response.status}`
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -274,6 +302,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
             )}
             <Button
               title={isLoading ? "Updating..." : "Update"}
+              onclick={handleUpdate}
               type="submit"
               disabled={isDisabled}
               loading={isLoading}
