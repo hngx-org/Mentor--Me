@@ -1,8 +1,10 @@
+/* eslint-disable dot-notation */
+/* eslint-disable no-prototype-builtins */
 /* eslint-disable no-unsafe-optional-chaining */
 
 "use client";
 
-import React, { useContext, useEffect } from "react";
+import React, { useState } from "react";
 
 import Image from "next/image";
 
@@ -30,10 +32,10 @@ import { useAuthCtx } from "@/context/AuthContext";
 export default function LoginForm() {
   const { setUserData } = useAuthCtx();
   const router = useRouter();
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [user, setUser] = React.useState<any>();
-  const [isValid, setIsValid] = React.useState(true);
-  const [formData, setFormData] = React.useState({
+  const [isLoading, setIsLoading] = useState(false);
+  const [userD, setUser] = useState<any>();
+  const [isValid, setIsValid] = useState(true);
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
@@ -69,38 +71,41 @@ export default function LoginForm() {
 
     if (form.checkValidity() === false) {
       setIsValid(false);
-      return;
-    }
+    } else {
+      setIsValid(true);
+      try {
+        const response = await axios.post(
+          "https://mentormee-api.onrender.com/auth/login",
+          {
+            email: formData.email,
+            password: formData.password,
+            role: "mentor",
+          }
+        );
 
-    try {
-      const response = await axios.post(
-        "https://mentormee-api.onrender.com/auth/login",
-        {
-          email: formData.email,
-          password: formData.password,
-          role: "mentor",
+        localStorage.setItem("Mentor", JSON.stringify(response.data));
+        setUser(response.data);
+        setUserData(response.data);
+      } catch (err: any) {
+        if (err.response && err.response.status === 406) {
+          localStorage.setItem("Mentor", JSON.stringify(err.response.data));
+          router.push("/mentor-auth/otp");
+        } else {
+          toast(err?.response?.data?.message || "something went wrong");
+          return; // Stop the function execution if an error occurs
         }
-      );
-
-      setUser(response.data);
-      setUserData(response.data);
-      localStorage.setItem("Mentor", JSON.stringify(response.data));
-
-      const userProfileLink = "profileLink" in user?.data?.user;
-      if (user?.data?.user && userProfileLink) {
-        router.replace("/mentor-profile?path=profile");
-      } else {
-        router.replace("/mentor-profile-creation");
+      } finally {
+        setIsLoading(false);
       }
-    } catch (err: any) {
-      if (err.response && err.response.status === 406) {
-        localStorage.setItem("Mentor", JSON.stringify(err.response.data));
-        router.push("/mentor-auth/otp");
+
+      if (userD?.data?.user && "profileLink" in userD?.data?.user) {
+        router.push("/mentor-profile?path=profile");
       } else {
-        toast(err?.response?.data?.message || "something went wrong");
+        router.push("/mentor-profile-creation");
       }
-    } finally {
-      setIsLoading(false);
+
+      // Check if the userD is defined before accessing its properties
+      console.log(userD?.data?.user && "profileLink" in userD?.data?.user);
     }
   };
 
@@ -172,8 +177,8 @@ export default function LoginForm() {
                   variant="primary"
                   className="w-full h-[48px]"
                   fullWidth
-                  // loading={isLoading}
-                  // disabled={isDisabled}
+                  loading={isLoading}
+                  disabled={isDisabled}
                 />
               </div>
             </form>
