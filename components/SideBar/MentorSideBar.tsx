@@ -4,11 +4,13 @@
 
 import Link from "next/link";
 
+import { useRouter } from "next/navigation";
 import { sidebarMentorLinks } from "@/lib/Constant";
 import {
   Logo2,
   LogoIcon,
   LogoutIcon,
+  LogoutMenteeIcon,
   ProfileIcon,
   SettingIcon,
 } from "@/public/SVGs";
@@ -24,6 +26,7 @@ export default function MentorSideBar({
   path,
   className,
 }: SideBarMentorProps) {
+  const router = useRouter;
   return (
     <section
       className={`w-[274px] min-h-screen border-[1px] fixed left-0 top-0 h-full p-5 hidden lg:flex ${
@@ -65,27 +68,18 @@ export default function MentorSideBar({
           </div>
         </div>
 
-        <div className="mt-5 my-1 border-t-2 border-Neutra40">
-          <ul className="px-3 mt-10  py-1 flex flex-col gap-1 cursor-pointer">
-            <li className="flex gap-3 rounded-[5px] p-2">
-              <SettingIcon />
+        <div className="my-4 border-t-2 border-Neutra40 pt-4">
+          <Link
+            href="/"
+            onClick={() => router.replace("/")}
+            className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 "
+          >
+            <LogoutIcon />
 
-              <span
-                className={` font-Inter text-[12px] font-[500] ${
-                  light ? "text-[#40444B]" : "text-[#fff]"
-                } `}
-              >
-                Setting
-              </span>
-            </li>
-            <li className="flex gap-2  rounded-[5px] p-2">
-              <LogoutIcon />
-
-              <span className="font-Inter text-[14px] font-[500]  text-Error50">
-                LogOut
-              </span>
-            </li>
-          </ul>
+            <span className="  font-Inter text-[14px] xl:text-xl font-[500]  text-Error50">
+              LogOut
+            </span>
+          </Link>
         </div>
 
         <div className=" ">

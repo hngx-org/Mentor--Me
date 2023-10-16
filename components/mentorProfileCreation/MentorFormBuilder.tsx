@@ -5,8 +5,8 @@
 //  The buttons trigger the change of the currForm state from here using props. Which in turn changes which form is shown
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { toast } from "react-toastify";
 import { useMentorContext } from "@/app/(mentor)/mentor-profile-creation/MentorContext";
-import formData from "@/lib/mentorProfileCreationData";
 
 interface myProps {
   children?: any;
@@ -25,6 +25,30 @@ export default function MentorFormBuilder({
   const form = useRef(null);
   const [isFull, setIsFull] = useState(false);
   const [textLength, setTextLength] = useState(0);
+  const [isSelected, setIsSelected] = useState(false);
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const getUser = localStorage.getItem("Mentor");
+      if (getUser) {
+        try {
+          const newUser = JSON.parse(getUser);
+          setEmail(newUser.data.user.email);
+          // @ts-ignore
+          setFormInputs((prevInps) => ({ ...prevInps, email }));
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      }
+    }
+
+    const emailField = document.querySelector('input[name="email"]');
+    // @ts-ignore
+    emailField.value = email;
+    // @ts-ignore
+    emailField.disabled = true;
+  }, [email]);
 
   function checkTextArea(e: any) {
     const words = e.target.value;
@@ -79,35 +103,29 @@ export default function MentorFormBuilder({
                 {input.label}
               </label>
 
-              <input
-                className="w-full border-[#d0d5dd] border-[1px] rounded-md p-4 placeholder:text-[#98A2B3] "
-                type={input.type}
-                placeholder={input.placeholder}
-                id={input.label}
-                required
-                // list={input.listName}
-                autoComplete="off"
-                onInput={handleInput}
-                name={input.apiName}
-              />
-
-              {/* {input.nature === "dropdown" ? (
-                <>
-                  <Image
-                    className="absolute right-4 translate-y-[-50%] top-[70%]"
-                    src={MentorCreationArrDown}
-                    alt="arrow-down"
-                  />
-
-                  <div>
-                    
-                  </div>
-
-                  
-                </>
+              {input.nature === "dropdown" ? (
+                <SelectComponent
+                  dropList={input.dropList}
+                  label={input.label}
+                  handleInput={(e) => {
+                    handleInput(e);
+                  }}
+                  placeholder={input.placeholder}
+                  apiName={input.apiName}
+                  isMultiple={input.multiple}
+                />
               ) : (
-                ""
-              )} */}
+                <input
+                  className="w-full border-[#d0d5dd] border-[1px] rounded-md p-4 placeholder:text-[#98A2B3] "
+                  type={input.type}
+                  placeholder={input.placeholder}
+                  id={input.label}
+                  required
+                  autoComplete="off"
+                  onInput={handleInput}
+                  name={input.apiName}
+                />
+              )}
             </div>
           );
 
@@ -129,7 +147,7 @@ export default function MentorFormBuilder({
               rows={10 as number}
               placeholder="Write something"
               onInput={checkTextArea}
-              name={input.label}
+              name={input.apiName}
               required
             />
 
@@ -171,11 +189,12 @@ export default function MentorFormBuilder({
             const valid = (form.current! as HTMLFormElement).reportValidity();
 
             if (isFull) {
-              alert("You have too many words, please reduce them");
+              toast("You have too many words, please reduce them");
             }
 
             if (valid && !isFull) {
               handleClick();
+              // console.log(formInputs);
             }
           }}
         >
@@ -183,5 +202,123 @@ export default function MentorFormBuilder({
         </button>
       </div>
     </form>
+  );
+}
+
+interface selectProps {
+  label: any;
+  dropList: any;
+  handleInput: (e: any) => void;
+  placeholder: any;
+  apiName: any;
+  isMultiple: boolean;
+}
+
+function SelectComponent({
+  label,
+  dropList,
+  handleInput,
+  placeholder,
+  apiName,
+  isMultiple,
+}: selectProps) {
+  const [isSelected, setIsSelected] = useState(false);
+  const [selectedValues, setSelectedValues] = useState([]);
+  const [selectedValue, setSelectedValue] = useState("");
+  const { formInputs, setFormInputs } = useMentorContext();
+
+  function handleDelete(e: any) {
+    const content =
+      e.target.parentElement.querySelector(".tool-box").textContent;
+    // @ts-ignore
+    setSelectedValues((prevValues) => {
+      const newArr = prevValues.filter((value: any) => value !== content);
+      const selectName =
+        e.target.parentElement.parentElement.parentElement.querySelector(
+          "select"
+        ).name;
+
+      setFormInputs((prevInputs: any) => ({
+        ...prevInputs,
+        [selectName]: newArr.join(", "),
+      }));
+      return newArr;
+    });
+  }
+  return isMultiple ? (
+    <>
+      <select
+        onInput={(e: any) => {
+          setIsSelected(true);
+          // if the user selects the same value again, it won't be added to the list
+          setSelectedValues((prevValues: any) => {
+            if (prevValues.includes(e.target.value)) return prevValues;
+            return [...prevValues, e.target.value];
+          });
+        }}
+        onChange={(e: any) => {
+          // update the formInput state with the array of values
+          setFormInputs((prevInputs: any) => ({
+            ...prevInputs,
+            [e.target.name]: selectedValues.join(", "),
+          }));
+        }}
+        className={`w-full border-[#d0d5dd] border-[1px] rounded-md  p-4 ${
+          isSelected ? "text-Neutral60" : "text-[#98A2B3]"
+        }`}
+        name={apiName}
+        value="+ Add skills"
+      >
+        <option value="+ Add skills" disabled>
+          {placeholder}
+        </option>
+        {dropList.map((list: any) => (
+          <option value={list} key={list}>
+            {list}
+          </option>
+        ))}
+      </select>
+      {/* <p>Selected options: {selectedValues.join(", ")}</p> */}
+      <div className="flex gap-2 flex-wrap">
+        {selectedValues.map((value) => (
+          <div
+            key={value}
+            className="border-black border-[1px] p-2 rounded-md w-fit flex gap-4 items-center"
+          >
+            <p className="tool-box">{value}</p>
+
+            <button
+              type="button"
+              onClick={handleDelete}
+              className="border-black rounded-[50%] border-[1px] px-[5px] text-center cursor-pointer"
+            >
+              ✕
+            </button>
+          </div>
+        ))}
+      </div>
+    </>
+  ) : (
+    <select
+      onInput={(e) => {
+        handleInput(e);
+        setIsSelected(true);
+        // @ts-ignore
+        setSelectedValue(e.target.value);
+      }}
+      className={`w-full border-[#d0d5dd] border-[1px] rounded-md  p-4 ${
+        isSelected ? "text-Neutral60" : "text-[#98A2B3]"
+      }`}
+      name={apiName}
+      required
+      value={selectedValue}
+    >
+      <option value="" disabled>
+        {placeholder}
+      </option>
+      {dropList.map((list: any) => (
+        <option key={list}>{list}</option>
+      ))}
+    </select>
   );
 }

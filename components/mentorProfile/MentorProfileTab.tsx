@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { Button } from "../buttons/button";
+import Selector from "../selector";
 
 export type ModalType = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -56,16 +57,16 @@ export default function MentorProfileTabLayout({
       </div>
       {active === "basic info" && <BasicInfoTab />}
       {active === "Experience/ Certification" && (
-        <p className="h-[100%] flex justify-center my-20 ">in progress</p>
+        <p className="h-[100%] flex justify-center ">in progress</p>
       )}
       {active === "Social links" && (
-        <p className="h-[100%] flex justify-center my-20 "> in progress</p>
+        <p className="h-[100%] flex justify-center "> in progress</p>
       )}
     </div>
   );
 }
 
-function ProfileCard() {
+function ProfileCard({ userName }: { userName: string }) {
   return (
     <div className="w-[100%] flex flex-col h-[100px] space-x-4 my-5">
       <p>change profile photo</p>
@@ -73,7 +74,7 @@ function ProfileCard() {
         <div className="w-[54px]  h-[54px] sm:w-[54px] sm:h-[54px]  rounded-full relative ">
           <Image
             style={{ objectFit: "cover", borderRadius: "100%" }}
-            src="/assets/mentor3.png"
+            src={`https://api.dicebear.com/7.x/initials/png?seed=${userName}`}
             fill
             alt="profile"
           />
@@ -96,6 +97,7 @@ function BasicInfoTab() {
     gender: "",
     fullName: "",
   });
+  const [selected, setSelected] = useState("");
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement & HTMLTextAreaElement & HTMLSelectElement>
@@ -108,7 +110,7 @@ function BasicInfoTab() {
   };
   return (
     <div className="w-[100%] px-2">
-      <ProfileCard />
+      <ProfileCard userName="shade mayowa" />
       <div className="w-[100%] h-[100%] space-y-5 text-Neutra50">
         <MentorProfileInput
           label="Your full name"
@@ -116,7 +118,12 @@ function BasicInfoTab() {
           name="fullName"
           onChange={handleChange}
         />
-        <DropDown label="select gender" />
+        <Selector
+          placeHolder="pick your gender"
+          selected={selected}
+          onSelect={setSelected}
+          options={["male", "female", "other"]}
+        />
         <TextArea
           label="Bio"
           value={details.bio}
@@ -156,7 +163,7 @@ export function MentorProfileInput({
         value={value}
         name={name}
         onChange={onChange}
-        className="flex grow active:border-0 p-4 focus:outline-none border h-[46px] rounded-[6px]"
+        className="flex grow active:border-0 p-4 focus:outline-none border border-Neutra10 h-[46px] rounded-[6px]"
       />
     </div>
   );
@@ -171,26 +178,26 @@ export function TextArea({ value, label, name, onChange }: InputProps) {
         value={value}
         name={name}
         onChange={onChange}
-        className="flex grow active:border-0 p-4 focus:outline-none border h-[216px] rounded-[6px]"
+        className="flex grow active:border-0 p-4 focus:outline-none border border-Neutra10 h-[216px] rounded-[6px]"
       />
     </div>
   );
 }
-export function DropDown({ label }: { label: string }) {
-  return (
-    <div className="w-[100%] h-fit flex flex-col">
-      <label htmlFor="gender" className="text-sm ">
-        {label} <span className="text-ErrorBase">*</span>
-      </label>
-      <select
-        id="gender"
-        name=""
-        className="flex grow active:border-0 p-4 focus:outline-none border  rounded-[6px]"
-      >
-        <option>male</option>
-        <option>female</option>
-        <option>other</option>
-      </select>
-    </div>
-  );
-}
+// export function DropDown({ label }: { label: string }) {
+//   return (
+//     <div className="w-[100%] h-fit flex flex-col">
+//       <label htmlFor="gender" className="text-sm ">
+//         {label} <span className="text-ErrorBase">*</span>
+//       </label>
+//       <select
+//         id="gender"
+//         name=""
+//         className="flex grow active:border-0 p-4 focus:outline-none border  rounded-[6px] styled-select"
+//       >
+//         <option>male</option>
+//         <option>female</option>
+//         <option>other</option>
+//       </select>
+//     </div>
+//   );
+// }
