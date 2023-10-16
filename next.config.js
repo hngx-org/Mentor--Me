@@ -3,7 +3,6 @@ const nextConfig = {
   images: {
     domains: ["res.cloudinary.com"],
 
-
     remotePatterns: [
       {
         protocol: "https",
@@ -13,7 +12,6 @@ const nextConfig = {
       },
     ],
     // domains: ["res.cloudinary.com"],
-
   },
 
   staticPageGenerationTimeout: 1000,
