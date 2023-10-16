@@ -25,7 +25,7 @@ export default function ProfileDetailsCardContainer({
           onClick={() => {
             if (openModal) {
               openModal({
-                state: "basic info",
+                state: "Experience/ Certification",
                 isOpen: true,
               });
             }

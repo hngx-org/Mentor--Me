@@ -121,6 +121,7 @@ export default function ProfilePage() {
               email=""
               userRole={user?.mentorship_type}
               userRating={4}
+              openModal={setModal}
             />
           ) : (
             <MentorProfileHeader
@@ -128,6 +129,7 @@ export default function ProfilePage() {
               email=""
               userRole="Product Designer"
               userRating={4}
+              openModal={setModal}
             />
           )}
 
