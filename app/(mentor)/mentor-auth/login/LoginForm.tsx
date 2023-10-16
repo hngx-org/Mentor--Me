@@ -51,19 +51,6 @@ export default function LoginForm() {
     }));
   };
 
-  // console.log(user.success);
-
-  // console.log(user.token);
-
-  // console.log(user);
-
-  // useEffect(() => {
-  //   setUserData((prev) => ({
-  //     ...prev,
-  //     token: user.message,
-  //   }));
-  // }, [user]);
-
   const handleSumbit = async (e: React.FormEvent) => {
     setIsLoading(true);
     e.preventDefault();

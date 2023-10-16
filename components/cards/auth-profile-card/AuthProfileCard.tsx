@@ -1,4 +1,5 @@
 import Image from "next/image";
+// import { useAuthCtx } from "@/context/AuthContext";
 
 // pass in a flex-row-reverse in the style props to align with the nav design
 // call useContext here auth context and pass the need value
@@ -22,7 +23,7 @@ export default function AuthProfileCard({
         <div className="w-[24px]  h-[24px] sm:w-[54px] sm:h-[54px]  rounded-full relative ">
           <Image
             style={{ objectFit: "cover", borderRadius: "100%" }}
-            src={`https://api.dicebear.com/7.x/initials/png?seed=${"you"}`}
+            src={`https://api.dicebear.com/7.x/initials/png?seed=${email}`}
             fill
             alt="profile"
           />
@@ -30,7 +31,7 @@ export default function AuthProfileCard({
 
         <div className="space-y-0.5 mx-2">
           <p className="font-bold  text-base capitalize ">{user || "hello"}</p>
-          <p className="text-sm ">{user || "bye"}</p>
+          <p className="text-sm ">{email || "bye"}</p>
         </div>
       </div>
     </div>

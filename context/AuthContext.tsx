@@ -8,11 +8,13 @@ import React, {
   useMemo,
 } from "react";
 import { useReadLocalStorage } from "usehooks-ts";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 type AuthCtxType = {
-  userData: UserData | null;
-  setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
+  // userData?: Data;
+  // setUserData: React.Dispatch<React.SetStateAction<Data | undefined>>;
+  user: User | null;
+  setUserData: React.Dispatch<React.SetStateAction<Data | undefined>>;
 };
 
 // type UserData = {
@@ -21,7 +23,7 @@ type AuthCtxType = {
 //   email: string;
 // };
 
-type data = {
+type UserData = {
   token: string;
   user: {
     _id: string;
@@ -35,22 +37,29 @@ type data = {
   };
 };
 
-type UserData = {
+type Data = {
   message: string;
-  data: data | null;
+  data: UserData | null;
   success: boolean;
 };
+
+interface User {
+  name?: string;
+  email?: string;
+  profession?: string;
+}
 
 const AuthContext = createContext<AuthCtxType | null>(null);
 
 const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [userData, setUserData] = useState<UserData | null>({
-    message: "",
-    data: null,
-    success: false,
+  const [userData, setUserData] = useState<Data | undefined>();
+  const [user, setUser] = useState<User | null>({
+    email: "",
+    name: "",
+    profession: "",
   });
-  const router = useRouter();
-  const data = useReadLocalStorage("Mentor" || "Mentee");
+  const data: Data | null = useReadLocalStorage("Mentor" || "Mentee");
+  // const router = useRouter();
 
   // const setUser = (data, value) => {
   //   setUserData((prev) => ({
@@ -61,16 +70,19 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (data) {
-      setUserData(data as UserData);
+      setUserData(data);
+      setUser((prev) => ({
+        ...prev,
+        email: data.data?.user.email,
+      }));
+      return;
       // router.replace("/mentor-dashboard/");
-    } else {
-      setUserData(null);
     }
     // console.log(data);
     console.log(userData);
   }, [userData]);
 
-  const value = useMemo(() => ({ userData, setUserData }), [userData]);
+  const value = useMemo(() => ({ user, setUserData }), [userData]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

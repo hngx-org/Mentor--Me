@@ -14,6 +14,7 @@ import {
   SettingIcon,
 } from "@/public/SVGs";
 import { useAuthCtx } from "@/context/AuthContext";
+import AuthProfileCard from "../cards/auth-profile-card/AuthProfileCard";
 
 export type SideBarMentorProps = {
   light?: boolean;
@@ -23,17 +24,21 @@ export default async function SidebarMentor({
   light,
   path,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
-  const { userData } = useAuthCtx();
-  const [imgUrl, setImgUrl] = useState("");
-  const email = userData.data?.user.email;
-  const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${imgUrl}`;
+  const { user } = useAuthCtx();
+  const email = user?.email;
+  const userName = user?.email?.split("@")[0];
+  // const [imgUrl, setImgUrl] = useState("");
+  // const email = userData.data?.user.email;
+  // const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
+  //   imgUrl || ""
+  // }`;
 
   // may or may not need this
-  useEffect(() => {
-    if (email) {
-      setImgUrl(email);
-    }
-  }, [imgUrl]);
+  // useEffect(() => {
+  //   if (email) {
+  //     setImgUrl(email);
+  //   }
+  // }, [imgUrl]);
 
   return (
     <section
@@ -101,19 +106,24 @@ export default async function SidebarMentor({
         {/* profile */}
 
         <Link href="/mentor-profile?path=profile" prefetch>
-          <ul className="  cursor-pointer   ">
+          {/* <ul className="  cursor-pointer   ">
             <li className="flex gap-3 items-center  p-1">
-              <div>
-                <Image width={44} height={44} src={profileImg} alt="profile" />
+              <div className="overflow-hidden rounded-full">
+                <Image width={44} height={44} src="" alt="profile" />
               </div>
               <span className="  font-Inter tetx-[10px] font-[500]   text-Neutra30">
                 <span className={`${path === "profile" ? "text-white" : ""}`}>
                   Funmi Oladapo
                 </span>
-                <br /> {email}
+                <br /> ihaveperks@gmail.com
               </span>
             </li>
-          </ul>
+          </ul> */}
+          <AuthProfileCard
+            email={email}
+            user={userName}
+            styles="text-Neutra30"
+          />
         </Link>
       </div>
     </section>

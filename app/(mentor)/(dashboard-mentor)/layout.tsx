@@ -13,8 +13,9 @@ import { useAuthCtx } from "@/context/AuthContext";
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const pathParams = useSearchParams().get("path");
   const actionParams = useSearchParams().get("action");
-  const { userData } = useAuthCtx();
-  const email = userData?.data?.user.email;
+  const { user } = useAuthCtx();
+  const email = user?.email;
+  const userName = user?.email?.split("@")[0];
   const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${email}`;
 
   return (
@@ -26,6 +27,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           path={pathParams}
           action={actionParams}
           imgSrc={profileImg}
+          username={userName}
         />
 
         <MobileSideBar path={pathParams} action={actionParams} />
