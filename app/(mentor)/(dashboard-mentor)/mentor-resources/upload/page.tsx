@@ -18,6 +18,7 @@ export default function UploadResourcesPage() {
   const categoryRef = useRef<HTMLInputElement>(null);
   const courseTypeRef = useRef<HTMLInputElement>(null);
   const priceRef = useRef<HTMLInputElement>(null);
+  const [file, setFile] = useState<File | null>(null);
   const [courseDescription, setCourseDescription] = useState("");
   const [isCategoryDropDownExpanded, setIsCategoryDropDownExpanded] =
     useState(false);
@@ -47,27 +48,61 @@ export default function UploadResourcesPage() {
     <form
       onSubmit={async (e) => {
         e.preventDefault();
-        const resourceData: { [prop: string]: string } = {
-          category: categoryRef.current?.value!,
-          courseDescription: courseDescriptionRef.current?.value!,
-          title: courseTitleRef.current?.value!,
-          courseType: courseTypeRef.current?.value!,
-          price: priceRef.current?.value!,
+        const user = JSON.parse(
+          localStorage.getItem("Mentor") ||
+            JSON.stringify({ data: { token: null } })
+        );
+        let videoBase64;
+        const {
+          data: { token },
+        } = user;
+
+        const anotherRes = await fetch(
+          "https://mentormee-api.onrender.com/mentors/get-current",
+          {
+            redirect: "follow",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const anotherData = await anotherRes.json();
+        console.log(anotherData);
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file!);
+
+        fileReader.onloadend = async function () {
+          videoBase64 = fileReader.result as string;
+
+          console.log(videoBase64);
+          const resourceData = {
+            category: categoryRef.current?.value!,
+            description: courseDescriptionRef.current?.value!,
+            title: courseTitleRef.current?.value!,
+            coursetype: courseTypeRef.current?.value!,
+            price: priceRef.current?.value!,
+            name: anotherData?.userDetails?.fullName,
+            role: anotherData?.userDetails?.fullName,
+            company: anotherData?.company,
+            file: videoBase64 as string,
+            image: "random",
+          };
+          const res = await fetch("/api/upload-resource", {
+            method: "POST",
+            body: JSON.stringify(resourceData),
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          });
+          const data = await res.json();
+          console.log(data);
+          if (data.success === true) {
+            toast("resource uploaded successfully");
+          } else {
+            toast(`Error: ${data.message}`);
+          }
         };
-        const formData = new FormData();
-        Object.keys(resourceData).forEach((prop) => {
-          formData.append(prop, resourceData[prop]);
-        });
-        const res = await fetch("/api/upload-resource", {
-          method: "POST",
-          body: formData,
-        });
-        const data = await res.json();
-        if (data.success === true) {
-          toast("resource uploaded successfully");
-        } else {
-          toast(`Error: ${data.message}`);
-        }
       }}
       className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white pt-10"
     >
@@ -190,7 +225,7 @@ export default function UploadResourcesPage() {
         <p className="capitalize text-Neutral60 font-Inter font-medium mb-2 text-lg">
           upload file
         </p>
-        <DragArea />
+        <DragArea setFile={setFile} />
       </div>
       <Input title="price" htmlFor="price">
         <input
@@ -213,7 +248,11 @@ export default function UploadResourcesPage() {
   );
 }
 
-const DragArea = () => {
+const DragArea = ({
+  setFile,
+}: {
+  setFile: React.Dispatch<React.SetStateAction<File | null>>;
+}) => {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   return (
     <div
@@ -236,6 +275,8 @@ const DragArea = () => {
         setIsDraggingOver(false);
 
         const file = e.dataTransfer.files[0];
+        console.log(file);
+        setFile(file);
       }}
       onDragOver={(e) => {
         e.preventDefault();
@@ -256,6 +297,9 @@ const DragArea = () => {
             type="file"
             id="upload-file"
             name="upload-file"
+            onChange={(e) => {
+              setFile(e.target.files![0]);
+            }}
             className="hidden"
           />
         </label>{" "}
