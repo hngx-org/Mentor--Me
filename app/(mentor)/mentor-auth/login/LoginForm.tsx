@@ -2,7 +2,7 @@
 
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import Image from "next/image";
 
@@ -25,8 +25,10 @@ import Input from "@/components/inputs/input";
 import { BackwardIcon } from "@/public/SVGs";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
+import { useAuthCtx } from "@/context/AuthContext";
 
 export default function LoginForm() {
+  const { setUserData } = useAuthCtx();
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
   const [user, setUser] = React.useState<any>();
@@ -47,6 +49,19 @@ export default function LoginForm() {
       [name]: value,
     }));
   };
+
+  // console.log(user.success);
+
+  // console.log(user.token);
+
+  // console.log(user);
+
+  // useEffect(() => {
+  //   setUserData((prev) => ({
+  //     ...prev,
+  //     token: user.message,
+  //   }));
+  // }, [user]);
 
   const handleSumbit = async (e: React.FormEvent) => {
     setIsLoading(true);
@@ -74,6 +89,7 @@ export default function LoginForm() {
             router.replace("/mentor-profile-creation");
           }
           localStorage.setItem("Mentor", JSON.stringify(response.data));
+          setUserData(response.data);
         })
         .catch((err) => {
           toast(err);
