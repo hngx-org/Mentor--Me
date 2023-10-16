@@ -16,6 +16,10 @@ export type NavbarMenteeProps = {
   username?: string;
   imgSrc?: string;
   jobTitle?: string;
+  name?: string;
+  bio?: string;
+  email?: string;
+  mentorship?: string;
 };
 export const NavbarMentee = ({
   path,
@@ -23,6 +27,10 @@ export const NavbarMentee = ({
   username,
   imgSrc,
   jobTitle,
+  name,
+  bio,
+  email,
+  mentorship,
 }: NavbarMenteeProps) => {
   const [scrollY, setScrollY] = useState(0);
   const [isView, setIsView] = useState(false);

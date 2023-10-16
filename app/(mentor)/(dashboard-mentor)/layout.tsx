@@ -17,6 +17,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const email = user?.email;
   const userName = user?.email?.split("@")[0];
   const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${email}`;
+  const nameParams = useSearchParams().get("name");
+  const bioParams = useSearchParams().get("bio");
+  const emailParams = useSearchParams().get("email");
+  const mentorshipParams = useSearchParams().get("mentorship");
 
   return (
     <>
