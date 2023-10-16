@@ -112,6 +112,7 @@ export default function MentorFormBuilder({
                   }}
                   placeholder={input.placeholder}
                   apiName={input.apiName}
+                  isMultiple={input.multiple}
                 />
               ) : (
                 <input
@@ -210,6 +211,7 @@ interface selectProps {
   handleInput: (e: any) => void;
   placeholder: any;
   apiName: any;
+  isMultiple: boolean;
 }
 
 function SelectComponent({
@@ -218,10 +220,85 @@ function SelectComponent({
   handleInput,
   placeholder,
   apiName,
+  isMultiple,
 }: selectProps) {
   const [isSelected, setIsSelected] = useState(false);
+  const [selectedValues, setSelectedValues] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
-  return (
+  const { formInputs, setFormInputs } = useMentorContext();
+
+  function handleDelete(e: any) {
+    const content =
+      e.target.parentElement.querySelector(".tool-box").textContent;
+    // @ts-ignore
+    setSelectedValues((prevValues) => {
+      const newArr = prevValues.filter((value: any) => value !== content);
+      const selectName =
+        e.target.parentElement.parentElement.parentElement.querySelector(
+          "select"
+        ).name;
+
+      setFormInputs((prevInputs: any) => ({
+        ...prevInputs,
+        [selectName]: newArr.join(", "),
+      }));
+      return newArr;
+    });
+  }
+  return isMultiple ? (
+    <>
+      <select
+        onInput={(e: any) => {
+          setIsSelected(true);
+          // if the user selects the same value again, it won't be added to the list
+          setSelectedValues((prevValues: any) => {
+            if (prevValues.includes(e.target.value)) return prevValues;
+            return [...prevValues, e.target.value];
+          });
+        }}
+        onChange={(e: any) => {
+          // update the formInput state with the array of values
+          setFormInputs((prevInputs: any) => ({
+            ...prevInputs,
+            [e.target.name]: selectedValues.join(", "),
+          }));
+        }}
+        className={`w-full border-[#d0d5dd] border-[1px] rounded-md  p-4 ${
+          isSelected ? "text-Neutral60" : "text-[#98A2B3]"
+        }`}
+        name={apiName}
+        value="+ Add skills"
+      >
+        <option value="+ Add skills" disabled>
+          {placeholder}
+        </option>
+        {dropList.map((list: any) => (
+          <option value={list} key={list}>
+            {list}
+          </option>
+        ))}
+      </select>
+      {/* <p>Selected options: {selectedValues.join(", ")}</p> */}
+      <div className="flex gap-2 flex-wrap">
+        {selectedValues.map((value) => (
+          <div
+            key={value}
+            className="border-black border-[1px] p-2 rounded-md w-fit flex gap-4 items-center"
+          >
+            <p className="tool-box">{value}</p>
+
+            <button
+              type="button"
+              onClick={handleDelete}
+              className="border-black rounded-[50%] border-[1px] px-[5px] text-center cursor-pointer"
+            >
+              ✕
+            </button>
+          </div>
+        ))}
+      </div>
+    </>
+  ) : (
     <select
       onInput={(e) => {
         handleInput(e);
