@@ -16,10 +16,6 @@ import { toast } from "react-toastify";
 
 import auth from "@/public/assets/images/auth.jpeg";
 
-import google from "@/public/assets/images/goggle.svg";
-
-import facebook from "@/public/assets/images/facebook.svg";
-
 import Input from "@/components/inputs/input";
 
 import { Button } from "@/components/buttons/button";
@@ -46,35 +42,43 @@ export default function LoginForm() {
 
   const handleSumbit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     const form = e.currentTarget as HTMLFormElement;
 
     if (form.checkValidity() === false) {
       setIsValid(false);
     } else {
       setIsValid(true);
+      setIsLoading(true);
 
-      try {
-        const response = await axios.post(
-          "https://mentormee-api.onrender.com/auth/login",
-          {
-            email: formData.email,
-            password: formData.password,
-            role: "mentee",
+      axios
+        .post("https://mentormee-api.onrender.com/auth/login", {
+          email: formData.email,
+          password: formData.password,
+          role: "mentee",
+        })
+        .then((res) => {
+          localStorage.setItem("Mentee", JSON.stringify(res.data?.data?.user));
+          localStorage.setItem("MenteeToken", res.data?.data?.token);
+          setUser(res.data.data);
+          if (res?.data?.data?.user?.profileLink) {
+            router.replace("/dashboard");
+            setIsLoading(false);
+          } else {
+            router.replace("/mentee-profile-creation");
+            setIsLoading(false);
           }
-        );
-        localStorage.setItem("Mentee", JSON.stringify(response.data));
-        setUser(response.data);
-
-        router.replace("/mentee-profile-creation");
-      } catch (error: any) {
-        if (error.response && error.response.status === 406) {
-          localStorage.setItem("Mentee", JSON.stringify(error.response.data));
-          router.push("/mentee-auth/otp");
-        } else {
-          toast(error?.response?.data?.message || "something went wrong");
-        }
-      }
+        })
+        .catch((error: any) => {
+          setIsLoading(false);
+          if (error?.response?.status === 406) {
+            localStorage.setItem("Mentee", JSON.stringify(error.response.data));
+            router.push("/mentee-auth/otp");
+          } else {
+            toast.error(
+              error?.response?.data?.message || "something went wrong"
+            );
+          }
+        });
     }
   };
   return (
@@ -90,7 +94,7 @@ export default function LoginForm() {
             />
           </div>
         </div>
-        <div className="col-span-3  px-4  lg:px-6 xl:px-16">
+        <div className="col-span-3  px-4  lg:px-6 xl:px-16 pt-9">
           <div className="flex justify-between items-center">
             <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
               <a href="/"> Mentor Me</a>
@@ -154,7 +158,7 @@ export default function LoginForm() {
                 OR
               </h5>
             </div>
-            <div className="flex flex-col gap-4">
+            {/* <div className="flex flex-col gap-4">
               <Button
                 variant="outline-primary"
                 paddingLess
@@ -173,7 +177,7 @@ export default function LoginForm() {
               >
                 Log in with Google
               </Button>
-            </div>
+            </div> */}
             <Link href="/mentee-auth/sign-up">
               <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
                 New to MentorMe?

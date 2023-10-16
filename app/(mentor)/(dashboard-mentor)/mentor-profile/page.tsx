@@ -4,7 +4,7 @@
 "use client";
 
 import React, { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import MentorProfileHeader from "@/components/mentorProfile/MentorProfileHeader";
 import ProfileDetailsCardContainer, {
   AvailableSessionCard,
@@ -28,16 +28,19 @@ const baseUrl = "https://mentormee-api.onrender.com";
 
 export default function ProfilePage() {
   const { data } = useAuth();
-  console.log(data?.userDetails.email);
-  const [username] = data?.userDetails.email.split("@") || ["", ""];
+  // console.log(data?.userDetails.email);
+  // const [username] = data?.userDetails.email.split("@") || ["", ""];
   const mentorshipType = data?.mentorship_type;
 
   const [currMentor, setCurrMentor] = useState<any>();
   const [user, setUser] = useState<any>({});
   const [userData, setUserData] = useState({
     username: "",
-    role: "",
+    bio: "",
+    email: "",
+    mentorship: "",
   });
+  const router = useRouter();
   const [modal, setModal] = useState<ModalState>({
     state: "basic info",
     isOpen: false,
@@ -47,6 +50,7 @@ export default function ProfilePage() {
   if (typeof window !== "undefined") {
     const getUser = localStorage.getItem("Mentor");
     if (getUser) {
+      console.log(getUser);
       try {
         const newUser = JSON.parse(getUser);
         token = newUser.data.token; // assign token value here
@@ -56,27 +60,37 @@ export default function ProfilePage() {
     }
   }
 
-  // const getCurrentMentor = async () => {
-  //   try {
-  //     const response = await fetch(`${baseUrl}/mentors/get-current`, {
-  //       method: "GET",
-  //       redirect: "follow",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       setUser(data?.data); // Assuming you want to set the entire data object
-  //       console.log("Current Mentor", data?.data);
-  //     } else {
-  //       console.error("Failed to fetch current mentor data");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching current mentor data:", error);
-  //   }
-  // };
+  const getCurrentMentor = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/mentors/get-current`, {
+        method: "GET",
+        redirect: "follow",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data?.data); // Assuming you want to set the entire data object
+        console.log("Current Mentor", data?.data);
+        setUserData({
+          username: data?.data?.userDetails?.fullName,
+          bio: data?.data?.userDetails?.bio,
+          email: data?.data?.userDetails?.email,
+          mentorship: data?.data?.mentorship_type,
+        });
+      } else {
+        console.error("Failed to fetch current mentor data");
+      }
+    } catch (error) {
+      console.error("Error fetching current mentor data:", error);
+    } finally {
+      console.log(user);
+    }
+  };
+
+  console.log(user);
   // const getCurrent = async () => {
   //   try {
   //     const currMent = await fetch(`${baseUrl}/users/get-current`, {
@@ -90,7 +104,7 @@ export default function ProfilePage() {
   //       .then((res) => res.json())
   //       .then((data) => {
   //         setCurrMentor(data?.data);
-  //         console.log("Current User", data?.data); // Log the data directly from the response
+  //         console.log("Current User", data?.data);
   //       });
   //   } catch (error) {
   //     console.log(error);
@@ -99,15 +113,16 @@ export default function ProfilePage() {
   //   }
   // };
 
-  // useEffect(() => {
-  //   getCurrentMentor();
-  //   getCurrent();
-  // }, []);
+  useEffect(() => {
+    getCurrentMentor();
+  }, []);
 
-  // let [username, domain] = currMentor?.email?.split("@") || ["", ""];
-  // if (currMentor !== undefined) {
-  //   [username, domain] = currMentor.email.split("@");
-  // }
+  useEffect(() => {
+    router.push(
+      `/mentor-profile?path=profile&name=${userData.username}&email=${userData.email}&bio=${userData.bio}&mentorship=${userData.mentorship}`
+    );
+  }, [userData]);
+
   const paramsAction = useSearchParams().get("action");
   // console.log(user);
   // console.log(currMentor);
@@ -124,7 +139,7 @@ export default function ProfilePage() {
         <div className=" w-full overflow-x-hidden ">
           {user && user ? (
             <MentorProfileHeader
-              userName={username}
+              userName={userData.username}
               email=""
               userRole={mentorshipType!}
               userRating={4}
@@ -142,7 +157,7 @@ export default function ProfilePage() {
 
           {user && user ? (
             <MentorProfileMainLayout>
-              <BioCard text="" />
+              <BioCard text={userData.bio} />
               <ProfileDetailsCardContainer
                 heading="education"
                 items={[

@@ -60,39 +60,42 @@ export default function LoginForm() {
       setIsValid(false);
     } else {
       setIsValid(true);
-      try {
-        const response = await axios.post(
-          "https://mentormee-api.onrender.com/auth/login",
-          {
-            email: formData.email,
-            password: formData.password,
-            role: "mentor",
-          }
-        );
 
-        localStorage.setItem("Mentor", JSON.stringify(response.data));
-        setUser(response.data);
-        setUserData(response.data);
-      } catch (err: any) {
-        if (err.response && err.response.status === 406) {
-          localStorage.setItem("Mentor", JSON.stringify(err.response.data));
-          router.push("/mentor-auth/otp");
-        } else {
-          toast(err?.response?.data?.message || "something went wrong");
-          return; // Stop the function execution if an error occurs
-        }
-      } finally {
-        setIsLoading(false);
-      }
+      axios
+        .post("https://mentormee-api.onrender.com/auth/login", {
+          email: formData.email,
+          password: formData.password,
+          role: "mentor",
+        })
+        .then((res) => {
+          localStorage.setItem("Mentor", JSON.stringify(res.data?.data?.user));
+          localStorage.setItem("MentorToken", res.data?.data?.token);
+          setUser(res.data.data);
+          if (res?.data?.data?.user?.profileLink) {
+            router.replace("/dashboard");
+            setIsLoading(false);
+          } else {
+            router.replace("/mentor-profile-creation");
+            setIsLoading(false);
+          }
+        })
+        .catch((error: any) => {
+          setIsLoading(false);
+          if (error?.response?.status === 406) {
+            localStorage.setItem("Mentor", JSON.stringify(error.response.data));
+            router.push("/mentor-auth/otp");
+          } else {
+            toast.error(
+              error?.response?.data?.message || "something went wrong"
+            );
+          }
+        });
 
       if (userD?.data?.user && "profileLink" in userD?.data?.user) {
         router.push("/mentor-profile?path=profile");
       } else {
         router.push("/mentor-profile-creation");
       }
-
-      // Check if the userD is defined before accessing its properties
-      console.log(userD?.data?.user && "profileLink" in userD?.data?.user);
     }
   };
 
