@@ -47,42 +47,61 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
       setIsLoading(false); // Make sure to set loading state to false in this case
       return;
     }
-
+    const data = new FormData();
+    data.append("image", file); // Use append instead of set
+    data.append("uoload_preset", "nd2sr4np");
+    data.append("cloud_name", "dp5ysdt4c");
     try {
-      const data = new FormData();
-      data.append("image", file); // Use append instead of set
-      data.append("name", formData.name);
-      data.append("gender", formData.gender);
-      data.append("bio", formData.bio);
-
-      const res = await fetch("/api/form-upload", {
-        method: "POST",
-        body: data,
-        headers: {
-          // Set the Content-Type header to allow the server to properly parse the FormData
-          // 'multipart/form-data' is the content type used for file uploads
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      // handle the error
-      if (!res.ok) {
-        throw new Error(await res.text());
-      } else {
-        console.log("Upload successful:", res);
-      }
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/dp5ysdt4c/image/upload",
+        {
+          method: "POST",
+          body: data,
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
     } catch (error) {
-      // Handle other errors here
       console.error(error);
-    } finally {
-      setIsLoading(false);
-      setFormData({
-        name: "",
-        gender: "select",
-        bio: "",
-        image: undefined,
-      });
     }
+
+    // try {
+    //   const data = new FormData();
+    //   data.append("image", file); // Use append instead of set
+    //   // data.append("name", formData.name);
+    //   // data.append("gender", formData.gender);
+    //   // data.append("bio", formData.bio);
+
+    //   // const res = await fetch("/api/form-upload", {
+    //   //   method: "POST",
+    //   //   body: data,
+    //   //   headers: {
+    //   //     // Set the Content-Type header to allow the server to properly parse the FormData
+    //   //     // 'multipart/form-data' is the content type used for file uploads
+    //   //     "Content-Type": "multipart/form-data",
+    //   //   },
+    //   // });
+
+    //   // handle the error
+    //   if (!res.ok) {
+    //     throw new Error(await res.text());
+    //   } else {
+    //     console.log("Upload successful:", res);
+    //   }
+    // } catch (error) {
+    //   // Handle other errors here
+    //   console.error(error);
+    // } finally {
+    //   setIsLoading(false);
+    //   setFormData({
+    //     name: "",
+    //     gender: "select",
+    //     bio: "",
+    //     image: undefined,
+    //   });
+    // }
   };
 
   return (

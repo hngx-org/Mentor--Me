@@ -69,6 +69,7 @@ export default function MenteeSideBar({
 
         <div className="my-4 border-t-2 border-Neutra40 pt-4">
           <Link
+            href="/"
             onClick={() => router.replace("/")}
             className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 "
           >

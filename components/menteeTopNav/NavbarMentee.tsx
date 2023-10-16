@@ -51,7 +51,7 @@ export const NavbarMentee = ({
   return (
     <nav
       className={`${
-        scrollY > 200
+        scrollY > 250
           ? "fixed top-0 left-0 bg-white/30 z-50 backdrop-blur-xl lg:ml-[274px]"
           : ""
       } flex w-full justify-between px-3 items-center  py-4 ${

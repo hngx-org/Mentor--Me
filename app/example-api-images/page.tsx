@@ -11,11 +11,13 @@ export type SearchResult = {
   url: string;
   filename: string;
 };
+
 cloudinary.v2.config({
   cloud_name: "dp5ysdt4c",
   api_key: "484974749171579",
   api_secret: "Cg4R45jPQx1TUmrTpmMenPI4MYo",
 });
+
 export default async function CloudinaryImages() {
   // folder images example
   // .expression("mentor-communities*")
