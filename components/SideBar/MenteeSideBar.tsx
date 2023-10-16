@@ -73,9 +73,8 @@ export default function MenteeSideBar({
             onClick={() => router.replace("/")}
             className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 "
           >
-            <span className="h-7 w-7 !rotate-180 xl:w-8 xl:h-8 opacity-0 animate-slideLeft">
-              <LogoutMenteeIcon />
-            </span>
+            <LogoutIcon />
+
             <span className="  font-Inter text-[14px] xl:text-xl font-[500]  text-Error50">
               LogOut
             </span>
