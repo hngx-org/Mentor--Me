@@ -63,7 +63,7 @@ export function MentorProfileCreationForms() {
     if (getUser) {
       try {
         const newUser = JSON.parse(getUser);
-        token = newUser.data.token; // assign token value here
+        token = newUser.user.token; // assign token value here
       } catch (error) {
         console.error("Error parsing JSON:", error);
       }

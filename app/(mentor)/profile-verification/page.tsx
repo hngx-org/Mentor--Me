@@ -124,7 +124,7 @@ export default function MentorProfileVerification() {
       });
       if (response.status === 200) {
         setShowModal(true);
-        setVerificationStatus("pending");
+        setVerificationStatus("approved");
         setStep(0);
         setFormSubmitted(true);
       } else {
@@ -264,7 +264,10 @@ export default function MentorProfileVerification() {
                             className="mt-5 w-full py-3 text-center font-Inter font-500 text-[16px]"
                             paddingLess
                           >
-                            <a href="/mentor-profile"> Go to dashboard</a>
+                            <a href="/mentor-profile?path=profile">
+                              {" "}
+                              Go to dashboard
+                            </a>
                           </Button>
                         </div>
                       </div>
