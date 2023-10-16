@@ -215,9 +215,19 @@ function SelectComponent({
     // @ts-ignore
     setSelectedValues((prevValues) => {
       const newArr = prevValues.filter((value: any) => value !== content);
+      const selectName =
+        e.target.parentElement.parentElement.parentElement.querySelector(
+          "select"
+        ).name;
+
+      setFormInputs((prevInputs: any) => ({
+        ...prevInputs,
+        [selectName]: newArr.join(", "),
+      }));
       return newArr;
     });
   }
+  // console.log(formInputs);
   // console.log(selectedValues);
   return isMultiple ? (
     <>

@@ -8,11 +8,30 @@ import MentorImageFour from "../../../public/assets/images/landing-page/mentorTy
 import Carousel from "@/components/Carousel";
 
 const imgCarousel = [
-  MentorImageOne,
-  MentorImageTwo,
-  MentorImageOne,
-  MentorImageFour,
-  MentorImageThree,
+  {
+    id: 1,
+    img: MentorImageOne,
+  },
+  {
+    id: 2,
+    img: MentorImageThree,
+  },
+  {
+    id: 3,
+    img: MentorImageFour,
+  },
+  {
+    id: 4,
+    img: MentorImageThree,
+  },
+  {
+    id: 5,
+    img: MentorImageOne,
+  },
+  {
+    id: 6,
+    img: MentorImageTwo,
+  },
 ];
 export default function MentorTypes() {
   return (
@@ -28,107 +47,22 @@ export default function MentorTypes() {
       </div>
 
       <div className="w-9/10 md:w-5/6 mx-auto">
-        {/* <div className="md:flex mb-[8rem] md:mb-0 justify-between items-center">
-          <div className="w-full md:w-1/3 mx-auto max-w-[426px] mb-[5rem] md:mb-[8rem]">
-            <h3 className="text-[1.2rem] text-center md:text-left md:text-[1.6rem] font-semibold">
-              Tech Experienced Mentors
-            </h3>
-            <p className="text-[0.85rem] text-center md:text-left md:text-[0.9rem] py-[1rem]">
-              Welcome to Mentor.Me, your gateway to a world of tech excellence
+        <Carousel
+          imgCarousel={imgCarousel}
+          title="Tech Experienced Mentors"
+          text=" Welcome to Mentor.Me, your gateway to a world of tech excellence and
+            innovation. We believe that mentorship is the cornerstone of
+            personal and professional growth in the fast-paced and ever-evolving
+            world of technology."
+        />
+        <Carousel
+          imgCarousel={imgCarousel}
+          title="Marketing Experienced Mentors"
+          text=" Welcome to Mentor.Me, your gateway to a world of tech excellence
               and innovation. We believe that mentorship is the cornerstone of
               personal and professional growth in the fast-paced and
-              ever-evolving world of technology.
-            </p>
-
-            <div className="w-[144px] mx-auto md:mx-0 xl:mx-0 flex justify-between mt-[1rem] md:mt-[2rem]">
-              <Image
-                src={LeftArrow}
-                alt=""
-                width={48}
-                height={48}
-                className="cursor-pointer w-[40px] md:w-[48px]"
-              />
-
-              <Image
-                src={RightArrow}
-                alt=""
-                width={48}
-                height={48}
-                className="cursor-pointer w-[40px] md:w-[48px]"
-              />
-            </div>
-          </div>
-
-          <div className="block w-3/4 mx-auto xl:mx-0 max-w-[800px] mb-[2rem] xl:mb-0 xl:ml-[4rem] xl:ml-0 xl:flex items-center xl:justify-between">
-            <Image
-              src={MentorImageOne}
-              alt=""
-              width={372}
-              height={200}
-              className="block mb-[2rem] mx-auto"
-            />
-
-            <Image
-              src={MentorImageTwo}
-              alt=""
-              width={372}
-              height={200}
-              className="block mb-[2rem] mx-auto"
-            />
-          </div>
-        </div> */}
-
-        <Carousel imgCarousel={imgCarousel} />
-
-        <div className="md:flex justify-between items-center">
-          <div className="w-full md:w-1/3 mx-auto max-w-[426px] mb-[5rem] md:mb-[8rem]">
-            <h3 className="text-[1.2rem] text-center md:text-left md:text-[1.6rem] font-semibold">
-              Marketing Experienced Mentors
-            </h3>
-            <p className="text-[0.85rem] text-center md:text-left md:text-[0.9rem] py-[1rem]">
-              Welcome to Mentor.Me, your gateway to a world of tech excellence
-              and innovation. We believe that mentorship is the cornerstone of
-              personal and professional growth in the fast-paced and
-              ever-evolving world of technology.
-            </p>
-
-            <div className="w-[144px] mx-auto md:mx-0 xl:mx-0 flex justify-between mt-[1rem] md:mt-[2rem]">
-              <Image
-                src={LeftArrow}
-                alt=""
-                width={48}
-                height={48}
-                className="cursor-pointer w-[40px] md:w-[48px]"
-              />
-
-              <Image
-                src={RightArrow}
-                alt=""
-                width={48}
-                height={48}
-                className="cursor-pointer w-[40px] md:w-[48px]"
-              />
-            </div>
-          </div>
-
-          <div className="block w-3/4 mx-auto xl:mx-0 max-w-[800px] mb-[2rem] xl:mb-0 xl:ml-[4rem] xl:ml-0 xl:flex items-center xl:justify-between">
-            <Image
-              src={MentorImageThree}
-              alt=""
-              width={372}
-              height={200}
-              className="block mb-[2rem] mx-auto"
-            />
-
-            {/* <Image
-              src={MentorImageFour}
-              alt=""
-              width={372}
-              height={200}
-              className="block mb-[2rem] mx-auto"
-            /> */}
-          </div>
-        </div>
+              ever-evolving world of technology."
+        />
       </div>
     </section>
   );
