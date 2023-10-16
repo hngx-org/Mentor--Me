@@ -1,27 +1,43 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import MentorCard from "./MentorCard";
 import { mentorCardAvatar } from "@/public";
+import { getMentorInfo } from "@/lib/apiHelper";
 
-type PropsObj = {
-  id: number;
-  mentorName: string;
-  verify: boolean;
-  mentorPostion: string;
-  cardHero: string;
-  mentorAvatar: string;
+type MentorDataType = {
   date: string;
+  firstname: string;
+  timezone: string;
+  review: number;
+  nextAvailable: string;
+  topic: string;
+  contentImage: string;
+  id: string;
   time: string;
   title: string;
-  desc: string;
+  content: string;
+  lastname: string;
 };
 
-type Props = { mentorInfo: PropsObj[] };
+const MentorGrid: React.FC = () => {
+  const [mentorInfo, setMentorInfo] = useState([] as MentorDataType[]);
 
-const MentorGrid: React.FC<Props> = ({ mentorInfo }) => {
+  useEffect(() => {
+    getMentorInfo(setMentorInfo);
+  }, []);
+
+  console.log(mentorInfo);
+
+  function capitalizeFirstLetter(string: string) {
+    if (string && string.length > 0) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+    return string; // Return the input string if it's undefined or empty
+  }
+
   const pathname = usePathname();
   // const communitiesPath = pathname === "/communities";
 
@@ -72,15 +88,17 @@ const MentorGrid: React.FC<Props> = ({ mentorInfo }) => {
         {mentorInfo.map((item) => (
           <MentorCard
             id={item.id}
-            mentorName={item.mentorName}
-            verify={item.verify}
-            mentorPostion={item.mentorPostion}
-            mentorAvatar={item.mentorAvatar}
-            cardHero={item.cardHero}
+            mentorName={`${capitalizeFirstLetter(
+              item.firstname
+            )} ${capitalizeFirstLetter(item.lastname)}`}
+            verify
+            mentorPostion={capitalizeFirstLetter(item.title)}
+            mentorAvatar={mentorCardAvatar}
+            cardHero={item.contentImage}
             date={item.date}
             time={item.time}
-            title={item.title}
-            desc={item.desc}
+            title={capitalizeFirstLetter(item.topic)}
+            desc={capitalizeFirstLetter(item.content)}
           />
         ))}
       </div>

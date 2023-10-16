@@ -13,7 +13,7 @@ export const form1Arr = [
     placeholder: "Full name",
     nature: "input",
     type: "text",
-    apiName: "full_name",
+    apiName: "fullName",
   },
   {
     id: 2,
@@ -337,9 +337,19 @@ export const form2Arr = [
   {
     id: 5,
     label: "Skils",
-    placeholder: "Skils",
-    nature: "",
+    placeholder: "+ Add skils",
+    nature: "dropdown",
     type: "",
+    dropList: [
+      "Backend development",
+      "Frontend Development",
+      "Mobile Development",
+      "UI/UX",
+      "Product Management",
+      "Video Editing",
+      "Soft skills",
+    ],
+    multiple: true,
     apiName: "skills",
   },
   {
@@ -403,7 +413,7 @@ export const form4Arr = [
     placeholder: "",
     nature: "",
     type: "textarea",
-    apiName: "introduction",
+    apiName: "bio",
   },
 ];
 

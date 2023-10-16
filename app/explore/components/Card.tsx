@@ -17,7 +17,7 @@ interface Cards {
   date?: string;
   topic?: string;
   review?: string;
-  contentImage?: string;
+  contentImage: string;
   timezone?: string;
   nextAvailable: string;
 }
@@ -95,11 +95,12 @@ export default function Card({ filteredResults, loading }: CardProps) {
                 className=" w-[330px] md:w-[280px] lg:w-[295px] h-[420px] lg:h-[435px] overflow-hidden container mx-auto border-[0.5px] border-[#ABABAB] rounded-lg mt-6"
               >
                 <Image
-                  src={MentorImg1}
+                  src={details?.contentImage}
+                  // unoptimized
                   alt="mentor"
                   width={200}
                   height={200}
-                  className="w-full object-cover"
+                  className="w-full h-[185px] object-cover"
                 />
                 <div className="p-4 space-y-3">
                   <div className="flex items-center ">
