@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 
 import { CalenderIcon, ClockIcon } from "@/public/SVGs";
+import Loading from "@/app/(mentor)/loading";
 // import Button from "@/components/ui/Button";
 
 type Props = {
@@ -30,7 +31,7 @@ const BigMentorShipCard: React.FC<Props> = ({
   desc,
 }) => (
   <div className="bigMentorshipCard lg:rounded-[8px] rounded-[5px]   hidden lg:flex  gap-4 ">
-    <div className="image  flex-shrink-0  aspect-[551/336]  xl:w-[551px] lg:w-[400px] overflow-hidden rounded-[8px]">
+    {/* <div className="image  flex-shrink-0  aspect-[551/336]  xl:w-[551px] lg:w-[400px] overflow-hidden rounded-[8px]">
       {" "}
       <Image
         alt="members"
@@ -39,8 +40,20 @@ const BigMentorShipCard: React.FC<Props> = ({
         height={400}
         className="block  aspect-[298/183]  w-[110%] object-cover "
       />
-    </div>
-
+    </div> */}
+    <Suspense key={id} fallback={<Loading />}>
+      <div className="image  flex-shrink-0  aspect-[551/336]  xl:w-[551px] lg:w-[400px] overflow-hidden rounded-[8px]">
+        {" "}
+        <Image
+          alt="members"
+          src={mentorCardHero}
+          width={606}
+          height={400}
+          className="block  aspect-[298/183]  w-[110%] object-cover "
+        />
+      </div>
+    </Suspense>
+    .
     <div className="info px-[14px] xl:gap-[10px]  flex flex-col font-Hanken text-NeutalBase ">
       <div className="topic font-bold xl:text-[46px] lg:text-[40px] xl:leading-[56px] lg:leading-[50px] whitespace-nowrap">
         {title}
