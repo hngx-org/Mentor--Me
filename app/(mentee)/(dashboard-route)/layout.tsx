@@ -11,6 +11,9 @@ import { NavbarMentee } from "@/components/menteeTopNav/NavbarMentee";
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const pathParams = useSearchParams().get("path");
   const actionParams = useSearchParams().get("action");
+  const nameParams = useSearchParams().get("action");
+  const bioParams = useSearchParams().get("action");
+  const emailParams = useSearchParams().get("action");
 
   return (
     <>

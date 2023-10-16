@@ -16,6 +16,10 @@ export type NavbarMenteeProps = {
   username?: string;
   imgSrc?: string;
   jobTitle?: string;
+  name?: string;
+  bio?: string;
+  email?: string;
+  mentorship?: string;
 };
 export const NavbarMentee = ({
   path,
@@ -23,6 +27,10 @@ export const NavbarMentee = ({
   username,
   imgSrc,
   jobTitle,
+  name,
+  bio,
+  email,
+  mentorship,
 }: NavbarMenteeProps) => {
   const [scrollY, setScrollY] = useState(0);
   const [isView, setIsView] = useState(false);
@@ -51,7 +59,7 @@ export const NavbarMentee = ({
   return (
     <nav
       className={`${
-        scrollY > 200
+        scrollY > 250
           ? "fixed top-0 left-0 bg-white/30 z-50 backdrop-blur-xl lg:ml-[274px]"
           : ""
       } flex w-full justify-between px-3 items-center  py-4 ${
@@ -86,7 +94,7 @@ export const NavbarMentee = ({
           <p>{jobTitle || "C++ Developer"}</p>
         </div>
         <div
-          className="cursor-pointer relative"
+          className="cursor-pointer relative overflow-hidden rounded-full"
           onClick={() => setIsView(!isView)}
           role="dialog"
         >

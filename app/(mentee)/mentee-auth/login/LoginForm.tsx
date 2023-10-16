@@ -66,7 +66,11 @@ export default function LoginForm() {
         localStorage.setItem("Mentee", JSON.stringify(response.data));
         setUser(response.data);
 
-        router.replace("/mentee-profile-creation");
+        if (response?.data?.data && response?.data?.data?.user?.profileLink) {
+          router.replace("/mentee-profile?path=profile");
+        } else {
+          router.replace("/mentee-profile-creation");
+        }
       } catch (error: any) {
         if (error.response && error.response.status === 406) {
           localStorage.setItem("Mentee", JSON.stringify(error.response.data));

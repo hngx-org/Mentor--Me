@@ -27,11 +27,12 @@ import Input from "@/components/inputs/input";
 import { BackwardIcon } from "@/public/SVGs";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
+import { useAuthCtx } from "@/context/AuthContext";
 
 export default function LoginForm() {
+  const { setUserData } = useAuthCtx();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [userD, setUser] = useState<any>();
   const [isValid, setIsValid] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
@@ -69,7 +70,13 @@ export default function LoginForm() {
         );
 
         localStorage.setItem("Mentor", JSON.stringify(response.data));
-        setUser(response.data);
+        setUserData(response.data);
+
+        if (response?.data?.data && response?.data?.data?.user?.profileLink) {
+          router.push("/mentor-profile?path=profile");
+        } else {
+          router.push("/mentor-profile-creation");
+        }
       } catch (err: any) {
         if (err.response && err.response.status === 406) {
           localStorage.setItem("Mentor", JSON.stringify(err.response.data));
@@ -81,15 +88,6 @@ export default function LoginForm() {
       } finally {
         setIsLoading(false);
       }
-
-      if (userD?.data?.user && "profileLink" in userD?.data?.user) {
-        router.push("/mentor-profile?path=profile");
-      } else {
-        router.push("/mentor-profile-creation");
-      }
-
-      // Check if the userD is defined before accessing its properties
-      console.log(userD?.data?.user && "profileLink" in userD?.data?.user);
     }
   };
 
