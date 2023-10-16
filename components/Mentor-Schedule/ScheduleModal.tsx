@@ -10,7 +10,6 @@ interface ModalProps {
   date: number | string;
   description?: string;
   closeModal: () => void;
-  isModalOpen?: Boolean;
   status: string;
 }
 

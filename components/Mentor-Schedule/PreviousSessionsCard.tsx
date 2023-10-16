@@ -6,11 +6,8 @@ import Modal from "./ScheduleModal";
 
 interface CardApiReturn {
   sessionName: string;
-  sessionType?: string;
-  id?: number;
   relevantTopics?: string;
   time?: string | number;
-  date?: number | string;
   description?: string;
   createdAt: string;
 }
@@ -84,7 +81,7 @@ function PreviousSessionsCard({
             sessionName={sessionName}
             sessionType={description}
             time={time}
-            status={`Done`}
+            status="Done"
             date={createdAt}
             description={description}
             closeModal={closeModal}

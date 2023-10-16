@@ -91,7 +91,7 @@ function UpcomingSessionCard({
             sessionType={sessionType}
             time={time}
             date={date}
-            status={`Pending`}
+            status="Pending"
             description={description}
             closeModal={closeModal}
           />
