@@ -14,8 +14,6 @@ import Modal from "@/components/modal/Modal";
 import generateKey from "@/lib/generatekey";
 
 const OTPForm = () => {
-  const router = useRouter();
-
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [userid, setUserId] = useState("");
@@ -26,20 +24,22 @@ const OTPForm = () => {
     .map(() => useRef(null));
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof localStorage !== "undefined") {
       const getUser = localStorage.getItem("Mentor");
 
       if (getUser) {
-        const newUser = JSON.parse(getUser);
-        setUser(newUser);
-        setEmail(newUser.email);
-        setUserId(newUser._id);
-      } else {
-        router.replace("/mentor-auth/login");
-        // console.error("Error parsing JSON:", error);
+        try {
+          const newUser = JSON.parse(getUser);
+          setUser(newUser);
+          setEmail(newUser.data.email);
+          setUserId(newUser.data._id);
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
       }
     }
   }, []);
+  const router = useRouter();
 
   const openModal = (): void => {
     setIsOpen(true);
@@ -82,10 +82,10 @@ const OTPForm = () => {
         const data = await response.json();
         openModal();
       } else {
-        toast("Incorrect Otp. Try Again");
+        alert("Incorrect Otp. Try Again");
       }
-    } catch (error: any) {
-      toast.error(error?.response?.data?.message || "Something went wrong");
+    } catch (error) {
+      console.error("Error", error);
     }
   };
 
@@ -103,9 +103,8 @@ const OTPForm = () => {
           }),
         }
       );
-    } catch (error: any) {
+    } catch (error) {
       // console.error("Error", error);
-      toast.error(error?.response?.data?.message || "Something went wrong");
     }
   };
 
