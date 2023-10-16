@@ -19,7 +19,6 @@ type formProps = {
 
 const MAX_SIZE = 2 * 1024 * 1024; // 2MB in bytes
 export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
-  const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState<File>();
   const [formData, setFormData] = useState<formProps>({
