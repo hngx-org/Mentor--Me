@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { UserData, useAuthCtx } from "./AuthContext";
-import { CurrentMentor } from "./types";
+import { CurrentMentor, UnverifiedCurrMentor } from "./types";
 
 interface User {
   message: string;
-  data: CurrentMentor | null;
+  data: UnverifiedCurrMentor | null;
   success: boolean;
 }
 

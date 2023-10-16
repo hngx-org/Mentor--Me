@@ -57,3 +57,41 @@ export interface CurrentMentor {
     profileLink: string;
   };
 }
+
+export interface UnverifiedCurrMentor {
+  _id: string;
+  userProfile: string;
+  yearsOfExp: number;
+  skills: string;
+  company: string;
+  other_links: string;
+  certifications: string;
+  certification_file: string;
+  degree: string;
+  institution: string;
+  year_of_graduation: number;
+  mentoring_experience: string;
+  mentorship_type: string;
+  mentorship_availability: string;
+  preferred_startTime: string;
+  preferred_endTime: string;
+  preferred_days: string;
+  isVerified: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  userDetails: {
+    _id: string;
+    email: string;
+    emailVerified: boolean;
+    accountDisabled: boolean;
+    role: string;
+    lastActive: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+    bio: string;
+    fullName: string;
+    profileLink: string;
+  };
+}

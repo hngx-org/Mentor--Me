@@ -30,7 +30,7 @@ import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import { useAuthCtx } from "@/context/AuthContext";
 
 export default function LoginForm() {
-  const { setUserData } = useAuthCtx();
+  const { setUserInfo } = useAuthCtx();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [userD, setUser] = useState<any>();
@@ -72,7 +72,8 @@ export default function LoginForm() {
 
         localStorage.setItem("Mentor", JSON.stringify(response.data));
         setUser(response.data);
-        setUserData(response.data);
+        // setUserInfo(response.data);
+        router.push("/mentor-profile-creation");
       } catch (err: any) {
         if (err.response && err.response.status === 406) {
           localStorage.setItem("Mentor", JSON.stringify(err.response.data));
@@ -85,11 +86,11 @@ export default function LoginForm() {
         setIsLoading(false);
       }
 
-      if (userD?.data?.user && "profileLink" in userD?.data?.user) {
-        router.push("/mentor-profile?path=profile");
-      } else {
-        router.push("/mentor-profile-creation");
-      }
+      // if (userD?.data?.user && "profileLink" in userD?.data?.user) {
+      //   router.push("/mentor-profile?path=profile");
+      // } else {
+      //   router.push("/mentor-profile-creation");
+      // }
 
       // Check if the userD is defined before accessing its properties
       console.log(userD?.data?.user && "profileLink" in userD?.data?.user);

@@ -15,6 +15,7 @@ import {
 } from "@/public/SVGs";
 import { useAuthCtx } from "@/context/AuthContext";
 import AuthProfileCard from "../cards/auth-profile-card/AuthProfileCard";
+import useAuth from "@/context/useAuth";
 
 export type SideBarMentorProps = {
   light?: boolean;
@@ -24,21 +25,9 @@ export default async function SidebarMentor({
   light,
   path,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
-  const { user } = useAuthCtx();
-  const email = user?.email;
-  const userName = user?.email?.split("@")[0];
-  // const [imgUrl, setImgUrl] = useState("");
-  // const email = userData.data?.user.email;
-  // const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
-  //   imgUrl || ""
-  // }`;
-
-  // may or may not need this
-  // useEffect(() => {
-  //   if (email) {
-  //     setImgUrl(email);
-  //   }
-  // }, [imgUrl]);
+  const { data } = useAuth();
+  const email = data?.userDetails.email;
+  const username = data?.userDetails.fullName;
 
   return (
     <section
@@ -121,7 +110,7 @@ export default async function SidebarMentor({
           </ul> */}
           <AuthProfileCard
             email={email}
-            user={userName}
+            user={username}
             styles="text-Neutra30"
           />
         </Link>
