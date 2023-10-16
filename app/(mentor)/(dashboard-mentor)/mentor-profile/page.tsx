@@ -17,6 +17,7 @@ import OverViewCardLayout from "@/components/mentorProfile/MentorProfilelayouts"
 import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import UpdateProfile from "@/components/cards/mentee-profile-cards/UpdateProfile";
+import useAuth from "@/context/useAuth";
 
 export type ModalState = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -26,6 +27,11 @@ export type ModalState = {
 const baseUrl = "https://mentormee-api.onrender.com";
 
 export default function ProfilePage() {
+  const { data } = useAuth();
+  // console.log(data?.userDetails.email);
+  // const [username] = data?.userDetails.email.split("@") || ["", ""];
+  const mentorshipType = data?.mentorship_type;
+
   const [currMentor, setCurrMentor] = useState<any>();
   const [user, setUser] = useState<any>({});
   const [userData, setUserData] = useState({
@@ -120,7 +126,7 @@ export default function ProfilePage() {
   const paramsAction = useSearchParams().get("action");
   // console.log(user);
   // console.log(currMentor);
-  console.log(userData);
+  // console.log(userData);
   return (
     <>
       {paramsAction === "edit-mentor" ? (
@@ -135,7 +141,7 @@ export default function ProfilePage() {
             <MentorProfileHeader
               userName={userData.username}
               email=""
-              userRole={user?.mentorship_type}
+              userRole={mentorshipType!}
               userRating={4}
               openModal={setModal}
             />
@@ -157,8 +163,8 @@ export default function ProfilePage() {
                 heading="education"
                 items={[
                   {
-                    text: user?.degree || "",
-                    heading: user?.institution || "",
+                    text: data?.degree || "",
+                    heading: data?.institution || "",
                     type: "certification",
                   },
                 ]}
@@ -167,7 +173,12 @@ export default function ProfilePage() {
               <SkillSCard skills={[]} />
               <ProfileDetailsCardContainer
                 heading="Experience"
-                items={[]}
+                items={[
+                  {
+                    type: "experience",
+                    text: data?.mentoring_experience || "",
+                  },
+                ]}
                 openModal={setModal}
               />
               {/* 
@@ -178,7 +189,7 @@ export default function ProfilePage() {
               /> */}
               <AvailableSessionCard
                 timezone=" Greenwich Mean Time (GMT)"
-                availableDays={`${user?.preferred_days} ${user?.preferred_time}`}
+                availableDays={`${data?.preferred_days} ${user?.preferred_time}`}
               />
               <OverViewCardLayout heading="impact at a glance" />
               <SessionsProgressCard progress={10} />
