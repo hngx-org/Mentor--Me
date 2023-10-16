@@ -2,7 +2,8 @@ import Image from "next/image";
 
 // pass in a flex-row-reverse in the style props to align with the nav design
 // call useContext here auth context and pass the need value
-export default function ProfileCard({
+// default font color is black you can change it ins the styles props
+export default function AuthProfileCard({
   user,
   email,
   profession,
@@ -21,17 +22,15 @@ export default function ProfileCard({
         <div className="w-[24px]  h-[24px] sm:w-[54px] sm:h-[54px]  rounded-full relative ">
           <Image
             style={{ objectFit: "cover", borderRadius: "100%" }}
-            src={`https://api.dicebear.com/7.x/initials/png?seed=${
-              user || "0"
-            }`}
+            src={`https://api.dicebear.com/7.x/initials/png?seed=${"you"}`}
             fill
             alt="profile"
           />
         </div>
 
-        <div className="space-y-2 mx-2">
-          <p className="font-bold  text-sm ">{user}</p>
-          <p className="font-bold  text-sm ">{user}</p>
+        <div className="space-y-0.5 mx-2">
+          <p className="font-bold  text-base capitalize ">{user || "hello"}</p>
+          <p className="text-sm ">{user || "bye"}</p>
         </div>
       </div>
     </div>
