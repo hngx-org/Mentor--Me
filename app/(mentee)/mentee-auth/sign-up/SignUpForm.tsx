@@ -10,19 +10,20 @@ import axios from "axios";
 
 import { useRouter } from "next/navigation";
 
-import { toast } from "react-toastify";
 import auth from "../../../../public/assets/images/auth.jpeg";
+
+import google from "../../../../public/assets/images/goggle.svg";
+
+import facebook from "../../../../public/assets/images/facebook.svg";
 
 import Input from "@/components/inputs/input";
 
 import { Button } from "@/components/buttons/button";
 import { BackwardIcon } from "@/public/SVGs";
-import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 export default function SignUpForm() {
   const router = useRouter();
   const [isValid, setIsValid] = React.useState(true);
-  const [loading, setLoading] = React.useState(false);
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
@@ -44,28 +45,21 @@ export default function SignUpForm() {
       setIsValid(false);
     } else {
       setIsValid(true);
-      setLoading(true);
-      axios
-        .post("https://mentormee-api.onrender.com/auth/register", {
-          email: formData.email,
-          password: formData.password,
-          role: "mentee",
-        })
-        .then((response) => {
-          setLoading(false);
-          localStorage.setItem(
-            "Mentee",
-            JSON.stringify(response.data?.data?.user)
-          );
-          router.push("/mentee-auth/otp");
-        })
-        .catch((error) => {
-          // Handle error
-          setLoading(false);
-          toast.error(
-            error.response?.data?.message || "couldn't sign you up, try again"
-          );
-        });
+      try {
+        const response = await axios.post(
+          "https://mentormee-api.onrender.com/auth/register",
+          {
+            email: formData.email,
+            password: formData.password,
+            role: "mentee",
+          }
+        );
+        localStorage.setItem("Mentee", JSON.stringify(response.data));
+        router.push("/mentee-auth/otp");
+      } catch (error) {
+        // Handle error
+        console.error("An error occurred: ", error);
+      }
     }
   };
   return (
@@ -82,7 +76,7 @@ export default function SignUpForm() {
           </div>
         </div>
 
-        <div className="col-span-3  px-4  lg:px-6 xl:px-16 pt-9">
+        <div className="col-span-3  px-4  lg:px-6 xl:px-16">
           <div className="flex justify-between items-center">
             <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
               <a href="/"> Mentor Me</a>
@@ -94,7 +88,7 @@ export default function SignUpForm() {
             </a>
           </div>
           <div className="flex justify-center flex-col">
-            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-5">
+            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
               Sign Up
             </h4>
             <h5 className="text-[#808080] text-base font-Hanken mt-2 mb-5">
@@ -126,24 +120,17 @@ export default function SignUpForm() {
                 </span>
               </p>
 
-              <div className="flex relative justify-end">
-                {loading && (
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-1/2 z-30">
-                    <LoadingSpinner />
-                  </div>
-                )}
-                <Button
-                  variant="primary"
-                  paddingLess
-                  className="w-full h-[48px]"
-                  type="submit"
-                >
-                  Sign Up
-                </Button>
-              </div>
+              <Button
+                variant="primary"
+                paddingLess
+                className="w-full h-[48px]"
+                type="submit"
+              >
+                Sign Up
+              </Button>
             </form>
 
-            {/* <div className="flex justify-center w-full">
+            <div className="flex justify-center w-full">
               <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
                 OR
               </h5>
@@ -167,7 +154,7 @@ export default function SignUpForm() {
               >
                 Sign Up with Google
               </Button>
-            </div> */}
+            </div>
             <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
               Already a user?{" "}
               <span className="font-semibold text-[#121212]">

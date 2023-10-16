@@ -5,7 +5,6 @@ import React from "react";
 import Image from "next/image";
 
 import Link from "next/link";
-import { toast } from "react-toastify";
 
 import axios from "axios";
 
@@ -45,12 +44,12 @@ export default function SignUpForm() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setIsLoading(true);
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
     if (form.checkValidity() === false) {
       setIsValid(false);
     } else {
-      setIsLoading(true);
       setIsValid(true);
       axios
         .post("https://mentormee-api.onrender.com/auth/register", {
@@ -59,19 +58,12 @@ export default function SignUpForm() {
           role: "mentor",
         })
         .then((response) => {
-          setIsLoading(false);
-          localStorage.setItem(
-            "Mentor",
-            JSON.stringify(response.data?.data?.user)
-          );
+          console.log(response.data);
+          localStorage.setItem("Mentor", JSON.stringify(response.data));
           router.push("/mentor-auth/otp");
         })
         .catch((error) => {
-          // Handle error
-          setIsLoading(false);
-          toast.error(
-            error.response?.data?.message || "couldn't sign you up, try again"
-          );
+          console.log(error);
         });
     }
   };
