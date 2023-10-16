@@ -62,7 +62,6 @@ const MenteeCommunities: React.FC = () => {
       id: 17,
     },
   ];
-  // eslint-disable-next-line prefer-const
 
   return (
     <div className="w-full">

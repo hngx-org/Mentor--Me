@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 
 import Link from "next/link";
@@ -6,6 +6,7 @@ import { mentorCardHero, mentorCardAvatar, verified } from "@/public";
 
 import { CalenderIcon, ClockIcon, IconVerfied } from "@/public/SVGs";
 import { Button } from "../buttons/button";
+import Loading from "@/app/(mentor)/loading";
 // import Button from "@/components/ui/Button";
 
 type Props = {
@@ -35,13 +36,26 @@ const MentorCard: React.FC<Props> = ({
 }) => (
   <div className="mentorCard xl:max-w-[295px] lg:max-w-[225px]  max-w-[182px] xl:w-[295px]  lg:w-[225px] w-[182px]  h-fit border border-Neutra10 lg:rounded-[8px] rounded-[5px] pb-3 flex flex-col flex-shrink-0">
     <div className="card h-full w-full font-Hanken flex flex-col gap-3 lg:gap-3 items-center">
-      <Image
+      {/* <Image
         alt="members"
         src={mentorCardHero}
         width={298}
         height={183}
         className="flex lg:w-[100%] lg:aspect-[298/183]object-cover "
-      />
+      /> */}
+
+      <Suspense key={id} fallback={<Loading />}>
+        <div className="w-full">
+          <Image
+            src={cardHero}
+            width={298}
+            height={183}
+            alt=""
+            className="flex w-[100%] aspect-[298/183] object-cover "
+          />
+        </div>
+      </Suspense>
+
       <div className="info w-full px-2 lg:px-[14px] lg:gap-[10px] flex flex-col gap-[4px] ">
         <div className="w-fit flex lg:gap-1 gap-[3px] flex-col justify-center text-center">
           <div className="flex gap-1 items-center">
