@@ -3,6 +3,7 @@
 import React, { Suspense } from "react";
 import cloudinary from "cloudinary";
 import Image from "next/image";
+import Link from "next/link";
 import Loading from "../(mentee)/(dashboard-route)/mentee-sessions/loading";
 
 export type SearchResult = {
@@ -28,6 +29,9 @@ export default async function CloudinaryImages() {
   return results.resources ? (
     <div className="flex flex-col w-full px-4">
       <div className="flex flex-col w-full justify-center items-center mb-6 gap-4">
+        <Link href="/" className="p-2 my-2 border border-gray-400">
+          Back to Home
+        </Link>
         <p className="text-center my-8 font-bold text-3xl">
           Images from Cloudinary
         </p>
