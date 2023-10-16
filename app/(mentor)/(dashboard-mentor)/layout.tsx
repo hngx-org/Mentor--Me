@@ -26,17 +26,22 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   }`;
   return (
     <>
-      <SidebarMentor path={pathParams} />
+      <SidebarMentor
+        path={pathParams}
+        name={nameParams}
+        imgSrc={profileImg}
+        email={emailParams}
+      />
 
       <main className="lg:ml-[274px]">
         <NavbarMentee
           path={pathParams}
           action={actionParams}
-          imgSrc={profileImg}
           username={userName}
           name={nameParams}
-          bio={bioParams}
+          imgSrc={profileImg}
           email={emailParams}
+          bio={bioParams}
           jobTitle={mentorshipParams}
         />
 
