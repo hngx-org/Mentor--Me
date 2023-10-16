@@ -46,7 +46,7 @@ type Data = {
 interface User {
   name?: string;
   email?: string;
-  profession?: string;
+  jobTitle?: string;
 }
 
 const AuthContext = createContext<AuthCtxType | null>(null);
@@ -56,17 +56,9 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>({
     email: "",
     name: "",
-    profession: "",
+    jobTitle: "",
   });
   const data: Data | null = useReadLocalStorage("Mentor" || "Mentee");
-  // const router = useRouter();
-
-  // const setUser = (data, value) => {
-  //   setUserData((prev) => ({
-  //     ...prev,
-  //     [data]: value,
-  //   }));
-  // };
 
   useEffect(() => {
     if (data) {
