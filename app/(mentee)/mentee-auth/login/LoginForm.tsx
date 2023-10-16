@@ -68,7 +68,6 @@ export default function LoginForm() {
             setIsLoading(false);
           }
         })
-
         .catch((error: any) => {
           setIsLoading(false);
           if (error?.response?.status === 406) {
