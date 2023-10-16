@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { toast } from "react-toastify";
+
 import MentorMeIcon from "@/svgs/MentorMeIcon";
 
 import {
@@ -29,6 +32,9 @@ export default function MenteeProfileCreationForms() {
   const { formInputs, setFormInputs } = useMenteeContext();
   const [currForm, setCurrForm] = useState(0);
   const [isModalShown, setIsModalShown] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const select1 = useRef<HTMLInputElement>(null);
   const image1 = useRef<HTMLImageElement>(null);
@@ -55,24 +61,24 @@ export default function MenteeProfileCreationForms() {
   // Moved tokenString to a scope where it can be accessed
   let token = ""; // declare token variable
 
-  if (typeof window !== "undefined") {
-    const getUser = localStorage.getItem("Mentee");
-    if (getUser) {
-      try {
-        const newUser = JSON.parse(getUser);
-        token = newUser.data.token; // assign token value here
-      } catch (error) {
-        console.error("Error parsing JSON:", error);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const getToken = localStorage.getItem("MenteeToken");
+      if (getToken) {
+        token = getToken;
+      } else {
+        toast("Please login to create a profile");
+        router.replace("/mentee-auth/login");
       }
     }
-  }
+  }, []);
 
   function submitData() {
     const customHeaders = {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
-
+    setLoading(true);
     axios
       .post(
         "https://mentormee-api.onrender.com/mentee/create-profile",
@@ -81,11 +87,15 @@ export default function MenteeProfileCreationForms() {
       )
       .then((response) => {
         // Handle the response
+        setLoading(false);
         setIsModalShown(true);
       })
       .catch((error) => {
+        setLoading(false);
         // Handle any errors
-        alert(error.response.data.message);
+        toast(
+          error?.response?.data?.message || "something is not right try again"
+        );
       });
   }
 
@@ -137,7 +147,7 @@ export default function MenteeProfileCreationForms() {
 
   function showFile(e: any) {
     if ([...e.target.files][0].size > 2 * 1024 * 1024) {
-      alert("Image size exceeds 2MB. Please upload a smaller image.");
+      toast("Image size exceeds 2MB. Please upload a smaller image.");
       return;
     }
     setFiles((prevFile) => ({
@@ -309,10 +319,6 @@ export default function MenteeProfileCreationForms() {
 
         {/* CONTAINER FOR THE FORMS */}
       </div>
-
-      {/* ///////////////////// */}
-      {/* ///////////////////// */}
-      {/* ///////////////////// */}
 
       {/* CONTAINER FOR THE IMAGE */}
 
