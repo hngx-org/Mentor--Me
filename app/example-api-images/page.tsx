@@ -14,6 +14,7 @@ export default async function CloudinaryImages() {
   const results = (await cloudinary.v2.search
     .expression("resource_type:image")
     .sort_by("public_id", "desc")
+
     .execute()) as { resources: SearchResult[] };
   console.log("=======================");
   console.log(results.resources);
