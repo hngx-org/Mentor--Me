@@ -8,6 +8,9 @@ export type SearchResult = {
   url: string;
   filename: string;
 };
+cloudinary.v2.config({
+  cloud_name: "dp5ysdt4c",
+});
 export default async function CloudinaryImages() {
   // folder images example
   // .expression("mentor-communities*")
