@@ -152,6 +152,7 @@ export default function ProfilePage() {
           {user && user ? (
             <MentorProfileMainLayout>
               <BioCard text={userData.bio} />
+
               <ProfileDetailsCardContainer
                 heading="education"
                 items={[
