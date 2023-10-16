@@ -57,11 +57,11 @@ export default function LoginForm() {
           role: "mentee",
         })
         .then((res) => {
-          localStorage.setItem("Mentee", JSON.stringify(res.data?.data?.user));
+          localStorage.setItem("Mentee", JSON.stringify(res.data));
           localStorage.setItem("MenteeToken", res.data?.data?.token);
           setUser(res.data.data);
           if (res?.data?.data?.user?.profileLink) {
-            router.replace("/dashboard");
+            router.replace("/dashboard?path=Home");
             setIsLoading(false);
           } else {
             router.replace("/mentee-profile-creation");

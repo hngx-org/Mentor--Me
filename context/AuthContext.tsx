@@ -32,6 +32,7 @@ type Data = {
   message: string;
   data: UserData | null;
   success: boolean;
+  email?: string;
 };
 
 interface User {
@@ -55,7 +56,7 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
       setUserData(data);
       setUser((prev) => ({
         ...prev,
-        email: data.data?.user.email,
+        email: data?.email,
         token: data.data?.token,
       }));
     }

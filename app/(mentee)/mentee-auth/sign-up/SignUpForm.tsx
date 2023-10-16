@@ -53,10 +53,7 @@ export default function SignUpForm() {
         })
         .then((response) => {
           setLoading(false);
-          localStorage.setItem(
-            "Mentee",
-            JSON.stringify(response.data?.data?.user)
-          );
+          localStorage.setItem("Mentee", JSON.stringify(response.data));
           router.push("/mentee-auth/otp");
         })
         .catch((error) => {

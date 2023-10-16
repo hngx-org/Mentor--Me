@@ -25,6 +25,7 @@ import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/Vxrcel
 
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = React.useState(false);
+  const [imgLoading, setImgLoading] = React.useState(false);
   const router = useRouter();
   const [isValid, setIsValid] = React.useState(true);
 
@@ -60,10 +61,7 @@ export default function SignUpForm() {
         })
         .then((response) => {
           setIsLoading(false);
-          localStorage.setItem(
-            "Mentor",
-            JSON.stringify(response.data?.data?.user)
-          );
+          localStorage.setItem("Mentor", JSON.stringify(response.data));
           router.push("/mentor-auth/otp");
         })
         .catch((error) => {
@@ -77,109 +75,112 @@ export default function SignUpForm() {
   };
 
   return (
-    <div>
-      <div className="w-full h-[100vh] grid grid-cols-1 lg:grid-cols-6  overflow-hidden">
-        <div className="lg:col-span-3 ">
-          <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <Image
-              src={auth}
-              alt="Authentication Image"
-              layout="fill"
-              objectFit="cover"
+    <div className="w-full h-[100vh] grid grid-cols-1 lg:grid-cols-6  overflow-hidden">
+      <div className="lg:col-span-3 ">
+        {imgLoading && (
+          <div className="flex w-full min-h-screen justify-center items-center relative scale-150">
+            <LoadingSpinner />
+          </div>
+        )}
+        <div className="w-full h-full relative">
+          <Image
+            src={auth}
+            alt="Authentication Image"
+            layout="fill"
+            objectFit="cover"
+            loading="lazy"
+            onLoadingComplete={() => setImgLoading(false)}
+          />
+        </div>
+      </div>
+      <div className="col-span-3  px-4  lg:px-6 xl:px-16 mb-4">
+        <div className="flex justify-between items-center">
+          <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
+            <a href="/"> Mentor Me</a>
+          </h2>
+
+          <a href="/welcome/login" className="flex">
+            {" "}
+            <BackwardIcon /> <span className="ms-2">Go back</span>
+          </a>
+        </div>
+        <div className="flex justify-center flex-col">
+          <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
+            Sign Up
+          </h4>
+          <h5 className="text-[#808080] text-base font-Hanken mt-2 mb-5">
+            Create an account
+          </h5>
+          <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+            <Input
+              id="email"
+              label="Email Address"
+              required
+              type="email"
+              name="email"
+              onChange={handleInputChange}
+            />
+            <Input
+              id="password"
+              label="Password"
+              name="password"
+              required
+              type="password"
+              onChange={handleInputChange}
+            />
+            <p className="font-Hanken text-[#565656] text-sm my-3">
+              {" "}
+              By clicking Sign Up, you agree to mentor.Me’s
+              <span className="text-[#008080]">Terms of Privacy & Policy</span>
+            </p>{" "}
+            <div className="  flex relative justify-end">
+              {isLoading && (
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-1/2 z-30">
+                  <LoadingSpinner />
+                </div>
+              )}
+              <Button
+                title="Sign up"
+                type="submit"
+                variant="primary"
+                className="w-full h-[48px]"
+                fullWidth
+                loading={isLoading}
+                disabled={isDisabled}
+              />
+            </div>
+          </form>
+
+          <div className="flex justify-center w-full">
+            <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
+              OR
+            </h5>
+          </div>
+          <div className="flex flex-col gap-4">
+            <Button
+              title="Sign up with Google"
+              variant="secondary"
+              className="w-full h-[48px] gap-4"
+              fullWidth
+              loading={isLoading}
+              icon={google}
+            />
+            <Button
+              title="Sign up with Facebook"
+              variant="secondary"
+              className="w-full h-[48px] gap-4"
+              fullWidth
+              loading={isLoading}
+              icon={facebook}
             />
           </div>
-        </div>
-        <div className="col-span-3  px-4  lg:px-6 xl:px-16 mb-4">
-          <div className="flex justify-between items-center">
-            <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
-              <a href="/"> Mentor Me</a>
-            </h2>
-
-            <a href="/welcome/login" className="flex">
+          <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
+            Already a user?{" "}
+            <span className="font-semibold text-[#121212]">
               {" "}
-              <BackwardIcon /> <span className="ms-2">Go back</span>
-            </a>
-          </div>
-          <div className="flex justify-center flex-col">
-            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
-              Sign Up
-            </h4>
-            <h5 className="text-[#808080] text-base font-Hanken mt-2 mb-5">
-              Create an account
-            </h5>
-            <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-              <Input
-                id="email"
-                label="Email Address"
-                required
-                type="email"
-                name="email"
-                onChange={handleInputChange}
-              />
-              <Input
-                id="password"
-                label="Password"
-                name="password"
-                required
-                type="password"
-                onChange={handleInputChange}
-              />
-              <p className="font-Hanken text-[#565656] text-sm my-3">
-                {" "}
-                By clicking Sign Up, you agree to mentor.Me’s
-                <span className="text-[#008080]">
-                  Terms of Privacy & Policy
-                </span>
-              </p>{" "}
-              <div className="  flex relative justify-end">
-                {isLoading && (
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-1/2 z-30">
-                    <LoadingSpinner />
-                  </div>
-                )}
-                <Button
-                  title="Sign up"
-                  type="submit"
-                  variant="primary"
-                  className="w-full h-[48px]"
-                  fullWidth
-                  loading={isLoading}
-                  disabled={isDisabled}
-                />
-              </div>
-            </form>
-
-            <div className="flex justify-center w-full">
-              <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
-                OR
-              </h5>
-            </div>
-            <div className="flex flex-col gap-4">
-              <Button
-                title="Sign up with Google"
-                variant="secondary"
-                className="w-full h-[48px] gap-4"
-                fullWidth
-                loading={isLoading}
-                icon={google}
-              />
-              <Button
-                title="Sign up with Facebook"
-                variant="secondary"
-                className="w-full h-[48px] gap-4"
-                fullWidth
-                loading={isLoading}
-                icon={facebook}
-              />
-            </div>
-            <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
-              Already a user?{" "}
-              <span className="font-semibold text-[#121212]">
-                {" "}
-                <Link href="/mentor-auth/login">Log In</Link>
-              </span>
-            </h5>
-          </div>
+              <Link href="/mentor-auth/login">Log In</Link>
+            </span>
+          </h5>
         </div>
       </div>
     </div>
