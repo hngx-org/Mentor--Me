@@ -44,7 +44,7 @@ export default function UploadResources() {
           <tr>
             <th colSpan={3} className="p-0">
               <div className="py-8 px-4 bg-white border-[#EAEBF0] border-[1px] rounded-t-xl">
-                <EllipsisIcon className="ml-auto cursor-pointer" />
+                <p className="ml-auto w-max">My Uploaded Resources</p>
               </div>
             </th>
           </tr>

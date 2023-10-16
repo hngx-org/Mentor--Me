@@ -13,7 +13,7 @@ export const form1Arr = [
     placeholder: "Full name",
     nature: "input",
     type: "text",
-    apiName: "full_name",
+    apiName: "fullName",
   },
   {
     id: 2,
@@ -403,7 +403,7 @@ export const form4Arr = [
     placeholder: "",
     nature: "",
     type: "textarea",
-    apiName: "introduction",
+    apiName: "bio",
   },
 ];
 

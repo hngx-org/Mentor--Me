@@ -84,7 +84,7 @@ export default function ProfilePage() {
         .then((res) => res.json())
         .then((data) => {
           setCurrMentor(data?.data);
-          console.log("Current", data?.data); // Log the data directly from the response
+          console.log("Current User", data?.data); // Log the data directly from the response
         });
     } catch (error) {
       console.log(error);
@@ -135,16 +135,11 @@ export default function ProfilePage() {
             <MentorProfileMainLayout>
               <BioCard text="" />
               <ProfileDetailsCardContainer
-                heading="skill/expertise"
+                heading="education"
                 items={[
                   {
-                    text: "Google UX Certification",
-                    heading: "Coursera",
-                    type: "certification",
-                  },
-                  {
-                    text: "Bachelor of Science in Computer Science",
-                    heading: "ABXYZ University",
+                    text: user?.degree || "",
+                    heading: user?.institution || "",
                     type: "certification",
                   },
                 ]}
@@ -156,16 +151,15 @@ export default function ProfilePage() {
                 items={[]}
                 openModal={setModal}
               />
-
+              {/* 
               <ProfileDetailsCardContainer
                 heading="Education"
                 items={[]}
                 openModal={setModal}
-              />
+              /> */}
               <AvailableSessionCard
                 timezone=" Greenwich Mean Time (GMT)"
-                availableDays="Mondays - Wednesdays, 
-11:00am - 2:00pm"
+                availableDays={`${user?.preferred_days} ${user?.preferred_time}`}
               />
               <OverViewCardLayout heading="impact at a glance" />
               <SessionsProgressCard progress={10} />
@@ -178,7 +172,7 @@ export default function ProfilePage() {
                 items={[
                   {
                     text: "Google UX Certification",
-                    heading: "Coursera",
+                    // heading: "Coursera",
                     type: "certification",
                   },
                   {
