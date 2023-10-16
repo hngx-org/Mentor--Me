@@ -399,7 +399,7 @@ const form4Arr = [
   {
     id: 4,
     label: "Want a mentor from a specific country? (optional)",
-    placeholder: "+ Add countries",
+    placeholder: "+ Add country",
     nature: "dropdown",
     type: "",
     dropList: [
@@ -653,7 +653,6 @@ const form4Arr = [
       "Zimbabwe",
       "Åland Islands",
     ],
-    multiple: true,
     apiName: "country_request",
   },
 ];
