@@ -24,14 +24,13 @@ interface OneOffFormData {
   date?: string;
   relevantTopics?: string;
 }
-
 interface RecurringFormData {
   sessionName?: string;
   description?: string;
   sessionType?: string;
-  occurrence?: string;
-  time?: string;
-  date?: string;
+  numberOfSession?: number;
+  occurence?: string;
+  // time?: string;
   relevantTopics?: string;
 }
 
@@ -68,7 +67,6 @@ export function FreeSessionForm() {
   };
   const closeCalendar = (): void => {
     setCalendarVisible(false);
-    // setSuccessful(true);
   };
 
   const openSuccessModal = (): void => {
@@ -164,19 +162,6 @@ export function FreeSessionForm() {
             <option value="5">5</option>
             <option value="10">10</option>
           </SelectInputType>
-          {/* <SelectInputType
-            labelText="Time"
-            isRequired
-            selectId="time"
-            selectName="time"
-            placeholder="Select the time of the day"
-            value={formData.time}
-            onChange={handleSelectChange}
-          >
-            <option value="12pm">12pm</option>
-            <option value="2pm">2pm</option>
-            <option value="4pm">4pm</option>
-          </SelectInputType> */}
           <TimeInputType
             labelText="Time"
             type="time"
@@ -189,7 +174,7 @@ export function FreeSessionForm() {
           />
           <TimeInputType
             labelText="Date"
-            type="datetime-local"
+            type="date"
             onChange={handleInputChange}
             value={formData.date}
             isRequired
@@ -198,19 +183,6 @@ export function FreeSessionForm() {
             placeholder="Select the date"
           />
 
-          {/* <SelectInputType
-            labelText="Date"
-            isRequired
-            selectId="date"
-            selectName="date"
-            placeholder="Choose a date"
-            value={formData.date}
-            onChange={handleSelectChange}
-          >
-            <option value="October 15">October 15</option>
-            <option value="October 22">Octoober 22</option>
-            <option value="November 2">November 2</option>
-          </SelectInputType> */}
           <SelectInputType
             labelText="Select relevant topics"
             isRequired
@@ -434,13 +406,15 @@ export function OneOffSessionForm() {
             </span>
           </div>
           <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
-            <Button
-              className="p-4 w-full md:w-[20%]"
-              variant="outline-primary"
-              type="button"
-            >
-              Cancel
-            </Button>
+            <Link className="w-full" href="/mentor-schedule">
+              <Button
+                className="p-4 w-full md:w-[20%]"
+                variant="outline-primary"
+                type="button"
+              >
+                Cancel
+              </Button>
+            </Link>
             <Button
               onClick={openCalendar}
               className="p-4 w-full md:w-[20%]"
@@ -479,9 +453,9 @@ export function RecurringSessionForm() {
   const [formData, setFormData] = useState<RecurringFormData>({
     sessionName: "",
     description: "",
+    occurence: "",
     sessionType: "",
-    date: "",
-    time: "",
+    numberOfSession: 0,
     relevantTopics: "",
   });
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -553,7 +527,7 @@ export function RecurringSessionForm() {
       <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
         <div className=" w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3">
           <h1 className="text-left font-bold text-[1.5rem] sm:text-[2rem] text-[#08051e]">
-            Create a OneOff Session
+            Create a Recurring Session
           </h1>
           <p className="text-gray-500">Create a session that best suits you!</p>
         </div>
@@ -566,7 +540,6 @@ export function RecurringSessionForm() {
             selectName="sessionName"
             placeholder="Give this session a name"
             value={formData.sessionName}
-            // onChange={(value) => handleSelectChange(value)}
             onChange={handleSelectChange}
           >
             <option value="Design principles">Design principles</option>
@@ -594,7 +567,33 @@ export function RecurringSessionForm() {
             <option value="private">Private</option>
             <option value="general">General</option>
           </SelectInputType>
-          <TimeInputType
+          <SelectInputType
+            labelText="Number of session"
+            isRequired
+            selectId="numberOfSession"
+            selectName="numberOfSession"
+            placeholder="Select..."
+            value={formData.numberOfSession}
+            onChange={handleSelectChange}
+          >
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="6">6</option>
+          </SelectInputType>
+          <SelectInputType
+            labelText="Occurence"
+            isRequired
+            selectId="occurence"
+            selectName="occurence"
+            placeholder="How often will you like to have this session"
+            value={formData.occurence}
+            onChange={handleSelectChange}
+          >
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+          </SelectInputType>
+
+          {/* <TimeInputType
             labelText="Time"
             type="time"
             onChange={handleInputChange}
@@ -603,9 +602,9 @@ export function RecurringSessionForm() {
             InputId="time"
             InputName="time"
             placeholder="Select the time of the day"
-          />
+          /> */}
 
-          <TimeInputType
+          {/* <TimeInputType
             labelText="Date"
             type="date"
             onChange={handleInputChange}
@@ -614,7 +613,7 @@ export function RecurringSessionForm() {
             InputId="date"
             InputName="date"
             placeholder="Select the date"
-          />
+          /> */}
           <SelectInputType
             labelText="Select relevant topics"
             isRequired
@@ -635,13 +634,15 @@ export function RecurringSessionForm() {
             </span>
           </div>
           <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
-            <Button
-              className="p-4 w-full md:w-[20%]"
-              variant="outline-primary"
-              type="button"
-            >
-              Cancel
-            </Button>
+            <Link className="w-full" href="/mentor-schedule">
+              <Button
+                className="p-4 w-full md:w-[20%]"
+                variant="outline-primary"
+                type="button"
+              >
+                Cancel
+              </Button>
+            </Link>
             <Button
               onClick={openCalendar}
               className="p-4 w-full md:w-[20%]"

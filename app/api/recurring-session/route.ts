@@ -5,9 +5,9 @@ type RecurringFormData = {
   sessionName?: string;
   description?: string;
   sessionType?: string;
-  occurrence?: string;
-  time?: string;
-  date?: string;
+  occurence?: string;
+  numberOfSession?: number;
+  // time?: string;
   relevantTopics?: string;
 };
 
@@ -19,9 +19,8 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     sessionName,
     description,
     sessionType,
-    occurrence,
-    time,
-    date,
+    occurence,
+    numberOfSession,
     relevantTopics,
   } = data;
 
@@ -30,9 +29,8 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     sessionName,
     description,
     sessionType,
-    occurrence,
-    time,
-    date,
+    numberOfSession,
+    occurence,
     relevantTopics,
   });
 };
