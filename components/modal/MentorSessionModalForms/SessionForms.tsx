@@ -7,43 +7,46 @@ import { SelectInputType, TimeInputType } from "./SelectInputType";
 import MentorCalendar from "./MentorCalendar";
 import { Button } from "@/components/buttons/button";
 
-type SessionFormProps = {
-  labelName?: string;
-  isRequired?: true;
-  sessionType?: string;
-  placeholder?: string;
-};
-
-interface FormData {
+interface FreeFormData {
   sessionName?: string;
   description?: string;
   attendeesLimit?: number;
   time?: string;
   date?: string;
-  topics?: string;
-}
-interface CalendarFunctions {
-  onClose: () => void;
-  onShowSuccessModal: () => void;
+  relevantTopics?: string;
 }
 
-export function FreeSessionForm({
-  labelName,
-  isRequired,
-  sessionType,
-  placeholder,
-}: SessionFormProps) {
+interface OneOffFormData {
+  sessionName?: string;
+  description?: string;
+  sessionType?: string;
+  time?: string;
+  date?: string;
+  relevantTopics?: string;
+}
+
+interface RecurringFormData {
+  sessionName?: string;
+  description?: string;
+  sessionType?: string;
+  occurrence?: string;
+  time?: string;
+  date?: string;
+  relevantTopics?: string;
+}
+
+export function FreeSessionForm() {
   const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
   const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<FreeFormData>({
     sessionName: "",
     description: "",
     attendeesLimit: 0,
     date: "",
     time: "",
-    topics: "",
+    relevantTopics: "",
   });
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -103,6 +106,8 @@ export function FreeSessionForm({
       const responseData = await response.json();
       console.log("form submitted,", responseData);
     } else {
+      setCalendarVisible(false);
+      setError("An error occurred while creating a session");
       console.error("submissiom failed");
     }
   };
@@ -209,10 +214,10 @@ export function FreeSessionForm({
           <SelectInputType
             labelText="Select relevant topics"
             isRequired
-            selectId="topics"
-            selectName="topics"
+            selectId="relevantTopics"
+            selectName="relevantTopics"
             placeholder="Select some relevant topics this session"
-            value={formData.topics}
+            value={formData.relevantTopics}
             onChange={handleSelectChange}
           >
             <option value="Design">Design</option>
@@ -265,23 +270,18 @@ export function FreeSessionForm({
   );
 }
 
-export function OneOffSessionForm({
-  labelName,
-  isRequired,
-  sessionType,
-  placeholder,
-}: SessionFormProps) {
+export function OneOffSessionForm() {
   const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
   const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<OneOffFormData>({
     sessionName: "",
     description: "",
-    attendeesLimit: 0,
+    sessionType: "",
     date: "",
     time: "",
-    topics: "",
+    relevantTopics: "",
   });
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -290,6 +290,15 @@ export function OneOffSessionForm({
       [name]: value,
     });
   };
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   const closeSuccessModal = (): void => {
     setSuccessful(false);
   };
@@ -302,7 +311,7 @@ export function OneOffSessionForm({
     setCalendarVisible(false);
     setSuccessful(true);
   };
-  const openCalendar = (): void => {
+  const openCalendar = async (e: MouseEvent<HTMLButtonElement>) => {
     // e.preventDefault();
     const isFormValid = Object.values(formData).every((value) => value !== "");
 
@@ -312,6 +321,30 @@ export function OneOffSessionForm({
     } else {
       setError("All fields are required");
       // console.log("All fields are required");
+    }
+
+    const data = formData;
+    console.log(JSON.stringify(data));
+
+    // POSTING DATA
+    const response = await fetch(
+      "https://hngmentorme.onrender.com/api/one-off-session",
+      {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log("form submitted,", responseData);
+    } else {
+      setCalendarVisible(false);
+      setError("An error occurred while creating a session");
+      console.error("submissiom failed");
     }
   };
   return (
@@ -324,7 +357,7 @@ export function OneOffSessionForm({
           <p className="text-gray-500">Create a session that best suits you!</p>
         </div>
         <form className="flex flex-col gap-3 sm:gap-6 py-3 rounded sm:px-12 w-full justify-between">
-          <span className="text-Error30 font-bold">{error}</span>
+          <span className="text-Error50 font-bold">{error}</span>
           <SelectInputType
             labelText="Session name"
             isRequired
@@ -349,51 +382,45 @@ export function OneOffSessionForm({
             <option value="Design principles">Design principles</option>
           </SelectInputType>
           <SelectInputType
-            labelText="Attendees limit"
+            labelText="Session Type"
             isRequired
-            selectId="attendeesLimit"
-            selectName="attendeesLimit"
+            selectId="sessionType"
+            selectName="sessionType"
             placeholder="Select from the options"
-            value={formData.attendeesLimit}
+            value={formData.sessionType}
             onChange={handleSelectChange}
           >
-            <option value="2">2</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
+            <option value="private">Private</option>
+            <option value="general">General</option>
           </SelectInputType>
-          <SelectInputType
+          <TimeInputType
             labelText="Time"
-            isRequired
-            selectId="time"
-            selectName="time"
-            placeholder="Select the time of the day"
+            type="time"
+            onChange={handleInputChange}
             value={formData.time}
-            onChange={handleSelectChange}
-          >
-            <option value="12pm">12pm</option>
-            <option value="2pm">2pm</option>
-            <option value="4pm">4pm</option>
-          </SelectInputType>
-          <SelectInputType
-            labelText="Date"
             isRequired
-            selectId="date"
-            selectName="date"
-            placeholder="Choose a date"
+            InputId="time"
+            InputName="time"
+            placeholder="Select the time of the day"
+          />
+
+          <TimeInputType
+            labelText="Date"
+            type="date"
+            onChange={handleInputChange}
             value={formData.date}
-            onChange={handleSelectChange}
-          >
-            <option value="October 15">October 15</option>
-            <option value="October 22">Octoober 22</option>
-            <option value="November 2">November 2</option>
-          </SelectInputType>
+            isRequired
+            InputId="date"
+            InputName="date"
+            placeholder="Select the date"
+          />
           <SelectInputType
             labelText="Select relevant topics"
             isRequired
-            selectId="topics"
-            selectName="topics"
+            selectId="relevantTopics"
+            selectName="relevantTopics"
             placeholder="Select some relevant topics this session"
-            value={formData.topics}
+            value={formData.relevantTopics}
             onChange={handleSelectChange}
           >
             <option value="Design">Design</option>
@@ -444,23 +471,18 @@ export function OneOffSessionForm({
   );
 }
 
-export function RecurringSessionForm({
-  labelName,
-  isRequired,
-  sessionType,
-  placeholder,
-}: SessionFormProps) {
+export function RecurringSessionForm() {
   const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
   const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<RecurringFormData>({
     sessionName: "",
     description: "",
-    attendeesLimit: 0,
+    sessionType: "",
     date: "",
     time: "",
-    topics: "",
+    relevantTopics: "",
   });
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -469,6 +491,15 @@ export function RecurringSessionForm({
       [name]: value,
     });
   };
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   const closeSuccessModal = (): void => {
     setSuccessful(false);
   };
@@ -481,7 +512,7 @@ export function RecurringSessionForm({
     setCalendarVisible(false);
     setSuccessful(true);
   };
-  const openCalendar = (): void => {
+  const openCalendar = async (e: MouseEvent<HTMLButtonElement>) => {
     // e.preventDefault();
     const isFormValid = Object.values(formData).every((value) => value !== "");
 
@@ -492,18 +523,42 @@ export function RecurringSessionForm({
       setError("All fields are required");
       // console.log("All fields are required");
     }
+
+    const data = formData;
+    console.log(JSON.stringify(data));
+
+    // POSTING DATA
+    const response = await fetch(
+      "https://hngmentorme.onrender.com/api/recurring-session",
+      {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log("form submitted,", responseData);
+    } else {
+      setCalendarVisible(false);
+      setError("An error occurred while creating a session");
+      console.error("submissiom failed");
+    }
   };
   return (
     <div className="p-0 bg-[#1d1c1c57]  bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
       <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
         <div className=" w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3">
           <h1 className="text-left font-bold text-[1.5rem] sm:text-[2rem] text-[#08051e]">
-            Create a Recurring Session
+            Create a OneOff Session
           </h1>
           <p className="text-gray-500">Create a session that best suits you!</p>
         </div>
         <form className="flex flex-col gap-3 sm:gap-6 py-3 rounded sm:px-12 w-full justify-between">
-          <span className="text-Error30 font-bold">{error}</span>
+          <span className="text-Error50 font-bold">{error}</span>
           <SelectInputType
             labelText="Session name"
             isRequired
@@ -514,8 +569,7 @@ export function RecurringSessionForm({
             // onChange={(value) => handleSelectChange(value)}
             onChange={handleSelectChange}
           >
-            <option value="React Js / Vue Js">React Js / Vue Js</option>
-            <option value="Styling in Next Js">Styling in Next Js</option>
+            <option value="Design principles">Design principles</option>
           </SelectInputType>
           <SelectInputType
             labelText="Description"
@@ -526,57 +580,48 @@ export function RecurringSessionForm({
             value={formData.description}
             onChange={handleSelectChange}
           >
-            <option value="React Js / Vue Js">React Js / Vue Js</option>
-            <option value="Proper styling in websites">
-              Proper styling in websites
-            </option>
+            <option value="Design principles">Design principles</option>
           </SelectInputType>
           <SelectInputType
-            labelText="Attendees limit"
+            labelText="Session Type"
             isRequired
-            selectId="attendeesLimit"
-            selectName="attendeesLimit"
+            selectId="sessionType"
+            selectName="sessionType"
             placeholder="Select from the options"
-            value={formData.attendeesLimit}
+            value={formData.sessionType}
             onChange={handleSelectChange}
           >
-            <option value="2">2</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
+            <option value="private">Private</option>
+            <option value="general">General</option>
           </SelectInputType>
-          <SelectInputType
+          <TimeInputType
             labelText="Time"
-            isRequired
-            selectId="time"
-            selectName="time"
-            placeholder="Select the time of the day"
+            type="time"
+            onChange={handleInputChange}
             value={formData.time}
-            onChange={handleSelectChange}
-          >
-            <option value="12pm">12pm</option>
-            <option value="2pm">2pm</option>
-            <option value="4pm">4pm</option>
-          </SelectInputType>
-          <SelectInputType
-            labelText="Date"
             isRequired
-            selectId="date"
-            selectName="date"
-            placeholder="Choose a date"
+            InputId="time"
+            InputName="time"
+            placeholder="Select the time of the day"
+          />
+
+          <TimeInputType
+            labelText="Date"
+            type="date"
+            onChange={handleInputChange}
             value={formData.date}
-            onChange={handleSelectChange}
-          >
-            <option value="October 15">October 15</option>
-            <option value="October 22">Octoober 22</option>
-            <option value="November 2">November 2</option>
-          </SelectInputType>
+            isRequired
+            InputId="date"
+            InputName="date"
+            placeholder="Select the date"
+          />
           <SelectInputType
             labelText="Select relevant topics"
             isRequired
-            selectId="topics"
-            selectName="topics"
+            selectId="relevantTopics"
+            selectName="relevantTopics"
             placeholder="Select some relevant topics this session"
-            value={formData.topics}
+            value={formData.relevantTopics}
             onChange={handleSelectChange}
           >
             <option value="Design">Design</option>

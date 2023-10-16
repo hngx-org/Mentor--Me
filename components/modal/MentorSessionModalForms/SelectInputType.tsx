@@ -17,7 +17,7 @@ interface SelectInputProps
 interface TimeInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   labelText?: string;
   InputId?: string;
-  type?: "time" | "datetime-local";
+  type?: "time" | "datetime-local" | "date";
   value?: string | number;
   InputName?: string;
   placeholder?: string;
