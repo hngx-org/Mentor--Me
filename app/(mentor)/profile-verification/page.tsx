@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import HeaderAfterSignUp from "@/components/mentor-profile-verification/HeaderAfterSignUp";
 import {
   Amico,
@@ -356,7 +356,6 @@ export default function MentorProfileVerification() {
           buttonText="Go to dashboard"
         />
       )}
-      <ToastContainer />
     </>
   );
 }
