@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import { AwardIcon, EditIcon } from "@/public/SVGs";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 
@@ -7,14 +8,18 @@ type Props = {
   expertise: string;
   experience: string;
   workPlace: string;
+  discipline: string;
 };
 export default function OverviewCard({
   desc,
   expertise,
   experience,
   workPlace,
+  discipline,
 }: Props) {
   const [showMore, setshowMore] = useState(true);
+  const truncatedDesc =
+    desc && desc.length >= 180 && showMore ? `${desc.slice(0, 180)}....` : desc;
   return (
     <div className="mt-6 flex flex-col gap-8">
       <div className="w-full">
@@ -22,9 +27,9 @@ export default function OverviewCard({
           Bio:
         </h2>
         <p className="text-Neutra50 font-Hanken text-[16px] w-full max-w-[500px] tracking-wide">
-          {desc.length >= 180 && showMore ? `${desc.slice(0, 180)}....` : desc}
+          {truncatedDesc}
         </p>
-        {desc.length >= 180 && (
+        {desc && desc.length >= 180 && (
           <div>
             {showMore ? (
               <button
@@ -51,7 +56,7 @@ export default function OverviewCard({
           Expertise
         </p>
         <Button
-          className="px-4 py-2 border-gray-400"
+          className="px-4 py-2 mt-5 border-gray-400"
           title={expertise}
           variant="secondary"
         />
@@ -61,7 +66,10 @@ export default function OverviewCard({
           <p className="text-Neutra50 font-bold text-[18px] font-Hanken">
             Experience
           </p>
-          <EditIcon />
+
+          <div className="hidden">
+            <EditIcon />
+          </div>
         </div>
         <div className="flex justify-center items-center gap-4 lg:gap-8">
           <div>
@@ -83,11 +91,18 @@ export default function OverviewCard({
             </p>
           </div>
         </div>
-        <div className=" w-full flex justify-between">
+        <div className=" w-full flex justify-between mt-4">
           <p className="text-Neutra50 font-bold text-[18px] font-Hanken">
-            Education
+            Educational Interest
           </p>
-          <EditIcon />
+          <div className="hidden">
+            <EditIcon />
+          </div>
+        </div>
+        <div className="flex flex-col w-full mt-2">
+          <p className="text-black font-normal text-[16px] ml-3 font-Hanken">
+            {discipline}
+          </p>
         </div>
       </div>
     </div>
