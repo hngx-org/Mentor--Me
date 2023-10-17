@@ -1,33 +1,67 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useMemo,
+} from "react";
+import { useReadLocalStorage } from "usehooks-ts";
 
 type AuthCtxType = {
-  userData: UserData;
-  setUserData: React.Dispatch<React.SetStateAction<UserData>>;
+  user: User | null;
+  setUserData: React.Dispatch<React.SetStateAction<Data | undefined>>;
 };
 
-type UserData = {
-  userId: string;
+export type UserData = {
   token: string;
-  email: string;
+  user: {
+    _id: string;
+    accountDisabled: boolean;
+    createdAt: string;
+    emailVerified: boolean;
+    lastActive: string;
+    role: string;
+    updatedAt: string;
+    email: string;
+  };
 };
+
+type Data = {
+  message: string;
+  data: UserData | null;
+  success: boolean;
+};
+
+interface User {
+  name?: string;
+  email?: string;
+  token?: string;
+}
 
 const AuthContext = createContext<AuthCtxType | null>(null);
 
 const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [userData, setUserData] = useState<UserData>({
+  const [userData, setUserData] = useState<Data | undefined>();
+  const [user, setUser] = useState<User | null>({
     email: "",
     token: "",
-    userId: "",
   });
+  const data: Data | null = useReadLocalStorage("Mentor" || "Mentee");
 
-  const value = {
-    userData,
-    setUserData,
-  };
+  useEffect(() => {
+    if (data) {
+      setUserData(data);
+      setUser((prev) => ({
+        ...prev,
+        email: data.data?.user.email,
+        token: data.data?.token,
+      }));
+    }
+  }, [userData]);
+
+  const value = useMemo(() => ({ user, setUserData }), [userData]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
