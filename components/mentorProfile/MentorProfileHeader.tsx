@@ -8,7 +8,7 @@ import { Button } from "../buttons/button";
 import { ModalState } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/page";
 
 type MentorProfileHeaderProps = {
-  userName: string;
+  userName?: string;
   userRole: string;
   userRating: number;
   userId?: string;
