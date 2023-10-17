@@ -8,22 +8,22 @@ const Calendarcomponent = () => {
   const css = `
   .my-selected:not([disabled]) { 
     font-weight: bold; 
-    border: 2px solid #ABABAB;
+    border: 2px solid #008080;
   }
   .my-selected:hover:not([disabled]) { 
-    border-color: #ABABAB;
+    border-color: #008080;
     color: black;
   }
   .my-today { 
     font-weight: bold;
     font-size: 100%; 
     color: white;
-    background-color: #ABABAB;
+    background-color: #008080;
   }
 `;
 
   return (
-    <div className="max-w-fit border-[0.5px] border-Accent1 rounded-xl">
+    <div>
       <style>{css}</style>
       <DayPicker
         mode="multiple"
@@ -36,6 +36,16 @@ const Calendarcomponent = () => {
         }}
         modifiersStyles={{
           disabled: { fontSize: "75%" },
+        }}
+        styles={{
+          root: {
+            minWidth: "fit-content",
+            maxWidth: "fit-content",
+            border: "1px solid #008080",
+            borderRadius: "10px",
+            padding: ".5em",
+            margin: "0",
+          },
         }}
       />
     </div>
