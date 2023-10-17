@@ -14,7 +14,7 @@ import axios from "axios";
 
 import { useRouter } from "next/navigation";
 
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
 
@@ -84,7 +84,7 @@ export default function LoginForm() {
           localStorage.setItem("Mentor", JSON.stringify(err.response.data));
           router.push("/mentor-auth/otp");
         } else {
-          toast(err?.response?.data?.message || "something went wrong");
+          toast.error(err?.response?.data?.message || "something went wrong");
           return; // Stop the function execution if an error occurs
         }
       } finally {
