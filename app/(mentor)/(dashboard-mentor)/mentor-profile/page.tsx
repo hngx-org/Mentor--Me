@@ -27,8 +27,6 @@ const baseUrl = "https://mentormee-api.onrender.com";
 
 export default function ProfilePage() {
   const { data } = useAuth();
-  // console.log(data?.userDetails.email);
-  // const [username] = data?.userDetails.email.split("@") || ["", ""];
   const mentorshipType = data?.mentorship_type;
 
   const [currMentor, setCurrMentor] = useState<any>();
