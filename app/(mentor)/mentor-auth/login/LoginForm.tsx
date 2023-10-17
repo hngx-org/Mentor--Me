@@ -30,6 +30,8 @@ import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import { useAuthCtx } from "@/context/AuthContext";
 
 export default function LoginForm() {
+  const [imgLoading, setImgLoading] = React.useState(false);
+
   const { setUserData } = useAuthCtx();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -95,12 +97,19 @@ export default function LoginForm() {
     <div>
       <div className="w-full h-[100vh] grid grid-cols-1 lg:grid-cols-6  overflow-hidden">
         <div className="lg:col-span-3 ">
-          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+          {imgLoading && (
+            <div className="flex w-full min-h-screen justify-center items-center relative scale-150">
+              <LoadingSpinner />
+            </div>
+          )}
+          <div className="w-full h-full relative">
             <Image
               src={auth}
               alt="Authentication Image"
               layout="fill"
               objectFit="cover"
+              loading="lazy"
+              onLoadingComplete={() => setImgLoading(false)}
             />
           </div>
         </div>
