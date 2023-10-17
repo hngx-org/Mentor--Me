@@ -33,7 +33,7 @@ const EditProfile: React.FC<Props> = ({ children, onClose }) => (
         </p>
       </div>
       <p className=" font-Inter text-18 font-medium leading-6 text-Neutra50 ml-20 mb-8">
-        change profile hoto
+        change profile photo
       </p>
 
       <div className=" flex gap-3 items-center mb-10 ">
