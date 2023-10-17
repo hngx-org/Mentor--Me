@@ -61,7 +61,7 @@ export const NavbarMentee = ({
         scrollY > 250
           ? "fixed top-0 left-0 bg-white/30 z-50 backdrop-blur-xl lg:ml-[274px]"
           : ""
-      } flex w-full justify-between px-3 items-center  py-4 ${
+      } flex w-full justify-between px-3 items-center  py-4   ${
         action === "edit-profile" ? "hidden" : ""
       }`}
     >
@@ -79,7 +79,6 @@ export const NavbarMentee = ({
       )}
       <div className="flex items-center gap-3 relative">
         <NotificationBingIcon />
-
         <div
           className={` ${
             isView
@@ -88,13 +87,13 @@ export const NavbarMentee = ({
           }  `}
         >
           <p className="font-[500] text-black text-[14px]">
-            {name || "Funmi Oladapo"}
+            {name || "Username"}
           </p>
           {/* @ts-ignore */}
-          <p>{decodeURI(jobTitle) || "C++ Developer"}</p>
+          <p>{jobTitle || "Job Title"}</p>
         </div>
         <div
-          className="cursor-pointer relative overflow-hidden rounded-full"
+          className="cursor-pointer relative  rounded-full select-none"
           onClick={() => setIsView(!isView)}
           role="dialog"
         >
@@ -103,22 +102,23 @@ export const NavbarMentee = ({
             alt="mentor"
             width={40}
             height={40}
+            className="object-cover rounded-full"
           />
 
           {isView && (
             <>
               <div
-                className="min-h-screen h-screen top-0 left-0 w-full fixed z-[99] flex justify-center items-center opacity-0"
+                className="min-h-screen h-screen top-0 left-0 w-full fixed z-[99] flex justify-center items-center opacity-0 bg-black/25"
                 role="dialog"
                 onClick={() => setIsView(!isView)}
               />
-              <div className="flex flex-col  h-[110px] w-[180px] absolute top-10 -right-2 justify-center items-center z-[9999] border border-Neutra20  text-lg font-medium font-Hanken   rounded-xl mt-4 bg-black text-Neutra10 shadow-[0_0_20px_rgba(0,0,0,0.3)] before:absolute before:content-[''] before:h-[20px] before:w-[20px] before:bg-black before:-top-2 before:rotate-45 before:right-4 before:z-[-1]  ">
+              <div className=" absolute h-[100px] w-[180px] top-12 -right-2 z-[999999] bg-black/30 backdrop-blur-xl flex flex-col justify-center items-center  border border-Neutra20  text-lg font-medium font-Hanken  shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-xl before:absolute before:content-[''] before:h-[20px] before:w-[20px] before:bg-gradient-to-tr before:from-black/50  before:via-transparent before:to-black/5 before:overflow-hidden before:-top-2 before:rotate-[140deg] before:right-4 before:z-[-1]">
                 <button
                   type="button"
                   disabled={path === "profile"}
                   className={`${
                     path === "profile" ? "opacity-70 !cursor-not-allowed" : ""
-                  } flex items-center w-full justify-start  border-b border-Neutra50 pb-1 hover:bg-gray-800/60  pl-6`}
+                  } flex items-center w-full justify-start  border-b border-Neutra50 pb-1 hover:bg-gray-800/ rounded-xl  pl-6`}
                   onClick={() => {
                     router.push(
                       `${
@@ -144,17 +144,17 @@ export const NavbarMentee = ({
                         : "/mentee-profile?path=profile"
                     }
                   >
-                    <div className="   text-[12px] text-Neutra10  font-Hanken hidden sm:block">
+                    <div className="   text-[12px] text-Neutra10  font-Hanken hidden sm:block ">
                       <p className="font-[500] text-white text-[14px]">
-                        {username || "Funmi Oladapo"}
+                        {username || "Username"}
                       </p>
-                      <p>{jobTitle || "C++ Developer"}</p>
+                      <p>{jobTitle || "JobTitle"}</p>
                     </div>
                   </Link>
                 </button>
                 <button
                   type="button"
-                  className="pl-6 flex items-center w-full justify-start gap-4 pt-1 hover:bg-gray-800/60 px-2 p-1"
+                  className="pl-6 text-white flex items-center rounded-xl w-full justify-start gap-4 pt-1 hover:bg-gray-800/60 px-2 p-1"
                 >
                   Logout
                 </button>
