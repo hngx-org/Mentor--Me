@@ -118,7 +118,7 @@ export const NavbarMentee = ({
                   disabled={path === "profile"}
                   className={`${
                     path === "profile" ? "opacity-70 !cursor-not-allowed" : ""
-                  } flex items-center w-full justify-start  border-b border-Neutra50 pb-1 hover:bg-gray-800/ rounded-xl  pl-6`}
+                  } flex items-center w-full justify-start  border-b border-Neutra50 pb-1 hover:bg-gray-800/60 rounded-tl-xl rounded-tr-xl  pl-6`}
                   onClick={() => {
                     router.push(
                       `${
@@ -134,7 +134,7 @@ export const NavbarMentee = ({
                   }}
                 >
                   <Link
-                    className={`${
+                    className={` ${
                       path === "profile" ? "opacity-50 !cursor-not-allowed" : ""
                     } `}
                     prefetch
@@ -154,7 +154,7 @@ export const NavbarMentee = ({
                 </button>
                 <button
                   type="button"
-                  className="pl-6 text-white flex items-center rounded-xl w-full justify-start gap-4 pt-1 hover:bg-gray-800/60 px-2 p-1"
+                  className="pl-6 text-white flex items-center  w-full justify-start gap-4  hover:bg-gray-800/60 px-2 p-1 rounded-bl-xl rounded-br-xl "
                 >
                   Logout
                 </button>
