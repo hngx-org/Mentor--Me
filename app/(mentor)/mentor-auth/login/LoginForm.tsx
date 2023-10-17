@@ -30,7 +30,7 @@ import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import { useAuthCtx } from "@/context/AuthContext";
 
 export default function LoginForm() {
-  const { setUserData } = useAuthCtx();
+  const { userData, setUserData } = useAuthCtx();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState(true);
@@ -60,7 +60,7 @@ export default function LoginForm() {
     } else {
       setIsValid(true);
 
-      axios
+      await axios
         .post("https://mentormee-api.onrender.com/auth/login", {
           email: formData.email,
           password: formData.password,
@@ -69,7 +69,7 @@ export default function LoginForm() {
         .then((res) => {
           localStorage.setItem("Mentor", JSON.stringify(res.data?.data?.user));
           localStorage.setItem("MentorToken", res.data?.data?.token);
-          // setUser(res.data.data);
+          setUserData(res.data.data);
           if (res?.data?.data?.user?.profileLink) {
             router.replace("/dashboard");
             setIsLoading(false);
@@ -90,7 +90,7 @@ export default function LoginForm() {
           }
         });
 
-      if (userD?.data?.user && "profileLink" in userDa?.data?.user) {
+      if (userData?.data?.user && "profileLink" in userData?.data?.user) {
         router.push("/mentor-profile?path=profile");
       } else {
         router.push("/mentor-profile-creation");
