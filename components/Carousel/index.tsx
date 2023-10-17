@@ -9,12 +9,11 @@ export default function Carousel({ imgCarousel, title, text }: any) {
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
   const handleNext = () => {
-    setCurrentIndex(currentIndex === 2 ? 0 : currentIndex + 1);
+    setCurrentIndex(currentIndex + 1);
   };
 
   const handlePrev = () => {
-    setCurrentIndex(currentIndex < 0 ? 0 : currentIndex - 1);
-    console.log(currentIndex);
+    setCurrentIndex(currentIndex < 1 ? 0 : currentIndex - 1);
   };
 
   return (
@@ -29,32 +28,47 @@ export default function Carousel({ imgCarousel, title, text }: any) {
           </p>
 
           <div className="w-[144px] mx-auto md:mx-0 xl:mx-0 flex justify-between mt-[1rem] md:mt-[2rem]">
-            <Image
-              src={LeftArrow}
-              alt=""
-              width={48}
-              height={48}
-              className="cursor-pointer w-[40px] md:w-[48px]"
+            <button
+              type="button"
               onClick={handlePrev}
-            />
+              disabled={currentIndex === 1}
+            >
+              <Image
+                src={LeftArrow}
+                alt=""
+                width={48}
+                height={48}
+                className="cursor-pointer w-[40px] md:w-[48px]"
+              />
+            </button>
 
-            <Image
-              src={RightArrow}
-              alt=""
-              width={48}
-              height={48}
-              className="cursor-pointer w-[40px] md:w-[48px]"
+            <button
+              type="button"
+              className="outline-none"
               onClick={handleNext}
-            />
+              disabled={currentIndex === 5}
+            >
+              <Image
+                src={RightArrow}
+                alt=""
+                width={48}
+                height={48}
+                className="cursor-pointer w-[40px] md:w-[48px]"
+              />
+            </button>
           </div>
         </div>
 
-        <div className="flex relative justify-center items-center overflow-hidden w-[100%] ease-in-out translate-x-0">
+        <div className="flex relative  items-center overflow-x-hidden w-[100%] ease-in-out ">
           {imgCarousel.map((item: any, index: number) => (
             <div
-              style={{ transform: `translateX(${-currentIndex}00%` }}
+              style={{
+                transform: `translateX(${-currentIndex}00%`,
+              }}
               key={item.id}
-              className="flex justify-center gap-3 ease-in-out"
+              className={`flex justify-center gap-3 ease-in-out translate-x-0${
+                index === currentIndex ? "scale-50" : ""
+              }`}
             >
               <Image
                 src={item.img}
