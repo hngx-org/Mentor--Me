@@ -8,7 +8,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import Image from "next/image";
@@ -35,8 +34,6 @@ import Form5 from "./Form5";
 import { useMentorContext } from "./MentorContext";
 
 export function MentorProfileCreationForms() {
-  const router = useRouter();
-
   const {
     formInputs,
     currForm,
@@ -61,17 +58,17 @@ export function MentorProfileCreationForms() {
   // Moved tokenString to a scope where it can be accessed
   let token = ""; // declare token variable
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const getToken = localStorage.getItem("MentorToken");
-      if (getToken) {
-        token = getToken;
-      } else {
-        toast("Please login to create a profile");
-        router.replace("/mentor-auth/login");
+  if (typeof window !== "undefined") {
+    const getUser = localStorage.getItem("Mentor");
+    if (getUser) {
+      try {
+        const newUser = JSON.parse(getUser);
+        token = newUser.data.token; // assign token value here
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
       }
     }
-  }, []);
+  }
 
   function submitData() {
     const customHeaders = {
@@ -92,7 +89,8 @@ export function MentorProfileCreationForms() {
       })
       .catch((error) => {
         // Handle any errors
-        toast(error.response.data.message);
+        console.log(error.response.data.message);
+        toast.error(error.response.data.message);
       });
   }
 
