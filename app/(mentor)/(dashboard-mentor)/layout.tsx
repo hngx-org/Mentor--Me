@@ -20,10 +20,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const bioParams = useSearchParams().get("bio");
   const emailParams = useSearchParams().get("email");
   const mentorshipParams = useSearchParams().get("mentorship");
-
-  const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
-    nameParams || email
-  }`;
+  const profileImg =
+    // @ts-ignore
+    `https://api.dicebear.com/7.x/initials/png?seed=${nameParams || email[0]}`;
   return (
     <>
       <SidebarMentor

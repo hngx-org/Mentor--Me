@@ -30,9 +30,7 @@ import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import { useAuthCtx } from "@/context/AuthContext";
 
 export default function LoginForm() {
-  const [imgLoading, setImgLoading] = React.useState(false);
-
-  const { setUserData } = useAuthCtx();
+  const { userData, setUserData } = useAuthCtx();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState(true);
@@ -61,34 +59,41 @@ export default function LoginForm() {
       setIsValid(false);
     } else {
       setIsValid(true);
-      try {
-        const response = await axios.post(
-          "https://mentormee-api.onrender.com/auth/login",
-          {
-            email: formData.email,
-            password: formData.password,
-            role: "mentor",
+
+      await axios
+        .post("https://mentormee-api.onrender.com/auth/login", {
+          email: formData.email,
+          password: formData.password,
+          role: "mentor",
+        })
+        .then((res) => {
+          localStorage.setItem("Mentor", JSON.stringify(res.data?.data?.user));
+          localStorage.setItem("MentorToken", res.data?.data?.token);
+          setUserData(res.data.data);
+          if (res?.data?.data?.user?.profileLink) {
+            router.replace("/dashboard");
+            setIsLoading(false);
+          } else {
+            router.replace("/mentor-profile-creation");
+            setIsLoading(false);
           }
-        );
+        })
+        .catch((error: any) => {
+          setIsLoading(false);
+          if (error?.response?.status === 406) {
+            localStorage.setItem("Mentor", JSON.stringify(error.response.data));
+            router.push("/mentor-auth/otp");
+          } else {
+            toast.error(
+              error?.response?.data?.message || "something went wrong"
+            );
+          }
+        });
 
-        localStorage.setItem("Mentor", JSON.stringify(response.data));
-        setUserData(response.data);
-
-        if (response?.data?.data && response?.data?.data?.user?.profileLink) {
-          router.push("/mentor-profile?path=profile");
-        } else {
-          router.push("/mentor-profile-creation");
-        }
-      } catch (err: any) {
-        if (err.response && err.response.status === 406) {
-          localStorage.setItem("Mentor", JSON.stringify(err.response.data));
-          router.push("/mentor-auth/otp");
-        } else {
-          toast.error(err?.response?.data?.message || "something went wrong");
-          return; // Stop the function execution if an error occurs
-        }
-      } finally {
-        setIsLoading(false);
+      if (userData?.data?.user && "profileLink" in userData?.data?.user) {
+        router.push("/mentor-profile?path=profile");
+      } else {
+        router.push("/mentor-profile-creation");
       }
     }
   };
@@ -97,19 +102,12 @@ export default function LoginForm() {
     <div>
       <div className="w-full h-[100vh] grid grid-cols-1 lg:grid-cols-6  overflow-hidden">
         <div className="lg:col-span-3 ">
-          {imgLoading && (
-            <div className="flex w-full min-h-screen justify-center items-center relative scale-150">
-              <LoadingSpinner />
-            </div>
-          )}
-          <div className="w-full h-full relative">
+          <div style={{ position: "relative", width: "100%", height: "100%" }}>
             <Image
               src={auth}
               alt="Authentication Image"
               layout="fill"
               objectFit="cover"
-              loading="lazy"
-              onLoadingComplete={() => setImgLoading(false)}
             />
           </div>
         </div>
