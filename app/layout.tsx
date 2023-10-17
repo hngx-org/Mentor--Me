@@ -1,9 +1,8 @@
 import React from "react";
 import "./globals.css";
 import type { Metadata } from "next";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Inter, Hanken_Grotesk as HankenGrotesk } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import AuthContextProvider from "@/context/AuthContext";
 // import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
@@ -32,16 +31,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${hanken.variable}`}>
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 5000,
+            },
+            style: {
+              fontSize: "16px",
+              maxWidth: "max-content",
+              padding: "16px 24px",
+              color: "#333333",
+            },
+          }}
         />
         <AuthContextProvider>{children}</AuthContextProvider>
       </body>

@@ -114,7 +114,7 @@ export default function MenteeBooking() {
       <Header />
       <div className="flex flex-col gap-10 sm:flex-row px-2 sm:px-5">
         {" "}
-        <div className="w-full sm:w-1/2 space-y-7">
+        <div className="w-full px-1 sm:w-1/2 space-y-7">
           <p className="font-Inter font-medium text-base text-Neutra30 text-left sm:max-w-[425px]">
             I am a Product Designer of over 2 years of expertise managing and
             building apps that centers on usability and accessibility. My Work
@@ -231,7 +231,7 @@ export default function MenteeBooking() {
             </div>
           ))}
         </div>
-        <div className="w-full sm:w-1/2 sm:border-l border-Neutra30 px-2 sm:pl-10 md:pl-16 space-y-7">
+        <div className="w-full sm:w-1/2 sm:border-l border-Neutra30 px-1  sm:pl-5 md:pl-10 space-y-7">
           <MentorProfileRight />
         </div>
       </div>
