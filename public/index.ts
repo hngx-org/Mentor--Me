@@ -91,3 +91,6 @@ export const CartImgPath1 = "assets/images/cart/cart1.png";
 export const CartImgPath2 = "assets/images/cart/cart2.png";
 export const CartImgPath3 = "assets/images/cart/cart3.png";
 export const SuccessImg = "assets/images/cart/success-img.png";
+
+//  images for sessions schedule
+export { default as imageFromServer } from "./assets/images/MentorSchedule/photocard.png";
