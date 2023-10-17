@@ -1,30 +1,29 @@
 /* eslint-disable import/prefer-default-export */
 import { NextRequest, NextResponse } from "next/server";
 
-type FormData = {
+type OneOffFormData = {
   sessionName?: string;
   description?: string;
-  attendeesLimit?: number;
+  sessionType?: string;
   time?: string;
   date?: string;
-  topics?: string;
+  relevantTopics?: string;
 };
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
-  const data: FormData = await req.json();
+  const data: OneOffFormData = await req.json();
   console.log("data:", data);
 
-  const { sessionName, description, attendeesLimit, time, date, topics } = data;
+  const { sessionName, description, sessionType, time, date, relevantTopics } =
+    data;
 
   //    return new NextResponse("Form Submitted");
   return NextResponse.json({
     sessionName,
     description,
-    attendeesLimit,
+    sessionType,
     time,
     date,
-    topics,
+    relevantTopics,
   });
 };
-
-// export default POST;

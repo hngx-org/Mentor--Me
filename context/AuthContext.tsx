@@ -11,6 +11,7 @@ import { useReadLocalStorage } from "usehooks-ts";
 
 type AuthCtxType = {
   user: User | null;
+  userData: Data | undefined;
   setUserData: React.Dispatch<React.SetStateAction<Data | undefined>>;
 };
 
@@ -62,7 +63,7 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [userData]);
 
-  const value = useMemo(() => ({ user, setUserData }), [userData]);
+  const value = useMemo(() => ({ user, setUserData, userData }), [userData]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

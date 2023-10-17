@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from "next/image";
 import React, { useRef, useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import axios from "axios";
 import { MenteeDashboardProfileImg } from "@/public";
 import { EditIcon, EditIconDark } from "@/public/SVGs";
@@ -159,15 +159,8 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                         e.currentTarget.files &&
                         e.currentTarget.files[0].size > MAX_SIZE
                       ) {
-                        toast(
-                          "Image size exceeds 2MB. Please upload a smaller image.",
-                          {
-                            draggable: true,
-                            pauseOnFocusLoss: true,
-                            pauseOnHover: true,
-                            position: "top-center",
-                            updateId: "dismiss",
-                          }
+                        toast.error(
+                          "Image size exceeds 2MB. Please upload a smaller image."
                         );
 
                         return;
