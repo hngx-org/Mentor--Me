@@ -18,6 +18,7 @@ import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import UpdateProfile from "@/components/cards/mentee-profile-cards/UpdateProfile";
 import useAuth from "@/context/useAuth";
+import { User } from "./types";
 
 export type ModalState = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -34,7 +35,7 @@ export default function ProfilePage() {
 
   const [currMentor, setCurrMentor] = useState<any>();
   const [user, setUser] = useState<any>({});
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<User>({
     username: "",
     bio: "",
     email: "",
@@ -53,6 +54,7 @@ export default function ProfilePage() {
     isOpen: false,
   });
   let token = ""; // declare token variable
+  const [skills, setSkills] = useState<any>([])
 
   if (typeof window !== "undefined") {
     const getUser = localStorage.getItem("Mentor");
@@ -101,9 +103,25 @@ export default function ProfilePage() {
       console.error("Error fetching current mentor data:", error);
     } finally {
       console.log(user);
+      if(userData.skills.includes(",")) {
+        const newSkills = userData.skills.split(",")
+        setSkills(Array.from(newSkills))
+      } else {
+        setSkills(userData.skills)
+      }
     }
   };
 
+  useEffect(() => {
+    if(userData.skills.includes(",")) {
+      const newSkills = userData.skills.split(",")
+      setSkills(Array.from(newSkills))
+    } else {
+      setSkills(Array.from(userData.skills))
+    }
+  }, [userData])
+
+  console.log(skills)
   console.log(user);
   // const getCurrent = async () => {
   //   try {
@@ -140,7 +158,8 @@ export default function ProfilePage() {
   const paramsAction = useSearchParams().get("action");
   // console.log(user);
   // console.log(currMentor);
-  // console.log(userData);
+  console.log({userData});
+  
   return (
     <>
       {paramsAction === "edit-mentor" ? (
@@ -184,7 +203,9 @@ export default function ProfilePage() {
                 ]}
                 openModal={setModal}
               />
-              <SkillSCard skills={[]} />
+
+              <SkillSCard skills={skills || []} />
+
               <ProfileDetailsCardContainer
                 heading="Experience"
                 items={[
