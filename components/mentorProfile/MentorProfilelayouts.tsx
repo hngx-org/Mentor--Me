@@ -11,11 +11,11 @@ export default function OverViewCardLayout({
   return (
     <div className="border border-Neutral10 w-[100%] p-7 h-[100%] rounded-[8px] flex flex-col space-y-5 ">
       <p className="capitalize font-bold"> {heading}</p>
-      <ProgressBar progress={50} rounded progressBgColor="bg-Accent2" />
+      <ProgressBar progress={0} rounded progressBgColor="bg-Accent2" />
       <div className="flex flex-wrap w-[100%] h-[100%] ">
-        <OverViewCard text="25" subText="Average Attendence" label="%" />
-        <OverViewCard text="12" subText="Total learning hours" label="hours" />
-        <OverViewCard text="2" subText="Sessions completed " label="" />
+        <OverViewCard text="0" subText="Average Attendence" label="%" />
+        <OverViewCard text="0" subText="Total learning hours" label="hours" />
+        <OverViewCard text="0" subText="Sessions completed " label="" />
       </div>
     </div>
   );

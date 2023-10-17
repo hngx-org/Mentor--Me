@@ -43,6 +43,13 @@ export default function ProfilePage() {
     bio: "",
     email: "",
     mentorship: "",
+    skills: "",
+    degree: "",
+    institution: "",
+    preferred_startTime: "",
+    preferred_endTime: "",
+    preferred_days: "",
+    mentoring_experience: "",
   });
   const router = useRouter();
   const [modal, setModal] = useState<ModalState>({
@@ -83,6 +90,13 @@ export default function ProfilePage() {
           bio: data?.data?.userDetails?.bio,
           email: data?.data?.userDetails?.email,
           mentorship: data?.data?.mentorship_type,
+          skills: data?.data?.skills,
+          degree: data?.data?.degree,
+          institution: data?.data?.institution,
+          preferred_startTime: data?.data?.preferred_startTime,
+          preferred_endTime: data?.data?.preferred_endTime,
+          preferred_days: data?.data?.preferred_days,
+          mentoring_experience: data?.data?.mentoring_experience,
         });
         setLoading(false);
       } else {
