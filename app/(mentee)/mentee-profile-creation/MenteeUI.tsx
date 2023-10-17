@@ -115,6 +115,59 @@ export default function MenteeProfileCreationForms() {
     }
   }, [files]);
 
+  const [image, setImage] = useState(null);
+  const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [preview, setPreview] = useState(null);
+
+  const uploadImage = async () => {
+    setLoading(true);
+    const fileReader = new FileReader();
+    //
+    fileReader.readAsDataURL(image!);
+    fileReader.onloadend = async () => {
+      try {
+        const response = await fetch("/api/mentor-profile", {
+          method: "POST",
+          body: JSON.stringify(fileReader.result),
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        });
+        const data = await response.json();
+        setUrl(data);
+        if (data.error) {
+          alert(
+            "Problem uploading image, please check your internet connection"
+          );
+        }
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+
+  // This useEffect performs the post request when the value of files.file2 changes
+  useEffect(() => {
+    if (files.file1) {
+      uploadImage();
+    }
+  }, [files.file1]);
+
+  useEffect(() => {
+    if (url) {
+      setFormInputs((prevData: any) => ({
+        ...prevData,
+        // @ts-ignore
+        image: url.url,
+      }));
+    }
+
+    console.log(formInputs);
+  }, [url]);
+
+  console.log(formInputs);
   function move(motion: string) {
     // console.log(forms);
     if (currForm <= 0 && motion === "back") {
@@ -144,6 +197,8 @@ export default function MenteeProfileCreationForms() {
       ...prevFile,
       [e.target.id]: [...e.target.files][0],
     }));
+
+    setImage(e.target.files[0]);
 
     setFormInputs((prevData: any) => ({
       ...prevData,
@@ -220,7 +275,7 @@ export default function MenteeProfileCreationForms() {
                     type="file"
                     onChange={showFile}
                     id="file1"
-                    name="image"
+                    name="image_name"
                     required
                   />
                   <button

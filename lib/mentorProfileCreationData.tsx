@@ -300,7 +300,7 @@ export const form2Arr = [
     placeholder: "Job title",
     nature: "input",
     type: "text",
-    apiName: "job_title",
+    apiName: "title",
   },
   {
     id: 2,
@@ -316,7 +316,7 @@ export const form2Arr = [
     placeholder: "Industry/Field of Expertise",
     nature: "dropdown",
     type: "",
-    apiName: "industry",
+    apiName: "expertise",
     dropList: [
       "Backend development",
       "Frontend Development",
