@@ -20,9 +20,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const bioParams = useSearchParams().get("bio");
   const emailParams = useSearchParams().get("email");
   const mentorshipParams = useSearchParams().get("mentorship");
-  const profileImg =
-    // @ts-ignore
-    `https://api.dicebear.com/7.x/initials/png?seed=${nameParams || email[0]}`;
+  const firstLetterOfEmail = email ? email[0] : ""; // Default to empty string if email is undefined
+  const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
+    nameParams || firstLetterOfEmail
+  }`;
   return (
     <>
       <SidebarMentor
