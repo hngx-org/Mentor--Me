@@ -12,7 +12,7 @@ type MentorProfileHeaderProps = {
   userRole: string;
   userRating: number;
   userId?: string;
-  email?: string;
+  mentorship?: string;
   openModal: React.Dispatch<React.SetStateAction<ModalState>>;
 };
 
@@ -21,7 +21,7 @@ export default function MentorProfileHeader({
   userRating,
   userRole,
   userId,
-  email,
+  mentorship,
   openModal,
 }: MentorProfileHeaderProps) {
   const [randomColor, setRandomColor] = useState("");
@@ -73,7 +73,7 @@ export default function MentorProfileHeader({
               {userName}
             </p>
             <p className="text-Neutra40 text-sm"> {userRole}</p>
-            <p className="text-Neutra40 text-sm"> {email}</p>
+            <p className="text-Neutra40 text-sm"> {mentorship}</p>
           </div>
           <div className="flex justify-center space-x-4 min-w-fit py-2 items-center">
             <ShareIcon />

@@ -14,7 +14,7 @@ import axios from "axios";
 
 import { useRouter } from "next/navigation";
 
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
 
@@ -33,7 +33,6 @@ export default function LoginForm() {
   const { setUserData } = useAuthCtx();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [userD, setUser] = useState<any>();
   const [isValid, setIsValid] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
@@ -70,7 +69,7 @@ export default function LoginForm() {
         .then((res) => {
           localStorage.setItem("Mentor", JSON.stringify(res.data?.data?.user));
           localStorage.setItem("MentorToken", res.data?.data?.token);
-          setUser(res.data.data);
+          // setUser(res.data.data);
           if (res?.data?.data?.user?.profileLink) {
             router.replace("/dashboard");
             setIsLoading(false);
@@ -91,7 +90,7 @@ export default function LoginForm() {
           }
         });
 
-      if (userD?.data?.user && "profileLink" in userD?.data?.user) {
+      if (userD?.data?.user && "profileLink" in userDa?.data?.user) {
         router.push("/mentor-profile?path=profile");
       } else {
         router.push("/mentor-profile-creation");
