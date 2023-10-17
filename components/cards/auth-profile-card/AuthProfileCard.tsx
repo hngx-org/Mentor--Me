@@ -23,7 +23,7 @@ export default function AuthProfileCard({
         <div className="w-[24px]  h-[24px] sm:w-[54px] sm:h-[54px]  rounded-full relative ">
           <Image
             style={{ objectFit: "cover", borderRadius: "100%" }}
-            src={`https://api.dicebear.com/7.x/initials/png?seed=${email}`}
+            src={`https://api.dicebear.com/7.x/initials/png?seed=${user}`}
             fill
             alt="profile"
           />

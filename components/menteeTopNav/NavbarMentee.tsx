@@ -15,11 +15,11 @@ export type NavbarMenteeProps = {
   action?: string | null;
   username?: string;
   imgSrc?: string;
-  jobTitle?: string;
-  name?: string;
-  bio?: string;
-  email?: string;
-  mentorship?: string;
+
+  name?: string | null;
+  bio?: string | null;
+  email?: string | null;
+  jobTitle?: string | null;
 };
 export const NavbarMentee = ({
   path,
@@ -30,7 +30,6 @@ export const NavbarMentee = ({
   name,
   bio,
   email,
-  mentorship,
 }: NavbarMenteeProps) => {
   const [scrollY, setScrollY] = useState(0);
   const [isView, setIsView] = useState(false);
@@ -89,9 +88,10 @@ export const NavbarMentee = ({
           }  `}
         >
           <p className="font-[500] text-black text-[14px]">
-            {username || "Funmi Oladapo"}
+            {name || "Funmi Oladapo"}
           </p>
-          <p>{jobTitle || "C++ Developer"}</p>
+          {/* @ts-ignore */}
+          <p>{decodeURI(jobTitle) || "C++ Developer"}</p>
         </div>
         <div
           className="cursor-pointer relative overflow-hidden rounded-full"

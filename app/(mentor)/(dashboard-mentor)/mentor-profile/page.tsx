@@ -17,6 +17,7 @@ import OverViewCardLayout from "@/components/mentorProfile/MentorProfilelayouts"
 import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import UpdateProfile from "@/components/cards/mentee-profile-cards/UpdateProfile";
+import useAuth from "@/context/useAuth";
 
 export type ModalState = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -26,6 +27,11 @@ export type ModalState = {
 const baseUrl = "https://mentormee-api.onrender.com";
 
 export default function ProfilePage() {
+  const { data } = useAuth();
+  // console.log(data?.userDetails.email);
+  // const [username] = data?.userDetails.email.split("@") || ["", ""];
+  const mentorshipType = data?.mentorship_type;
+
   const [currMentor, setCurrMentor] = useState<any>();
   const [user, setUser] = useState<any>({});
   const [userData, setUserData] = useState({
@@ -33,6 +39,13 @@ export default function ProfilePage() {
     bio: "",
     email: "",
     mentorship: "",
+    skills: "",
+    degree: "",
+    institution: "",
+    preferred_startTime: "",
+    preferred_endTime: "",
+    preferred_days: "",
+    mentoring_experience: "",
   });
   const router = useRouter();
   const [modal, setModal] = useState<ModalState>({
@@ -73,6 +86,13 @@ export default function ProfilePage() {
           bio: data?.data?.userDetails?.bio,
           email: data?.data?.userDetails?.email,
           mentorship: data?.data?.mentorship_type,
+          skills: data?.data?.skills,
+          degree: data?.data?.degree,
+          institution: data?.data?.institution,
+          preferred_startTime: data?.data?.preferred_startTime,
+          preferred_endTime: data?.data?.preferred_endTime,
+          preferred_days: data?.data?.preferred_days,
+          mentoring_experience: data?.data?.mentoring_experience,
         });
       } else {
         console.error("Failed to fetch current mentor data");
@@ -120,7 +140,7 @@ export default function ProfilePage() {
   const paramsAction = useSearchParams().get("action");
   // console.log(user);
   // console.log(currMentor);
-  console.log(userData);
+  // console.log(userData);
   return (
     <>
       {paramsAction === "edit-mentor" ? (
@@ -134,15 +154,15 @@ export default function ProfilePage() {
           {user && user ? (
             <MentorProfileHeader
               userName={userData.username}
-              email=""
-              userRole={user?.mentorship_type}
+              mentorship={userData.mentorship}
+              userRole={mentorshipType!}
               userRating={4}
               openModal={setModal}
             />
           ) : (
             <MentorProfileHeader
               userName="Shade Mayowa"
-              email=""
+              mentorship=""
               userRole="Product Designer"
               userRating={4}
               openModal={setModal}
@@ -152,12 +172,13 @@ export default function ProfilePage() {
           {user && user ? (
             <MentorProfileMainLayout>
               <BioCard text={userData.bio} />
+
               <ProfileDetailsCardContainer
                 heading="education"
                 items={[
                   {
-                    text: user?.degree || "",
-                    heading: user?.institution || "",
+                    text: userData.degree || "",
+                    heading: userData.institution || "",
                     type: "certification",
                   },
                 ]}
@@ -166,7 +187,12 @@ export default function ProfilePage() {
               <SkillSCard skills={[]} />
               <ProfileDetailsCardContainer
                 heading="Experience"
-                items={[]}
+                items={[
+                  {
+                    type: "experience",
+                    text: userData.mentoring_experience || "",
+                  },
+                ]}
                 openModal={setModal}
               />
               {/* 
@@ -177,7 +203,7 @@ export default function ProfilePage() {
               /> */}
               <AvailableSessionCard
                 timezone=" Greenwich Mean Time (GMT)"
-                availableDays={`${user?.preferred_days} ${user?.preferred_time}`}
+                availableDays={`${userData.preferred_days} ${userData.preferred_startTime} ${userData.preferred_endTime}`}
               />
               <OverViewCardLayout heading="impact at a glance" />
               <SessionsProgressCard progress={10} />
@@ -249,7 +275,7 @@ export default function ProfilePage() {
 11:00am - 2:00pm"
               />
               <OverViewCardLayout heading="impact at a glance" />
-              <SessionsProgressCard progress={10} />
+              <SessionsProgressCard progress={0} />
             </MentorProfileMainLayout>
           )}
 

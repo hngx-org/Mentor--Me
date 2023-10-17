@@ -30,10 +30,11 @@ import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import { useAuthCtx } from "@/context/AuthContext";
 
 export default function LoginForm() {
+  const [imgLoading, setImgLoading] = React.useState(false);
+
   const { setUserData } = useAuthCtx();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [userD, setUser] = useState<any>();
   const [isValid, setIsValid] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
@@ -71,8 +72,13 @@ export default function LoginForm() {
         );
 
         localStorage.setItem("Mentor", JSON.stringify(response.data));
-        setUser(response.data);
         setUserData(response.data);
+
+        if (response?.data?.data && response?.data?.data?.user?.profileLink) {
+          router.push("/mentor-profile?path=profile");
+        } else {
+          router.push("/mentor-profile-creation");
+        }
       } catch (err: any) {
         if (err.response && err.response.status === 406) {
           localStorage.setItem("Mentor", JSON.stringify(err.response.data));
@@ -84,15 +90,6 @@ export default function LoginForm() {
       } finally {
         setIsLoading(false);
       }
-
-      if (userD?.data?.user && "profileLink" in userD?.data?.user) {
-        router.push("/mentor-profile?path=profile");
-      } else {
-        router.push("/mentor-profile-creation");
-      }
-
-      // Check if the userD is defined before accessing its properties
-      console.log(userD?.data?.user && "profileLink" in userD?.data?.user);
     }
   };
 
@@ -100,12 +97,19 @@ export default function LoginForm() {
     <div>
       <div className="w-full h-[100vh] grid grid-cols-1 lg:grid-cols-6  overflow-hidden">
         <div className="lg:col-span-3 ">
-          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+          {imgLoading && (
+            <div className="flex w-full min-h-screen justify-center items-center relative scale-150">
+              <LoadingSpinner />
+            </div>
+          )}
+          <div className="w-full h-full relative">
             <Image
               src={auth}
               alt="Authentication Image"
               layout="fill"
               objectFit="cover"
+              loading="lazy"
+              onLoadingComplete={() => setImgLoading(false)}
             />
           </div>
         </div>
