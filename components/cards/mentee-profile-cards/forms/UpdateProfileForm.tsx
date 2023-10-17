@@ -4,6 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import {
@@ -99,6 +100,8 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   }, [token]);
 
   const handleUpdate = async (e: any) => {
+    const router = useRouter();
+
     e.preventDefault(); // Prevent the default form submission behavior
 
     // Check if authToken exists
@@ -123,6 +126,10 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
 
           setTimeout(() => {
             setIsProfileUpdated(false);
+            // Redirect to the desired page after a 3-second timeout
+            router.push(
+              "https://mentor-me-lake.vercel.app/mentee-profile?path=profile"
+            );
           }, 3000);
           console.log("PATCH request was successful");
         } else {
