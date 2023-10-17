@@ -108,11 +108,11 @@ export const NavbarMentee = ({
           {isView && (
             <>
               <div
-                className="min-h-screen h-screen top-0 left-0 w-full fixed z-[99] flex justify-center items-center opacity-0 bg-black/25"
+                className="min-h-screen h-screen top-0 left-0 w-full fixed z-[99] opacity-0 bg-black/25"
                 role="dialog"
                 onClick={() => setIsView(!isView)}
               />
-              <div className=" absolute h-[100px] w-[180px] top-12 -right-2 z-[999999] bg-black/30 backdrop-blur-xl flex flex-col justify-center items-center  border border-Neutra20  text-lg font-medium font-Hanken  shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-xl before:absolute before:content-[''] before:h-[20px] before:w-[20px] before:bg-gradient-to-tr before:from-black/50  before:via-transparent before:to-black/5 before:overflow-hidden before:-top-2 before:rotate-[140deg] before:right-4 before:z-[-1]">
+              <div className=" absolute h-[100px] w-[180px] top-12 -right-2 z-[999999] bg-black/30 backdrop-blur-xl flex flex-col justify-between items-center  border border-Neutra20  text-lg font-medium font-Hanken  shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-xl before:absolute before:content-[''] before:h-[20px] before:w-[20px] before:bg-gradient-to-tr before:from-black/50  before:via-transparent before:to-black/5 before:overflow-hidden before:-top-2 before:rotate-[140deg] before:right-4 before:z-[-1]">
                 <button
                   type="button"
                   disabled={path === "profile"}
