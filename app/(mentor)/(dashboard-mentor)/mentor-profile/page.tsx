@@ -15,8 +15,6 @@ import ProfileDetailsCardContainer, {
 import MentorProfileMainLayout from "@/components/mentorProfile/mentorProfileMainLayout";
 import OverViewCardLayout from "@/components/mentorProfile/MentorProfilelayouts";
 import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
-import LoadingSpinner from "@/components/loaders/LoadingSpinner";
-import UpdateProfile from "@/components/cards/mentee-profile-cards/UpdateProfile";
 import useAuth from "@/context/useAuth";
 import Skeleton from "@/components/mentorProfile/Skeleton";
 
