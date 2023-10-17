@@ -24,6 +24,22 @@ type MenuProfileProps = {
   title: string;
   tab: string;
 };
+
+type MenteeData = {
+  username: string;
+  bio: string;
+  email: string;
+  company: string;
+  role: string;
+  expertise: string;
+  gender: string;
+  goal: string;
+  country: string;
+  title: string;
+  discipline: string;
+  image: string;
+};
+
 const menteeMenus: MenuProfileProps[] = [
   {
     id: 1,
@@ -41,9 +57,12 @@ const menteeMenus: MenuProfileProps[] = [
     tab: "commendations",
   },
 ];
+const baseUrl = "https://mentormee-api.onrender.com";
 
 export default function MenteeProfilePage() {
   const [activeTab, setActiveTab] = useState<string | null | undefined>("");
+  const [menteeData, setMenteeData] = useState<MenteeData>({});
+  const [token, setToken] = useState("");
   const router = useRouter();
   const paramsTab = useSearchParams().get("tab");
   const paramsAction = useSearchParams().get("action");
@@ -51,6 +70,57 @@ export default function MenteeProfilePage() {
   useEffect(() => {
     setActiveTab(paramsTab || "overview");
   }, [paramsTab]);
+
+  useEffect(() => {
+    const getUser = localStorage.getItem("Mentee");
+    if (getUser) {
+      try {
+        const newUser = JSON.parse(getUser);
+        const extractedToken = newUser.data.token;
+        setToken(extractedToken);
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
+    }
+  }, []);
+
+  const fetchMenteeData = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/mentee/get-current`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setMenteeData({
+          username: data?.data?.user?.fullName,
+          bio: data?.data?.user?.bio,
+          email: data?.data?.user?.email,
+          company: data?.data?.company,
+          role: data?.data?.user?.role,
+          expertise: data?.data?.expertise,
+          gender: data?.data?.gender,
+          goal: data?.data?.goal,
+          country: data?.data?.country_request,
+          title: data?.data?.title,
+          discipline: data?.data?.discipline_request,
+          image: data?.data?.user?.image,
+        });
+      } else {
+        console.error("Failed to fetch user data");
+      }
+    } catch (error) {
+      console.error("Error fetching user data");
+    }
+  };
+  useEffect(() => {
+    if (token) {
+      fetchMenteeData();
+    }
+  }, [token]);
 
   return (
     <>
@@ -75,10 +145,15 @@ export default function MenteeProfilePage() {
               <div className="relative -mt-12 ">
                 <Suspense fallback={<LoadingSpinner />}>
                   <Image
-                    src={MenteeDashboardProfileImg}
+                    src={`https://api.dicebear.com/7.x/initials/png?seed=${menteeData.username}`}
                     alt="cover"
                     width={130}
                     height={130}
+                    style={{
+                      objectFit: "cover",
+                      borderRadius: "9999px",
+                    }}
+                    quality={100}
                   />
                 </Suspense>
                 <div
@@ -90,12 +165,13 @@ export default function MenteeProfilePage() {
               </div>
               <div className="flex flex-col">
                 <p className="flex gap-4 font-Inter font-bold lg:text-[32px] text-Neutra50 items-center">
-                  <span>Henrietta Okankwo</span>
-                  <NaijaFlagIcon />
+                  <span>{menteeData.username}</span>
+                  <span className=" text-xs">
+                    Residence: {menteeData.country}
+                  </span>
                 </p>
                 <p>
-                  Product designer <span>at</span> Federal University of
-                  Technology, Owerri
+                  {menteeData.title} <span>at</span> {menteeData.company}
                 </p>
               </div>
             </div>
@@ -111,7 +187,7 @@ export default function MenteeProfilePage() {
               />
             </Link>
           </div>
-          <div className=" flex w-full justify-center max-xl:flex-col px-4 sm:px-6 lg:px-8 2xl:px-32 lg:gap-8 xl:gap-16 2xl:gap-28 max-xl:pb-8">
+          <div className=" flex w-full justify-center max-xl:flex-col px-4 sm:px-6 lg:px-8 2xl:px-32 lg:gap-8 xl:gap-16 2xl:gap-28 max-xl:pb-8 mb-6">
             <div className="flex flex-col  w-full ">
               <div className="flex mt-10 max-lg:w-full ">
                 <div className="flex flex-col w-full ">
@@ -138,11 +214,11 @@ export default function MenteeProfilePage() {
                   <div className="w-full h-full ">
                     {activeTab === "overview" && (
                       <OverviewCard
-                        desc="I’m Henrietta Okonkwo, a rising star in the world of product design, I bring to the table a deep-seated passion for innovation and an unwavering commitment to precision in my work.
-Armed with my background in graphic design, I’m on a personal mission to connect with experienced mentors who can help me hone my design skills and infuse fresh perspectives into my craft."
-                        expertise="UI Design"
-                        experience="Product Designer 3 years"
-                        workPlace="Federal University of Science Technology, Owerri"
+                        desc={menteeData.bio}
+                        expertise={menteeData.expertise}
+                        experience={menteeData.title}
+                        workPlace={menteeData.company}
+                        discipline={menteeData.discipline}
                       />
                     )}
                     {activeTab === "my-mentors" && <MyMentorsCard />}
