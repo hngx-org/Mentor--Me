@@ -4,7 +4,7 @@
 
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { CaretIcon } from "@/public/SVGs";
@@ -48,6 +48,10 @@ export default function UploadResourcesPage() {
     <form
       onSubmit={async (e) => {
         e.preventDefault();
+        if (!file) {
+          toast.error("Please upload a preview video");
+          return;
+        }
         const user = JSON.parse(
           localStorage.getItem("Mentor") ||
             JSON.stringify({ data: { token: null } })
@@ -57,52 +61,59 @@ export default function UploadResourcesPage() {
           data: { token },
         } = user;
 
-        const anotherRes = await fetch(
-          "https://mentormee-api.onrender.com/mentors/get-current",
-          {
-            redirect: "follow",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const anotherData = await anotherRes.json();
-        console.log(anotherData);
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(file!);
+        const toastLoader = toast.loading("Uploading resource");
+        try {
+          const anotherRes = await fetch(
+            "https://mentormee-api.onrender.com/mentors/get-current",
+            {
+              redirect: "follow",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          const anotherData = await anotherRes.json();
+          console.log(anotherData);
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file!);
 
-        fileReader.onloadend = async function () {
-          videoBase64 = fileReader.result as string;
+          fileReader.onloadend = async function () {
+            videoBase64 = fileReader.result as string;
 
-          console.log(videoBase64);
-          const resourceData = {
-            category: categoryRef.current?.value!,
-            description: courseDescriptionRef.current?.value!,
-            title: courseTitleRef.current?.value!,
-            coursetype: courseTypeRef.current?.value!,
-            price: priceRef.current?.value!,
-            name: anotherData?.userDetails?.fullName,
-            role: anotherData?.userDetails?.fullName,
-            company: anotherData?.company,
-            file: videoBase64 as string,
-            image: "random",
+            console.log(videoBase64);
+            const resourceData = {
+              category: categoryRef.current?.value!,
+              description: courseDescriptionRef.current?.value!,
+              title: courseTitleRef.current?.value!,
+              coursetype: courseTypeRef.current?.value!,
+              price: priceRef.current?.value!,
+              name: anotherData?.userDetails?.fullName,
+              role: anotherData?.userDetails?.fullName,
+              company: anotherData?.company,
+              file: videoBase64 as string,
+              image: "random",
+            };
+            const res = await fetch("/api/upload-resource", {
+              method: "POST",
+              body: JSON.stringify(resourceData),
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+            });
+            const data = await res.json();
+            console.log(data);
+            if (data.success === true) {
+              toast.success("resource uploaded successfully");
+            } else {
+              toast.error(`Error: ${data.message}`);
+            }
           };
-          const res = await fetch("/api/upload-resource", {
-            method: "POST",
-            body: JSON.stringify(resourceData),
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          });
-          const data = await res.json();
-          console.log(data);
-          if (data.success === true) {
-            toast("resource uploaded successfully");
-          } else {
-            toast(`Error: ${data.message}`);
-          }
-        };
+        } catch (e) {
+          toast.error("An error occurred while uploading the resource.");
+        } finally {
+          toast.dismiss(toastLoader);
+        }
       }}
       className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white pt-10"
     >
@@ -233,6 +244,12 @@ export default function UploadResourcesPage() {
           name="price"
           ref={priceRef}
           id="price"
+          onKeyDown={(e) => {
+            if (e.key === "e") {
+              e.preventDefault();
+            }
+            console.log(e.key);
+          }}
           required
           placeholder="Input the price"
           className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:font-normal"
