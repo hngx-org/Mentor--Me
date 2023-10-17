@@ -28,6 +28,7 @@ const baseUrl = "https://mentormee-api.onrender.com";
 
 export default function ProfilePage() {
   const { data } = useAuth();
+  console.log(data);
   // console.log(data?.userDetails.email);
   // const [username] = data?.userDetails.email.split("@") || ["", ""];
   const mentorshipType = data?.mentorship_type;
@@ -57,7 +58,6 @@ export default function ProfilePage() {
   if (typeof window !== "undefined") {
     const getUser = localStorage.getItem("Mentor");
     if (getUser) {
-      console.log(getUser);
       try {
         const newUser = JSON.parse(getUser);
         token = newUser.data.token; // assign token value here
@@ -80,7 +80,7 @@ export default function ProfilePage() {
       if (response.ok) {
         const data = await response.json();
         setUser(data?.data); // Assuming you want to set the entire data object
-        console.log("Current Mentor", data?.data);
+        // console.log("Current Mentor", data?.data);
         setUserData({
           username: data?.data?.userDetails?.fullName,
           bio: data?.data?.userDetails?.bio,
@@ -104,7 +104,7 @@ export default function ProfilePage() {
     }
   };
 
-  console.log(user);
+  // console.log(user);
   // const getCurrent = async () => {
   //   try {
   //     const currMent = await fetch(`${baseUrl}/users/get-current`, {
@@ -131,11 +131,11 @@ export default function ProfilePage() {
     getCurrentMentor();
   }, []);
 
-  useEffect(() => {
-    router.push(
-      `/mentor-profile?path=profile&name=${userData.username}&email=${userData.email}&bio=${userData.bio}&mentorship=${userData.mentorship}`
-    );
-  }, [userData]);
+  // useEffect(() => {
+  //   router.push(
+  //     `/mentor-profile?path=profile&name=${userData.username}&email=${userData.email}&bio=${userData.bio}&mentorship=${userData.mentorship}`
+  //   );
+  // }, [userData]);
 
   const paramsAction = useSearchParams().get("action");
   // console.log(user);
@@ -209,74 +209,7 @@ export default function ProfilePage() {
               <SessionsProgressCard progress={10} />
             </MentorProfileMainLayout>
           ) : (
-            <MentorProfileMainLayout>
-              <BioCard text="" />
-              <ProfileDetailsCardContainer
-                heading="skill/expertise"
-                items={[
-                  {
-                    text: "Google UX Certification",
-                    // heading: "Coursera",
-                    type: "certification",
-                  },
-                  {
-                    text: "Bachelor of Science in Computer Science",
-                    heading: "ABXYZ University",
-                    type: "certification",
-                  },
-                ]}
-                openModal={setModal}
-              />
-              <SkillSCard
-                skills={[
-                  "Leadership",
-                  "User Experience",
-                  "UX Research",
-                  "Figma",
-                  "Sketch",
-                  "Leadership",
-                  "User Experience",
-                  "UX Research",
-                  "Figma",
-                  "Sketch",
-                ]}
-              />
-              <ProfileDetailsCardContainer
-                heading="Experience"
-                items={[
-                  {
-                    text: "Webmaster Inc.",
-                    heading: "CEO ",
-                    type: "experience",
-                  },
-                  {
-                    text: "futurLabs",
-                    heading: "Ui/Ux design intern",
-                    type: "experience",
-                  },
-                ]}
-                openModal={setModal}
-              />
-
-              <ProfileDetailsCardContainer
-                heading="Education"
-                items={[
-                  {
-                    text: "University of Lagos. 2013 - 2017",
-                    heading: "B.Sc Computer Science ",
-                    type: "education",
-                  },
-                ]}
-                openModal={setModal}
-              />
-              <AvailableSessionCard
-                timezone=" Greenwich Mean Time (GMT)"
-                availableDays="Mondays - Wednesdays, 
-11:00am - 2:00pm"
-              />
-              <OverViewCardLayout heading="impact at a glance" />
-              <SessionsProgressCard progress={0} />
-            </MentorProfileMainLayout>
+            <div>Something went wrong</div>
           )}
 
           {modal.isOpen && (
