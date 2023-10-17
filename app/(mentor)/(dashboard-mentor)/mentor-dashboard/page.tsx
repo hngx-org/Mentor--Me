@@ -1,15 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AboutMentor from "@/components/mentor-dashboard/AboutMentor";
 import MentorSession from "@/components/mentor-dashboard/MentorSession";
 import UnverifiedMentorCard from "@/components/mentor-dashboard/UnverifiedMentorCard";
 import Modal from "@/components/mentor-dashboard/Modal";
 import FilterBar from "@/components/mentor-dashboard/FilterBar";
+import useAuth from "@/context/useAuth";
 
 const page = () => {
+  const { data } = useAuth();
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (
+      data?.userDetails?.profileLink &&
+      data?.userDetails?.profileLink !== ""
+    ) {
+      setIsVerified(true);
+    }
+  }, [data]);
   return (
     <div className="">
       <div className="px-5 py-10 lg:p-10 bg-[#f9fafc]">

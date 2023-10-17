@@ -34,6 +34,7 @@ type Data = {
   data: UserData | null;
   success: boolean;
   email?: string;
+  token?: string;
 };
 
 interface User {
