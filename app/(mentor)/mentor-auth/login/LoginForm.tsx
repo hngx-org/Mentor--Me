@@ -14,6 +14,7 @@ import axios from "axios";
 
 import { useRouter } from "next/navigation";
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { toast } from "react-hot-toast";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
@@ -60,40 +61,36 @@ export default function LoginForm() {
     } else {
       setIsValid(true);
 
-      await axios
-        .post("https://mentormee-api.onrender.com/auth/login", {
-          email: formData.email,
-          password: formData.password,
-          role: "mentor",
-        })
-        .then((res) => {
-          localStorage.setItem("Mentor", JSON.stringify(res.data?.data?.user));
-          localStorage.setItem("MentorToken", res.data?.data?.token);
-          setUserData(res.data.data);
-          if (res?.data?.data?.user?.profileLink) {
-            router.replace("/dashboard");
-            setIsLoading(false);
-          } else {
-            router.replace("/mentor-profile-creation");
-            setIsLoading(false);
+      try {
+        const response = await axios.post(
+          "https://mentormee-api.onrender.com/auth/login",
+          {
+            email: formData.email,
+            password: formData.password,
+            role: "mentor",
           }
-        })
-        .catch((error: any) => {
-          setIsLoading(false);
-          if (error?.response?.status === 406) {
-            localStorage.setItem("Mentor", JSON.stringify(error.response.data));
-            router.push("/mentor-auth/otp");
-          } else {
-            toast.error(
-              error?.response?.data?.message || "something went wrong"
-            );
-          }
-        });
+        );
 
-      if (userData?.data?.user && "profileLink" in userData?.data?.user) {
-        router.push("/mentor-profile?path=profile");
-      } else {
-        router.push("/mentor-profile-creation");
+        localStorage.setItem("Mentor", JSON.stringify(response.data));
+        setUserData(response.data);
+
+        if (response?.data?.data && response?.data?.data?.user?.profileLink) {
+          router.replace("/mentor-profile?path=mentor-profile");
+          setIsLoading(false);
+        } else {
+          router.replace("/mentor-profile-creation");
+          setIsLoading(false);
+        }
+      } catch (error: any) {
+        if (error.response && error.response.status === 406) {
+          localStorage.setItem("Mentor", JSON.stringify(error.response.data));
+          router.push("/mentor-auth/otp");
+        } else {
+          toast.error(error?.response?.data?.message || "something went wrong");
+          return;
+        }
+      } finally {
+        setIsLoading(false);
       }
     }
   };
