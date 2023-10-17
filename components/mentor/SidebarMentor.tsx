@@ -13,20 +13,29 @@ import {
   ProfileIcon,
   SettingIcon,
 } from "@/public/SVGs";
-import { useAuthCtx } from "@/context/AuthContext";
 import AuthProfileCard from "../cards/auth-profile-card/AuthProfileCard";
 import useAuth from "@/context/useAuth";
 
 export type SideBarMentorProps = {
   light?: boolean;
+  imgSrc?: string;
+
+  name?: string | null;
+  bio?: string | null;
+  email?: string | null;
+  jobTitle?: string | null;
 };
 
 export default async function SidebarMentor({
   light,
   path,
+  imgSrc,
+  name,
+  bio,
+  email,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
   const { data } = useAuth();
-  const email = data?.userDetails.email;
+  const mail = data?.userDetails.email;
   const username = data?.userDetails.fullName;
 
   return (

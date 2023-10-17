@@ -6,8 +6,6 @@ import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 
-import { toast } from "react-toastify";
-
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import Modal from "@/components/modal/Modal";

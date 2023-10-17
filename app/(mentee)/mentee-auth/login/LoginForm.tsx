@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 
 import axios from "axios";
 
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 import auth from "@/public/assets/images/auth.jpeg";
 
@@ -76,7 +76,7 @@ export default function LoginForm() {
           localStorage.setItem("Mentee", JSON.stringify(error.response.data));
           router.push("/mentee-auth/otp");
         } else {
-          toast(error?.response?.data?.message || "something went wrong");
+          toast.error(error?.response?.data?.message || "something went wrong");
         }
       }
     }

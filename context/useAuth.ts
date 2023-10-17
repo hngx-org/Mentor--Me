@@ -1,8 +1,10 @@
 // context/useAuth.ts
 
 import React, { useEffect, useState } from "react";
-import { UserData, useAuthCtx } from "./AuthContext";
+import { useAuthCtx } from "./AuthContext";
 import { CurrentMentor, UnverifiedCurrMentor } from "./types";
+
+const baseUrl = "https://mentormee-api.onrender.com/";
 
 interface User {
   message: string;
@@ -21,7 +23,7 @@ export const useAuth = () => {
   useEffect(() => {
     const requestAuth = async () => {
       // Make an authenticated request to the server
-      const url = `${process.env.NEXT_PUBLIC_BASE_URL}mentors/get-current`;
+      const url = `${baseUrl}mentors/get-current`;
       if (user?.token) {
         const response = await fetch(url!, {
           headers: {

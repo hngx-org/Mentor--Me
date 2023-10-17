@@ -32,6 +32,7 @@ type Data = {
   message: string;
   data: UserData | null;
   success: boolean;
+  email?: string;
 };
 
 interface User {

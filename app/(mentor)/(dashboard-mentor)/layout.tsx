@@ -15,24 +15,36 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const actionParams = useSearchParams().get("action");
   const { data } = useAuth();
   const username = data?.userDetails.fullName;
-  const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${username}`;
+  // const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${username}`;
+  const email = data?.userDetails.email;
   const jobTitle = data?.certifications;
   const nameParams = useSearchParams().get("name");
   const bioParams = useSearchParams().get("bio");
   const emailParams = useSearchParams().get("email");
   const mentorshipParams = useSearchParams().get("mentorship");
 
+  const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
+    nameParams || email
+  }`;
   return (
     <>
-      <SidebarMentor path={pathParams} />
+      <SidebarMentor
+        path={pathParams}
+        name={nameParams}
+        imgSrc={profileImg}
+        email={emailParams}
+      />
 
       <main className="lg:ml-[274px]">
         <NavbarMentee
           path={pathParams}
           action={actionParams}
-          imgSrc={profileImg}
           username={username}
-          jobTitle={jobTitle}
+          name={nameParams}
+          imgSrc={profileImg}
+          email={emailParams}
+          bio={bioParams}
+          jobTitle={mentorshipParams}
         />
 
         <MobileSideBar path={pathParams} action={actionParams} />

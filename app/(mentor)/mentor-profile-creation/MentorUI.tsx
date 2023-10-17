@@ -11,7 +11,7 @@ import axios from "axios";
 import Link from "next/link";
 
 import Image from "next/image";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-hot-toast";
 import styles from "./page.module.css";
 
 import MentorMeIcon from "@/svgs/MentorMeIcon";
@@ -63,7 +63,7 @@ export function MentorProfileCreationForms() {
     if (getUser) {
       try {
         const newUser = JSON.parse(getUser);
-        token = newUser.user.token; // assign token value here
+        token = newUser.data.token; // assign token value here
       } catch (error) {
         console.error("Error parsing JSON:", error);
       }
