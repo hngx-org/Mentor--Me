@@ -154,7 +154,7 @@ export default function ProfilePage() {
           {user && user ? (
             <MentorProfileHeader
               userName={userData.username}
-              mentorship={userData.mentorship}
+              // mentorship={userData.mentorship}
               userRole={mentorshipType!}
               userRating={4}
               openModal={setModal}

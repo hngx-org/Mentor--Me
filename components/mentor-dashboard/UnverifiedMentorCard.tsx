@@ -1,14 +1,16 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import React from "react";
+import { useSearchParams } from "next/navigation";
+import useAuth from "@/context/useAuth";
 
 interface PropType {
   isVerified: boolean;
   setIsVerified: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const UnverifiedMentorCard = ({ setIsVerified, isVerified }: PropType) => {
-  const nameParams = useSearchParams().get("name");
+  const { data } = useAuth();
+  const nameParams = data?.userDetails?.fullName;
   return (
     <>
       <div className="mb-10 hidden md:block">
