@@ -68,14 +68,14 @@ export default function MentorSideBar({
           </div>
         </div>
 
-        <div className="mt-5 my-1 border-t-2 border-Neutra40">
+        <div className="my-4 border-t-2 border-Neutra40 pt-4">
           <Link
+            href="/"
             onClick={() => router.replace("/")}
             className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 "
           >
-            <span className="h-7 w-7 rotate-180 xl:w-8 xl:h-8">
-              <LogoutMenteeIcon />
-            </span>
+            <LogoutIcon />
+
             <span className="  font-Inter text-[14px] xl:text-xl font-[500]  text-Error50">
               LogOut
             </span>

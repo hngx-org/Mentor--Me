@@ -3,8 +3,8 @@
 
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useState, useEffect, Suspense, createContext } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import MentorProfileHeader from "@/components/mentorProfile/MentorProfileHeader";
 import ProfileDetailsCardContainer, {
   AvailableSessionCard,
@@ -17,6 +17,7 @@ import OverViewCardLayout from "@/components/mentorProfile/MentorProfilelayouts"
 import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import UpdateProfile from "@/components/cards/mentee-profile-cards/UpdateProfile";
+import useAuth from "@/context/useAuth";
 
 export type ModalState = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -24,14 +25,42 @@ export type ModalState = {
 };
 
 const baseUrl = "https://mentormee-api.onrender.com";
-
+type UserData = {
+  fullName: string;
+  bio: string;
+  email?: string;
+  mentorship?: string;
+  skills?: string;
+  degree?: string;
+  institution?: string;
+  preferred_startTime?: string;
+  preferred_endTime?: string;
+  preferred_days?: string;
+  mentoring_experience?: string;
+};
 export default function ProfilePage() {
+  const { data } = useAuth();
+  console.log(data);
+  // console.log(data?.userDetails.email);
+  // const [fullName] = data?.userDetails.email.split("@") || ["", ""];
+  const mentorshipType = data?.mentorship_type;
+
   const [currMentor, setCurrMentor] = useState<any>();
   const [user, setUser] = useState<any>({});
-  const [userData, setUserData] = useState({
-    username: "",
-    role: "",
+  const [userData, setUserData] = useState<UserData | undefined>({
+    fullName: "",
+    bio: "",
+    email: "",
+    mentorship: "",
+    skills: "",
+    degree: "",
+    institution: "",
+    preferred_startTime: "",
+    preferred_endTime: "",
+    preferred_days: "",
+    mentoring_experience: "",
   });
+  const router = useRouter();
   const [modal, setModal] = useState<ModalState>({
     state: "basic info",
     isOpen: false,
@@ -63,48 +92,67 @@ export default function ProfilePage() {
       if (response.ok) {
         const data = await response.json();
         setUser(data?.data); // Assuming you want to set the entire data object
-        console.log("Current Mentor", data?.data);
+        // console.log("Current Mentor", data?.data);
+        setUserData({
+          fullName: data?.data?.userDetails?.fullName,
+          bio: data?.data?.userDetails?.bio,
+          email: data?.data?.userDetails?.email,
+          mentorship: data?.data?.mentorship_type,
+          skills: data?.data?.skills,
+          degree: data?.data?.degree,
+          institution: data?.data?.institution,
+          preferred_startTime: data?.data?.preferred_startTime,
+          preferred_endTime: data?.data?.preferred_endTime,
+          preferred_days: data?.data?.preferred_days,
+          mentoring_experience: data?.data?.mentoring_experience,
+        });
       } else {
         console.error("Failed to fetch current mentor data");
       }
     } catch (error) {
       console.error("Error fetching current mentor data:", error);
-    }
-  };
-  const getCurrent = async () => {
-    try {
-      const currMent = await fetch(`${baseUrl}/users/get-current`, {
-        method: "GET",
-        redirect: "follow",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setCurrMentor(data?.data);
-          console.log("Current User", data?.data); // Log the data directly from the response
-        });
-    } catch (error) {
-      console.log(error);
     } finally {
-      // Any code that needs to be executed regardless of success or failure can go here
+      console.log(user);
     }
   };
 
+  // console.log(user);
+  // const getCurrent = async () => {
+  //   try {
+  //     const currMent = await fetch(`${baseUrl}/users/get-current`, {
+  //       method: "GET",
+  //       redirect: "follow",
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setCurrMentor(data?.data);
+  //         console.log("Current User", data?.data);
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     // Any code that needs to be executed regardless of success or failure can go here
+  //   }
+  // };
+
   useEffect(() => {
     getCurrentMentor();
-    getCurrent();
   }, []);
-  let [username, domain] = currMentor?.email?.split("@") || ["", ""];
-  if (currMentor !== undefined) {
-    [username, domain] = currMentor.email.split("@");
-  }
+
+  // useEffect(() => {
+  //   router.push(
+  //     `/mentor-profile?path=profile&name=${userData.fullName}&email=${userData.email}&bio=${userData.bio}&mentorship=${userData.mentorship}`
+  //   );
+  // }, [userData]);
+
   const paramsAction = useSearchParams().get("action");
   // console.log(user);
   // console.log(currMentor);
-  console.log(userData);
+  // console.log(userData);
   return (
     <>
       {paramsAction === "edit-mentor" ? (
@@ -117,29 +165,32 @@ export default function ProfilePage() {
         <div className=" w-full overflow-x-hidden ">
           {user && user ? (
             <MentorProfileHeader
-              userName={username}
-              email=""
-              userRole={user?.mentorship_type}
+              userName={userData?.fullName}
+              mentorship={userData?.mentorship}
+              userRole={mentorshipType!}
               userRating={4}
+              openModal={setModal}
             />
           ) : (
             <MentorProfileHeader
               userName="Shade Mayowa"
-              email=""
+              mentorship=""
               userRole="Product Designer"
               userRating={4}
+              openModal={setModal}
             />
           )}
 
           {user && user ? (
             <MentorProfileMainLayout>
-              <BioCard text="" />
+              <BioCard text={userData?.bio} />
+
               <ProfileDetailsCardContainer
                 heading="education"
                 items={[
                   {
-                    text: user?.degree || "",
-                    heading: user?.institution || "",
+                    text: userData?.degree || "",
+                    heading: userData?.institution || "",
                     type: "certification",
                   },
                 ]}
@@ -148,7 +199,12 @@ export default function ProfilePage() {
               <SkillSCard skills={[]} />
               <ProfileDetailsCardContainer
                 heading="Experience"
-                items={[]}
+                items={[
+                  {
+                    type: "experience",
+                    text: userData?.mentoring_experience || "",
+                  },
+                ]}
                 openModal={setModal}
               />
               {/* 
@@ -159,84 +215,21 @@ export default function ProfilePage() {
               /> */}
               <AvailableSessionCard
                 timezone=" Greenwich Mean Time (GMT)"
-                availableDays={`${user?.preferred_days} ${user?.preferred_time}`}
+                availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
               />
               <OverViewCardLayout heading="impact at a glance" />
               <SessionsProgressCard progress={10} />
             </MentorProfileMainLayout>
           ) : (
-            <MentorProfileMainLayout>
-              <BioCard text="" />
-              <ProfileDetailsCardContainer
-                heading="skill/expertise"
-                items={[
-                  {
-                    text: "Google UX Certification",
-                    // heading: "Coursera",
-                    type: "certification",
-                  },
-                  {
-                    text: "Bachelor of Science in Computer Science",
-                    heading: "ABXYZ University",
-                    type: "certification",
-                  },
-                ]}
-                openModal={setModal}
-              />
-              <SkillSCard
-                skills={[
-                  "Leadership",
-                  "User Experience",
-                  "UX Research",
-                  "Figma",
-                  "Sketch",
-                  "Leadership",
-                  "User Experience",
-                  "UX Research",
-                  "Figma",
-                  "Sketch",
-                ]}
-              />
-              <ProfileDetailsCardContainer
-                heading="Experience"
-                items={[
-                  {
-                    text: "Webmaster Inc.",
-                    heading: "CEO ",
-                    type: "experience",
-                  },
-                  {
-                    text: "futurLabs",
-                    heading: "Ui/Ux design intern",
-                    type: "experience",
-                  },
-                ]}
-                openModal={setModal}
-              />
-
-              <ProfileDetailsCardContainer
-                heading="Education"
-                items={[
-                  {
-                    text: "University of Lagos. 2013 - 2017",
-                    heading: "B.Sc Computer Science ",
-                    type: "education",
-                  },
-                ]}
-                openModal={setModal}
-              />
-              <AvailableSessionCard
-                timezone=" Greenwich Mean Time (GMT)"
-                availableDays="Mondays - Wednesdays, 
-11:00am - 2:00pm"
-              />
-              <OverViewCardLayout heading="impact at a glance" />
-              <SessionsProgressCard progress={10} />
-            </MentorProfileMainLayout>
+            <div>Something went wrong</div>
           )}
 
           {modal.isOpen && (
-            <MentorProfileModal onClose={setModal} state={modal.state} />
+            <MentorProfileModal
+              setUserData={setUserData}
+              onClose={setModal}
+              state={modal.state}
+            />
           )}
         </div>
       )}

@@ -1,8 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Button } from "../buttons/button";
+import Selector from "../selector";
+import useAuth from "@/context/useAuth";
+import AuthContextProvider, { useAuthCtx } from "@/context/AuthContext";
+import { ModalState } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/page";
 
 export type ModalType = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -10,8 +21,12 @@ export type ModalType = {
 
 export default function MentorProfileTabLayout({
   modalState,
+  setUserData,
+  onClose,
 }: {
   modalState: string;
+  setUserData: Dispatch<SetStateAction<Data | undefined>>;
+  onClose: Dispatch<SetStateAction<ModalState>>;
 }) {
   const [active, setActive] = useState(modalState);
 
@@ -54,7 +69,9 @@ export default function MentorProfileTabLayout({
           <p>Social links</p>
         </div>
       </div>
-      {active === "basic info" && <BasicInfoTab />}
+      {active === "basic info" && (
+        <BasicInfoTab onClose={onClose} setUserData={setUserData} />
+      )}
       {active === "Experience/ Certification" && (
         <p className="h-[100%] flex justify-center ">in progress</p>
       )}
@@ -66,6 +83,8 @@ export default function MentorProfileTabLayout({
 }
 
 function ProfileCard({ userName }: { userName: string }) {
+  const { data } = useAuth();
+  const name = data?.userDetails?.fullName;
   return (
     <div className="w-[100%] flex flex-col h-[100px] space-x-4 my-5">
       <p>change profile photo</p>
@@ -73,7 +92,7 @@ function ProfileCard({ userName }: { userName: string }) {
         <div className="w-[54px]  h-[54px] sm:w-[54px] sm:h-[54px]  rounded-full relative ">
           <Image
             style={{ objectFit: "cover", borderRadius: "100%" }}
-            src={`https://api.dicebear.com/7.x/initials/png?seed=${userName}`}
+            src={`https://api.dicebear.com/7.x/initials/png?seed=${name}`}
             fill
             alt="profile"
           />
@@ -90,12 +109,24 @@ function ProfileCard({ userName }: { userName: string }) {
   );
 }
 
-function BasicInfoTab() {
+type Data = {
+  bio: string;
+  fullName: string;
+};
+
+function BasicInfoTab({
+  setUserData,
+  onClose,
+}: {
+  setUserData: Dispatch<SetStateAction<Data | undefined>>;
+  onClose: Dispatch<SetStateAction<ModalState>>;
+}) {
   const [details, setDetail] = useState({
     bio: "",
-    gender: "",
+
     fullName: "",
   });
+  const [selected, setSelected] = useState("");
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement & HTMLTextAreaElement & HTMLSelectElement>
@@ -106,6 +137,20 @@ function BasicInfoTab() {
       [name]: value,
     }));
   };
+  const isDisabled = details.fullName === "" || details.bio.length < 10;
+  const handleSubmit = () => {
+    setUserData((prev) => ({
+      ...prev,
+      ...details,
+    }));
+    onClose({
+      state: "basic info",
+      isOpen: false,
+    });
+  };
+
+  console.log(details);
+
   return (
     <div className="w-[100%] px-2">
       <ProfileCard userName="shade mayowa" />
@@ -116,7 +161,12 @@ function BasicInfoTab() {
           name="fullName"
           onChange={handleChange}
         />
-        <DropDown label="select gender" />
+        {/* <Selector
+          placeHolder="pick your gender"
+          selected={selected}
+          onSelect={setSelected}
+          options={["male", "female", "other"]}
+        /> */}
         <TextArea
           label="Bio"
           value={details.bio}
@@ -124,8 +174,14 @@ function BasicInfoTab() {
           onChange={handleChange}
         />
       </div>
-      <div className="flex w-[100%] h-fit justify-end py-5">
-        <Button variant="primary">update profile</Button>
+      <div
+        className={`flex w-[100%] h-fit justify-end py-5 ${
+          isDisabled && "opacity-50"
+        }`}
+      >
+        <Button variant="primary" onClick={handleSubmit} disabled={isDisabled}>
+          update profile
+        </Button>
       </div>
     </div>
   );
@@ -156,7 +212,7 @@ export function MentorProfileInput({
         value={value}
         name={name}
         onChange={onChange}
-        className="flex grow active:border-0 p-4 focus:outline-none border h-[46px] rounded-[6px]"
+        className="flex grow active:border-0 p-4 focus:outline-none border border-Neutra10 h-[46px] rounded-[6px]"
       />
     </div>
   );
@@ -171,26 +227,26 @@ export function TextArea({ value, label, name, onChange }: InputProps) {
         value={value}
         name={name}
         onChange={onChange}
-        className="flex grow active:border-0 p-4 focus:outline-none border h-[216px] rounded-[6px]"
+        className="flex grow active:border-0 p-4 focus:outline-none border border-Neutra10 h-[216px] rounded-[6px]"
       />
     </div>
   );
 }
-export function DropDown({ label }: { label: string }) {
-  return (
-    <div className="w-[100%] h-fit flex flex-col">
-      <label htmlFor="gender" className="text-sm ">
-        {label} <span className="text-ErrorBase">*</span>
-      </label>
-      <select
-        id="gender"
-        name=""
-        className="flex grow active:border-0 p-4 focus:outline-none border  rounded-[6px]"
-      >
-        <option>male</option>
-        <option>female</option>
-        <option>other</option>
-      </select>
-    </div>
-  );
-}
+// export function DropDown({ label }: { label: string }) {
+//   return (
+//     <div className="w-[100%] h-fit flex flex-col">
+//       <label htmlFor="gender" className="text-sm ">
+//         {label} <span className="text-ErrorBase">*</span>
+//       </label>
+//       <select
+//         id="gender"
+//         name=""
+//         className="flex grow active:border-0 p-4 focus:outline-none border  rounded-[6px] styled-select"
+//       >
+//         <option>male</option>
+//         <option>female</option>
+//         <option>other</option>
+//       </select>
+//     </div>
+//   );
+// }

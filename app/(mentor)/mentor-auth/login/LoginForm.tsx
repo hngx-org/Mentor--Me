@@ -14,7 +14,8 @@ import axios from "axios";
 
 import { useRouter } from "next/navigation";
 
-import { toast } from "react-toastify";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { toast } from "react-hot-toast";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
 
@@ -27,11 +28,12 @@ import Input from "@/components/inputs/input";
 import { BackwardIcon } from "@/public/SVGs";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
+import { useAuthCtx } from "@/context/AuthContext";
 
 export default function LoginForm() {
+  const { userData, setUserData } = useAuthCtx();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [userD, setUser] = useState<any>();
   const [isValid, setIsValid] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
@@ -58,6 +60,7 @@ export default function LoginForm() {
       setIsValid(false);
     } else {
       setIsValid(true);
+
       try {
         const response = await axios.post(
           "https://mentormee-api.onrender.com/auth/login",
@@ -69,27 +72,26 @@ export default function LoginForm() {
         );
 
         localStorage.setItem("Mentor", JSON.stringify(response.data));
-        setUser(response.data);
-      } catch (err: any) {
-        if (err.response && err.response.status === 406) {
-          localStorage.setItem("Mentor", JSON.stringify(err.response.data));
+        setUserData(response.data);
+
+        if (response?.data?.data && response?.data?.data?.user?.profileLink) {
+          router.replace("/mentor-profile?path=mentor-profile");
+          setIsLoading(false);
+        } else {
+          router.replace("/mentor-profile-creation");
+          setIsLoading(false);
+        }
+      } catch (error: any) {
+        if (error.response && error.response.status === 406) {
+          localStorage.setItem("Mentor", JSON.stringify(error.response.data));
           router.push("/mentor-auth/otp");
         } else {
-          toast(err?.response?.data?.message || "something went wrong");
-          return; // Stop the function execution if an error occurs
+          toast.error(error?.response?.data?.message || "something went wrong");
+          return;
         }
       } finally {
         setIsLoading(false);
       }
-
-      if (userD?.data?.user && "profileLink" in userD?.data?.user) {
-        router.push("/mentor-profile?path=profile");
-      } else {
-        router.push("/mentor-profile-creation");
-      }
-
-      // Check if the userD is defined before accessing its properties
-      console.log(userD?.data?.user && "profileLink" in userD?.data?.user);
     }
   };
 

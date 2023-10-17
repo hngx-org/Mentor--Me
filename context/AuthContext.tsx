@@ -1,33 +1,74 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useMemo,
+} from "react";
+import { useReadLocalStorage } from "usehooks-ts";
 
 type AuthCtxType = {
-  userData: UserData;
-  setUserData: React.Dispatch<React.SetStateAction<UserData>>;
+  user: User | null;
+  userData: Data | undefined;
+  setUserData: React.Dispatch<React.SetStateAction<Data | undefined>>;
 };
 
-type UserData = {
-  userId: string;
+export type UserData = {
   token: string;
-  email: string;
+  userDetails: {
+    _id: string;
+    email: string;
+    emailVerified: boolean;
+    accountDisabled: boolean;
+    role: string;
+    lastActive: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+    profileLink: string;
+    bio: string;
+    fullName: string;
+  };
 };
+
+type Data = {
+  message: string;
+  data: UserData | null;
+  success: boolean;
+  email?: string;
+  token?: string;
+};
+
+interface User {
+  name?: string;
+  email?: string;
+  token?: string;
+}
 
 const AuthContext = createContext<AuthCtxType | null>(null);
 
 const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [userData, setUserData] = useState<UserData>({
+  const [userData, setUserData] = useState<Data | undefined>();
+  const [user, setUser] = useState<User | null>({
     email: "",
     token: "",
-    userId: "",
   });
+  const data: Data | null = useReadLocalStorage("Mentor" || "Mentee");
 
-  const value = {
-    userData,
-    setUserData,
-  };
+  useEffect(() => {
+    if (data) {
+      setUserData(data);
+      setUser((prev) => ({
+        ...prev,
+        email: data?.email,
+        token: data.data?.token,
+      }));
+    }
+  }, [userData]);
+
+  const value = useMemo(() => ({ user, setUserData, userData }), [userData]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
