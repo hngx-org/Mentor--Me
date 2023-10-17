@@ -16,22 +16,33 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuthCtx();
   const email = user?.email;
   const userName = user?.email?.split("@")[0];
-  const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${email}`;
   const nameParams = useSearchParams().get("name");
   const bioParams = useSearchParams().get("bio");
   const emailParams = useSearchParams().get("email");
   const mentorshipParams = useSearchParams().get("mentorship");
-
+  const firstLetterOfEmail = email ? email[0] : ""; // Default to empty string if email is undefined
+  const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
+    nameParams || firstLetterOfEmail
+  }`;
   return (
     <>
-      <SidebarMentor path={pathParams} />
+      <SidebarMentor
+        path={pathParams}
+        name={nameParams}
+        imgSrc={profileImg}
+        email={emailParams}
+      />
 
       <main className="lg:ml-[274px]">
         <NavbarMentee
           path={pathParams}
           action={actionParams}
-          imgSrc={profileImg}
           username={userName}
+          name={nameParams}
+          imgSrc={profileImg}
+          email={emailParams}
+          bio={bioParams}
+          jobTitle={mentorshipParams}
         />
 
         <MobileSideBar path={pathParams} action={actionParams} />

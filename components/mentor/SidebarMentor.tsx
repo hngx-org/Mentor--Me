@@ -18,15 +18,24 @@ import AuthProfileCard from "../cards/auth-profile-card/AuthProfileCard";
 
 export type SideBarMentorProps = {
   light?: boolean;
+  imgSrc?: string;
+
+  name?: string | null;
+  bio?: string | null;
+  email?: string | null;
+  jobTitle?: string | null;
 };
 
 export default async function SidebarMentor({
   light,
   path,
+  imgSrc,
+  name,
+  bio,
+  email,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
   const { user } = useAuthCtx();
-  const email = user?.email;
-  const userName = user?.email?.split("@")[0];
+
   // const [imgUrl, setImgUrl] = useState("");
   // const email = userData.data?.user.email;
   // const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
@@ -119,11 +128,7 @@ export default async function SidebarMentor({
               </span>
             </li>
           </ul> */}
-          <AuthProfileCard
-            email={email}
-            user={userName}
-            styles="text-Neutra30"
-          />
+          <AuthProfileCard email={email} user={name} styles="text-Neutra30" />
         </Link>
       </div>
     </section>

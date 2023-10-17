@@ -12,7 +12,7 @@ type MentorProfileHeaderProps = {
   userRole: string;
   userRating: number;
   userId?: string;
-  email?: string;
+  mentorship?: string;
   openModal: React.Dispatch<React.SetStateAction<ModalState>>;
 };
 
@@ -21,7 +21,7 @@ export default function MentorProfileHeader({
   userRating,
   userRole,
   userId,
-  email,
+  mentorship,
   openModal,
 }: MentorProfileHeaderProps) {
   const [randomColor, setRandomColor] = useState("");
@@ -53,7 +53,7 @@ export default function MentorProfileHeader({
       <div className="h-[50%] w-[100%]  bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400  bg-cover bg-no-repeat" />
       <div className="h-[50%] w-[100%]  bg-white" />
       <div className=" w-[80%]   h-fit flex  flex-col items-center space-y-2 sm:space-x-2  sm:flex-row self-center absolute  top-[100px] sm:top-[90px] ">
-        <div className=" w-[90px] h-[90px]  sm:w-fit sm:h-fit  border rounded-full border-[6px] border-white ">
+        <div className=" w-[90px] h-[90px]  sm:w-fit sm:h-fit  rounded-full border-[6px] border-white ">
           <Image
             src={`https://api.dicebear.com/7.x/initials/png?seed=${userName}`}
             width={200}
@@ -73,7 +73,7 @@ export default function MentorProfileHeader({
               {userName}
             </p>
             <p className="text-Neutra40 text-sm"> {userRole}</p>
-            <p className="text-Neutra40 text-sm"> {email}</p>
+            <p className="text-Neutra40 text-sm"> {mentorship}</p>
           </div>
           <div className="flex justify-center space-x-4 min-w-fit py-2 items-center">
             <ShareIcon />
