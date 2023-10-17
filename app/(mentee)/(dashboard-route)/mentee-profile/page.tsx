@@ -61,7 +61,7 @@ const baseUrl = "https://mentormee-api.onrender.com";
 
 export default function MenteeProfilePage() {
   const [activeTab, setActiveTab] = useState<string | null | undefined>("");
-  const [menteeData, setMenteeData] = useState<MenteeData>({});
+  const [menteeData, setMenteeData] = useState<MenteeData>({} as MenteeData);
   const [token, setToken] = useState("");
   const router = useRouter();
   const paramsTab = useSearchParams().get("tab");
