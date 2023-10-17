@@ -55,5 +55,7 @@ export interface CurrentMentor {
     updatedAt: string;
     __v: number;
     profileLink: string;
+    bio: string;
+    fullName: string;
   };
 }
