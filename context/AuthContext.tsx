@@ -17,15 +17,19 @@ type AuthCtxType = {
 
 export type UserData = {
   token: string;
-  user: {
+  userDetails: {
     _id: string;
-    accountDisabled: boolean;
-    createdAt: string;
-    emailVerified: boolean;
-    lastActive: string;
-    role: string;
-    updatedAt: string;
     email: string;
+    emailVerified: boolean;
+    accountDisabled: boolean;
+    role: string;
+    lastActive: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+    profileLink: string;
+    bio: string;
+    fullName: string;
   };
 };
 
