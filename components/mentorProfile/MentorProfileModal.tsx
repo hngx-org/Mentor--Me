@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from "react";
-
 import { ModalCloseIcon } from "@/public/SVGs";
 import MentorProfileTabLayout from "./MentorProfileTab";
 import { ModalState } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/page";
