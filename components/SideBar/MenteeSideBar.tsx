@@ -92,7 +92,7 @@ export default function MenteeSideBar({
         </div>
 
         <div
-          className={`mt-10 bottom-0  ${
+          className={`mt-16 bottom-0  ${
             path === "profile" ? "border border-[#E5FFFF] rounded-2xl" : ""
           }`}
         >
@@ -103,7 +103,7 @@ export default function MenteeSideBar({
                 <span className="  font-Inter text-[10px] font-[500]   text-Neutra30">
                   <span
                     className={`${
-                      path === "profile" ? "text-white" : "white-[#fff]"
+                      path === "profile" ? "text-white" : "text-[#fff]"
                     }`}
                   >
                     Funmi Oladapo
