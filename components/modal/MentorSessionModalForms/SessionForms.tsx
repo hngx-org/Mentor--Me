@@ -40,7 +40,7 @@ interface RecurringFormData {
 export function FreeSessionForm() {
   const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
-  const [formVisible, setFormVisible] = useState<boolean>(false);
+  const [formVisible, setFormVisible] = useState<boolean>(true);
   const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [formData, setFormData] = useState<FreeFormData>({
@@ -84,6 +84,7 @@ export function FreeSessionForm() {
     if (isFormValid) {
       setError("");
       setCalendarVisible(true);
+      setFormVisible(false);
     } else {
       setError("All fields are required");
       // console.log("All fields are required");
@@ -109,115 +110,124 @@ export function FreeSessionForm() {
       console.log("form submitted,", responseData);
     } else {
       setCalendarVisible(false);
+      setFormVisible(true);
       setError("An error occurred while creating a session");
       console.error("submissiom failed");
     }
   };
   return (
-    <div className="p-0 bg-[#1d1c1c57]  bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
-      <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
-        <div className=" w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3">
-          <h1 className="text-left font-bold text-[1.5rem] sm:text-[2rem] text-[#08051e]">
-            Create a Free Session
-          </h1>
-          <p className="text-gray-500">Create a session that best suits you!</p>
-        </div>
-        <form className="flex flex-col gap-3 sm:gap-6 py-3 rounded sm:px-12 w-full justify-between">
-          <span className="text-Error50 font-bold">{error}</span>
-          <SelectInputType
-            labelText="Session name"
-            isRequired
-            selectId="sessionName"
-            selectName="sessionName"
-            placeholder="Give this session a name"
-            value={formData.sessionName}
-            // onChange={(value) => handleSelectChange(value)}
-            onChange={handleSelectChange}
-          >
-            <option value="Design principles" className="text-black">
-              Design principles
-            </option>
-            <option value="Technical Writing 101">Technical Writing 101</option>
-          </SelectInputType>
-          <TimeInputType
-            labelText="Description"
-            isRequired
-            type="text"
-            InputId="description"
-            InputName="description"
-            placeholder="Tell us a little about this session"
-            value={formData.description}
-            onChange={handleInputChange}
-          />
-          <SelectInputType
-            labelText="Attendees limit"
-            isRequired
-            selectId="attendeesLimit"
-            selectName="attendeesLimit"
-            placeholder="Select from the options"
-            value={formData.attendeesLimit}
-            onChange={handleSelectChange}
-          >
-            <option value="2">2</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-          </SelectInputType>
-          <TimeInputType
-            labelText="Time"
-            type="time"
-            onChange={handleInputChange}
-            value={formData.time}
-            isRequired
-            InputId="time"
-            InputName="time"
-            placeholder="Select the time of the day"
-          />
-          <TimeInputType
-            labelText="Date"
-            type="date"
-            onChange={handleInputChange}
-            value={formData.date}
-            isRequired
-            InputId="date"
-            InputName="date"
-            placeholder="Select the date"
-          />
-
-          <SelectInputType
-            labelText="Select relevant topics"
-            isRequired
-            selectId="relevantTopics"
-            selectName="relevantTopics"
-            placeholder="Select some relevant topics this session"
-            value={formData.relevantTopics}
-            onChange={handleSelectChange}
-          >
-            <option value="Design">Design</option>
-            <option value="Development">Development</option>
-            <option value="Technical Writing">Technical Writing</option>
-          </SelectInputType>
-
-          <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
-            <Link className="w-full" href="/mentor-schedule">
-              <Button
-                className="p-4 w-full md:w-[20%]"
-                variant="outline-primary"
-                type="button"
+    <div>
+      {formVisible && (
+        <div className="p-0 bg-[#1d1c1c57]  bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
+          <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
+            <div className=" w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3">
+              <h1 className="text-left font-bold text-[1.5rem] sm:text-[2rem] text-[#08051e]">
+                Create a Free Session
+              </h1>
+              <p className="text-gray-500">
+                Create a session that best suits you!
+              </p>
+            </div>
+            <form className="flex flex-col gap-3 sm:gap-6 py-3 rounded sm:px-12 w-full justify-between">
+              <span className="text-Error50 font-bold">{error}</span>
+              <SelectInputType
+                labelText="Session name"
+                isRequired
+                selectId="sessionName"
+                selectName="sessionName"
+                placeholder="Give this session a name"
+                value={formData.sessionName}
+                // onChange={(value) => handleSelectChange(value)}
+                onChange={handleSelectChange}
               >
-                Cancel
-              </Button>
-            </Link>
-            <Button
-              onClick={openCalendar}
-              className="p-4 w-full md:w-[20%]"
-              variant="primary"
-              type="button"
-            >
-              Continue
-            </Button>
+                <option value="Design principles" className="text-black">
+                  Design principles
+                </option>
+                <option value="Technical Writing 101">
+                  Technical Writing 101
+                </option>
+              </SelectInputType>
+              <TimeInputType
+                labelText="Description"
+                isRequired
+                type="text"
+                InputId="description"
+                InputName="description"
+                placeholder="Tell us a little about this session"
+                value={formData.description}
+                onChange={handleInputChange}
+              />
+              <SelectInputType
+                labelText="Attendees limit"
+                isRequired
+                selectId="attendeesLimit"
+                selectName="attendeesLimit"
+                placeholder="Select from the options"
+                value={formData.attendeesLimit}
+                onChange={handleSelectChange}
+              >
+                <option value="2">2</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+              </SelectInputType>
+              <TimeInputType
+                labelText="Time"
+                type="time"
+                onChange={handleInputChange}
+                value={formData.time}
+                isRequired
+                InputId="time"
+                InputName="time"
+                placeholder="Select the time of the day"
+              />
+              <TimeInputType
+                labelText="Date"
+                type="date"
+                onChange={handleInputChange}
+                value={formData.date}
+                isRequired
+                InputId="date"
+                InputName="date"
+                placeholder="Select the date"
+              />
+
+              <SelectInputType
+                labelText="Select relevant topics"
+                isRequired
+                selectId="relevantTopics"
+                selectName="relevantTopics"
+                placeholder="Select some relevant topics this session"
+                value={formData.relevantTopics}
+                onChange={handleSelectChange}
+              >
+                <option value="Design">Design</option>
+                <option value="Development">Development</option>
+                <option value="Technical Writing">Technical Writing</option>
+              </SelectInputType>
+
+              <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
+                <Link className="w-full" href="/mentor-schedule">
+                  <Button
+                    className="p-4 w-full md:w-[20%]"
+                    variant="outline-primary"
+                    type="button"
+                  >
+                    Cancel
+                  </Button>
+                </Link>
+                <Button
+                  onClick={openCalendar}
+                  className="p-4 w-full md:w-[20%]"
+                  variant="primary"
+                  type="button"
+                >
+                  Continue
+                </Button>
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
+        </div>
+      )}
       {CalendarVisible && (
         <MentorCalendar
           onClose={closeCalendar}
