@@ -102,7 +102,7 @@ export default function AllSession({
             key={session.id}
             onClick={() => {
               router.push(
-                `?path=${path}&View=${activeView}&tabs=${session.tab}`,
+                `?path=Sessions&View=${activeView}&tabs=${session.tab}`,
                 {
                   scroll: false,
                 }
