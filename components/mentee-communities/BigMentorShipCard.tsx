@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 
 import { CalenderIcon, ClockIcon } from "@/public/SVGs";
+import Loading from "@/app/(mentor)/loading";
 // import Button from "@/components/ui/Button";
 
 type Props = {
@@ -16,6 +17,20 @@ type Props = {
   title: string;
   desc: string;
 };
+function addDotsToString(inputString: string, desiredLength: number) {
+  // Check if the input string is longer than the desired length
+  if (inputString.length <= desiredLength) {
+    return inputString; // No need to add dots
+  }
+
+  const dots = ".".repeat(3); // Create a string of dots
+
+  return inputString.slice(0, desiredLength) + dots; // Concatenate the input string with dots
+}
+
+console.log(
+  addDotsToString("jkbknioefknififhnirfzmnkcdvopvomv omvp[vmpo[efp[ofron", 13)
+);
 
 const BigMentorShipCard: React.FC<Props> = ({
   id,
@@ -30,23 +45,25 @@ const BigMentorShipCard: React.FC<Props> = ({
   desc,
 }) => (
   <div className="bigMentorshipCard lg:rounded-[8px] rounded-[5px]   hidden lg:flex  gap-4 ">
-    <div className="image  flex-shrink-0  aspect-[551/336]  xl:w-[551px] lg:w-[400px] overflow-hidden rounded-[8px]">
-      {" "}
-      <Image
-        alt="members"
-        src={mentorCardHero}
-        width={606}
-        height={400}
-        className="block  aspect-[298/183]  w-[110%] object-cover "
-      />
-    </div>
-
-    <div className="info px-[14px] xl:gap-[10px]  flex flex-col font-Hanken text-NeutalBase ">
-      <div className="topic font-bold xl:text-[46px] lg:text-[40px] xl:leading-[56px] lg:leading-[50px] whitespace-nowrap">
-        {title}
+    <Suspense key={id} fallback={<Loading />}>
+      <div className="image  flex-shrink-0  aspect-[551/336]  xl:w-[551px] lg:w-[400px] overflow-hidden rounded-[8px]">
+        {" "}
+        <Image
+          alt="members"
+          src={mentorCardHero}
+          width={606}
+          height={400}
+          className="block  aspect-[298/183]  w-[110%] object-cover "
+        />
+      </div>
+    </Suspense>
+    .
+    <div className="info px-[14px] xl:gap-[10px]  flex flex-col font-Hanken text-NeutalBase max-w-[550px] overflow-hidden ">
+      <div className="topic font-bold  lg:text-[38px] xl:leading-[56px] lg:leading-[50px] whitespace-nowrap">
+        {addDotsToString(title, 26)}
       </div>
       <div className="w-fit flex gap-1 flex-col justify-center text-center">
-        <div className="flex gap-1 items-center">
+        <div className="flex gap-[15px] items-center">
           <Image
             alt="members"
             src={mentorImage}
@@ -54,13 +71,16 @@ const BigMentorShipCard: React.FC<Props> = ({
             height={37}
             className="lg:w-[30px] aspect-square xl:w-[37px]"
           />
-          <p className="font-semibold xl:text-[24px] lg:text-[18px] leading-[28.8px] ">
-            {mentorName}
-          </p>
+          <div className="flex flex-col text-left">
+            {" "}
+            <p className="font-medium text-Accent1 lg:text-[18px] leading-[21.8px] ">
+              {mentorName}
+            </p>
+            <p className="text-Neutra30 font-normal text-[14px] leading-[20.6px]">
+              Science and Technology
+            </p>
+          </div>
         </div>
-        <p className="text-Neutra30 font-normal text-[18px] leading-[21.6px]">
-          Science and Technology
-        </p>
       </div>
       <div className="time flex xl:gap-[14px] lg:gap-[8px] text-[16px] text-Neutra30 font-normal">
         <div className="w-fit flex gap-x-[6px] items-center">
@@ -75,7 +95,7 @@ const BigMentorShipCard: React.FC<Props> = ({
         </div>
       </div>
 
-      <div className="desc font-normal xl:text-2xl lg:text-[18px] xl:h-[96px] h-[54px] overflow-clip">
+      <div className="desc font-normal  lg:text-[16px] xl:h-[96px] h-[54px] overflow-clip">
         {desc}
       </div>
 

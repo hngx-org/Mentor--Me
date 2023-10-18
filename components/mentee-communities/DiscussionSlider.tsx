@@ -15,15 +15,17 @@ type PropsObj = {
   id: number;
 };
 
-type Props = { slideInfo: PropsObj[] };
-const DiscussionSlider: React.FC<Props> = ({ slideInfo }) => {
+type Props = { slideInfo: PropsObj[]; isLoggedIn: boolean };
+const DiscussionSlider: React.FC<Props> = ({
+  slideInfo,
+  isLoggedIn = false,
+}) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   function getRandomInt(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  const isLoggedIn = false;
   // Example: Generate a random integer between 1 and 10
 
   const handlePrevClick = () => {
@@ -43,7 +45,7 @@ const DiscussionSlider: React.FC<Props> = ({ slideInfo }) => {
 
   return (
     <div
-      className="discussion-section relative lg:mt-[98px] md:mt[40px] mt-[23px]  flex flex-col mx-auto 
+      className="discussion-section relative  mt-[23px]  flex flex-col mx-auto 
 text-NeutalBase font-Inter overflow-hidden "
       // style={{marginLeft:`${}`}}
     >
@@ -53,7 +55,7 @@ text-NeutalBase font-Inter overflow-hidden "
         </h2>
 
         {isLoggedIn ? (
-          <Link href="/mentee-communities/mentorship">
+          <Link href="/mentee-community/mentorship">
             <div className="seeMore  text-Accent1 lg:font-medium lg:text-[16px] lg:leading-[25.2px] mr-4 ">
               View more
             </div>
