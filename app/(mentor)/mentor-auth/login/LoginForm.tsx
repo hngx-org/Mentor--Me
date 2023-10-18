@@ -61,37 +61,38 @@ export default function LoginForm() {
     } else {
       setIsValid(true);
 
-      try {
-        const response = await axios.post(
-          "https://mentormee-api.onrender.com/auth/login",
-          {
-            email: formData.email,
-            password: formData.password,
-            role: "mentor",
+      axios
+        .post("https://mentormee-api.onrender.com/auth/login", {
+          email: formData.email,
+          password: formData.password,
+          role: "mentor",
+        })
+        .then((response) => {
+          localStorage.setItem("Mentor", JSON.stringify(response.data));
+          setUserData(response.data);
+
+          if (response?.data?.data && response?.data?.data?.user?.profileLink) {
+            router.replace("/mentor-profile?path=mentor-profile");
+            setIsLoading(false);
+          } else {
+            router.replace("/mentor-profile-creation");
+            setIsLoading(false);
           }
-        );
+        })
 
-        localStorage.setItem("Mentor", JSON.stringify(response.data));
-        setUserData(response.data);
-
-        if (response?.data?.data && response?.data?.data?.user?.profileLink) {
-          router.replace("/mentor-profile?path=mentor-profile");
+        .catch((error) => {
+          if (error.response && error.response.status === 406) {
+            localStorage.setItem("Mentor", JSON.stringify(error.response.data));
+            router.push("/mentor-auth/otp");
+          } else {
+            toast.error(
+              error?.response?.data?.message || "something went wrong"
+            );
+          }
+        })
+        .finally(() => {
           setIsLoading(false);
-        } else {
-          router.replace("/mentor-profile-creation");
-          setIsLoading(false);
-        }
-      } catch (error: any) {
-        if (error.response && error.response.status === 406) {
-          localStorage.setItem("Mentor", JSON.stringify(error.response.data));
-          router.push("/mentor-auth/otp");
-        } else {
-          toast.error(error?.response?.data?.message || "something went wrong");
-          return;
-        }
-      } finally {
-        setIsLoading(false);
-      }
+        });
     }
   };
 
