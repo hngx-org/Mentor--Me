@@ -30,11 +30,13 @@ export default function Identification({
     const { type, files } = event.target;
 
     if (type === "file" && files) {
+      const selectedFile = files[0];
+      const fileUrl = URL.createObjectURL(selectedFile);
       setFormData?.((prevData) => ({
         ...prevData,
         identification: {
           ...prevData.identification,
-          uploadID: files[0], // Update the graduationFile property with the selected file
+          uploadID: fileUrl, // Update the graduationFile property with the selected file
         },
       }));
       setSelectedFileName(files[0].name);
@@ -74,15 +76,15 @@ export default function Identification({
             Full Legal Name
             <input
               className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
-              id="fullname"
+              id="fullName"
               type="text"
               placeholder="Jane Doe"
-              name="fullname"
+              name="fullName"
               onChange={handleInputChange}
               required
             />
           </label>
-          {validated && !formData?.identification?.fullname && (
+          {validated && !formData?.identification?.fullName && (
             <p className="font-Inter font-[500] text-Error40 text-[10px]">
               Please enter your Legal Name
             </p>
@@ -97,14 +99,14 @@ export default function Identification({
             Date of Birth
             <input
               className="mt-1 border border-Neutra10 rounded-md w-full py-2 px-3  font-[400] text-[12px] leading-tight focus:outline-none focus:shadow-outline"
-              id="dateofBirth"
+              id="dateOfBirth"
               type="date"
               placeholder="Jane Doe"
-              name="dateofBirth"
+              name="dateOfBirth"
               onChange={handleInputChange}
               required
             />
-            {validated && !formData?.identification?.dateofBirth && (
+            {validated && !formData?.identification?.dateOfBirth && (
               <p className="font-Inter font-[500] text-Error40 text-[10px]">
                 Please enter your date of birth
               </p>
@@ -179,7 +181,7 @@ export default function Identification({
                 onChange={handleFileChange}
               />
             </label>
-            {validated && !formData?.identification?.dateofBirth && (
+            {validated && !formData?.identification?.uploadID && (
               <p className="font-Inter font-[500] text-Error40 text-[10px]">
                 Please upload ID file
               </p>

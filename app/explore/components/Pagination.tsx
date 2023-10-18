@@ -3,12 +3,14 @@ import React, { useState } from "react";
 type PaginationProps = {
   currentPage: number;
   totalPages: number;
+  postsPerPage: number;
   onPageChange: (page: number) => void;
 };
 
 export default function Pagination({
   currentPage,
   totalPages,
+  postsPerPage,
   onPageChange,
 }: PaginationProps) {
   const renderPageNumbers = () => {
@@ -28,20 +30,33 @@ export default function Pagination({
     return pageNumbers;
   };
 
-  const [onClicked, setOnClicked] = useState(2);
-  const linkStyle = "font-semibold text-lg cursor-pointer";
-  const activeStyle =
-    "font-semibold text-lg cursor-pointer md:bg-Accent1 px2 py2 md:px[8px] md:py[4px] md:px-[16px] md:py-[8px] md:text-white rounded-[9999px] transition";
-  const nonActiveStyle = "font-semibold text-lg cursor-pointer text-black";
+  // Added this
+  // const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  const pages = Array.from(
+    { length: Math.ceil(totalPages / postsPerPage) },
+    (_, i) => i + 1
+  );
 
-  const numClicked = (num: number) => {
-    setOnClicked(num);
-  };
+  // const [onClicked, setOnClicked] = useState(1);
+  const linkStyle = "fontsemibold text-lg cursor-pointer";
+  const activeStyle =
+    "font-semibold text-lg cursor-pointer md:bg-Accent1 px2 py2 md:px[8px] md:py[7px] md:px-[16px] md:py-[7px] md:text-white rounded-[9999px] transition";
+  const nonActiveStyle =
+    "fontsemibold text-md lg:text-lg cursor-pointer text-black";
+
+  // const numClicked = (num: number) => {
+  //   setOnClicked(num);
+  // };
 
   return (
     <div className="flex justify-center items-center mb-20 mt-10 ">
       <div className="flex items-center gap-4 lg:gap-7 rounded-[40px] border-[0.2px] border-Neutra40 px-2 py-2">
-        <button type="button" className="hover:opacity-70 transition-opacity">
+        <button
+          type="button"
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="hover:opacity-70 transition-opacity"
+        >
           <svg
             width="60"
             height="60"
@@ -63,8 +78,10 @@ export default function Pagination({
         >
           Prev
         </button>
-        <div className="flex items-center gap-3 lg:gap-5">
-          <button
+        {/* Page numbers */}
+        <div className="flex items-center gap3 space-x-3 lg:gap5 lg:space-x-5">
+          {/*     Previous hardcoded value */}
+          {/* <button
             type="button"
             className={onClicked === 1 ? activeStyle : nonActiveStyle}
             onClick={() => numClicked(1)}
@@ -104,8 +121,17 @@ export default function Pagination({
             className={onClicked === 10 ? activeStyle : nonActiveStyle}
           >
             10
-          </button>
-          {/* {renderPageNumbers()} */}
+          </button> */}
+          {pages.map((page) => (
+            <button
+              type="button"
+              key={page}
+              className={currentPage === page ? activeStyle : nonActiveStyle}
+              onClick={() => onPageChange(page)}
+            >
+              {page}
+            </button>
+          ))}
         </div>
         <button
           type="button"
@@ -115,7 +141,12 @@ export default function Pagination({
         >
           Next
         </button>
-        <button type="button" className=" hover:opacity-50 transition-opacity">
+        <button
+          type="button"
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className=" hover:opacity-50 transition-opacity"
+        >
           <svg
             width="60"
             height="60"
