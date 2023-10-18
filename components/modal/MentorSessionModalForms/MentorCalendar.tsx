@@ -12,15 +12,21 @@ interface SessionTime {
 interface CalendarProps {
   onClose?: () => void;
   onShowSuccessModal?: () => void;
+  onDurationChange?: () => void;
 }
 
-const MentorCalendar = ({ onClose, onShowSuccessModal }: CalendarProps) => {
+const MentorCalendar = ({
+  onClose,
+  onShowSuccessModal,
+  onDurationChange,
+}: CalendarProps) => {
   const [minutes, setMinutes] = useState<SessionTime>({ minutes: 30 });
   function handleIncrease(event: React.MouseEvent<HTMLElement>) {
     setMinutes((prevState) => ({
       ...prevState,
       minutes: prevState.minutes + 10,
     }));
+    // onDurationChange(minutes?.minutes + 10)
   }
   function handleDecrease(event: React.MouseEvent<HTMLElement>) {
     setMinutes((prevState) => ({
