@@ -1,38 +1,8 @@
 import Image from "next/image";
-import LeftArrow from "../../../public/assets/Icons/landing-page/arrow-circle-left.png";
-import RightArrow from "../../../public/assets/Icons/landing-page/arrow-circle-right.png";
-import MentorImageOne from "../../../public/assets/images/landing-page/mentorTypes-1.png";
-import MentorImageTwo from "../../../public/assets/images/landing-page/mentorTypes-2.png";
-import MentorImageThree from "../../../public/assets/images/landing-page/mentorTypes-3.png";
-import MentorImageFour from "../../../public/assets/images/landing-page/mentorTypes-4.png";
+
+import imgCarousel from "@/lib/constants/carouselData";
 import Carousel from "@/components/Carousel";
 
-const imgCarousel = [
-  {
-    id: 1,
-    img: MentorImageOne,
-  },
-  {
-    id: 2,
-    img: MentorImageThree,
-  },
-  {
-    id: 3,
-    img: MentorImageFour,
-  },
-  {
-    id: 4,
-    img: MentorImageThree,
-  },
-  {
-    id: 5,
-    img: MentorImageOne,
-  },
-  {
-    id: 6,
-    img: MentorImageTwo,
-  },
-];
 export default function MentorTypes() {
   return (
     <section className="pt-[3rem] pb-[5rem] my-[2rem] md:my-[5rem]">

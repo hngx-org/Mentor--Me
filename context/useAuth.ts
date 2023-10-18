@@ -9,6 +9,7 @@ interface User {
   data: CurrentMentor | null;
   success: boolean;
 }
+const baseUrl = "https://mentormee-api.onrender.com";
 
 export const useAuth = () => {
   const { user } = useAuthCtx();
@@ -21,9 +22,10 @@ export const useAuth = () => {
   useEffect(() => {
     const requestAuth = async () => {
       // Make an authenticated request to the server
-      const url = `${process.env.NEXT_PUBLIC_BASE_URL}mentors/get-current`;
+      const url = `${baseUrl}/mentors/get-current`;
       if (user?.token) {
         const response = await fetch(url!, {
+          method: "GET",
           headers: {
             Authorization: `Bearer ${user?.token}`,
             "Content-Type": "application/json",
