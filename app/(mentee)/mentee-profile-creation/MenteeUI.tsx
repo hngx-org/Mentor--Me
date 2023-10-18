@@ -163,11 +163,8 @@ export default function MenteeProfileCreationForms() {
         image: url.url,
       }));
     }
-
-    console.log(formInputs);
   }, [url]);
 
-  console.log(formInputs);
   function move(motion: string) {
     // console.log(forms);
     if (currForm <= 0 && motion === "back") {
