@@ -18,7 +18,8 @@ const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
       <section>
         {/* Search component */}
         <section className="p-6 md:p-10">
-          <SearchCommunitySearchbar />
+          {/* create another swarch component or use this one */}
+          {/* <SearchCommunitySearchbar /> */}
         </section>
         {/* Community info */}
         <section className="p-6 md:p-12 md:flex gap-4 justify-between items-center">
