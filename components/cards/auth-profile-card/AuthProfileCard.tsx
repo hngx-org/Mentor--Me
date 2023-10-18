@@ -30,7 +30,7 @@ export default function AuthProfileCard({
           path === "profile" ? "w-full" : "overflow-hidden"
         }`}
       >
-        <div className="w-[20px]  h-[20px] sm:w-[54px] sm:h-[54px]  rounded-full relative ">
+        <div className="w-[20px]  h-[20px] sm:w-[54px] sm:h-[54px]  rounded-full relative flex-shrink-0 ">
           <Image
             style={{ objectFit: "cover", borderRadius: "100%" }}
             src={`https://api.dicebear.com/7.x/initials/png?seed=${user}`}
