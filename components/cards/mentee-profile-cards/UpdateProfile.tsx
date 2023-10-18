@@ -33,16 +33,14 @@ const updateProfileTabs: UpdateProfileTabsProp[] = [
   },
 ];
 export default function UpdateProfile() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
-    email: "",
-    message: "",
+
+    bio: "",
   });
-  const isDisabled =
-    !formData.name || !formData.email || !formData.message || !formData.phone;
+  const isDisabled = !formData.name || !formData.bio;
   const [activeTab, setActiveTab] = useState<string | null | undefined>("");
 
   const router = useRouter();

@@ -4,9 +4,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import { redirect, useRouter } from "next/navigation";
 import {
   MenteeDashboardProfileImg,
   MenteeUpdateProfileCheckmark,
@@ -19,23 +19,24 @@ type formProps = {
   fullName: string;
   bio: string;
   gender: string;
-  image: "";
+  image: string;
 };
 
 const MAX_SIZE = 2 * 1024 * 1024; // 2MB in bytes
 export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [fileURL, setFileURL] = useState("");
+  const router = useRouter(); // router
+
+  const [file, setFile] = useState<any>();
   const [formData, setFormData] = useState<formProps>({
     fullName: "",
     gender: "Select",
     bio: "",
     image: "",
   });
-  const [token, setToken] = useState(false);
+  const [token, setToken] = useState("");
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
   const baseUrl = "https://mentormee-api.onrender.com";
-  const router = useRouter();
 
   const handleImageInputChange = (e: any) => {
     const file = e.target.files[0];
@@ -73,14 +74,17 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   };
 
   useEffect(() => {
-    const getUser = localStorage.getItem("Mentee");
-    if (getUser) {
-      try {
-        const newUser = JSON.parse(getUser);
-        const extractedToken = newUser.data.token;
-        setToken(extractedToken);
-      } catch (error) {
-        console.error("Error parsing JSON:", error);
+    if (typeof window !== "undefined") {
+      const getUser = localStorage.getItem("Mentee");
+      if (getUser) {
+        try {
+          const newUser = JSON.parse(getUser);
+          const getToken = newUser.data.token;
+          setToken(getToken);
+          // assign token value here
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
       }
     }
   }, []);
@@ -96,7 +100,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data.data);
+
         setFormData({
           fullName: data?.data?.user?.fullName,
           gender: data?.data?.gender,
@@ -110,17 +114,33 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
       console.error("Error fetching user data");
     }
   };
-  useEffect(() => {
-    if (token) {
-      fetchMenteeData();
-    }
-  }, [token]);
 
   const handleUpdate = async (e: any) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-
+    setIsLoading(true);
+    e.preventDefault();
     // Check if authToken exists
-    if (token) {
+    const imageData = new FormData();
+    imageData.append("file", file);
+    imageData.append("upload_preset", "nd2sr4np");
+    imageData.append("cloud_name", "dp5ysdt4c");
+    imageData.append("api_key", "484974749171579");
+    imageData.append("folder", "mentee-profile");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dp5ysdt4c/image/upload",
+      {
+        method: "POST",
+        body: imageData,
+      }
+    );
+    const data = await res.json();
+
+    console.log(formData);
+
+    setFormData({
+      ...formData,
+      image: data.url,
+    });
+    if (res.ok && token) {
       const apiUrl = "https://mentormee-api.onrender.com/mentee/update-profile";
 
       const patchData = {
@@ -139,6 +159,8 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
           // Handle a successful update here
           setIsProfileUpdated(true);
 
+          router.push("/mentee-profile?path=profile");
+
           setTimeout(() => {
             setIsProfileUpdated(false);
             router.replace("/mentee-profile?path=profile");
@@ -151,23 +173,54 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
         }
       } catch (error) {
         console.error("Error:", error);
+        setIsLoading(false);
+      } finally {
+        setIsLoading(false);
+        fetchMenteeData();
+        router.push("/mentee-profile?path=profile");
       }
     } else {
       // Handle the case where authToken is missing
       console.log("Auth token is missing.");
+      setIsLoading(false);
     }
   };
-
+  // console.log(formData);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // const handleEditClick = () => {
-  //   // @ts-ignore
-  //   fileInputRef.current.click();
-  // };
   const isDisabled =
     !formData.fullName ||
     formData.gender === "select" ||
     formData.bio.length < 30;
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
+    e.preventDefault();
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file); // Use append instead of set
+    formData.append("upload_preset", "nd2sr4np");
+
+    try {
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dp5ysdt4c/image/upload",
+        formData
+      );
+
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+      setFormData({
+        fullName: "",
+        gender: "select",
+        bio: "",
+        image: "",
+      });
+    }
+  };
 
   return (
     <div className="flex w-full justify-center sm:justify-start">
@@ -195,9 +248,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
               >
                 <Image
                   src={
-                    formData.image
-                      ? URL.createObjectURL(formData.image)
-                      : MenteeDashboardProfileImg
+                    file ? URL.createObjectURL(file) : MenteeDashboardProfileImg
                   }
                   alt="user image"
                   width={130}
@@ -216,7 +267,24 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={handleImageInputChange}
+                    ref={fileInputRef}
+                    className="hidden"
+                    onChange={(e) => {
+                      if (
+                        e.currentTarget.files &&
+                        e.currentTarget.files[0].size > MAX_SIZE
+                      ) {
+                        toast.error(
+                          "Image size exceeds 2MB. Please upload a smaller image."
+                        );
+
+                        return;
+                      }
+
+                      if (e.currentTarget.files && e.currentTarget.files[0]) {
+                        setFile(e.currentTarget.files[0]);
+                      }
+                    }}
                   />
                 </label>
               </div>
