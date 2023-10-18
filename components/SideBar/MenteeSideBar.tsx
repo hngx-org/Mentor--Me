@@ -24,7 +24,7 @@ export default function MenteeSideBar({
   const router = useRouter();
   return (
     <section
-      className={`hidden w-[240px] border-[1px] py-7 px-4 min-h-screen h-screen fixed left-0 ${
+      className={`hidden w-[240px] border-[1px] py-7 px-4 min-h-screen h-screen fixed left-0  top-0${
         light ? "bg-[#fff]" : " bg-[#000] hidden lg:block"
       }`}
     >
