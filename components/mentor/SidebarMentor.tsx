@@ -129,7 +129,12 @@ export default function SidebarMentor({
               </span>
             </li>
           </ul> */}
-          <AuthProfileCard email={email} user={name} styles="text-Neutra30" />
+          <AuthProfileCard
+            path={path}
+            email={email}
+            user={name}
+            styles="text-Neutra30"
+          />
         </Link>
       </div>
     </section>
