@@ -11,6 +11,7 @@ interface FreeFormData {
   sessionName?: string;
   description?: string;
   attendeesLimit?: number;
+  duration?: number;
   time?: string;
   date?: string;
   relevantTopics?: string;
@@ -20,6 +21,7 @@ interface OneOffFormData {
   sessionName?: string;
   description?: string;
   sessionType?: string;
+  duration?: number;
   time?: string;
   date?: string;
   relevantTopics?: string;
@@ -30,6 +32,7 @@ interface RecurringFormData {
   sessionType?: string;
   numberOfSession?: number;
   occurence?: string;
+
   // time?: string;
   relevantTopics?: string;
 }
@@ -37,6 +40,7 @@ interface RecurringFormData {
 export function FreeSessionForm() {
   const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
+  const [formVisible, setFormVisible] = useState<boolean>(false);
   const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [formData, setFormData] = useState<FreeFormData>({
@@ -135,20 +139,16 @@ export function FreeSessionForm() {
             </option>
             <option value="Technical Writing 101">Technical Writing 101</option>
           </SelectInputType>
-          <SelectInputType
+          <TimeInputType
             labelText="Description"
             isRequired
-            selectId="description"
-            selectName="description"
+            type="text"
+            InputId="description"
+            InputName="description"
             placeholder="Tell us a little about this session"
             value={formData.description}
-            onChange={handleSelectChange}
-          >
-            <option value="Design principles">Design principles</option>
-            <option value="Getting started in technical writing">
-              Design principles
-            </option>
-          </SelectInputType>
+            onChange={handleInputChange}
+          />
           <SelectInputType
             labelText="Attendees limit"
             isRequired
@@ -196,12 +196,7 @@ export function FreeSessionForm() {
             <option value="Development">Development</option>
             <option value="Technical Writing">Technical Writing</option>
           </SelectInputType>
-          <div>
-            <input type="checkbox" />
-            <span className="px-2 text-gray-400">
-              Allow mentees to select this instead
-            </span>
-          </div>
+
           <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
             <Link className="w-full" href="/mentor-schedule">
               <Button
@@ -342,17 +337,16 @@ export function OneOffSessionForm() {
           >
             <option value="Design principles">Design principles</option>
           </SelectInputType>
-          <SelectInputType
+          <TimeInputType
             labelText="Description"
             isRequired
-            selectId="description"
-            selectName="description"
+            type="text"
+            InputId="description"
+            InputName="description"
             placeholder="Tell us a little about this session"
             value={formData.description}
-            onChange={handleSelectChange}
-          >
-            <option value="Design principles">Design principles</option>
-          </SelectInputType>
+            onChange={handleInputChange}
+          />
           <SelectInputType
             labelText="Session Type"
             isRequired
@@ -399,12 +393,6 @@ export function OneOffSessionForm() {
             <option value="Development">Development</option>
             <option value="Technical Writing">Technical Writing</option>
           </SelectInputType>
-          <div>
-            <input type="checkbox" />
-            <span className="px-2 text-gray-400">
-              Allow mentees to select this instead
-            </span>
-          </div>
           <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
             <Link className="w-full" href="/mentor-schedule">
               <Button
@@ -543,17 +531,16 @@ export function RecurringSessionForm() {
           >
             <option value="Design principles">Design principles</option>
           </SelectInputType>
-          <SelectInputType
+          <TimeInputType
             labelText="Description"
             isRequired
-            selectId="description"
-            selectName="description"
+            type="text"
+            InputId="description"
+            InputName="description"
             placeholder="Tell us a little about this session"
             value={formData.description}
-            onChange={handleSelectChange}
-          >
-            <option value="Design principles">Design principles</option>
-          </SelectInputType>
+            onChange={handleInputChange}
+          />
           <SelectInputType
             labelText="Session Type"
             isRequired
@@ -626,12 +613,6 @@ export function RecurringSessionForm() {
             <option value="Development">Development</option>
             <option value="Technical Writing">Technical Writing</option>
           </SelectInputType>
-          <div>
-            <input type="checkbox" />
-            <span className="px-2 text-gray-400">
-              Allow mentees to select this instead
-            </span>
-          </div>
           <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
             <Link className="w-full" href="/mentor-schedule">
               <Button
