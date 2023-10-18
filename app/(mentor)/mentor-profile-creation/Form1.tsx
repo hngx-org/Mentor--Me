@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { toast } from "react-hot-toast";
 import MentorFormBuilder from "@/components/mentorProfileCreation/MentorFormBuilder";
 import { MentorCreationProfileIcon } from "@/public";
 import { HeadingBuild } from "./MentorUI";
@@ -45,7 +46,7 @@ function Form1({ handleMoveForward, handleMoveBack }: myProps) {
         });
         const data = await response.json();
         if (data.error) {
-          alert(
+          toast.error(
             "problem uploading image, please check your internet connection"
           );
         }
