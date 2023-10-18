@@ -17,6 +17,7 @@
     "@headlessui/react": "^1.7.17",
     "axios": "^1.5.1",
     "cloudinary": "^1.41.0",
+    "countries-list": "^3.0.5",
     "date-fns": "^2.30.0",
     "eslint-config-prettier": "^9.0.0",
     "framer-motion": "^10.16.4",
