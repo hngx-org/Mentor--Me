@@ -21,7 +21,7 @@ export default function AuthProfileCard({
     <div
       className={`w-full max-w-[95%] flex   justify-between items-center  ${styles} ${
         path === "profile"
-          ? "bg-gradient-to-r from-orange-500 via-red-600 to-fuchsia-500 p-[2px] rounded-xl"
+          ? "bg-gradient-to-r from-orange-500 via-red-600 to-fuchsia-500 p-[1px] rounded-xl"
           : ""
       } `}
     >
