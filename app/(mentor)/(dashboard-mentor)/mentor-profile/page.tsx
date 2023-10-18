@@ -40,12 +40,12 @@ type UserData = {
 };
 export default function ProfilePage() {
   const { data } = useAuth();
-  console.log(data);
+
   // console.log(data?.userDetails.email);
   // const [fullName] = data?.userDetails.email.split("@") || ["", ""];
   const mentorshipType = data?.mentorship_type;
 
-  const [currMentor, setCurrMentor] = useState<any>();
+  const [skills, setSkills] = useState<any>();
   const [user, setUser] = useState<any>({});
   const [userData, setUserData] = useState<UserData | undefined>({
     fullName: "",
@@ -143,11 +143,14 @@ export default function ProfilePage() {
     getCurrentMentor();
   }, []);
 
-  // useEffect(() => {
-  //   router.push(
-  //     `/mentor-profile?path=profile&name=${userData.fullName}&email=${userData.email}&bio=${userData.bio}&mentorship=${userData.mentorship}`
-  //   );
-  // }, [userData]);
+  useEffect(() => {
+    if (data?.skills?.includes(",")) {
+      const skills = data?.skills?.split(",");
+      setSkills(Array.from(new Set(skills)));
+    } else {
+      setSkills([data?.skills]);
+    }
+  }, [data]);
 
   const paramsAction = useSearchParams().get("action");
   // console.log(user);
@@ -167,7 +170,7 @@ export default function ProfilePage() {
             <MentorProfileHeader
               userName={userData?.fullName}
               mentorship={userData?.mentorship}
-              userRole={mentorshipType!}
+              userRole={data?.userDetails?.role!}
               userRating={4}
               openModal={setModal}
             />
@@ -196,7 +199,7 @@ export default function ProfilePage() {
                 ]}
                 openModal={setModal}
               />
-              <SkillSCard skills={[]} />
+              <SkillSCard skills={skills || []} />
               <ProfileDetailsCardContainer
                 heading="Experience"
                 items={[
