@@ -15,6 +15,7 @@ const CommunityPage = () => (
 
   <section className="w-full h-full">
     {/* Search Bar */}
+
     <div>
       <HomeNavBar />
     </div>
@@ -47,7 +48,7 @@ const CommunityPage = () => (
     <DiscussionForums />
     {/* Free mentorship sessions */}
     {/* <MentorshipSessions /> */}
-    <div className=" w-[396px] sm:w-[628px]  md:w-[860px] lg:w-[calc(1052px)] xl:w-[calc(1352px)] 2xl:w-[calc(1362px)]   border border-transparent  mx-auto overflow-hidden">
+    <div className=" w-[396px] sm:w-[628px]  md:w-[860px] lg:w-[calc(1052px)] xl:w-[calc(1352px)] 2xl:w-[calc(1362px)]  border border-transparent  mx-auto overflow-hidden">
       <MentorGrid />
     </div>
     <div className="footer h-[7rem] w-full bg-transparent" />

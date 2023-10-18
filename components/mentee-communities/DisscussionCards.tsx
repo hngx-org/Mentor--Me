@@ -42,7 +42,7 @@ const DiscussionCards: React.FC<Props> = ({ title, members, desc, id }) => (
       
       </button> */}
 
-    <Link href="/mentee-communities/forums">
+    <Link href={`/mentee-community/forums/${id}`}>
       <button
         type="button"
         className="text-[10px] lg:text-[16px] font-Inter whitespace-nowrap px-[38px]  py-[10.5px] lg:py-[16px]  bg-white border font-medium  border-NeutalBase text-NeutalBase flex items-center gap-x-1 rounded-[8px]"

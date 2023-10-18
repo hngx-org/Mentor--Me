@@ -38,10 +38,15 @@ const StartDiscussionModal = ({ setIsModalOpen }: Props) => {
     }
   };
 
-  const onFormSubmit = async (data: FieldValues) => {
+  const onFormSubmit = (data: FieldValues) => {
     //  todo send data to backend
-    // console.log("hello there");
+    console.log("hello there");
+    console.log("Form Data:", data);
+
     // await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // close modal
+    setIsModalOpen((p) => !p);
   };
   // md:max-h-[28.625rem]
   return (
@@ -54,7 +59,11 @@ const StartDiscussionModal = ({ setIsModalOpen }: Props) => {
         className="w-full flex flex-col gap-4 p-6 rounded-lg bg-white max-w-[21.875rem] md:max-w-[31.25rem] border-solid md:border-[1px] border-Neutra20 discuss-box-shadow"
       >
         <div
-          onClick={() => setIsModalOpen((p) => !p)}
+          onClick={() => {
+            setIsModalOpen((p) => !p);
+
+            console.log("close modal");
+          }}
           className="self-end cursor-pointer"
         >
           <CloseIcon />

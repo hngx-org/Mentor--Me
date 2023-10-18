@@ -68,21 +68,6 @@ const MentorGrid: React.FC = () => {
           Free Mentorship Sessions
         </h2>
 
-        {/* <div className="lg:grid lg:grid-cols-4 hidden ">
-      <MentorCard />
-      <MentorCard />
-      <MentorCard />
-      <MentorCard />
-    </div>
-    <div className="md:grid grid-cols-3 lg:hidden hidden ml-6">
-      <MentorCard />
-      <MentorCard />
-      <MentorCard />
-    </div>
-    <div className="grid grid-cols-2 md:hidden ">
-      <MentorCard />
-      <MentorCard />
-    </div> */}
         <div
           className={`${"imi"} flex  transition-all  duration-300 transform   gap-x-[25px] sm:gap-x-[40px]  md:gap-x-[calc(40px)] lg:gap-x-[calc(50px)] xl:gap-x-[calc(45px)] 2xl:gap-x-[calc(60px)]
  md:w-fit  overflow-x-auto `}
