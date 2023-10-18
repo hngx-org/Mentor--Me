@@ -3,7 +3,7 @@
 
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense, createContext } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import MentorProfileHeader from "@/components/mentorProfile/MentorProfileHeader";
 import ProfileDetailsCardContainer, {
@@ -25,17 +25,30 @@ export type ModalState = {
 };
 
 const baseUrl = "https://mentormee-api.onrender.com";
-
+type UserData = {
+  fullName: string;
+  bio: string;
+  email?: string;
+  mentorship?: string;
+  skills?: string;
+  degree?: string;
+  institution?: string;
+  preferred_startTime?: string;
+  preferred_endTime?: string;
+  preferred_days?: string;
+  mentoring_experience?: string;
+};
 export default function ProfilePage() {
   const { data } = useAuth();
+
   // console.log(data?.userDetails.email);
-  // const [username] = data?.userDetails.email.split("@") || ["", ""];
+  // const [fullName] = data?.userDetails.email.split("@") || ["", ""];
   const mentorshipType = data?.mentorship_type;
 
-  const [currMentor, setCurrMentor] = useState<any>();
+  const [skills, setSkills] = useState<any>();
   const [user, setUser] = useState<any>({});
-  const [userData, setUserData] = useState({
-    username: "",
+  const [userData, setUserData] = useState<UserData | undefined>({
+    fullName: "",
     bio: "",
     email: "",
     mentorship: "",
@@ -57,7 +70,6 @@ export default function ProfilePage() {
   if (typeof window !== "undefined") {
     const getUser = localStorage.getItem("Mentor");
     if (getUser) {
-      console.log(getUser);
       try {
         const newUser = JSON.parse(getUser);
         token = newUser.data.token; // assign token value here
@@ -80,9 +92,9 @@ export default function ProfilePage() {
       if (response.ok) {
         const data = await response.json();
         setUser(data?.data); // Assuming you want to set the entire data object
-        console.log("Current Mentor", data?.data);
+        // console.log("Current Mentor", data?.data);
         setUserData({
-          username: data?.data?.userDetails?.fullName,
+          fullName: data?.data?.userDetails?.fullName,
           bio: data?.data?.userDetails?.bio,
           email: data?.data?.userDetails?.email,
           mentorship: data?.data?.mentorship_type,
@@ -104,7 +116,7 @@ export default function ProfilePage() {
     }
   };
 
-  console.log(user);
+  // console.log(user);
   // const getCurrent = async () => {
   //   try {
   //     const currMent = await fetch(`${baseUrl}/users/get-current`, {
@@ -132,10 +144,13 @@ export default function ProfilePage() {
   }, []);
 
   useEffect(() => {
-    router.push(
-      `/mentor-profile?path=profile&name=${userData.username}&email=${userData.email}&bio=${userData.bio}&mentorship=${userData.mentorship}`
-    );
-  }, [userData]);
+    if (data?.skills?.includes(",")) {
+      const skills = data?.skills?.split(",");
+      setSkills(Array.from(new Set(skills)));
+    } else {
+      setSkills([data?.skills]);
+    }
+  }, [data]);
 
   const paramsAction = useSearchParams().get("action");
   // console.log(user);
@@ -153,9 +168,9 @@ export default function ProfilePage() {
         <div className=" w-full overflow-x-hidden ">
           {user && user ? (
             <MentorProfileHeader
-              userName={userData.username}
-              mentorship={userData.mentorship}
-              userRole={mentorshipType!}
+              userName={userData?.fullName}
+              mentorship={userData?.mentorship}
+              userRole={data?.userDetails?.role!}
               userRating={4}
               openModal={setModal}
             />
@@ -171,26 +186,26 @@ export default function ProfilePage() {
 
           {user && user ? (
             <MentorProfileMainLayout>
-              <BioCard text={userData.bio} />
+              <BioCard text={userData?.bio} />
 
               <ProfileDetailsCardContainer
                 heading="education"
                 items={[
                   {
-                    text: userData.degree || "",
-                    heading: userData.institution || "",
+                    text: userData?.degree || "",
+                    heading: userData?.institution || "",
                     type: "certification",
                   },
                 ]}
                 openModal={setModal}
               />
-              <SkillSCard skills={[]} />
+              <SkillSCard skills={skills || []} />
               <ProfileDetailsCardContainer
                 heading="Experience"
                 items={[
                   {
                     type: "experience",
-                    text: userData.mentoring_experience || "",
+                    text: userData?.mentoring_experience || "",
                   },
                 ]}
                 openModal={setModal}
@@ -203,84 +218,21 @@ export default function ProfilePage() {
               /> */}
               <AvailableSessionCard
                 timezone=" Greenwich Mean Time (GMT)"
-                availableDays={`${userData.preferred_days} ${userData.preferred_startTime} ${userData.preferred_endTime}`}
+                availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
               />
               <OverViewCardLayout heading="impact at a glance" />
               <SessionsProgressCard progress={10} />
             </MentorProfileMainLayout>
           ) : (
-            <MentorProfileMainLayout>
-              <BioCard text="" />
-              <ProfileDetailsCardContainer
-                heading="skill/expertise"
-                items={[
-                  {
-                    text: "Google UX Certification",
-                    // heading: "Coursera",
-                    type: "certification",
-                  },
-                  {
-                    text: "Bachelor of Science in Computer Science",
-                    heading: "ABXYZ University",
-                    type: "certification",
-                  },
-                ]}
-                openModal={setModal}
-              />
-              <SkillSCard
-                skills={[
-                  "Leadership",
-                  "User Experience",
-                  "UX Research",
-                  "Figma",
-                  "Sketch",
-                  "Leadership",
-                  "User Experience",
-                  "UX Research",
-                  "Figma",
-                  "Sketch",
-                ]}
-              />
-              <ProfileDetailsCardContainer
-                heading="Experience"
-                items={[
-                  {
-                    text: "Webmaster Inc.",
-                    heading: "CEO ",
-                    type: "experience",
-                  },
-                  {
-                    text: "futurLabs",
-                    heading: "Ui/Ux design intern",
-                    type: "experience",
-                  },
-                ]}
-                openModal={setModal}
-              />
-
-              <ProfileDetailsCardContainer
-                heading="Education"
-                items={[
-                  {
-                    text: "University of Lagos. 2013 - 2017",
-                    heading: "B.Sc Computer Science ",
-                    type: "education",
-                  },
-                ]}
-                openModal={setModal}
-              />
-              <AvailableSessionCard
-                timezone=" Greenwich Mean Time (GMT)"
-                availableDays="Mondays - Wednesdays, 
-11:00am - 2:00pm"
-              />
-              <OverViewCardLayout heading="impact at a glance" />
-              <SessionsProgressCard progress={0} />
-            </MentorProfileMainLayout>
+            <div>Something went wrong</div>
           )}
 
           {modal.isOpen && (
-            <MentorProfileModal onClose={setModal} state={modal.state} />
+            <MentorProfileModal
+              setUserData={setUserData}
+              onClose={setModal}
+              state={modal.state}
+            />
           )}
         </div>
       )}

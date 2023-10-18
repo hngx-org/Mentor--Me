@@ -11,20 +11,25 @@ import { useReadLocalStorage } from "usehooks-ts";
 
 type AuthCtxType = {
   user: User | null;
+  userData: Data | undefined;
   setUserData: React.Dispatch<React.SetStateAction<Data | undefined>>;
 };
 
 export type UserData = {
   token: string;
-  user: {
+  userDetails: {
     _id: string;
-    accountDisabled: boolean;
-    createdAt: string;
-    emailVerified: boolean;
-    lastActive: string;
-    role: string;
-    updatedAt: string;
     email: string;
+    emailVerified: boolean;
+    accountDisabled: boolean;
+    role: string;
+    lastActive: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+    profileLink: string;
+    bio: string;
+    fullName: string;
   };
 };
 
@@ -33,6 +38,7 @@ type Data = {
   data: UserData | null;
   success: boolean;
   email?: string;
+  token?: string;
 };
 
 interface User {
@@ -62,7 +68,7 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [userData]);
 
-  const value = useMemo(() => ({ user, setUserData }), [userData]);
+  const value = useMemo(() => ({ user, setUserData, userData }), [userData]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
