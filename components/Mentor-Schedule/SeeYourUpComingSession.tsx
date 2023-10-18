@@ -6,7 +6,7 @@ import UpcomingSessionCard from "./UpcomingSessionCard";
 interface RecentbookingFromApi {
   sessionName: string;
   sessionType: string;
-  id?: number;
+  _id?: string;
   relevantTopics: string;
   time: string | number;
   date: number | string;
@@ -22,7 +22,7 @@ function SeeYourUpComingSession() {
     const fetchDataFromApi = async () => {
       try {
         const res = await fetch(
-          "https://hngmentorme.onrender.com/api/one-off-session"
+          "https://hngmentorme.onrender.com/api/free-session"
         );
         if (!res.ok) {
           throw new Error(`API request failed with status ${res.status}`);
@@ -48,14 +48,14 @@ function SeeYourUpComingSession() {
 
   return (
     <div>
-      <div className="lg:hidden w-full grid grid-cols-2 gap-3 box-border">
+      {/* <div className="lg:hidden w-full grid grid-cols-2 gap-3 box-border">
         {sliceTwo.map((feed) => (
           <UpcomingSessionCard key={feed.id} {...feed} />
         ))}
-      </div>
-      <div className="hidden lg:grid lg:grid-cols-3 gap-4">
-        {sliceThree.map((feed) => (
-          <UpcomingSessionCard key={feed.id} {...feed} />
+      </div> */}
+      <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        {feedFromApi.map((feed) => (
+          <UpcomingSessionCard key={feed._id} {...feed} />
         ))}
       </div>
     </div>
