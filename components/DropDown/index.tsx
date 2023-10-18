@@ -58,20 +58,24 @@ function DropDown({
       exit="exit"
       className="shadow-[0_0_4px_2px_rgba(204,_204,_204,_0.25)] mt-4 p-4 rounded-lg overflow-hidden origin-top"
     >
-      {dropDownOptions.map((option, idx) => (
-        <motion.p
-          variants={optionsVariants}
-          exit={{ scaleY: 0 }}
-          onClick={() => {
-            setSelectedOptionIdx(selectedOptionIdx !== idx ? idx : -1);
-          }}
-          className={`font-Inter text-NeutalBase cursor-pointer capitalize px-4 py-2 rounded-md font-medium text-base leading-[3] ${
-            selectedOptionIdx === idx ? "bg-[rgba(204,_204,_204,_0.15)]" : ""
-          }`}
-        >
-          {option}
-        </motion.p>
-      ))}
+      {dropDownOptions.map((option, idx) => {
+        const key = Math.random();
+        return (
+          <motion.p
+            variants={optionsVariants}
+            key={key}
+            exit={{ scaleY: 0 }}
+            onClick={() => {
+              setSelectedOptionIdx(selectedOptionIdx !== idx ? idx : -1);
+            }}
+            className={`font-Inter text-NeutalBase cursor-pointer capitalize px-4 py-2 rounded-md font-medium text-base leading-[3] ${
+              selectedOptionIdx === idx ? "bg-[rgba(204,_204,_204,_0.15)]" : ""
+            }`}
+          >
+            {option}
+          </motion.p>
+        );
+      })}
     </motion.div>
   );
 }

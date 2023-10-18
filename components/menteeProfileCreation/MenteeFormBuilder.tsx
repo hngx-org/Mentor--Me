@@ -21,33 +21,11 @@ export default function MenteeFormBuilder({
   handleBack,
   handleClick,
 }: myProps) {
-  const form = useRef(null);
+  const form = useRef<HTMLFormElement | null>(null);
   const { formInputs, setFormInputs } = useMenteeContext();
   const [isFull, setIsFull] = useState(false);
   const [textLength, setTextLength] = useState(0);
-  const [email, setEmail] = useState("");
-
-  // useEffect(() => {
-  //   if (typeof localStorage !== "undefined") {
-  //     const getUser = localStorage.getItem("Mentee");
-  //     if (getUser) {
-  //       try {
-  //         const newUser = JSON.parse(getUser);
-  //         setEmail(newUser.data.user.email);
-  //         // @ts-ignore
-  //         setFormInputs((prevInps) => ({ ...prevInps, email }));
-  //       } catch (error) {
-  //         console.error("Error parsing JSON:", error);
-  //       }
-  //     }
-  //   }
-
-  //   const emailField = document.querySelector('input[name="email"]');
-  //   // @ts-ignore
-  //   emailField.value = email;
-  //   // @ts-ignore
-  //   emailField.disabled = true;
-  // }, [email]);
+  const [isValid, setIsValid] = useState(false);
 
   function checkTextArea(e: any) {
     const words = e.target.value;
@@ -76,6 +54,8 @@ export default function MenteeFormBuilder({
       ...prevInputs,
       [e.target.name]: e.target.value,
     }));
+
+    setIsValid(form.current!.checkValidity());
   }
 
   return (
@@ -171,11 +151,14 @@ export default function MenteeFormBuilder({
         </button>
         <button
           type="submit"
-          className=" bg-[#121212] text-white font-semibold border-[1px] w-[100%] max-w-[200px] py-5 rounded-md font-Inter text-center"
+          className={`${
+            isValid
+              ? "bg-[#121212] cursor-pointer"
+              : "bg-[#6c6c6c] cursor-not-allowed"
+          } text-white font-semibold border-[1px] w-[100%] max-w-[200px] py-5 rounded-md font-Inter text-center`}
           onClick={(e) => {
             e.preventDefault();
-            const valid = (form.current! as HTMLFormElement).reportValidity();
-            if (valid) {
+            if (isValid) {
               handleClick();
             }
           }}

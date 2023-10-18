@@ -61,59 +61,60 @@ export default function UploadResourcesPage() {
           data: { token },
         } = user;
 
-        const toastLoader = toast.loading("Uploading resource");
-        try {
-          const anotherRes = await fetch(
-            "https://mentormee-api.onrender.com/mentors/get-current",
-            {
-              redirect: "follow",
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-              },
-            }
-          );
-          const anotherData = await anotherRes.json();
-          console.log(anotherData);
-          const fileReader = new FileReader();
-          fileReader.readAsDataURL(file!);
+        const uploadResource = async function () {
+          try {
+            const anotherRes = await fetch(
+              "https://mentormee-api.onrender.com/mentors/get-current",
+              {
+                redirect: "follow",
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+            const { data: anotherData } = await anotherRes.json();
+            console.log(anotherData);
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file!);
 
-          fileReader.onloadend = async function () {
-            videoBase64 = fileReader.result as string;
+            fileReader.onloadend = async function () {
+              videoBase64 = fileReader.result as string;
 
-            console.log(videoBase64);
-            const resourceData = {
-              category: categoryRef.current?.value!,
-              description: courseDescriptionRef.current?.value!,
-              title: courseTitleRef.current?.value!,
-              coursetype: courseTypeRef.current?.value!,
-              price: priceRef.current?.value!,
-              name: anotherData?.userDetails?.fullName,
-              role: anotherData?.userDetails?.fullName,
-              company: anotherData?.company,
-              file: videoBase64 as string,
-              image: "random",
+              const resourceData = {
+                category: categoryRef.current?.value!,
+                description: courseDescriptionRef.current?.value!,
+                title: courseTitleRef.current?.value!,
+                coursetype: courseTypeRef.current?.value!,
+                price: priceRef.current?.value!,
+                name: anotherData?.userDetails?.fullName,
+                role: anotherData?.userDetails?.role,
+                company: anotherData?.company,
+                ratings: "0.0",
+                reviews: "0",
+                currency: "NGN",
+                video: videoBase64 as string,
+                image: "random",
+              };
+              const res = await fetch("/api/upload-resource", {
+                method: "POST",
+                body: JSON.stringify(resourceData),
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+              });
+              const data = await res.json();
+              console.log(data);
             };
-            const res = await fetch("/api/upload-resource", {
-              method: "POST",
-              body: JSON.stringify(resourceData),
-              headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-              },
-            });
-            const data = await res.json();
-            console.log(data);
-            if (data.success === true) {
-              toast.success("resource uploaded successfully");
-            } else {
-              toast.error(`Error: ${data.message}`);
-            }
-          };
-        } catch (e) {
-          toast.error("An error occurred while uploading the resource.");
-        } finally {
-          toast.dismiss(toastLoader);
-        }
+          } catch (e) {
+            console.log(e);
+          }
+        };
+        toast.promise(uploadResource(), {
+          loading: "Uploading resource, please wait.",
+          success: "Resource uploaded successfully!",
+          error: "There was an error uploading the resource.",
+        });
       }}
       className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white pt-10"
     >
@@ -179,6 +180,7 @@ export default function UploadResourcesPage() {
           id="category"
           name="category"
           ref={categoryRef}
+          defaultValue=""
           required
           onKeyDown={(e) => {
             e.preventDefault();
@@ -218,6 +220,7 @@ export default function UploadResourcesPage() {
           id="course-type"
           name="course-type"
           ref={courseTypeRef}
+          defaultValue=""
           onKeyDown={(e) => {
             e.preventDefault();
           }}
@@ -248,7 +251,6 @@ export default function UploadResourcesPage() {
             if (e.key === "e") {
               e.preventDefault();
             }
-            console.log(e.key);
           }}
           required
           placeholder="Input the price"
