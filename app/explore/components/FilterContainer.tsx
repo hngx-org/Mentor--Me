@@ -6,6 +6,7 @@ import SearchBox from "./SearchBox";
 import ShowAvailMentor from "./ShowAvailMentor";
 import Filter from "./Filter";
 import Card from "./Card";
+import Pagination from "./Pagination";
 
 export default function FilterContainer() {
   interface CardProps {
@@ -30,6 +31,15 @@ export default function FilterContainer() {
   const [cards, setCards] = useState<CardProps[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // For pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(8);
+  // Get current page
+  const indexOfLastCard = currentPage * postsPerPage;
+  const indexOfFirstCard = indexOfLastCard - postsPerPage;
+  const currentCard = filteredResults.slice(indexOfFirstCard, indexOfLastCard);
+  const totalPages = filteredResults.length;
+
   useEffect(() => {
     fetch("https://cardbackendhngx.onrender.com/api/get_data")
       .then((response) => response.json())
@@ -40,14 +50,21 @@ export default function FilterContainer() {
       .catch((err) => console.log(err));
   }, []);
 
-  // console.log(searchResults);
+  // Remove later
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= Math.ceil(totalPages / postsPerPage)) {
+      setCurrentPage(page);
+    }
+    console.log(currentPage);
+    // You can add logic here to fetch data for the new page if needed.
+  };
 
   return (
     <>
       <div className="container mx-auto mt-24 px-4 py-8">
         <div className="bg bg-Neutral60 rounded-[5px] px-6 py-4 space-y-5 lg:py-8">
           {/* All */}
-          <div className="w[350px] flex items-center space-x-10 gap10 text-white overflow-x-auto lg:justify-center lg:space-x-16">
+          {/* <div className="w[350px] flex items-center space-x-10 gap10 text-white overflow-x-auto lg:justify-center lg:space-x-16">
             <span className=" font-Inter font-medium text-base lg:text-lg">
               All
             </span>
@@ -72,7 +89,7 @@ export default function FilterContainer() {
             <span className=" font-Inter font-medium text-base lg:text-lg">
               Marketing
             </span>
-          </div>
+          </div> */}
 
           {/* Search for mobile */}
           {/* <Filter /> */}
@@ -94,9 +111,16 @@ export default function FilterContainer() {
       </div>
       <div className="container mx-auto px-4 mb-5">
         {/* searchResult={searchResults} */}
-        <Card filteredResults={filteredResults} loading={loading} />
+        {/* <Card filteredResults={filteredResults} loading={loading} /> */}
+        <Card filteredResults={currentCard} loading={loading} />
       </div>
       {/* <Card searchResult={searchResults} loading={loading} /> */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        postsPerPage={postsPerPage}
+        onPageChange={handlePageChange}
+      />
     </>
   );
 }
