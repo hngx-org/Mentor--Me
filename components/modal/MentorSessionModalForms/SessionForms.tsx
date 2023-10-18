@@ -479,7 +479,6 @@ export function RecurringSessionForm() {
   };
   const closeCalendar = (): void => {
     setCalendarVisible(false);
-    // setSuccessful(true);
   };
 
   const openSuccessModal = (): void => {
