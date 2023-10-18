@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { StartDiscussionModal } from "@/components/mentor-community";
-import SearchCommunitySearchbar from "@/components/mentor-community/searchcommunity-searchbar";
+
+import SearchCommunitySearchbar from "@/components/Community/searchcommunity-searchbar";
 import { discussionComms, discussionCommunitites } from "../data";
 import { MsgEditIcon } from "@/public/assets/Icons/mentor-communities";
-import DiscussionCard from "@/components/mentor-community/discussion-card";
+import DiscussionCard from "@/components/Community/discussion-card";
+import { StartDiscussionModal } from "@/components/Community";
 
-const DiscussionsPage = ({ params }: { params: { slug: string } }) => {
+const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -25,7 +26,7 @@ const DiscussionsPage = ({ params }: { params: { slug: string } }) => {
           <div className="flex flex-col gap-2">
             <h1 className="font-bold text-[1.125rem] font-Hanken md:text-[2rem]">
               {
-                discussionCommunitites[params.slug as keyof discussionComms]
+                discussionCommunitites[params.forum as keyof discussionComms]
                   .name
               }
             </h1>
@@ -33,9 +34,9 @@ const DiscussionsPage = ({ params }: { params: { slug: string } }) => {
             <div className="flex">
               {/* Member Pfps */}
               <div className="flex items-center">
-                {/* iamge */}
+                {/* image */}
                 {discussionCommunitites[
-                  params.slug as keyof discussionComms
+                  params.forum as keyof discussionComms
                 ].members
                   .slice(0, 3)
                   .map((member, idx) => (
@@ -60,7 +61,7 @@ const DiscussionsPage = ({ params }: { params: { slug: string } }) => {
               {/* Member count */}
               <span className=" md:text-base relative font-medium text-Accent1 font-Hanken right-5">
                 {`${
-                  discussionCommunitites[params.slug as keyof discussionComms]
+                  discussionCommunitites[params.forum as keyof discussionComms]
                     .members.length
                 }`}{" "}
                 members
@@ -69,7 +70,7 @@ const DiscussionsPage = ({ params }: { params: { slug: string } }) => {
             {/* Comm description */}
             <p className="text-Neutral60 font-Hanken md:text-[1.125rem]">
               {
-                discussionCommunitites[params.slug as keyof discussionComms]
+                discussionCommunitites[params.forum as keyof discussionComms]
                   .description
               }
             </p>
@@ -92,7 +93,7 @@ const DiscussionsPage = ({ params }: { params: { slug: string } }) => {
         {/* Discussion list */}
         <section className="p-8 pb-[3rem] flex flex-col gap-4 md:p-14">
           {discussionCommunitites[
-            params.slug as keyof discussionComms
+            params.forum as keyof discussionComms
           ].discussions.map((item) => (
             <DiscussionCard
               author={item.author}

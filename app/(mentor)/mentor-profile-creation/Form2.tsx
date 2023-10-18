@@ -44,7 +44,7 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
         });
         const data = await response.json();
         if (data.error) {
-          alert(
+          toast.error(
             "problem uploading image, please check your internet connection"
           );
         }
