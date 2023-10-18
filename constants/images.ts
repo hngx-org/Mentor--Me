@@ -16,6 +16,13 @@ import Mentor2 from "@/public/assets/images/explore-page/mentor2.png";
 import Mentor3 from "@/public/assets/images/explore-page/mentor3.png";
 import Mentor4 from "@/public/assets/images/explore-page/mentor4.png";
 
+// MOBILE SIDEBAR -- DO NOT TOUCH
+import sessionHope from "@/public/assets/images/mentor/mobile-sidebar/session-hope.png";
+import sessionMaurice from "@/public/assets/images/mentor/mobile-sidebar/session-maurice.png";
+import sessionPatricia from "@/public/assets/images/mentor/mobile-sidebar/session-patricia.png";
+import sessionShaolin from "@/public/assets/images/mentor/mobile-sidebar/session-shaolin.png";
+import sessionKaplan from "@/public/assets/images/mentor/mobile-sidebar/session-kaplan.png";
+
 // LANDING PAGE -- DO NOT TOUCH
 import MemberPfp from "@/public/assets/images/communities/MemberProfilePhoto.png";
 import MemberPfp2 from "@/public/assets/images/communities/MemberProfilePhoto2.jpg";
@@ -29,6 +36,14 @@ import FreeMentorSesh from "@/public/assets/images/communities/FreeMentorSesh.jp
 import FreeMentorSesh2 from "@/public/assets/images/communities/FreeMentorSesh2.png";
 import FreeMentorSesh3 from "@/public/assets/images/communities/FreeMentorSesh3.jpg";
 import FreeMentorSesh4 from "@/public/assets/images/communities/FreeMentorSesh4.jpg";
+
+// MENTOR -- DO NOT TOUCH
+import DashboardMenteeNavImg from "@/public/assets/images/mentor/profile-verification/dashboard-nav-image.png";
+import Amico from "@/public/assets/images/mentor/profile-verification/amico.png";
+import verificationApproved from "@/public/assets/images/mentor/profile-verification/verification-approved.png";
+import verificationPending from "@/public/assets/images/mentor/profile-verification/verifcation-pending.png";
+import verificationRejected from "@/public/assets/images/mentor/profile-verification/verification-rejected.png";
+import SucessIcon from "@/public/assets/images/mentor/profile-verification/icon-park-outline_success.svg";
 
 export default {
   AryaStar,
@@ -59,4 +74,17 @@ export default {
   FreeMentorSesh2,
   FreeMentorSesh3,
   FreeMentorSesh4,
+
+  DashboardMenteeNavImg,
+  Amico,
+  verificationApproved,
+  verificationPending,
+  verificationRejected,
+  SucessIcon,
+
+  sessionHope,
+  sessionMaurice,
+  sessionPatricia,
+  sessionShaolin,
+  sessionKaplan,
 };
