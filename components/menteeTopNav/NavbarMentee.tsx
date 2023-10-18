@@ -63,7 +63,7 @@ export const NavbarMentee = ({
       }`}
     >
       <h3 className="uppercase  font-Hanken font-[700] text-[24px]">
-        {path || "[PathName Here]"}
+        {path ?? "Home"}
       </h3>
       {scrollY > 400 && (
         <button
@@ -83,9 +83,11 @@ export const NavbarMentee = ({
               : "text-[12px] text-Neutra40  font-Hanken hidden sm:block"
           }  `}
         >
-          <p className="font-[500] text-black text-[14px]">{name}</p>
+          <p className="font-[500] text-black text-[14px]">
+            {name || "Username"}
+          </p>
           {/* @ts-ignore */}
-          <p>{jobTitle}</p>
+          <p>{jobTitle || "Job Title"}</p>
         </div>
         <div
           className="cursor-pointer relative  rounded-full select-none"
@@ -139,10 +141,12 @@ export const NavbarMentee = ({
                         : "/mentee-profile?path=profile"
                     }
                   >
-                    <p className="font-[500] text-white text-[14px]">
-                      {username}
-                    </p>
-                    <p>{jobTitle}</p>
+                    <div className="   text-[12px] text-Neutra10  font-Hanken hidden sm:block ">
+                      <p className="font-[500] text-white text-[14px]">
+                        {username || "Username"}
+                      </p>
+                      <p>{jobTitle || "JobTitle"}</p>
+                    </div>
                   </Link>
                 </button>
                 <button
