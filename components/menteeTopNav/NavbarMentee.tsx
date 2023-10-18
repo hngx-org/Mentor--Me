@@ -112,7 +112,7 @@ export const NavbarMentee = ({
                 role="dialog"
                 onClick={() => setIsView(!isView)}
               />
-              <div className=" absolute h-[100px] w-[180px] top-16 -right-2 z-[999999] bg-black backdrop-blur-xl flex flex-col justify-between items-center  border border-Neutra20  text-lg font-medium font-Hanken  shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-xl before:absolute before:content-[''] before:h-[20px] before:w-[20px] before:bg-black before:overflow-hidden before:-top-2 before:rotate-[140deg] before:right-4 before:z-[-1]">
+              <div className=" absolute h-[100px] w-[180px] top-16 -right-2 z-[999999] bg-black backdrop-blur-xl flex flex-col justify-start items-center  border border-Neutra20  text-lg font-medium font-Hanken  shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-xl before:absolute before:content-[''] before:h-[20px] before:w-[20px] before:bg-black before:overflow-hidden before:-top-2 before:rotate-[140deg] before:right-4 before:z-[-1]">
                 <button
                   type="button"
                   disabled={path === "profile"}
@@ -134,7 +134,7 @@ export const NavbarMentee = ({
                   }}
                 >
                   <Link
-                    className={` ${
+                    className={`text-[12px] text-Neutra10  font-Hanken   flex flex-col items-start ${
                       path === "profile" ? "opacity-50 !cursor-not-allowed" : ""
                     } `}
                     prefetch
@@ -144,12 +144,10 @@ export const NavbarMentee = ({
                         : "/mentee-profile?path=profile"
                     }
                   >
-                    <div className="   text-[12px] text-Neutra10  font-Hanken hidden sm:block ">
-                      <p className="font-[500] text-white text-[14px]">
-                        {username || "Username"}
-                      </p>
-                      <p>{jobTitle || "JobTitle"}</p>
-                    </div>
+                    <p className="font-[500] text-white text-[14px]">
+                      {username || "Username"}
+                    </p>
+                    <p>{jobTitle || "JobTitle"}</p>
                   </Link>
                 </button>
                 <button
