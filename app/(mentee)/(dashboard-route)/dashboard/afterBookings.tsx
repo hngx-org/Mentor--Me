@@ -6,6 +6,7 @@ import { menteeDashboardData } from "@/lib/menteeDashboard/data";
 import UpcomingCard from "./upcomingCard";
 import MenteeCard from "./cards";
 import Calendarcomponent from "../mentee-booking/components/booking-session/Calender";
+import useAuth from "@/context/useAuth";
 
 const AfterBookings: FC = () => (
   <div className="w-full min-h-screen">

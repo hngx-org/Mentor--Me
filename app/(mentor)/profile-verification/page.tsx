@@ -39,7 +39,7 @@ export default function MentorProfileVerification() {
       certificationName: "",
       issuingInstitution: "",
       graduationYear: "",
-      graduationFile: null,
+      graduationFile: "",
     },
     qualifications: {
       qualification: "",
@@ -53,11 +53,11 @@ export default function MentorProfileVerification() {
       achievementDesc: "",
     },
     identification: {
-      fullname: "",
-      dateofBirth: "",
+      fullName: "",
+      dateOfBirth: "",
       idType: "",
       idNumber: "",
-      uploadID: null,
+      uploadID: "",
     },
   });
 
@@ -85,55 +85,58 @@ export default function MentorProfileVerification() {
   }
 
   const handleSubmit = async () => {
-    try {
-      const url =
-        "https://mentormee-api.onrender.com/mentors/account-verification";
-      const requestData = {
-        certificates: {
-          certificationName: formData.certificates.certificationName,
-          issuingInstitution: formData.certificates.issuingInstitution,
-          graduationYear: formData.certificates.graduationYear,
-          graduationFile: "file.png",
-        },
-        qualifications: {
-          qualification: formData.qualifications.qualification,
-          yearsExperience: formData.qualifications.yearsExperience,
-          qualificationDesc: formData.qualifications.qualificationDesc,
-        },
-        achievements: {
-          achievementName: formData.achievements.achievementName,
-          issuingOrganization: formData.achievements.issuingOrganization,
-          yearReceived: formData.achievements.yearReceived,
-          achievementDesc: formData.achievements.achievementDesc,
-        },
-        identification: {
-          fullName: formData.identification.fullname,
-          dateOfBirth: formData.identification.dateofBirth,
-          idType: formData.identification.idType,
-          idNumber: formData.identification.idNumber,
-          uploadID: "file.png",
-        },
-      };
+    const url =
+      "https://mentormee-api.onrender.com/mentors/account-verification";
+    // const requestData = {
+    //   certificates: {
+    //     certificationName: formData.certificates.certificationName,
+    //     issuingInstitution: formData.certificates.issuingInstitution,
+    //     graduationYear: formData.certificates.graduationYear,
+    //     graduationFile: formData.certificates.graduationFile,
+    //   },
+    //   qualifications: {
+    //     qualification: formData.qualifications.qualification,
+    //     yearsExperience: formData.qualifications.yearsExperience,
+    //     qualificationDesc: formData.qualifications.qualificationDesc,
+    //   },
+    //   achievements: {
+    //     achievementName: formData.achievements.achievementName,
+    //     issuingOrganization: formData.achievements.issuingOrganization,
+    //     yearReceived: formData.achievements.yearReceived,
+    //     achievementDesc: formData.achievements.achievementDesc,
+    //   },
+    //   identification: {
+    //     fullName: formData.identification.fullname,
+    //     dateOfBirth: formData.identification.dateofBirth,
+    //     idType: formData.identification.idType,
+    //     idNumber: formData.identification.idNumber,
+    //     uploadID: "file.png",
+    //   },
+    // };
 
-      console.log(requestData);
+    console.log(formData);
 
-      const response = await axios.post(url, requestData, {
+    axios
+      .post(url, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          setShowModal(true);
+          setVerificationStatus("approved");
+          setStep(0);
+          setFormSubmitted(true);
+        } else {
+          console.error("Unexpected status:", response.status);
+          toast.error("An error occurred. Please try again later.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(error?.message || "Something went wrong");
       });
-      if (response.status === 200) {
-        setShowModal(true);
-        setVerificationStatus("approved");
-        setStep(0);
-        setFormSubmitted(true);
-      } else {
-        console.error("Unexpected status:", response.status);
-        toast.error("An error occurred. Please try again later.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
   };
   return (
     <>

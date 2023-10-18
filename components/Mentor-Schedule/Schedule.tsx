@@ -7,7 +7,6 @@ import PortfolioCard from "./PortfolioCard";
 import AddNewSession from "./AddNewSession";
 import RecentBooking from "./RecentBooking";
 import SeeYourUpComingSession from "./SeeYourUpComingSession";
-import PreviousSessionsCall from "./PreviousSessionsCall";
 import MobileSideBar from "../mentor/MobileSiderBar";
 import SidebarMentor from "../mentor/SidebarMentor";
 import MentorTopNav from "../mentorTopNav";
@@ -85,19 +84,19 @@ function Schedule() {
             {" "}
             <PortfolioCard />
           </div>
-          <div className="container lg:hidden mt-4 grid grid-cols-2 gap-3">
+          <div className="container lg:hidden mt-4  flex  gap-3">
             <PortfolioCard />
 
             <AddNewSession />
           </div>
           {/* Upcoming session */}
           <h3 className="text-lg lg:mt-20 font-Hanken text-neutral-950 font-semibold mt-6 lg:mb-[30px] md:font-inter md:font-medium md:text-[32px]">
-            Upcoming Sessions{" "}
+            All Sessions{" "}
             <span className="hidden lg:inline-block">with Mentees</span>
           </h3>
           <div className="flex justify-between items-center lg:hidden mt-1">
             <p className="text-xs font-Hanken font-normal">
-              View your upcoming sessions
+              View your sessions
             </p>
             <div className="hidden">
               <ArrowRightIcon />
@@ -122,23 +121,6 @@ function Schedule() {
                 <SeeYourUpComingSession />
               </div>
             </div>
-          </div>
-
-          {/* Previous Sessions */}
-          <h3 className="text-lg font-Hanken lg:mt-20 text-neutral-950 font-semibold mt-3 md:mt-6  md:font-inter md:font-medium md:text-[32px]">
-            Previous Sessions
-          </h3>
-          <div className="flex justify-between items-center mt-1 lg:hidden">
-            <p className="text-xs font-Hanken font-normal">
-              Explore your previous sessions with mentees
-            </p>
-            <div className="hidden">
-              <ArrowRightIcon />
-            </div>
-          </div>
-
-          <div className="mb-5">
-            <PreviousSessionsCall />
           </div>
         </section>
       </div>

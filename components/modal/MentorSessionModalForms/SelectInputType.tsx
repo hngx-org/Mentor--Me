@@ -17,7 +17,7 @@ interface SelectInputProps
 interface TimeInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   labelText?: string;
   InputId?: string;
-  type?: "time" | "datetime-local" | "date";
+  type?: "time" | "datetime-local" | "date" | "text";
   value?: string | number;
   InputName?: string;
   placeholder?: string;
@@ -48,7 +48,7 @@ export function SelectInputType({
             value={value}
             id={selectId}
             name={selectName}
-            placeholder="Give this session a name"
+            placeholder={placeholder}
             required={isRequired}
             className="appearance-none first:text-gray-500 border rounded-lg sm:rounded-lg p-2 md:p-4 md:py-5 w-full focus:outline-none focus:border-gray-600"
             onChange={onChange}

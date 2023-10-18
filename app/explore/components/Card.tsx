@@ -68,8 +68,6 @@ export default function Card({ filteredResults, loading }: CardProps) {
   //   contentImage?: string
   // }
 
-  // const cardSlice = cards.slice(0, 10);
-
   return (
     <div>
       {loading ? (
@@ -87,12 +85,12 @@ export default function Card({ filteredResults, loading }: CardProps) {
       </ul> */}
 
           {filteredResults.length === 0 ? (
-            <h1 className=" text-center  text-2xl">No card Available...</h1>
+            <h1 className=" text-center  text-2xl">Enter a valid keyword...</h1>
           ) : (
             filteredResults.map((details) => (
               <div
                 key={details.id}
-                className=" w-[330px] md:w-[280px] lg:w-[295px] h-[420px] lg:h-[435px] overflow-hidden container mx-auto border-[0.5px] border-[#ABABAB] rounded-lg mt-6"
+                className=" w-[330px] md:w-[280px] lg:w-[295px] 2xl:w-[320px] h-[420px] lg:h-[415px] overflow-hidden container mx-auto border-[0.5px] border-[#ABABAB] rounded-lg mt-6"
               >
                 <Image
                   src={details?.contentImage}
@@ -171,7 +169,7 @@ export default function Card({ filteredResults, loading }: CardProps) {
                   {/* View Profile */}
                   <Link
                     href="/welcome/login"
-                    className=" cursorpointer mlauto mrauto w-full mt-5 flex justify-center items-center font-Hanken text-Accent1 text-base hover:opacity-50 transition-opacity lg:border lg:border-[#121212] lg:py-[10px] lg:px[32px] lg:px-[40px] lg:rounded-[8px] lg:flex"
+                    className=" cursorpointer mlauto mrauto wfull mt-5 flex justify-center items-center font-Hanken text-Accent1 text-base hover:opacity-50 transition-opacity lg:borderlg:border-[#121212]lg:py-[10px]lg:px[32px]lg:px-[40px]lg:rounded-[8px]lg:flex"
                   >
                     View Profile
                   </Link>
