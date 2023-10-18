@@ -91,18 +91,29 @@ export default function MenteeSideBar({
           </Link>
         </div>
 
-        <Link
-          href="/mentee-profile?path=profile"
-          prefetch
-          className="mt-16 bottom-0"
+        <div
+          className={`mt-10 bottom-0  ${
+            path === "profile" ? "border border-[#E5FFFF] rounded-2xl" : ""
+          }`}
         >
-          <AuthProfileCard
-            path={path}
-            email={data?.userDetails?.email}
-            user={data?.userDetails?.fullName}
-            styles="text-Neutra30"
-          />
-        </Link>
+          <Link href="/mentee-profile?path=profile" prefetch>
+            <ul className="  cursor-pointer   ">
+              <li className="flex gap-3 items-center  p-1">
+                <ProfileIcon />
+                <span className="  font-Inter text-[10px] font-[500]   text-Neutra30">
+                  <span
+                    className={`${
+                      path === "profile" ? "text-white" : "white-[#fff]"
+                    }`}
+                  >
+                    Funmi Oladapo
+                  </span>
+                  <br /> funmi@zurimp.com
+                </span>
+              </li>
+            </ul>
+          </Link>
+        </div>
       </div>
     </section>
   );

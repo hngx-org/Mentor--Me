@@ -40,9 +40,7 @@ export default function AuthProfileCard({
         </div>
 
         <div className="flex flex-col ">
-          <span className="font-bold  text-base capitalize ">
-            {user || "hello"}
-          </span>
+          <span className="font-bold   capitalize ">{user || "hello"}</span>
           <span className="text-sm ">{email || "bye"}</span>
         </div>
       </div>
