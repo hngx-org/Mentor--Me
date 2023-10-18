@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import MentorFormBuilder from "@/components/mentorProfileCreation/MentorFormBuilder";
 import { MentorCreationProfileIcon } from "@/public";
@@ -11,7 +11,8 @@ interface myProps {
   handleMoveBack: () => void;
 }
 function Form1({ handleMoveForward, handleMoveBack }: myProps) {
-  const { currForm, files, setFiles, setFormInputs } = useMentorContext();
+  const { currForm, files, setFiles, formInputs, setFormInputs } =
+    useMentorContext();
 
   const select1 = useRef<HTMLInputElement>(null);
   const image1 = useRef<HTMLImageElement>(null);
@@ -23,6 +24,56 @@ function Form1({ handleMoveForward, handleMoveBack }: myProps) {
     }
   }, [files]);
 
+  const [image, setImage] = useState<File | null>(null);
+  const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [preview, setPreview] = useState(null);
+
+  const uploadImage = async () => {
+    setLoading(true);
+    const fileReader = new FileReader();
+    //
+    fileReader.readAsDataURL(image!);
+    fileReader.onloadend = async () => {
+      try {
+        const response = await fetch("/api/mentor-profile", {
+          method: "POST",
+          body: JSON.stringify(fileReader.result),
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        });
+        const data = await response.json();
+        if (data.error) {
+          alert(
+            "problem uploading image, please check your internet connection"
+          );
+        }
+        setUrl(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+
+  // This useEffect performs the post request when the value of files.file1 changes
+  useEffect(() => {
+    if (files.file1) {
+      uploadImage();
+    }
+  }, [files.file1]);
+
+  useEffect(() => {
+    if (url) {
+      setFormInputs((prevData: any) => ({
+        ...prevData,
+        // @ts-ignore
+        image: url.url,
+      }));
+    }
+  }, [url]);
+
   function showFile(e: any) {
     if ([...e.target.files][0].size > 2 * 1024 * 1024) {
       alert("Image size exceeds 2MB. Please upload a smaller image.");
@@ -33,11 +84,12 @@ function Form1({ handleMoveForward, handleMoveBack }: myProps) {
       [e.target.id]: [...e.target.files][0],
     }));
 
+    setImage(e.target.files[0]);
+
     setFormInputs((prevData: any) => ({
       ...prevData,
       [e.target.name]: e.target.files[0].name,
     }));
-
     // console.log(formInputs);
   }
 
@@ -82,7 +134,7 @@ function Form1({ handleMoveForward, handleMoveBack }: myProps) {
               type="file"
               onChange={showFile}
               id="file1"
-              name="profile_img"
+              name="profile_img_name"
               accept=".pdf, .png, .jpeg, .jpg"
               required
             />

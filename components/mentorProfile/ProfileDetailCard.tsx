@@ -25,7 +25,7 @@ export default function ProfileDetailsCardContainer({
           onClick={() => {
             if (openModal) {
               openModal({
-                state: "basic info",
+                state: "Experience/ Certification",
                 isOpen: true,
               });
             }
@@ -88,7 +88,7 @@ export function InfoCard({ type, heading, text }: InfoCardProps) {
   );
 }
 
-export function BioCard({ text }: { text: string }) {
+export function BioCard({ text }: { text?: string }) {
   return (
     <div className="w-[100%]  flex space-x-5 h-fit items-center my-2">
       <div>

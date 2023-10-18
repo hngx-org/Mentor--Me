@@ -6,14 +6,14 @@ import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 
-import { toast } from "react-toastify";
-
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import Modal from "@/components/modal/Modal";
 import generateKey from "@/lib/generatekey";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 const OTPForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [userid, setUserId] = useState("");
@@ -60,6 +60,7 @@ const OTPForm = () => {
   //   return hashedEmail;
   // }
   const verifyEmail = async () => {
+    setIsLoading(true);
     const enteredOTP = otpInputs.map(
       (inputRef) => inputRef.current?.value || ""
     );
@@ -80,9 +81,11 @@ const OTPForm = () => {
       );
       if (response.ok) {
         const data = await response.json();
+        setIsLoading(false);
         openModal();
       } else {
         alert("Incorrect Otp. Try Again");
+        setIsLoading(false);
       }
     } catch (error) {
       console.error("Error", error);
@@ -153,28 +156,31 @@ const OTPForm = () => {
               {/* {user && hashEmail(user?.email)} */}
               {email}
             </h5>
-
-            <div className="flex  space-x-5">
-              {otpInputs.map((inputRef, index) => (
-                <input
-                  key={generateKey(index)}
-                  ref={inputRef as React.RefObject<HTMLInputElement> | null}
-                  type="text"
-                  maxLength={1}
-                  value={otp[index]}
-                  onChange={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    handleInputChange(e, index);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key.length === 1 && otp[index].length === 1) {
+            <div className="flex gap-4">
+              <div className="flex  space-x-5">
+                {otpInputs.map((inputRef, index) => (
+                  <input
+                    key={generateKey(index)}
+                    ref={inputRef as React.RefObject<HTMLInputElement> | null}
+                    type="text"
+                    maxLength={1}
+                    value={otp[index]}
+                    onChange={(e) => {
                       e.preventDefault();
-                    }
-                  }}
-                  className="w-10 h-10 border border-gray-300 rounded-md text-center text-2xl"
-                />
-              ))}
+                      e.stopPropagation();
+                      handleInputChange(e, index);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key.length === 1 && otp[index].length === 1) {
+                        e.preventDefault();
+                      }
+                    }}
+                    className="w-10 h-10 border border-gray-300 rounded-md text-center text-2xl"
+                  />
+                ))}
+              </div>
+
+              {isLoading && <LoadingSpinner />}
             </div>
 
             <p className="font-Hanken text-[#565656] text-sm my-5 flex">

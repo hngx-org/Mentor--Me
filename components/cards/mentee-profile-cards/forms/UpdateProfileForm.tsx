@@ -3,15 +3,19 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from "next/image";
-import React, { useRef, useState } from "react";
-import { MenteeDashboardProfileImg } from "@/public";
+import React, { useRef, useState, useEffect } from "react";
+import { toast } from "react-hot-toast";
+import axios from "axios";
+import {
+  MenteeDashboardProfileImg,
+  MenteeUpdateProfileCheckmark,
+} from "@/public";
 import { EditIcon, EditIconDark } from "@/public/SVGs";
-
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 
 type formProps = {
-  name: string;
+  fullName: string;
   bio: string;
   gender: string;
   image: File | undefined;
@@ -22,11 +26,118 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState<File>();
   const [formData, setFormData] = useState<formProps>({
-    name: "",
-    gender: "select",
+    fullName: "",
+    gender: "",
     bio: "",
     image: file,
   });
+  const [token, setToken] = useState(false);
+  const [isProfileUpdated, setIsProfileUpdated] = useState(false);
+  const baseUrl = "https://mentormee-api.onrender.com";
+
+  // Create an event handler function to update the name state
+
+  const handleFullNameChange = (e: any) => {
+    const newFullName = e.target.value;
+    setFormData({
+      ...formData,
+      fullName: newFullName,
+    });
+  };
+
+  // Create an event handler function to update the gender state
+  const handleGenderChange = (e: any) => {
+    const newGender = e.target.value;
+    setFormData({
+      ...formData,
+      gender: newGender,
+    });
+  };
+
+  useEffect(() => {
+    const getUser = localStorage.getItem("Mentee");
+    if (getUser) {
+      try {
+        const newUser = JSON.parse(getUser);
+        const extractedToken = newUser.data.token;
+        setToken(extractedToken);
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
+    }
+  }, []);
+
+  const fetchMenteeData = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/mentee/get-current`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.data);
+        setFormData({
+          fullName: data?.data?.user?.fullName,
+          gender: data?.data?.gender,
+          bio: data?.data?.user?.bio,
+          image: data?.data?.image,
+        });
+      } else {
+        console.error("Failed to fetch user data");
+      }
+    } catch (error) {
+      console.error("Error fetching user data");
+    }
+  };
+  useEffect(() => {
+    if (token) {
+      fetchMenteeData();
+    }
+  }, [token]);
+
+  const handleUpdate = async (e: any) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+
+    // Check if authToken exists
+    if (token) {
+      const apiUrl = "https://mentormee-api.onrender.com/mentee/update-profile";
+
+      const patchData = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      };
+
+      try {
+        const response = await fetch(apiUrl, patchData);
+
+        if (response.ok) {
+          // Handle a successful update here
+          setIsProfileUpdated(true);
+
+          setTimeout(() => {
+            setIsProfileUpdated(false);
+          }, 3000);
+          console.log("PATCH request was successful");
+        } else {
+          console.error(
+            `PATCH request failed with status code ${response.status}`
+          );
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    } else {
+      // Handle the case where authToken is missing
+      console.log("Auth token is missing.");
+    }
+  };
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -35,54 +146,73 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   //   fileInputRef.current.click();
   // };
   const isDisabled =
-    !formData.name || formData.gender === "select" || formData.bio.length < 30;
+    !formData.fullName ||
+    formData.gender === "select" ||
+    formData.bio.length < 30;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
     e.preventDefault();
     if (!file) return;
 
-    if (file.size > MAX_SIZE) {
-      console.error("Image size exceeds 2MB. Please upload a smaller image.");
-      setIsLoading(false); // Make sure to set loading state to false in this case
-      return;
-    }
+    const formData = new FormData();
+    formData.append("file", file); // Use append instead of set
+    formData.append("uoload_preset", "nd2sr4np");
 
     try {
-      const data = new FormData();
-      data.append("image", file); // Use append instead of set
-      data.append("name", formData.name);
-      data.append("gender", formData.gender);
-      data.append("bio", formData.bio);
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dp5ysdt4c/image/upload",
+        formData
+      );
 
-      const res = await fetch("/api/form-upload", {
-        method: "POST",
-        body: data,
-        headers: {
-          // Set the Content-Type header to allow the server to properly parse the FormData
-          // 'multipart/form-data' is the content type used for file uploads
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      // handle the error
-      if (!res.ok) {
-        throw new Error(await res.text());
-      } else {
-        console.log("Upload successful:", res);
-      }
+      console.log(response);
     } catch (error) {
-      // Handle other errors here
       console.error(error);
     } finally {
       setIsLoading(false);
       setFormData({
-        name: "",
+        fullName: "",
         gender: "select",
         bio: "",
         image: undefined,
       });
     }
+
+    // try {
+    //   const data = new FormData();
+    //   data.append("image", file); // Use append instead of set
+    //   // data.append("name", formData.name);
+    //   // data.append("gender", formData.gender);
+    //   // data.append("bio", formData.bio);
+
+    //   // const res = await fetch("/api/form-upload", {
+    //   //   method: "POST",
+    //   //   body: data,
+    //   //   headers: {
+    //   //     // Set the Content-Type header to allow the server to properly parse the FormData
+    //   //     // 'multipart/form-data' is the content type used for file uploads
+    //   //     "Content-Type": "multipart/form-data",
+    //   //   },
+    //   // });
+
+    //   // handle the error
+    //   if (!res.ok) {
+    //     throw new Error(await res.text());
+    //   } else {
+    //     console.log("Upload successful:", res);
+    //   }
+    // } catch (error) {
+    //   // Handle other errors here
+    //   console.error(error);
+    // } finally {
+    //   setIsLoading(false);
+    //   setFormData({
+    //     name: "",
+    //     gender: "select",
+    //     bio: "",
+    //     image: undefined,
+    //   });
+    // }
   };
 
   return (
@@ -97,7 +227,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
         </p>
 
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleUpdate}
           className="w-full flex flex-col gap-4 sm:gap-6  "
         >
           <div className="flex items-center gap-4">
@@ -115,7 +245,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                       ? URL.createObjectURL(formData.image)
                       : MenteeDashboardProfileImg
                   }
-                  alt="cover"
+                  alt="user image"
                   width={130}
                   height={130}
                   className="rounded-full object-contain"
@@ -141,7 +271,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                         e.currentTarget.files &&
                         e.currentTarget.files[0].size > MAX_SIZE
                       ) {
-                        alert(
+                        toast.error(
                           "Image size exceeds 2MB. Please upload a smaller image."
                         );
 
@@ -153,6 +283,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                           ...formData,
                           image: e.currentTarget.files[0],
                         });
+                        setFile(e.currentTarget.files[0]);
                       }
                     }}
                   />
@@ -191,7 +322,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 type="text"
                 placeholder="Your full name"
                 name="name"
-                value={formData.name}
+                value={formData.fullName}
                 id="name"
                 required
                 className={`w-full p-2 outline-none rounded-xl bg-transparent border  py-3 focus:border-primary focus:valid:border-green-400  transition-all duration-300 ${
@@ -200,12 +331,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                     : "border-Neutra10"
                 } `}
                 min={2}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    [e.target.name]: e.target.value,
-                  })
-                }
+                onChange={handleFullNameChange}
               />
             </label>
 
@@ -224,19 +350,14 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                     ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059] bg-black"
                     : "border-Neutra10 bg-transparent"
                 } `}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    [e.target.name]: e.target.value,
-                  })
-                }
+                onChange={handleGenderChange}
                 value={formData.gender}
               >
                 <option value="select" disabled>
                   Select gender
                 </option>
-                <option value="1">Male</option>
-                <option value="2">Female</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
               </select>
             </label>
 
@@ -264,6 +385,15 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 }
               />
             </label>
+            {isProfileUpdated && (
+              <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div className="bg-white border rounded-lg p-8 max-w-sm w-full mx-4">
+                  <p className="text-xl text-green-600">
+                    Profile updated successfully!
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="  flex relative justify-end">
@@ -272,6 +402,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 <LoadingSpinner />
               </div>
             )}
+
             <Button
               title={isLoading ? "Updating..." : "Update"}
               type="submit"
