@@ -26,13 +26,14 @@ export type SideBarMentorProps = {
   jobTitle?: string | null;
 };
 
-export default async function SidebarMentor({
+export default function SidebarMentor({
   light,
   path,
   imgSrc,
   name,
   bio,
   email,
+  jobTitle,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
   const { user } = useAuthCtx();
 
@@ -115,20 +116,12 @@ export default async function SidebarMentor({
         {/* profile */}
 
         <Link href="/mentor-profile?path=profile" prefetch>
-          {/* <ul className="  cursor-pointer   ">
-            <li className="flex gap-3 items-center  p-1">
-              <div className="overflow-hidden rounded-full">
-                <Image width={44} height={44} src="" alt="profile" />
-              </div>
-              <span className="  font-Inter tetx-[10px] font-[500]   text-Neutra30">
-                <span className={`${path === "profile" ? "text-white" : ""}`}>
-                  Funmi Oladapo
-                </span>
-                <br /> ihaveperks@gmail.com
-              </span>
-            </li>
-          </ul> */}
-          <AuthProfileCard email={email} user={name} styles="text-Neutra30" />
+          <AuthProfileCard
+            path={path}
+            email={email}
+            user={name}
+            styles="text-Neutra30"
+          />
         </Link>
       </div>
     </section>

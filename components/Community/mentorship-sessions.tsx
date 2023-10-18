@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { MentorSeshCard } from ".";
 import { freeMentorSessions } from "@/app/(mentor)/(dashboard-mentor)/mentor-community/data";
+import { MentorSeshCard } from ".";
 
 const MentorshipSessions = () => {
   const pathname = usePathname();
@@ -21,7 +21,7 @@ const MentorshipSessions = () => {
             pathname === "/mentor-community"
               ? "/mentor-community/mentorships"
               : pathname === "/mentee-communities"
-              ? "/mentee-communities/mentorships"
+              ? "/mentee-community/mentorships"
               : "communities/mentorships"
           }`}
           className="text-[.875rem] md:block md:text-[1rem] font-medium cursor-pointer text-Accent1 hover:underline"

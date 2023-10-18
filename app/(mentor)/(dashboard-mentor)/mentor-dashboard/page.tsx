@@ -15,8 +15,8 @@ const page = () => {
 
   useEffect(() => {
     if (
-      data?.userDetails?.profileLink &&
-      data?.userDetails?.profileLink !== ""
+      data?.userDetails?.emailVerified &&
+      data?.userDetails?.emailVerified === true
     ) {
       setIsVerified(true);
     }
@@ -25,7 +25,7 @@ const page = () => {
     <div className="">
       <div className="px-5 py-10 lg:p-10 bg-[#f9fafc]">
         <FilterBar />
-        {!isVerified && (
+        {isVerified && (
           <UnverifiedMentorCard
             isVerified={isVerified}
             setIsVerified={setIsVerified}
