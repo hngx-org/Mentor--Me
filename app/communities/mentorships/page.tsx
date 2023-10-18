@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 
 import { verify } from "crypto";
 import { mentorCardAvatar, mentorCardHero } from "@/public";
-import BigMentorShipCard from "@/components/mentee-communities/BigMentorShipCard";
-import MentorCard from "@/components/mentee-communities/MentorCard";
+import BigMentorShipCard from "@/components/Community/BigMentorShipCard";
+import MentorCard from "@/components/Community/MentorCard";
 import HomeNavBar from "@/components/homeNavbar";
 import Footer from "@/components/Footer";
 import { getMentorInfo } from "@/lib/apiHelper";

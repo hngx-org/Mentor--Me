@@ -15,6 +15,7 @@ interface FreeFormData {
   time?: string;
   date?: string;
   relevantTopics?: string;
+  sessionUrl?: string;
 }
 
 interface OneOffFormData {
@@ -50,6 +51,7 @@ export function FreeSessionForm() {
     date: "",
     time: "",
     relevantTopics: "",
+    sessionUrl: "",
   });
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;

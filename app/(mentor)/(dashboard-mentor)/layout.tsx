@@ -26,25 +26,26 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   }`;
   return (
     <>
-      <SidebarMentor
-        path={pathParams}
-        name={userName}
-        imgSrc={profileImg}
-        email={email}
-      />
-
-      <main className="lg:ml-[274px]">
-        <NavbarMentee
+      <Suspense fallback={<LoadingSpinner />}>
+        <SidebarMentor
           path={pathParams}
-          action={actionParams}
-          username={userName}
           name={userName}
           imgSrc={profileImg}
           email={email}
-          bio={bio}
-          jobTitle={jobTitle}
         />
+      </Suspense>
 
+      <main className="lg:ml-[274px]">
+        <Suspense fallback={<LoadingSpinner />}>
+          <NavbarMentee
+            path={pathParams}
+            action={actionParams}
+            username={userName}
+            name={userName}
+            imgSrc={profileImg}
+            jobTitle={jobTitle}
+          />
+        </Suspense>
         <MobileSideBar path={pathParams} action={actionParams} />
         <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
       </main>
