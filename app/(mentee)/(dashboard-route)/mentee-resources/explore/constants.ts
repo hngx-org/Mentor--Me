@@ -4,10 +4,10 @@ import { LockIcon, PlayIcon } from "@/public/SVGs";
 
 export const resourceLinks = [
   { label: "All", id: 1, to: "" },
-  { label: "Design", id: 2, to: "" },
-  { label: "Marketing", id: 3, to: "" },
-  { label: "Business", id: 4, to: "" },
-  { label: "Career", id: 5, to: "" },
+  // { label: "Design", id: 2, to: "" },
+  // { label: "Marketing", id: 3, to: "" },
+  // { label: "Business", id: 4, to: "" },
+  // { label: "Career", id: 5, to: "" },
 ];
 
 export const newResources = [
