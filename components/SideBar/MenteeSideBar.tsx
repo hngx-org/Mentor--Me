@@ -84,7 +84,7 @@ export default function MenteeSideBar({
           </Link>
         </div>
 
-        <Link href="/mentor-profile?path=profile" prefetch>
+        <Link href="/mentee-profile?path=profile" prefetch>
           <AuthProfileCard
             path={path}
             email={data?.userDetails?.email}
