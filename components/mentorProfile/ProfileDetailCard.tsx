@@ -89,11 +89,35 @@ export function InfoCard({ type, heading, text }: InfoCardProps) {
 }
 
 export function BioCard({ text }: { text?: string }) {
+  const [showMore, setshowMore] = React.useState(true);
+  const truncatedDesc =
+    text && text.length >= 180 && showMore ? `${text.slice(0, 180)}....` : text;
   return (
     <div className="w-[100%]  flex space-x-5 h-fit items-center my-2">
       <div>
         <p className="text-lg font-bold font-[#000]"> Bio</p>
-        <p className="text-Neutra40">{text || "Click to add Bio"}</p>
+        <p className="text-Neutra40">{truncatedDesc}</p>
+        {text && text.length >= 180 && (
+          <div>
+            {showMore ? (
+              <button
+                type="button"
+                className="text-Accent2 font-Hanken text-[16px] font-medium"
+                onClick={() => setshowMore(false)}
+              >
+                Show More
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="text-Accent1 font-Hanken text-[16px] font-medium"
+                onClick={() => setshowMore(true)}
+              >
+                Show Less
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
