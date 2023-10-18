@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import {
@@ -19,22 +19,39 @@ type formProps = {
   fullName: string;
   bio: string;
   gender: string;
-  image: File | undefined;
+  image: "";
 };
 
 const MAX_SIZE = 2 * 1024 * 1024; // 2MB in bytes
 export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [file, setFile] = useState<File>();
+  const [fileURL, setFileURL] = useState("");
   const [formData, setFormData] = useState<formProps>({
     fullName: "",
-    gender: "",
+    gender: "Select",
     bio: "",
-    image: file,
+    image: "",
   });
   const [token, setToken] = useState(false);
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
   const baseUrl = "https://mentormee-api.onrender.com";
+  const router = useRouter();
+
+  const handleImageInputChange = (e: any) => {
+    const file = e.target.files[0];
+    if (e.currentTarget.files && e.currentTarget.files[0].size > MAX_SIZE) {
+      toast.error("Image size exceeds 2MB. Please upload a smaller image.");
+    }
+
+    //  if (file) {
+    //    const reader = new FileReader();
+
+    //    reader.onload = (e) => {
+    //      setFileURL(e.target.result);
+    //    };
+    //    reader.readAsDataURL(file);
+    //  }
+  };
 
   // Create an event handler function to update the name state
 
@@ -100,8 +117,6 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   }, [token]);
 
   const handleUpdate = async (e: any) => {
-    const router = useRouter();
-
     e.preventDefault(); // Prevent the default form submission behavior
 
     // Check if authToken exists
@@ -126,10 +141,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
 
           setTimeout(() => {
             setIsProfileUpdated(false);
-            // Redirect to the desired page after a 3-second timeout
-            router.push(
-              "https://mentor-me-lake.vercel.app/mentee-profile?path=profile"
-            );
+            router.replace("/mentee-profile?path=profile");
           }, 3000);
           console.log("PATCH request was successful");
         } else {
@@ -156,71 +168,6 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
     !formData.fullName ||
     formData.gender === "select" ||
     formData.bio.length < 30;
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setIsLoading(true);
-    e.preventDefault();
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append("file", file); // Use append instead of set
-    formData.append("uoload_preset", "nd2sr4np");
-
-    try {
-      const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dp5ysdt4c/image/upload",
-        formData
-      );
-
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-      setFormData({
-        fullName: "",
-        gender: "select",
-        bio: "",
-        image: undefined,
-      });
-    }
-
-    // try {
-    //   const data = new FormData();
-    //   data.append("image", file); // Use append instead of set
-    //   // data.append("name", formData.name);
-    //   // data.append("gender", formData.gender);
-    //   // data.append("bio", formData.bio);
-
-    //   // const res = await fetch("/api/form-upload", {
-    //   //   method: "POST",
-    //   //   body: data,
-    //   //   headers: {
-    //   //     // Set the Content-Type header to allow the server to properly parse the FormData
-    //   //     // 'multipart/form-data' is the content type used for file uploads
-    //   //     "Content-Type": "multipart/form-data",
-    //   //   },
-    //   // });
-
-    //   // handle the error
-    //   if (!res.ok) {
-    //     throw new Error(await res.text());
-    //   } else {
-    //     console.log("Upload successful:", res);
-    //   }
-    // } catch (error) {
-    //   // Handle other errors here
-    //   console.error(error);
-    // } finally {
-    //   setIsLoading(false);
-    //   setFormData({
-    //     name: "",
-    //     gender: "select",
-    //     bio: "",
-    //     image: undefined,
-    //   });
-    // }
-  };
 
   return (
     <div className="flex w-full justify-center sm:justify-start">
@@ -268,31 +215,8 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
 
                   <input
                     type="file"
-                    name="image"
-                    id="image"
                     accept="image/*"
-                    ref={fileInputRef}
-                    className="hidden"
-                    onChange={(e) => {
-                      if (
-                        e.currentTarget.files &&
-                        e.currentTarget.files[0].size > MAX_SIZE
-                      ) {
-                        toast.error(
-                          "Image size exceeds 2MB. Please upload a smaller image."
-                        );
-
-                        return;
-                      }
-
-                      if (e.currentTarget.files && e.currentTarget.files[0]) {
-                        setFormData({
-                          ...formData,
-                          image: e.currentTarget.files[0],
-                        });
-                        setFile(e.currentTarget.files[0]);
-                      }
-                    }}
+                    onChange={handleImageInputChange}
                   />
                 </label>
               </div>
