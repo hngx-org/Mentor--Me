@@ -1,10 +1,7 @@
 "use client";
 
-import SearchCommunitySearchbar from "@/components/mentor-community/searchcommunity-searchbar";
-import {
-  DiscussionForums,
-  MentorshipSessions,
-} from "@/components/mentor-community";
+import { DiscussionForums, MentorshipSessions } from "@/components/Community";
+import SearchCommunitySearchbar from "@/components/Community/searchcommunity-searchbar";
 
 export default function MenteeCommunitiesPage() {
   return (
