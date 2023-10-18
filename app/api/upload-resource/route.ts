@@ -16,18 +16,14 @@ export async function POST(request: NextRequest) {
     const result = await cloudinary.v2.uploader.upload(
       formData.file as string,
       {
-        resource_type: "image",
+        resource_type: "video",
       }
     );
     delete formData.file;
 
     formData.file = result.url;
 
-    formData.ratings = "0.0";
-    formData.reviews = "0";
-    formData.currency = "N";
-
-    console.log("works");
+    console.log("formdata", formData);
 
     const res = await fetch("https://hngmentorme.onrender.com/api/resources", {
       method: "POST",

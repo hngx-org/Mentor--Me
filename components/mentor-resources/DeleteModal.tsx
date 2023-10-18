@@ -2,14 +2,20 @@
 
 import { useState } from "react";
 
+import toast from "react-hot-toast";
 import { CancelIcon } from "@/public/SVGs";
 
 interface DeleteModalProps {
   resourceName: string;
+  resourceId: string;
   closeModal: () => void;
 }
 
-const DeleteModal = ({ resourceName, closeModal }: DeleteModalProps) => {
+const DeleteModal = ({
+  resourceName,
+  closeModal,
+  resourceId,
+}: DeleteModalProps) => {
   const [confirmatoryAnswer, setConfirmatoryAnswer] = useState("");
   return (
     <div className="font-Inter text-NeutalBase w-[min(100%_,470px)] bg-white rounded-[8px] pb-4">
@@ -50,6 +56,33 @@ const DeleteModal = ({ resourceName, closeModal }: DeleteModalProps) => {
           disabled={
             confirmatoryAnswer.toLowerCase() !== resourceName.toLowerCase()
           }
+          onClick={async () => {
+            const toastId = toast.loading(`Deleting ${resourceName} resource `);
+            try {
+              const res = await fetch("/api/delete-resource", {
+                method: "DELETE",
+                body: JSON.stringify(resourceId),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+              if (!res.ok) {
+                throw new Error("There was an error deleting the resource");
+              }
+              const data = await res.json();
+              if (data.success) {
+                toast.success("Deleted resource successfully");
+              }
+              if (data.error) {
+                toast.error(data.error);
+              }
+            } catch (e: any) {
+              toast.error(e.message);
+            } finally {
+              toast.dismiss(toastId);
+              closeModal();
+            }
+          }}
         >
           I understand, delete this repository
         </button>
