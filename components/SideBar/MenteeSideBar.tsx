@@ -5,6 +5,7 @@
 import Link from "next/link";
 
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { SideBarMentorProps } from "./SidebarMentor";
 import {
   Logo2,
@@ -16,10 +17,14 @@ import {
 } from "@/public/SVGs";
 
 import { sidebarMenteeLinks } from "@/lib/Constant";
+import { DashboardMenteeNavImg } from "@/public";
 
 export default function MenteeSideBar({
   light = false,
   path,
+  userName,
+  email,
+  imgSrc,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
   const router = useRouter();
   return (
@@ -88,13 +93,19 @@ export default function MenteeSideBar({
         >
           <Link href="/mentee-profile?path=profile" prefetch>
             <ul className="  cursor-pointer   ">
-              <li className="flex gap-3 items-center  p-1">
-                <ProfileIcon />
-                <span className="  font-Inter tetx-[10px] font-[500]   text-Neutra30">
+              <li className="flex gap-1 items-center  p-1 ">
+                <Image
+                  src={imgSrc || DashboardMenteeNavImg}
+                  alt="mentee"
+                  width={40}
+                  height={40}
+                  className="object-cover rounded-full"
+                />
+                <span className="  font-Inter tetx-[6px] font-[500]   text-Neutra30 overflow-hidden">
                   <span className={`${path === "profile" ? "text-white" : ""}`}>
-                    Funmi Oladapo
+                    {userName}
                   </span>
-                  <br /> funmi@zurimp.com
+                  <br /> {email}
                 </span>
               </li>
             </ul>

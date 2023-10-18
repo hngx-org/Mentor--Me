@@ -7,12 +7,16 @@ import UpcomingCard from "./upcomingCard";
 import MenteeCard from "./cards";
 import Calendarcomponent from "../mentee-booking/components/booking-session/Calender";
 
-const AfterBookings: FC = () => (
+export type User = {
+  username: string | undefined;
+};
+
+const AfterBookings = ({ username }: User) => (
   <div className="w-full min-h-screen">
     <div className="p-[21px] sm:p-8 bg-white border space-y-16">
       <div className="my-4">
         <h1 className="text-2xl font-semibold leading-10">
-          Welcome Henrietta! <span className="ml-4"> 👋</span>
+          Welcome {username}! <span className="ml-4"> 👋</span>
         </h1>
         <p className="font-inter text-base font-medium text-gray-500">
           You have 2 upcoming sessions

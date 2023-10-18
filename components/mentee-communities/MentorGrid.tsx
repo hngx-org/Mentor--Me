@@ -85,7 +85,7 @@ const MentorGrid: React.FC = () => {
         className={`${"imi"} flex  transition-all  duration-300 transform   gap-x-[25px] sm:gap-x-[40px]  md:gap-x-[calc(40px)] lg:gap-x-[calc(50px)] xl:gap-x-[calc(45px)] 2xl:gap-x-[calc(60px)]
  md:w-fit  overflow-x-auto `}
       >
-        {mentorInfo.map((item) => (
+        {mentorInfo?.map((item) => (
           <MentorCard
             id={item.id}
             mentorName={`${capitalizeFirstLetter(

@@ -7,6 +7,7 @@ import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
 import MobileSideBar from "@/components/MobileSideBar";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import { NavbarMentee } from "@/components/menteeTopNav/NavbarMentee";
+import useAuth from "@/context/useAuth";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const pathParams = useSearchParams().get("path");
@@ -15,12 +16,35 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const bioParams = useSearchParams().get("action");
   const emailParams = useSearchParams().get("action");
 
+  const { data } = useAuth();
+  const email = data?.userDetails?.email;
+  const userName = data?.userDetails?.fullName;
+  const jobTitle = data?.mentorship_type;
+  const bio = data?.userDetails.bio;
+
+  const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
+    userName || email
+  }`;
   return (
     <>
-      <MenteeSideBar path={pathParams} />
+      <MenteeSideBar
+        path={pathParams}
+        userName={userName}
+        email={email}
+        imgSrc={profileImg}
+      />
 
       <main className="lg:ml-[274px]">
-        <NavbarMentee path={pathParams} action={actionParams} />
+        <NavbarMentee
+          path={pathParams}
+          action={actionParams}
+          username={userName}
+          name={userName}
+          email={email}
+          jobTitle={jobTitle}
+          bio={bio}
+          imgSrc={profileImg}
+        />
 
         <MobileSideBar path={pathParams} action={actionParams} />
         <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
