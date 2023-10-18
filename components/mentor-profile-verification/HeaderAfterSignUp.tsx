@@ -2,12 +2,15 @@ import React from "react";
 import Image from "next/image";
 import { DashboardMenteeNavImg } from "@/public";
 import { BulletIcon, NotificationBingIcon } from "@/public/SVGs";
+import { useAuthCtx } from "@/context/AuthContext";
 
 interface Steps {
   step: number;
 }
 
 export default function HeaderAfterSignUp({ step }: Steps) {
+  const { user } = useAuthCtx();
+  const email = user?.email;
   const isStep1To4 = step >= 1 && step <= 4;
   const h1ClassName = isStep1To4
     ? "font-Hanken font-[700]  md:text-2xl text-xl text-Neutra20"
