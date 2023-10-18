@@ -80,7 +80,10 @@ export default function UploadResources() {
           <tr>
             <th colSpan={3} className="p-0">
               <div className="py-8 px-4 bg-white border-[#EAEBF0] border-[1px] rounded-t-xl">
-                <EllipsisIcon className="ml-auto" />
+                <p className="w-max ml-auto text-[#272D37] font-Inter">
+                  {(paginationData.currentPage - 1) * 8 + 1} -{" "}
+                  {paginationData.currentPage * 8}
+                </p>
               </div>
             </th>
           </tr>

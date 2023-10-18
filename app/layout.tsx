@@ -8,7 +8,7 @@ import AuthContextProvider from "@/context/AuthContext";
 
 const inter = Inter({
   subsets: ["latin"],
-  display: "swap",
+  // display: "swap",
   variable: "--font-inter",
 });
 

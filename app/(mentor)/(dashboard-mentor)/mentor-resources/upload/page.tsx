@@ -1,6 +1,7 @@
-"use client";
-
+/* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+
+"use client";
 
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -9,16 +10,21 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { CaretIcon } from "@/public/SVGs";
 import DropDown from "@/components/DropDown";
+import ResourceCurriculum from "./resourceCurriculum";
 
 const courseTypeOptions = ["JavaScript", "TypeScript", "C++", "C#"];
 
 export default function UploadResourcesPage() {
   const courseTitleRef = useRef<HTMLInputElement>(null);
+  const [curriculumList, setCurriculumList] = useState<
+    { id: string; title: string; duration: number }[]
+  >([{ id: "FIRSTSECTIONFIELD", title: "", duration: 0 }]);
   const courseDescriptionRef = useRef<HTMLTextAreaElement>(null);
   const categoryRef = useRef<HTMLInputElement>(null);
   const courseTypeRef = useRef<HTMLInputElement>(null);
   const priceRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
+  const [video, setVideo] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
   const [isCategoryDropDownExpanded, setIsCategoryDropDownExpanded] =
     useState(false);
@@ -28,6 +34,15 @@ export default function UploadResourcesPage() {
   const [selectedCategoryOptionIdx, setSelectedCategoryOptionIdx] =
     useState(-1);
 
+  useEffect(() => {
+    if (!file) return;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
+    fileReader.onloadend = function () {
+      setVideo(fileReader.result as string);
+    };
+  }, [file?.name]);
   useEffect(() => {
     function detectOuterClick(this: Document, ev: MouseEvent) {
       if (!categoryRef.current?.parentElement?.contains(ev.target as Node)) {
@@ -116,7 +131,7 @@ export default function UploadResourcesPage() {
           error: "There was an error uploading the resource.",
         });
       }}
-      className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white pt-10"
+      className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white pt-10 mb-8"
     >
       <h1 className="capitalize font-Inter font-medium text-2xl mb-8 text-NeutalBase">
         upload resources
@@ -180,12 +195,11 @@ export default function UploadResourcesPage() {
           id="category"
           name="category"
           ref={categoryRef}
-          defaultValue=""
           required
           onKeyDown={(e) => {
             e.preventDefault();
           }}
-          value={courseTypeOptions[selectedCategoryOptionIdx]}
+          value={courseTypeOptions[selectedCategoryOptionIdx] || ""}
           placeholder="select category"
           className="border-none cursor-pointer outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
         />
@@ -220,12 +234,11 @@ export default function UploadResourcesPage() {
           id="course-type"
           name="course-type"
           ref={courseTypeRef}
-          defaultValue=""
           onKeyDown={(e) => {
             e.preventDefault();
           }}
           required
-          value={courseTypeOptions[selectedOptionIdx]}
+          value={courseTypeOptions[selectedOptionIdx] || ""}
           placeholder="select course type"
           className="border-none cursor-pointer outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
         />
@@ -237,9 +250,19 @@ export default function UploadResourcesPage() {
       </Input>
       <div className="mb-4">
         <p className="capitalize text-Neutral60 font-Inter font-medium mb-2 text-lg">
-          upload file
+          video preview
         </p>
         <DragArea setFile={setFile} />
+        {video.trim().length > 0 && (
+          <div className="flex items-center my-4 gap-4">
+            <video
+              autoPlay
+              className=" w-40 object-cover object-center"
+              src={video}
+            />
+            <p className="font-medium font-Inter">{file?.name}</p>
+          </div>
+        )}
       </div>
       <Input title="price" htmlFor="price">
         <input
@@ -257,9 +280,13 @@ export default function UploadResourcesPage() {
           className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:font-normal"
         />
       </Input>
+      <ResourceCurriculum
+        curriculumList={curriculumList}
+        setCurriculumList={setCurriculumList}
+      />
       <button
         type="submit"
-        className="font-Inter mb-4 font-medium capitalize cursor-pointer bg-NeutalBase py-3 px-5 w-full rounded-[8px] border-none outline-none text-white"
+        className="font-Inter mb-4 font-medium capitalize cursor-pointer bg-NeutalBase py-4 px-5 w-full rounded-[8px] border-none outline-none text-white"
       >
         upload resource
       </button>
@@ -295,6 +322,17 @@ const DragArea = ({
 
         const file = e.dataTransfer.files[0];
         console.log(file);
+        const acceptedFileTypes = ["mp4", "webm", "avi", "mkv", "ogg"];
+        const fileType = file.name.split(".").at(-1);
+
+        if (!acceptedFileTypes.includes(fileType!.toLowerCase())) {
+          toast.error(`Unsupported file format: ${fileType}`);
+          return;
+        }
+        if (file.size > 15728640) {
+          toast.error("The uploaded file is larger than 15MB");
+          return;
+        }
         setFile(file);
       }}
       onDragOver={(e) => {
@@ -316,7 +354,13 @@ const DragArea = ({
             type="file"
             id="upload-file"
             name="upload-file"
+            accept=".mp4, .webm, .avi, .mkv, .ogg"
+            size={15728640}
             onChange={(e) => {
+              if (e.target.files![0].size > 15728640) {
+                toast.error("The uploaded file is larger than 15MB");
+                return;
+              }
               setFile(e.target.files![0]);
             }}
             className="hidden"
@@ -325,7 +369,7 @@ const DragArea = ({
         to upload
       </div>
       <p className="text-[#9C9CA7]">
-        Accepted formats (mp4, xls, pdf, csv, ppt). Maximum of 15MB
+        Accepted formats (mp4, WebM, avi, mkv, ogg). Maximum of 15MB
       </p>
     </div>
   );
@@ -357,7 +401,6 @@ const Input = ({
     >
       {children}
     </label>
-    {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */}
     {extraElements}
   </div>
 );
