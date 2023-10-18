@@ -17,8 +17,7 @@ export type NavbarMenteeProps = {
   imgSrc?: string;
 
   name?: string | null;
-  bio?: string | null;
-  email?: string | null;
+
   jobTitle?: string | null;
 };
 export const NavbarMentee = ({
@@ -28,8 +27,6 @@ export const NavbarMentee = ({
   imgSrc,
   jobTitle,
   name,
-  bio,
-  email,
 }: NavbarMenteeProps) => {
   const [scrollY, setScrollY] = useState(0);
   const [isView, setIsView] = useState(false);
@@ -86,11 +83,9 @@ export const NavbarMentee = ({
               : "text-[12px] text-Neutra40  font-Hanken hidden sm:block"
           }  `}
         >
-          <p className="font-[500] text-black text-[14px]">
-            {name || "Username"}
-          </p>
+          <p className="font-[500] text-black text-[14px]">{name}</p>
           {/* @ts-ignore */}
-          <p>{jobTitle || "Job Title"}</p>
+          <p>{jobTitle}</p>
         </div>
         <div
           className="cursor-pointer relative  rounded-full select-none"
@@ -145,9 +140,9 @@ export const NavbarMentee = ({
                     }
                   >
                     <p className="font-[500] text-white text-[14px]">
-                      {username || "Username"}
+                      {username}
                     </p>
-                    <p>{jobTitle || "JobTitle"}</p>
+                    <p>{jobTitle}</p>
                   </Link>
                 </button>
                 <button
