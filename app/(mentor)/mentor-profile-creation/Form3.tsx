@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import MentorFormBuilder from "@/components/mentorProfileCreation/MentorFormBuilder";
 import { MentorCreationPlusIcon } from "@/public";
@@ -12,7 +12,8 @@ interface myProps {
 }
 
 function Form3({ handleMoveForward, handleMoveBack }: myProps) {
-  const { currForm, files, setFiles, setFormInputs } = useMentorContext();
+  const { currForm, files, setFiles, setFormInputs, formInputs } =
+    useMentorContext();
   const select3 = useRef<HTMLInputElement>(null);
   const image3 = useRef<HTMLImageElement>(null);
 
@@ -23,6 +24,56 @@ function Form3({ handleMoveForward, handleMoveBack }: myProps) {
     }
   }, [files]);
 
+  const [image, setImage] = useState(null);
+  const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [preview, setPreview] = useState(null);
+
+  const uploadImage = async () => {
+    setLoading(true);
+    const fileReader = new FileReader();
+    //
+    fileReader.readAsDataURL(image!);
+    fileReader.onloadend = async () => {
+      try {
+        const response = await fetch("/api/mentor-profile", {
+          method: "POST",
+          body: JSON.stringify(fileReader.result),
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        });
+        const data = await response.json();
+        setUrl(data);
+        if (data.error) {
+          alert(
+            "problem uploading image, please check your internet connection"
+          );
+        }
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+
+  // This useEffect performs the post request when the value of files.file2 changes
+  useEffect(() => {
+    if (files.file3) {
+      uploadImage();
+    }
+  }, [files.file3]);
+
+  useEffect(() => {
+    if (url) {
+      setFormInputs((prevData: any) => ({
+        ...prevData,
+        // @ts-ignore
+        education_url: url.url,
+      }));
+    }
+  }, [url]);
+
   function showFile(e: any) {
     if ([...e.target.files][0].size > 2 * 1024 * 1024) {
       alert("Image size exceeds 2MB. Please upload a smaller image.");
@@ -32,6 +83,8 @@ function Form3({ handleMoveForward, handleMoveBack }: myProps) {
       ...prevFile,
       [e.target.id]: [...e.target.files][0],
     }));
+
+    setImage(e.target.files[0]);
 
     setFormInputs((prevData: any) => ({
       ...prevData,
