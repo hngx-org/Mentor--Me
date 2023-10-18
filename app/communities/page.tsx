@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
-import { DiscussionForums } from "@/components/mentor-community";
+
 import HomeNavBar from "@/components/homeNavbar";
 import { SearchIcon } from "@/public/assets/Icons/mentor-communities";
 import Footer from "@/components/Footer";
 import { mentorCardAvatar, mentorCardHero } from "@/public";
-import MentorGrid from "@/components/mentee-communities/MentorGrid";
+import MentorGrid from "@/components/Community/MentorGrid";
+import { DiscussionForums } from "@/components/Community";
 // import useAuth from "@/context/useAuth";
 
 const CommunityPage = () => (
