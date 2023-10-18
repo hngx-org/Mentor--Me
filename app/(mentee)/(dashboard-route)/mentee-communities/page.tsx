@@ -81,7 +81,10 @@ const MenteeCommunities: React.FC = () => {
               {" "}
               <div className=" w-[396px] sm:w-[406px]  md:w-[628px] lg:w-[calc(777px)] xl:w-[calc(977px)] 2xl:w-[calc(1362px)]   border border-transparent  mx-auto overflow-hidden">
                 {" "}
-                <DiscussionSlider slideInfo={sliderInfo} />
+                <DiscussionSlider
+                  isLoggedIn={isLoggedIn}
+                  slideInfo={sliderInfo}
+                />
               </div>
               <div className=" w-[396px] sm:w-[406px]  md:w-[628px] lg:w-[calc(777px)] xl:w-[calc(977px)] 2xl:w-[calc(1362px)]  border border-transparent  mx-auto overflow-hidden">
                 <MentorGrid />
@@ -92,7 +95,10 @@ const MenteeCommunities: React.FC = () => {
               {" "}
               <div className=" w-[396px] sm:w-[628px]  md:w-[860px] lg:w-[calc(1052px)] xl:w-[calc(1352px)] 2xl:w-[calc(1362px)]   border border-transparent  mx-auto overflow-hidden">
                 {" "}
-                <DiscussionSlider slideInfo={sliderInfo} />
+                <DiscussionSlider
+                  isLoggedIn={isLoggedIn}
+                  slideInfo={sliderInfo}
+                />
               </div>
               <div className=" w-[396px] sm:w-[628px]  md:w-[860px] lg:w-[calc(1052px)] xl:w-[calc(1352px)] 2xl:w-[calc(1362px)]   border border-transparent  mx-auto overflow-hidden">
                 <MentorGrid />

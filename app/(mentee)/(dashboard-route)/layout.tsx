@@ -12,15 +12,11 @@ import useAuth from "@/context/useAuth";
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const pathParams = useSearchParams().get("path");
   const actionParams = useSearchParams().get("action");
-  const nameParams = useSearchParams().get("action");
-  const bioParams = useSearchParams().get("action");
-  const emailParams = useSearchParams().get("action");
 
   const { data } = useAuth();
   const email = data?.userDetails?.email;
   const userName = data?.userDetails?.fullName;
   const jobTitle = data?.mentorship_type;
-  const bio = data?.userDetails.bio;
 
   const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
     userName || email
@@ -40,9 +36,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           action={actionParams}
           username={userName}
           name={userName}
-          email={email}
           jobTitle={jobTitle}
-          bio={bio}
           imgSrc={profileImg}
         />
 
