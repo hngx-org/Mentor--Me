@@ -63,7 +63,7 @@ export const NavbarMentee = ({
       }`}
     >
       <h3 className="uppercase  font-Hanken font-[700] text-[24px]">
-        {path || "[PathName Here]"}
+        {path ?? "Home"}
       </h3>
       {scrollY > 400 && (
         <button

@@ -27,18 +27,18 @@ export default function MenteeSideBar({
   const router = useRouter();
   return (
     <section
-      className={`hidden w-[274px] border-[1px] py-7 pl-4 min-h-screen h-screen fixed left-0 ${
+      className={`hidden w-[240px] border-[1px] py-7 px-4 min-h-screen h-screen fixed left-0 ${
         light ? "bg-[#fff]" : " bg-[#000] hidden lg:block"
       }`}
     >
-      <div className="flex flex-col justify-between h-full">
+      <div className="flex flex-col justify-between h-full relative">
         <div>
           <div className="w-full pl-3">{light ? <Logo2 /> : <LogoIcon />}</div>
-          <div className="mt-16 2xl:mt-20 ">
+          <div className="mt-10  ">
             <p className="font-Inter text-[14px]  leading-[20.3px] font-[500]   text-Neutra30 pl-3">
               MENU
             </p>
-            <ul className="px-3  py-4  flex flex-col gap-2 xl:gap-y-6 cursor-pointer text-[13px]  ">
+            <ul className="px-3  py-4  flex flex-col gap-[10px]  cursor-pointer text-[13px]  ">
               {sidebarMenteeLinks.map((link) => (
                 <Link key={link.id} href={link.path} prefetch>
                   <li
@@ -52,17 +52,17 @@ export default function MenteeSideBar({
                   >
                     <span>{link.iconDark}</span>
                     <span
-                      className={` font-Inter text-[14px] xl:text-xl font-[500] ${
+                      className={` font-Inter text-[14px]  font-[500] ${
                         light ? "text-[#008080]" : "text-[#fff]"
                       } `}
                     >
                       {link.label}
                     </span>
-                    {link.label === "Communities" && (
+                    {/* {link.label === "Communities" && (
                       <span className="text-white font-medium text-lg ">
                         ↗
                       </span>
-                    )}
+                    )} */}
                   </li>
                 </Link>
               ))}
@@ -70,21 +70,32 @@ export default function MenteeSideBar({
           </div>
         </div>
 
-        <div className="my-4 border-t-2 border-Neutra40 pt-4">
+        <div className="mt-10 border-t-2 border-Neutra40 pt-4">
+          <div className="flex items-center w-full justify-start gap-4 pt-6 pl-2 hover:brightness-150 transition-all duration-300 ">
+            <SettingIcon />
+
+            <span className="  font-Inter text-[14px]  font-[500]  text-[#ffff] cursor-pointer">
+              Setting
+            </span>
+          </div>
           <Link
             href="/"
             onClick={() => router.replace("/")}
-            className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 "
+            className="flex items-center w-full justify-start gap-4 pt-6 pl-2 hover:brightness-150 transition-all duration-300 "
           >
             <LogoutIcon />
 
-            <span className="  font-Inter text-[14px] xl:text-xl font-[500]  text-Error50">
+            <span className="  font-Inter text-[14px]  font-[500]  text-Error50">
               LogOut
             </span>
           </Link>
         </div>
 
-        <Link href="/mentee-profile?path=profile" prefetch>
+        <Link
+          href="/mentee-profile?path=profile"
+          prefetch
+          className="mt-16 bottom-0"
+        >
           <AuthProfileCard
             path={path}
             email={data?.userDetails?.email}
