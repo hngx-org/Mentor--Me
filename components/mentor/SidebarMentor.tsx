@@ -26,13 +26,14 @@ export type SideBarMentorProps = {
   jobTitle?: string | null;
 };
 
-export default async function SidebarMentor({
+export default function SidebarMentor({
   light,
   path,
   imgSrc,
   name,
   bio,
   email,
+  jobTitle,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
   const { user } = useAuthCtx();
 
