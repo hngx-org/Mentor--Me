@@ -199,7 +199,7 @@ export default function UploadResourcesPage() {
           onKeyDown={(e) => {
             e.preventDefault();
           }}
-          value={courseTypeOptions[selectedCategoryOptionIdx] || ""}
+          defaultValue={courseTypeOptions[selectedCategoryOptionIdx] || ""}
           placeholder="select category"
           className="border-none cursor-pointer outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
         />
@@ -238,7 +238,7 @@ export default function UploadResourcesPage() {
             e.preventDefault();
           }}
           required
-          value={courseTypeOptions[selectedOptionIdx] || ""}
+          defaultValue={courseTypeOptions[selectedOptionIdx] || ""}
           placeholder="select course type"
           className="border-none cursor-pointer outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
         />
