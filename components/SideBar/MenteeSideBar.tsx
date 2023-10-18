@@ -16,15 +16,18 @@ import {
 } from "@/public/SVGs";
 
 import { sidebarMenteeLinks } from "@/lib/Constant";
+import AuthProfileCard from "../cards/auth-profile-card/AuthProfileCard";
+import useAuth from "@/context/useAuth";
 
 export default function MenteeSideBar({
   light = false,
   path,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
+  const { data } = useAuth();
   const router = useRouter();
   return (
     <section
-      className={`hidden w-[274px] border-[1px] py-7 px-4 min-h-screen h-screen fixed left-0 ${
+      className={`hidden w-[274px] border-[1px] py-7 pl-4 min-h-screen h-screen fixed left-0 ${
         light ? "bg-[#fff]" : " bg-[#000] hidden lg:block"
       }`}
     >
@@ -81,25 +84,14 @@ export default function MenteeSideBar({
           </Link>
         </div>
 
-        <div
-          className={`${
-            path === "profile" ? "border border-[#E5FFFF] rounded-2xl" : ""
-          }`}
-        >
-          <Link href="/mentee-profile?path=profile" prefetch>
-            <ul className="  cursor-pointer   ">
-              <li className="flex gap-3 items-center  p-1">
-                <ProfileIcon />
-                <span className="  font-Inter tetx-[10px] font-[500]   text-Neutra30">
-                  <span className={`${path === "profile" ? "text-white" : ""}`}>
-                    Funmi Oladapo
-                  </span>
-                  <br /> funmi@zurimp.com
-                </span>
-              </li>
-            </ul>
-          </Link>
-        </div>
+        <Link href="/mentor-profile?path=profile" prefetch>
+          <AuthProfileCard
+            path={path}
+            email={data?.userDetails?.email}
+            user={data?.userDetails?.fullName}
+            styles="text-Neutra30"
+          />
+        </Link>
       </div>
     </section>
   );
