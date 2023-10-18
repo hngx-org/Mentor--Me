@@ -15,7 +15,7 @@ const UnverifiedMentorCard = ({ setIsVerified, isVerified }: PropType) => {
     <>
       <div className="mb-10 hidden md:block">
         <h2 className="font-bold font-Hanken lg:leading-[54px] text-Neutral60 lg:text-5xl">
-          Welcome {nameParams || "User"}! 👋
+          Welcome {nameParams}! 👋
         </h2>
         <p className="text-base lg:text-lg font-Inter font-normal text-Neutra30">
           You have no upcoming sessions!!!

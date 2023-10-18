@@ -15,8 +15,8 @@ const page = () => {
 
   useEffect(() => {
     if (
-      data?.userDetails?.profileLink &&
-      data?.userDetails?.profileLink !== ""
+      data?.userDetails?.emailVerified &&
+      data?.userDetails?.emailVerified === true
     ) {
       setIsVerified(true);
     }

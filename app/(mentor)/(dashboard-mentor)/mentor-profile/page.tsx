@@ -3,8 +3,8 @@
 
 "use client";
 
-import React, { useState, useEffect, Suspense, createContext } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import MentorProfileHeader from "@/components/mentorProfile/MentorProfileHeader";
 import ProfileDetailsCardContainer, {
   AvailableSessionCard,
@@ -15,8 +15,7 @@ import ProfileDetailsCardContainer, {
 import MentorProfileMainLayout from "@/components/mentorProfile/mentorProfileMainLayout";
 import OverViewCardLayout from "@/components/mentorProfile/MentorProfilelayouts";
 import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
-import LoadingSpinner from "@/components/loaders/LoadingSpinner";
-import UpdateProfile from "@/components/cards/mentee-profile-cards/UpdateProfile";
+
 import useAuth from "@/context/useAuth";
 
 export type ModalState = {
@@ -40,12 +39,8 @@ type UserData = {
 };
 export default function ProfilePage() {
   const { data } = useAuth();
-  console.log(data);
-  // console.log(data?.userDetails.email);
-  // const [fullName] = data?.userDetails.email.split("@") || ["", ""];
-  const mentorshipType = data?.mentorship_type;
 
-  const [currMentor, setCurrMentor] = useState<any>();
+  const [skills, setSkills] = useState<any>();
   const [user, setUser] = useState<any>({});
   const [userData, setUserData] = useState<UserData | undefined>({
     fullName: "",
@@ -116,123 +111,89 @@ export default function ProfilePage() {
     }
   };
 
-  // console.log(user);
-  // const getCurrent = async () => {
-  //   try {
-  //     const currMent = await fetch(`${baseUrl}/users/get-current`, {
-  //       method: "GET",
-  //       redirect: "follow",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setCurrMentor(data?.data);
-  //         console.log("Current User", data?.data);
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     // Any code that needs to be executed regardless of success or failure can go here
-  //   }
-  // };
-
   useEffect(() => {
     getCurrentMentor();
   }, []);
 
-  // useEffect(() => {
-  //   router.push(
-  //     `/mentor-profile?path=profile&name=${userData.fullName}&email=${userData.email}&bio=${userData.bio}&mentorship=${userData.mentorship}`
-  //   );
-  // }, [userData]);
+  useEffect(() => {
+    if (data?.skills?.includes(",")) {
+      const skills = data?.skills?.split(",");
+      setSkills(Array.from(new Set(skills)));
+    } else {
+      setSkills([data?.skills]);
+    }
+  }, [data]);
 
-  const paramsAction = useSearchParams().get("action");
-  // console.log(user);
-  // console.log(currMentor);
-  // console.log(userData);
   return (
-    <>
-      {paramsAction === "edit-mentor" ? (
-        <Suspense fallback={<LoadingSpinner />}>
-          <div className="w-full justify-center flex relative ">
-            <UpdateProfile />
-          </div>
-        </Suspense>
+    <div className=" w-full overflow-x-hidden ">
+      {user && user ? (
+        <MentorProfileHeader
+          userName={userData?.fullName}
+          mentorship={userData?.mentorship}
+          userRole={data?.userDetails?.role!}
+          userRating={4}
+          openModal={setModal}
+        />
       ) : (
-        <div className=" w-full overflow-x-hidden ">
-          {user && user ? (
-            <MentorProfileHeader
-              // userName={userData?.username}
-              mentorship={userData?.mentorship}
-              userRole={mentorshipType!}
-              userRating={4}
-              openModal={setModal}
-            />
-          ) : (
-            <MentorProfileHeader
-              userName="Shade Mayowa"
-              mentorship=""
-              userRole="Product Designer"
-              userRating={4}
-              openModal={setModal}
-            />
-          )}
+        <MentorProfileHeader
+          userName="Shade Mayowa"
+          mentorship=""
+          userRole="Product Designer"
+          userRating={4}
+          openModal={setModal}
+        />
+      )}
 
-          {user && user ? (
-            <MentorProfileMainLayout>
-              <BioCard text={userData?.bio} />
+      {user && user ? (
+        <MentorProfileMainLayout>
+          <BioCard text={userData?.bio} />
 
-              <ProfileDetailsCardContainer
-                heading="education"
-                items={[
-                  {
-                    text: userData?.degree || "",
-                    heading: userData?.institution || "",
-                    type: "certification",
-                  },
-                ]}
-                openModal={setModal}
-              />
-              <SkillSCard skills={[]} />
-              <ProfileDetailsCardContainer
-                heading="Experience"
-                items={[
-                  {
-                    type: "experience",
-                    text: userData?.mentoring_experience || "",
-                  },
-                ]}
-                openModal={setModal}
-              />
-              {/* 
+          <ProfileDetailsCardContainer
+            heading="education"
+            items={[
+              {
+                text: userData?.degree || "",
+                heading: userData?.institution || "",
+                type: "certification",
+              },
+            ]}
+            openModal={setModal}
+          />
+          <SkillSCard skills={skills || []} />
+          <ProfileDetailsCardContainer
+            heading="Experience"
+            items={[
+              {
+                type: "experience",
+                text: userData?.mentoring_experience || "",
+              },
+            ]}
+            openModal={setModal}
+          />
+          {/* 
               <ProfileDetailsCardContainer
                 heading="Education"
                 items={[]}
                 openModal={setModal}
               /> */}
-              <AvailableSessionCard
-                timezone=" Greenwich Mean Time (GMT)"
-                availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
-              />
-              <OverViewCardLayout heading="impact at a glance" />
-              <SessionsProgressCard progress={10} />
-            </MentorProfileMainLayout>
-          ) : (
-            <div>Something went wrong</div>
-          )}
-
-          {modal.isOpen && (
-            <MentorProfileModal
-              setUserData={setUserData}
-              onClose={setModal}
-              state={modal.state}
-            />
-          )}
-        </div>
+          <AvailableSessionCard
+            timezone=" Greenwich Mean Time (GMT)"
+            availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
+          />
+          <OverViewCardLayout heading="impact at a glance" />
+          <SessionsProgressCard progress={10} />
+        </MentorProfileMainLayout>
+      ) : (
+        <div>Something went wrong</div>
       )}
-    </>
+
+      {modal.isOpen && (
+        <MentorProfileModal
+          setUserData={setUserData}
+          onClose={setModal}
+          state={modal.state}
+        />
+      )}
+    </div>
   );
 }
