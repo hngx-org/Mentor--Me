@@ -16,8 +16,8 @@ interface ContextProps {
   setFiles: Dispatch<SetStateAction<any>>;
   currForm: any;
   setCurrForm: Dispatch<SetStateAction<any>>;
-  isRegistered: any;
-  setIsRegistered: Dispatch<SetStateAction<any>>;
+  loader: any;
+  setLoader: Dispatch<SetStateAction<any>>;
 }
 
 export const MentorContext = createContext<ContextProps>({
@@ -27,8 +27,8 @@ export const MentorContext = createContext<ContextProps>({
   setCurrForm: (): any => {},
   files: {},
   setFiles: (): any => {},
-  isRegistered: false,
-  setIsRegistered: (): any => {},
+  loader: false,
+  setLoader: (): any => {},
 });
 
 interface myProps {
@@ -45,7 +45,7 @@ export function MentorProvider({ children }: myProps) {
     file3: "",
   });
   const [currForm, setCurrForm] = useState(0);
-  const [isRegistered, setIsRegistered] = useState(false);
+  const [loader, setLoader] = useState(false);
   const myValues = useMemo(
     () => ({
       formInputs,
@@ -54,10 +54,10 @@ export function MentorProvider({ children }: myProps) {
       setFiles,
       currForm,
       setCurrForm,
-      isRegistered,
-      setIsRegistered,
+      loader,
+      setLoader,
     }),
-    [formInputs, currForm, isRegistered]
+    [formInputs, currForm, loader]
   );
   return (
     <MentorContext.Provider value={myValues}>{children}</MentorContext.Provider>

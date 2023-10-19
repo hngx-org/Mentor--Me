@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import { useMentorContext } from "@/app/(mentor)/mentor-profile-creation/MentorContext";
+import LoadingSpinner from "../loaders/LoadingSpinner";
 
 interface myProps {
   children?: any;
@@ -21,7 +22,7 @@ export default function MentorFormBuilder({
   handleBack,
   handleClick,
 }: myProps) {
-  const { formInputs, setFormInputs } = useMentorContext();
+  const { formInputs, setFormInputs, currForm, loader } = useMentorContext();
   const form = useRef<HTMLFormElement | null>(null);
   const [isFull, setIsFull] = useState(false);
   const [textLength, setTextLength] = useState(0);
@@ -70,6 +71,7 @@ export default function MentorFormBuilder({
       ...prevData,
       [e.target.name]: e.target.value,
     }));
+    setIsValid(form.current!.checkValidity());
   }
 
   function handleInput(e: any) {
@@ -188,7 +190,7 @@ export default function MentorFormBuilder({
             isValid
               ? "bg-[#121212] cursor-pointer"
               : "bg-[#6c6c6c] cursor-not-allowed"
-          } text-white font-semibold border-[1px] w-[100%] max-w-[200px] py-5 rounded-md font-Inter text-center`}
+          } text-white font-semibold border-[1px] w-[100%] max-w-[200px] py-5 rounded-md font-Inter text-center relative`}
           onClick={(e) => {
             e.preventDefault();
             const valid = (form.current! as HTMLFormElement).reportValidity();
@@ -203,7 +205,14 @@ export default function MentorFormBuilder({
             }
           }}
         >
-          Continue
+          {currForm === 4 && loader ? (
+            <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
+              <LoadingSpinner />
+            </div>
+          ) : (
+            ""
+          )}
+          {currForm === 4 ? "Submit" : "Continue"}
         </button>
       </div>
     </form>
@@ -283,7 +292,8 @@ function SelectComponent({
           </option>
         ))}
       </select>
-      {/* <p>Selected options: {selectedValues.join(", ")}</p> */}
+
+      {/* This div contains a display of all the options that the user has selected */}
       <div className="flex gap-2 flex-wrap">
         {selectedValues.map((value) => (
           <div

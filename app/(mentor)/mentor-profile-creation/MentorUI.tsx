@@ -35,14 +35,8 @@ import Form5 from "./Form5";
 import { useMentorContext } from "./MentorContext";
 
 export function MentorProfileCreationForms() {
-  const {
-    formInputs,
-    currForm,
-    setCurrForm,
-    files,
-    isRegistered,
-    setIsRegistered,
-  } = useMentorContext();
+  const { formInputs, currForm, setCurrForm, files, loader, setLoader } =
+    useMentorContext();
   const [isModalShown, setIsModalShown] = useState(false);
 
   const forms = [
@@ -85,11 +79,13 @@ export function MentorProfileCreationForms() {
       )
       .then((response) => {
         // Handle the response
-        setIsRegistered(true);
+        console.log(response);
+        setLoader(false);
         setIsModalShown(true);
       })
       .catch((error) => {
         // Handle any errors
+        setLoader(false);
         console.log(error.response.data.message);
         toast.error(error.response.data.message);
       });
@@ -125,6 +121,7 @@ export function MentorProfileCreationForms() {
       setCurrForm(currForm + 1);
     } else if (currForm === forms.length - 1 && motion === "forward") {
       // setCurrForm(0);
+      setLoader(true);
       submitData();
     }
   }

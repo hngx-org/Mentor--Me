@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import MentorMeIcon from "@/svgs/MentorMeIcon";
 
 import {
@@ -27,8 +28,8 @@ const form3Arr = formData[2];
 const form4Arr = formData[3];
 
 export default function MenteeProfileCreationForms() {
-  const { formInputs, setFormInputs } = useMenteeContext();
-  const [currForm, setCurrForm] = useState(0);
+  const { formInputs, setFormInputs, currForm, setCurrForm, setLoader } =
+    useMenteeContext();
   const [isModalShown, setIsModalShown] = useState(false);
 
   const select1 = useRef<HTMLInputElement>(null);
@@ -82,11 +83,13 @@ export default function MenteeProfileCreationForms() {
       )
       .then((response) => {
         // Handle the response
+        setLoader(false);
         setIsModalShown(true);
       })
       .catch((error) => {
         // Handle any errors
-        alert(error.response.data.message);
+        setLoader(false);
+        toast.error(error.response.data.message);
       });
   }
 
@@ -178,6 +181,7 @@ export default function MenteeProfileCreationForms() {
       setCurrForm(currForm + 1);
     } else if (currForm === forms.length - 1 && motion === "forward") {
       // setCurrForm(0);
+      setLoader(true);
       submitData();
     }
   }
