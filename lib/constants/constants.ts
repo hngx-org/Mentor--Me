@@ -212,6 +212,32 @@ export const mobileSidebarLinks: MobileSidebarProps[] = [
     link: "/mentee-resources?path=Resources",
   },
 ];
+export const mobileSidebarLinksMentor: MobileSidebarProps[] = [
+  {
+    id: 1,
+    label: "Home",
+    icon: MobileHomeIcon(),
+    link: "/mentor-dashboard?path=Home",
+  },
+  {
+    id: 2,
+    label: "Sessions",
+    icon: MobileSession(),
+    link: "/mentor-schedule?path=Sessions",
+  },
+  {
+    id: 3,
+    label: "Communities",
+    icon: CommunitIconMobile(),
+    link: "/mentor-community?path=Communities",
+  },
+  {
+    id: 4,
+    label: "Resources",
+    icon: ResourcesMobile(),
+    link: "/mentor-resources?path=Resources",
+  },
+];
 
 export const reviewsArr: IReview[] = [
   {
