@@ -24,6 +24,28 @@ export type ModalState = {
   isOpen: boolean;
 };
 
+export type UserDetails = {
+  bio: string;
+  fullName: string;
+  gender: string | number;
+  email: string;
+};
+type MentorProfileCtx = {
+  details: UserDetails;
+  updateUserDetailsCtx: React.Dispatch<React.SetStateAction<UserDetails>>;
+};
+
+const defaultUserDetailsContext: MentorProfileCtx = {
+  updateUserDetailsCtx: function () {},
+
+  details: {
+    bio: "",
+    fullName: "",
+    gender: "",
+    email: "",
+  },
+};
+
 const baseUrl = "https://mentormee-api.onrender.com";
 type UserData = {
   fullName: string;
