@@ -138,6 +138,8 @@ export default function MentorFormBuilder({
     }
   }, [yearGrad]);
 
+  console.log(formInputs);
+
   return (
     <form ref={form} className="flex flex-col gap-6">
       {content.map((input: any) => {
@@ -241,7 +243,7 @@ export default function MentorFormBuilder({
       {children}
 
       {/* If the last form is being shown, display this UI */}
-      {currForm === 4 ? (
+      {/* {currForm === 4 ? (
         <div className="flex items-center justify-start gap-2">
           <input
             type="checkbox"
@@ -257,7 +259,7 @@ export default function MentorFormBuilder({
         </div>
       ) : (
         ""
-      )}
+      )} */}
 
       {/* container for the buttons */}
       <div className="flex gap-3 mt-[50px] justify-between">
@@ -349,21 +351,21 @@ function SelectComponent({
     <>
       <select
         onInput={(e: any) => {
+          handleInput(e);
           setIsSelected(true);
           // if the user selects the same value again, it won't be added to the list
           setSelectedValues((prevValues: any) => {
             if (prevValues.includes(e.target.value)) return prevValues;
             return [...prevValues, e.target.value];
           });
-          handleInput(e);
         }}
         onChange={(e: any) => {
+          handleInput(e);
           // update the formInput state with the array of values
           setFormInputs((prevInputs: any) => ({
             ...prevInputs,
             [e.target.name]: selectedValues.join(", "),
           }));
-          handleInput(e);
         }}
         className={`w-full border-[#d0d5dd] border-[1px] rounded-md  p-4 ${
           isSelected ? "text-Neutral60" : "text-[#98A2B3]"
