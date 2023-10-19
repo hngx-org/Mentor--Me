@@ -26,6 +26,10 @@ export type SideBarMentorProps = {
   jobTitle?: string | null;
 };
 
+const logoutHandler = () => {
+  localStorage.clear();
+};
+
 export default function SidebarMentor({
   light,
   path,
@@ -103,6 +107,7 @@ export default function SidebarMentor({
             </span>
           </div> */}
           <Link
+            onClick={logoutHandler}
             href="/welcome/login?path=login"
             className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 py-4"
           >
