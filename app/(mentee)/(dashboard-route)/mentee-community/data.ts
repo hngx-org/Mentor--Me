@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { Dispatch, SetStateAction } from "react";
 import { images } from "@/lib/constants/index";
 
 export type Discussion = {
@@ -29,6 +30,15 @@ export type Community = {
   members: Member[];
   description: string;
   discussions: Discussion[];
+};
+export type discussionState = {
+  discussionData: Community[];
+  setDiscussionData: Dispatch<SetStateAction<Community[]>>;
+};
+export type SearchState = {
+  q: string;
+  setQ: Dispatch<SetStateAction<string>>;
+  filterDiscussions: () => void;
 };
 
 export type discussionComms = {
