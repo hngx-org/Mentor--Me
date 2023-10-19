@@ -10,6 +10,7 @@ import { EditIcon } from "@/public/SVGs";
 
 import UpdateProfileForm from "./forms/UpdateProfileForm";
 import ExperienceForm from "./forms/ExperienceForm";
+import SocialsForm from "./forms/SocialsForm";
 
 type UpdateProfileTabsProp = {
   id: number;
@@ -26,6 +27,11 @@ const updateProfileTabs: UpdateProfileTabsProp[] = [
     id: 2,
     title: "Experience",
     tab: "experience",
+  },
+  {
+    id: 3,
+    title: "Social Links",
+    tab: "socials",
   },
 ];
 export default function UpdateProfile() {
@@ -139,6 +145,7 @@ export default function UpdateProfile() {
       </div>
       {activeTab === "basic-info" && <UpdateProfileForm isDark={isDark} />}
       {activeTab === "experience" && <ExperienceForm isDark={isDark} />}
+      {activeTab === "socials" && <SocialsForm isDark={isDark} />}
     </div>
   );
 }
