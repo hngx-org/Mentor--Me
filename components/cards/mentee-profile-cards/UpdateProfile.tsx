@@ -9,6 +9,7 @@ import { MenteeDashboardProfileImg } from "@/public";
 import { EditIcon } from "@/public/SVGs";
 
 import UpdateProfileForm from "./forms/UpdateProfileForm";
+import ExperienceForm from "./forms/ExperienceForm";
 
 type UpdateProfileTabsProp = {
   id: number;
@@ -25,11 +26,6 @@ const updateProfileTabs: UpdateProfileTabsProp[] = [
     id: 2,
     title: "Experience",
     tab: "experience",
-  },
-  {
-    id: 3,
-    title: "Social links",
-    tab: "social_links",
   },
 ];
 export default function UpdateProfile() {
@@ -142,6 +138,7 @@ export default function UpdateProfile() {
         ))}
       </div>
       {activeTab === "basic-info" && <UpdateProfileForm isDark={isDark} />}
+      {activeTab === "experience" && <ExperienceForm isDark={isDark} />}
     </div>
   );
 }
