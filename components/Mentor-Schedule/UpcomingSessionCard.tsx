@@ -1,24 +1,33 @@
 import React, { useState } from "react";
 import { Button } from "../buttons/button";
-import Modal from "./ScheduleModal";
+import Modal from "./ModalSchedules";
+import SessionModalContent from "./SessionsModalContent";
 
 // Define the props interface for the UpcomingSessionCard component
 interface RecentbookingFromApi {
   sessionName: string;
   relevantTopics: string;
-  sessionType?: string; // Optional property
+  sessionType?: string;
   time: string | number;
   date: number | string;
   description: string;
+  occurence: string;
+  tag: string;
+  duration: number;
+  attendeesLimit: number;
 }
 
 function UpcomingSessionCard({
   relevantTopics,
   sessionName,
   sessionType,
+  duration,
   time,
   date,
   description,
+  attendeesLimit,
+  occurence,
+  tag,
 }: RecentbookingFromApi) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -54,16 +63,18 @@ function UpcomingSessionCard({
           <p className="font-inter text-sm text-stone-500">{sessionType}</p>
 
           {/* Date and Time */}
-          <div className=" flex font-Inter justify-center  font-medium items-center">
-            <div className="flex flex-col items-center text-center pr-4 border-r border-neutral-200">
+          <div className=" flex font-Inter justify-center   font-medium items-center">
+            <div className="flex flex-col items-center text-center pr-4  border-r border-neutral-200">
               {/* Date */}
               <p className="text-[36px] md:text-[47px]">{day}</p>
               {/* Month */}
               <p className="text-base md:text-lg font-Inter">{month}</p>
             </div>
-            <div className="flex flex-col items-center text-center pl-2">
+            <div className="flex flex-col pl-4 items-center text-center">
               {/* Time */}
-              <p className="text-[36px] font-inter md:text-[47px]">{time}</p>
+              <p className="text-[36px] font-inter md:text-[47px]">
+                {duration}
+              </p>
               {/* Minutes */}
               <p className="text-base md:text-lg font-Inter">mins</p>
             </div>
@@ -80,16 +91,19 @@ function UpcomingSessionCard({
         </div>
 
         {isModalOpen && (
-          <Modal
-            relevantTopics={relevantTopics}
-            sessionName={sessionName}
-            sessionType={sessionType}
-            time={time}
-            date={date}
-            status="Pending"
-            description={description}
-            closeModal={closeModal}
-          />
+          <Modal closeModal={closeModal}>
+            {" "}
+            <SessionModalContent
+              sessionName={sessionName}
+              relevantTopics={relevantTopics}
+              sessionType={sessionType}
+              date={date}
+              attendeesLimit={attendeesLimit}
+              description={description}
+              tag={tag}
+              occurence={occurence}
+            />
+          </Modal>
         )}
       </div>
     </div>

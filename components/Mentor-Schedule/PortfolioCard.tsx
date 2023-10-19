@@ -12,6 +12,10 @@ interface PortfolioReviewProps {
   time: string;
   date: string;
   relevantTopics: string;
+  sessionUrl: string;
+  tag: string;
+  duration: number;
+  occurence: string;
 }
 
 function PortfolioCard() {
@@ -23,14 +27,46 @@ function PortfolioCard() {
     // Fetch data from the server or set the initial data here
     const fetchDataFromApi = async () => {
       try {
-        const res = await fetch(
-          "https://hngmentorme.onrender.com/api/free-session"
-        );
-        if (!res.ok) {
-          throw new Error(`API request failed with status ${res.status}`);
+        const [
+          freeSessionResponse,
+          oneOffSessionResponse,
+          recurringSessionResponse,
+        ] = await Promise.all([
+          fetch("https://hngmentorme.onrender.com/api/free-session"),
+          fetch("https://hngmentorme.onrender.com/api/one-off-session"),
+          fetch("https://hngmentorme.onrender.com/api/recurring-session"),
+        ]);
+
+        if (!freeSessionResponse.ok) {
+          throw new Error(
+            `API request failed with status ${freeSessionResponse.status}`
+          );
         }
-        const data = await res.json();
-        setDataFromServer(data);
+        if (!oneOffSessionResponse.ok) {
+          throw new Error(
+            `API request failed with status ${oneOffSessionResponse.status}`
+          );
+        }
+        if (!recurringSessionResponse.ok) {
+          throw new Error(
+            `API request failed with status ${recurringSessionResponse.status}`
+          );
+        }
+
+        const [freeSessionData, oneOffSessionData, recurringSessionData] =
+          await Promise.all([
+            freeSessionResponse.json(),
+            oneOffSessionResponse.json(),
+            recurringSessionResponse.json(),
+          ]);
+
+        // Merge the data from different endpoints into one array
+        const mergedData = [
+          ...freeSessionData,
+          ...oneOffSessionData,
+          ...recurringSessionData,
+        ];
+        setDataFromServer(mergedData);
       } catch (error) {
         console.error(error);
       }

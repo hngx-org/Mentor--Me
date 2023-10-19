@@ -11,6 +11,12 @@ interface RecentbookingFromApi {
   time: string | number;
   date: number | string;
   description: string;
+  duration: number;
+  attendeesLimit: number;
+  tag: string;
+  sessionUrl: string;
+  occurence: string;
+  numberOfSession?: number;
 }
 function SeeYourUpComingSession() {
   const [feedFromApi, setFeedFromApi] = useState<RecentbookingFromApi[] | null>(
@@ -21,14 +27,46 @@ function SeeYourUpComingSession() {
     // Fetch data from the API
     const fetchDataFromApi = async () => {
       try {
-        const res = await fetch(
-          "https://hngmentorme.onrender.com/api/free-session"
-        );
-        if (!res.ok) {
-          throw new Error(`API request failed with status ${res.status}`);
+        const [
+          freeSessionResponse,
+          oneOffSessionResponse,
+          recurringSessionResponse,
+        ] = await Promise.all([
+          fetch("https://hngmentorme.onrender.com/api/free-session"),
+          fetch("https://hngmentorme.onrender.com/api/one-off-session"),
+          fetch("https://hngmentorme.onrender.com/api/recurring-session"),
+        ]);
+
+        if (!freeSessionResponse.ok) {
+          throw new Error(
+            `API request failed with status ${freeSessionResponse.status}`
+          );
         }
-        const data = await res.json();
-        setFeedFromApi(data);
+        if (!oneOffSessionResponse.ok) {
+          throw new Error(
+            `API request failed with status ${oneOffSessionResponse.status}`
+          );
+        }
+        if (!recurringSessionResponse.ok) {
+          throw new Error(
+            `API request failed with status ${recurringSessionResponse.status}`
+          );
+        }
+
+        const [freeSessionData, oneOffSessionData, recurringSessionData] =
+          await Promise.all([
+            freeSessionResponse.json(),
+            oneOffSessionResponse.json(),
+            recurringSessionResponse.json(),
+          ]);
+
+        // Merge the data from different endpoints into one array
+        const mergedData = [
+          ...freeSessionData,
+          ...oneOffSessionData,
+          ...recurringSessionData,
+        ];
+        setFeedFromApi(mergedData);
       } catch (error) {
         console.error(error);
       }
@@ -42,19 +80,12 @@ function SeeYourUpComingSession() {
       <h2 className="text-xl font-semibold leading-10">No Upcoming Session</h2>
     );
   }
-
-  const sliceTwo = feedFromApi.slice(1, 3); // to make sure it is only two cards that render for smaller screens
-  const sliceThree = feedFromApi.slice(1, 4); // render three for larger screens
+  const sliceThree = feedFromApi.slice(1, 12);
 
   return (
     <div>
-      {/* <div className="lg:hidden w-full grid grid-cols-2 gap-3 box-border">
-        {sliceTwo.map((feed) => (
-          <UpcomingSessionCard key={feed.id} {...feed} />
-        ))}
-      </div> */}
       <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
-        {feedFromApi.map((feed) => (
+        {sliceThree.map((feed) => (
           <UpcomingSessionCard key={feed._id} {...feed} />
         ))}
       </div>
