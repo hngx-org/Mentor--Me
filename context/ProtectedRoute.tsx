@@ -23,13 +23,13 @@ const ProtectedRoute = ({ children, role }: Props) => {
   //   console.log(containsRole);
   //   console.log(data);
 
-  if (!data?.data?.token) {
-    return <Navigate to="/welcome/login" />;
-  }
+  // if (!data?.data?.token) {
+  //   return <Navigate to="/welcome/login" />;
+  // }
 
-  if (data.data.token && !containsRole) {
-    return <Navigate to={`${data.data.user.role}-profile`} />;
-  }
+  // if (data.data.token && !containsRole) {
+  //   return <Navigate to={`${data.data.user.role}-profile`} />;
+  // }
 
   //   useEffect(() => {
   //     if (data) {

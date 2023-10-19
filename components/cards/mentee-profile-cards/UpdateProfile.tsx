@@ -65,7 +65,7 @@ export default function UpdateProfile() {
   return (
     <div
       className={`w-full justify-start  flex flex-col items-start gap-8 h-full min-h-screen relative   px-4 pb-16 sm:pb-0 sm:pl-10 lg:pl-20 ${
-        isDark ? "bg-NeutalBase" : ""
+        isDark ? "bg-gray-950" : ""
       }`}
     >
       <Link
