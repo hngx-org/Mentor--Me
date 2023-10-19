@@ -244,8 +244,8 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   // };
 
   return (
-    <div className="flex w-full justify-center sm:justify-start">
-      <div className="flex gap-4 flex-col">
+    <div className="flex  w-full xl:max-w-full xl:mb-[100px] justify-center xl:justify-start sm:justify-start">
+      <div className="flex gap-4 flex-col ">
         <p
           className={`${
             isDark ? "text-white" : "text-Neutra50"
@@ -313,7 +313,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
             </div>
           </div>
           <div
-            className={`flex  flex-col w-full gap-4 sm:gap-10 ${
+            className={`flex  flex-col w-full xl:w-[500px] gap-4 sm:gap-10 ${
               isDark && "text-white "
             }`}
           >

@@ -140,7 +140,7 @@ export default function MenteeProfilePage() {
           </div>
         </Suspense>
       ) : (
-        <section className="w-full pb-[100px] pl-[-5px] max-lg:pb-16 relative">
+        <section className="w-full pb-[100px]  max-lg:pb-16 relative">
           <div className="flex w-full max-sm:h-[150px]">
             <Image
               src={DashboardCoverBg}
@@ -160,8 +160,8 @@ export default function MenteeProfilePage() {
                         : `https://api.dicebear.com/7.x/initials/png?seed=${menteeData.username}`
                     }
                     alt="cover"
-                    width={130}
-                    height={130}
+                    width={200}
+                    height={200}
                     style={{
                       objectFit: "cover",
                       borderRadius: "9999px",
@@ -179,9 +179,6 @@ export default function MenteeProfilePage() {
               <div className="flex flex-col">
                 <p className="flex gap-4 font-Inter font-bold lg:text-[32px] text-Neutra50 items-center">
                   <span>{menteeData.username}</span>
-                  <span className=" text-xs">
-                    Residence: {menteeData.country}
-                  </span>
                 </p>
                 <p>
                   {menteeData.title} <span>at</span> {menteeData.company}

@@ -148,7 +148,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
   };
 
   return (
-    <div className="flex w-full justify-center sm:justify-start">
+    <div className="flex w-full xl:max-w-full justify-center sm:justify-start">
       <div className="flex gap-4 flex-col">
         <p
           className={`${
@@ -178,7 +178,10 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
           >
             {addInput.map((num, idx) => (
               <div className="flex items-center gap-4 relative" key={num}>
-                <label htmlFor={`experience-${num}`}>
+                <label
+                  htmlFor={`experience-${num}`}
+                  className="w-full xl:w-[300px]"
+                >
                   <p className="flex items-start mb-2">
                     <span>Experience</span>
                     <span className="text-red-500 font-medium text-sm">*</span>
@@ -209,7 +212,10 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
                 >
                   At
                 </span>{" "}
-                <label htmlFor={`experience-${num}`}>
+                <label
+                  htmlFor={`experience-${num}`}
+                  className="w-full xl:w-[300px]"
+                >
                   <p className="flex items-start mb-2">
                     <span>Workplace</span>
                     <span className="text-red-500 font-medium text-sm">*</span>
@@ -217,7 +223,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
 
                   <input
                     type="text"
-                    placeholder="Your Experience"
+                    placeholder="Workplace"
                     value={formData.company}
                     name={`experience-${num}`}
                     id={`experience-${num}`}
@@ -233,7 +239,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
                 {addInput.length > 1 && idx > 0 && (
                   <button
                     type="button"
-                    className="w-6 h-1  bg-white absolute top-1/2 right-[-50px] transform -translate-y-1/2"
+                    className="w-6 h-1  bg-black absolute top-1/2 right-[-50px] transform -translate-y-1/2"
                     onClick={() => {
                       const updatedInputs = addInput.slice(
                         0,
