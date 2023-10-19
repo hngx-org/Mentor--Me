@@ -10,20 +10,17 @@ import MentorProfileHeader from "@/components/mentorProfile/MentorProfileHeader"
 import ProfileDetailsCardContainer, {
   AvailableSessionCard,
   BioCard,
+  ModalState,
   SessionsProgressCard,
   SkillSCard,
 } from "@/components/mentorProfile/ProfileDetailCard";
 import MentorProfileMainLayout from "@/components/mentorProfile/mentorProfileMainLayout";
 import OverViewCardLayout from "@/components/mentorProfile/MentorProfilelayouts";
 import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
-import ProtectedRoute from "@/context/ProtectedRoute";
-
 import useAuth from "@/context/useAuth";
-
-export type ModalState = {
-  state: "basic info" | "Experience/ Certification" | "Social links";
-  isOpen: boolean;
-};
+import MentorProfileSkeleton from "@/components/skeleton/ProfileloaderSkeleton";
+import MentorDetailsContextProvider, { UserDetails } from "./DetailsContext";
+import ProtectedRoute from "@/context/ProtectedRoute";
 
 const baseUrl = "https://mentormee-api.onrender.com";
 type UserData = {
@@ -41,8 +38,14 @@ type UserData = {
 };
 export default function ProfilePage() {
   const { data } = useAuth();
-
-  const [skills, setSkills] = useState<any>();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [userDetailsContext, setUserDetailsContext] = useState<UserDetails>({
+    bio: "",
+    fullName: "",
+    gender: "",
+    email: "",
+  });
   const [user, setUser] = useState<any>({});
   const [userData, setUserData] = useState<UserData | undefined>({
     fullName: "",
@@ -89,7 +92,7 @@ export default function ProfilePage() {
       if (response.ok) {
         const data = await response.json();
         setUser(data?.data); // Assuming you want to set the entire data object
-        // console.log("Current Mentor", data?.data);
+        console.log("Current Mentor", data?.data);
         setUserData({
           fullName: data?.data?.userDetails?.fullName,
           bio: data?.data?.userDetails?.bio,
@@ -103,10 +106,20 @@ export default function ProfilePage() {
           preferred_days: data?.data?.preferred_days,
           mentoring_experience: data?.data?.mentoring_experience,
         });
+        setUserDetailsContext((prev) => ({
+          bio: data?.data?.userDetails?.bio,
+          email: data?.data?.userDetails?.email,
+          gender: "",
+          fullName: data?.data?.userDetails?.fullName,
+        }));
+
+        setLoading(false);
       } else {
         console.error("Failed to fetch current mentor data");
       }
     } catch (error) {
+      setLoading(false);
+      setError("Error fetching current mentor data:");
       console.error("Error fetching current mentor data:", error);
     } finally {
       console.log(user);
@@ -117,87 +130,60 @@ export default function ProfilePage() {
     getCurrentMentor();
   }, []);
 
-  useEffect(() => {
-    if (data?.skills?.includes(",")) {
-      const skills = data?.skills?.split(",");
-      setSkills(Array.from(new Set(skills)));
-    } else {
-      setSkills([data?.skills]);
-    }
-  }, [data]);
-
   return (
-    <ProtectedRoute role="mentor">
-      <div className=" w-full overflow-x-hidden ">
-        {user && user ? (
-          <MentorProfileHeader
-            userName={userData?.fullName}
-            mentorship={userData?.mentorship}
-            userRole={data?.userDetails?.role!}
-            userRating={4}
-            openModal={setModal}
-          />
-        ) : (
-          <MentorProfileHeader
-            userName="Shade Mayowa"
-            mentorship=""
-            userRole="Product Designer"
-            userRating={4}
-            openModal={setModal}
-          />
-        )}
+    <>
+      <MentorDetailsContextProvider
+        updateUserDetailsCtx={setUserDetailsContext}
+        details={userDetailsContext}
+      >
+        {loading && <MentorProfileSkeleton />}
 
-        {user && user ? (
-          <MentorProfileMainLayout>
-            <BioCard text={userData?.bio} />
+        {!loading && !error && user && (
+          <div className="w-[100%] h-fit pb-10">
+            <MentorProfileHeader
+              userName={userDetailsContext.fullName}
+              email=""
+              userRole={user?.mentorship_type}
+              userRating={4}
+              modal={setModal}
+            />
+            <MentorProfileMainLayout>
+              <BioCard text={userDetailsContext?.bio || "Add bio"} />
 
-            <ProfileDetailsCardContainer
-              heading="education"
-              items={[
-                {
-                  text: userData?.degree || "",
-                  heading: userData?.institution || "",
-                  type: "certification",
-                },
-              ]}
-              openModal={setModal}
-            />
-            <SkillSCard skills={skills || []} />
-            <ProfileDetailsCardContainer
-              heading="Experience"
-              items={[
-                {
-                  type: "experience",
-                  text: userData?.mentoring_experience || "",
-                },
-              ]}
-              openModal={setModal}
-            />
-            {/* 
               <ProfileDetailsCardContainer
-                heading="Education"
+                heading="education"
+                items={[
+                  {
+                    text: userData?.degree || "",
+                    heading: userData?.institution || "",
+                    type: "certification",
+                  },
+                ]}
+                openModal={setModal}
+              />
+              <SkillSCard
+                skills={userData?.skills?.split(",")! || "add skills"}
+              />
+
+              <ProfileDetailsCardContainer
+                heading="Experience"
                 items={[]}
                 openModal={setModal}
-              /> */}
-            <AvailableSessionCard
-              timezone=" Greenwich Mean Time (GMT)"
-              availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
-            />
-            <OverViewCardLayout heading="impact at a glance" />
-            <SessionsProgressCard progress={10} />
-          </MentorProfileMainLayout>
-        ) : (
-          <div>Something went wrong</div>
-        )}
+              />
 
-        {modal.isOpen && (
-          <MentorProfileModal
-            setUserData={setUserData}
-            onClose={setModal}
-            state={modal.state}
-          />
+              <AvailableSessionCard
+                timezone=" Greenwich Mean Time (GMT)"
+                availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
+              />
+              <OverViewCardLayout heading="impact at a glance" />
+              <SessionsProgressCard progress={80} />
+            </MentorProfileMainLayout>
+            {modal.isOpen && (
+              <MentorProfileModal onClose={setModal} state={modal.state} />
+            )}
+          </div>
         )}
-      </div>
-    </ProtectedRoute>
+      </MentorDetailsContextProvider>
+    </>
   );
 }
