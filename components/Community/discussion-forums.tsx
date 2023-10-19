@@ -7,12 +7,17 @@ import {
 } from "@/public/assets/Icons/mentor-communities";
 import ForumCard from "./ForumCard";
 import { discussionCommunities } from "@/app/(mentor)/(dashboard-mentor)/mentor-community/data";
+import { discussionState } from "@/app/(mentee)/(dashboard-route)/mentee-community/data";
 
-const DiscussionForums = () => {
+const DiscussionForums = ({
+  discussionData,
+  setDiscussionData,
+}: discussionState) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLastCard, setIsLastCard] = useState(false);
 
-  const discussionsLength = discussionCommunities.length;
+  console.log(discussionData);
+  const discussionsLength = discussionData?.length;
 
   const sliderBtnHandler = (type: "fwd" | "bwd") => {
     const containerDimensions = containerRef.current?.getBoundingClientRect();
@@ -54,7 +59,7 @@ const DiscussionForums = () => {
         ref={containerRef}
         className="flex gap-6 overflow-x-auto scroll-smooth discussion-comms"
       >
-        {discussionCommunities.map((comm, idx) => (
+        {discussionData?.map((comm, idx) => (
           <ForumCard
             index={idx}
             setIsLastCard={setIsLastCard}
