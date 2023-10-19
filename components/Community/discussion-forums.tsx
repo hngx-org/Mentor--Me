@@ -16,7 +16,7 @@ const DiscussionForums = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLastCard, setIsLastCard] = useState(false);
 
-  console.log(discussionData);
+  // console.log("dataa getting to discussion forum", discussionData);
   const discussionsLength = discussionData?.length;
 
   const sliderBtnHandler = (type: "fwd" | "bwd") => {

@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { Community } from "@/app/(mentee)/(dashboard-route)/mentee-community/data";
 
 export const get = (url: string) =>
   fetch(url).then((response) => response.json());
@@ -58,4 +59,28 @@ export const getMentorInfo = async (
   console.log(data);
 
   return data;
+};
+
+export const filterCommunitiyForum: (
+  q: string,
+  initalData: Community[],
+  setData: (value: SetStateAction<Community[]>) => void
+) => void = (
+  q: string,
+  initalData: Community[],
+
+  setData: (value: SetStateAction<Community[]>) => void
+) => {
+  if (q) {
+    console.log("Search is on. Query: ", q);
+    const filteredSliderInfo = initalData.filter((item) =>
+      item.name.toLowerCase().includes(q.toLowerCase())
+    );
+
+    if (filteredSliderInfo.length < 0) {
+      setData(filteredSliderInfo);
+    }
+  } else {
+    setData(initalData);
+  }
 };
