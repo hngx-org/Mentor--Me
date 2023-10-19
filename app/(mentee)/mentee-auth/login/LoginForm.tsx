@@ -59,20 +59,21 @@ export default function LoginForm() {
       setIsValid(true);
 
       axios
-        .post("https://mentormee-api.onrender.com/auth/login", {
+        .post("https://mentorme-be.vercel.app/api/auth/login", {
           email: formData.email,
           password: formData.password,
-          role: "mentee",
         })
         .then((response) => {
           localStorage.setItem("Mentee", JSON.stringify(response.data));
           setUser(response.data);
 
-          if (response?.data?.data && response?.data?.data?.user?.profileLink) {
-            router.replace("/mentee-profile?path=profile");
-          } else {
-            router.replace("/mentee-profile-creation");
-          }
+          router.replace("/mentee-profile-creation");
+
+          // if (response?.data?.data && response?.data?.data?.user?.profileLink) {
+          //   router.replace("/mentee-profile?path=profile");
+          // } else {
+          //   router.replace("/mentee-profile-creation");
+          // }
         })
 
         .catch((error) => {
