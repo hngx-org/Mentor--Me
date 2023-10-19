@@ -58,7 +58,7 @@ export default function MentorProfileHeader({
             <Button
               variant="outline-primary"
               paddingLess
-              className="px-1  sm:px-2 sm:py-2 "
+              className="px-1 sm:px-2 sm:py-2"
               onClick={() => {
                 modal({
                   state: "basic info",

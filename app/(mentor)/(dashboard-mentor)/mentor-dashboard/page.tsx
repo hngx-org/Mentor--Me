@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/aria-role */
+
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -7,9 +9,11 @@ import UnverifiedMentorCard from "@/components/mentor-dashboard/UnverifiedMentor
 import Modal from "@/components/mentor-dashboard/Modal";
 import FilterBar from "@/components/mentor-dashboard/FilterBar";
 import useAuth from "@/context/useAuth";
+import ProtectedRoute from "@/context/ProtectedRoute";
 
 const page = () => {
   const { data } = useAuth();
+  // const role = data?.userDetails.role;
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -21,25 +25,28 @@ const page = () => {
       setIsVerified(true);
     }
   }, [data]);
+
   return (
-    <div className="">
-      <div className="px-5 py-10 lg:p-10 bg-[#f9fafc]">
-        <FilterBar />
-        {isVerified && (
-          <UnverifiedMentorCard
+    <ProtectedRoute role="mentor">
+      <div className="">
+        <div className="px-5 py-10 lg:p-10 bg-[#f9fafc]">
+          <FilterBar />
+          {isVerified && (
+            <UnverifiedMentorCard
+              isVerified={isVerified}
+              setIsVerified={setIsVerified}
+            />
+          )}
+          <MentorSession
             isVerified={isVerified}
-            setIsVerified={setIsVerified}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
           />
-        )}
-        <MentorSession
-          isVerified={isVerified}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-        />
-        <AboutMentor />
+          <AboutMentor />
+        </div>
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
-    </div>
+    </ProtectedRoute>
   );
 };
 
