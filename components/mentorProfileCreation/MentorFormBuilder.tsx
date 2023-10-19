@@ -22,11 +22,11 @@ export default function MentorFormBuilder({
   handleClick,
 }: myProps) {
   const { formInputs, setFormInputs } = useMentorContext();
-  const form = useRef(null);
+  const form = useRef<HTMLFormElement | null>(null);
   const [isFull, setIsFull] = useState(false);
   const [textLength, setTextLength] = useState(0);
-  const [isSelected, setIsSelected] = useState(false);
   const [email, setEmail] = useState("");
+  const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
@@ -87,6 +87,7 @@ export default function MentorFormBuilder({
       [e.target.name]: value,
     }));
     // console.log(formInputs);
+    setIsValid(form.current!.checkValidity());
   }
 
   return (
@@ -183,7 +184,11 @@ export default function MentorFormBuilder({
         </button>
         <button
           type="submit"
-          className=" bg-[#121212] text-white font-semibold border-[1px] w-[100%] max-w-[200px] py-5 rounded-md font-Inter text-center"
+          className={`${
+            isValid
+              ? "bg-[#121212] cursor-pointer"
+              : "bg-[#6c6c6c] cursor-not-allowed"
+          } text-white font-semibold border-[1px] w-[100%] max-w-[200px] py-5 rounded-md font-Inter text-center`}
           onClick={(e) => {
             e.preventDefault();
             const valid = (form.current! as HTMLFormElement).reportValidity();

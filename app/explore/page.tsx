@@ -4,7 +4,6 @@ import FilterContainer from "./components/FilterContainer";
 import CardContainer from "./components/CardContainer";
 import Pagination from "./components/Pagination";
 import Footer from "@/components/Footer";
-import PaginatedItem from "./components/PaginatedItem";
 
 export default function page() {
   // const [info, setInfo] = useState([]);
@@ -15,7 +14,6 @@ export default function page() {
       <HomeNavBar />
       <FilterContainer />
       {/* <CardContainer /> */}
-      <PaginatedItem />
       <Footer />
     </main>
   );

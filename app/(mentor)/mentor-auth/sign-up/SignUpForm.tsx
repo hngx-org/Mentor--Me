@@ -10,6 +10,8 @@ import axios from "axios";
 
 import { useRouter } from "next/navigation";
 
+import { toast } from "react-hot-toast";
+
 import auth from "../../../../public/assets/images/auth.jpeg";
 
 import google from "../../../../public/assets/images/goggle.svg";
@@ -65,6 +67,10 @@ export default function SignUpForm() {
         })
         .catch((error) => {
           console.log(error);
+          toast.error(error?.response?.data?.message || "something went wrong");
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     }
   };

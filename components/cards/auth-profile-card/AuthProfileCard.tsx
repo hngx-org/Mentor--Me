@@ -21,7 +21,7 @@ export default function AuthProfileCard({
     <div
       className={`w-full max-w-[95%] flex   justify-between items-center  ${styles} ${
         path === "profile"
-          ? "bg-gradient-to-r from-orange-500 via-red-600 to-fuchsia-500 p-[2px] rounded-xl"
+          ? "bg-gradient-to-r from-orange-500 via-red-600 to-fuchsia-500 p-[1px] rounded-xl"
           : ""
       } `}
     >
@@ -30,7 +30,7 @@ export default function AuthProfileCard({
           path === "profile" ? "w-full" : "overflow-hidden"
         }`}
       >
-        <div className="w-[20px]  h-[20px] sm:w-[54px] sm:h-[54px]  rounded-full relative ">
+        <div className="w-[15px]  h-[15px] sm:w-[40px] sm:h-[40px]  rounded-full relative ">
           <Image
             style={{ objectFit: "cover", borderRadius: "100%" }}
             src={`https://api.dicebear.com/7.x/initials/png?seed=${user}`}
@@ -39,9 +39,9 @@ export default function AuthProfileCard({
           />
         </div>
 
-        <div className="space-y-0.5 ">
-          <p className="font-bold  text-base capitalize ">{user || "hello"}</p>
-          <p className="text-sm ">{email || "bye"}</p>
+        <div className="flex flex-col ">
+          <span className="font-bold   capitalize ">{user || "hello"}</span>
+          <span className="text-sm ">{email || "bye"}</span>
         </div>
       </div>
     </div>

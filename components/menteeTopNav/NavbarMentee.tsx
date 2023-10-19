@@ -17,8 +17,7 @@ export type NavbarMenteeProps = {
   imgSrc?: string;
 
   name?: string | null;
-  bio?: string | null;
-  email?: string | null;
+
   jobTitle?: string | null;
 };
 export const NavbarMentee = ({
@@ -28,8 +27,6 @@ export const NavbarMentee = ({
   imgSrc,
   jobTitle,
   name,
-  bio,
-  email,
 }: NavbarMenteeProps) => {
   const [scrollY, setScrollY] = useState(0);
   const [isView, setIsView] = useState(false);
@@ -66,7 +63,7 @@ export const NavbarMentee = ({
       }`}
     >
       <h3 className="uppercase  font-Hanken font-[700] text-[24px]">
-        {path || "[PathName Here]"}
+        {path ?? "Home"}
       </h3>
       {scrollY > 400 && (
         <button
@@ -112,7 +109,7 @@ export const NavbarMentee = ({
                 role="dialog"
                 onClick={() => setIsView(!isView)}
               />
-              <div className=" absolute h-[100px] w-[180px] top-16 -right-2 z-[999999] bg-black backdrop-blur-xl flex flex-col justify-between items-center  border border-Neutra20  text-lg font-medium font-Hanken  shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-xl before:absolute before:content-[''] before:h-[20px] before:w-[20px] before:bg-black before:overflow-hidden before:-top-2 before:rotate-[140deg] before:right-4 before:z-[-1]">
+              <div className=" absolute h-[100px] w-[180px] top-16 -right-2 z-[999999] bg-black backdrop-blur-xl flex flex-col justify-start items-center  border border-Neutra20  text-lg font-medium font-Hanken  shadow-[0_0_20px_rgba(0,0,0,0.3)] rounded-xl before:absolute before:content-[''] before:h-[20px] before:w-[20px] before:bg-black before:overflow-hidden before:-top-2 before:rotate-[140deg] before:right-4 before:z-[-1]">
                 <button
                   type="button"
                   disabled={path === "profile"}
@@ -134,7 +131,7 @@ export const NavbarMentee = ({
                   }}
                 >
                   <Link
-                    className={` ${
+                    className={`text-[12px] text-Neutra10  font-Hanken   flex flex-col items-start ${
                       path === "profile" ? "opacity-50 !cursor-not-allowed" : ""
                     } `}
                     prefetch
