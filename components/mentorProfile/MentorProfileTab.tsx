@@ -36,7 +36,7 @@ export default function MentorProfileTabLayout({
 
   return (
     <div className="w-[100%] my-5 h-[100%]">
-      <div className="flex justify-between w-[100%] text-Neutra10 text-xs sm:text-base cursor-pointer">
+      <div className="flex justify-between w-[100%] text-Neutra10 text-xs sm:text-base cursor-pointer px-4">
         <div
           onClick={() => {
             setActive("basic info");
@@ -162,7 +162,7 @@ function BasicInfoTab({
   console.log(details);
 
   return (
-    <div className="w-[100%] px-2">
+    <div className="w-[100%] px-4">
       <ProfileCard userName="shade mayowa" />
       <div className="w-[100%] h-[100%] space-y-5 text-Neutra50">
         <MentorProfileInput
