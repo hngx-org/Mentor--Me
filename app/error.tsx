@@ -13,7 +13,7 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    toast.error(error.message, { position: "bottom-center" });
+    toast.error(error.message, { position: "top-center" });
   }, [error]);
   return <ErrorCard message={error} reset={reset} />;
 }

@@ -9,7 +9,7 @@ export const Error404 = () => (
   >
     <h1
       id="error-heading"
-      className="text-[7rem] sm:text-[12rem] lg:text-[15rem] 2xl:text-[17rem] uppercase"
+      className="text-[7rem] sm:text-[12rem] lg:text-[15rem] 2xl:text-[17rem] uppercase "
     >
       404
     </h1>
