@@ -110,7 +110,7 @@ export default async function Resource({
           </Link>
         </div>
         <div className="w-[min(353px,_100%)] border-Neutra10 border-[1px] rounded-[6px] overflow-hidden mt-4 mx-auto md:row-span-full md:col-start-2 md:col-end-3 md:mt-2 md:mx-0">
-          <div className="relative w-full">
+          <div className="relative w-full border-b-[1px] border-Neutra10">
             <Image
               width={495}
               height={233}

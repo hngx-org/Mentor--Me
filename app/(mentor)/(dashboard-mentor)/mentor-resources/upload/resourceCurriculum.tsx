@@ -91,7 +91,7 @@ const Curriculum = function ({
   return (
     <div className="grid grid-cols-[1fr,_1fr,_30px] mb-4 gap-4 justify-between items-center bg-[#F9F9F9] p-4 rounded-lg">
       <input
-        className="px-4 py-2 border-Neutra10 border-[2px] rounded-md outline-none placeholder:text-Neutra20 text-NeutalBase font-Inter"
+        className="w-full px-4 py-2 border-Neutra10 border-[2px] rounded-md outline-none placeholder:text-Neutra20 text-NeutalBase font-Inter"
         required
         value={title}
         onChange={(e) => {
@@ -102,7 +102,7 @@ const Curriculum = function ({
         placeholder="Section title"
       />
       <input
-        className="px-4 py-2 border-Neutra10 border-[2px] rounded-md outline-none placeholder:text-Neutra20 text-NeutalBase font-Inter"
+        className="w-full px-4 py-2 border-Neutra10 border-[2px] rounded-md outline-none placeholder:text-Neutra20 text-NeutalBase font-Inter"
         required
         value={duration}
         onChange={(e) => {

@@ -12,7 +12,20 @@ import { CaretIcon } from "@/public/SVGs";
 import DropDown from "@/components/DropDown";
 import ResourceCurriculum from "./resourceCurriculum";
 
-const courseTypeOptions = ["JavaScript", "TypeScript", "C++", "C#"];
+const COURSETYPEOPTIONS = [
+  "Video Course",
+  "Text-Based Course",
+  "Interactive Course",
+  "Live Webinar",
+  "Self-Paced Course",
+];
+const TRACKOPTIONS = [
+  "Frontend Track",
+  "Backend Track",
+  "Mobile Track",
+  "UI / UX",
+  "Video Editing",
+];
 
 export default function UploadResourcesPage() {
   const courseTitleRef = useRef<HTMLInputElement>(null);
@@ -20,19 +33,17 @@ export default function UploadResourcesPage() {
     { id: string; title: string; duration: number }[]
   >([{ id: "FIRSTSECTIONFIELD", title: "", duration: 0 }]);
   const courseDescriptionRef = useRef<HTMLTextAreaElement>(null);
-  const categoryRef = useRef<HTMLInputElement>(null);
+  const trackRef = useRef<HTMLInputElement>(null);
   const courseTypeRef = useRef<HTMLInputElement>(null);
   const priceRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const [video, setVideo] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
-  const [isCategoryDropDownExpanded, setIsCategoryDropDownExpanded] =
-    useState(false);
+  const [isTrackDropDownExpanded, setIsTrackDropDownExpanded] = useState(false);
   const [isCourseTypeDropDownExpanded, setIsCourseTypeDropDownExpanded] =
     useState(false);
   const [selectedOptionIdx, setSelectedOptionIdx] = useState(-1);
-  const [selectedCategoryOptionIdx, setSelectedCategoryOptionIdx] =
-    useState(-1);
+  const [selectedTrackOptionIdx, setSelectedTrackOptionIdx] = useState(-1);
 
   useEffect(() => {
     if (!file) return;
@@ -45,8 +56,8 @@ export default function UploadResourcesPage() {
   }, [file?.name]);
   useEffect(() => {
     function detectOuterClick(this: Document, ev: MouseEvent) {
-      if (!categoryRef.current?.parentElement?.contains(ev.target as Node)) {
-        setIsCategoryDropDownExpanded(false);
+      if (!trackRef.current?.parentElement?.contains(ev.target as Node)) {
+        setIsTrackDropDownExpanded(false);
       }
       if (!courseTypeRef.current?.parentElement?.contains(ev.target as Node)) {
         setIsCourseTypeDropDownExpanded(false);
@@ -97,7 +108,7 @@ export default function UploadResourcesPage() {
               videoBase64 = fileReader.result as string;
 
               const resourceData = {
-                category: categoryRef.current?.value!,
+                category: trackRef.current?.value!,
                 description: courseDescriptionRef.current?.value!,
                 title: courseTitleRef.current?.value!,
                 coursetype: courseTypeRef.current?.value!,
@@ -171,20 +182,20 @@ export default function UploadResourcesPage() {
         </p>
       </Input>
       <Input
-        title="Category"
-        htmlFor="category"
+        title="Track"
+        htmlFor="track"
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
-          setIsCategoryDropDownExpanded((prev) => !prev);
+          setIsTrackDropDownExpanded((prev) => !prev);
         }}
         extraElements={
           <AnimatePresence>
-            {isCategoryDropDownExpanded && (
+            {isTrackDropDownExpanded && (
               <DropDown
-                dropDownOptions={courseTypeOptions}
-                setSelectedOptionIdx={setSelectedCategoryOptionIdx}
-                selectedOptionIdx={selectedCategoryOptionIdx}
+                dropDownOptions={TRACKOPTIONS}
+                setSelectedOptionIdx={setSelectedTrackOptionIdx}
+                selectedOptionIdx={selectedTrackOptionIdx}
               />
             )}
           </AnimatePresence>
@@ -192,20 +203,18 @@ export default function UploadResourcesPage() {
       >
         <input
           type="text"
-          id="category"
-          name="category"
-          ref={categoryRef}
+          id="track"
+          name="track"
+          ref={trackRef}
           required
           onKeyDown={(e) => {
             e.preventDefault();
           }}
-          defaultValue={courseTypeOptions[selectedCategoryOptionIdx] || ""}
-          placeholder="select category"
+          defaultValue={TRACKOPTIONS[selectedTrackOptionIdx] || ""}
+          placeholder="select track"
           className="border-none cursor-pointer outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
         />
-        <motion.span
-          animate={{ rotate: isCategoryDropDownExpanded ? 0 : -180 }}
-        >
+        <motion.span animate={{ rotate: isTrackDropDownExpanded ? 0 : -180 }}>
           <CaretIcon className=" cursor-pointer" />
         </motion.span>
       </Input>
@@ -221,7 +230,7 @@ export default function UploadResourcesPage() {
           <AnimatePresence>
             {isCourseTypeDropDownExpanded && (
               <DropDown
-                dropDownOptions={courseTypeOptions}
+                dropDownOptions={COURSETYPEOPTIONS}
                 setSelectedOptionIdx={setSelectedOptionIdx}
                 selectedOptionIdx={selectedOptionIdx}
               />
@@ -238,7 +247,7 @@ export default function UploadResourcesPage() {
             e.preventDefault();
           }}
           required
-          defaultValue={courseTypeOptions[selectedOptionIdx] || ""}
+          defaultValue={COURSETYPEOPTIONS[selectedOptionIdx] || ""}
           placeholder="select course type"
           className="border-none cursor-pointer outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
         />
