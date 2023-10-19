@@ -130,13 +130,13 @@ export default function ProfilePage() {
   }, [data]);
 
   return (
-    <Fragment>
+    <>
       {loading && <MentorProfileSkeleton />}
 
       {!loading && !error && user && (
         <div>
           <MentorProfileHeader
-            userName={""}
+            userName=""
             email=""
             userRole={user?.mentorship_type}
             userRating={4}
@@ -184,6 +184,6 @@ export default function ProfilePage() {
           )}
         </div>
       )}
-    </Fragment>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import React from "react";
 
 import { ShareIcon } from "@/public/SVGs";
 import { Button } from "../buttons/button";
