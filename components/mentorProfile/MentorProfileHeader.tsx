@@ -5,8 +5,8 @@ import React from "react";
 
 import { ShareIcon } from "@/public/SVGs";
 import { Button } from "../buttons/button";
-import { ModalState } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/page";
 import ParseReviewStars from "../ParseReview/ParseReviewStars";
+import { ModalState } from "./ProfileDetailCard";
 
 type MentorProfileHeaderProps = {
   userName: string;

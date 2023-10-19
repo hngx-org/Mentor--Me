@@ -6,7 +6,11 @@ import {
   EducationIcon,
 } from "@/public/SVGs";
 import ProgressBar from "../progressBar/ProgressBar";
-import { ModalState } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/page";
+
+export type ModalState = {
+  state: "basic info" | "Experience/ Certification" | "Social links";
+  isOpen: boolean;
+};
 
 export default function ProfileDetailsCardContainer({
   heading,

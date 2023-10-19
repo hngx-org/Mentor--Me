@@ -13,11 +13,11 @@ import { Button } from "../buttons/button";
 import Selector from "../selector";
 import useAuth from "@/context/useAuth";
 import AuthContextProvider, { useAuthCtx } from "@/context/AuthContext";
+import { ModalState } from "./ProfileDetailCard";
 import {
   MentorDetailsContext,
-  ModalState,
   UserDetails,
-} from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/page";
+} from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/DetailsContext";
 
 export type ModalType = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -158,8 +158,6 @@ function BasicInfoTab({
       isOpen: false,
     });
   };
-
-  console.log(details);
 
   return (
     <div className="w-[100%] px-4">

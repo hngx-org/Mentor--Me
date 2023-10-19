@@ -9,6 +9,7 @@ import MentorProfileHeader from "@/components/mentorProfile/MentorProfileHeader"
 import ProfileDetailsCardContainer, {
   AvailableSessionCard,
   BioCard,
+  ModalState,
   SessionsProgressCard,
   SkillSCard,
 } from "@/components/mentorProfile/ProfileDetailCard";
@@ -18,35 +19,7 @@ import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
 
 import useAuth from "@/context/useAuth";
 import MentorProfileSkeleton from "@/components/skeleton/ProfileloaderSkeleton";
-
-export type ModalState = {
-  state: "basic info" | "Experience/ Certification" | "Social links";
-  isOpen: boolean;
-};
-
-export type UserDetails = {
-  bio: string;
-  fullName: string;
-  gender: string | number;
-  email: string;
-};
-type MentorProfileCtx = {
-  details: UserDetails;
-  updateUserDetailsCtx: React.Dispatch<React.SetStateAction<UserDetails>>;
-};
-
-const defaultUserDetailsContext: MentorProfileCtx = {
-  updateUserDetailsCtx: (setAction) => setAction,
-
-  details: {
-    bio: "",
-    fullName: "",
-    gender: "",
-    email: "",
-  },
-};
-
-export const MentorDetailsContext = createContext(defaultUserDetailsContext);
+import MentorDetailsContextProvider, { UserDetails } from "./DetailsContext";
 
 const baseUrl = "https://mentormee-api.onrender.com";
 type UserData = {
@@ -167,14 +140,9 @@ export default function ProfilePage() {
 
   return (
     <>
-      <MentorDetailsContext.Provider
-        value={useMemo(
-          () => ({
-            details: userDetailsContext,
-            updateUserDetailsCtx: setUserDetailsContext,
-          }),
-          [userDetailsContext]
-        )}
+      <MentorDetailsContextProvider
+        updateUserDetailsCtx={setUserDetailsContext}
+        details={userDetailsContext}
       >
         {loading && <MentorProfileSkeleton />}
 
@@ -184,7 +152,7 @@ export default function ProfilePage() {
               userName={userDetailsContext.fullName}
               email=""
               userRole={user?.mentorship_type}
-              userRating={2}
+              userRating={1.5}
               modal={setModal}
             />
             <MentorProfileMainLayout>
@@ -224,7 +192,7 @@ export default function ProfilePage() {
             )}
           </div>
         )}
-      </MentorDetailsContext.Provider>
+      </MentorDetailsContextProvider>
     </>
   );
 }
