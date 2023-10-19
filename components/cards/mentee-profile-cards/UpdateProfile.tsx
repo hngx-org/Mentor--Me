@@ -28,8 +28,8 @@ const updateProfileTabs: UpdateProfileTabsProp[] = [
   },
   {
     id: 3,
-    title: "Social links",
-    tab: "social_links",
+    title: "Education",
+    tab: "education",
   },
 ];
 export default function UpdateProfile() {

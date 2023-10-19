@@ -72,6 +72,15 @@ export default function MenteeProfilePage() {
   }, [paramsTab]);
 
   useEffect(() => {
+    const hasReloaded = sessionStorage.getItem("hasReloaded");
+
+    if (!hasReloaded) {
+      sessionStorage.setItem("hasReloaded", "true");
+      window.location.reload();
+    }
+  }, []);
+
+  useEffect(() => {
     const getUser = localStorage.getItem("Mentee");
     if (getUser) {
       try {
@@ -131,7 +140,7 @@ export default function MenteeProfilePage() {
           </div>
         </Suspense>
       ) : (
-        <section className="w-full max-lg:pb-16 relative">
+        <section className="w-full pb-[100px] pl-[-5px] max-lg:pb-16 relative">
           <div className="flex w-full max-sm:h-[150px]">
             <Image
               src={DashboardCoverBg}
@@ -140,12 +149,16 @@ export default function MenteeProfilePage() {
               height={500}
             />
           </div>
-          <div className="flex w-full justify-between items-center px-6 lg:px-8 max-lg:flex-col max-lg:items-start max-lg:gap-6 2xl:px-32">
-            <div className="flex items-center gap-6  w-full max-lg:flex-col max-lg:items-start max-lg:gap-6">
+          <div className="flex w-full justify-between items-center px-6 lg:pl-8 max-lg:flex-col max-lg:items-start max-lg:gap-6 2xl:px-32">
+            <div className="flex items-center gap-6  w-full max-lg:flex-col max-lg:items-start max-lg:gap-6 ">
               <div className="relative -mt-12 ">
                 <Suspense fallback={<LoadingSpinner />}>
                   <Image
-                    src={`https://api.dicebear.com/7.x/initials/png?seed=${menteeData.username}`}
+                    src={
+                      menteeData.image
+                        ? menteeData.image
+                        : `https://api.dicebear.com/7.x/initials/png?seed=${menteeData.username}`
+                    }
                     alt="cover"
                     width={130}
                     height={130}
@@ -194,11 +207,15 @@ export default function MenteeProfilePage() {
                   <div className="flex items-center gap-10 !max-lg:w-full select-nones ">
                     {menteeMenus.map((menu) => (
                       <p
-                        className={` cursor-pointer capitalize text-[14px] sm:text-[18px] font-Hanken text-Neutra50 border-b-[3px] pb-1  border-white${
+                        className={` cursor-pointer capitalize text-[14px] sm:text-[18px] font-Hanken ${
+                          activeTab === menu.tab
+                            ? "text-Neutra50"
+                            : "text-Neutra30"
+                        } border-b-[3px] pb-1  border-white${
                           activeTab === menu.tab
                             ? " !border-Accent1 text-black font-medium"
                             : ""
-                        }`}
+                        } leading-[30px]`}
                         key={menu.id}
                         onClick={() => {
                           router.push(`?path=profile&tab=${menu.tab}`, {
