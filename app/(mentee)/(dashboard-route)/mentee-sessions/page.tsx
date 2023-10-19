@@ -19,7 +19,7 @@ import {
 
 import { faceMoji1, faceMoji2, faceMoji3 } from "@/public";
 
-import Calendarcomponent from "../mentee-booking/components/booking-session/Calender";
+import MenteeCalenda from "@/components/cards/mentee-session-cards/MenteeCalenda";
 import Button from "./(ui)/VxrcelBtn";
 import Loading from "./loading";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
@@ -64,6 +64,21 @@ export default function AllSession({
 
   const [isReminder, setIsReminder] = useState(false);
   const [isView, setIsView] = useState(false);
+
+  const [isViewAll, setIsViewAll] = useState(false);
+  const [selectedDay, setSelectedDay] = useState<Date | null>(null);
+  const filteredItems = isViewAll
+    ? upcomingSessions
+    : upcomingSessions.filter((item) => {
+        if (!selectedDay) {
+          return true; // Show all items if no day is selected
+        }
+        const itemDate = new Date(item.date);
+        return (
+          itemDate.toLocaleDateString() === selectedDay.toLocaleDateString()
+        );
+      });
+
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
       const getView = localStorage.getItem("view");
@@ -238,30 +253,61 @@ export default function AllSession({
                     upcomingSessions.length > 5 ? "max-h-[760px] pb-4 " : ""
                   }`}
                 >
-                  {upcomingSessions.map((session) => (
-                    <UpcomingCard
-                      openModal={setIsReminder}
-                      key={session.id}
-                      {...session}
-                      getView={activeView}
-                    />
-                  ))}
+                  {filteredItems.length === 0 ? ( // Check if there are no items for the selected day
+                    <p className="text-center font-bold text-lg">
+                      No Session this day
+                    </p> // Display message when no items are found
+                  ) : isViewAll ? (
+                    // Show all items without filtering
+                    upcomingSessions.map((session) => (
+                      <UpcomingCard
+                        openModal={setIsReminder}
+                        key={session.id}
+                        {...session}
+                        getView={activeView}
+                      />
+                    ))
+                  ) : (
+                    // Show filtered items as before
+                    filteredItems.map((session) => (
+                      <UpcomingCard
+                        openModal={setIsReminder}
+                        key={session.id}
+                        {...session}
+                        getView={activeView}
+                      />
+                    ))
+                  )}
                 </div>
                 <div
                   className={`flex ${
                     activeView === "Grid"
                       ? "2xl:px-16"
-                      : "2xl:w-full xl:flex-col xl:justify-center"
+                      : "2xl:w-full xl:flex-col xl:justify-start"
                   }      items-start lg:items-center justify-between max-lg:w-full gap-10 lg:gap-6 lg:mt-10 max-sm:flex-col lg:ml-10 pb-10 mt-4`}
                 >
+                  {" "}
+                  <p
+                    className="text-Accent1 font-bold cursor-pointer hover:text-black"
+                    onClick={() => {
+                      setIsViewAll(!isViewAll);
+                    }}
+                  >
+                    View All Sessions
+                  </p>
                   <div
                     className={`${
                       activeView === "Grid" ? "w-fit" : ""
                     } w-fit   lg:max-w-[430px] xl:max-w-[500px] lg:justify-start flex max-sm:justify-center cursor-pointer sm:hover:shadow-[0px_0px_40px_rgba(0,0,0,0.2)] transition-all duration-300`}
                   >
-                    <Calendarcomponent />
+                    <MenteeCalenda
+                      onDaySelect={(date: Date | null) => {
+                        setSelectedDay(date);
+                        setIsViewAll(false);
+                      }}
+                    />
                   </div>
-                  <div className="flex flex-col w-full lg:max-w-[330px] xl:max-w-[500px] ">
+                  <div className="hidden flex-col w-full lg:max-w-[330px] xl:max-w-[500px] ">
                     <p className="text-NeutalBase font-Inter font-medium text-[18px]">
                       Ongoing Group Sessions
                     </p>

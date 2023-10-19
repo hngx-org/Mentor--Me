@@ -70,14 +70,14 @@ export default function UpcomingCard({
             className={`px-4 py-2 border-Neutra50 !bg-transparent ${
               isGrid ? "max-[1364px]:px-1" : ""
             }`}
-            title={rescheduleBtn}
+            title={rescheduleBtn || ""}
             variant="secondary"
             fullWidth
           />
           <div className="w-full" role="dialog" onClick={() => openModal(true)}>
             <Button
               className="px-4 py-2 border-Neutra50"
-              title={reminderBtn}
+              title={reminderBtn || ""}
               variant="primary"
               fullWidth
             />
