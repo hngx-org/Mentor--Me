@@ -79,7 +79,7 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
                 Community
               </Link>
               <Link
-                href="/mentee-resources/explore?path=Explores"
+                href="/mentee-explore"
                 className="text-[#565656] text-[0.8rem]"
               >
                 Resources
