@@ -33,7 +33,7 @@ function OneOffSessionForm() {
     time: "",
     relevantTopics: "",
     sessionUrl: "",
-    tag: "",
+    // tag: "OneOff session",
     duration: 0,
   });
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {

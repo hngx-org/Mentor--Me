@@ -33,7 +33,7 @@ function FreeSessionForm() {
     time: "",
     relevantTopics: "",
     sessionUrl: "",
-    tag: "",
+    // tag: "",
     duration: 0,
   });
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -108,7 +108,8 @@ function FreeSessionForm() {
   return (
     <div>
       {formVisible && (
-        <div className="p-0 bg-[#1d1c1c57]  bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
+        <div className="p-0 bg-[#1d1c1c57] max-h-full bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
+          {/* <div className=""> */}
           <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
             <div className=" w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3">
               <h1 className="text-left font-bold text-[1.5rem] sm:text-[2rem] text-[#08051e]">
@@ -146,7 +147,7 @@ function FreeSessionForm() {
                 isRequired
                 selectId="attendeesLimit"
                 selectName="attendeesLimit"
-                placeholder="Select from the options"
+                placeholder="0"
                 value={formData.attendeesLimit}
                 onChange={handleSelectChange}
               >
@@ -237,6 +238,7 @@ function FreeSessionForm() {
                 </Button>
               </div>
             </form>
+            {/* </div> */}
           </div>
         </div>
       )}

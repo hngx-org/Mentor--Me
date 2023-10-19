@@ -35,7 +35,7 @@ function RecurringSessionForm() {
     numberOfSession: 0,
     relevantTopics: "",
     sessionUrl: "",
-    tag: "",
+    // tag: "",
     duration: 0,
   });
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
