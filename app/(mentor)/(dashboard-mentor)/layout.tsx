@@ -34,7 +34,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       />
       {/* </Suspense> */}
 
-      <main className="lg:ml-[274px]">
+      <main className="lg:ml-[240px]">
         <Suspense fallback={<LoadingSpinner />}>
           <NavbarMentee
             path={pathParams}

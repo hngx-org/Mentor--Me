@@ -66,7 +66,7 @@ export default function MentorProfileHeader({
     <div className="w-[100%]   relative flex flex-col  ">
       <div className="sm:h-[200px] h-[150px] w-[100%]  bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400  bg-cover bg-no-repeat" />
 
-      <div className=" w-full  flex  flex-col items-start  sm:flex-row  gap-2 px-4 border-b border-Neutra10 pb-4">
+      <div className="w-full flex flex-col items-start  sm:flex-row  gap-2 px-4 border-b border-Neutra10 pb-4">
         <div
           style={{ backgroundColor: randomColor }}
           className="-mt-10 lg:-mt-12 w-full max-w-[90px] h-[90px]  sm:max-w-[200px] sm:h-[200px] rounded-full border-[6px] border-white flex justify-center items-center"
@@ -76,17 +76,17 @@ export default function MentorProfileHeader({
         </div>
         <div className=" w-[100%] flex flex-col items-center sm:flex-row sm:justify-between px-2 mt-2">
           <div className="flex  flex-col items-center sm:items-start w-[100%] mt-2">
-            <p className="text-Neutra60 font-[700] text-lg sm:text-2xl capitalize">
+            <p className="text-Neutra60 font-[700] text-sm capitalize">
               {userName}
             </p>
-            <p className="text-Neutra40 text-sm"> {mentorship}</p>
+            <p className="text-Neutra40 text-sm">{mentorship}</p>
             <p className="text-Neutra40 text-sm capitalize"> {userRole}</p>
           </div>
           <div className="flex justify-center space-x-4 min-w-fit py-2 items-center">
             <Button
               variant="outline-primary"
               paddingLess
-              className="px-1  sm:px-2 sm:py-2 "
+              className="px-1 sm:px-2 sm:py-2"
               onClick={() => {
                 openModal({
                   isOpen: true,

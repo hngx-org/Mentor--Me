@@ -61,15 +61,15 @@ export default function SidebarMentor({
           <div className="w-full pl-3">
             <LogoIcon />
           </div>
-          <div className="mt-8">
-            <p className="font-Inter tetx-[14px]  leading-[10.3px] font-[500]   text-Neutra30 pl-3">
+          <div className="mt-10">
+            <p className="font-Inter tetx-[14px] leading-[10.3px] font-[500] text-Neutra30 pl-3">
               MENU
             </p>
             <ul className="  mt-2 px-4  py-2  gap-[2px] cursor-pointer  ">
               {sidebarMentorLinks.map((link) => (
                 <Link key={link.id} href={link.path} prefetch>
                   <li
-                    className={`flex gap-3  hover:bg-Neutra50 transition-all duration-300   ${
+                    className={`flex gap-3  hover:bg-Neutra50 transition-all duration-300 mb-3  ${
                       light && path === link.label.toLowerCase()
                         ? "bg-[#E5FFFF]"
                         : !light && path === link.label.toLowerCase()
@@ -80,7 +80,7 @@ export default function SidebarMentor({
                     <span>{link.iconDark}</span>
 
                     <span
-                      className={` font-Inter text-[12px] font-[500]  ${
+                      className={` font-Inter text-[1.25rem] font-[500]  ${
                         light ? "text-[#008080]" : "text-[#fff]"
                       } `}
                     >
@@ -95,20 +95,20 @@ export default function SidebarMentor({
         {/* logout */}
 
         <div className="mt-5 my-3 border-t-2 border-Neutra40  flex flex-col gap-2 ">
-          <div className="flex items-center w-full justify-start gap-4  pt-4 pl-2 hover:brightness-150 transition-all duration-300 ">
+          {/* <div className="flex items-center w-full justify-start gap-4  pt-4 pl-2 hover:brightness-150 transition-all duration-300 ">
             <SettingIcon />
 
             <span className="  font-Inter text-[12px]  font-[500]  text-[#ffff] cursor-pointer">
               Setting
             </span>
-          </div>
+          </div> */}
           <Link
             href="/welcome/login?path=login"
-            className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 "
+            className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 py-4"
           >
             <LogoutIcon />
 
-            <span className="  font-Inter text-[12px] font-[500]  text-Error50">
+            <span className="font-Inter text-[1.25rem] font-[500] text-Error50">
               LogOut
             </span>
           </Link>
@@ -118,14 +118,14 @@ export default function SidebarMentor({
           <Link
             href="/mentor-profile?path=profile"
             prefetch
-            className="bottom-3  mt-2"
+            className="bottom-3 mt-2"
           >
             <AuthProfileCard
               path={path}
               email={email}
               user={name}
               profileImg={imgSrc}
-              styles="text-Neutra30 "
+              styles="text-Neutra30"
             />
           </Link>
         </Suspense>

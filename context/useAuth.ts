@@ -13,7 +13,7 @@ interface User {
 const baseUrl = "https://mentormee-api.onrender.com";
 type urlType = "users" | "mentors" | "mentee";
 
-export const useAuth = (type: urlType = "users") => {
+export const useAuth = (type: urlType = "mentors") => {
   const { user } = useAuthCtx();
   const [data, setData] = useState<User>({
     message: "",

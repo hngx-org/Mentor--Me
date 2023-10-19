@@ -26,14 +26,14 @@ export default function AuthProfileCard({
     //       : ""
     //   }
     <div
-      className={`w-full max-w-[95%] flex   justify-between items-center  ${styles} `}
+      className={`w-full max-w-[95%] flex justify-between items-center  ${styles} `}
     >
       <div
         className={`flex gap-2 p-1 rounded-xl bg-black  ${
           path === "profile" ? "w-full" : "overflow-hidden"
         }`}
       >
-        <div className="w-[15px]  h-[15px] sm:w-[40px] sm:h-[40px]  rounded-full relative ">
+        <div className="w-[15px] h-[15px] sm:w-[40px] sm:h-[40px] rounded-full relative aspect-square">
           <Image
             style={{ objectFit: "cover", borderRadius: "100%" }}
             // src={`https://api.dicebear.com/7.x/initials/png?seed=${user}`}
@@ -43,7 +43,7 @@ export default function AuthProfileCard({
           />
         </div>
 
-        <div className="flex flex-col ">
+        <div className="flex flex-col">
           <span className="font-bold line-clamp-1 capitalize ">
             {user || "hello"}
           </span>
