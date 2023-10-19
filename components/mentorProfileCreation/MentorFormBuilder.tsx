@@ -203,7 +203,7 @@ export default function MentorFormBuilder({
             }
           }}
         >
-          Next
+          Continue
         </button>
       </div>
     </form>

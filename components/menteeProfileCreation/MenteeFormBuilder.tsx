@@ -158,6 +158,8 @@ export default function MenteeFormBuilder({
           } text-white font-semibold border-[1px] w-[100%] max-w-[200px] py-5 rounded-md font-Inter text-center`}
           onClick={(e) => {
             e.preventDefault();
+            const valid = (form.current! as HTMLFormElement).reportValidity();
+
             if (isValid) {
               handleClick();
             }

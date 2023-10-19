@@ -15,6 +15,7 @@ import { toast } from "react-hot-toast";
 import styles from "./page.module.css";
 
 import MentorMeIcon from "@/svgs/MentorMeIcon";
+import { BackwardIcon } from "@/public/SVGs";
 
 import {
   MentorCreationTopEllipse,
@@ -154,11 +155,16 @@ export function MentorProfileCreationForms() {
       {/* left side with forms */}
       <div className="flex flex-col w-[100%] lg:w-[50%] relative max-h-[100vh]">
         {/* mentor me logo */}
-
-        <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px] mb-[40px] sm:mb-[80px] sticky top-0 mt-5 sm:mx-10 mx-4" />
-
+        <Link href="/" className="w-fit h-fit">
+          <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px]   sticky top-0 mt-5 sm:mx-10 mx-4" />
+        </Link>
+        <Link
+          href="/mentor-auth/login"
+          className="flex mb-[30px] sm:mb-[30px] ml-4 sm:ml-8 mt-8"
+        >
+          <BackwardIcon /> <span className="ms-2">Go back</span>
+        </Link>
         {/* CONTAINER FOR THE FORMS */}
-
         <div className="flex items-start relative gap-[100px] w-[100%] max-h-[100%] overflow-x-hidden">
           {/* form 1 */}
 
@@ -217,7 +223,6 @@ export function MentorProfileCreationForms() {
           />
           {/* form 5 */}
         </div>
-
         {/* CONTAINER FOR THE FORMS */}
       </div>
 
