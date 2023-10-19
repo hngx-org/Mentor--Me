@@ -1,0 +1,95 @@
+:root {
+  --error-shadow: #000;
+  --error-bg: #737373;
+  --error-header: #7a7a7a;
+  --error-color: #fafafa;
+  --lit-header: #e6e6e6;
+  --error-speed: 2s;
+  --container-bg: #dbdbdb;
+}
+
+.perspective-12 {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  background: var(--error-bg);
+  box-sizing: border-box;
+  transform-style: preserve-3d;
+  min-height: 100vh;
+}
+@property --swing-x {
+  initial-value: 0;
+  inherits: false;
+  syntax: "<integer>";
+}
+@property --swing-y {
+  initial-value: 0;
+  inherits: false;
+  syntax: "<integer>";
+}
+
+#error-heading {
+  -webkit-animation: swing var(--error-speed) infinite alternate-reverse
+    ease-in-out;
+  animation: swing var(--error-speed) infinite alternate-reverse ease-in-out;
+
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  letter-spacing: 1rem;
+  transform: translate3d(0, 0, 0vmin);
+  --x: calc(50% + (var(--swing-x) * 0.5) * 1%);
+  background: radial-gradient(var(--lit-header), var(--error-header) 45%)
+    var(--x) 100%/200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  z-index: 99999999;
+}
+.not-found {
+  text-shadow: 2px 2px 3px #fff;
+}
+
+.cloak {
+  animation: swing var(--error-speed) infinite alternate-reverse ease-in-out;
+  height: 100%;
+  width: 100%;
+  transform-origin: 50% 100%;
+  /* transform-origin: 50% 30%; */
+  transform: rotate(calc(var(--swing-x) * -0.25deg));
+  background: radial-gradient(
+    40% 40% at 50% 42%,
+    transparent,
+    var(--container-bg) 45%
+  );
+}
+
+.cloak__container {
+  height: 270vmax;
+  width: 270vmax;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@media (max-width: 400px) {
+  .cloak__container {
+    height: 300vmax;
+    width: 300vmax;
+  }
+}
+
+@keyframes swing {
+  0% {
+    --swing-x: -100;
+    --swing-y: -100;
+  }
+  50% {
+    --swing-y: 0;
+  }
+  100% {
+    --swing-y: -100;
+    --swing-x: 100;
+  }
+}
