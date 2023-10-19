@@ -1,10 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Dispatch, useState } from "react";
 import FilterPopup from "./FilterPopup";
 import { FilterIcon } from "@/public/SVGs";
 
-export default function Filter() {
+interface Props {
+  onSubmit: () => void;
+  setSelectedTimeZone: Dispatch<React.SetStateAction<string>>;
+  selectedTimeZone: string;
+  value: number;
+  setValue: Dispatch<React.SetStateAction<number>>;
+  selectedDate: Date;
+  setSelectedDate: Dispatch<React.SetStateAction<Date>>;
+}
+
+export default function Filter({
+  selectedTimeZone,
+  setSelectedTimeZone,
+  value,
+  setValue,
+  selectedDate,
+  setSelectedDate,
+  onSubmit,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const filterPop = () => {
@@ -30,7 +48,18 @@ export default function Filter() {
           </span>
         </div>
       </button>
-      {isOpen && <FilterPopup onClose={closePopup} />}
+      {isOpen && (
+        <FilterPopup
+          onClose={closePopup}
+          selectedTimeZone={selectedTimeZone}
+          setSelectedTimeZone={setSelectedTimeZone}
+          value={value}
+          setValue={setValue}
+          setSelectedDate={setSelectedDate}
+          selectedDate={selectedDate}
+          onSubmit={onSubmit}
+        />
+      )}
     </div>
   );
 }
