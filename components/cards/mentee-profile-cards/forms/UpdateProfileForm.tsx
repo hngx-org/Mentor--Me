@@ -351,7 +351,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 name="gender"
                 className={`w-full p-2 outline-none rounded-xl  border  py-3 focus:border-primary focus:valid:border-green-400  transition-all duration-300 ${
                   isDark
-                    ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059] bg-black"
+                    ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059] bg-gray-950"
                     : "border-Neutra10 bg-transparent"
                 } `}
                 onChange={handleGenderChange}
