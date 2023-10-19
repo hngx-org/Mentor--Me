@@ -32,6 +32,7 @@ const Resource = ({ params }: { params: { resource: string } }) => {
         `https://hngmentorme.onrender.com/api/resources/${id}`
       );
       const res = await result.json();
+
       setData(res);
     } catch (error) {
       const { message } = error as { message: string };
@@ -61,11 +62,18 @@ const Resource = ({ params }: { params: { resource: string } }) => {
               {data?.description || staticDescription}
             </p>
             <div className="flex font-Hanken text-xs text-white items-center">
-              <FilledStarIcon />
-              <FilledStarIcon />
-              <FilledStarIcon />
-              <FilledStarIcon />
-              <EmptyStarIcon />
+              {Array.from(
+                { length: Math.min(data?.ratings, 5) },
+                (_, index) => (
+                  <FilledStarIcon key={index} />
+                )
+              )}
+              {Array.from(
+                { length: Math.max(5 - data.ratings, 0) },
+                (_, index) => (
+                  <EmptyStarIcon key={index} />
+                )
+              )}
               <span className="mx-1">{data?.ratings} | </span>
               <span>{data?.reviews} reviews</span>
             </div>
