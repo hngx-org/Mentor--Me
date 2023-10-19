@@ -6,6 +6,7 @@ import React from "react";
 import { ShareIcon } from "@/public/SVGs";
 import { Button } from "../buttons/button";
 import { ModalState } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/page";
+import ParseReviewStars from "../ParseReview/ParseReviewStars";
 
 type MentorProfileHeaderProps = {
   userName: string;
@@ -26,10 +27,10 @@ export default function MentorProfileHeader({
 }: MentorProfileHeaderProps) {
   return (
     <div className="w-[100%] h-[294px]   relative flex flex-col  ">
-      <div className="h-[50%] w-[100%]  bg-blue-500 bg-[url('/assets/mentor-profileBanner.png')] bg-cover bg-no-repeat" />
+      <div className="h-[50%] w-[100%]  bg-blue-500 bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-yellow-200 via-red-500 to-fuchsia-500 bg-cover bg-no-repeat" />
       <div className="h-[50%] w-[100%]  bg-white" />
-      <div className=" w-[80%]   h-fit flex  flex-col items-center space-y-2 sm:space-x-2  sm:flex-row self-center absolute  top-[100px] sm:top-[80px] ">
-        <div className=" w-[90px] h-[90px] sm:w-[200px] sm:h-[200px]   ">
+      <div className=" w-[80%]   h-fit flex  flex-col items-center space-y-2 sm:space-x-2  sm:flex-row self-center absolute  top-[100px] sm:top-[100px] ">
+        <div className=" w-[90px] h-[90px] sm:w-[180px] sm:h-[180px] border border-4 border-white rounded-full  ">
           <Image
             src={`https://api.dicebear.com/7.x/initials/png?seed=${userName}`}
             width={180}
@@ -43,6 +44,12 @@ export default function MentorProfileHeader({
             <p className="text-Neutra60 font-[700] text-lg capitalize">
               {userName}
             </p>
+            <div className="flex w-fit items-center">
+              <ParseReviewStars review={userRating} />
+              <span className="mx-2"> | </span>
+              <p> reviews</p>
+            </div>
+
             <p className="text-Neutra40 text-sm"> {userRole}</p>
             <p className="text-Neutra40 text-sm"> {email}</p>
           </div>

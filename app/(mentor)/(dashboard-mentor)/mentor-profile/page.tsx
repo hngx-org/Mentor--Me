@@ -3,7 +3,7 @@
 
 "use client";
 
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { useRouter } from "next/navigation";
 import MentorProfileHeader from "@/components/mentorProfile/MentorProfileHeader";
 import ProfileDetailsCardContainer, {
@@ -18,7 +18,6 @@ import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
 
 import useAuth from "@/context/useAuth";
 import MentorProfileSkeleton from "@/components/skeleton/ProfileloaderSkeleton";
-import { createContext } from "vm";
 
 export type ModalState = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -47,7 +46,7 @@ const defaultUserDetailsContext: MentorProfileCtx = {
   },
 };
 
-const MentorProfileContext = createContext(defaultUserDetailsContext);
+export const MentorDetailsContext = createContext(defaultUserDetailsContext);
 
 const baseUrl = "https://mentormee-api.onrender.com";
 type UserData = {
@@ -168,54 +167,61 @@ export default function ProfilePage() {
 
   return (
     <>
-      {loading && <MentorProfileSkeleton />}
+      <MentorDetailsContext.Provider
+        value={{
+          details: userDetailsContext,
+          updateUserDetailsCtx: setUserDetailsContext,
+        }}
+      >
+        {loading && <MentorProfileSkeleton />}
 
-      {!loading && !error && user && (
-        <div className="w-[100%] h-fit">
-          <MentorProfileHeader
-            userName={userDetailsContext.fullName}
-            email=""
-            userRole={user?.mentorship_type}
-            userRating={4}
-            modal={setModal}
-          />
-          <MentorProfileMainLayout>
-            <BioCard text={userData?.bio || "Add bio"} />
+        {!loading && !error && user && (
+          <div className="w-[100%] h-fit">
+            <MentorProfileHeader
+              userName={userDetailsContext.fullName}
+              email=""
+              userRole={user?.mentorship_type}
+              userRating={4}
+              modal={setModal}
+            />
+            <MentorProfileMainLayout>
+              <BioCard text={userDetailsContext?.bio || "Add bio"} />
 
-            <ProfileDetailsCardContainer
-              heading="education"
-              items={[
-                {
-                  text: userData?.degree || "",
-                  heading: userData?.institution || "",
-                  type: "certification",
-                },
-              ]}
-              openModal={setModal}
-            />
-            <SkillSCard skills={userData?.skills?.split(" ")!} />
-            <ProfileDetailsCardContainer
-              heading="Experience"
-              items={[]}
-              openModal={setModal}
-            />
+              <ProfileDetailsCardContainer
+                heading="education"
+                items={[
+                  {
+                    text: userData?.degree || "",
+                    heading: userData?.institution || "",
+                    type: "certification",
+                  },
+                ]}
+                openModal={setModal}
+              />
+              <SkillSCard skills={userData?.skills?.split(" ")!} />
+              <ProfileDetailsCardContainer
+                heading="Experience"
+                items={[]}
+                openModal={setModal}
+              />
 
-            <AvailableSessionCard
-              timezone=" Greenwich Mean Time (GMT)"
-              availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
-            />
-            <OverViewCardLayout heading="impact at a glance" />
-            <SessionsProgressCard progress={10} />
-          </MentorProfileMainLayout>
-          {modal.isOpen && (
-            <MentorProfileModal
-              setUserData={setUserData}
-              onClose={setModal}
-              state={modal.state}
-            />
-          )}
-        </div>
-      )}
+              <AvailableSessionCard
+                timezone=" Greenwich Mean Time (GMT)"
+                availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
+              />
+              <OverViewCardLayout heading="impact at a glance" />
+              <SessionsProgressCard progress={10} />
+            </MentorProfileMainLayout>
+            {modal.isOpen && (
+              <MentorProfileModal
+                setUserData={setUserData}
+                onClose={setModal}
+                state={modal.state}
+              />
+            )}
+          </div>
+        )}
+      </MentorDetailsContext.Provider>
     </>
   );
 }

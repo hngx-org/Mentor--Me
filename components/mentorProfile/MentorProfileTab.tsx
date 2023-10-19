@@ -13,7 +13,11 @@ import { Button } from "../buttons/button";
 import Selector from "../selector";
 import useAuth from "@/context/useAuth";
 import AuthContextProvider, { useAuthCtx } from "@/context/AuthContext";
-import { ModalState } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/page";
+import {
+  MentorDetailsContext,
+  ModalState,
+  UserDetails,
+} from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/page";
 
 export type ModalType = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -21,14 +25,14 @@ export type ModalType = {
 
 export default function MentorProfileTabLayout({
   modalState,
-  setUserData,
+
   onClose,
 }: {
   modalState: string;
-  setUserData: Dispatch<SetStateAction<Data | undefined>>;
   onClose: Dispatch<SetStateAction<ModalState>>;
 }) {
   const [active, setActive] = useState(modalState);
+  const ProfileBio = useContext(MentorDetailsContext);
 
   return (
     <div className="w-[100%] my-5 h-[100%]">
@@ -70,7 +74,12 @@ export default function MentorProfileTabLayout({
         </div>
       </div>
       {active === "basic info" && (
-        <BasicInfoTab onClose={onClose} setUserData={setUserData} />
+        <BasicInfoTab
+          onClose={onClose}
+          bio={ProfileBio.details.bio}
+          fullName={ProfileBio.details.fullName}
+          updateUserInfo={ProfileBio.updateUserDetailsCtx}
+        />
       )}
       {active === "Experience/ Certification" && (
         <p className="h-[100%] flex justify-center ">in progress</p>
@@ -115,16 +124,17 @@ type Data = {
 };
 
 function BasicInfoTab({
-  setUserData,
   onClose,
+  updateUserInfo,
+  bio,
+  fullName,
 }: {
-  setUserData: Dispatch<SetStateAction<Data | undefined>>;
   onClose: Dispatch<SetStateAction<ModalState>>;
-}) {
+  updateUserInfo: React.Dispatch<React.SetStateAction<UserDetails>>;
+} & Data) {
   const [details, setDetail] = useState({
-    bio: "",
-
-    fullName: "",
+    bio: bio,
+    fullName: fullName,
   });
   const [selected, setSelected] = useState("");
 
@@ -137,9 +147,9 @@ function BasicInfoTab({
       [name]: value,
     }));
   };
-  const isDisabled = details.fullName === "" || details.bio.length < 10;
+  const isDisabled = details.bio?.length < 10;
   const handleSubmit = () => {
-    setUserData((prev) => ({
+    updateUserInfo((prev) => ({
       ...prev,
       ...details,
     }));
