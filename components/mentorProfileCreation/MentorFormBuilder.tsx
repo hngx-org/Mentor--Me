@@ -138,8 +138,6 @@ export default function MentorFormBuilder({
     }
   }, [yearGrad]);
 
-  console.log(formInputs);
-
   return (
     <form ref={form} className="flex flex-col gap-6">
       {content.map((input: any) => {
