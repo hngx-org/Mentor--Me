@@ -79,7 +79,7 @@ export function MentorProfileCreationForms() {
       )
       .then((response) => {
         // Handle the response
-        console.log(response);
+        // console.log(response);
         setLoader(false);
         setIsModalShown(true);
       })
@@ -130,16 +130,21 @@ export function MentorProfileCreationForms() {
     //   {/* // Overall container for the whole page */}
     <div className={`lg:flex-row flex  ${styles.scroll} relative bg-white`}>
       {/* overlay that shows behind the modal */}
-      <button
-        aria-label="hide/show overlay"
-        type="button"
-        onClick={() => {
-          setIsModalShown(false);
-        }}
+      <Link
         className={`duration-[0.5s] fixed top-0 left-0 h-full w-full bg-[#00000080] z-[8]  pointer-events-none ${
           isModalShown ? "opacity-1 pointer-events-auto" : "opacity-0"
         }`}
-      />
+        href="/mentor-profile?path=profile"
+        prefetch
+      >
+        <button
+          aria-label="hide/show overlay"
+          type="button"
+          onClick={() => {
+            setIsModalShown(false);
+          }}
+        />
+      </Link>
 
       {/* div containing success modal */}
       <div

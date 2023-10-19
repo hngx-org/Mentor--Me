@@ -17,7 +17,7 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
   const select2 = useRef<HTMLInputElement>(null);
   const image2 = useRef<HTMLImageElement>(null);
   const [image, setImage] = useState(null);
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState([]);
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState(null);
 
@@ -41,7 +41,8 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
             "problem uploading image, please check your internet connection"
           );
         }
-        setUrl(data);
+        // @ts-ignore
+        setUrl((prevData) => [...prevData, data.url]);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -50,23 +51,27 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
   };
   // This useEffect performs the post request when the value of files.file2 changes
   useEffect(() => {
-    if (files.file2) {
+    if (file2Arr.length > 0) {
       uploadImage();
     }
-  }, [files.file2]);
+  }, [file2Arr]);
 
+  // This useefect updates the object of data going to the backend, this particular data is an array of strings of urls of the cloudinary images
   useEffect(() => {
     if (url) {
       setFormInputs((prevData: any) => ({
         ...prevData,
         // @ts-ignore
-        certification_file: url.url,
+        certification_file: url.join(", "),
       }));
     }
   }, [url]);
 
   function showFile(e: any) {
-    if ([...e.target.files][0].size > 2 * 1024 * 1024) {
+    if (
+      [...e.target.files][0] &&
+      [...e.target.files][0].size > 2 * 1024 * 1024
+    ) {
       toast.error("Image size exceeds 2MB. Please upload a smaller image.");
       return;
     }
@@ -80,19 +85,11 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
     }));
 
     setImage(e.target.files[0]);
-
-    setFormInputs((prevData: any) => ({
-      ...prevData,
-      [e.target.name]: e.target.files[0].name,
-    }));
-
-    // console.log(formInputs);
   }
 
   function selectFile(element: any) {
     element.click();
   }
-
   return (
     <div className="form-container mt-[-10px] sm:mt-0 w-[100%] h-[100%] sm:pt-0 pt-0 overflow-y-scroll opacity-0  absolute p-4 sm:p-10">
       <HeadingBuild
@@ -103,7 +100,7 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
       <MentorFormBuilder
         content={form2Arr}
         handleClick={() => {
-          if (files.file2 === "") {
+          if (file2Arr.length === 0) {
             toast.error("please upload a certificate");
             return;
           }
@@ -126,7 +123,7 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
                 placeholder="Link"
                 id="certification"
                 name="certification_link"
-                required
+                // required
                 onInput={(e: any) => {
                   setFormInputs((prevData: any) => ({
                     ...prevData,
@@ -156,22 +153,29 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
             </button>
           </div>
 
-          <div className="flex flex-wrap gap-4 items-start">
+          <div className="flex flex-wrap gap-4 items-start mt-6">
             {file2Arr.length > 0
               ? file2Arr.map((file, idx) => (
                   <div
                     className="border-[1px] min-h-[100px] flex flex-col items-center justify-center border-black rounded-md p-2"
                     key={
                       // @ts-ignore
-                      file.name
+                      file.size + 5
                     }
                   >
+                    {
+                      // @ts-ignore
+                      file.type === "application/pdf" ? (
+                        <p className="text-[red] font-bold mb-3">PDF</p>
+                      ) : (
+                        ""
+                      )
+                    }
                     <img
                       className=" mr-[20px] max-w-[120px] w-[80%]"
                       src={URL.createObjectURL(file)}
                       alt=""
                     />
-
                     <p className="uppercase text-sm">
                       {
                         // @ts-ignore

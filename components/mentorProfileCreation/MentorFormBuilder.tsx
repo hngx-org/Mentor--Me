@@ -173,6 +173,24 @@ export default function MentorFormBuilder({
       {/* this children prop is for the variations for each of the forms. So it's basically a fix */}
       {children}
 
+      {currForm === 4 ? (
+        <div className="flex items-center justify-start gap-2">
+          <input
+            type="checkbox"
+            className="mt-[6px]"
+            required
+            onInput={handleInput}
+          />
+          <p className="font-medium font-Inter ">
+            By filling this form, you agree to MentorMe’s{" "}
+            <span className="text-Accent1">Privacy policy</span> and{" "}
+            <span className="text-Accent1">Terms of use</span>.
+          </p>
+        </div>
+      ) : (
+        ""
+      )}
+
       {/* container for the buttons */}
       <div className="flex gap-3 mt-[50px] justify-between">
         <button
@@ -269,6 +287,7 @@ function SelectComponent({
             if (prevValues.includes(e.target.value)) return prevValues;
             return [...prevValues, e.target.value];
           });
+          handleInput(e);
         }}
         onChange={(e: any) => {
           // update the formInput state with the array of values
@@ -276,6 +295,7 @@ function SelectComponent({
             ...prevInputs,
             [e.target.name]: selectedValues.join(", "),
           }));
+          handleInput(e);
         }}
         className={`w-full border-[#d0d5dd] border-[1px] rounded-md  p-4 ${
           isSelected ? "text-Neutral60" : "text-[#98A2B3]"
