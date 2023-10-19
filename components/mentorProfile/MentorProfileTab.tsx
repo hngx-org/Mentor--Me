@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import {
+import React, {
   ChangeEvent,
   Dispatch,
   SetStateAction,
@@ -13,7 +13,11 @@ import { Button } from "../buttons/button";
 import Selector from "../selector";
 import useAuth from "@/context/useAuth";
 import AuthContextProvider, { useAuthCtx } from "@/context/AuthContext";
-import { ModalState } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/page";
+import { ModalState } from "./ProfileDetailCard";
+import {
+  MentorDetailsContext,
+  UserDetails,
+} from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/DetailsContext";
 
 export type ModalType = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -21,18 +25,17 @@ export type ModalType = {
 
 export default function MentorProfileTabLayout({
   modalState,
-  setUserData,
   onClose,
 }: {
   modalState: string;
-  setUserData: Dispatch<SetStateAction<Data | undefined>>;
   onClose: Dispatch<SetStateAction<ModalState>>;
 }) {
   const [active, setActive] = useState(modalState);
+  const ProfileBio = useContext(MentorDetailsContext);
 
   return (
     <div className="w-[100%] my-5 h-[100%]">
-      <div className="flex justify-between w-[100%] text-Neutra10 text-xs sm:text-base cursor-pointer">
+      <div className="flex justify-between w-[100%] text-Neutra10 text-xs sm:text-base cursor-pointer px-4">
         <div
           onClick={() => {
             setActive("basic info");
@@ -70,7 +73,12 @@ export default function MentorProfileTabLayout({
         </div>
       </div>
       {active === "basic info" && (
-        <BasicInfoTab onClose={onClose} setUserData={setUserData} />
+        <BasicInfoTab
+          onClose={onClose}
+          bio={ProfileBio.details.bio}
+          fullName={ProfileBio.details.fullName}
+          updateUserInfo={ProfileBio.updateUserDetailsCtx}
+        />
       )}
       {active === "Experience/ Certification" && (
         <p className="h-[100%] flex justify-center ">in progress</p>
@@ -92,7 +100,7 @@ function ProfileCard({ userName }: { userName: string }) {
         <div className="w-[54px]  h-[54px] sm:w-[54px] sm:h-[54px]  rounded-full relative ">
           <Image
             style={{ objectFit: "cover", borderRadius: "100%" }}
-            src={`https://api.dicebear.com/7.x/initials/png?seed=${name}`}
+            src={`https://api.dicebear.com/7.x/initials/png?seed=${userName}`}
             fill
             alt="profile"
           />
@@ -115,16 +123,17 @@ type Data = {
 };
 
 function BasicInfoTab({
-  setUserData,
   onClose,
+  updateUserInfo,
+  bio,
+  fullName,
 }: {
-  setUserData: Dispatch<SetStateAction<Data | undefined>>;
   onClose: Dispatch<SetStateAction<ModalState>>;
-}) {
+  updateUserInfo: React.Dispatch<React.SetStateAction<UserDetails>>;
+} & Data) {
   const [details, setDetail] = useState({
-    bio: "",
-
-    fullName: "",
+    bio,
+    fullName,
   });
   const [selected, setSelected] = useState("");
 
@@ -137,9 +146,9 @@ function BasicInfoTab({
       [name]: value,
     }));
   };
-  const isDisabled = details.fullName === "" || details.bio.length < 10;
+  const isDisabled = details.bio?.length < 10;
   const handleSubmit = () => {
-    setUserData((prev) => ({
+    updateUserInfo((prev) => ({
       ...prev,
       ...details,
     }));
@@ -149,11 +158,9 @@ function BasicInfoTab({
     });
   };
 
-  console.log(details);
-
   return (
-    <div className="w-[100%] px-2">
-      <ProfileCard userName="shade mayowa" />
+    <div className="w-[100%] px-4">
+      <ProfileCard userName={fullName} />
       <div className="w-[100%] h-[100%] space-y-5 text-Neutra50">
         <MentorProfileInput
           label="Your full name"
@@ -161,12 +168,12 @@ function BasicInfoTab({
           name="fullName"
           onChange={handleChange}
         />
-        {/* <Selector
+        <Selector
           placeHolder="pick your gender"
           selected={selected}
           onSelect={setSelected}
           options={["male", "female", "other"]}
-        /> */}
+        />
         <TextArea
           label="Bio"
           value={details.bio}
