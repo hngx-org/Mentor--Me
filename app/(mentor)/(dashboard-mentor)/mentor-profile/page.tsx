@@ -35,6 +35,8 @@ type UserData = {
   preferred_endTime?: string;
   preferred_days?: string;
   mentoring_experience?: string;
+  certification?: string;
+  experience?: string;
 };
 export default function ProfilePage() {
   const { data } = useAuth();
@@ -45,6 +47,8 @@ export default function ProfilePage() {
     fullName: "",
     gender: "",
     email: "",
+    certification: "",
+    experience: "",
   });
   const [user, setUser] = useState<any>({});
   const [userData, setUserData] = useState<UserData | undefined>({
@@ -59,6 +63,7 @@ export default function ProfilePage() {
     preferred_endTime: "",
     preferred_days: "",
     mentoring_experience: "",
+    certification: "",
   });
   const router = useRouter();
   const [modal, setModal] = useState<ModalState>({
@@ -105,12 +110,17 @@ export default function ProfilePage() {
           preferred_endTime: data?.data?.preferred_endTime,
           preferred_days: data?.data?.preferred_days,
           mentoring_experience: data?.data?.mentoring_experience,
+          certification: data?.data?.certifications,
         });
         setUserDetailsContext((prev) => ({
           bio: data?.data?.userDetails?.bio,
           email: data?.data?.userDetails?.email,
           gender: "",
           fullName: data?.data?.userDetails?.fullName,
+          certification: data?.data?.certifications,
+          experience: data?.data?.mentoring_experience,
+          linkedIn: data?.data.linkedin,
+          otherlinks: data?.data.other_links,
         }));
 
         setLoading(false);
@@ -149,25 +159,41 @@ export default function ProfilePage() {
             />
             <MentorProfileMainLayout>
               <BioCard text={userDetailsContext?.bio || "Add bio"} />
-
+              <SkillSCard
+                skills={userData?.skills?.split(",")! || "add skills"}
+              />
               <ProfileDetailsCardContainer
                 heading="education"
                 items={[
                   {
                     text: userData?.degree || "",
                     heading: userData?.institution || "",
-                    type: "certification",
+                    type: "education",
                   },
                 ]}
                 openModal={setModal}
               />
-              <SkillSCard
-                skills={userData?.skills?.split(",")! || "add skills"}
-              />
 
               <ProfileDetailsCardContainer
                 heading="Experience"
-                items={[]}
+                items={
+                  userData?.mentoring_experience?.split(" ").map((item) => ({
+                    type: "experience",
+                    heading: item,
+                    text: "present",
+                  })) || []
+                }
+                openModal={setModal}
+              />
+              <ProfileDetailsCardContainer
+                heading="certification"
+                items={
+                  userData?.certification?.split("  ").map((item) => ({
+                    type: "certification",
+                    heading: item,
+                    text: "certificate",
+                  })) || []
+                }
                 openModal={setModal}
               />
 

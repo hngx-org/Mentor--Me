@@ -51,7 +51,7 @@ export default function ProfileDetailsCardContainer({
   );
 }
 
-type InfoCardProps = {
+export type InfoCardProps = {
   type: "skill" | "experience" | "certification" | "education";
   text?: string;
   heading?: string;
