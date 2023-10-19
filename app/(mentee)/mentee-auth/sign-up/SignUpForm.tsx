@@ -56,7 +56,7 @@ export default function SignUpForm() {
     } else {
       setIsValid(true);
       axios
-        .post("https://mentorme-be.vercel.app/api/auth/register", {
+        .post("https://mentormee-api.onrender.com/auth/register", {
           // first_name: formData.first_name,
           // last_name: formData.last_name,
           email: formData.email,
