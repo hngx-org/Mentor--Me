@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/aria-role */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -18,6 +19,7 @@ import { EditIcon, GoNextArrowIcon, NaijaFlagIcon } from "@/public/SVGs";
 import Button from "../mentee-sessions/(ui)/VxrcelBtn";
 import UpdateProfile from "@/components/cards/mentee-profile-cards/UpdateProfile";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
+import ProtectedRoute from "@/context/ProtectedRoute";
 
 type MenuProfileProps = {
   id: number;
@@ -123,7 +125,7 @@ export default function MenteeProfilePage() {
   }, [token]);
 
   return (
-    <>
+    <ProtectedRoute role="mentee">
       {paramsAction === "edit-profile" ? (
         <Suspense fallback={<LoadingSpinner />}>
           <div className="w-full justify-center flex relative ">
@@ -287,6 +289,6 @@ export default function MenteeProfilePage() {
           </div>
         </section>
       )}
-    </>
+    </ProtectedRoute>
   );
 }
