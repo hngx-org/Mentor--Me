@@ -1,12 +1,15 @@
+/* eslint-disable jsx-a11y/aria-role */
+
 "use client";
 
 import React, { useState } from "react";
 import { NextPage } from "next";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 
 import NewMentee from "./noBookings";
 import AfterBookings from "./afterBookings";
 import RegularUser from "./regularUser";
+import ProtectedRoute from "@/context/ProtectedRoute";
 
 const MenteeDashboard: NextPage = () => {
   const [activeScreen, setActiveScreen] = useState<
@@ -16,11 +19,23 @@ const MenteeDashboard: NextPage = () => {
   const handleActiveScreen = () => {
     switch (activeScreen) {
       case "beforeBooking":
-        return <NewMentee />;
+        return (
+          // <ProtectedRoute role="mentee">
+          <NewMentee />
+          // </ProtectedRoute>
+        );
       case "hasBooking":
-        return <AfterBookings />;
+        return (
+          // <ProtectedRoute role="mentee">
+          <AfterBookings />
+          // </ProtectedRoute>
+        );
       case "regular":
-        return <RegularUser />;
+        return (
+          // <ProtectedRoute role="mentee">
+          <RegularUser />
+          // </ProtectedRoute>
+        );
 
       default:
         return <NewMentee />;
