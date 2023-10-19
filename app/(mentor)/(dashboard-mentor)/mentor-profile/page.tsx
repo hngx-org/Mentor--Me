@@ -3,7 +3,7 @@
 
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useRouter } from "next/navigation";
 import MentorProfileHeader from "@/components/mentorProfile/MentorProfileHeader";
 import ProfileDetailsCardContainer, {
@@ -17,6 +17,7 @@ import OverViewCardLayout from "@/components/mentorProfile/MentorProfilelayouts"
 import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
 
 import useAuth from "@/context/useAuth";
+import MentorProfileSkeleton from "@/components/skeleton/ProfileloaderSkeleton";
 
 export type ModalState = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -39,7 +40,8 @@ type UserData = {
 };
 export default function ProfilePage() {
   const { data } = useAuth();
-
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [skills, setSkills] = useState<any>();
   const [user, setUser] = useState<any>({});
   const [userData, setUserData] = useState<UserData | undefined>({
@@ -87,7 +89,7 @@ export default function ProfilePage() {
       if (response.ok) {
         const data = await response.json();
         setUser(data?.data); // Assuming you want to set the entire data object
-        // console.log("Current Mentor", data?.data);
+        console.log("Current Mentor", data?.data);
         setUserData({
           fullName: data?.data?.userDetails?.fullName,
           bio: data?.data?.userDetails?.bio,
@@ -101,10 +103,13 @@ export default function ProfilePage() {
           preferred_days: data?.data?.preferred_days,
           mentoring_experience: data?.data?.mentoring_experience,
         });
+        setLoading(false);
       } else {
         console.error("Failed to fetch current mentor data");
       }
     } catch (error) {
+      setLoading(false);
+      setError("Error fetching current mentor data:");
       console.error("Error fetching current mentor data:", error);
     } finally {
       console.log(user);
@@ -125,75 +130,60 @@ export default function ProfilePage() {
   }, [data]);
 
   return (
-    <div className=" w-full overflow-x-hidden ">
-      {user && user ? (
-        <MentorProfileHeader
-          userName={userData?.fullName}
-          mentorship={userData?.mentorship}
-          userRole={data?.userDetails?.role!}
-          userRating={4}
-          openModal={setModal}
-        />
-      ) : (
-        <MentorProfileHeader
-          userName="Shade Mayowa"
-          mentorship=""
-          userRole="Product Designer"
-          userRating={4}
-          openModal={setModal}
-        />
-      )}
+    <Fragment>
+      {loading && <MentorProfileSkeleton />}
 
-      {user && user ? (
-        <MentorProfileMainLayout>
-          <BioCard text={userData?.bio} />
+      {!loading && !error && user && (
+        <div>
+          <MentorProfileHeader
+            userName={""}
+            email=""
+            userRole={user?.mentorship_type}
+            userRating={4}
+            modal={setModal}
+          />
+          <MentorProfileMainLayout>
+            <BioCard text={userData?.bio || "Add bio"} />
 
-          <ProfileDetailsCardContainer
-            heading="education"
-            items={[
-              {
-                text: userData?.degree || "",
-                heading: userData?.institution || "",
-                type: "certification",
-              },
-            ]}
-            openModal={setModal}
-          />
-          <SkillSCard skills={skills || []} />
-          <ProfileDetailsCardContainer
-            heading="Experience"
-            items={[
-              {
-                type: "experience",
-                text: userData?.mentoring_experience || "",
-              },
-            ]}
-            openModal={setModal}
-          />
-          {/* 
+            <ProfileDetailsCardContainer
+              heading="education"
+              items={[
+                {
+                  text: userData?.degree || "",
+                  heading: userData?.institution || "",
+                  type: "certification",
+                },
+              ]}
+              openModal={setModal}
+            />
+            <SkillSCard skills={userData?.skills?.split(" ")!} />
+            <ProfileDetailsCardContainer
+              heading="Experience"
+              items={[]}
+              openModal={setModal}
+            />
+            {/* 
               <ProfileDetailsCardContainer
                 heading="Education"
                 items={[]}
                 openModal={setModal}
               /> */}
-          <AvailableSessionCard
-            timezone=" Greenwich Mean Time (GMT)"
-            availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
-          />
-          <OverViewCardLayout heading="impact at a glance" />
-          <SessionsProgressCard progress={10} />
-        </MentorProfileMainLayout>
-      ) : (
-        <div>Something went wrong</div>
+            <AvailableSessionCard
+              timezone=" Greenwich Mean Time (GMT)"
+              availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
+            />
+            <OverViewCardLayout heading="impact at a glance" />
+            <SessionsProgressCard progress={10} />
+          </MentorProfileMainLayout>
+          {modal.isOpen && (
+            <MentorProfileModal
+              setUserData={setUserData}
+              onClose={setModal}
+              state={modal.state}
+            />
+          )}
+        </div>
       )}
-
-      {modal.isOpen && (
-        <MentorProfileModal
-          setUserData={setUserData}
-          onClose={setModal}
-          state={modal.state}
-        />
-      )}
-    </div>
+    </Fragment>
   );
 }
