@@ -197,7 +197,7 @@ export default function MentorFormBuilder({
               toast.error("You have too many words, please reduce them");
             }
 
-            if (valid && !isFull) {
+            if (isValid && !isFull) {
               handleClick();
               // console.log(formInputs);
             }

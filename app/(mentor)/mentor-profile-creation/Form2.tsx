@@ -13,16 +13,9 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
   const { currForm, files, setFiles, setFormInputs, formInputs } =
     useMentorContext();
 
+  const [file2Arr, setFile2Arr] = useState([]);
   const select2 = useRef<HTMLInputElement>(null);
   const image2 = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    if (files.file2) {
-      // @ts-ignore
-      image2.current!.src = URL.createObjectURL(files.file2);
-    }
-  }, [files]);
-
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -77,9 +70,13 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
       toast.error("Image size exceeds 2MB. Please upload a smaller image.");
       return;
     }
+
+    // @ts-ignore
+    setFile2Arr((prevArr) => [...prevArr, select2.current!.files![0]]);
+
     setFiles((prevFile: any) => ({
       ...prevFile,
-      [e.target.id]: [...e.target.files][0],
+      [e.target.id]: file2Arr,
     }));
 
     setImage(e.target.files[0]);
@@ -159,19 +156,31 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
             </button>
           </div>
 
-          <div>
-            <img
-              ref={image2}
-              src="/"
-              alt=""
-              className=" mr-[20px] max-w-[200px] w-[80%]"
-            />
-            <p>
-              {
-                // @ts-ignore
-                files.file2 && files.file2.name
-              }
-            </p>
+          <div className="flex flex-wrap gap-4 items-start">
+            {file2Arr.length > 0
+              ? file2Arr.map((file, idx) => (
+                  <div
+                    className="border-[1px] min-h-[100px] flex flex-col items-center justify-center border-black rounded-md p-2"
+                    key={
+                      // @ts-ignore
+                      file.name
+                    }
+                  >
+                    <img
+                      className=" mr-[20px] max-w-[120px] w-[80%]"
+                      src={URL.createObjectURL(file)}
+                      alt=""
+                    />
+
+                    <p className="uppercase text-sm">
+                      {
+                        // @ts-ignore
+                        file.name
+                      }
+                    </p>
+                  </div>
+                ))
+              : ""}
           </div>
         </div>
       </MentorFormBuilder>

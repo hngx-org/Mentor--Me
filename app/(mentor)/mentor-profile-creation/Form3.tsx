@@ -17,13 +17,7 @@ function Form3({ handleMoveForward, handleMoveBack }: myProps) {
     useMentorContext();
   const select3 = useRef<HTMLInputElement>(null);
   const image3 = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    if (files.file3) {
-      // @ts-ignore
-      image3.current!.src = URL.createObjectURL(files.file3);
-    }
-  }, [files]);
+  const [file3Arr, setFile3Arr] = useState([]);
 
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
@@ -80,6 +74,10 @@ function Form3({ handleMoveForward, handleMoveBack }: myProps) {
       alert("Image size exceeds 2MB. Please upload a smaller image.");
       return;
     }
+
+    // @ts-ignore
+    setFile3Arr((prevArr) => [...prevArr, select3.current!.files![0]]);
+
     setFiles((prevFile: any) => ({
       ...prevFile,
       [e.target.id]: [...e.target.files][0],
@@ -145,20 +143,31 @@ function Form3({ handleMoveForward, handleMoveBack }: myProps) {
             <p>Add other educational qualifications</p>
           </button>
 
-          <div>
-            <img
-              ref={image3}
-              src="/"
-              alt=""
-              className=" mr-[20px] max-w-[200px] w-[80%]"
-            />
+          <div className="flex flex-wrap gap-4 items-start ">
+            {file3Arr.length > 0
+              ? file3Arr.map((file, idx) => (
+                  <div
+                    className="border-[1px] min-h-[100px] flex flex-col items-center justify-center border-black rounded-md p-2"
+                    key={
+                      // @ts-ignore
+                      file.name
+                    }
+                  >
+                    <img
+                      className=" mr-[20px] max-w-[120px] w-[80%]"
+                      src={URL.createObjectURL(file)}
+                      alt=""
+                    />
 
-            <p>
-              {
-                // @ts-ignore
-                files.file3 && files.file3.name
-              }
-            </p>
+                    <p className="uppercase text-sm">
+                      {
+                        // @ts-ignore
+                        file.name
+                      }
+                    </p>
+                  </div>
+                ))
+              : ""}
           </div>
         </div>
       </MentorFormBuilder>
