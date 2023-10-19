@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import {
+import React, {
   ChangeEvent,
   Dispatch,
   SetStateAction,
@@ -133,8 +133,8 @@ function BasicInfoTab({
   updateUserInfo: React.Dispatch<React.SetStateAction<UserDetails>>;
 } & Data) {
   const [details, setDetail] = useState({
-    bio: bio,
-    fullName: fullName,
+    bio,
+    fullName,
   });
   const [selected, setSelected] = useState("");
 

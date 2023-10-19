@@ -3,7 +3,7 @@
 
 "use client";
 
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import MentorProfileHeader from "@/components/mentorProfile/MentorProfileHeader";
 import ProfileDetailsCardContainer, {
@@ -36,7 +36,7 @@ type MentorProfileCtx = {
 };
 
 const defaultUserDetailsContext: MentorProfileCtx = {
-  updateUserDetailsCtx: function () {},
+  updateUserDetailsCtx: (setAction) => setAction,
 
   details: {
     bio: "",
@@ -168,10 +168,13 @@ export default function ProfilePage() {
   return (
     <>
       <MentorDetailsContext.Provider
-        value={{
-          details: userDetailsContext,
-          updateUserDetailsCtx: setUserDetailsContext,
-        }}
+        value={useMemo(
+          () => ({
+            details: userDetailsContext,
+            updateUserDetailsCtx: setUserDetailsContext,
+          }),
+          [userDetailsContext]
+        )}
       >
         {loading && <MentorProfileSkeleton />}
 
