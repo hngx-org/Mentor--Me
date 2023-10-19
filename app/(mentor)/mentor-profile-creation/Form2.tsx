@@ -54,7 +54,7 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
     if (file2Arr.length > 0) {
       uploadImage();
     }
-  }, [file2Arr]);
+  }, [image]);
 
   // This useefect updates the object of data going to the backend, this particular data is an array of strings of urls of the cloudinary images
   useEffect(() => {
@@ -90,6 +90,21 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
   function selectFile(element: any) {
     element.click();
   }
+
+  function handleDelete(e: any) {
+    const id = Number(e.target.parentElement.id);
+    // @ts-ignore
+    setFile2Arr((prevArr) => {
+      const newArr = prevArr.filter((box, idx) => idx !== id);
+      return newArr;
+    });
+
+    setUrl((prevUrls) => {
+      const newArr = prevUrls.filter((box, idx) => idx !== id);
+      return newArr;
+    });
+  }
+
   return (
     <div className="form-container mt-[-10px] sm:mt-0 w-[100%] h-[100%] sm:pt-0 pt-0 overflow-y-scroll opacity-0  absolute p-4 sm:p-10">
       <HeadingBuild
@@ -157,7 +172,8 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
             {file2Arr.length > 0
               ? file2Arr.map((file, idx) => (
                   <div
-                    className="border-[1px] min-h-[100px] flex flex-col items-center justify-center border-black rounded-md p-2"
+                    id={`${idx}`}
+                    className="border-[1px] min-h-[100px] flex flex-col items-center justify-center border-black rounded-md p-2 pr-4 relative"
                     key={
                       // @ts-ignore
                       file.size + 5
@@ -165,7 +181,7 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
                   >
                     {
                       // @ts-ignore
-                      file.type === "application/pdf" ? (
+                      file && file.type === "application/pdf" ? (
                         <p className="text-[red] font-bold mb-3">PDF</p>
                       ) : (
                         ""
@@ -182,6 +198,13 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
                         file.name
                       }
                     </p>
+                    <button
+                      type="button"
+                      onClick={handleDelete}
+                      className="border-black rounded-[50%] absolute top-2 right-2 ml-5 border-[1px] px-[5px] text-center cursor-pointer"
+                    >
+                      ✕
+                    </button>
                   </div>
                 ))
               : ""}

@@ -28,6 +28,8 @@ export default function MentorFormBuilder({
   const [textLength, setTextLength] = useState(0);
   const [email, setEmail] = useState("");
   const [isValid, setIsValid] = useState(false);
+  const [inSchool, setInschool] = useState(true);
+  const [yearGrad, setYearGrad] = useState(false);
 
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
@@ -91,6 +93,50 @@ export default function MentorFormBuilder({
     // console.log(formInputs);
     setIsValid(form.current!.checkValidity());
   }
+
+  // This controls the disappearance of the input field or checkbox, depending on whether the user is in school or not
+  useEffect(() => {
+    if (currForm === 2) {
+      const yearGradInp = document.querySelector(
+        'input[name="year_of_graduation"]'
+      );
+
+      yearGradInp?.addEventListener("input", () => {
+        // @ts-ignore
+        if (yearGradInp!.value !== "") {
+          setInschool(false);
+        } else {
+          setInschool(true);
+        }
+      });
+    }
+  }, [formInputs]);
+
+  useEffect(() => {
+    if (currForm === 2) {
+      const yearGradInp = document.querySelector(
+        'input[name="year_of_graduation"]'
+      );
+
+      // @ts-ignore
+      if (yearGrad) {
+        // @ts-ignore
+        yearGradInp!.parentElement.style.display = "none";
+        yearGradInp?.removeAttribute("required");
+      } else if (yearGrad === false) {
+        // @ts-ignore
+        yearGradInp!.parentElement.style.display = "block";
+        yearGradInp?.setAttribute("required", "true");
+      }
+
+      setFormInputs((prevData: any) => ({
+        ...prevData,
+        // @ts-ignore
+        in_school: yearGrad,
+      }));
+      setIsValid(form.current!.checkValidity());
+    }
+  }, [yearGrad]);
 
   return (
     <form ref={form} className="flex flex-col gap-6">
@@ -170,9 +216,31 @@ export default function MentorFormBuilder({
         );
       })}
 
+      {/* if the 3rd form is being showm, display this UI */}
+      {currForm === 2 ? (
+        <div
+          className={`flex items-center justify-start gap-4 ${
+            inSchool ? "" : "hidden"
+          }`}
+        >
+          <input
+            type="checkbox"
+            className="mt-[6px]"
+            onClick={(e) => {
+              setYearGrad(!yearGrad);
+            }}
+            name="in_school"
+          />
+          <p className="text-[#121212] font-medium">currently in school</p>
+        </div>
+      ) : (
+        ""
+      )}
+
       {/* this children prop is for the variations for each of the forms. So it's basically a fix */}
       {children}
 
+      {/* If the last form is being shown, display this UI */}
       {currForm === 4 ? (
         <div className="flex items-center justify-start gap-2">
           <input

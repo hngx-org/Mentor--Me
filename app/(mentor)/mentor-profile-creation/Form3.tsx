@@ -18,9 +18,6 @@ function Form3({ handleMoveForward, handleMoveBack }: myProps) {
   const select3 = useRef<HTMLInputElement>(null);
   const image3 = useRef<HTMLImageElement>(null);
   const [file3Arr, setFile3Arr] = useState([]);
-  const [inSchool, setInschool] = useState(true);
-  const [yearGrad, setYearGrad] = useState(false);
-  const checkbox = useRef<HTMLInputElement>(null);
 
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState([]);
@@ -61,7 +58,7 @@ function Form3({ handleMoveForward, handleMoveBack }: myProps) {
     if (file3Arr.length > 0) {
       uploadImage();
     }
-  }, [file3Arr]);
+  }, [image]);
 
   // This useefect updates the object of data going to the backend, this particular data is an array of strings of urls of the cloudinary images
   useEffect(() => {
@@ -92,30 +89,19 @@ function Form3({ handleMoveForward, handleMoveBack }: myProps) {
     element.click();
   }
 
-  useEffect(() => {
-    if (currForm === 2) {
-      const yearGradInp = document.querySelector(
-        'input[name="year_of_graduation"]'
-      );
+  function handleDelete(e: any) {
+    const id = Number(e.target.parentElement.id);
+    // @ts-ignore
+    setFile3Arr((prevArr) => {
+      const newArr = prevArr.filter((box, idx) => idx !== id);
+      return newArr;
+    });
 
-      yearGradInp?.addEventListener("input", () => {
-        // @ts-ignore
-        if (yearGradInp!.value !== "") {
-          setInschool(false);
-        } else {
-          setInschool(true);
-        }
-      });
-
-      if (yearGrad) {
-        // @ts-ignore
-        yearGradInp!.style.display = "none";
-      } else {
-        // @ts-ignore
-        yearGradInp!.style.display = "block";
-      }
-    }
-  }, [formInputs, yearGrad]);
+    setUrl((prevUrls) => {
+      const newArr = prevUrls.filter((box, idx) => idx !== id);
+      return newArr;
+    });
+  }
 
   return (
     <div className="form-container mt-[-10px] sm:mt-0 w-[100%] h-[100%] sm:pt-0 pt-0 overflow-y-scroll opacity-0  absolute p-4 sm:p-10">
@@ -134,22 +120,6 @@ function Form3({ handleMoveForward, handleMoveBack }: myProps) {
         }}
       >
         <div className="flex flex-col w-full gap-8">
-          <div
-            className={`flex items-center justify-start gap-4 ${
-              inSchool ? "" : "hidden"
-            }`}
-          >
-            <input
-              ref={checkbox}
-              type="checkbox"
-              className="mt-[6px]"
-              onInput={(e) => {
-                setYearGrad(!yearGrad);
-              }}
-            />
-            <p className="text-[#121212] font-medium">currently in school</p>
-          </div>
-
           <input
             ref={select3}
             className="hidden"
@@ -178,7 +148,7 @@ function Form3({ handleMoveForward, handleMoveBack }: myProps) {
             {file3Arr.length > 0
               ? file3Arr.map((file, idx) => (
                   <div
-                    className="border-[1px] min-h-[100px] flex flex-col items-center justify-center border-black rounded-md p-2"
+                    className="border-[1px] min-h-[100px] flex flex-col items-center justify-center border-black rounded-md p-2 relative pr-4"
                     key={
                       // @ts-ignore
                       file.size + 5
@@ -204,6 +174,13 @@ function Form3({ handleMoveForward, handleMoveBack }: myProps) {
                         file.name
                       }
                     </p>
+                    <button
+                      type="button"
+                      onClick={handleDelete}
+                      className="border-black rounded-[50%] absolute top-2 right-2 ml-5 border-[1px] px-[5px] text-center cursor-pointer"
+                    >
+                      ✕
+                    </button>
                   </div>
                 ))
               : ""}

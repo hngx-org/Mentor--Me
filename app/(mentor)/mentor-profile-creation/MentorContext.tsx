@@ -38,6 +38,7 @@ interface myProps {
 export function MentorProvider({ children }: myProps) {
   const [formInputs, setFormInputs] = useState({
     preferred_endTime: "18:00",
+    year_of_graduation: 0,
   });
   const [files, setFiles] = useState({
     file1: "",
