@@ -4,7 +4,7 @@
 
 "use client";
 
-import React, { useState, useEffect, createContext, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import MentorProfileHeader from "@/components/mentorProfile/MentorProfileHeader";
 import ProfileDetailsCardContainer, {
@@ -20,6 +20,7 @@ import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
 import useAuth from "@/context/useAuth";
 import MentorProfileSkeleton from "@/components/skeleton/ProfileloaderSkeleton";
 import MentorDetailsContextProvider, { UserDetails } from "./DetailsContext";
+import ProtectedRoute from "@/context/ProtectedRoute";
 
 const baseUrl = "https://mentormee-api.onrender.com";
 type UserData = {
@@ -112,6 +113,7 @@ export default function ProfilePage() {
           gender: "",
           fullName: data?.data?.userDetails?.fullName,
         }));
+
         setLoading(false);
       } else {
         console.error("Failed to fetch current mentor data");
@@ -129,15 +131,6 @@ export default function ProfilePage() {
     getCurrentMentor();
   }, []);
 
-  useEffect(() => {
-    if (data?.skills?.includes(",")) {
-      const skills = data?.skills?.split(",");
-      setSkills(Array.from(new Set(skills)));
-    } else {
-      setSkills([data?.skills]);
-    }
-  }, [data]);
-
   return (
     <>
       <MentorDetailsContextProvider
@@ -147,7 +140,7 @@ export default function ProfilePage() {
         {loading && <MentorProfileSkeleton />}
 
         {!loading && !error && user && (
-          <div className="w-[100%] h-fit">
+          <div className="w-[100%] h-fit pb-10">
             <MentorProfileHeader
               userName={userDetailsContext.fullName}
               email=""
@@ -169,7 +162,10 @@ export default function ProfilePage() {
                 ]}
                 openModal={setModal}
               />
-              <SkillSCard skills={userData?.skills?.split(" ")!} />
+              <SkillSCard
+                skills={userData?.skills?.split(",")! || "add skills"}
+              />
+
               <ProfileDetailsCardContainer
                 heading="Experience"
                 items={[]}

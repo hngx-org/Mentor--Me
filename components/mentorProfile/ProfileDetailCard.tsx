@@ -132,7 +132,7 @@ export function SkillSCard({ skills }: { skills: string[] }) {
       <p className="text-lg font-bold font-[#000]"> Skills/Expertise</p>
       <div className="flex w-[100%] flex-wrap">
         {skills.length === 0 && <p> click to add skills</p>}
-        {skills.length > 1 &&
+        {skills.length >= 1 &&
           skills.slice(0, 5).map((item) => (
             <Fragment key={item}>
               <div className="border border-Neutral10 py-[8px] px-[10px] w-fit rounded-[8px] m-[5px]">
