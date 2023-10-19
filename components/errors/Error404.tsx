@@ -9,13 +9,13 @@ export const Error404 = () => (
   >
     <h1
       id="error-heading"
-      className="text-[7rem] sm:text-[12rem] xl:text-[17rem] uppercase"
+      className="text-[7rem] sm:text-[12rem] lg:text-[15rem] 2xl:text-[17rem] uppercase"
     >
       404
     </h1>
-    <div className="text-center uppercase leading-8 z-50 text-white">
+    <div className="text-center uppercase leading-8 z-50 text-black">
       <div className="flex flex-col gap-6 ">
-        <h1 className="text-[3rem] sm:text-[6rem] xl:text-[10rem] uppercase ">
+        <h1 className="text-[3rem] sm:text-[6rem] xl:text-[10rem] uppercase not-found font-medium">
           not found
         </h1>
         <h2 className="text-2xl sm:text-3xl xl:text-4xl mt-10">
@@ -27,7 +27,7 @@ export const Error404 = () => (
         <div className="flex w-full justify-center gap-3">
           <Link
             href="/"
-            className="border border-gray-200 rounded-full px-4 py-2 w-fit flex gap-2 items-center justify-center"
+            className="border border-gray-800 rounded-full px-4 py-2 w-fit flex gap-2 items-center justify-center"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

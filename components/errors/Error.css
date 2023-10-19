@@ -5,6 +5,7 @@
   --error-color: #fafafa;
   --lit-header: #e6e6e6;
   --error-speed: 2s;
+  --container-bg: #dbdbdb;
 }
 
 .perspective-12 {
@@ -46,6 +47,9 @@
   position: relative;
   z-index: 99999999;
 }
+.not-found {
+  text-shadow: 2px 2px 3px #fff;
+}
 
 .cloak {
   animation: swing var(--error-speed) infinite alternate-reverse ease-in-out;
@@ -54,7 +58,11 @@
   transform-origin: 50% 100%;
   /* transform-origin: 50% 30%; */
   transform: rotate(calc(var(--swing-x) * -0.25deg));
-  background: radial-gradient(40% 40% at 50% 42%, transparent, #000 45%);
+  background: radial-gradient(
+    40% 40% at 50% 42%,
+    transparent,
+    var(--container-bg) 45%
+  );
 }
 
 .cloak__container {

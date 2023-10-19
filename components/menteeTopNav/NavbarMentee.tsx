@@ -149,12 +149,13 @@ export const NavbarMentee = ({
                     </div>
                   </Link>
                 </button>
-                <button
-                  type="button"
+                <Link
+                  href="/"
+                  prefetch={false}
                   className="pl-6 text-white flex items-center  w-full justify-start gap-4  hover:bg-gray-800/60 px-2 p-1 rounded-bl-xl rounded-br-xl "
                 >
                   Logout
-                </button>
+                </Link>
               </div>
             </>
           )}
