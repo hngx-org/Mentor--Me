@@ -30,7 +30,7 @@ export const ErrorCard = ({
   return (
     <div
       id="error-wrapper"
-      className="w-full text-white flex flex-col items-center justify-start text-[color:var(--color)] perspective-12 pt-20 overflow-hidden"
+      className="w-full flex flex-col items-center justify-start text-[color:var(--color)] perspective-12 pt-20 overflow-hidden"
     >
       <h1
         id="error-heading"

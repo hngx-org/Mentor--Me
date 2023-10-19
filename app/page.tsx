@@ -11,7 +11,7 @@ import MentorSideBar from "@/components/SideBar/MentorSideBar";
 export default function Home() {
   return (
     <main className="bg-[white] text-[black] h-screen">
-      <HomeN eavBar BEans />
+      <HomeNavBar />
       <Hero />
       <Partners />
       <MentorTypes />
