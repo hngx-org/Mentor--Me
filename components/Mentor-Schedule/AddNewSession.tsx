@@ -8,9 +8,14 @@ import {
   CalendarIcon,
 } from "@/svgs/Schedule/ScheduleMentor";
 import { CancelIcon } from "@/public/SVGs";
+import Modal from "./ModalSchedules";
+import RecurringSessionForm from "../modal/MentorSessionModalForms/RecurringSessionForm";
+import OneOffSessionForm from "../modal/MentorSessionModalForms/OneOffSessionForm";
+import FreeSessionForm from "../modal/MentorSessionModalForms/FreeSessionForm";
 
 function AddNewSession() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isFormModal, setIsFormModal] = useState("");
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -47,6 +52,7 @@ function AddNewSession() {
   // Function to close the modal
   const closeModal = () => {
     setIsModalOpen(false);
+    setIsFormModal("");
   };
 
   return (
@@ -87,63 +93,63 @@ function AddNewSession() {
 
           {/* Modal */}
           <div
-            className="modal bg-white z-50 rounded-lg shadow-md"
+            className="modal w-1/2  bg-white z-50 rounded-lg shadow-md"
             ref={modalRef}
+            style={{ maxHeight: "80vh", overflowY: "auto" }}
           >
             {/* Modal content */}
-            <div className="w-[380px] min-w-[300px] h-[436px] lg:w-[584px] lg:h-[474px] mx-auto flex justify-center items-center">
-              <div className="w-[348px] h-[401px] lg:w-[504px] lg:h-[394px]">
-                <div className="flex justify-between items-center">
-                  <h2 className="font-Hanken text-2xl lg:text-[32px] font-bold">
-                    Create a session
-                  </h2>
-                  <div
-                    onClick={closeModal}
-                    onKeyPress={(e) => {
-                      if (e.key === "Enter") {
-                        closeModal();
-                      }
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    className="lg:hidden"
-                    aria-label="Close Modal"
-                  >
-                    <MymodalComponent />
-                  </div>
-                  <div
-                    onClick={closeModal}
-                    onKeyPress={(e) => {
-                      if (e.key === "Enter") {
-                        closeModal();
-                      }
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    className="hidden lg:block"
-                    aria-label="Close Modal"
-                  >
-                    <CancelIcon />
-                  </div>
-                </div>
-                <p className="text-base lg:text-xl text-neutral-500 mb-4">
-                  Create a session that best suits you!
-                </p>
-                <div className="flex flex-col justify-between items-center gap-7">
-                  {/* First option */}
-                  <Link href="/mentor-session-onoff">
+            {isFormModal === "free" ? (
+              <FreeSessionForm />
+            ) : isFormModal === "recurring" ? (
+              <RecurringSessionForm />
+            ) : isFormModal === "one-off" ? (
+              <OneOffSessionForm />
+            ) : (
+              <div className="w-[380px] min-w-[300px] h-[436px] lg:w-[584px] lg:h-[474px] mx-auto flex justify-center items-center">
+                <div className="w-[348px] h-[401px] lg:w-[504px] lg:h-[394px]">
+                  <div className="flex justify-between items-center">
+                    <h2 className="font-Hanken text-2xl lg:text-[32px] font-bold">
+                      Create a session
+                    </h2>
                     <div
-                      onClick={() => {
-                        // Handle click for the first option here
-                      }}
+                      onClick={closeModal}
                       onKeyPress={(e) => {
                         if (e.key === "Enter") {
-                          // Handle click for the first option here
+                          closeModal();
                         }
                       }}
                       role="button"
                       tabIndex={0}
-                      className="flex justify-start border hover:bg-gray-400 items-center gap-4 px-2 border-neutral-300 w-[348px] h-[89px] lg:h-[80px] lg:w-[504px] rounded-lg"
+                      className="lg:hidden"
+                      aria-label="Close Modal"
+                    >
+                      <MymodalComponent />
+                    </div>
+                    <div
+                      onClick={closeModal}
+                      onKeyPress={(e) => {
+                        if (e.key === "Enter") {
+                          closeModal();
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      className="hidden lg:block"
+                      aria-label="Close Modal"
+                    >
+                      <CancelIcon />
+                    </div>
+                  </div>
+                  <p className="text-base lg:text-xl text-neutral-500 mb-4">
+                    Create a session that best suits you!
+                  </p>
+                  <div className="flex flex-col justify-between items-center gap-7">
+                    {/* First option */}
+
+                    <button
+                      type="button"
+                      onClick={() => setIsFormModal("one-off")}
+                      className="flex justify-start text-left border hover:bg-gray-400 items-center gap-4 px-2 border-neutral-300 w-[348px] h-[89px] lg:h-[80px] lg:w-[504px] rounded-lg"
                     >
                       <div className="bg-Accent6 h-[60px] w-[60px] flex justify-center items-center">
                         <CalendarIcon />
@@ -157,22 +163,13 @@ function AddNewSession() {
                           Create a one-time session with a mentee
                         </p>
                       </div>
-                    </div>
-                  </Link>
-                  {/* Second option */}
-                  <Link href="/mentor-session-form-recurring">
-                    <div
-                      onClick={() => {
-                        // Handle click for the second option here
-                      }}
-                      onKeyPress={(e) => {
-                        if (e.key === "Enter") {
-                          // Handle click for the second option here
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      className="flex justify-start border hover:bg-gray-400 items-center gap-4 px-2 border-neutral-300 w-[348px] h-[89px] rounded-lg lg:h-[80px] lg:w-[504px]"
+                    </button>
+
+                    {/* Second option */}
+                    <button
+                      type="button"
+                      onClick={() => setIsFormModal("recurring")}
+                      className="flex text-left justify-start border hover:bg-gray-400 items-center gap-4 px-2 border-neutral-300 w-[348px] h-[89px] rounded-lg lg:h-[80px] lg:w-[504px]"
                     >
                       <div className="bg-Accent6 h-[60px] w-[60px] flex justify-center items-center">
                         <CalendarIcon />
@@ -186,23 +183,14 @@ function AddNewSession() {
                           Description for another session type
                         </p>
                       </div>
-                    </div>
-                  </Link>
+                    </button>
 
-                  {/* Third option */}
-                  <Link href="/mentor-session-forms">
-                    <div
-                      onClick={() => {
-                        // Handle click for the third option here
-                      }}
-                      onKeyPress={(e) => {
-                        if (e.key === "Enter") {
-                          // Handle click for the third option here
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      className="flex justify-start border hover:bg-gray-400 items-center gap-4 px-2 border-neutral-300 w-[348px] h-[89px] rounded-lg lg:h-[80px] lg:w-[504px]"
+                    {/* Third option */}
+
+                    <button
+                      type="button"
+                      onClick={() => setIsFormModal("free")}
+                      className="flex text-left justify-start border hover:bg-gray-400 items-center gap-4 px-2 border-neutral-300 w-[348px] h-[89px] rounded-lg lg:h-[80px] lg:w-[504px]"
                     >
                       <div className="bg-Accent6 h-[60px] w-[60px] flex justify-center items-center">
                         <CalendarIcon />
@@ -216,14 +204,20 @@ function AddNewSession() {
                           Description for another session type
                         </p>
                       </div>
-                    </div>
-                  </Link>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       )}
+
+      {/* {isFormModal === "free" && (
+        <Modal closeModal={closeFormModal}>
+          <FreeSessionForm />
+        </Modal>
+      )} */}
     </div>
   );
 }

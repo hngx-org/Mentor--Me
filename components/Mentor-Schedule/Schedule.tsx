@@ -16,8 +16,6 @@ import MobileAppear from "./MobileAppear";
 function Schedule() {
   return (
     <div>
-      <SidebarMentor />
-
       <div>
         <MobileAppear />
         {/* Mobile header ends */}
