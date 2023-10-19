@@ -18,6 +18,7 @@ import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
 
 import useAuth from "@/context/useAuth";
 import MentorProfileSkeleton from "@/components/skeleton/ProfileloaderSkeleton";
+import { createContext } from "vm";
 
 export type ModalState = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -46,6 +47,8 @@ const defaultUserDetailsContext: MentorProfileCtx = {
   },
 };
 
+const MentorProfileContext = createContext(defaultUserDetailsContext);
+
 const baseUrl = "https://mentormee-api.onrender.com";
 type UserData = {
   fullName: string;
@@ -64,6 +67,12 @@ export default function ProfilePage() {
   const { data } = useAuth();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [userDetailsContext, setUserDetailsContext] = useState<UserDetails>({
+    bio: "",
+    fullName: "",
+    gender: "",
+    email: "",
+  });
   const [skills, setSkills] = useState<any>();
   const [user, setUser] = useState<any>({});
   const [userData, setUserData] = useState<UserData | undefined>({
@@ -125,6 +134,12 @@ export default function ProfilePage() {
           preferred_days: data?.data?.preferred_days,
           mentoring_experience: data?.data?.mentoring_experience,
         });
+        setUserDetailsContext((prev) => ({
+          bio: data?.data?.userDetails?.bio,
+          email: data?.data?.userDetails?.email,
+          gender: "",
+          fullName: data?.data?.userDetails?.fullName,
+        }));
         setLoading(false);
       } else {
         console.error("Failed to fetch current mentor data");
@@ -156,9 +171,9 @@ export default function ProfilePage() {
       {loading && <MentorProfileSkeleton />}
 
       {!loading && !error && user && (
-        <div>
+        <div className="w-[100%] h-fit">
           <MentorProfileHeader
-            userName=""
+            userName={userDetailsContext.fullName}
             email=""
             userRole={user?.mentorship_type}
             userRating={4}
@@ -184,12 +199,7 @@ export default function ProfilePage() {
               items={[]}
               openModal={setModal}
             />
-            {/* 
-              <ProfileDetailsCardContainer
-                heading="Education"
-                items={[]}
-                openModal={setModal}
-              /> */}
+
             <AvailableSessionCard
               timezone=" Greenwich Mean Time (GMT)"
               availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
