@@ -439,7 +439,7 @@ function SuccessModal() {
         proceed
       </p>
 
-      <Link href="/dashboard">
+      <Link href="/dashboard?path=Home">
         {" "}
         <Button variant="primary" className="w-full sm:!w-full py-2 ">
           Continue to Home
