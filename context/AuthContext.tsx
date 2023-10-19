@@ -17,7 +17,7 @@ type AuthCtxType = {
 
 export type UserData = {
   token: string;
-  userDetails: {
+  user: {
     _id: string;
     email: string;
     emailVerified: boolean;
@@ -33,7 +33,7 @@ export type UserData = {
   };
 };
 
-type Data = {
+export type Data = {
   message: string;
   data: UserData | null;
   success: boolean;
@@ -55,20 +55,23 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
     email: "",
     token: "",
   });
-  const data: Data | null = useReadLocalStorage("Mentor" || "Mentee");
+  const Mentordata: Data | null = useReadLocalStorage("Mentor");
+  const MenteeData: Data | null = useReadLocalStorage("Mentee");
+  const data = MenteeData || Mentordata;
 
-  useEffect(() => {
-    if (data) {
-      setUserData(data);
-      setUser((prev) => ({
-        ...prev,
-        email: data?.email,
-        token: data.data?.token,
-      }));
-    }
-  }, [userData]);
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log(data, { email: data.data?.user.email });
+  //     setUserData(data);
+  //     setUser((prev) => ({
+  //       ...prev,
+  //       email: data?.data?.user.email,
+  //       token: data.data?.token,
+  //     }));
+  //   }
+  // }, [userData, data]);
 
-  const value = useMemo(() => ({ user, setUserData, userData }), [userData]);
+  const value = useMemo(() => ({ user, setUserData, userData }), [user, data]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
