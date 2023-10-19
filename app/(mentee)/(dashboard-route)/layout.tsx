@@ -30,7 +30,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         imgSrc={profileImg}
       />
 
-      <main className="lg:ml-[274px]">
+      <main className="lg:ml-[240px]">
         <NavbarMentee
           path={pathParams}
           action={actionParams}

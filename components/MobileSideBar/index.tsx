@@ -19,6 +19,7 @@ const MobileSideBar = ({
         <Link
           key={link.id}
           href={link.link}
+          scroll
           className="flex flex-col  justify-center  items-center"
         >
           <span className={`${path === link.label ? "" : " opacity-50"} `}>

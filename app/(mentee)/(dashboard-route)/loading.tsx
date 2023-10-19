@@ -2,7 +2,7 @@ import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 export default function Loading() {
   return (
-    <div className="w-full h-screen flex items-center justify-center relative">
+    <div className="w-full h-screen flex items-center justify-center relative bg-white/50 backdrop-blur-xl">
       <p className="absolute top-2 left-4 text-3xl font-bold font-Gladiora text-Neutra20">
         Loading....
       </p>

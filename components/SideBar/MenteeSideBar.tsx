@@ -98,7 +98,7 @@ export default function MenteeSideBar({
         </div>
         <Suspense fallback={<LoadingSpinner />}>
           <Link
-            href="/mentor-profile?path=profile"
+            href="/mentee-profile?path=profile"
             prefetch
             className="bottom-3  mt-2"
           >

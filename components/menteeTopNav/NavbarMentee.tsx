@@ -57,7 +57,7 @@ export const NavbarMentee = ({
     <nav
       className={`${
         scrollY > 300
-          ? "fixed top-0 left-0 bg-white/30 z-50 backdrop-blur-xl lg:ml-[274px]"
+          ? "fixed top-0 left-0 bg-white/30 z-50 backdrop-blur-xl lg:ml-[240px]"
           : ""
       } flex w-full justify-between px-3 items-center  py-4   ${
         action === "edit-profile" ? "hidden" : ""
@@ -145,15 +145,16 @@ export const NavbarMentee = ({
                           : "/mentee-profile?path=profile"
                       }
                     >
-                      <div className="   text-[12px] text-Neutra10  font-Hanken hidden sm:block ">
+                      <div className="   text-[12px] text-Neutra10  ">
                         <p className="font-[500] text-white text-[14px]">
-                          {username || "Username"}
+                          {username ?? "Username"}
                         </p>
-                        <p>{jobTitle || "JobTitle"}</p>
+                        <p>{jobTitle ?? "JobTitle"}</p>
                       </div>
                     </Link>
                   </button>
                   <button
+                    onClick={() => router.replace("/")}
                     type="button"
                     className="pl-6 text-white flex items-center  w-full justify-start gap-4  hover:bg-gray-800/60 px-2 p-1 rounded-bl-xl rounded-br-xl "
                   >
