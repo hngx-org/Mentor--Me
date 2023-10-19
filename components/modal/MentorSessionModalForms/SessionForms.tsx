@@ -16,6 +16,7 @@ interface FreeFormData {
   date?: string;
   relevantTopics?: string;
   sessionUrl?: string;
+  tag?: string;
 }
 
 interface OneOffFormData {
@@ -26,6 +27,8 @@ interface OneOffFormData {
   time?: string;
   date?: string;
   relevantTopics?: string;
+  sessionUrl?: string;
+  tag?: string;
 }
 interface RecurringFormData {
   sessionName?: string;
@@ -33,9 +36,12 @@ interface RecurringFormData {
   sessionType?: string;
   numberOfSession?: number;
   occurence?: string;
-
-  // time?: string;
+  date?: string;
+  duration?: number;
+  time?: string;
   relevantTopics?: string;
+  sessionUrl?: string;
+  tag?: string;
 }
 
 export function FreeSessionForm() {
@@ -52,6 +58,8 @@ export function FreeSessionForm() {
     time: "",
     relevantTopics: "",
     sessionUrl: "",
+    tag: "",
+    duration: 0,
   });
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -70,6 +78,9 @@ export function FreeSessionForm() {
   };
   const closeSuccessModal = (): void => {
     setSuccessful(false);
+  };
+  const closeForm = (): void => {
+    setFormVisible(false);
   };
   const closeCalendar = (): void => {
     setCalendarVisible(false);
@@ -139,7 +150,6 @@ export function FreeSessionForm() {
                 selectName="sessionName"
                 placeholder="Give this session a name"
                 value={formData.sessionName}
-                // onChange={(value) => handleSelectChange(value)}
                 onChange={handleSelectChange}
               >
                 <option value="Design principles" className="text-black">
@@ -192,7 +202,26 @@ export function FreeSessionForm() {
                 InputName="date"
                 placeholder="Select the date"
               />
-
+              <TimeInputType
+                labelText="Link to session"
+                type="url"
+                onChange={handleInputChange}
+                value={formData.sessionUrl}
+                isRequired
+                InputId="sessionUrl"
+                InputName="sessionUrl"
+                placeholder="Add a link to the session"
+              />
+              <TimeInputType
+                labelText="Tag"
+                type="text"
+                onChange={handleInputChange}
+                value={formData.tag}
+                isRequired
+                InputId="tag"
+                InputName="tag"
+                placeholder="tag"
+              />
               <SelectInputType
                 labelText="Select relevant topics"
                 isRequired
@@ -208,15 +237,14 @@ export function FreeSessionForm() {
               </SelectInputType>
 
               <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
-                <Link className="w-full" href="/mentor-schedule">
-                  <Button
-                    className="p-4 w-full md:w-[20%]"
-                    variant="outline-primary"
-                    type="button"
-                  >
-                    Cancel
-                  </Button>
-                </Link>
+                <Button
+                  onClick={closeForm}
+                  className="p-4 w-full md:w-[20%]"
+                  variant="outline-primary"
+                  type="button"
+                >
+                  Cancel
+                </Button>
                 <Button
                   onClick={openCalendar}
                   className="p-4 w-full md:w-[20%]"
@@ -252,6 +280,7 @@ export function FreeSessionForm() {
 export function OneOffSessionForm() {
   const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
+  const [formVisible, setFormVisible] = useState<boolean>(true);
   const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [formData, setFormData] = useState<OneOffFormData>({
@@ -261,6 +290,9 @@ export function OneOffSessionForm() {
     date: "",
     time: "",
     relevantTopics: "",
+    sessionUrl: "",
+    tag: "",
+    duration: 0,
   });
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -284,6 +316,10 @@ export function OneOffSessionForm() {
   const closeCalendar = (): void => {
     setCalendarVisible(false);
     // setSuccessful(true);
+  };
+
+  const closeForm = (): void => {
+    setFormVisible(false);
   };
 
   const openSuccessModal = (): void => {
@@ -392,6 +428,16 @@ export function OneOffSessionForm() {
             InputName="date"
             placeholder="Select the date"
           />
+          <TimeInputType
+            labelText="Link to session"
+            type="url"
+            onChange={handleInputChange}
+            value={formData.sessionUrl}
+            isRequired
+            InputId="sessionUrl"
+            InputName="sessionUrl"
+            placeholder="Add a link to the session"
+          />
           <SelectInputType
             labelText="Select relevant topics"
             isRequired
@@ -406,15 +452,14 @@ export function OneOffSessionForm() {
             <option value="Technical Writing">Technical Writing</option>
           </SelectInputType>
           <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
-            <Link className="w-full" href="/mentor-schedule">
-              <Button
-                className="p-4 w-full md:w-[20%]"
-                variant="outline-primary"
-                type="button"
-              >
-                Cancel
-              </Button>
-            </Link>
+            <Button
+              onClick={closeForm}
+              className="p-4 w-full md:w-[20%]"
+              variant="outline-primary"
+              type="button"
+            >
+              Cancel
+            </Button>
             <Button
               onClick={openCalendar}
               className="p-4 w-full md:w-[20%]"
@@ -447,6 +492,7 @@ export function OneOffSessionForm() {
 
 export function RecurringSessionForm() {
   const [currentStep, setcurrentStep] = useState<boolean>(false);
+  const [formVisible, setFormVisible] = useState<boolean>(true);
   const [successful, setSuccessful] = useState<boolean>(false);
   const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -457,6 +503,9 @@ export function RecurringSessionForm() {
     sessionType: "",
     numberOfSession: 0,
     relevantTopics: "",
+    sessionUrl: "",
+    tag: "",
+    duration: 0,
   });
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -492,6 +541,7 @@ export function RecurringSessionForm() {
     if (isFormValid) {
       setError("");
       setCalendarVisible(true);
+      setFormVisible(false);
     } else {
       setError("All fields are required");
       // console.log("All fields are required");
@@ -517,6 +567,7 @@ export function RecurringSessionForm() {
       console.log("form submitted,", responseData);
     } else {
       setCalendarVisible(false);
+      setFormVisible(true);
       setError("An error occurred while creating a session");
       console.error("submissiom failed");
     }
