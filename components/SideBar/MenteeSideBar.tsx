@@ -3,6 +3,7 @@
 "use client";
 
 import Link from "next/link";
+import { Suspense } from "react";
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -19,6 +20,7 @@ import {
 import { sidebarMenteeLinks } from "@/lib/Constant";
 import AuthProfileCard from "../cards/auth-profile-card/AuthProfileCard";
 import useAuth from "@/context/useAuth";
+import LoadingSpinner from "../loaders/LoadingSpinner";
 
 export default function MenteeSideBar({
   light = false,
@@ -27,7 +29,7 @@ export default function MenteeSideBar({
   email,
   imgSrc,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
-  const { data } = useAuth();
+  // const { data } = useAuth();
   const router = useRouter();
   return (
     <section
@@ -94,30 +96,21 @@ export default function MenteeSideBar({
             </span>
           </Link>
         </div>
-
-        <div
-          className={`mt-16 bottom-0  ${
-            path === "profile" ? "border border-[#E5FFFF] rounded-2xl" : ""
-          }`}
-        >
-          <Link href="/mentee-profile?path=profile" prefetch>
-            <ul className="  cursor-pointer   ">
-              <li className="flex gap-3 items-center  p-1">
-                <ProfileIcon />
-                <span className="  font-Inter text-[10px] font-[500]   text-Neutra30">
-                  <span
-                    className={`${
-                      path === "profile" ? "text-white" : "text-[#fff]"
-                    }`}
-                  >
-                    Funmi Oladapo
-                  </span>
-                  <br /> funmi@zurimp.com
-                </span>
-              </li>
-            </ul>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Link
+            href="/mentor-profile?path=profile"
+            prefetch
+            className="bottom-3  mt-2"
+          >
+            <AuthProfileCard
+              path={path}
+              email={email}
+              user={userName}
+              styles="text-Neutra30 "
+              profileImg={imgSrc}
+            />
           </Link>
-        </div>
+        </Suspense>
       </div>
     </section>
   );

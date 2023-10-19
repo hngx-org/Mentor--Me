@@ -2,6 +2,7 @@
 
 "use client";
 
+import { Suspense } from "react";
 import Link from "next/link";
 import { sidebarMentorLinks } from "@/lib/Constant";
 import {
@@ -13,6 +14,7 @@ import {
 } from "@/public/SVGs";
 import { useAuthCtx } from "@/context/AuthContext";
 import AuthProfileCard from "../cards/auth-profile-card/AuthProfileCard";
+import LoadingSpinner from "../loaders/LoadingSpinner";
 
 export type SideBarMentorProps = {
   light?: boolean;
@@ -33,7 +35,7 @@ export default function SidebarMentor({
   email,
   jobTitle,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
-  const { user } = useAuthCtx();
+  // const { user } = useAuthCtx();
 
   // const [imgUrl, setImgUrl] = useState("");
   // const email = userData.data?.user.email;
@@ -112,19 +114,21 @@ export default function SidebarMentor({
           </Link>
         </div>
         {/* profile */}
-
-        <Link
-          href="/mentor-profile?path=profile"
-          prefetch
-          className="bottom-3  mt-2"
-        >
-          <AuthProfileCard
-            path={path}
-            email={email}
-            user={name}
-            styles="text-Neutra30 "
-          />
-        </Link>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Link
+            href="/mentor-profile?path=profile"
+            prefetch
+            className="bottom-3  mt-2"
+          >
+            <AuthProfileCard
+              path={path}
+              email={email}
+              user={name}
+              profileImg={imgSrc}
+              styles="text-Neutra30 "
+            />
+          </Link>
+        </Suspense>
       </div>
     </section>
   );

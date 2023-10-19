@@ -2,16 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import { UserData, useAuthCtx } from "./AuthContext";
-import { CurrentMentor } from "./types";
+import { CurrentMentee, CurrentMentor } from "./types";
 
 interface User {
   message: string;
   data: CurrentMentor | null;
   success: boolean;
 }
-const baseUrl = "https://mentormee-api.onrender.com";
 
-export const useAuth = () => {
+const baseUrl = "https://mentormee-api.onrender.com";
+type urlType = "users" | "mentors" | "mentee";
+
+export const useAuth = (type: urlType = "users") => {
   const { user } = useAuthCtx();
   const [data, setData] = useState<User>({
     message: "",
@@ -22,7 +24,7 @@ export const useAuth = () => {
   useEffect(() => {
     const requestAuth = async () => {
       // Make an authenticated request to the server
-      const url = `${baseUrl}/mentors/get-current`;
+      const url = `${baseUrl}/${type}/get-current`;
       if (user?.token) {
         const response = await fetch(url!, {
           method: "GET",
