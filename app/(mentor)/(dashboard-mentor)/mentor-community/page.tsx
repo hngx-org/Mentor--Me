@@ -4,6 +4,7 @@ import { useState } from "react";
 import { DiscussionForums, MentorshipSessions } from "@/components/Community";
 import SearchCommunitySearchbar from "@/components/Community/searchcommunity-searchbar";
 import { discussionCommunities } from "./data";
+import SecondSearchCommunitySearchbar from "@/components/Community/searchcommunity-searchbar2";
 
 export default function MenteeCommunitiesPage() {
   // set discussion data to a state
@@ -14,17 +15,17 @@ export default function MenteeCommunitiesPage() {
 
   const filterDiscussions = () => {
     if (q) {
-      console.log("Search is on. Query: ", q);
+      // console.log("Search is on. Query: ", q);
       const filteredSliderInfo = discussionCommunities.filter((item) =>
         item.name.toLowerCase().includes(q.toLowerCase())
       );
-      console.log("Filtered results: ", filteredSliderInfo);
 
       // Update the sliderInfo state with the filtered array
       setDiscussionData(filteredSliderInfo);
     } else {
       setDiscussionData(discussionCommunities);
     }
+    // console.log(discussionData);
   };
 
   return (
@@ -32,7 +33,7 @@ export default function MenteeCommunitiesPage() {
     <section className="w-full h-full">
       {/* Search Bar */}
       <section className="p-6 md:p-10">
-        <SearchCommunitySearchbar
+        <SecondSearchCommunitySearchbar
           q={q}
           setQ={setQ}
           filterDiscussions={filterDiscussions}
