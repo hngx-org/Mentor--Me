@@ -19,7 +19,7 @@ const SearchCommunitySearchbar = ({
   return (
     <form
       onSubmit={onSubmitHandler}
-      className="p-4 md:p-0 md:pl-6 border-[1px] border-solid border-Neutra20 md:border-NeutalBase rounded-lg max-w-[38.125rem] flex items-center md:justify-between gap-3"
+      className="p-4 md:p-0 md:pl-6 border-[1px] border-solid border-Neutra20 md:border-NeutalBase rounded-lg max-w-[38.125rem] w-[610px] min-w-[30rem] flex items-center md:justify-between gap-3"
     >
       <span className="md:hidden">
         <SearchIcon />
