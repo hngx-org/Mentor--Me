@@ -39,20 +39,20 @@ export const sidebarMentorLinks: SidebarLinksProps[] = [
     iconLight: <HomeIcon2 />,
   },
 
-  {
-    id: 2,
-    path: "/mentor-messages",
-    label: "Messages",
-    iconDark: <MessageIcon />,
-    iconLight: <Messaging2 />,
-  },
-  {
-    id: 3,
-    path: "/mentor-my-mentors?path=MyMentors",
-    label: "My Mentee",
-    iconDark: <MyMentorsIcons />,
-    iconLight: <MyMentor2 />,
-  },
+  // {
+  //   id: 2,
+  //   path: "/mentor-messages",
+  //   label: "Messages",
+  //   iconDark: <MessageIcon />,
+  //   iconLight: <Messaging2 />,
+  // },
+  // {
+  //   id: 3,
+  //   path: "/mentor-my-mentors?path=MyMentors",
+  //   label: "My Mentee",
+  //   iconDark: <MyMentorsIcons />,
+  //   iconLight: <MyMentor2 />,
+  // },
   // {
   //   id: 4,
   //   path: "/mentor-booking?path=bookings",
@@ -81,27 +81,27 @@ export const sidebarMentorLinks: SidebarLinksProps[] = [
     iconDark: <CommunitiesIcon />,
     iconLight: <Communities2 />,
   },
-  {
-    id: 7,
-    path: "/mentor-earnings?path=earnings",
-    label: "Earnings",
-    iconDark: <EarningIcon />,
-    iconLight: <Earning2 />,
-  },
-  {
-    id: 8,
-    path: "/mentor-plans?path=plans",
-    label: "Plans",
-    iconDark: <PlansIcon />,
-    iconLight: "",
-  },
-  {
-    id: 9,
-    path: "/mentor-reviews",
-    label: "Reviews",
-    iconDark: <ReviewsIcon />,
-    iconLight: "",
-  },
+  // {
+  //   id: 7,
+  //   path: "/mentor-earnings?path=earnings",
+  //   label: "Earnings",
+  //   iconDark: <EarningIcon />,
+  //   iconLight: <Earning2 />,
+  // },
+  // {
+  //   id: 8,
+  //   path: "/mentor-plans?path=plans",
+  //   label: "Plans",
+  //   iconDark: <PlansIcon />,
+  //   iconLight: "",
+  // },
+  // {
+  //   id: 9,
+  //   path: "/mentor-reviews",
+  //   label: "Reviews",
+  //   iconDark: <ReviewsIcon />,
+  //   iconLight: "",
+  // },
 ];
 
 export const sidebarMenteeLinks: SidebarLinksProps[] = [
