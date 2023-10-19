@@ -183,11 +183,7 @@ export default function ProfilePage() {
               <SessionsProgressCard progress={10} />
             </MentorProfileMainLayout>
             {modal.isOpen && (
-              <MentorProfileModal
-                setUserData={setUserData}
-                onClose={setModal}
-                state={modal.state}
-              />
+              <MentorProfileModal onClose={setModal} state={modal.state} />
             )}
           </div>
         )}

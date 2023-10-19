@@ -10,7 +10,6 @@ type Data = {
 type MentorProfileModalProps = {
   onClose: Dispatch<SetStateAction<ModalState>>;
   state: string;
-  setUserData: Dispatch<SetStateAction<Data | undefined>>;
 };
 
 export default function MentorProfileModal({
