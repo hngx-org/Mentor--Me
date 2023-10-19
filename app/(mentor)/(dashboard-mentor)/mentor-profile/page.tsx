@@ -151,7 +151,7 @@ export default function ProfilePage() {
               userName={userDetailsContext.fullName}
               email=""
               userRole={user?.mentorship_type}
-              userRating={1}
+              userRating={4}
               modal={setModal}
             />
             <MentorProfileMainLayout>
@@ -180,7 +180,7 @@ export default function ProfilePage() {
                 availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
               />
               <OverViewCardLayout heading="impact at a glance" />
-              <SessionsProgressCard progress={10} />
+              <SessionsProgressCard progress={80} />
             </MentorProfileMainLayout>
             {modal.isOpen && (
               <MentorProfileModal onClose={setModal} state={modal.state} />
