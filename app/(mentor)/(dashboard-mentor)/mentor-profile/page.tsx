@@ -46,7 +46,6 @@ export default function ProfilePage() {
     gender: "",
     email: "",
   });
-  const [skills, setSkills] = useState<any>();
   const [user, setUser] = useState<any>({});
   const [userData, setUserData] = useState<UserData | undefined>({
     fullName: "",
