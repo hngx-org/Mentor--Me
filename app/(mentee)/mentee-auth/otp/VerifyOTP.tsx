@@ -12,7 +12,7 @@ import Modal from "@/components/modal/Modal";
 function VerifyOTP() {
   const [otpValue, setOTPValue] = useState("");
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [useremail, setUserEmail] = useState("");
   const [userid, setUserId] = useState("");
   const [user, setUser] = useState<any>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -25,7 +25,7 @@ function VerifyOTP() {
         try {
           const newUser = JSON.parse(getUser);
           setUser(newUser);
-          setEmail(newUser.data.email);
+          setUserEmail(newUser.data.email);
           setUserId(newUser.data._id);
         } catch (error) {
           console.error("Error parsing JSON:", error);
@@ -98,7 +98,7 @@ function VerifyOTP() {
               OTP Verification
             </h4>
             <h5 className="text-[#808080] text-sm font-Hanken mt-2 mb-10">
-              Please enter the 6 digit code sent to {email}
+              Please enter the 6 digit code sent to {useremail}
             </h5>
 
             <div className="flex  space-x-5">

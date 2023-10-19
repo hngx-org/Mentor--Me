@@ -29,9 +29,11 @@ const TRACKOPTIONS = [
 
 export default function UploadResourcesPage() {
   const courseTitleRef = useRef<HTMLInputElement>(null);
+
   const [curriculumList, setCurriculumList] = useState<
     { id: string; title: string; duration: number }[]
   >([{ id: "FIRSTSECTIONFIELD", title: "", duration: 0 }]);
+
   const courseDescriptionRef = useRef<HTMLTextAreaElement>(null);
   const trackRef = useRef<HTMLInputElement>(null);
   const courseTypeRef = useRef<HTMLInputElement>(null);
@@ -87,62 +89,65 @@ export default function UploadResourcesPage() {
           data: { token },
         } = user;
 
-        const uploadResource = async function () {
-          try {
-            const anotherRes = await fetch(
-              "https://mentormee-api.onrender.com/mentors/get-current",
-              {
-                redirect: "follow",
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                  "Content-Type": "application/json",
-                },
-              }
-            );
-            const { data: anotherData } = await anotherRes.json();
-            console.log(anotherData);
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(file!);
+        const toastId = toast.loading("Uploading resource, please wait.");
 
-            fileReader.onloadend = async function () {
-              videoBase64 = fileReader.result as string;
-
-              const resourceData = {
-                category: trackRef.current?.value!,
-                description: courseDescriptionRef.current?.value!,
-                title: courseTitleRef.current?.value!,
-                coursetype: courseTypeRef.current?.value!,
-                price: priceRef.current?.value!,
-                name: anotherData?.userDetails?.fullName,
-                role: anotherData?.userDetails?.role,
-                company: anotherData?.company,
-                ratings: "0.0",
-                reviews: "0",
-                currency: "NGN",
-                video: videoBase64 as string,
-                image: "random",
-              };
-              const res = await fetch("/api/upload-resource", {
-                method: "POST",
-                body: JSON.stringify(resourceData),
-                headers: {
-                  "Content-Type": "application/x-www-form-urlencoded",
-                },
-              });
-              const data = await res.json();
-              console.log(data);
-            };
-          } catch (e) {
-            console.log(e);
+        try {
+          const anotherRes = await fetch(
+            "https://mentormee-api.onrender.com/mentors/get-current",
+            {
+              redirect: "follow",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          if (!anotherRes.ok) {
+            throw new Error("Error fetching user data.");
           }
-        };
-        toast.promise(uploadResource(), {
-          loading: "Uploading resource, please wait.",
-          success: "Resource uploaded successfully!",
-          error: "There was an error uploading the resource.",
-        });
+          const { data: anotherData } = await anotherRes.json();
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file!);
+
+          fileReader.onloadend = async function () {
+            videoBase64 = fileReader.result as string;
+
+            const resourceData = {
+              track: trackRef.current?.value!,
+              description: courseDescriptionRef.current?.value!,
+              title: courseTitleRef.current?.value!,
+              category: courseTypeRef.current?.value!,
+              price: priceRef.current?.value!,
+              name: anotherData?.userDetails?.fullName,
+              role: anotherData?.userDetails?.role,
+              company: anotherData?.company,
+              ratings: "0.0",
+              reviews: "0",
+              currency: "NGN",
+              // videoUrl: videoBase64 as string,
+              videoUrl: "random2",
+              imageUrl: "random",
+              courseContents: curriculumList,
+            };
+            const res = await fetch("/api/upload-resource", {
+              method: "POST",
+              body: JSON.stringify(resourceData),
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+            });
+            const data = await res.json();
+            console.log(data);
+            toast.dismiss(toastId);
+            toast.success("Resource uploaded successfully!");
+          };
+        } catch (e) {
+          console.log(e);
+          toast.dismiss(toastId);
+          toast.error("There was an error uploading the resource.");
+        }
       }}
-      className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white pt-10 mb-8"
+      className="w-[min(550px,_100%)] mx-auto p-4 top-0 bg-white pt-10 mb-8"
     >
       <h1 className="capitalize font-Inter font-medium text-2xl mb-8 text-NeutalBase">
         upload resources

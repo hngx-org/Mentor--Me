@@ -70,7 +70,7 @@ const Explore = () => {
     <>
       <HomeNavBar />
       <Container>
-        <div className="w-full p-6 overflow-hidden max-w-[1280px] mx-auto mt-[100px]">
+        <div className="w-full p-6 pb-20 overflow-hidden max-w-[1280px] mx-auto mt-[100px]">
           <div className="flex gap-3 md:gap-[60px] mb-6">
             {resourceLinks.map((link) => (
               <Link

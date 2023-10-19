@@ -13,15 +13,16 @@ export async function POST(request: NextRequest) {
   });
 
   try {
-    const result = await cloudinary.v2.uploader.upload(
-      formData.file as string,
-      {
-        resource_type: "video",
-      }
-    );
-    delete formData.file;
+    // const result = await cloudinary.v2.uploader.upload(
+    //   formData.videoUrl as string,
+    //   {
+    //     resource_type: "video",
+    //     allowed_formats: ["mp4", "mkv", "ogg", "avi", "webm"],
+    //     timeout: 120000,
+    //   }
+    // );
 
-    formData.file = result.url;
+    // formData.videoUrl = result.url;
 
     console.log("formdata", formData);
 

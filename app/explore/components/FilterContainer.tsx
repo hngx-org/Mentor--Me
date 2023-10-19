@@ -20,10 +20,11 @@ export default function FilterContainer() {
     topic?: string;
     review?: string;
     contentImage: string;
-    timezone?: string;
+    timezone: string;
     nextAvailable: string;
   }
 
+  // For search Filter
   const [searchResults, setSearchResults] = useState<CardProps[]>([]);
 
   const [filteredResults, setFilteredResults] = useState<CardProps[]>([]);
@@ -34,11 +35,36 @@ export default function FilterContainer() {
   // For pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(8);
+
   // Get current page
   const indexOfLastCard = currentPage * postsPerPage;
   const indexOfFirstCard = indexOfLastCard - postsPerPage;
-  const currentCard = filteredResults.slice(indexOfFirstCard, indexOfLastCard);
+  const currentCard = filteredResults.slice(indexOfFirstCard, indexOfLastCard); // After paginated
   const totalPages = filteredResults.length;
+
+  // For toogle switch
+  const [enabled, setEnabled] = useState(true);
+  const handleToggle = (isEnabled: boolean) => {
+    setEnabled(isEnabled);
+  };
+
+  // For filter
+  const [selectedDate, setSelectedDate] = useState<Date | any>();
+  const [selectedTimeZone, setSelectedTimeZone] = useState("");
+
+  // For range slider
+  const [value, setValue] = useState<number>(10);
+
+  // const filtered = currentCard.filter((card) =>
+  //   card.timezone.toLowerCase().includes(selected.toLowerCase())
+  // );
+
+  // const filtered = cards.filter(
+  //   (card) =>
+  //     card.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     card.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     card.title.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   useEffect(() => {
     fetch("https://cardbackendhngx.onrender.com/api/get_data")
@@ -57,6 +83,21 @@ export default function FilterContainer() {
     }
     console.log(currentPage);
     // You can add logic here to fetch data for the new page if needed.
+  };
+
+  // handle filter
+
+  const handleFilter = () => {
+    const filtered = currentCard.filter((card) =>
+      card.timezone.toLowerCase().includes(selectedTimeZone.toLowerCase())
+    );
+    setFilteredResults(filtered);
+    console.log(filtered);
+    // console.log({
+    //   date: selectedDate,
+    //   price: value,
+    //   time: selectedTimeZone,
+    // });
   };
 
   return (
@@ -98,13 +139,26 @@ export default function FilterContainer() {
               cards={cards}
               setSearchResults={setSearchResults}
               setFilteredResults={setFilteredResults}
+              value={value}
+              setValue={setValue}
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+              onSubmit={handleFilter}
             />
             {/* <SearchBox /> */}
             <div>
-              <ShowAvailMentor />
+              <ShowAvailMentor enabled={enabled} onChange={handleToggle} />
             </div>
             <div className="hidden lg:flex">
-              <Filter />
+              <Filter
+                selectedTimeZone={selectedTimeZone}
+                setSelectedTimeZone={setSelectedTimeZone}
+                value={value}
+                setValue={setValue}
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+                onSubmit={handleFilter}
+              />
             </div>
           </div>
         </div>
