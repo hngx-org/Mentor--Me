@@ -10,6 +10,5 @@ export default function ParseReviewStars({ review }: { review: number }) {
       stars.push(<UnfilledStarIcon />);
     }
   }
-  console.log(stars);
   return <div className="flex w-fit">{stars.map((item) => item)}</div>;
 }
