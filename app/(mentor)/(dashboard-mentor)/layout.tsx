@@ -14,28 +14,27 @@ import useAuth from "@/context/useAuth";
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const pathParams = useSearchParams().get("path");
   const actionParams = useSearchParams().get("action");
-  const { user } = useAuthCtx();
+
   const { data } = useAuth();
   const email = data?.userDetails?.email;
   const userName = data?.userDetails?.fullName;
   const jobTitle = data?.mentorship_type;
-  const bio = data?.userDetails.bio;
 
   const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
     userName || email
   }`;
   return (
     <>
-      <Suspense fallback={<LoadingSpinner />}>
-        <SidebarMentor
-          path={pathParams}
-          name={userName}
-          imgSrc={profileImg}
-          email={email}
-        />
-      </Suspense>
+      {/* <Suspense fallback={<LoadingSpinner />}> */}
+      <SidebarMentor
+        path={pathParams}
+        name={userName}
+        imgSrc={profileImg}
+        email={email}
+      />
+      {/* </Suspense> */}
 
-      <main className="lg:ml-[274px]">
+      <main className="lg:ml-[240px]">
         <Suspense fallback={<LoadingSpinner />}>
           <NavbarMentee
             path={pathParams}
