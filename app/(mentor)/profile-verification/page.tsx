@@ -3,7 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import axios from "axios";
+import { useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
+import useAuth from "@/context/useAuth";
 import HeaderAfterSignUp from "@/components/mentor-profile-verification/HeaderAfterSignUp";
 import {
   Amico,
@@ -30,6 +32,15 @@ import { FormData } from "@/components/mentor-profile-verification/types";
 import SidebarMentor from "@/components/mentor/SidebarMentor";
 
 export default function MentorProfileVerification() {
+  const pathParams = useSearchParams().get("path");
+  const actionParams = useSearchParams().get("action");
+  const { data } = useAuth();
+  const email = data?.userDetails?.email;
+  const userName = data?.userDetails?.fullName;
+  const jobTitle = data?.mentorship_type;
+  const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
+    userName || email
+  }`;
   const [step, setStep] = useState(0);
   const [verificationStatus, setVerificationStatus] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -87,34 +98,6 @@ export default function MentorProfileVerification() {
   const handleSubmit = async () => {
     const url =
       "https://mentormee-api.onrender.com/mentors/account-verification";
-    // const requestData = {
-    //   certificates: {
-    //     certificationName: formData.certificates.certificationName,
-    //     issuingInstitution: formData.certificates.issuingInstitution,
-    //     graduationYear: formData.certificates.graduationYear,
-    //     graduationFile: formData.certificates.graduationFile,
-    //   },
-    //   qualifications: {
-    //     qualification: formData.qualifications.qualification,
-    //     yearsExperience: formData.qualifications.yearsExperience,
-    //     qualificationDesc: formData.qualifications.qualificationDesc,
-    //   },
-    //   achievements: {
-    //     achievementName: formData.achievements.achievementName,
-    //     issuingOrganization: formData.achievements.issuingOrganization,
-    //     yearReceived: formData.achievements.yearReceived,
-    //     achievementDesc: formData.achievements.achievementDesc,
-    //   },
-    //   identification: {
-    //     fullName: formData.identification.fullname,
-    //     dateOfBirth: formData.identification.dateofBirth,
-    //     idType: formData.identification.idType,
-    //     idNumber: formData.identification.idNumber,
-    //     uploadID: "file.png",
-    //   },
-    // };
-
-    console.log(formData);
 
     axios
       .post(url, formData, {
@@ -142,10 +125,22 @@ export default function MentorProfileVerification() {
     <>
       <div className="w-full flex bg-white text-black h-full lg:pb-0 pb-14 ">
         <div className="lg:w-1/4 hidden lg:block ">
-          <SidebarMentor />
+          <SidebarMentor
+            path={pathParams}
+            name={userName}
+            imgSrc={profileImg}
+            email={email}
+          />
         </div>
         <div className="lg:w-[90%] w-full h-full">
-          <HeaderAfterSignUp step={step} />
+          <HeaderAfterSignUp
+            step={step}
+            action={actionParams}
+            username={userName}
+            name={userName}
+            imgSrc={profileImg}
+            jobTitle={jobTitle}
+          />
 
           <div className="content my-5 flex flex-col items-center">
             <h1 className="font-Hanken font-[600] md:text-3xl text-2xl">
@@ -346,7 +341,7 @@ export default function MentorProfileVerification() {
             </div>
           </div>
         </div>
-        <MobileSideBar />
+        <MobileSideBar path={pathParams} action={actionParams} />
       </div>
       {showModal && (
         <SucessModal

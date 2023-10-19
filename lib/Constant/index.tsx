@@ -138,7 +138,7 @@ export const sidebarMenteeLinks: SidebarLinksProps[] = [
   },
   {
     id: 6,
-    path: "/mentee-communities?path=Communities",
+    path: "/mentee-community?path=Communities",
     label: "Communities",
     iconDark: CommunitiesIcon(),
   },

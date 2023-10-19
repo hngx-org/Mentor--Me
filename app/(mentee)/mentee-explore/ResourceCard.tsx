@@ -50,7 +50,7 @@ const ResourceCard = ({
         <span> {reviews} reviews</span>
       </div>
       <div className="flex gap-4 mb-4">
-        <Link href={`/mentee-resources/explore/${id}?path=Resources`}>
+        <Link href="/welcome/login">
           <button
             type="button"
             className="font-Inter w-[112px] text-white rounded-lg bg-NeutalBase h-10 mb-4"
