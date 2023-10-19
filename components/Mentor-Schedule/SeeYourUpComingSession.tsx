@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import UpcomingSessionCard from "./UpcomingSessionCard";
 
 interface RecentbookingFromApi {
@@ -10,6 +11,8 @@ interface RecentbookingFromApi {
   relevantTopics: string;
   time: string | number;
   date: number | string;
+  createdAt: number | string;
+  updatedAt: Date;
   description: string;
   duration: number;
   attendeesLimit: number;
@@ -23,56 +26,42 @@ function SeeYourUpComingSession() {
     null
   );
 
+  const fetchDataFromApi = async (type: string) => {
+    try {
+      const res = await axios.get(
+        `https://hngmentorme.onrender.com/api/${type}`
+      );
+      return res.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
   useEffect(() => {
     // Fetch data from the API
-    const fetchDataFromApi = async () => {
-      try {
-        const [
-          freeSessionResponse,
-          oneOffSessionResponse,
-          recurringSessionResponse,
-        ] = await Promise.all([
-          fetch("https://hngmentorme.onrender.com/api/free-session"),
-          fetch("https://hngmentorme.onrender.com/api/one-off-session"),
-          fetch("https://hngmentorme.onrender.com/api/recurring-session"),
-        ]);
+    const fetchData = async () => {
+      const freeSessionData = await fetchDataFromApi("free-session");
+      const oneOffSessionData = await fetchDataFromApi("one-off-session");
+      const recurringSessionData = await fetchDataFromApi("recurring-session");
 
-        if (!freeSessionResponse.ok) {
-          throw new Error(
-            `API request failed with status ${freeSessionResponse.status}`
-          );
-        }
-        if (!oneOffSessionResponse.ok) {
-          throw new Error(
-            `API request failed with status ${oneOffSessionResponse.status}`
-          );
-        }
-        if (!recurringSessionResponse.ok) {
-          throw new Error(
-            `API request failed with status ${recurringSessionResponse.status}`
-          );
-        }
-
-        const [freeSessionData, oneOffSessionData, recurringSessionData] =
-          await Promise.all([
-            freeSessionResponse.json(),
-            oneOffSessionResponse.json(),
-            recurringSessionResponse.json(),
-          ]);
-
-        // Merge the data from different endpoints into one array
-        const mergedData = [
-          ...freeSessionData,
-          ...oneOffSessionData,
-          ...recurringSessionData,
-        ];
-        setFeedFromApi(mergedData);
-      } catch (error) {
-        console.error(error);
-      }
+      // Merge the data from different endpoints into one array
+      const mergedData = [
+        ...freeSessionData,
+        ...oneOffSessionData,
+        ...recurringSessionData,
+      ];
+      // Add creationDate field to each form data when fetching
+      console.log(mergedData, "merged");
+      // Sort the merged data by updatedAt in descending order
+      const sortedData = mergedData.sort(
+        (a, b) =>
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+      );
+      console.log(sortedData, "all");
+      setFeedFromApi(sortedData);
     };
-
-    fetchDataFromApi();
+    fetchData();
   }, []);
 
   if (feedFromApi === null || feedFromApi.length === 0) {
@@ -85,7 +74,7 @@ function SeeYourUpComingSession() {
   return (
     <div>
       <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
-        {sliceThree.map((feed) => (
+        {feedFromApi.map((feed) => (
           <UpcomingSessionCard key={feed._id} {...feed} />
         ))}
       </div>

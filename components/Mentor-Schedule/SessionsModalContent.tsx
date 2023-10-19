@@ -75,7 +75,7 @@ const SessionModalContent: React.FC<SessionModalContentProps> = ({
       )}
       {tag && (
         <div>
-          <p className="text-Neutra30">Type of session</p>
+          <p className="text-Neutra30">Tag</p>
           <p>{tag}</p>
         </div>
       )}

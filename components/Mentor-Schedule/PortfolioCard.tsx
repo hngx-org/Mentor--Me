@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import PortfolioReview from "./PortfolioReview";
 import AddNewSession from "./AddNewSession";
 
@@ -16,6 +17,7 @@ interface PortfolioReviewProps {
   tag: string;
   duration: number;
   occurence: string;
+  createdAt: string | number;
 }
 
 function PortfolioCard() {
@@ -23,56 +25,42 @@ function PortfolioCard() {
     []
   );
 
+  const fetchDataFromApi = async (type: string) => {
+    try {
+      const res = await axios.get(
+        `https://hngmentorme.onrender.com/api/${type}`
+      );
+      return res.data;
+    } catch (error) {
+      console.error(error);
+      throw error; // Add this line to throw the error
+    }
+  };
+
   useEffect(() => {
-    // Fetch data from the server or set the initial data here
-    const fetchDataFromApi = async () => {
-      try {
-        const [
-          freeSessionResponse,
-          oneOffSessionResponse,
-          recurringSessionResponse,
-        ] = await Promise.all([
-          fetch("https://hngmentorme.onrender.com/api/free-session"),
-          fetch("https://hngmentorme.onrender.com/api/one-off-session"),
-          fetch("https://hngmentorme.onrender.com/api/recurring-session"),
-        ]);
+    // Fetch data from the API
+    const fetchData = async () => {
+      const freeSessionData = await fetchDataFromApi("free-session");
+      const oneOffSessionData = await fetchDataFromApi("one-off-session");
+      const recurringSessionData = await fetchDataFromApi("recurring-session");
 
-        if (!freeSessionResponse.ok) {
-          throw new Error(
-            `API request failed with status ${freeSessionResponse.status}`
-          );
-        }
-        if (!oneOffSessionResponse.ok) {
-          throw new Error(
-            `API request failed with status ${oneOffSessionResponse.status}`
-          );
-        }
-        if (!recurringSessionResponse.ok) {
-          throw new Error(
-            `API request failed with status ${recurringSessionResponse.status}`
-          );
-        }
-
-        const [freeSessionData, oneOffSessionData, recurringSessionData] =
-          await Promise.all([
-            freeSessionResponse.json(),
-            oneOffSessionResponse.json(),
-            recurringSessionResponse.json(),
-          ]);
-
-        // Merge the data from different endpoints into one array
-        const mergedData = [
-          ...freeSessionData,
-          ...oneOffSessionData,
-          ...recurringSessionData,
-        ];
-        setDataFromServer(mergedData);
-      } catch (error) {
-        console.error(error);
-      }
+      // Merge the data from different endpoints into one array
+      const mergedData = [
+        ...freeSessionData,
+        ...oneOffSessionData,
+        ...recurringSessionData,
+      ];
+      // Add creationDate field to each form data when fetching
+      console.log(mergedData, "merged");
+      // Sort the merged data by updatedAt in descending order
+      const sortedData = mergedData.sort(
+        (a, b) =>
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+      );
+      console.log(sortedData, "all");
+      setDataFromServer(sortedData);
     };
-
-    fetchDataFromApi();
+    fetchData();
   }, []);
 
   // Use slice to get the first two elements from dataFromServer
