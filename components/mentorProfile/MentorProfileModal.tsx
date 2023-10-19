@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { ModalCloseIcon } from "@/public/SVGs";
 import MentorProfileTabLayout from "./MentorProfileTab";
-import { ModalState } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/page";
+import { ModalState } from "./ProfileDetailCard";
 
 type Data = {
   bio: string;
@@ -16,7 +16,6 @@ type MentorProfileModalProps = {
 export default function MentorProfileModal({
   onClose,
   state,
-  setUserData,
 }: MentorProfileModalProps) {
   return (
     <div className=" h-[100vh] w-[100vw] fixed z-[200] top-0 bottom-0 right-0 left-0 ">
@@ -44,11 +43,7 @@ export default function MentorProfileModal({
           <ModalCloseIcon />
         </div>
         <p className="font-bold text-Neutra50 ">Update your profile Details</p>
-        <MentorProfileTabLayout
-          onClose={onClose}
-          setUserData={setUserData}
-          modalState={state}
-        />
+        <MentorProfileTabLayout onClose={onClose} modalState={state} />
       </div>
     </div>
   );

@@ -16,7 +16,6 @@ import ProfileDetailsCardContainer, {
 import MentorProfileMainLayout from "@/components/mentorProfile/mentorProfileMainLayout";
 import OverViewCardLayout from "@/components/mentorProfile/MentorProfilelayouts";
 import MentorProfileModal from "@/components/mentorProfile/MentorProfileModal";
-
 import useAuth from "@/context/useAuth";
 import MentorProfileSkeleton from "@/components/skeleton/ProfileloaderSkeleton";
 import MentorDetailsContextProvider, { UserDetails } from "./DetailsContext";
@@ -152,7 +151,7 @@ export default function ProfilePage() {
               userName={userDetailsContext.fullName}
               email=""
               userRole={user?.mentorship_type}
-              userRating={1.5}
+              userRating={1}
               modal={setModal}
             />
             <MentorProfileMainLayout>

@@ -25,7 +25,6 @@ export type ModalType = {
 
 export default function MentorProfileTabLayout({
   modalState,
-
   onClose,
 }: {
   modalState: string;
