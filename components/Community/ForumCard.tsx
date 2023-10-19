@@ -11,6 +11,7 @@ import {
   Discussion,
   Member,
 } from "@/app/(mentor)/(dashboard-mentor)/mentor-community/data";
+import { membersCardAvatar } from "@/public";
 
 interface Props {
   slug: string;
@@ -66,8 +67,8 @@ const Forum = ({
       </h3>
       <div className="flex gap-2">
         {/* Member pictures */}
-        <div className="flex items-center">
-          {/* iamge */}
+        {/* <div className="flex items-center">
+          
           {membersPhoto.map((member, idx) => (
             <div
               className={`w-[1.5rem] border-solid rounded-full overflow-hidden border-2 border-NeutalBase relative ${
@@ -86,9 +87,10 @@ const Forum = ({
               />
             </div>
           ))}
-        </div>
+        </div> */}
+        <Image src={membersCardAvatar} className="object-cover " alt="Member" />
         {/* Member count */}
-        <span className="text-[0.625rem] md:text-base relative font-medium underline text-Accent1 font-Hanken right-7">
+        <span className="text-[0.625rem] md:text-base relative font-medium underline text-Accent1 font-Hanken ">
           {noOfMembers} members
         </span>
       </div>
