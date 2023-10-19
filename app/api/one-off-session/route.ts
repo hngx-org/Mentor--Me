@@ -8,14 +8,26 @@ type OneOffFormData = {
   time?: string;
   date?: string;
   relevantTopics?: string;
+  sessionUrl?: string;
+  duration?: number;
+  tag?: string;
 };
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const data: OneOffFormData = await req.json();
   console.log("data:", data);
 
-  const { sessionName, description, sessionType, time, date, relevantTopics } =
-    data;
+  const {
+    sessionName,
+    description,
+    sessionType,
+    time,
+    date,
+    relevantTopics,
+    sessionUrl,
+    duration,
+    tag,
+  } = data;
 
   //    return new NextResponse("Form Submitted");
   return NextResponse.json({
@@ -25,5 +37,8 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     time,
     date,
     relevantTopics,
+    sessionUrl,
+    duration,
+    tag,
   });
 };
