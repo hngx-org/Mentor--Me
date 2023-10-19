@@ -96,7 +96,7 @@ const data = [
 export default function MentorReviews() {
   return (
     <div>
-      <div className="bg-[#FBFBFB] lg:ms-[18rem]">
+      <div className="bg-[#FBFBFB] ">
         <div className=" md:m-2 grid grid-2">
           <div className=" border-2 w-100 rounded-lg md:m-1 lg:m-5">
             <div className="flex justify-between p-3 border-b">
