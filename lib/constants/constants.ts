@@ -203,7 +203,7 @@ export const mobileSidebarLinks: MobileSidebarProps[] = [
     id: 3,
     label: "Communities",
     icon: CommunitIconMobile(),
-    link: "/mentee-communities?path=Communities",
+    link: "/mentee-community?path=Communities",
   },
   {
     id: 4,

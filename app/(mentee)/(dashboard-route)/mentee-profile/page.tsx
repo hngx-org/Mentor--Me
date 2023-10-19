@@ -53,11 +53,6 @@ const menteeMenus: MenuProfileProps[] = [
     title: "My Mentors",
     tab: "my-mentors",
   },
-  {
-    id: 3,
-    title: "commendations",
-    tab: "commendations",
-  },
 ];
 const baseUrl = "https://mentormee-api.onrender.com";
 
@@ -224,7 +219,6 @@ export default function MenteeProfilePage() {
                       />
                     )}
                     {activeTab === "my-mentors" && <MyMentorsCard />}
-                    {activeTab === "commendations" && <Commendations />}
                   </div>
                 </div>
               </div>
