@@ -78,10 +78,14 @@ function UpcomingSessionCard({
             <div className="flex flex-col pl-4 items-center text-center">
               {/* Time */}
               <p className="text-[36px] font-inter md:text-[47px]">
-                {duration}
+                {duration ? duration : occurence}
               </p>
               {/* Minutes */}
-              <p className="text-base md:text-lg font-Inter">mins</p>
+              {!duration ? (
+                ""
+              ) : (
+                <p className="text-base md:text-lg font-Inter">mins</p>
+              )}
             </div>
           </div>
 
