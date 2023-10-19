@@ -253,7 +253,7 @@ export default function MenteeProfilePage() {
                   Community Statistics
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                  <div className="flex flex-col items-center justify-start border border-Neutra10 pt-4 pb-6">
+                  <div className="flex flex-col items-center justify-start border rounded-[6px] border-Neutra10 pt-4 pb-6">
                     <p className="font-Inter text-sm font-medium text-Neutra50 ">
                       Average Attendence
                     </p>
@@ -265,7 +265,7 @@ export default function MenteeProfilePage() {
                     </p>
                   </div>
 
-                  <div className="flex flex-col items-center justify-start border border-Neutra10 pt-4 pb-6">
+                  <div className="flex flex-col items-center justify-start border border-Neutra10 rounded-[6px] pt-4 pb-6">
                     <p className="font-Inter text-sm font-medium text-Neutra50 text-left">
                       Sessions completed
                     </p>
@@ -274,7 +274,7 @@ export default function MenteeProfilePage() {
                     </p>
                   </div>
 
-                  <div className="flex flex-col items-center justify-start border border-Neutra10 pt-4 pb-6">
+                  <div className="flex flex-col items-center justify-start border border-Neutra10 rounded-[6px] pt-4 pb-6">
                     <p className="font-Inter text-sm font-medium text-Neutra50 text-left">
                       Total Learning Time
                     </p>
@@ -283,7 +283,7 @@ export default function MenteeProfilePage() {
                     </p>
                   </div>
 
-                  <div className="flex flex-col items-center justify-start border border-Neutra10 pt-4 pb-6">
+                  <div className="flex flex-col items-center justify-start border border-Neutra10 rounded-[6px] pt-4 pb-6">
                     <p className="font-Inter text-sm font-medium text-Neutra50 ">
                       Total Points
                     </p>

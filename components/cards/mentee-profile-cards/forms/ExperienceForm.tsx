@@ -262,9 +262,9 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
             >
               <button
                 type="button"
-                className={
+                className={` mt-[-8px] ${
                   addInput.length === 10 ? "opacity-40 cursor-not-allowed" : ""
-                }
+                }`}
                 disabled={addInput.length === 10}
                 onClick={() =>
                   setAddInput((prev) => [...prev, prev.length + 1])

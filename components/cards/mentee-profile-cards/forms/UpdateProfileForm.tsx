@@ -17,7 +17,6 @@ import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/Vxrcel
 type formProps = {
   fullName: string;
   bio: string;
-  gender: string;
   image: string;
 };
 
@@ -28,7 +27,6 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const [fileURL, setFileURL] = useState<any>("");
   const [formData, setFormData] = useState<formProps>({
     fullName: "",
-    gender: "",
     bio: "",
     image: "",
   });
@@ -55,15 +53,6 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
     setFormData({
       ...formData,
       fullName: newFullName,
-    });
-  };
-
-  // Create an event handler function to update the gender state
-  const handleGenderChange = (e: any) => {
-    const newGender = e.target.value;
-    setFormData({
-      ...formData,
-      gender: newGender,
     });
   };
 
@@ -120,7 +109,6 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
         console.log(data.data);
         setFormData({
           fullName: data?.data?.user?.fullName,
-          gender: data?.data?.gender,
           bio: data?.data?.user?.bio,
           image: data?.data?.user?.image,
         });
@@ -209,10 +197,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   // console.log(formData);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const isDisabled =
-    !formData.fullName ||
-    formData.gender === "select" ||
-    formData.bio.length < 30;
+  const isDisabled = !formData.fullName || formData.bio.length < 30;
 
   // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   //   setIsLoading(true);
@@ -338,31 +323,6 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 min={2}
                 onChange={handleFullNameChange}
               />
-            </label>
-
-            <label htmlFor="gender">
-              <p className="flex items-start mb-2">
-                <span>Select gender</span>
-                <span className="text-red-500 font-medium text-sm">*</span>
-              </p>
-              <select
-                id="gender"
-                required
-                name="gender"
-                className={`w-full p-2 outline-none rounded-xl  border  py-3 focus:border-primary focus:valid:border-green-400  transition-all duration-300 ${
-                  isDark
-                    ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059] bg-gray-950"
-                    : "border-Neutra10 bg-transparent"
-                } `}
-                onChange={handleGenderChange}
-                value={formData.gender}
-              >
-                <option value="select" disabled>
-                  Select gender
-                </option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
             </label>
 
             <label htmlFor="bio">

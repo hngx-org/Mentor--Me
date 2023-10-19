@@ -182,7 +182,7 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
                 {addInput.length > 1 && idx > 0 && (
                   <button
                     type="button"
-                    className="w-6 h-1   bg-white absolute top-1/2 right-[-50px] transform -translate-y-1/2"
+                    className="w-6 h-1  bg-black absolute top-1/2 right-[-50px] transform -translate-y-1/2"
                     onClick={() => {
                       const updatedInputs = addInput.slice(
                         0,
