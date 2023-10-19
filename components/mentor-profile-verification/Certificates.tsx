@@ -23,11 +23,13 @@ export default function Certificates({
 
     if (type === "file" && files) {
       // Handle file input change
+      const selectedFile = files[0];
+      const fileUrl = URL.createObjectURL(selectedFile);
       setFormData?.((prevData) => ({
         ...prevData,
         certificates: {
           ...prevData.certificates,
-          graduationFile: files[0], // Update the graduationFile property with the selected file
+          graduationFile: fileUrl, // Update the graduationFile property with the selected file
         },
       }));
       setSelectedFileName(files[0].name);

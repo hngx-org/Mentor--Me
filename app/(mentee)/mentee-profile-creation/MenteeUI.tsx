@@ -163,11 +163,8 @@ export default function MenteeProfileCreationForms() {
         image: url.url,
       }));
     }
-
-    console.log(formInputs);
   }, [url]);
 
-  console.log(formInputs);
   function move(motion: string) {
     // console.log(forms);
     if (currForm <= 0 && motion === "back") {
@@ -442,7 +439,7 @@ function SuccessModal() {
         proceed
       </p>
 
-      <Link href="/dashboard">
+      <Link href="/dashboard?path=Home">
         {" "}
         <Button variant="primary" className="w-full sm:!w-full py-2 ">
           Continue to Home

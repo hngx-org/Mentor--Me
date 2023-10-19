@@ -8,6 +8,8 @@ import Link from "next/link";
 
 import axios from "axios";
 
+import { toast } from "react-hot-toast";
+
 import { useRouter } from "next/navigation";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
@@ -18,17 +20,22 @@ import facebook from "../../../../public/assets/images/facebook.svg";
 
 import Input from "@/components/inputs/input";
 
-import { Button } from "@/components/buttons/button";
 import { BackwardIcon } from "@/public/SVGs";
+import Button from "../../(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 export default function SignUpForm() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = React.useState(false);
   const [isValid, setIsValid] = React.useState(true);
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
   });
 
+  const isDisabled = !formData.email.match(
+    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
+  );
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -38,6 +45,7 @@ export default function SignUpForm() {
   };
 
   const handleSumbit = async (e: React.FormEvent) => {
+    setIsLoading(true);
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
 
@@ -45,21 +53,24 @@ export default function SignUpForm() {
       setIsValid(false);
     } else {
       setIsValid(true);
-      try {
-        const response = await axios.post(
-          "https://mentormee-api.onrender.com/auth/register",
-          {
-            email: formData.email,
-            password: formData.password,
-            role: "mentee",
-          }
-        );
-        localStorage.setItem("Mentee", JSON.stringify(response.data));
-        router.push("/mentee-auth/otp");
-      } catch (error) {
-        // Handle error
-        console.error("An error occurred: ", error);
-      }
+      axios
+        .post("https://mentormee-api.onrender.com/auth/register", {
+          email: formData.email,
+          password: formData.password,
+          role: "mentee",
+        })
+        .then((response) => {
+          localStorage.setItem("Mentee", JSON.stringify(response.data));
+          router.push("/mentee-auth/otp");
+        })
+
+        .catch((error) => {
+          console.error("An error occurred: ", error);
+          toast.error(error?.response?.data?.message || "something went wrong");
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
   };
   return (
@@ -120,14 +131,22 @@ export default function SignUpForm() {
                 </span>
               </p>
 
-              <Button
-                variant="primary"
-                paddingLess
-                className="w-full h-[48px]"
-                type="submit"
-              >
-                Sign Up
-              </Button>
+              <div className="  flex relative justify-end">
+                {isLoading && (
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-1/2 z-30">
+                    <LoadingSpinner />
+                  </div>
+                )}
+                <Button
+                  title="Sign up"
+                  type="submit"
+                  variant="primary"
+                  className="w-full h-[48px]"
+                  fullWidth
+                  loading={isLoading}
+                  disabled={isDisabled}
+                />
+              </div>
             </form>
 
             <div className="flex justify-center w-full">
@@ -137,23 +156,21 @@ export default function SignUpForm() {
             </div>
             <div className="flex flex-col gap-4">
               <Button
-                variant="outline-primary"
-                paddingLess
-                className="w-full h-[48px]"
-                imgSrc={google}
-                imgAlt="google"
-              >
-                Sign Up with Google
-              </Button>
+                title="Sign up with Google"
+                variant="secondary"
+                className="w-full h-[48px] gap-4"
+                fullWidth
+                loading={isLoading}
+                icon={google}
+              />
               <Button
-                variant="outline-primary"
-                paddingLess
-                className="w-full h-[48px]"
-                imgSrc={facebook}
-                imgAlt="facebook"
-              >
-                Sign Up with Google
-              </Button>
+                title="Sign up with Facebook"
+                variant="secondary"
+                className="w-full h-[48px] gap-4"
+                fullWidth
+                loading={isLoading}
+                icon={facebook}
+              />
             </div>
             <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
               Already a user?{" "}
