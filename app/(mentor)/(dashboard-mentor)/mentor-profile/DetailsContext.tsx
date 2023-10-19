@@ -1,13 +1,19 @@
 import React, { createContext, useMemo } from "react";
+import { InfoCardProps } from "@/components/mentorProfile/ProfileDetailCard";
 
 export type UserDetails = {
   bio: string;
   fullName: string;
   gender: string | number;
   email: string;
+  certification: string;
+  experience: string;
+  linkedIn?: string;
+  otherlinks?: string;
 };
 type MentorProfileCtx = {
   details: UserDetails;
+
   updateUserDetailsCtx: React.Dispatch<React.SetStateAction<UserDetails>>;
 };
 
@@ -19,6 +25,8 @@ const defaultUserDetailsContext: MentorProfileCtx = {
     fullName: "",
     gender: "",
     email: "",
+    certification: "",
+    experience: "",
   },
 };
 
