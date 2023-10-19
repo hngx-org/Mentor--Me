@@ -161,12 +161,12 @@ function BasicInfoTab({
           name="fullName"
           onChange={handleChange}
         />
-        {/* <Selector
+        <Selector
           placeHolder="pick your gender"
           selected={selected}
           onSelect={setSelected}
           options={["male", "female", "other"]}
-        /> */}
+        />
         <TextArea
           label="Bio"
           value={details.bio}

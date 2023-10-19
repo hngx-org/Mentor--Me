@@ -67,12 +67,19 @@ export default function MentorProfileHeader({
       <div className="sm:h-[200px] h-[150px] w-[100%]  bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400  bg-cover bg-no-repeat" />
 
       <div className=" w-full  flex  flex-col items-start  sm:flex-row  gap-2 px-4 border-b border-Neutra10 pb-4">
-        <div
-          style={{ backgroundColor: randomColor }}
-          className="-mt-10 lg:-mt-12 w-full max-w-[90px] h-[90px]  sm:max-w-[200px] sm:h-[200px] rounded-full border-[6px] border-white flex justify-center items-center"
-        >
-          {!initials && <LoadingSpinner />}
-          <p className="text-white text-8xl font-bold">{initials}</p>
+        <div className=" w-[90px] h-[90px]  sm:w-fit sm:h-fit  border rounded-full border-[6px] border-white top:10">
+          <Image
+            src={`https://api.dicebear.com/7.x/initials/png?seed=${userName}`}
+            width={200}
+            height={200}
+            sizes="500px"
+            style={{
+              objectFit: "cover",
+              borderRadius: "9999px",
+            }}
+            alt="ths profileImage"
+            quality={100}
+          />
         </div>
         <div className=" w-[100%] flex flex-col items-center sm:flex-row sm:justify-between px-2 mt-2">
           <div className="flex  flex-col items-center sm:items-start w-[100%] mt-2">
