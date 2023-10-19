@@ -79,11 +79,11 @@ const Modal: FC<ModalProps> = ({
                 <p className="text-center my-6 font-Hanken text-base">
                   {content}
                 </p>
-                <Link href="/welcome/login">
+                <Link href="/welcome/login" className="border-0">
                   <Button
                     variant="primary"
                     paddingLess
-                    className="w-full h-[48px] px-[1rem]"
+                    className="w-full h-[48px] px-[1rem] border-0"
                   >
                     {buttontext}
                   </Button>
