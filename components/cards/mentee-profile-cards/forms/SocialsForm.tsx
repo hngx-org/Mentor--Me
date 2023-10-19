@@ -126,7 +126,7 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
   };
 
   return (
-    <div className="flex w-full justify-center sm:justify-start">
+    <div className="flex w-full xl:max-w-full justify-center sm:justify-start">
       <div className="flex gap-4 flex-col">
         <p
           className={`${
@@ -157,7 +157,10 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
           >
             {addInput.map((num, idx) => (
               <div className="flex items-center gap-4 relative" key={num}>
-                <label htmlFor={`social-link-${num}`}>
+                <label
+                  htmlFor={` social-link-${num}`}
+                  className="w-full xl:w-[500px]"
+                >
                   <p className="flex items-start mb-2">
                     <span>Social Link</span>
                     <span className="text-red-500 font-medium text-sm">*</span>
@@ -179,7 +182,7 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
                 {addInput.length > 1 && idx > 0 && (
                   <button
                     type="button"
-                    className="w-6 h-1  bg-white absolute top-1/2 right-0 transform -translate-y-1/2"
+                    className="w-6 h-1   bg-white absolute top-1/2 right-[-50px] transform -translate-y-1/2"
                     onClick={() => {
                       const updatedInputs = addInput.slice(
                         0,
@@ -202,9 +205,9 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
             >
               <button
                 type="button"
-                className={
+                className={` mt-[-8px] ${
                   addInput.length === 10 ? "opacity-40 cursor-not-allowed" : ""
-                }
+                }`}
                 disabled={addInput.length === 10}
                 onClick={() =>
                   setAddInput((prev) => [...prev, prev.length + 1])

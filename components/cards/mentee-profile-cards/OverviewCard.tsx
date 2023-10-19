@@ -63,8 +63,8 @@ export default function OverviewCard({
           variant="secondary"
         />
       </div>
-      <div className="flex flex-col gap- w-full max-xl:max-w-[500px] xl:gap-y-5 ">
-        <div className="border border-gray-200 xl:px-2">
+      <div className="flex flex-col w-full xl:max-w-[500px] xl:gap-y-5 ">
+        <div className="border border-gray-200 rounded-[8px] xl:px-2">
           <div className=" w-full flex justify-between ">
             <p className="text-Neutra50 font-bold text-[18px] font-Hanken">
               Experience
@@ -99,23 +99,28 @@ export default function OverviewCard({
             </div>
           </div>
         </div>
-        <div className="border border-gray-200 xl:px-2 xl:py-5">
-          <div className=" w-full flex justify-between ">
-            <p className="text-Neutra50 font-bold text-[18px] font-Hanken">
-              Education
-            </p>
-            <EditIcon
-              className="cursor-pointer"
-              onClick={() => router.push("?action=edit-profile&tab=education")}
-              onKeyDown={() =>
-                router.push("?action=edit-profile&tab=education")
-              }
-            />
-          </div>
-          <div className="flex flex-col w-full mt-2">
-            <p className="text-black font-normal text-[16px] ml-3 font-Hanken">
-              {discipline}
-            </p>
+        <div className="flex flex-col w-full xl:max-w-[500px] xl:gap-y-5">
+          <div className="border border-gray-200 rounded-[8px] xl:px-2">
+            <div className="w-full flex justify-between ">
+              <p className="text-Neutra50 font-bold text-[18px] font-Hanken">
+                Education
+              </p>
+              <EditIcon
+                className="cursor-pointer"
+                onClick={() =>
+                  router.push("?action=edit-profile&tab=education")
+                }
+                onKeyDown={() =>
+                  router.push("?action=edit-profile&tab=education")
+                }
+              />
+            </div>
+            <div className="flex justify-start items-center xl:pl-4 xl:py-2 gap-4 lg:gap-8">
+              {" "}
+              <p className="text-black font-normal text-[16px] ml-3 font-Hanken">
+                {discipline}
+              </p>
+            </div>
           </div>
         </div>
       </div>

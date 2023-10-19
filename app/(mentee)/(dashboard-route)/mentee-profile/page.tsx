@@ -188,7 +188,7 @@ export default function MenteeProfilePage() {
               onClick={() => router.push("?action=edit-profile")}
             >
               <Button
-                className="px-4 py-2"
+                className="px-4 py-2 xl:h-[56px] xl:w-[163px] text-[16px]"
                 title="Edit Profile"
                 variant="secondary"
               />
@@ -237,8 +237,8 @@ export default function MenteeProfilePage() {
                 </div>
               </div>
             </div>
-            <div className="flex mt-10 w-full lg:w-[80%] justify-center items-center">
-              <div className="flex w-full p-4 lg:p-10 border border-Neutra10 flex-col gap-4">
+            <div className="flex mt-10 w-full lg:w-[80%] justify-center  items-center">
+              <div className="flex w-full rounded-[8px] p-4 lg:p-10 border border-Neutra10 flex-col gap-4">
                 <p className="w-full flex justify-between font-Inter font-medium text-[15px] text-Neutra50">
                   <span>
                     Profile Strength:{" "}

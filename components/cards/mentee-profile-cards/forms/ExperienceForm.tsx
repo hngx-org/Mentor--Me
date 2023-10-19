@@ -210,7 +210,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
                       : "text-Neutra50"
                   }`}
                 >
-                  At
+                  at
                 </span>{" "}
                 <label
                   htmlFor={`experience-${num}`}
