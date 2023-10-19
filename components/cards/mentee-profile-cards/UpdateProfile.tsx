@@ -58,8 +58,8 @@ export default function UpdateProfile() {
     setActiveTab(params || "basic-info");
     if (typeof localStorage !== "undefined") {
       const theme = localStorage.getItem("theme");
-      if (theme === "dark") {
-        setIsDark(true);
+      if (theme === "light") {
+        setIsDark(false);
       }
     }
   }, [params]);
@@ -114,7 +114,7 @@ export default function UpdateProfile() {
         <p>Update your profile details</p>
       </div>
       <div
-        className={`flex gap-4 w-full justify-between sm:max-w-[400px] px-2 sm:p-4 ${
+        className={`flex gap-4 w-full justify-between xl:max-w-[900px] sm:max-w-[400px] px-2 sm:p-4 ${
           isDark ? "border-gray-800 border-t border-b" : ""
         }`}
       >
