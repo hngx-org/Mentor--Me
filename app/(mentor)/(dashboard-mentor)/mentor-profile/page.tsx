@@ -141,7 +141,7 @@ export default function ProfilePage() {
   }, []);
 
   return (
-    <>
+    <ProtectedRoute>
       <MentorDetailsContextProvider
         updateUserDetailsCtx={setUserDetailsContext}
         details={userDetailsContext}
@@ -210,6 +210,6 @@ export default function ProfilePage() {
           </div>
         )}
       </MentorDetailsContextProvider>
-    </>
+    </ProtectedRoute>
   );
 }

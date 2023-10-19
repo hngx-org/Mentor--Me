@@ -20,6 +20,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const userName = data?.userDetails?.fullName;
   const jobTitle = data?.mentorship_type;
 
+  // console.log(email);
+
   const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
     userName || email
   }`;
