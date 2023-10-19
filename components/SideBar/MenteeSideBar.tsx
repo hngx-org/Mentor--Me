@@ -5,6 +5,7 @@
 import Link from "next/link";
 
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { SideBarMentorProps } from "./SidebarMentor";
 import {
   Logo2,
@@ -22,6 +23,9 @@ import useAuth from "@/context/useAuth";
 export default function MenteeSideBar({
   light = false,
   path,
+  userName,
+  email,
+  imgSrc,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
   const { data } = useAuth();
   const router = useRouter();

@@ -6,13 +6,14 @@ import CheckedIcon from "@/svgs/CheckedIcon";
 import Calendarcomponent from "../mentee-booking/components/booking-session/Calender";
 import { menteeDashboardData } from "@/lib/menteeDashboard/data";
 import MenteeCard from "./cards";
+import { User } from "./afterBookings";
 
-const NewMentee: FC = () => (
+const NewMentee = ({ username }: User) => (
   <div className="w-full min-h-screen">
     <div className="p-4">
       <div className="my-4">
         <h1 className="text-2xl font-semibold leading-10">
-          Welcome Henrietta! <span className="ml-4"> 👋</span>
+          Welcome {username}! <span className="ml-4"> 👋</span>
         </h1>
         <p className="font-inter text-base font-medium text-gray-500">
           You have no upcoming sessions
