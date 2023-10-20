@@ -11,6 +11,7 @@ import AfterBookings from "./afterBookings";
 import RegularUser from "./regularUser";
 // import ProtectedRoute from "@/context/ProtectedRoute";
 import useAuth from "@/context/useAuth";
+import ProtectedRoute from "@/context/ProtectedRoute";
 
 const MenteeDashboard: NextPage = () => {
   const [activeScreen, setActiveScreen] = useState<
@@ -23,14 +24,23 @@ const MenteeDashboard: NextPage = () => {
   const handleActiveScreen = () => {
     switch (activeScreen) {
       case "beforeBooking":
-        return <NewMentee username={username} />;
+        return (
+          <ProtectedRoute>
+            {" "}
+            <NewMentee username={username} />
+          </ProtectedRoute>
+        );
       case "hasBooking":
-        return <AfterBookings username={username} />;
+        return (
+          <ProtectedRoute>
+            <AfterBookings username={username} />
+          </ProtectedRoute>
+        );
       case "regular":
         return (
-          // <ProtectedRoute role="mentee">
-          <RegularUser />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <RegularUser />
+          </ProtectedRoute>
         );
 
       default:
