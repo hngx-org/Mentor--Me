@@ -72,7 +72,7 @@ export default function LoginForm() {
           setUserData(response.data);
 
           if (response?.data?.data && response?.data?.data?.user?.profileLink) {
-            router.replace("/mentor-profile?path=mentor-profile");
+            router.replace("/mentor-profile?path=profile");
             setIsLoading(false);
           } else {
             router.replace("/mentor-profile-creation");
