@@ -59,7 +59,7 @@ export default function MentorProfileTabLayout({
       }));
     setCertification(certification);
     setExperience(experience);
-  }, []);
+  }, [ProfileBio.details]);
   return (
     <div className="w-[100%] my-5 min-h-fit h-fit ">
       <div className="flex justify-between w-[100%] text-Neutra10 text-xs sm:text-base cursor-pointer px-4   border-b-2">
@@ -115,11 +115,13 @@ export default function MentorProfileTabLayout({
             title="certification"
             items={certification || []}
             updateState={setCertification}
+            updateUserDetails={ProfileBio.updateUserDetailsCtx}
           />
           <ExpeCerts
             title="experience"
             items={experience || []}
             updateState={setExperience}
+            updateUserDetails={ProfileBio.updateUserDetailsCtx}
           />
         </>
       )}
@@ -260,12 +262,18 @@ type ExpeCertsProps = {
   items: InfoCardProps[];
   title: string;
   updateState: React.Dispatch<React.SetStateAction<InfoCardProps[]>>;
+  updateUserDetails: React.Dispatch<React.SetStateAction<UserDetails>>;
 };
 
 interface View {
   view: "Edit" | "All" | "Add" | "select";
 }
-export function ExpeCerts({ items, title, updateState }: ExpeCertsProps) {
+export function ExpeCerts({
+  items,
+  title,
+  updateState,
+  updateUserDetails,
+}: ExpeCertsProps) {
   const [view, setView] = useState("All");
   const [action, setAction] = useState("");
   const [item, setItem] = useState({
@@ -298,6 +306,12 @@ export function ExpeCerts({ items, title, updateState }: ExpeCertsProps) {
       [name]: value,
     }));
   };
+
+  const handleEdit = () => {
+    updateUserDetails((prev) => ({ ...prev, [title]: item.title }));
+    console.log(title);
+    setView("All");
+  };
   return (
     <div className="w-[100%]  relative h-fit max-h-[400px] flex flex-col border border-3  rounded-[6px] my-5 overflow-scroll hide-message-layout-scroll ">
       {view === "All" && (
@@ -316,7 +330,7 @@ export function ExpeCerts({ items, title, updateState }: ExpeCertsProps) {
               >
                 <EditIConv2 />
               </span>
-              <span
+              {/* <span
                 onClick={() => {
                   setView("update");
                   setAction("Add");
@@ -324,7 +338,7 @@ export function ExpeCerts({ items, title, updateState }: ExpeCertsProps) {
                 role="presentation"
               >
                 <AddIConv2 />
-              </span>
+              </span> */}
             </div>
           </div>
           <div className="px-4">
@@ -359,6 +373,7 @@ export function ExpeCerts({ items, title, updateState }: ExpeCertsProps) {
           handleChange={handleChange}
           setItem={setItem}
           type={title}
+          handleEdit={handleEdit}
           handleAdd={handleAdd}
         />
       )}
@@ -420,6 +435,7 @@ interface EditViewProps {
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   type: string;
   handleAdd: () => void;
+  handleEdit: () => void;
 }
 
 const getInputDesc = (type: string) => {
@@ -440,6 +456,7 @@ function EditView({
   type,
   handleChange,
   handleAdd,
+  handleEdit,
 }: EditViewProps) {
   return (
     <div className="min-h-[80%] h-fit w-[100%] p-4">
@@ -488,7 +505,9 @@ function EditView({
         />
       </div>
       {action === "Edit" ? (
-        <Button variant="primary">update</Button>
+        <Button variant="primary" onClick={handleEdit}>
+          update
+        </Button>
       ) : (
         <Button
           variant="primary"

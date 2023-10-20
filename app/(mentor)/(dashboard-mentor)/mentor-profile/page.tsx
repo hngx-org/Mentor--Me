@@ -180,7 +180,7 @@ export default function ProfilePage() {
             <ProfileDetailsCardContainer
               heading="Experience"
               items={
-                userData?.mentoring_experience?.split(" ").map((item) => ({
+                userDetailsContext?.experience?.split(" ").map((item) => ({
                   type: "experience",
                   heading: item,
                   text: "present",
@@ -192,7 +192,7 @@ export default function ProfilePage() {
             <ProfileDetailsCardContainer
               heading="certification"
               items={
-                userData?.certification?.split("  ").map((item) => ({
+                userDetailsContext.certification.split("  ").map((item) => ({
                   type: "certification",
                   heading: item,
                   text: "certificate",
