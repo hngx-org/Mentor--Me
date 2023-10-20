@@ -80,6 +80,7 @@ export default function ProfilePage() {
         token = newUser.data.token; // assign token value here
       } catch (error) {
         console.error("Error parsing JSON:", error);
+        setError("Error fetching current mentor data");
       }
     }
   }
@@ -126,6 +127,8 @@ export default function ProfilePage() {
         setLoading(false);
       } else {
         console.error("Failed to fetch current mentor data");
+        setLoading(false);
+        setError("Error fetching current mentor data");
       }
     } catch (error) {
       setLoading(false);
@@ -169,6 +172,7 @@ export default function ProfilePage() {
                     text: userData?.degree || "",
                     heading: userData?.institution || "",
                     type: "education",
+                    id: "5",
                   },
                 ]}
                 openModal={setModal}
@@ -181,6 +185,7 @@ export default function ProfilePage() {
                     type: "experience",
                     heading: item,
                     text: "present",
+                    id: "4",
                   })) || []
                 }
                 openModal={setModal}
@@ -192,6 +197,7 @@ export default function ProfilePage() {
                     type: "certification",
                     heading: item,
                     text: "certificate",
+                    id: "q",
                   })) || []
                 }
                 openModal={setModal}

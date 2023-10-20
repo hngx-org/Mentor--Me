@@ -52,14 +52,13 @@ export default function ProfileDetailsCardContainer({
 }
 
 export type InfoCardProps = {
-  type: "skill" | "experience" | "certification" | "education";
+  type: string;
   text?: string;
   heading?: string;
+  id: string | number;
 };
 
-function getIcons(
-  type: "skill" | "experience" | "certification" | "education"
-) {
+function getIcons(type: string) {
   if (type === "certification") {
     return <CertificationIcon />;
   }
@@ -80,9 +79,9 @@ function getIcons(
   return <p> add icon</p>;
 }
 
-export function InfoCard({ type, heading, text }: InfoCardProps) {
+export function InfoCard({ type, heading, text, id }: InfoCardProps) {
   return (
-    <div className="w-[100%]  flex space-x-5 h-fit items-center my-2">
+    <div className="w-[100%]  flex space-x-5 h-fit items-center my-2" key={id}>
       {getIcons(type)}
       <div>
         <p className="text-lg  font-[500] text-Neutra50">{heading}</p>
