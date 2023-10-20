@@ -2,7 +2,7 @@
 
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useIntersectionObserver } from "usehooks-ts";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +12,7 @@ import {
   Member,
 } from "@/app/(mentor)/(dashboard-mentor)/mentor-community/data";
 import { membersCardAvatar } from "@/public";
+import Modal from '../../app/modal/modal'
 
 interface Props {
   slug: string;
@@ -48,6 +49,16 @@ const Forum = ({
   const isVisible = !!entry?.isIntersecting;
   const noOfMembers = members.length.toString();
   const membersPhoto = members.slice(0, 3);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+      setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+      setIsModalOpen(false);
+    };
 
   useEffect(() => {
     if (index === discussLength - 1 && isVisible) {
@@ -98,17 +109,24 @@ const Forum = ({
         {description}
       </p>
       <Link
-        href={`${
-          pathname === "/communities"
-            ? "/welcome/login"
-            : pathname === "/mentor-community"
-            ? `/mentor-community/${slug}`
-            : `/mentee-community/${slug}`
-        }`}
+        href={pathname === "/communities" ? "/communities": pathname === "/mentor-community" ? `/mentor-community/${slug}` : `/mentee-community/${slug}` }
         className="text-xs text-center md:text-base border-solid border-[1px] p-4 md:py-5 md:px-10 w-full md:w-fit mx-auto border-NeutalBase rounded-lg font-medium font-Inter"
+        onClick={(e) => { if (pathname === '/communities'){
+          e.preventDefault(); 
+          openModal(); 
+        }  
+        }}
       >
         Join Discussion
       </Link>
+
+      {isModalOpen && pathname === "/communities" && (
+        <Modal
+          isOpen={isModalOpen}
+          closeModal={closeModal}
+          
+        />
+      )}
     </div>
   );
 };
