@@ -51,7 +51,7 @@ const Modal: FC<ModalProps> = ({
                 <p className="font-Inter text-lg text-center font-medium">
                   You are not authenticated
                 </p>
-                <div className="flex gap-2 gap-2">
+                <div className="flex gap-2">
                   <button
                     type="button"
                     className="text-black  bg-white rounded-[7px] border-[1px] text-[13px] w-[90px]  border-black p-2 "
