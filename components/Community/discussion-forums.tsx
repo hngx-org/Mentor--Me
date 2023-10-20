@@ -6,11 +6,8 @@ import {
   ArrowRightIcon,
 } from "@/public/assets/Icons/mentor-communities";
 import ForumCard from "./ForumCard";
-import { discussionCommunities } from "@/app/(mentor)/(dashboard-mentor)/mentor-community/data";
+
 import { discussionState } from "@/app/(mentee)/(dashboard-route)/mentee-community/data";
-import { MentorCard } from ".";
-import DiscussionCard from "./discussion-card";
-import DiscussionCards from "./DisscussionCards";
 
 const DiscussionForums = ({
   discussionData,
