@@ -17,7 +17,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const email = data?.userDetails?.email;
   const userName = data?.userDetails?.fullName;
   const jobTitle = data?.mentorship_type;
-
   const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
     userName || email
   }`;

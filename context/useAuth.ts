@@ -21,6 +21,8 @@ export const useAuth = (type: urlType = "mentors") => {
     success: false,
   });
 
+  // console.log(user);
+
   useEffect(() => {
     const requestAuth = async () => {
       // Make an authenticated request to the server
@@ -34,6 +36,7 @@ export const useAuth = (type: urlType = "mentors") => {
           },
         });
         const data: User = await response.json();
+        // console.log(data);
         setData(data);
       }
     };

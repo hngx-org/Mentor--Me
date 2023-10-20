@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import { useMentorContext } from "@/app/(mentor)/mentor-profile-creation/MentorContext";
+import LoadingSpinner from "../loaders/LoadingSpinner";
 
 interface myProps {
   children?: any;
@@ -21,12 +22,14 @@ export default function MentorFormBuilder({
   handleBack,
   handleClick,
 }: myProps) {
-  const { formInputs, setFormInputs } = useMentorContext();
+  const { formInputs, setFormInputs, currForm, loader } = useMentorContext();
   const form = useRef<HTMLFormElement | null>(null);
   const [isFull, setIsFull] = useState(false);
   const [textLength, setTextLength] = useState(0);
   const [email, setEmail] = useState("");
   const [isValid, setIsValid] = useState(false);
+  const [inSchool, setInschool] = useState(true);
+  const [yearGrad, setYearGrad] = useState(false);
 
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
@@ -70,6 +73,7 @@ export default function MentorFormBuilder({
       ...prevData,
       [e.target.name]: e.target.value,
     }));
+    setIsValid(form.current!.checkValidity());
   }
 
   function handleInput(e: any) {
@@ -89,6 +93,50 @@ export default function MentorFormBuilder({
     // console.log(formInputs);
     setIsValid(form.current!.checkValidity());
   }
+
+  // This controls the disappearance of the input field or checkbox, depending on whether the user is in school or not
+  useEffect(() => {
+    if (currForm === 2) {
+      const yearGradInp = document.querySelector(
+        'input[name="year_of_graduation"]'
+      );
+
+      yearGradInp?.addEventListener("input", () => {
+        // @ts-ignore
+        if (yearGradInp!.value !== "") {
+          setInschool(false);
+        } else {
+          setInschool(true);
+        }
+      });
+    }
+  }, [formInputs]);
+
+  useEffect(() => {
+    if (currForm === 2) {
+      const yearGradInp = document.querySelector(
+        'input[name="year_of_graduation"]'
+      );
+
+      // @ts-ignore
+      if (yearGrad) {
+        // @ts-ignore
+        yearGradInp!.parentElement.style.display = "none";
+        yearGradInp?.removeAttribute("required");
+      } else if (yearGrad === false) {
+        // @ts-ignore
+        yearGradInp!.parentElement.style.display = "block";
+        yearGradInp?.setAttribute("required", "true");
+      }
+
+      setFormInputs((prevData: any) => ({
+        ...prevData,
+        // @ts-ignore
+        in_school: yearGrad,
+      }));
+      setIsValid(form.current!.checkValidity());
+    }
+  }, [yearGrad]);
 
   return (
     <form ref={form} className="flex flex-col gap-6">
@@ -168,8 +216,48 @@ export default function MentorFormBuilder({
         );
       })}
 
+      {/* if the 3rd form is being showm, display this UI */}
+      {currForm === 2 ? (
+        <div
+          className={`flex items-center justify-start gap-4 ${
+            inSchool ? "" : "hidden"
+          }`}
+        >
+          <input
+            type="checkbox"
+            className="mt-[6px]"
+            onClick={(e) => {
+              setYearGrad(!yearGrad);
+            }}
+            name="in_school"
+          />
+          <p className="text-[#121212] font-medium">currently in school</p>
+        </div>
+      ) : (
+        ""
+      )}
+
       {/* this children prop is for the variations for each of the forms. So it's basically a fix */}
       {children}
+
+      {/* If the last form is being shown, display this UI */}
+      {/* {currForm === 4 ? (
+        <div className="flex items-center justify-start gap-2">
+          <input
+            type="checkbox"
+            className="mt-[6px]"
+            required
+            onInput={handleInput}
+          />
+          <p className="font-medium font-Inter ">
+            By filling this form, you agree to MentorMe’s{" "}
+            <span className="text-Accent1">Privacy policy</span> and{" "}
+            <span className="text-Accent1">Terms of use</span>.
+          </p>
+        </div>
+      ) : (
+        ""
+      )} */}
 
       {/* container for the buttons */}
       <div className="flex gap-3 mt-[50px] justify-between">
@@ -188,7 +276,7 @@ export default function MentorFormBuilder({
             isValid
               ? "bg-[#121212] cursor-pointer"
               : "bg-[#6c6c6c] cursor-not-allowed"
-          } text-white font-semibold border-[1px] w-[100%] max-w-[200px] py-5 rounded-md font-Inter text-center`}
+          } text-white font-semibold border-[1px] w-[100%] max-w-[200px] py-5 rounded-md font-Inter text-center relative`}
           onClick={(e) => {
             e.preventDefault();
             const valid = (form.current! as HTMLFormElement).reportValidity();
@@ -197,13 +285,20 @@ export default function MentorFormBuilder({
               toast.error("You have too many words, please reduce them");
             }
 
-            if (valid && !isFull) {
+            if (isValid && !isFull) {
               handleClick();
               // console.log(formInputs);
             }
           }}
         >
-          Next
+          {currForm === 4 && loader ? (
+            <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
+              <LoadingSpinner />
+            </div>
+          ) : (
+            ""
+          )}
+          {currForm === 4 ? "Submit" : "Continue"}
         </button>
       </div>
     </form>
@@ -254,6 +349,7 @@ function SelectComponent({
     <>
       <select
         onInput={(e: any) => {
+          handleInput(e);
           setIsSelected(true);
           // if the user selects the same value again, it won't be added to the list
           setSelectedValues((prevValues: any) => {
@@ -262,6 +358,7 @@ function SelectComponent({
           });
         }}
         onChange={(e: any) => {
+          handleInput(e);
           // update the formInput state with the array of values
           setFormInputs((prevInputs: any) => ({
             ...prevInputs,
@@ -283,7 +380,8 @@ function SelectComponent({
           </option>
         ))}
       </select>
-      {/* <p>Selected options: {selectedValues.join(", ")}</p> */}
+
+      {/* This div contains a display of all the options that the user has selected */}
       <div className="flex gap-2 flex-wrap">
         {selectedValues.map((value) => (
           <div

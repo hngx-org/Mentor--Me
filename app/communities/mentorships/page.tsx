@@ -3,12 +3,14 @@
 import React, { useEffect, useState } from "react";
 
 import { verify } from "crypto";
+import { set } from "date-fns/esm";
 import { mentorCardAvatar, mentorCardHero } from "@/public";
 import BigMentorShipCard from "@/components/Community/BigMentorShipCard";
 import MentorCard from "@/components/Community/MentorCard";
 import HomeNavBar from "@/components/homeNavbar";
 import Footer from "@/components/Footer";
 import { getMentorInfo } from "@/lib/apiHelper";
+import SearchCommunitySearchbar from "@/components/Community/searchcommunity-searchbar";
 
 type MentorDataType = {
   date: string;
@@ -27,12 +29,34 @@ type MentorDataType = {
 
 export default function FreeMentorship() {
   const [mentorInfo, setMentorInfo] = useState([] as MentorDataType[]);
-
+  const [initialMentorInfo, setInitialMentorInfo] = useState(
+    [] as MentorDataType[]
+  );
   useEffect(() => {
+    getMentorInfo(setInitialMentorInfo);
     getMentorInfo(setMentorInfo);
   }, []);
 
   console.log(mentorInfo);
+
+  const [q, setQ] = useState("");
+
+  const filterDiscussions = () => {
+    if (q) {
+      console.log("Search is on. Query: ", q);
+      const filteredSliderInfo = initialMentorInfo.filter(
+        (item) =>
+          item.firstname.toLowerCase().includes(q.toLowerCase()) ||
+          item.topic.toLowerCase().includes(q.toLowerCase())
+      );
+      console.log("Filtered results: ", filteredSliderInfo);
+
+      // Update the sliderInfo state with the filtered array
+      setMentorInfo(filteredSliderInfo);
+    } else {
+      setMentorInfo(initialMentorInfo);
+    }
+  };
 
   function capitalizeFirstLetter(string: string) {
     if (string && string.length > 0) {
@@ -51,13 +75,16 @@ export default function FreeMentorship() {
           and insights with Mentor me
         </p>
       </div>
-      <div className="search border border-[#CCCCCC] mt-1 md:mt-[0] md:w-[60vw]  lg:w-[40vw] w-[60%] pl-[16px] py-[16px] rounded-[6px] md:mx-auto ml-6 md:ml-auto flex lg:mb-[64px] mb-6 ">
-        <input
-          type="text"
-          className=" text-[14px] font-normal leading-[20.3px] text-Neutra20 w-full font-Inter outline-0 "
-          placeholder="Search for community"
-        />{" "}
-      </div>
+      <section className="py-6 md:pb-[5rem]  md:pt-10  w-full">
+        <div className="mx-auto  w-fit">
+          {" "}
+          <SearchCommunitySearchbar
+            q={q}
+            setQ={setQ}
+            filterDiscussions={filterDiscussions}
+          />
+        </div>
+      </section>
 
       {/* text */}
       <div className=" hidden lg:flex flex-col gap-y-8 px-[100px]">

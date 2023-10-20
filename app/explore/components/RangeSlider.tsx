@@ -1,9 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Dispatch, useState } from "react";
 
-export default function RangeSlider() {
-  const [value, setValue] = useState<number>(10);
+interface Props {
+  value: number;
+  setValue: Dispatch<React.SetStateAction<number>>;
+}
+
+export default function RangeSlider({ value, setValue }: Props) {
+  // const [value, setValue] = useState<number>(10);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // console.log(Number(event.target.value));

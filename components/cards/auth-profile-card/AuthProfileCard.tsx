@@ -19,6 +19,7 @@ export default function AuthProfileCard({
   styles?: string;
   path?: string;
 }) {
+  console.log(user);
   return (
     // ${
     //     path === "profile"

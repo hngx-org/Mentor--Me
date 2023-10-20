@@ -16,21 +16,38 @@ import { EditIcon, EditIconDark } from "@/public/SVGs";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 
+type formProps = {
+  title: string;
+  company: string;
+};
+
 export default function ExperienceForm({ isDark }: { isDark: boolean }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter(); // router
   const [addInput, setAddInput] = useState([1]);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState<formProps>({
+    title: "",
+    company: "",
+  });
   const [token, setToken] = useState("");
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
   const baseUrl = "https://mentormee-api.onrender.com";
 
-  // Create an event handler function to update the gender state
-  const handleGenderChange = (e: any) => {
-    const newGender = e.target.value;
+  // Create an event handler function to update the experience state
+  const handleExperienceChange = (e: any) => {
+    const newTitle = e.target.value;
     setFormData({
       ...formData,
-      gender: newGender,
+      title: newTitle,
+    });
+  };
+
+  // Create an event handler function to update the workplace state
+  const handleWorklaceChange = (e: any) => {
+    const newWorkplace = e.target.value;
+    setFormData({
+      ...formData,
+      company: newWorkplace,
     });
   };
 
@@ -61,12 +78,11 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
       });
       if (response.ok) {
         const data = await response.json();
+        console.log(data.data);
 
         setFormData({
-          fullName: data?.data?.user?.fullName,
-          gender: data?.data?.gender,
-          bio: data?.data?.user?.bio,
-          image: data?.data?.image,
+          title: data?.data?.title,
+          company: data?.data?.company,
         });
       } else {
         console.error("Failed to fetch user data");
@@ -75,10 +91,15 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
       console.error("Error fetching user data");
     }
   };
+  useEffect(() => {
+    if (token) {
+      fetchMenteeData();
+    }
+  }, [token]);
 
   const handleUpdate = async (e: any) => {
-    setIsLoading(true);
-    e.preventDefault();
+    e.preventDefault(); // Prevent the default form submission behavior
+
     // Check if authToken exists
     if (token) {
       const apiUrl = "https://mentormee-api.onrender.com/mentee/update-profile";
@@ -91,6 +112,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
         },
         body: JSON.stringify(formData),
       };
+      console.log(formData);
 
       try {
         const response = await fetch(apiUrl, patchData);
@@ -98,8 +120,6 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
         if (response.ok) {
           // Handle a successful update here
           setIsProfileUpdated(true);
-
-          router.push("/mentee-profile?path=profile");
 
           setTimeout(() => {
             setIsProfileUpdated(false);
@@ -112,26 +132,23 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
         }
       } catch (error) {
         console.error("Error:", error);
-        setIsLoading(false);
       } finally {
         setIsLoading(false);
         fetchMenteeData();
-        router.push("/mentee-profile?path=profile");
+        // router.push("/mentee-profile?path=profile");
       }
     } else {
       // Handle the case where authToken is missing
       console.log("Auth token is missing.");
-      setIsLoading(false);
     }
   };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
     e.preventDefault();
   };
 
   return (
-    <div className="flex w-full justify-center sm:justify-start">
+    <div className="flex w-full xl:max-w-full justify-center sm:justify-start">
       <div className="flex gap-4 flex-col">
         <p
           className={`${
@@ -161,7 +178,10 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
           >
             {addInput.map((num, idx) => (
               <div className="flex items-center gap-4 relative" key={num}>
-                <label htmlFor={`experience-${num}`}>
+                <label
+                  htmlFor={`experience-${num}`}
+                  className="w-full xl:w-[300px]"
+                >
                   <p className="flex items-start mb-2">
                     <span>Experience</span>
                     <span className="text-red-500 font-medium text-sm">*</span>
@@ -170,6 +190,8 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
                   <input
                     type="text"
                     placeholder="Your Experience"
+                    required
+                    value={formData.title}
                     name={`experience-${num}`}
                     id={`experience-${num}`}
                     className={`w-full p-2 outline-none rounded-xl bg-transparent border py-3 focus:border-primary focus:valid:border-green-400 transition-all duration-300 ${
@@ -178,12 +200,46 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
                         : "border-Neutra10"
                     }`}
                     min={2}
+                    onChange={handleExperienceChange}
+                  />
+                </label>
+                <span
+                  className={`w-fit items-center justify-center pt-8 ${
+                    isDark
+                      ? " bg-gradient-to-r from-[#0d62ff] via-[#00ffb7] to-[#ff00fb] bg-clip-text text-transparent font-bold text-[17px]"
+                      : "text-Neutra50"
+                  }`}
+                >
+                  at
+                </span>{" "}
+                <label
+                  htmlFor={`experience-${num}`}
+                  className="w-full xl:w-[300px]"
+                >
+                  <p className="flex items-start mb-2">
+                    <span>Workplace</span>
+                    <span className="text-red-500 font-medium text-sm">*</span>
+                  </p>
+
+                  <input
+                    type="text"
+                    placeholder="Workplace"
+                    value={formData.company}
+                    name={`experience-${num}`}
+                    id={`experience-${num}`}
+                    className={`w-full p-2 outline-none rounded-xl bg-transparent border py-3 focus:border-primary focus:valid:border-green-400 transition-all duration-300 ${
+                      isDark
+                        ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059]"
+                        : "border-Neutra10"
+                    }`}
+                    min={2}
+                    onChange={handleWorklaceChange}
                   />
                 </label>
                 {addInput.length > 1 && idx > 0 && (
                   <button
                     type="button"
-                    className="w-6 h-1  bg-white absolute top-1/2 right-0 transform -translate-y-1/2"
+                    className="w-6 h-1  bg-black absolute top-1/2 right-[-50px] transform -translate-y-1/2"
                     onClick={() => {
                       const updatedInputs = addInput.slice(
                         0,
@@ -206,9 +262,9 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
             >
               <button
                 type="button"
-                className={
+                className={` mt-[-8px] ${
                   addInput.length === 10 ? "opacity-40 cursor-not-allowed" : ""
-                }
+                }`}
                 disabled={addInput.length === 10}
                 onClick={() =>
                   setAddInput((prev) => [...prev, prev.length + 1])
