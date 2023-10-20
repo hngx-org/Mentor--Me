@@ -278,7 +278,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
               <div className="fixed inset-0 flex items-center justify-center z-50">
                 <div className="bg-white border rounded-lg p-8 max-w-sm w-full mx-4">
                   <p className="text-xl text-green-600">
-                    Exoerience updated successfully!
+                    Experience updated successfully!
                   </p>
                 </div>
               </div>
