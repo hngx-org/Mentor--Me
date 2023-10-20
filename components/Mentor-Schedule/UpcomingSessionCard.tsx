@@ -15,6 +15,7 @@ interface RecentbookingFromApi {
   tag: string;
   duration: number;
   attendeesLimit: number;
+  sessionUrl: string;
 }
 
 function UpcomingSessionCard({
@@ -28,6 +29,7 @@ function UpcomingSessionCard({
   attendeesLimit,
   occurence,
   tag,
+  sessionUrl,
 }: RecentbookingFromApi) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -45,7 +47,7 @@ function UpcomingSessionCard({
     <div>
       <div>
         {/* Container for the card */}
-        <div className="max-w-[350px] mb-2  border border-neutral-300 rounded-lg p-4 flex flex-col gap-5">
+        <div className="max-w-[350px] mb-2  border border-neutral-300 rounded-lg p-4 flex flex-col gap-5 shadow-sm">
           <div className="px-4 border border-Accent1 text-center w-fit flex justify-center bg-black">
             {" "}
             <p className="text-medium text-white">{tag}</p>
@@ -109,6 +111,7 @@ function UpcomingSessionCard({
               description={description}
               tag={tag}
               occurence={occurence}
+              sessionUrl={sessionUrl}
             />
           </Modal>
         )}

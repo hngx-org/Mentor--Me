@@ -65,7 +65,7 @@ function Schedule() {
               </div>
             </div>
           </div>
-          <hr className="max-w-[380px] h-1 lg:max-w-[606px]" />
+          <hr className=" h-1 lg:max-w-[606px]" />
           {/* My sessions */}
           <h3 className="text-lg font-Hanken text-neutral-950 font-semibold mt-3 md:mt-6 lg:mt-7 md:font-inter md:font-medium lg:mb-10 md:text-[32px]">
             My Sessions
@@ -82,7 +82,7 @@ function Schedule() {
             {" "}
             <PortfolioCard />
           </div>
-          <div className="container lg:hidden mt-4  flex  gap-3">
+          <div className=" lg:hidden mt-4 grid grid-cols-2 gap-3">
             <PortfolioCard />
 
             <AddNewSession />

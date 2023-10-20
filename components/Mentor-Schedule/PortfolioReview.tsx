@@ -66,24 +66,28 @@ function PortfolioReview({
   };
   return (
     <div>
-      <div className="h-[235px] max-w-[295px] border-t-4 border-Accent1 border-x border-b rounded-lg px-2 py-5 flex flex-col justify-start gap-5">
-        <div className="flex justify-between item-center ">
-          <h3 className="font-Hanken font-bold text-base ">{sessionName}</h3>
-          <div className="hidden md:block cursor-pointer">
-            <MySettingsIcon />
+      <div className="h-[235px] max-w-[295px] border-t-4 border-Accent1 shadow-md rounded-lg px-2 py-4 flex flex-col justify-between gap-5">
+        <div>
+          {" "}
+          <div className="flex justify-between item-center ">
+            <h3 className="font-Hanken font-bold text-lg ">{sessionName}</h3>
+            <div className="hidden md:block cursor-pointer">
+              <MySettingsIcon />
+            </div>
+          </div>
+          <div className="font-Hanken text-Neutra50 font-medium text-base flex flex-col h-[58px] gap-4 justify-between col-span-full row-span-3 ">
+            <p>{duration} mins</p>
+            <button
+              type="button"
+              onClick={openModal}
+              className="text-neutral-500 font-base cursor-pointer underline leading-5 underline-offset-4   text-left w-fit"
+            >
+              View Details
+            </button>
           </div>
         </div>
-        <div className="font-Hanken text-sm font-normal flex flex-col h-[58px] gap-4 justify-between col-span-full row-span-3 ">
-          <p>{duration} mins</p>
-          <button
-            type="button"
-            onClick={openModal}
-            className="text-neutral-500 font-base cursor-pointer underline leading-5 underline-offset-4   text-left w-fit"
-          >
-            View Details
-          </button>
-        </div>
-        <div className=" col-span-full ">
+
+        <div className=" ">
           <div className="hidden lg:text-Accent1 lg:text-sm gap-4 lg:flex cursor-pointer lg:justify-between lg:items-center">
             <button
               type="button"
@@ -116,6 +120,7 @@ function PortfolioReview({
             description={description}
             tag={tag}
             occurence={occurence}
+            sessionUrl={sessionUrl}
           />
         </Modal>
       )}
