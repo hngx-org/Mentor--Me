@@ -9,7 +9,6 @@ import { NextPage } from "next";
 import NewMentee from "./noBookings";
 import AfterBookings from "./afterBookings";
 import RegularUser from "./regularUser";
-// import ProtectedRoute from "@/context/ProtectedRoute";
 import useAuth from "@/context/useAuth";
 import ProtectedRoute from "@/context/ProtectedRoute";
 
@@ -18,7 +17,7 @@ const MenteeDashboard: NextPage = () => {
     "beforeBooking" | "hasBooking" | "regular"
   >("beforeBooking");
 
-  const { data } = useAuth();
+  const { data } = useAuth("Mentee");
   const username = data?.userDetails?.fullName;
 
   const handleActiveScreen = () => {
