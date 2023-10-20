@@ -1,7 +1,12 @@
-import Image from "next/image";
+"use client";
 
-import imgCarousel from "@/lib/constants/carouselData";
-import Carousel from "@/components/Carousel";
+import dynamic from "next/dynamic";
+import CarouselSlider from "@/components/Carousel";
+
+const MotionDiv = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.div),
+  { ssr: false }
+);
 
 export default function MentorTypes() {
   return (
@@ -16,23 +21,44 @@ export default function MentorTypes() {
         </p>
       </div>
 
-      <div className="w-9/10 md:w-5/6 mx-auto">
-        <Carousel
-          imgCarousel={imgCarousel}
-          title="Tech Experienced Mentors"
-          text=" Welcome to Mentor.Me, your gateway to a world of tech excellence and
+      <div className="w-9/10 mx-auto flex flex-col gap-10">
+        <MotionDiv
+          initial={{ opacity: 0, y: 200 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.7,
+            ease: "easeIn",
+            delay: 1,
+          }}
+        >
+          <CarouselSlider
+            title="Tech Experienced Mentors"
+            text=" Welcome to Mentor.Me, your gateway to a world of tech excellence and
             innovation. We believe that mentorship is the cornerstone of
             personal and professional growth in the fast-paced and ever-evolving
             world of technology."
-        />
-        <Carousel
-          imgCarousel={imgCarousel}
-          title="Marketing Experienced Mentors"
-          text=" Welcome to Mentor.Me, your gateway to a world of tech excellence
+          />
+        </MotionDiv>
+
+        <MotionDiv
+          initial={{ opacity: 0, y: 200 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.7,
+            ease: "easeIn",
+            delay: 2,
+          }}
+        >
+          <CarouselSlider
+            title="Marketing Experienced Mentors"
+            text=" Welcome to Mentor.Me, your gateway to a world of tech excellence
               and innovation. We believe that mentorship is the cornerstone of
               personal and professional growth in the fast-paced and
               ever-evolving world of technology."
-        />
+          />
+        </MotionDiv>
       </div>
     </section>
   );
