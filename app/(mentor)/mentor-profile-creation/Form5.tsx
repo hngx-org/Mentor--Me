@@ -24,16 +24,7 @@ function Form5({ handleMoveForward, handleMoveBack }: myProps) {
         handleBack={() => {
           handleMoveBack();
         }}
-      >
-        <div className="flex items-center justify-start gap-2">
-          <input type="checkbox" className="mt-[6px]" required />
-          <p className="font-medium font-Inter ">
-            By filling this form, you agree to MentorMe’s{" "}
-            <span className="text-Accent1">Privacy policy</span> and{" "}
-            <span className="text-Accent1">Terms of use</span>.
-          </p>
-        </div>
-      </MentorFormBuilder>
+      />
     </div>
   );
 }

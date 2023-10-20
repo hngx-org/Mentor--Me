@@ -1,3 +1,5 @@
+"use client";
+
 import { useReadLocalStorage } from "usehooks-ts";
 import React, { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";

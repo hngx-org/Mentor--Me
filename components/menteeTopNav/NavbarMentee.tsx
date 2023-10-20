@@ -53,6 +53,10 @@ export const NavbarMentee = ({
     };
   }, []);
 
+  // const LogoutHandler = () => {
+
+  // }
+
   return (
     <nav
       className={`${
@@ -145,7 +149,7 @@ export const NavbarMentee = ({
                           : "/mentee-profile?path=profile"
                       }
                     >
-                      <div className="   text-[12px] text-Neutra10  ">
+                      <div className="text-[12px] text-Neutra10 ">
                         <p className="font-[500] text-white text-[14px]">
                           {username ?? "Username"}
                         </p>
