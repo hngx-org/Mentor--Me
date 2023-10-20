@@ -39,7 +39,7 @@ type UserData = {
   experience?: string;
 };
 export default function ProfilePage() {
-  const { data } = useAuth();
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [userDetailsContext, setUserDetailsContext] = useState<UserDetails>({
@@ -65,7 +65,7 @@ export default function ProfilePage() {
     mentoring_experience: "",
     certification: "",
   });
-  const router = useRouter();
+
   const [modal, setModal] = useState<ModalState>({
     state: "basic info",
     isOpen: false,
@@ -137,6 +137,7 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
+    router.refresh();
     getCurrentMentor();
   }, []);
 
