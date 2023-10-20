@@ -3,22 +3,31 @@
 import Image from "next/image";
 import { IoSearch } from "react-icons/io5";
 
+import Typewriter from "typewriter-effect";
 import HeroImage from "../../../public/assets/images/landing-page/hero-section-images.png";
 
 export default function Hero() {
   return (
-    <section className="sm:py-[5rem] sm:mt-[3rem] mt-8">
+    <section className="sm:py-[5rem] lg:mt-[3rem] ">
       <div className="md:w-5/6 md:max-lg:w-9/10 md:m-auto md:flex justify-between items-center">
-        <div className="mb-[3.5rem] md:mb-0 max-w-[520px] mx-auto md:mx-0 md:max-w-[636px] md:max-xl:max-w-[480px] md:pr-[1rem]">
-          <div className="w-9/10 md:max-xl:w-9/10 mx-auto md:max-xl:mx-0 md:w-full ">
-            <h2 className="text-[1.5rem] md:max-xl:text-[1.8rem] leading-7 md:text-5xl md:leading-tight font-semibold pb-[1rem] md:pb-[1.5rem]">
-              Unleash Your{" "}
-              <span className="w-fit bg-gradient-to-r from-[#00ffd5] via-[#0075fa] to-[#db0794] bg-clip-text text-transparent select-none">
-                Potential
-              </span>{" "}
-              with Expert{" "}
-              <span className="bg-gradient-to-r from-[#00ffd5] via-[#0075fa] to-[#db0794] bg-clip-text text-transparent select-none">
-                Guidance
+        <div className="mb-[3.5rem] md:mb-0 sm:max-w-[600px] mx-auto md:mx-0   w-full">
+          <div className="w-full md:max-xl:w-9/10 mx-auto md:max-xl:mx-0 md:w-ful  xl:w-full ">
+            <h2 className="text-[1.5rem]   xl:leading-[1.3] 2xl:text-[55px] sm:text-5xl  font-semibold xl:font-bold font-Inter pb-[1rem] md:pb-[1.5rem]">
+              Unleash Your Potential with Expert{" "}
+              <span className="bg-gradient-to-r from-[#00ffd5] via-[#0075fa] to-[#db0794] bg-clip-text text-transparent select-none pr-3">
+                <Typewriter
+                  component="span"
+                  options={{
+                    autoStart: true,
+                    loop: true,
+                    strings: ["Guidance", "Insights", "Support"],
+                    delay: 150,
+                    skipAddStyles: true,
+                    cursor: "_",
+                    deleteSpeed: 100,
+                    cursorClassName: "cursor",
+                  }}
+                />
               </span>
             </h2>
             <p className="text-[0.85rem] md:text-base md:max-xl:text-[0.9rem]">
