@@ -1,19 +1,78 @@
-import React from "react";
-import Link from "next/link";
-import { BookIcon } from "@/public/SVGs";
-import ProtectedRoute from "@/context/ProtectedRoute";
+"use client";
 
-export async function generateMetadata({
-  searchParams: { path },
-}: {
-  searchParams: { path?: string | null };
-}) {
-  return {
-    title: path || "Resources",
-  };
-}
-const Resources = () => (
-  <ProtectedRoute>
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { BookIcon } from "@/public/SVGs";
+import Add from "@/public/assets/add-circle.svg";
+
+import ResourceOne from "@/public/assets/resource_one.png";
+import ResourceTwo from "@/public/assets/resource_two.png";
+import ResourceCard from "./explore/ResourceCard";
+import Container from "./Container";
+
+// export async function generateStaticMetadata({
+//   searchParams: { path },
+// }: {
+//   searchParams: { path?: string | null };
+// }) {
+//   return {
+//     title: path || "Resources",
+//   };
+// }
+
+const Resources = () => {
+  const [data, setData] = useState<any>([]);
+
+  useEffect(() => {
+    const savedItems = localStorage.getItem("save");
+    if (savedItems?.length !== undefined && savedItems.length > 3) {
+      const stored: any[] = JSON.parse(savedItems);
+      setData(stored);
+    }
+  }, []);
+
+  console.log(data);
+
+  return data.length ? (
+    <Container>
+      <div className="relative p-4 min-h-screen">
+        <div className="flex gap-3 md:gap-[60px] mb-10">
+          <p className="font-Hanken text-[1rem] lg:text-lg text-NeutalBase border-b-[4px] border-Accent1">
+            My Resources
+          </p>
+        </div>
+        <div className="flex gap-6 w-full flex-wrap justify-center pb-20">
+          {[...data].reverse()?.map((res: any, i: number) => (
+            <Link
+              key={res._id}
+              href={`/mentee-resources/explore/${res._id}?path=Resources`}
+            >
+              <ResourceCard
+                src={i % 2 ? ResourceTwo : ResourceOne}
+                title={res.title}
+                author={`${res.name} | ${res.role}, ${res.company}`}
+                reviews={res.reviews}
+                ratings={res.ratings}
+              />
+            </Link>
+          ))}
+        </div>
+        <Link
+          href="/mentee-resources/explore?path=Explores"
+          className="fixed bottom-20 right-10"
+        >
+          <Image
+            src={Add}
+            width={60}
+            height={60}
+            alt="add"
+            className="hover:scale-105"
+          />
+        </Link>
+      </div>
+    </Container>
+  ) : (
     <div className="w-full max-w-[447px] h-[calc(100vh-100px)] flex flex-col justify-center items-center mx-auto px-2 ">
       <BookIcon />
       <p className="mt-6 mb-7 font-Hanken text-Neutra40 text-lg">
@@ -31,7 +90,7 @@ const Resources = () => (
         </button>
       </Link>
     </div>
-  </ProtectedRoute>
-);
+  );
+};
 
 export default Resources;
