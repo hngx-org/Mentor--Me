@@ -2598,7 +2598,7 @@ export const EditIConv2 = () => (
     </g>
   </svg>
 );
-export const AddIConv2 = () => (
+export const AddIConv2 = ({ color }: { color?: string }) => (
   <svg
     width="20px"
     height="20px"
@@ -2610,7 +2610,7 @@ export const AddIConv2 = () => (
       <path
         id="Vector"
         d="M6 12H12M12 12H18M12 12V18M12 12V6"
-        stroke="#000000"
+        stroke={`${color || "#000000"}`}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

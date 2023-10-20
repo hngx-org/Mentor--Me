@@ -21,6 +21,8 @@ import {
   UserDetails,
 } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/DetailsContext";
 import { AddIConv2, EditIConv2 } from "@/public/SVGs";
+import { useFileUpload } from "./useFileUpdate";
+import ProfileCard from "./MentorProfileCard";
 
 export type ModalType = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -128,33 +130,6 @@ export default function MentorProfileTabLayout({
           others={ProfileBio.details.otherlinks!}
         />
       )}
-    </div>
-  );
-}
-
-function ProfileCard({ userName }: { userName: string }) {
-  const { data } = useAuth();
-  const name = data?.userDetails?.fullName;
-  return (
-    <div className="w-[100%] flex flex-col h-[100px] space-x-4 my-5">
-      <p>change profile photo</p>
-      <div className="w-[100%] flex h-[100px] space-x-2 my-5 ">
-        <div className="w-[54px]  h-[54px] sm:w-[54px] sm:h-[54px]  rounded-full relative ">
-          <Image
-            style={{ objectFit: "cover", borderRadius: "100%" }}
-            src={`https://api.dicebear.com/7.x/initials/png?seed=${userName}`}
-            fill
-            alt="profile"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <p className="font-bold text-Accent1  text-sm ">Upload file</p>
-          <p className="text-Neutra10 text-sm ">
-            Make sure the file is below 2mb
-          </p>
-        </div>
-      </div>
     </div>
   );
 }
