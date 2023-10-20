@@ -66,7 +66,7 @@ function PortfolioReview({
   };
   return (
     <div>
-      <div className="h-[235px] max-w-[295px] border-t-4 border-Accent1 shadow-md rounded-lg px-2 py-4 flex flex-col justify-between gap-5">
+      <div className="h-[235px] max-w-[295px] border-t-4 border-Accent1 hover:transform hover:scale-95 ease-in-out duration-300 shadow-lg rounded-lg px-2 py-4 flex flex-col justify-between gap-5">
         <div>
           {" "}
           <div className="flex justify-between item-center ">
