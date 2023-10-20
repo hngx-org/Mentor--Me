@@ -1,7 +1,6 @@
 import Image from "next/image";
 
-import imgCarousel from "@/lib/constants/carouselData";
-import Carousel from "@/components/Carousel";
+import CarouselSlider from "@/components/Carousel";
 
 export default function MentorTypes() {
   return (
@@ -16,17 +15,15 @@ export default function MentorTypes() {
         </p>
       </div>
 
-      <div className="w-9/10 md:w-5/6 mx-auto">
-        <Carousel
-          imgCarousel={imgCarousel}
+      <div className="w-9/10 mx-auto flex flex-col gap-10">
+        <CarouselSlider
           title="Tech Experienced Mentors"
           text=" Welcome to Mentor.Me, your gateway to a world of tech excellence and
             innovation. We believe that mentorship is the cornerstone of
             personal and professional growth in the fast-paced and ever-evolving
             world of technology."
         />
-        <Carousel
-          imgCarousel={imgCarousel}
+        <CarouselSlider
           title="Marketing Experienced Mentors"
           text=" Welcome to Mentor.Me, your gateway to a world of tech excellence
               and innovation. We believe that mentorship is the cornerstone of

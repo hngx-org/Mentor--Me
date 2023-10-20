@@ -5,12 +5,10 @@ import MentorTypes from "@/components/landingPage/mentorTypes/page";
 import BookingMentor from "@/components/landingPage/bookingMentor/page";
 import Reviews from "@/components/landingPage/reviews/page";
 import Footer from "@/components/Footer";
-import MenteeSideBar from "@/components/SideBar/MenteeSideBar";
-import MentorSideBar from "@/components/SideBar/MentorSideBar";
 
 export default function Home() {
   return (
-    <main className="bg-[white] text-[black] h-screen">
+    <main className="bg-[white] text-[black] ">
       <HomeNavBar />
       <Hero />
       <Partners />

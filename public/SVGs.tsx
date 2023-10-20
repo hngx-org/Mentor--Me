@@ -1,4 +1,6 @@
+// @ts-nocheck
 import * as React from "react";
+import { motion } from "framer-motion";
 import { SVGProps } from "react";
 
 export const ListViewIcon = ({
@@ -560,7 +562,11 @@ export const NotificationIcon = (props?: SVGProps<SVGSVGElement>) => (
 );
 
 export const NotificationBingIcon = (props?: SVGProps<SVGSVGElement>) => (
-  <svg
+  <motion.svg
+    whileHover={{
+      rotateZ: [0, -20, 20, -20, 20, -20, 20, 0],
+      transition: { duration: 0.5 },
+    }}
     xmlns="http://www.w3.org/2000/svg"
     width={24}
     height={24}
@@ -575,7 +581,7 @@ export const NotificationBingIcon = (props?: SVGProps<SVGSVGElement>) => (
       <path d="M15.332 18.82c0 1.83-1.5 3.33-3.33 3.33-.91 0-1.75-.38-2.35-.98-.6-.6-.98-1.44-.98-2.35" />
     </g>
     <path fill="#D53232" d="M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-  </svg>
+  </motion.svg>
 );
 
 export const CartOutlineIcon = (props?: SVGProps<SVGSVGElement>) => (
