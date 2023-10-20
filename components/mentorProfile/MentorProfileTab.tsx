@@ -21,7 +21,6 @@ import {
   UserDetails,
 } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/DetailsContext";
 import { AddIConv2, EditIConv2 } from "@/public/SVGs";
-import { useFileUpload } from "./useFileUpdate";
 import ProfileCard from "./MentorProfileCard";
 
 export type ModalType = {
