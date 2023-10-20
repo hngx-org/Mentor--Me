@@ -3,9 +3,12 @@
 import Image from "next/image";
 import { IoSearch } from "react-icons/io5";
 
-import Typewriter from "typewriter-effect";
+import dynamic from "next/dynamic";
 import HeroImage from "../../../public/assets/images/landing-page/hero-section-images.png";
 
+const TypewriterComponent = dynamic(() => import("typewriter-effect"), {
+  ssr: false,
+});
 export default function Hero() {
   return (
     <section className="sm:py-[5rem] lg:mt-[3rem] ">
@@ -15,7 +18,7 @@ export default function Hero() {
             <h2 className="text-[1.5rem]   xl:leading-[1.3] 2xl:text-[55px] sm:text-5xl  font-semibold xl:font-bold font-Inter pb-[1rem] md:pb-[1.5rem]">
               Unleash Your Potential with Expert{" "}
               <span className="bg-gradient-to-r from-[#00ffd5] via-[#0075fa] to-[#db0794] bg-clip-text text-transparent select-none pr-3">
-                <Typewriter
+                <TypewriterComponent
                   component="span"
                   options={{
                     autoStart: true,

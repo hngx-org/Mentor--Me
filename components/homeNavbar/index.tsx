@@ -6,8 +6,8 @@
 import React, { FC, useEffect, useState } from "react";
 
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 
+import dynamic from "next/dynamic";
 import {
   NotificationIcon,
   NotifyIcon,
@@ -16,6 +16,14 @@ import {
 } from "@/public/SVGs";
 import Hambuger from "../hambuger";
 
+const MotionDiv = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.div),
+  { ssr: false }
+);
+const AnimatePresenceDiv = dynamic(
+  () => import("framer-motion").then((mod) => mod.AnimatePresence),
+  { ssr: false }
+);
 type LinkProps = {
   id: number;
   label: string;
@@ -168,9 +176,9 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
           onClick={() => setToggleMenu(false)}
         />
       )}
-      <AnimatePresence>
+      <AnimatePresenceDiv>
         {toggleMenu && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, translateX: -100 }}
             animate={{ opacity: 1, translateX: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -213,9 +221,9 @@ const HomeNavBar: FC<HomeNavProps> = ({ isUserLogin = false }) => {
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         )}
-      </AnimatePresence>
+      </AnimatePresenceDiv>
     </>
   );
 };

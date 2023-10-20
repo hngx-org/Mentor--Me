@@ -1,7 +1,12 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 import CarouselSlider from "@/components/Carousel";
+
+const MotionDiv = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.div),
+  { ssr: false }
+);
 
 export default function MentorTypes() {
   return (
@@ -17,11 +22,15 @@ export default function MentorTypes() {
       </div>
 
       <div className="w-9/10 mx-auto flex flex-col gap-10">
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
+        <MotionDiv
+          initial={{ opacity: 0, y: 200 }}
           whileInView={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeIn", delay: 2 }}
+          transition={{
+            duration: 0.7,
+            ease: "easeIn",
+            delay: 1,
+          }}
         >
           <CarouselSlider
             title="Tech Experienced Mentors"
@@ -30,14 +39,26 @@ export default function MentorTypes() {
             personal and professional growth in the fast-paced and ever-evolving
             world of technology."
           />
-        </motion.div>
-        <CarouselSlider
-          title="Marketing Experienced Mentors"
-          text=" Welcome to Mentor.Me, your gateway to a world of tech excellence
+        </MotionDiv>
+
+        <MotionDiv
+          initial={{ opacity: 0, y: 200 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.7,
+            ease: "easeIn",
+            delay: 2,
+          }}
+        >
+          <CarouselSlider
+            title="Marketing Experienced Mentors"
+            text=" Welcome to Mentor.Me, your gateway to a world of tech excellence
               and innovation. We believe that mentorship is the cornerstone of
               personal and professional growth in the fast-paced and
               ever-evolving world of technology."
-        />
+          />
+        </MotionDiv>
       </div>
     </section>
   );

@@ -4,13 +4,23 @@
 "use client";
 
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+
 import { Suspense, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { DashboardMenteeNavImg } from "@/public";
 import { NotificationBingIcon } from "@/public/SVGs";
 import LoadingSpinner from "../loaders/LoadingSpinner";
+
+const MotionDiv = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.div),
+  { ssr: false }
+);
+const AnimatePresenceDiv = dynamic(
+  () => import("framer-motion").then((mod) => mod.AnimatePresence),
+  { ssr: false }
+);
 
 export type NavbarMenteeProps = {
   path?: string | null;
@@ -109,7 +119,7 @@ export const NavbarMentee = ({
               className="object-cover rounded-full"
             />
 
-            <AnimatePresence>
+            <AnimatePresenceDiv>
               {isView && (
                 <>
                   <div
@@ -117,7 +127,7 @@ export const NavbarMentee = ({
                     role="dialog"
                     onClick={() => setIsView(!isView)}
                   />
-                  <motion.div
+                  <MotionDiv
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -174,10 +184,10 @@ export const NavbarMentee = ({
                     >
                       Logout
                     </button>
-                  </motion.div>
+                  </MotionDiv>
                 </>
               )}
-            </AnimatePresence>
+            </AnimatePresenceDiv>
           </div>
         </div>
       </Suspense>
