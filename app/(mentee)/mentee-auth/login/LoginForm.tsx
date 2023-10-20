@@ -25,9 +25,11 @@ import Input from "@/components/inputs/input";
 import { BackwardIcon } from "@/public/SVGs";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Button from "../../(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
+import { useAuthCtx } from "@/context/AuthContext";
 
 export default function LoginForm() {
   const router = useRouter();
+  const { setUserData } = useAuthCtx();
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = React.useState<any>();
   const [isValid, setIsValid] = React.useState(true);
@@ -63,6 +65,7 @@ export default function LoginForm() {
         .then((response) => {
           localStorage.setItem("Mentee", JSON.stringify(response.data));
           setUser(response.data);
+          setUserData(response.data);
 
           if (response?.data?.data && response?.data?.data?.user?.profileLink) {
             router.replace("/mentee-profile?path=profile");
