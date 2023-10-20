@@ -141,6 +141,7 @@ export default function MenteeProfilePage() {
           <div className="flex w-full max-sm:h-[150px]">
             <Image
               src={DashboardCoverBg}
+              className="w-full"
               alt="cover"
               width={2000}
               height={500}
