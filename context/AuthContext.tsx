@@ -61,7 +61,7 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (data) {
-      console.log(data, { email: data.data?.user.email });
+      // console.log(data, { email: data.data?.user.email });
       setUserData(data);
       setUser((prev) => ({
         ...prev,

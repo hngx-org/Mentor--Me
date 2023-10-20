@@ -15,6 +15,7 @@ import { toast } from "react-hot-toast";
 import styles from "./page.module.css";
 
 import MentorMeIcon from "@/svgs/MentorMeIcon";
+import { BackwardIcon } from "@/public/SVGs";
 
 import {
   MentorCreationTopEllipse,
@@ -34,14 +35,8 @@ import Form5 from "./Form5";
 import { useMentorContext } from "./MentorContext";
 
 export function MentorProfileCreationForms() {
-  const {
-    formInputs,
-    currForm,
-    setCurrForm,
-    files,
-    isRegistered,
-    setIsRegistered,
-  } = useMentorContext();
+  const { formInputs, currForm, setCurrForm, files, loader, setLoader } =
+    useMentorContext();
   const [isModalShown, setIsModalShown] = useState(false);
 
   const forms = [
@@ -84,11 +79,13 @@ export function MentorProfileCreationForms() {
       )
       .then((response) => {
         // Handle the response
-        setIsRegistered(true);
+        // console.log(response);
+        setLoader(false);
         setIsModalShown(true);
       })
       .catch((error) => {
         // Handle any errors
+        setLoader(false);
         console.log(error.response.data.message);
         toast.error(error.response.data.message);
       });
@@ -124,6 +121,7 @@ export function MentorProfileCreationForms() {
       setCurrForm(currForm + 1);
     } else if (currForm === forms.length - 1 && motion === "forward") {
       // setCurrForm(0);
+      setLoader(true);
       submitData();
     }
   }
@@ -132,16 +130,21 @@ export function MentorProfileCreationForms() {
     //   {/* // Overall container for the whole page */}
     <div className={`lg:flex-row flex  ${styles.scroll} relative bg-white`}>
       {/* overlay that shows behind the modal */}
-      <button
-        aria-label="hide/show overlay"
-        type="button"
-        onClick={() => {
-          setIsModalShown(false);
-        }}
+      <Link
         className={`duration-[0.5s] fixed top-0 left-0 h-full w-full bg-[#00000080] z-[8]  pointer-events-none ${
           isModalShown ? "opacity-1 pointer-events-auto" : "opacity-0"
         }`}
-      />
+        href="/mentor-profile?path=profile"
+        prefetch
+      >
+        <button
+          aria-label="hide/show overlay"
+          type="button"
+          onClick={() => {
+            setIsModalShown(false);
+          }}
+        />
+      </Link>
 
       {/* div containing success modal */}
       <div
@@ -154,11 +157,16 @@ export function MentorProfileCreationForms() {
       {/* left side with forms */}
       <div className="flex flex-col w-[100%] lg:w-[50%] relative max-h-[100vh]">
         {/* mentor me logo */}
-
-        <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px] mb-[40px] sm:mb-[80px] sticky top-0 mt-5 sm:mx-10 mx-4" />
-
+        <Link href="/" className="w-fit h-fit">
+          <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px]   sticky top-0 mt-5 sm:mx-10 mx-4" />
+        </Link>
+        <Link
+          href="/mentor-auth/login"
+          className="flex mb-[30px] sm:mb-[30px] ml-4 sm:ml-8 mt-8"
+        >
+          <BackwardIcon /> <span className="ms-2">Go back</span>
+        </Link>
         {/* CONTAINER FOR THE FORMS */}
-
         <div className="flex items-start relative gap-[100px] w-[100%] max-h-[100%] overflow-x-hidden">
           {/* form 1 */}
 
@@ -217,7 +225,6 @@ export function MentorProfileCreationForms() {
           />
           {/* form 5 */}
         </div>
-
         {/* CONTAINER FOR THE FORMS */}
       </div>
 

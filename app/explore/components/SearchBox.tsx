@@ -13,7 +13,7 @@ interface CardProps {
   topic?: string;
   review?: string;
   contentImage: string;
-  timezone?: string;
+  timezone: string;
   nextAvailable: string;
 }
 interface SearchBoxProps {
@@ -22,11 +22,21 @@ interface SearchBoxProps {
   // setFilteredResults: React.Dispatch<React.SetStateAction<CardProps[]>>;
   setSearchResults: Dispatch<React.SetStateAction<CardProps[]>>;
   setFilteredResults: Dispatch<React.SetStateAction<CardProps[]>>;
+  value: number;
+  setValue: Dispatch<React.SetStateAction<number>>;
+  selectedDate: Date;
+  setSelectedDate: Dispatch<React.SetStateAction<Date>>;
+  onSubmit: () => void;
 }
 export default function SearchBox({
   cards,
   setSearchResults,
   setFilteredResults,
+  value,
+  setValue,
+  selectedDate,
+  setSelectedDate,
+  onSubmit,
 }: SearchBoxProps) {
   // {info, setSearchResults}
 
@@ -46,6 +56,12 @@ export default function SearchBox({
   const [searchTerm, setSearchTerm] = useState("");
   //  added this
   // const [filteredResults, setFilteredResults] = useState<CardProps[]>([]);
+
+  // For filter
+  const [selected, setSelected] = useState("");
+
+  // For range slider
+  // const [value, setValue] = useState<number>(10);
 
   useEffect(() => {
     // Filter the cards based on the search term and update the search results
@@ -94,7 +110,15 @@ export default function SearchBox({
           className="w[80%] w-full bg-transparent outline-none font-Inter font-normal text-sm text-[#101928]"
         />
         <div className="-mr5 ml-2 lg:hidden">
-          <Filter />
+          <Filter
+            selectedTimeZone={selected}
+            setSelectedTimeZone={setSelected}
+            value={value}
+            setValue={setValue}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+            onSubmit={onSubmit}
+          />
         </div>
       </div>
     </div>

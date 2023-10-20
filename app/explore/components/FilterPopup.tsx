@@ -1,24 +1,47 @@
-import React, { useState } from "react";
+import React, { Dispatch, useState } from "react";
 import RangeSlider from "./RangeSlider";
-import Calendarcomponent from "@/app/(mentee)/(dashboard-route)/mentee-booking/components/booking-session/Calender";
+import Calendarcomponent from "./Calender";
 
-type PopupProps = {
+interface PopupProps {
   onClose: () => void;
-};
+  onSubmit: () => void;
+  setSelectedTimeZone: Dispatch<React.SetStateAction<string>>;
+  selectedTimeZone: string;
+  value: number;
+  setValue: Dispatch<React.SetStateAction<number>>;
+  selectedDate: Date;
+  setSelectedDate: Dispatch<React.SetStateAction<Date>>;
+}
 
-export default function FilterPopup({ onClose }: PopupProps) {
-  const [selected, setSelected] = useState("");
+export default function FilterPopup({
+  onClose,
+  setSelectedTimeZone,
+  selectedTimeZone,
+  value,
+  setValue,
+  selectedDate,
+  setSelectedDate,
+  onSubmit,
+}: PopupProps) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(event.target.value);
-    setSelected(event.target.value);
+    setSelectedTimeZone(event.target.value);
+    // console.log(selected);
   };
 
   const closePopup = () => {
     // setIsPopupOpen(false);
+    onSubmit();
     onClose();
   };
+
+  // const filtered = cards.filter(
+  //   (card) =>
+  //     card.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     card.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     card.title.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   return (
     <div className=" z-10 container mx-auto absolute top20 top-16 right-0 right5 md:top-16 md:right-0 drop-shadow-2xl bg-white shadow-md rounded-md p-6 w-fit md:w-[400px] space-y-8">
@@ -37,8 +60,8 @@ export default function FilterPopup({ onClose }: PopupProps) {
             <input
               id="choiceGmt"
               type="radio"
-              value="choiceGmt"
-              checked={selected === "choiceGmt"}
+              value="GMT"
+              checked={selectedTimeZone === "GMT"}
               onChange={handleChange}
             />
           </div>
@@ -49,8 +72,8 @@ export default function FilterPopup({ onClose }: PopupProps) {
             <input
               id="choiceEst"
               type="radio"
-              value="choiceEst"
-              checked={selected === "choiceEst"}
+              value="EST"
+              checked={selectedTimeZone === "EST"}
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
@@ -62,8 +85,8 @@ export default function FilterPopup({ onClose }: PopupProps) {
             <input
               id="choiceGst"
               type="radio"
-              value="choiceGst"
-              checked={selected === "choiceGst"}
+              value="GST"
+              checked={selectedTimeZone === "GST"}
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
@@ -75,8 +98,8 @@ export default function FilterPopup({ onClose }: PopupProps) {
             <input
               id="choiceWat"
               type="radio"
-              value="choiceWat"
-              checked={selected === "choiceWat"}
+              value="WAT"
+              checked={selectedTimeZone === "WAT"}
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
@@ -89,7 +112,7 @@ export default function FilterPopup({ onClose }: PopupProps) {
               id="choiceEst2"
               type="radio"
               value="choiceEst2"
-              checked={selected === "choiceEst2"}
+              checked={selectedTimeZone === "choiceEst2"}
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
@@ -102,22 +125,23 @@ export default function FilterPopup({ onClose }: PopupProps) {
               id="choiceGst2"
               type="radio"
               value="choiceGst2"
-              checked={selected === "choiceGst2"}
+              checked={selectedTimeZone === "choiceGst2"}
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
           </div>
         </div>
       </div>
-      <RangeSlider />
+      <RangeSlider value={value} setValue={setValue} />
       <div className="flex flex-col space-y-5 justify-center ml3">
         <h1 className="font-Inter font-medium text-lg">Availability</h1>
         <div className="flex justify-center">
-          <Calendarcomponent />
+          <Calendarcomponent setSelectedDate={setSelectedDate} />
         </div>
       </div>
       <button
         type="button"
+        onClick={closePopup}
         className=" flex flex-col items-center bg-black text-white rounded-lg py-3 px-6 cursor-pointer ml-60 -mr-0 hover:bg-opacity-80 transition-opacity"
       >
         Apply

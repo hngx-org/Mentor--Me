@@ -36,10 +36,6 @@ export default function LoginForm() {
     password: "",
   });
 
-  const isDisabled = !formData.email.match(
-    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
-  );
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -59,21 +55,20 @@ export default function LoginForm() {
       setIsValid(true);
 
       axios
-        .post("https://mentorme-be.vercel.app/api/auth/login", {
+        .post("https://mentormee-api.onrender.com/auth/login", {
           email: formData.email,
           password: formData.password,
+          role: "mentee",
         })
         .then((response) => {
           localStorage.setItem("Mentee", JSON.stringify(response.data));
           setUser(response.data);
 
-          router.replace("/mentee-profile-creation");
-
-          // if (response?.data?.data && response?.data?.data?.user?.profileLink) {
-          //   router.replace("/mentee-profile?path=profile");
-          // } else {
-          //   router.replace("/mentee-profile-creation");
-          // }
+          if (response?.data?.data && response?.data?.data?.user?.profileLink) {
+            router.replace("/mentee-profile?path=profile");
+          } else {
+            router.replace("/mentee-profile-creation");
+          }
         })
 
         .catch((error) => {
@@ -153,13 +148,12 @@ export default function LoginForm() {
                   </div>
                 )}
                 <Button
-                  title="Sign up"
+                  title="Log in"
                   type="submit"
                   variant="primary"
                   className="w-full h-[48px]"
                   fullWidth
                   loading={isLoading}
-                  disabled={isDisabled}
                 />
               </div>
             </form>
@@ -171,7 +165,7 @@ export default function LoginForm() {
             </div>
             <div className="flex flex-col gap-4">
               <Button
-                title="Sign up with Google"
+                title="Log in with Google"
                 variant="secondary"
                 className="w-full h-[48px] gap-4"
                 fullWidth
@@ -179,7 +173,7 @@ export default function LoginForm() {
                 icon={google}
               />
               <Button
-                title="Sign up with Facebook"
+                title="Log in with Facebook"
                 variant="secondary"
                 className="w-full h-[48px] gap-4"
                 fullWidth

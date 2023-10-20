@@ -31,7 +31,7 @@ import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import { useAuthCtx } from "@/context/AuthContext";
 
 export default function LoginForm() {
-  // const { userData, setUserData } = useAuthCtx();
+  const { userData, setUserData } = useAuthCtx();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState(true);
@@ -62,23 +62,22 @@ export default function LoginForm() {
       setIsValid(true);
 
       axios
-        .post("https://mentorme-be.vercel.app/api/auth/login", {
+        .post("https://mentormee-api.onrender.com/auth/login", {
           email: formData.email,
           password: formData.password,
+          role: "mentor",
         })
         .then((response) => {
           localStorage.setItem("Mentor", JSON.stringify(response.data));
-          // setUserData(response.data);
+          setUserData(response.data);
 
-          router.replace("/mentor-profile-creation");
-
-          // if (response?.data?.data && response?.data?.data?.user?.profileLink) {
-          //   router.replace("/mentor-profile?path=mentor-profile");
-          //   setIsLoading(false);
-          // } else {
-          //   router.replace("/mentor-profile-creation");
-          //   setIsLoading(false);
-          // }
+          if (response?.data?.data && response?.data?.data?.user?.profileLink) {
+            router.replace("/mentor-profile?path=mentor-profile");
+            setIsLoading(false);
+          } else {
+            router.replace("/mentor-profile-creation");
+            setIsLoading(false);
+          }
         })
 
         .catch((error) => {

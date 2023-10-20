@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { MentorCreationArrDown } from "@/public";
 import { useMenteeContext } from "@/app/(mentee)/mentee-profile-creation/MenteeContext";
+import LoadingSpinner from "../loaders/LoadingSpinner";
 
 interface myProps {
   children?: any;
@@ -22,7 +23,7 @@ export default function MenteeFormBuilder({
   handleClick,
 }: myProps) {
   const form = useRef<HTMLFormElement | null>(null);
-  const { formInputs, setFormInputs } = useMenteeContext();
+  const { formInputs, setFormInputs, currForm, loader } = useMenteeContext();
   const [isFull, setIsFull] = useState(false);
   const [textLength, setTextLength] = useState(0);
   const [isValid, setIsValid] = useState(false);
@@ -155,15 +156,26 @@ export default function MenteeFormBuilder({
             isValid
               ? "bg-[#121212] cursor-pointer"
               : "bg-[#6c6c6c] cursor-not-allowed"
-          } text-white font-semibold border-[1px] w-[100%] max-w-[200px] py-5 rounded-md font-Inter text-center`}
+          } ${
+            loader ? "bg-[#6c6c6c]" : "bg-[#121212]"
+          } text-white font-semibold border-[1px] w-[100%] max-w-[200px] py-5 rounded-md font-Inter text-center relative`}
           onClick={(e) => {
             e.preventDefault();
+            const valid = (form.current! as HTMLFormElement).reportValidity();
+
             if (isValid) {
               handleClick();
             }
           }}
         >
-          Continue
+          {currForm === 3 && loader ? (
+            <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
+              <LoadingSpinner />
+            </div>
+          ) : (
+            ""
+          )}
+          {currForm === 3 ? "Submit" : "Continue"}
         </button>
       </div>
     </form>
