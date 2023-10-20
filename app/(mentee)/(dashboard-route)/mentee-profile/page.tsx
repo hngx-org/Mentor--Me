@@ -150,9 +150,7 @@ export default function MenteeProfilePage() {
             <div className="flex items-center gap-6  w-full max-lg:flex-col max-lg:items-start max-lg:gap-6 ">
               <div className="relative -mt-12 ">
                 <Suspense fallback={<LoadingSpinner />}>
-                  <div
-                    className={`h-[200px] w-[200px] bg-gradient-to-b rounded-full p-1 overflow-hidden`}
-                  >
+                  <div className="h-[200px] w-[200px] bg-gradient-to-b rounded-full p-1 overflow-hidden">
                     <Image
                       src={
                         menteeData.image

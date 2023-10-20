@@ -242,9 +242,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
         >
           <div className="flex items-center gap-4">
             <div className="relative  ">
-              <div
-                className={`h-[130px] w-[130px] bg-gradient-to-b rounded-full p-1 overflow-hidden`}
-              >
+              <div className="h-[130px] w-[130px] bg-gradient-to-b rounded-full p-1 overflow-hidden">
                 <Image
                   src={imageSource}
                   alt="user image"

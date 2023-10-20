@@ -178,7 +178,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
             }`}
           >
             {addInput.map((num, idx) => (
-              <div className="flex items-center gap-4 relative" key={idx}>
+              <div className="flex items-center gap-4 relative">
                 <div className="flex flex-col">
                   <label
                     htmlFor={`experience-${idx}`}
