@@ -130,7 +130,7 @@ const Forum = ({
           <span className="xl:underline"> {`${members.length} Members`}</span>
         </div>
 
-        <p className=" text-Neutra50 font-normal xl:text-[18px] lg:text-[16px] text-[10px] line-clamp-4 leading-[130%] overflow-clip">
+        <p className=" text-Neutra50 font-normal xl:text-[18px] lg:text-[16px] text-[10px] h-[52px] lg:h-[83.2px] xl:h-[93.6px] line-clamp-4 leading-[130%] overflow-clip">
           {description}
         </p>
       </div>
