@@ -151,15 +151,13 @@ export default function Reviews() {
       </div>
 
       <div className="w-9/10 md:w-auto mx-auto mt-[4rem] text-center">
-        <h3 className="text-[1.2rem] pb-[1.2rem]">
-          Click the button to get started in
-        </h3>
-        <button
-          type="button"
-          className="bg-[black] text-[white] text-[0.7rem] font-medium w-4/5 md:w-1/6 max-w-[169px] py-[1.1rem] md:py-[0.8rem] rounded-[8px] outline-none"
+        <Link
+          href="/welcome/signup"
+          className="bg-[black] text-[white] text-[0.7rem] font-medium rounded-[8px] outline-none sm:text-xl px-4 p-2 xl:text-2xl xl:px-6 hover:opacity-80 transition-all duration-500"
         >
-          <Link href="welcome/signup"> Get Started</Link>
-        </button>
+          {" "}
+          Get Started
+        </Link>
       </div>
     </section>
   );
