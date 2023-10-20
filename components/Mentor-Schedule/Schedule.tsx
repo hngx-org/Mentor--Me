@@ -41,13 +41,7 @@ function Schedule() {
               </Link>
             </div>
           </div>
-          {/* Intro talk */}
-          <div className="max-w-[322px] md:max-w-[450px] lg:max-w-[606px]">
-            <p className="font-inter font-medium text-sm leading-5 text-neutral-500 md:text-lg">
-              Create a seamless flow of events with mentees by crafting series
-              of personalized sessions with your calendar.
-            </p>
-          </div>
+
           {/* For the options */}
           <div className="max-w-[380px] relative text-gray-500 flex gap-5 font-Hanken text-base md:text-lg pt-6 lg:pt-10">
             <div className="h-[29px] hover:bg-Accent1 cursor-pointer lg:hover:bg-white">
@@ -67,9 +61,16 @@ function Schedule() {
           </div>
           <hr className=" h-1 lg:max-w-[606px]" />
           {/* My sessions */}
-          <h3 className="text-xl font-Hanken text-neutral-950 font-semibold mt-3 md:mt-6 lg:mt-7 md:font-inter md:font-medium lg:mb-10 md:text-[32px]">
+          <h3 className="text-xl font-Hanken text-neutral-950 font-semibold mt-3 md:mt-6 lg:mt-7 md:font-inter md:font-medium mb-3 md:text-[32px]">
             My Sessions
           </h3>
+          {/* Intro talk */}
+          <div className="max-w-[322px] md:max-w-[450px] lg:max-w-[606px] mb-6">
+            <p className="font-inter font-medium text-sm leading-5 text-neutral-500 md:text-lg lg:mb-12">
+              Create a seamless flow of events with mentees by crafting series
+              of personalized sessions with your calendar.
+            </p>
+          </div>
           <div className="flex justify-between items-center lg:hidden">
             <p className="text-base font-Hanken font-normal lg:mb-5 mb-3 mt-3">
               View, share, and create new sessions
@@ -88,7 +89,7 @@ function Schedule() {
             <AddNewSession />
           </div>
           {/* Upcoming session */}
-          <h3 className="text-lg lg:mt-20 font-Hanken text-neutral-950 font-semibold mt-10 lg:mb-[30px] md:font-inter md:font-medium md:text-[32px]">
+          <h3 className="text-lg lg:mt-20 font-Hanken text-neutral-950 font-semibold mt-10 lg:mb-0 md:font-inter md:font-medium md:text-[32px]">
             All Sessions{" "}
             <span className="hidden lg:inline-block">with Mentees</span>
           </h3>
@@ -115,7 +116,7 @@ function Schedule() {
                 </h4>
               </div>
 
-              <div className="mt-10">
+              <div>
                 <SeeYourUpComingSession />
               </div>
             </div>

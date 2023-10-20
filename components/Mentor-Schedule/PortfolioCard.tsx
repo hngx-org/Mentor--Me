@@ -76,7 +76,7 @@ function PortfolioCard() {
   return (
     <div>
       {/* for wider screens, two data is displayed */}
-      <div className="hidden lg:grid lg:grid-cols-3 gap-4">
+      <div className="hidden lg:grid lg:grid-cols-3">
         {loading ? (
           <LoadingSpinner />
         ) : (
