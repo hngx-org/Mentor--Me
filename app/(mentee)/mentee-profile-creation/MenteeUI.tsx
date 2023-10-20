@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import MentorMeIcon from "@/svgs/MentorMeIcon";
 
 import {
@@ -16,6 +17,7 @@ import {
 import MenteeProgressBar from "@/components/menteeProfileCreation/MenteeProgressBar";
 import MenteeFormBuilder from "@/components/menteeProfileCreation/MenteeFormBuilder";
 import { Button } from "@/components/buttons/button";
+import { BackwardIcon } from "@/public/SVGs";
 
 import formData from "@/lib/menteeProfileCreationData";
 import { MenteeProvider, useMenteeContext } from "./MenteeContext";
@@ -26,8 +28,8 @@ const form3Arr = formData[2];
 const form4Arr = formData[3];
 
 export default function MenteeProfileCreationForms() {
-  const { formInputs, setFormInputs } = useMenteeContext();
-  const [currForm, setCurrForm] = useState(0);
+  const { formInputs, setFormInputs, currForm, setCurrForm, setLoader } =
+    useMenteeContext();
   const [isModalShown, setIsModalShown] = useState(false);
 
   const select1 = useRef<HTMLInputElement>(null);
@@ -81,11 +83,13 @@ export default function MenteeProfileCreationForms() {
       )
       .then((response) => {
         // Handle the response
+        setLoader(false);
         setIsModalShown(true);
       })
       .catch((error) => {
         // Handle any errors
-        alert(error.response.data.message);
+        setLoader(false);
+        toast.error(error.response.data.message);
       });
   }
 
@@ -177,6 +181,7 @@ export default function MenteeProfileCreationForms() {
       setCurrForm(currForm + 1);
     } else if (currForm === forms.length - 1 && motion === "forward") {
       // setCurrForm(0);
+      setLoader(true);
       submitData();
     }
   }
@@ -230,7 +235,16 @@ export default function MenteeProfileCreationForms() {
       <div className="flex flex-col w-[100%] lg:w-[50%] relative max-h-[100vh]">
         {/* mentor me logo */}
 
-        <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px] mb-[40px] sm:mb-[80px] sticky top-0 mt-5 sm:mx-10 mx-4" />
+        <Link href="/">
+          <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px] sticky top-0 mt-5 sm:mx-10 mx-4" />
+        </Link>
+
+        <Link
+          href="/mentee-auth/login"
+          className="flex mb-[30px] sm:mb-[30px] ml-4 sm:ml-8 mt-8"
+        >
+          <BackwardIcon /> <span className="ms-2">Go back</span>
+        </Link>
 
         {/* CONTAINER FOR THE FORMS */}
 

@@ -44,9 +44,9 @@ function VerifyOTP() {
 
     if (otp.length === 6) {
       axios
-        .post("https://mentorme-be.vercel.app/api/auth/verify-email", {
-          email: useremail,
-          verification_token: otp,
+        .post("https://mentormee-api.onrender.com/auth/verify-email", {
+          userId: userid,
+          verificationCode: otp,
         })
         .then((response) => {
           console.log(response.data);
@@ -61,9 +61,13 @@ function VerifyOTP() {
 
   const resendEmail = async () => {
     axios
-      .post("https://mentorme-be.vercel.app/api/auth/request-otp", {
-        email: useremail,
-      })
+      .post(
+        "https://mentormee-api.onrender.com/auth/request-email-verification",
+        {
+          userId: userid,
+          isNewUser: true,
+        }
+      )
       .then((response) => {
         console.log(response.data);
       })
