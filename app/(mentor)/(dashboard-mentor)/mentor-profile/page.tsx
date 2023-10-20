@@ -156,7 +156,7 @@ export default function ProfilePage() {
             userName={userDetailsContext.fullName}
             email=""
             userRole={user?.mentorship_type}
-            userRating={4}
+            userRating={1}
             modal={setModal}
           />
           <MentorProfileMainLayout>
@@ -184,7 +184,7 @@ export default function ProfilePage() {
                   type: "experience",
                   heading: item,
                   text: "present",
-                  id: "4",
+                  id: "1",
                 })) || []
               }
               openModal={setModal}
