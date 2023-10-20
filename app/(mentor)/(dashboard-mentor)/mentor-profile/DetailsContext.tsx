@@ -1,5 +1,4 @@
 import React, { createContext, useMemo } from "react";
-import { InfoCardProps } from "@/components/mentorProfile/ProfileDetailCard";
 
 export type UserDetails = {
   bio: string;

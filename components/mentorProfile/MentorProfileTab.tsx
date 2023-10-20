@@ -271,11 +271,20 @@ interface ExpeCertsProps {
   items: InfoCardProps[];
   title: string;
 }
+
+interface View {
+  view: "Edit" | "All" | "Add";
+}
 export function ExpeCerts({ items, title }: ExpeCertsProps) {
+  const [view, setView] = useState("Edit");
   return (
     <div className="w-[100%] h-fit flex flex-col border border-3 rounded-[6px] my-5">
       <div className="w-[100%] h-[20px] py-6 flex justify-between px-4  items-center">
         <p>{title}</p>
+        <div className="space-x-4">
+          <span className="text-[20px]"> &#9998;</span>
+          <span>&#x2b;</span>
+        </div>
       </div>
       <div className="px-4">
         {items.length >= 1 &&
