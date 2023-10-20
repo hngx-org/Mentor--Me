@@ -17,7 +17,7 @@ import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/Vxrcel
 type formProps = {
   fullName: string;
   bio: string;
-  image: string;
+  image: string | null;
 };
 
 const MAX_SIZE = 2 * 1024 * 1024; // 2MB in bytes
@@ -28,10 +28,11 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const [formData, setFormData] = useState<formProps>({
     fullName: "",
     bio: "",
-    image: "",
+    image: null,
   });
   const [token, setToken] = useState("");
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
+  const [imageSource, setImageSource] = useState("");
   const baseUrl = "https://mentormee-api.onrender.com";
   const router = useRouter(); // router
 
@@ -39,8 +40,24 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = async (e) => {
         setFileURL(e.target?.result);
+
+        const imageData = new FormData();
+        imageData.append("file", e.target?.result as string);
+        imageData.append("upload_preset", "nd2sr4np");
+        imageData.append("cloud_name", "dp5ysdt4c");
+        imageData.append("api_key", "484974749171579");
+        imageData.append("folder", "mentee-profile");
+        const res = await fetch(
+          "https://api.cloudinary.com/v1_1/dp5ysdt4c/image/upload",
+          {
+            method: "POST",
+            body: imageData,
+          }
+        );
+        const data = await res.json();
+        setFormData({ ...formData, image: data.url });
       };
       reader.readAsDataURL(file);
     }
@@ -56,15 +73,17 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
     });
   };
 
-  let imageSource;
-
-  if (fileURL) {
-    imageSource = fileURL;
-  } else if (formData.image) {
-    imageSource = formData.image;
-  } else {
-    imageSource = `https://api.dicebear.com/7.x/initials/png?seed=${formData.fullName}`;
-  }
+  useEffect(() => {
+    if (formData.image) {
+      setImageSource(formData.image);
+    } else if (fileURL) {
+      setImageSource(fileURL);
+    } else {
+      setImageSource(
+        `https://api.dicebear.com/7.x/initials/png?seed=${formData.fullName}`
+      );
+    }
+  }, [formData, fileURL]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -106,7 +125,6 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data.data);
         setFormData({
           fullName: data?.data?.user?.fullName,
           bio: data?.data?.user?.bio,
@@ -129,28 +147,8 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
     setIsLoading(true);
     e.preventDefault();
     // Check if authToken exists
-    const imageData = new FormData();
-    imageData.append("file", fileURL);
-    imageData.append("upload_preset", "nd2sr4np");
-    imageData.append("cloud_name", "dp5ysdt4c");
-    imageData.append("api_key", "484974749171579");
-    imageData.append("folder", "mentee-profile");
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/dp5ysdt4c/image/upload",
-      {
-        method: "POST",
-        body: imageData,
-      }
-    );
-    const data = await res.json();
 
-    setFormData({
-      ...formData,
-      image: data.url,
-    });
-    console.log(data.url);
-
-    if (res.ok && token) {
+    if (formData.image && token) {
       const apiUrl = "https://mentormee-api.onrender.com/mentee/update-profile";
 
       const patchData = {
@@ -173,7 +171,6 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
           setTimeout(() => {
             setIsProfileUpdated(false);
           }, 3000);
-          console.log("PATCH request was successful");
         } else {
           console.error(
             `PATCH request failed with status code ${response.status}`
@@ -229,7 +226,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   // };
 
   return (
-    <div className="flex  w-full xl:max-w-full xl:mb-[100px] justify-center xl:justify-start sm:justify-start">
+    <div className="flex  w-full xl:max-w-full xl:mb-[100px]  justify-center xl:justify-start sm:justify-start">
       <div className="flex gap-4 flex-col ">
         <p
           className={`${
@@ -246,18 +243,14 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
           <div className="flex items-center gap-4">
             <div className="relative  ">
               <div
-                className={`h-[130px] w-[130px] bg-gradient-to-b ${
-                  isDark
-                    ? "from-[#0d62ff] via-[#00ffb7] to-[#ffcc00] "
-                    : "from-[#ff0d82] via-[#da0303] to-[#ff960d]"
-                }  rounded-full p-1 overflow-hidden`}
+                className={`h-[130px] w-[130px] bg-gradient-to-b rounded-full p-1 overflow-hidden`}
               >
                 <Image
                   src={imageSource}
                   alt="user image"
                   width={130}
                   height={130}
-                  className="rounded-full object-contain"
+                  className="rounded-full object-cover"
                 />
               </div>
               <div

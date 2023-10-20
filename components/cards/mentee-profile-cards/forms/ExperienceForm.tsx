@@ -31,6 +31,10 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
   });
   const [token, setToken] = useState("");
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
+  const [inputData, setInputData] = useState([
+    // Initialize inputData with an empty object for the first input field
+    { title: "", company: "" },
+  ]);
   const baseUrl = "https://mentormee-api.onrender.com";
 
   // Create an event handler function to update the experience state
@@ -135,20 +139,17 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
       } finally {
         setIsLoading(false);
         fetchMenteeData();
-        // router.push("/mentee-profile?path=profile");
+        router.push("/mentee-profile?path=profile");
       }
     } else {
       // Handle the case where authToken is missing
       console.log("Auth token is missing.");
     }
   };
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setIsLoading(true);
-    e.preventDefault();
-  };
+  const isDisabled = !formData.title || !formData.company;
 
   return (
-    <div className="flex w-full xl:max-w-full justify-center sm:justify-start">
+    <div className="flex w-full xl:max-w-full justify-start sm:justify-start">
       <div className="flex gap-4 flex-col">
         <p
           className={`${
@@ -177,65 +178,63 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
             }`}
           >
             {addInput.map((num, idx) => (
-              <div className="flex items-center gap-4 relative" key={num}>
-                <label
-                  htmlFor={`experience-${num}`}
-                  className="w-full xl:w-[300px]"
-                >
-                  <p className="flex items-start mb-2">
-                    <span>Experience</span>
-                    <span className="text-red-500 font-medium text-sm">*</span>
-                  </p>
+              <div className="flex items-center gap-4 relative" key={idx}>
+                <div className="flex flex-col">
+                  <label
+                    htmlFor={`experience-${idx}`}
+                    className="w-[300px] xl:w-[500px] xl:my-[10px]"
+                  >
+                    <p className="flex items-start mb-2">
+                      <span>Experience</span>
+                      <span className="text-red-500 font-medium text-sm">
+                        *
+                      </span>
+                    </p>
 
-                  <input
-                    type="text"
-                    placeholder="Your Experience"
-                    required
-                    value={formData.title}
-                    name={`experience-${num}`}
-                    id={`experience-${num}`}
-                    className={`w-full p-2 outline-none rounded-xl bg-transparent border py-3 focus:border-primary focus:valid:border-green-400 transition-all duration-300 ${
-                      isDark
-                        ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059]"
-                        : "border-Neutra10"
-                    }`}
-                    min={2}
-                    onChange={handleExperienceChange}
-                  />
-                </label>
-                <span
-                  className={`w-fit items-center justify-center pt-8 ${
-                    isDark
-                      ? " bg-gradient-to-r from-[#0d62ff] via-[#00ffb7] to-[#ff00fb] bg-clip-text text-transparent font-bold text-[17px]"
-                      : "text-Neutra50"
-                  }`}
-                >
-                  at
-                </span>{" "}
-                <label
-                  htmlFor={`experience-${num}`}
-                  className="w-full xl:w-[300px]"
-                >
-                  <p className="flex items-start mb-2">
-                    <span>Workplace</span>
-                    <span className="text-red-500 font-medium text-sm">*</span>
-                  </p>
+                    <input
+                      type="text"
+                      placeholder="Your Experience"
+                      required
+                      value={formData.title}
+                      name={`experience-${num}`}
+                      id={`experience-${num}`}
+                      className={`w-full p-2 outline-none rounded-xl bg-transparent border py-3 focus:border-primary focus:valid:border-green-400 transition-all duration-300 ${
+                        isDark
+                          ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059]"
+                          : "border-Neutra10"
+                      }`}
+                      min={2}
+                      onChange={handleExperienceChange}
+                    />
+                  </label>
 
-                  <input
-                    type="text"
-                    placeholder="Workplace"
-                    value={formData.company}
-                    name={`experience-${num}`}
-                    id={`experience-${num}`}
-                    className={`w-full p-2 outline-none rounded-xl bg-transparent border py-3 focus:border-primary focus:valid:border-green-400 transition-all duration-300 ${
-                      isDark
-                        ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059]"
-                        : "border-Neutra10"
-                    }`}
-                    min={2}
-                    onChange={handleWorklaceChange}
-                  />
-                </label>
+                  <label
+                    htmlFor={`experience-${num}`}
+                    className="w-full xl:w-[500px]"
+                  >
+                    <p className="flex items-start mb-2">
+                      <span>Workplace</span>
+                      <span className="text-red-500 font-medium text-sm">
+                        *
+                      </span>
+                    </p>
+
+                    <input
+                      type="text"
+                      placeholder="Workplace"
+                      value={formData.company}
+                      name={`experience-${num}`}
+                      id={`experience-${num}`}
+                      className={`w-full p-2 outline-none rounded-xl bg-transparent border py-3 focus:border-primary focus:valid:border-green-400 transition-all duration-300 ${
+                        isDark
+                          ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059]"
+                          : "border-Neutra10"
+                      }`}
+                      min={2}
+                      onChange={handleWorklaceChange}
+                    />
+                  </label>
+                </div>
                 {addInput.length > 1 && idx > 0 && (
                   <button
                     type="button"
@@ -251,7 +250,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
                 )}
               </div>
             ))}
-            <div
+            {/* <div
               className={`text-4xl h-full flex items-center justify-center w-fit px-6 p-2 font-bold  rounded-xl bg-transparent border active:scale-90 select-none  transition-all duration-300 ${
                 addInput.length === 10 ? "opacity-40 cursor-not-allowed" : ""
               }  ${
@@ -272,7 +271,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
               >
                 +
               </button>
-            </div>
+            </div> */}
 
             {isProfileUpdated && (
               <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -295,6 +294,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
             <Button
               title={isLoading ? "Updating..." : "Update"}
               type="submit"
+              disabled={isDisabled}
               loading={isLoading}
               variant={isDark ? "secondary" : "primary"}
               className={`${

@@ -150,21 +150,21 @@ export default function MenteeProfilePage() {
             <div className="flex items-center gap-6  w-full max-lg:flex-col max-lg:items-start max-lg:gap-6 ">
               <div className="relative -mt-12 ">
                 <Suspense fallback={<LoadingSpinner />}>
-                  <Image
-                    src={
-                      menteeData.image
-                        ? menteeData.image
-                        : `https://api.dicebear.com/7.x/initials/png?seed=${menteeData.username}`
-                    }
-                    alt="cover"
-                    width={200}
-                    height={200}
-                    style={{
-                      objectFit: "cover",
-                      borderRadius: "9999px",
-                    }}
-                    quality={100}
-                  />
+                  <div
+                    className={`h-[200px] w-[200px] bg-gradient-to-b rounded-full p-1 overflow-hidden`}
+                  >
+                    <Image
+                      src={
+                        menteeData.image
+                          ? menteeData.image
+                          : `https://api.dicebear.com/7.x/initials/png?seed=${menteeData.username}`
+                      }
+                      alt="user image"
+                      width={200}
+                      height={200}
+                      className="rounded-full object-cover"
+                    />
+                  </div>
                 </Suspense>
                 <div
                   className="absolute bottom-2 right-0 h-8 w-8 rounded-lg bg-white flex items-center justify-center cursor-pointer"

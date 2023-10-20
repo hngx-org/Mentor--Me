@@ -6,26 +6,31 @@
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
-import axios from "axios";
 import { redirect, useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
+
+type formProps = {
+  social: string;
+};
 
 export default function SocialsForm({ isDark }: { isDark: boolean }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter(); // router
   const [addInput, setAddInput] = useState([1]);
-  const [formData, setFormData] = useState({});
   const [token, setToken] = useState("");
+  const [formData, setFormData] = useState<formProps>({
+    social: "",
+  });
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
   const baseUrl = "https://mentormee-api.onrender.com";
 
   // Create an event handler function to update the gender state
-  const handleGenderChange = (e: any) => {
-    const newGender = e.target.value;
+  const handleSocialChange = (e: any) => {
+    const newSocial = e.target.value;
     setFormData({
       ...formData,
-      gender: newGender,
+      social: newSocial,
     });
   };
 
@@ -58,10 +63,7 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
         const data = await response.json();
 
         setFormData({
-          fullName: data?.data?.user?.fullName,
-          gender: data?.data?.gender,
-          bio: data?.data?.user?.bio,
-          image: data?.data?.image,
+          social: data?.data?.user?.fullName,
         });
       } else {
         console.error("Failed to fetch user data");
@@ -70,6 +72,8 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
       console.error("Error fetching user data");
     }
   };
+
+  const isDisabled = !formData.social || !formData.social.includes("@");
 
   const handleUpdate = async (e: any) => {
     setIsLoading(true);
@@ -126,8 +130,8 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
   };
 
   return (
-    <div className="flex w-full xl:max-w-full justify-center sm:justify-start">
-      <div className="flex gap-4 flex-col">
+    <div className="flex w-full xl:max-w-full justify-start sm:justify-start">
+      <div className="flex w-full gap-4 flex-col">
         <p
           className={`${
             isDark ? "text-white" : "text-Neutra50"
@@ -151,7 +155,7 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
           className="w-full flex flex-col gap-4 sm:gap-6  "
         >
           <div
-            className={`flex  flex-col w-full gap-4 sm:gap-10 ${
+            className={`flex  flex-col w-[300px] xl:w-[500px] gap-4 sm:gap-10 ${
               isDark && "text-white "
             }`}
           >
@@ -221,36 +225,36 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
               <div className="fixed inset-0 flex items-center justify-center z-50">
                 <div className="bg-white border rounded-lg p-8 max-w-sm w-full mx-4">
                   <p className="text-xl text-green-600">
-                    Exoerience updated successfully!
+                    Social links updated successfully!
                   </p>
                 </div>
               </div>
             )}
-          </div>
+            <div className="  flex relative justify-end">
+              {isLoading && (
+                <div className="absolute top-1/2 right-8 transform -translate-x-[50%] -translate-y-1/2 z-30">
+                  <LoadingSpinner />
+                </div>
+              )}
 
-          <div className="  flex relative justify-end">
-            {isLoading && (
-              <div className="absolute top-1/2 right-8 transform -translate-x-[50%] -translate-y-1/2 z-30">
-                <LoadingSpinner />
-              </div>
-            )}
-
-            <Button
-              title={isLoading ? "Updating..." : "Update"}
-              type="submit"
-              loading={isLoading}
-              variant={isDark ? "secondary" : "primary"}
-              className={`${
-                isDark
-                  ? "!bg-transparent border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059] brightness-125"
-                  : "py-4 px-8 "
-              }`}
-              titleClassName={`${
-                isDark
-                  ? "my-3 mx-6 bg-gradient-to-r from-[#0d62ff] via-[#00ffb7] to-[#ff00fb]  w-fit  bg-clip-text text-transparent text-xl tracking-wide "
-                  : ""
-              }`}
-            />
+              <Button
+                title={isLoading ? "Updating..." : "Update"}
+                type="submit"
+                disabled={isDisabled}
+                loading={isLoading}
+                variant={isDark ? "secondary" : "primary"}
+                className={`${
+                  isDark
+                    ? "!bg-transparent border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059] brightness-125"
+                    : "py-4 px-8 "
+                }`}
+                titleClassName={`${
+                  isDark
+                    ? "my-3 mx-6 bg-gradient-to-r from-[#0d62ff] via-[#00ffb7] to-[#ff00fb]  w-fit  bg-clip-text text-transparent text-xl tracking-wide "
+                    : ""
+                }`}
+              />
+            </div>
           </div>
         </form>
       </div>
