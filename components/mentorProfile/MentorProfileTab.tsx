@@ -19,6 +19,7 @@ import {
   MentorDetailsContext,
   UserDetails,
 } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/DetailsContext";
+import { AddIConv2, EditIConv2 } from "@/public/SVGs";
 
 export type ModalType = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -35,8 +36,8 @@ export default function MentorProfileTabLayout({
   const ProfileBio = useContext(MentorDetailsContext);
 
   return (
-    <div className="w-[100%] my-5 h-[100%]">
-      <div className="flex justify-between w-[100%] text-Neutra10 text-xs sm:text-base cursor-pointer px-4  border-b-2">
+    <div className="w-[100%] my-5 min-h-fit h-fit ">
+      <div className="flex justify-between w-[100%] text-Neutra10 text-xs sm:text-base cursor-pointer px-4   border-b-2">
         <div
           onClick={() => {
             setActive("basic info");
@@ -276,25 +277,45 @@ interface View {
   view: "Edit" | "All" | "Add";
 }
 export function ExpeCerts({ items, title }: ExpeCertsProps) {
-  const [view, setView] = useState("Edit");
+  const [view, setView] = useState("All");
+  const [item, setItem] = useState();
   return (
-    <div className="w-[100%] h-fit flex flex-col border border-3 rounded-[6px] my-5">
-      <div className="w-[100%] h-[20px] py-6 flex justify-between px-4  items-center">
-        <p>{title}</p>
-        <div className="space-x-4">
-          <span className="text-[20px]"> &#9998;</span>
-          <span>&#x2b;</span>
-        </div>
-      </div>
-      <div className="px-4">
-        {items.length >= 1 &&
-          items.map((item) => (
-            <Fragment key={item.text}>
-              <InfoCard {...item} />
-            </Fragment>
-          ))}
-        {items.length === 0 && <p> click to add {title}</p>}
-      </div>
+    <div className="w-[100%] h-fit flex flex-col border border-3 rounded-[6px] my-5 ">
+      {view === "All" && (
+        <>
+          <div className="w-[100%] h-[20px] py-6 flex justify-between px-4  items-center">
+            <p>{title}</p>
+
+            <div className="space-x-4 flex items-center">
+              <span
+                className="text-[20px]"
+                onClick={() => {
+                  setView("Edit");
+                }}
+              >
+                <EditIConv2 />
+              </span>
+              <span
+                onClick={() => {
+                  setView("Add");
+                }}
+              >
+                <AddIConv2 />
+              </span>
+            </div>
+          </div>
+          <div className="px-4">
+            {items.length >= 1 &&
+              items.map((item) => (
+                <Fragment key={item.text}>
+                  <InfoCard {...item} />
+                </Fragment>
+              ))}
+            {items.length === 0 && <p> click to add {title}</p>}
+          </div>
+        </>
+      )}
+      {view === "Add" && <EditView cancel={setView} action={view} />}
     </div>
   );
 }
@@ -331,3 +352,60 @@ export function SocialsField({
     </div>
   );
 }
+interface EditViewProps {
+  cancel: React.Dispatch<React.SetStateAction<string>>;
+  action: string;
+}
+function EditView({ cancel, action }: EditViewProps) {
+  return (
+    <div className="min-h-[80%] h-fit w-[100%] p-4">
+      <div className="flex justify-end w-[100%] justify-between">
+        <p className="font-bold uppercase text-lg">{action}</p>
+        <Button
+          variant={"outline-primary"}
+          className="w-fit px-2 py-0 "
+          paddingLess
+          onClick={() => {
+            cancel("All");
+          }}
+        >
+          cancel
+        </Button>
+      </div>
+
+      <div className="w-[100%]  flex flex-col  my-4">
+        <p className="text-Neutra30 text-sm font-bold">
+          company<span className="text-Error50">*</span>
+        </p>
+        <input
+          className="  active:border-0 placeholder:text-xs  border w-[100%] rounded-[6px] p-2 focus:outline-none"
+          placeholder="company"
+        />
+      </div>
+      <div className="w-[100%]  flex flex-col  my-4">
+        <p className="text-Neutra30 text-sm font-bold">
+          position<span className="text-Error50">*</span>
+        </p>
+        <input
+          className="  active:border-0 placeholder:text-xs  border w-[100%] rounded-[6px] p-2 focus:outline-none"
+          placeholder="position"
+        />
+      </div>
+      {action === "Edit" ? (
+        <Button variant={"primary"}>update</Button>
+      ) : (
+        <Button variant={"primary"}>Add</Button>
+      )}
+    </div>
+  );
+}
+
+function ShowItemsView() {
+  return (
+    <div>
+      <div></div>
+    </div>
+  );
+}
+
+function ItemsCard() {}
