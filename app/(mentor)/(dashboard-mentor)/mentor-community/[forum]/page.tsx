@@ -11,6 +11,7 @@ import { StartDiscussionModal } from "@/components/Community";
 
 const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log(discussionCommunitites);
 
   return (
     <>
@@ -19,7 +20,7 @@ const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
         {/* Search component */}
         <section className="p-6 md:p-10">
           {/* create another swarch component or use this one */}
-          {/* <SearchCommunitySearchbar /> */}git
+          {/* <SearchCommunitySearchbar /> */}
         </section>
         {/* Community info */}
         <section className="p-6 md:p-12 md:flex gap-4 justify-between items-center">
@@ -69,7 +70,7 @@ const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
               </span>
             </div>
             {/* Comm description */}
-            <p className="text-Neutral60 font-Hanken md:text-[1.125rem]">
+            <p className="text-Neutral60 font-Hanken md:text-[1.125rem] max-w-[680px]">
               {
                 discussionCommunitites[params.forum as keyof discussionComms]
                   .description
@@ -78,7 +79,7 @@ const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
           </div>
 
           {/* Start a discussion */}
-          <button
+          {/* <button
             type="button"
             onClick={() => setIsModalOpen((p) => !p)}
             className="mt-3 px-12 py-4 md:py-[1.125rem] text-white bg-NeutalBase rounded-lg font-Inter hover:bg-Neutral60 cursor-pointer md:flex gap-3 items-center"
@@ -89,13 +90,30 @@ const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
             <span className="text-[.875rem] font-Hanken font-semibold">
               Start a discussion
             </span>
+          </button> */}
+
+          <button
+            type="button"
+            className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px]  text-white border  bg-NeutalBase flex items-center gap-x-1 rounded-[8px]"
+            onClick={() => setIsModalOpen((p) => !p)}
+          >
+            <MsgEditIcon />
+            Start a disscussion
           </button>
         </section>
         {/* Discussion list */}
         <section className="p-8 pb-[3rem] flex flex-col gap-4 md:p-14">
           {discussionCommunitites[
             params.forum as keyof discussionComms
-          ].discussions.map((item) => (
+          ].discussions.map((item, ifx) => (
+            // <BigDiscussionCard
+            //   mentor={item.author.isMentor}
+            //   name={item.author.name}
+            //   title={item.topic}
+            //   desc={item.note}
+            //   heroCard={item.imageUrl}
+            //   image={item.author.profilePhotoUrl}
+            // />
             <DiscussionCard
               author={item.author}
               description={item.note}

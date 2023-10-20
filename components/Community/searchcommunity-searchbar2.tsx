@@ -17,7 +17,7 @@ const SecondSearchCommunitySearchbar = ({
   };
 
   return (
-    <form className="p-4 pl-6 border-[1px] border-solid border-Neutra10  rounded-lg max-w-[90vw] w-[380px]  flex items-center gap-[2px]">
+    <form className="p-4 pl-6 border-[1px] border-solid border-Neutra10  rounded-lg max-w-[90vw] w-[90vw] md:w-[370px] lg:w-[610px] flex items-center gap-[2px]">
       <span className="">
         <SearchIcon />
       </span>

@@ -52,7 +52,7 @@ const CommunityPage = () => {
         </div>
 
         {/* Search Bar */}
-        <section className="p-6 md:p-10">
+        <section className="py-6 md:py-10 flex justify-center ">
           <SearchCommunitySearchbar
             q={q}
             setQ={setQ}
@@ -67,7 +67,7 @@ const CommunityPage = () => {
       />
       {/* Free mentorship sessions */}
       {/* <MentorshipSessions /> */}
-      <div className=" w-[396px] sm:w-[628px]  md:w-[860px] lg:w-[calc(1052px)] xl:w-[calc(1352px)] 2xl:w-[calc(1362px)]  border border-transparent  mx-auto overflow-hidden">
+      <div className="p-6 md:p-10 ">
         <MentorGrid />
       </div>
       <div className="footer h-[7rem] w-full bg-transparent" />
