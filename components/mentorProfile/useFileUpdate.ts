@@ -2,14 +2,24 @@ import { useState } from "react";
 
 export const useFileUpload = () => {
   const [file, setFile] = useState("");
+  const [fileError, setFileError] = useState("");
 
   const onFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFileError("");
     const file = new FileReader();
     if (event.target.files?.[0]) {
       file.readAsDataURL(event.target.files[0]);
     }
     file.onload = (loadEvent) => {
       if (loadEvent.target?.result) {
+        if (loadEvent.target.result.toString().split("/")[0] !== "data:image") {
+          setFileError("File must be an image (png, jpeg, jpg)");
+          return;
+        }
+        if (loadEvent.target.result.toString().length / 1024 > 1000) {
+          setFileError("file too large, should be less than 2mb");
+          return;
+        }
         setFile(loadEvent.target.result as string);
       }
     };
@@ -19,5 +29,6 @@ export const useFileUpload = () => {
     file,
     setFile,
     onFileUpload,
+    fileError,
   };
 };

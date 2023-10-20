@@ -9,6 +9,7 @@ export type UserDetails = {
   experience: string;
   linkedIn?: string;
   otherlinks?: string;
+  imageSrc?: string;
 };
 type MentorProfileCtx = {
   details: UserDetails;
