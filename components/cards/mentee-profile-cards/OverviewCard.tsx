@@ -64,7 +64,7 @@ export default function OverviewCard({
         />
       </div>
       <div className="flex flex-col w-full xl:max-w-[500px] xl:gap-y-5 gap-y-5 ">
-        <div className="border border-gray-200 rounded-[8px] xl:h-[100px] xl:px-2">
+        <div className="border border-gray-200 rounded-[8px] p-2 xl:h-[100px] xl:p-3">
           <div className=" w-full flex justify-between ">
             <p className="text-Neutra50 font-bold text-[18px] font-Hanken">
               Experience
@@ -100,7 +100,7 @@ export default function OverviewCard({
           </div>
         </div>
         <div className="flex flex-col w-full xl:max-w-[500px] xl:gap-y-5">
-          <div className="border border-gray-200 xl:h-[100px] rounded-[8px] xl:px-2">
+          <div className="border border-gray-200 p-2 xl:h-[100px] rounded-[8px] xl:p-3">
             <div className="w-full flex justify-between ">
               <p className="text-Neutra50 font-bold text-[18px] font-Hanken">
                 Education

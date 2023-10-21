@@ -24,6 +24,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const [isLoading, setIsLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const [fileURL, setFileURL] = useState<any>("");
+  const [errorMessage, setErrorMessage] = useState(null);
   const [formData, setFormData] = useState<formProps>({
     fullName: "",
     bio: "",
@@ -172,9 +173,8 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
       } finally {
         setIsLoading(false);
         fetchMenteeData();
-        router.replace("/mentee-profile?path=profile");
-
-        // router.push("/mentee-profile?path=profile");
+        router.push("/mentee-profile?path=profile");
+        window.location.reload();
       }
     } else {
       // Handle the case where authToken is missing
@@ -208,13 +208,15 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
           className="w-full flex flex-col gap-4 sm:gap-6  "
         >
           <div className="flex items-center gap-4">
-            <div className="relative  ">
-              <div className="h-[130px] w-[130px] bg-gradient-to-b rounded-full p-1 overflow-hidden">
+            <div className="relative">
+              <div className="h-[130px] w-[130px] bg-gradient-to-b rounded-full p-1 overflow-hidden relative">
+                {/* Circular container for the image */}
                 <Image
                   src={imageSource}
                   alt="user image"
                   width={130}
                   height={130}
+                  layout="fixed"
                   className="rounded-full object-cover"
                 />
               </div>
@@ -225,7 +227,6 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
               >
                 <label htmlFor="image" className="cursor-pointer">
                   {isDark ? <EditIconDark /> : <EditIcon />}
-
                   <input
                     type="file"
                     name="image"
@@ -238,6 +239,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 </label>
               </div>
             </div>
+
             <div className="flex flex-col">
               <p
                 className={`${
