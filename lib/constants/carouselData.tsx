@@ -24,18 +24,6 @@ const imgCarousel = [
     id: 5,
     img: MentorImageOne,
   },
-  {
-    id: 6,
-    img: MentorImageTwo,
-  },
-  {
-    id: 7,
-    img: MentorImageOne,
-  },
-  {
-    id: 8,
-    img: MentorImageTwo,
-  },
 ];
 
 export default imgCarousel;
