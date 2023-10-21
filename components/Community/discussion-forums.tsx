@@ -6,7 +6,7 @@ import {
   ArrowRightIcon,
 } from "@/public/assets/Icons/mentor-communities";
 import ForumCard from "./ForumCard";
-import { discussionCommunities } from "@/app/(mentor)/(dashboard-mentor)/mentor-community/data";
+
 import { discussionState } from "@/app/(mentee)/(dashboard-route)/mentee-community/data";
 
 const DiscussionForums = ({
@@ -16,7 +16,7 @@ const DiscussionForums = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLastCard, setIsLastCard] = useState(false);
 
-  console.log(discussionData);
+  // console.log("dataa getting to discussion forum", discussionData);
   const discussionsLength = discussionData?.length;
 
   const sliderBtnHandler = (type: "fwd" | "bwd") => {
@@ -70,6 +70,12 @@ const DiscussionForums = ({
             members={comm.members}
             slug={comm.slug}
           />
+          // <DiscussionCards
+          //   title={comm.name}
+          //   members={comm.members.length}
+          //   desc={comm.description}
+          //   id={idx}
+          // />
         ))}
       </div>
     </section>

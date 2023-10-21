@@ -6,7 +6,11 @@ import {
   EducationIcon,
 } from "@/public/SVGs";
 import ProgressBar from "../progressBar/ProgressBar";
-import { ModalState } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/page";
+
+export type ModalState = {
+  state: "basic info" | "Experience/ Certification" | "Social links";
+  isOpen: boolean;
+};
 
 export default function ProfileDetailsCardContainer({
   heading,
@@ -47,15 +51,14 @@ export default function ProfileDetailsCardContainer({
   );
 }
 
-type InfoCardProps = {
-  type: "skill" | "experience" | "certification" | "education";
+export type InfoCardProps = {
+  type: string;
   text?: string;
   heading?: string;
+  id: string | number;
 };
 
-function getIcons(
-  type: "skill" | "experience" | "certification" | "education"
-) {
+function getIcons(type: string) {
   if (type === "certification") {
     return <CertificationIcon />;
   }
@@ -76,13 +79,15 @@ function getIcons(
   return <p> add icon</p>;
 }
 
-export function InfoCard({ type, heading, text }: InfoCardProps) {
+export function InfoCard({ type, heading, text, id }: InfoCardProps) {
   return (
-    <div className="w-[100%]  flex space-x-5 h-fit items-center my-2">
+    <div className="w-[100%]  flex space-x-5 h-fit items-center my-2" key={id}>
       {getIcons(type)}
       <div>
-        <p className="text-lg  font-[500] text-Neutra50">{heading}</p>
-        <p className="text-Neutra40"> {text} </p>
+        <p className="text-lg  font-[500] text-Neutra50 truncate  max-w-[250px] sm:max-w-[350px]">
+          {heading}
+        </p>
+        <p className="text-Neutra40 "> {text} </p>
       </div>
     </div>
   );
@@ -128,7 +133,7 @@ export function SkillSCard({ skills }: { skills: string[] }) {
       <p className="text-lg font-bold font-[#000]"> Skills/Expertise</p>
       <div className="flex w-[100%] flex-wrap">
         {skills.length === 0 && <p> click to add skills</p>}
-        {skills.length > 1 &&
+        {skills.length >= 1 &&
           skills.slice(0, 5).map((item) => (
             <Fragment key={item}>
               <div className="border border-Neutral10 py-[8px] px-[10px] w-fit rounded-[8px] m-[5px]">

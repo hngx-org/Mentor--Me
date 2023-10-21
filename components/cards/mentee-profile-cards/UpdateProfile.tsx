@@ -9,6 +9,8 @@ import { MenteeDashboardProfileImg } from "@/public";
 import { EditIcon } from "@/public/SVGs";
 
 import UpdateProfileForm from "./forms/UpdateProfileForm";
+import ExperienceForm from "./forms/ExperienceForm";
+import SocialsForm from "./forms/SocialsForm";
 
 type UpdateProfileTabsProp = {
   id: number;
@@ -28,8 +30,8 @@ const updateProfileTabs: UpdateProfileTabsProp[] = [
   },
   {
     id: 3,
-    title: "Social links",
-    tab: "social_links",
+    title: "Social Links",
+    tab: "socials",
   },
 ];
 export default function UpdateProfile() {
@@ -56,8 +58,8 @@ export default function UpdateProfile() {
     setActiveTab(params || "basic-info");
     if (typeof localStorage !== "undefined") {
       const theme = localStorage.getItem("theme");
-      if (theme === "dark") {
-        setIsDark(true);
+      if (theme === "light") {
+        setIsDark(false);
       }
     }
   }, [params]);
@@ -69,7 +71,7 @@ export default function UpdateProfile() {
   return (
     <div
       className={`w-full justify-start  flex flex-col items-start gap-8 h-full min-h-screen relative   px-4 pb-16 sm:pb-0 sm:pl-10 lg:pl-20 ${
-        isDark ? "bg-NeutalBase" : ""
+        isDark ? "bg-gray-950" : ""
       }`}
     >
       <Link
@@ -112,7 +114,7 @@ export default function UpdateProfile() {
         <p>Update your profile details</p>
       </div>
       <div
-        className={`flex gap-4 w-full justify-between sm:max-w-[400px] px-2 sm:p-4 ${
+        className={`flex gap-4 w-full justify-between xl:max-w-[900px] sm:max-w-[400px] px-2 sm:p-4 ${
           isDark ? "border-gray-800 border-t border-b" : ""
         }`}
       >
@@ -142,6 +144,8 @@ export default function UpdateProfile() {
         ))}
       </div>
       {activeTab === "basic-info" && <UpdateProfileForm isDark={isDark} />}
+      {activeTab === "experience" && <ExperienceForm isDark={isDark} />}
+      {activeTab === "socials" && <SocialsForm isDark={isDark} />}
     </div>
   );
 }

@@ -7,8 +7,12 @@ type RecurringFormData = {
   sessionType?: string;
   occurence?: string;
   numberOfSession?: number;
-  // time?: string;
+  duration?: number;
+  time?: string;
+  date?: string;
   relevantTopics?: string;
+  sessionUrl?: string;
+  tag?: string;
 };
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
@@ -21,7 +25,12 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     sessionType,
     occurence,
     numberOfSession,
+    time,
+    date,
     relevantTopics,
+    sessionUrl,
+    duration,
+    tag,
   } = data;
 
   //    return new NextResponse("Form Submitted");
@@ -31,6 +40,11 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     sessionType,
     numberOfSession,
     occurence,
+    time,
+    date,
     relevantTopics,
+    sessionUrl,
+    duration,
+    tag,
   });
 };

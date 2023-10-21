@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(request: NextRequest) {
   const resourceId = await request.json();
+  console.log(request.nextUrl.pathname);
 
   try {
     const res = await fetch(

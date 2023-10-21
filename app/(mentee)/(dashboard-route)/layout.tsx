@@ -13,11 +13,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const pathParams = useSearchParams().get("path");
   const actionParams = useSearchParams().get("action");
 
-  const { data } = useAuth();
+  const { data } = useAuth("Mentee");
+  console.log(data);
   const email = data?.userDetails?.email;
   const userName = data?.userDetails?.fullName;
   const jobTitle = data?.mentorship_type;
-
   const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
     userName || email
   }`;
@@ -30,7 +30,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         imgSrc={profileImg}
       />
 
-      <main className="lg:ml-[274px]">
+      <main className="lg:ml-[240px]">
         <NavbarMentee
           path={pathParams}
           action={actionParams}

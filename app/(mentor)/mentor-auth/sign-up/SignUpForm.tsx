@@ -31,6 +31,8 @@ export default function SignUpForm() {
   const [isValid, setIsValid] = React.useState(true);
 
   const [formData, setFormData] = React.useState({
+    // first_name: "",
+    // last_name: "",
     email: "",
     password: "",
   });
@@ -56,6 +58,8 @@ export default function SignUpForm() {
       setIsValid(true);
       axios
         .post("https://mentormee-api.onrender.com/auth/register", {
+          // first_name: formData.first_name,
+          // last_name: formData.last_name,
           email: formData.email,
           password: formData.password,
           role: "mentor",
@@ -113,6 +117,22 @@ export default function SignUpForm() {
             Create an account
           </h5>
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+            {/* <Input
+              id="first_name"
+              label="First Name"
+              required
+              type="first_name"
+              name="first_name"
+              onChange={handleInputChange}
+            />
+            <Input
+              id="last_name"
+              label="Last Name"
+              required
+              type="last_name"
+              name="last_name"
+              onChange={handleInputChange}
+            /> */}
             <Input
               id="email"
               label="Email Address"
@@ -152,7 +172,7 @@ export default function SignUpForm() {
             </div>
           </form>
 
-          <div className="flex justify-center w-full">
+          {/* <div className="flex justify-center w-full">
             <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
               OR
             </h5>
@@ -174,7 +194,7 @@ export default function SignUpForm() {
               loading={isLoading}
               icon={facebook}
             />
-          </div>
+          </div> */}
           <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
             Already a user?{" "}
             <span className="font-semibold text-[#121212]">

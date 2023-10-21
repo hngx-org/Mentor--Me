@@ -59,3 +59,38 @@ export interface CurrentMentor {
     fullName: string;
   };
 }
+
+export interface CurrentMentee {
+  message: string;
+  data: {
+    _id: string;
+    userProfile: string;
+    expertise: string;
+    goal: string;
+    discipline_request: string;
+    tools_request: string;
+    country_request: string;
+    country: string;
+    gender: string;
+    company: string;
+    title: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+    user: {
+      _id: string;
+      email: string;
+      emailVerified: boolean;
+      accountDisabled: boolean;
+      role: string;
+      lastActive: string;
+      createdAt: string;
+      updatedAt: string;
+      __v: number;
+      bio: string;
+      fullName: string;
+      profileLink: string;
+    };
+  };
+  success: boolean;
+}

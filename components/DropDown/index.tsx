@@ -8,16 +8,12 @@ interface DropDownProps {
 }
 
 const dropDownVariant: AnimationProps["variants"] = {
-  closed: { scaleX: 0, scaleY: 0.2 },
+  closed: { opacity: 0, scaleY: 0.2 },
   open: {
-    scaleX: 1,
+    opacity: 1,
     scaleY: 1,
     transition: {
-      scaleX: {
-        duration: 0.3,
-      },
       scaleY: {
-        delay: 0.35,
         duration: 0.4,
       },
       staggerChildren: 0.2,
@@ -26,6 +22,7 @@ const dropDownVariant: AnimationProps["variants"] = {
   },
   exit: {
     scaleY: 0,
+    opacity: 0,
   },
 };
 const optionsVariants = {
