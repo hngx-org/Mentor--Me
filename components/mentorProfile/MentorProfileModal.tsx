@@ -28,7 +28,7 @@ export default function MentorProfileModal({
         }}
         role="presentation"
       />
-      <div className="  rounded-[6px] w-[90%] h-[80%] md:right-10 lg:w-[50%]  lg:p-2 lg:px-10 lg:h-[100%] bg-white absolute flex flex-col top-10 right-5 lg:top-0 lg:right-0  overflow-scroll p-2 items-center hide-message-layout-scroll ">
+      <div className="  rounded-[12px] w-[90%] h-[80%] md:right-10 lg:w-[50%]  lg:p-2 lg:px-10 lg:h-[100%] bg-white absolute flex flex-col top-10 right-5 lg:top-0 lg:right-0  overflow-scroll p-2 items-center hide-message-layout-scroll ">
         <div
           className="flex h-fit w-[100%] justify-end  my-5"
           onClick={(e) => {
