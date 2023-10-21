@@ -62,10 +62,13 @@ const CommunityPage = () => {
           </section>
         </section>
         {/* Discussion Forums */}
-        <DiscussionForums
-          discussionData={discussionData}
-          setDiscussionData={setDiscussionData}
-        />
+        <section className="p-12">
+          <DiscussionForums
+            discussionData={discussionData}
+            setDiscussionData={setDiscussionData}
+          />
+        </section>
+
         {/* Free mentorship sessions */}
         {/* <MentorshipSessions /> */}
         <div className="p-6 md:p-10 ">

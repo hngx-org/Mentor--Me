@@ -22,9 +22,11 @@ interface FreeFormData {
 function FreeSessionForm() {
   const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
+  // const [minDate, setMinDate] = useState<string>(getMinDate());
   const [formVisible, setFormVisible] = useState<boolean>(true);
   const [CalendarVisible, setCalendarVisible] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  // const [dateError, setDateError] = useState<string>("");
   const [formData, setFormData] = useState<FreeFormData>({
     sessionName: "",
     description: "",
@@ -50,6 +52,31 @@ function FreeSessionForm() {
       [name]: value,
     });
   };
+
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const yyyy = today.getFullYear();
+
+  const minDate = `${yyyy}-${mm}-${dd}`;
+
+  // function getMinDate(): string {
+  //   const today = new Date();
+  //   const dd = String(today.getDate()).padStart(2, "0")
+  //   const mm = String(today.getMonth() + 1).padStart(2, "0")
+  //   const yyyy = today.getFullYear()
+  //   return `${yyyy}-${mm}-${dd}`
+  // }
+
+  // function handleDateValidation(event: ChangeEvent<HTMLInputElement>) {
+  //   const date = event.target.value;
+  //   if (date < minDate) {
+  //     setDateError("You cannot select a date that has passed")
+  //   }
+  //   else{
+  //   setDateError("")
+  // }
+  // }
   const closeSuccessModal = (): void => {
     setSuccessful(false);
   };
@@ -65,13 +92,15 @@ function FreeSessionForm() {
     setCalendarVisible(false);
     setSuccessful(true);
   };
+
   const openCalendar = async (e: MouseEvent<HTMLButtonElement>) => {
     // e.preventDefault();
     const isFormValid = Object.values(formData).every((value) => value !== "");
 
     if (isFormValid) {
       setError("");
-      setCalendarVisible(true);
+      // setCalendarVisible(true);
+      setSuccessful(true);
       setFormVisible(false);
     } else {
       setError("All fields are required");
@@ -98,7 +127,8 @@ function FreeSessionForm() {
       const responseData = await response.json();
       console.log("form submitted,", responseData);
     } else {
-      setCalendarVisible(false);
+      // setCalendarVisible(false);
+      setSuccessful(false);
       setFormVisible(true);
       setError("An error occurred while creating a session");
       console.error("submissiom failed");
@@ -149,6 +179,7 @@ function FreeSessionForm() {
               value={formData.attendeesLimit}
               onChange={handleSelectChange}
             >
+              <option value="0">0</option>
               <option value="2">2</option>
               <option value="5">5</option>
               <option value="10">10</option>
@@ -167,12 +198,15 @@ function FreeSessionForm() {
               labelText="Date"
               type="date"
               onChange={handleInputChange}
+              // onBlur={handleDateValidation}
               value={formData.date}
+              minDate={minDate}
               isRequired
               InputId="date"
               InputName="date"
               placeholder="Select the date"
             />
+            {/* <span className="text-Error50 font-bold">{dateError}</span> */}
             <TimeInputType
               labelText="Link to session"
               type="url"
@@ -183,18 +217,8 @@ function FreeSessionForm() {
               InputName="sessionUrl"
               placeholder="Add a link to the session"
             />
-            {/* <TimeInputType
-                                labelText="Tag"
-                                type="text"
-                                onChange={handleInputChange}
-                                value={formData.tag}
-                                isRequired
-                                InputId="tag"
-                                InputName="tag"
-                                placeholder="tag"
-                            /> */}
             <TimeInputType
-              labelText="Duration"
+              labelText="Duration in minutes"
               type="number"
               onChange={handleInputChange}
               value={formData.duration}
@@ -232,19 +256,19 @@ function FreeSessionForm() {
                 variant="primary"
                 type="button"
               >
-                Continue
+                Submit
               </Button>
             </div>
           </form>
         </div>
         // </div>
       )}
-      {CalendarVisible && (
+      {/* {CalendarVisible && (
         <MentorCalendar
           onClose={closeCalendar}
           onShowSuccessModal={openSuccessModal}
         />
-      )}
+      )} */}
       {successful && (
         <SuccessModal
           isOpen={successful}

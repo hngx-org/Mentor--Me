@@ -54,6 +54,13 @@ function RecurringSessionForm() {
     });
   };
 
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const yyyy = today.getFullYear();
+
+  const minDate = `${yyyy}-${mm}-${dd}`;
+
   const closeSuccessModal = (): void => {
     setSuccessful(false);
   };
@@ -74,7 +81,8 @@ function RecurringSessionForm() {
 
     if (isFormValid) {
       setError("");
-      setCalendarVisible(true);
+      // setCalendarVisible(true);
+      setSuccessful(true);
       setFormVisible(false);
     } else {
       setError("All fields are required");
@@ -103,7 +111,8 @@ function RecurringSessionForm() {
       const responseData = await response.json();
       console.log("form submitted,", responseData);
     } else {
-      setCalendarVisible(false);
+      // setCalendarVisible(false);
+      setSuccessful(false);
       setFormVisible(true);
       setError("An error occurred while creating a session");
       console.error("submissiom failed");
@@ -166,6 +175,7 @@ function RecurringSessionForm() {
               value={formData.numberOfSession}
               onChange={handleSelectChange}
             >
+              <option value="0">0</option>
               <option value="2">2</option>
               <option value="4">4</option>
               <option value="6">6</option>
@@ -199,6 +209,7 @@ function RecurringSessionForm() {
               type="date"
               onChange={handleInputChange}
               value={formData.date}
+              minDate={minDate}
               isRequired
               InputId="date"
               InputName="date"
@@ -215,7 +226,7 @@ function RecurringSessionForm() {
               placeholder="Link to session"
             />
             <TimeInputType
-              labelText="Duration"
+              labelText="Duration in minutes"
               type="number"
               onChange={handleInputChange}
               value={formData.duration}
@@ -252,19 +263,19 @@ function RecurringSessionForm() {
                 variant="primary"
                 type="button"
               >
-                Continue
+                Submit
               </Button>
             </div>
           </form>
         </div>
         // </div>
       )}
-      {CalendarVisible && (
+      {/* {CalendarVisible && (
         <MentorCalendar
           onClose={closeCalendar}
           onShowSuccessModal={openSuccessModal}
         />
-      )}
+      )} */}
       {successful && (
         <SuccessModal
           isOpen={successful}
