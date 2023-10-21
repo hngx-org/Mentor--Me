@@ -12,16 +12,28 @@ import { useMentorContext } from "@/app/(mentor)/mentor-profile-creation/MentorC
 import { MentorProvider } from "./MentorContext";
 
 import { MentorProfileCreationForms } from "./MentorUI";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 export default function MentorPage() {
-  const { formInputs, setFormInputs, currForm, loader } = useMentorContext();
-  // storing the data in localstorage
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
 
   return (
     <MentorProvider>
-      <div className="flex w-full h-full justify-center items-center min-h-[100vh]">
-        <MentorProfileCreationForms />
-      </div>
+      {isLoading ? (
+        <div className="h-screen flex items-center justify-center">
+          <LoadingSpinner />
+        </div>
+      ) : (
+        <div className="flex w-full h-full justify-center items-center min-h-[100vh]">
+          <MentorProfileCreationForms />
+        </div>
+      )}
     </MentorProvider>
   );
 }

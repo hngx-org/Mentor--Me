@@ -8,6 +8,7 @@ import React, {
   SetStateAction,
   useContext,
   useEffect,
+  useId,
   useState,
 } from "react";
 import { Button } from "../buttons/button";
@@ -19,6 +20,8 @@ import {
   MentorDetailsContext,
   UserDetails,
 } from "@/app/(mentor)/(dashboard-mentor)/mentor-profile/DetailsContext";
+import { AddIConv2, EditIConv2 } from "@/public/SVGs";
+import ProfileCard from "./MentorProfileCard";
 
 export type ModalType = {
   state: "basic info" | "Experience/ Certification" | "Social links";
@@ -32,11 +35,34 @@ export default function MentorProfileTabLayout({
   onClose: Dispatch<SetStateAction<ModalState>>;
 }) {
   const [active, setActive] = useState(modalState);
+  const [certification, setCertification] = useState<InfoCardProps[]>([]);
+  const [experience, setExperience] = useState<InfoCardProps[]>([]);
+
   const ProfileBio = useContext(MentorDetailsContext);
 
+  useEffect(() => {
+    const certification = ProfileBio.details.certification
+      .split("  ")
+      .map((item, index) => ({
+        type: "certification",
+        heading: item,
+        text: "present",
+        id: index + 20,
+      }));
+    const experience = ProfileBio.details.experience
+      .split("  ")
+      .map((item, index) => ({
+        type: "experience",
+        heading: item,
+        text: "present",
+        id: index + 20,
+      }));
+    setCertification(certification);
+    setExperience(experience);
+  }, [ProfileBio.details]);
   return (
-    <div className="w-[100%] my-5 h-[100%]">
-      <div className="flex justify-between w-[100%] text-Neutra10 text-xs sm:text-base cursor-pointer px-4  border-b-2">
+    <div className="w-[100%] my-5 min-h-fit h-fit ">
+      <div className="flex justify-between w-[100%] text-Neutra10 text-xs sm:text-base cursor-pointer px-4   border-b-2">
         <div
           onClick={() => {
             setActive("basic info");
@@ -86,24 +112,16 @@ export default function MentorProfileTabLayout({
       {active === "Experience/ Certification" && (
         <>
           <ExpeCerts
-            title="certifications"
-            items={
-              ProfileBio.details.certification.split("  ").map((item) => ({
-                type: "certification",
-                heading: item,
-                text: "present",
-              })) || []
-            }
+            title="certification"
+            items={certification || []}
+            updateState={setCertification}
+            updateUserDetails={ProfileBio.updateUserDetailsCtx}
           />
           <ExpeCerts
-            title="Experience"
-            items={
-              ProfileBio.details.experience.split("  ").map((item) => ({
-                type: "experience",
-                heading: item,
-                text: "present",
-              })) || []
-            }
+            title="experience"
+            items={experience || []}
+            updateState={setExperience}
+            updateUserDetails={ProfileBio.updateUserDetailsCtx}
           />
         </>
       )}
@@ -113,33 +131,6 @@ export default function MentorProfileTabLayout({
           others={ProfileBio.details.otherlinks!}
         />
       )}
-    </div>
-  );
-}
-
-function ProfileCard({ userName }: { userName: string }) {
-  const { data } = useAuth();
-  const name = data?.userDetails?.fullName;
-  return (
-    <div className="w-[100%] flex flex-col h-[100px] space-x-4 my-5">
-      <p>change profile photo</p>
-      <div className="w-[100%] flex h-[100px] space-x-2 my-5 ">
-        <div className="w-[54px]  h-[54px] sm:w-[54px] sm:h-[54px]  rounded-full relative ">
-          <Image
-            style={{ objectFit: "cover", borderRadius: "100%" }}
-            src={`https://api.dicebear.com/7.x/initials/png?seed=${userName}`}
-            fill
-            alt="profile"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <p className="font-bold text-Accent1  text-sm ">Upload file</p>
-          <p className="text-Neutra10 text-sm ">
-            Make sure the file is below 2mb
-          </p>
-        </div>
-      </div>
     </div>
   );
 }
@@ -195,12 +186,12 @@ function BasicInfoTab({
           name="fullName"
           onChange={handleChange}
         />
-        <Selector
+        {/* <Selector
           placeHolder="pick your gender"
           selected={selected}
           onSelect={setSelected}
           options={["male", "female", "other"]}
-        />
+        /> */}
         <TextArea
           label="Bio"
           value={details.bio}
@@ -267,25 +258,133 @@ export function TextArea({ value, label, name, onChange }: InputProps) {
   );
 }
 
-interface ExpeCertsProps {
+type ExpeCertsProps = {
   items: InfoCardProps[];
   title: string;
+  updateState: React.Dispatch<React.SetStateAction<InfoCardProps[]>>;
+  updateUserDetails: React.Dispatch<React.SetStateAction<UserDetails>>;
+};
+
+interface View {
+  view: "Edit" | "All" | "Add" | "select";
 }
-export function ExpeCerts({ items, title }: ExpeCertsProps) {
+export function ExpeCerts({
+  items,
+  title,
+  updateState,
+  updateUserDetails,
+}: ExpeCertsProps) {
+  const [view, setView] = useState("All");
+  const [action, setAction] = useState("");
+  const [item, setItem] = useState({
+    title: "",
+    content: "",
+  });
+  const handleUpdata = (id: string | number) => {};
+  const id = useId();
+
+  const handleAdd = () => {
+    const newItem: InfoCardProps = {
+      type: title,
+      id,
+      heading: item.title,
+      text: item.content,
+    };
+
+    updateState((prev) => [...prev, newItem]);
+    setItem({
+      content: "",
+      title: "",
+    });
+    setView("All");
+  };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setItem((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleEdit = () => {
+    updateUserDetails((prev) => ({ ...prev, [title]: item.title }));
+    console.log(title);
+    setView("All");
+  };
   return (
-    <div className="w-[100%] h-fit flex flex-col border border-3 rounded-[6px] my-5">
-      <div className="w-[100%] h-[20px] py-6 flex justify-between px-4  items-center">
-        <p>{title}</p>
-      </div>
-      <div className="px-4">
-        {items.length >= 1 &&
-          items.map((item) => (
-            <Fragment key={item.text}>
-              <InfoCard {...item} />
-            </Fragment>
-          ))}
-        {items.length === 0 && <p> click to add {title}</p>}
-      </div>
+    <div className="w-[100%]  relative h-fit max-h-[400px] flex flex-col border border-3  rounded-[6px] my-5 overflow-scroll hide-message-layout-scroll ">
+      {view === "All" && (
+        <div className="flex flex-col h-fit">
+          <div className="w-[100%] h-[20px] py-6 flex justify-between px-4  items-center">
+            <p>{title}</p>
+
+            <div className="space-x-4 flex items-center cursor-pointer">
+              <span
+                className="text-[20px]"
+                onClick={() => {
+                  setView("select");
+                  setAction("Edit");
+                }}
+                role="presentation"
+              >
+                <EditIConv2 />
+              </span>
+              {/* <span
+                onClick={() => {
+                  setView("update");
+                  setAction("Add");
+                }}
+                role="presentation"
+              >
+                <AddIConv2 />
+              </span> */}
+            </div>
+          </div>
+          <div className="px-4">
+            {items.length >= 1 &&
+              items.slice(0, 4).map((item) => (
+                <Fragment key={item.text}>
+                  <InfoCard {...item} />
+                  <hr />
+                </Fragment>
+              ))}
+            {items.length === 0 && <p> click to add {title}</p>}
+          </div>
+          {items.length > 4 && (
+            <div
+              className="flex w-[100%] h-[30px] bg-Neutra50 p-5 cursor-pointer items-center text-xs text-Neutra10 font-bold "
+              role="presentation"
+              onClick={() => {
+                setView("select");
+              }}
+            >
+              <p>view {items.length - 4} more...</p>
+            </div>
+          )}
+        </div>
+      )}
+      {view === "update" && (
+        <EditView
+          cancel={setView}
+          action={action}
+          content={item.content}
+          title={item.title}
+          handleChange={handleChange}
+          setItem={setItem}
+          type={title}
+          handleEdit={handleEdit}
+          handleAdd={handleAdd}
+        />
+      )}
+      {view === "select" && (
+        <ShowItemsView
+          setView={setView}
+          setAction={setAction}
+          setItem={setItem}
+          itemsList={items}
+        />
+      )}
     </div>
   );
 }
@@ -319,6 +418,184 @@ export function SocialsField({
     >
       <div className="text-xs"> 🔗 {type} </div>
       <div className="text-xs">{text}</div>
+    </div>
+  );
+}
+interface EditViewProps {
+  cancel: React.Dispatch<React.SetStateAction<string>>;
+  action: string;
+  title: string;
+  content: string;
+  setItem: React.Dispatch<
+    React.SetStateAction<{
+      title: string;
+      content: string;
+    }>
+  >;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  type: string;
+  handleAdd: () => void;
+  handleEdit: () => void;
+}
+
+const getInputDesc = (type: string) => {
+  if (type.toLocaleLowerCase() === "experience") {
+    return ["company", "postion"];
+  }
+  if (type === "certification") {
+    return ["issuing organisation", "course"];
+  }
+  return ["title", "content"];
+};
+function EditView({
+  cancel,
+  action,
+  title,
+  content,
+  setItem,
+  type,
+  handleChange,
+  handleAdd,
+  handleEdit,
+}: EditViewProps) {
+  return (
+    <div className="min-h-[80%] h-fit w-[100%] p-4">
+      <div className="flex justify-end w-[100%] justify-between">
+        <p className="font-bold uppercase text-lg">{action}</p>
+        <Button
+          variant="outline-primary"
+          className="w-fit px-2 py-0 "
+          paddingLess
+          onClick={() => {
+            cancel("All");
+            setItem({
+              title: "",
+              content: "",
+            });
+          }}
+        >
+          cancel
+        </Button>
+      </div>
+
+      <div className="w-[100%]  flex flex-col  my-4">
+        <p className="text-Neutra30 text-sm font-bold">
+          {getInputDesc(type)[0]}
+          <span className="text-Error50">*</span>
+        </p>
+        <input
+          className="  active:border-0 placeholder:text-xs  border w-[100%] rounded-[6px] p-2 focus:outline-none"
+          placeholder="company"
+          value={title}
+          name="title"
+          onChange={handleChange}
+        />
+      </div>
+      <div className="w-[100%]  flex flex-col  my-4">
+        <p className="text-Neutra30 text-sm font-bold">
+          {getInputDesc(type)[1]}
+          <span className="text-Error50">*</span>
+        </p>
+        <input
+          className="  active:border-0 placeholder:text-xs  border w-[100%] rounded-[6px] p-2 focus:outline-none"
+          placeholder="position"
+          value={content}
+          name="content"
+          onChange={handleChange}
+        />
+      </div>
+      {action === "Edit" ? (
+        <Button variant="primary" onClick={handleEdit}>
+          update
+        </Button>
+      ) : (
+        <Button
+          variant="primary"
+          onClick={() => {
+            handleAdd();
+          }}
+          disabled={content.length <= 0 || title.length <= 0}
+        >
+          Add
+        </Button>
+      )}
+    </div>
+  );
+}
+
+interface ShowItemsViewProps {
+  setView: React.Dispatch<React.SetStateAction<string>>;
+  setAction: React.Dispatch<React.SetStateAction<string>>;
+  setItem: React.Dispatch<
+    React.SetStateAction<{
+      title: string;
+      content: string;
+    }>
+  >;
+  itemsList: InfoCardProps[];
+}
+
+function ShowItemsView({
+  setView,
+  setAction,
+  setItem,
+  itemsList,
+}: ShowItemsViewProps) {
+  return (
+    <div className="w-[100%] h-fit px-4 ">
+      <div className=" flex justify-end sticky h-fit top-[0px] bg-white py-4">
+        <Button
+          variant="outline-primary"
+          className="w-fit px-2 py-0 "
+          paddingLess
+          onClick={() => {
+            setView("All");
+          }}
+        >
+          cancel
+        </Button>
+      </div>
+      {itemsList.map((item) => (
+        <ItemsCard
+          title={item.heading!}
+          content={item.text!}
+          setAction={setAction}
+          setItem={setItem}
+          setView={setView}
+        />
+      ))}
+    </div>
+  );
+}
+
+function ItemsCard({
+  title,
+  content,
+  setAction,
+  setItem,
+  setView,
+}: {
+  title: string;
+  content: string;
+  setAction: Dispatch<SetStateAction<string>>;
+  setItem: Dispatch<SetStateAction<{ title: string; content: string }>>;
+  setView: Dispatch<SetStateAction<string>>;
+}) {
+  return (
+    <div
+      className="w-[100%] h-fit rounded-[4px] p-3 bg-gray-50 my-4 cursor-pointer text-Neutra40"
+      onClick={() => {
+        setView("update");
+        setAction("Edit");
+        setItem({
+          content,
+          title,
+        });
+      }}
+      role="presentation"
+    >
+      <p className="font-extrabold">{title}</p>
+      <p>{content}</p>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 import { mentorCardAvatar, mentorCardHero } from "@/public";
 import BigMentorShipCard from "@/components/Community/BigMentorShipCard";
@@ -9,6 +9,7 @@ import HomeNavBar from "@/components/homeNavbar";
 import Footer from "@/components/Footer";
 import { getMentorInfo } from "@/lib/apiHelper";
 import SecondSearchCommunitySearchbar from "@/components/Community/searchcommunity-searchbar2";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 type MentorDataType = {
   date: string;
@@ -63,65 +64,67 @@ export default function FreeMentorship() {
   }
 
   return (
-    <div className="freeMentorship">
-      {/* text */}
-      {/* <div className="join-discussion lg:mt-[84px] md:mt-[40px]  hidden md:flex flex-col justify-center items-center">
+    <Suspense fallback={<LoadingSpinner />}>
+      <div className="freeMentorship">
+        {/* text */}
+        {/* <div className="join-discussion lg:mt-[84px] md:mt-[40px]  hidden md:flex flex-col justify-center items-center">
         <p className=" text-NeutalBase   xl:text-[60px] xl:leading-[72px] lg:text-[45px] lg:leading-[55px] md:text-[30px] md:leading-[40px] font-bold text-center font-Hanken lg:px-[2vw] md:px-[40px] lg:mb-[50px] md:mb-[26px] ">
           Connect with mentors in free classrooms and share their experiences
           and insights with Mentor me
         </p>
       </div> */}
-      <section className="py-6 md:py-10 px-[100px]">
-        <SecondSearchCommunitySearchbar
-          q={q}
-          setQ={setQ}
-          filterDiscussions={filterDiscussions}
-        />
-      </section>
-      {/* text */}
-      <div className=" hidden lg:flex flex-col gap-y-8 px-[100px]">
-        {mentorInfo.map((item) => (
-          <BigMentorShipCard
-            id={item.id}
-            mentorName={`${capitalizeFirstLetter(
-              item.firstname
-            )} ${capitalizeFirstLetter(item.lastname)}`}
-            verify
-            mentorPostion={capitalizeFirstLetter(item.title)}
-            mentorImage={mentorCardAvatar}
-            mentorCardHero={mentorCardHero}
-            date={item.date}
-            time={item.time}
-            title={capitalizeFirstLetter(item.topic)}
-            desc={capitalizeFirstLetter(item.content)}
+        <section className="py-6 md:py-10 px-[100px]">
+          <SecondSearchCommunitySearchbar
+            q={q}
+            setQ={setQ}
+            filterDiscussions={filterDiscussions}
           />
-        ))}
-      </div>
-      <h1 className="lg:hidden  mx-auto min-w-[400px] w-[80vw] font-Inter font-medium text-[16px] leading-[22.4px] pb-[15px]">
-        Free Mentorship Sessions
-      </h1>
-      <div className="grid lg:hidden  md:grid-cols-3 grid-cols-2  gap-y-5 md:gap-y-8 mx-auto min-w-[400px] w-[80vw]">
-        {mentorInfo.map((item) => (
-          <div className="w-full flex justify-center ">
-            <MentorCard
+        </section>
+        {/* text */}
+        <div className=" hidden lg:flex flex-col gap-y-8 px-[100px]">
+          {mentorInfo.map((item) => (
+            <BigMentorShipCard
               id={item.id}
               mentorName={`${capitalizeFirstLetter(
                 item.firstname
               )} ${capitalizeFirstLetter(item.lastname)}`}
               verify
               mentorPostion={capitalizeFirstLetter(item.title)}
-              mentorAvatar={mentorCardAvatar}
-              cardHero={item.contentImage}
+              mentorImage={mentorCardAvatar}
+              mentorCardHero={mentorCardHero}
               date={item.date}
               time={item.time}
               title={capitalizeFirstLetter(item.topic)}
               desc={capitalizeFirstLetter(item.content)}
             />
-          </div>
-        ))}
+          ))}
+        </div>
+        <h1 className="lg:hidden  mx-auto min-w-[400px] w-[80vw] font-Inter font-medium text-[16px] leading-[22.4px] pb-[15px]">
+          Free Mentorship Sessions
+        </h1>
+        <div className="grid lg:hidden  md:grid-cols-3 grid-cols-2  gap-y-5 md:gap-y-8 mx-auto min-w-[400px] w-[80vw]">
+          {mentorInfo.map((item) => (
+            <div className="w-full flex justify-center ">
+              <MentorCard
+                id={item.id}
+                mentorName={`${capitalizeFirstLetter(
+                  item.firstname
+                )} ${capitalizeFirstLetter(item.lastname)}`}
+                verify
+                mentorPostion={capitalizeFirstLetter(item.title)}
+                mentorAvatar={mentorCardAvatar}
+                cardHero={item.contentImage}
+                date={item.date}
+                time={item.time}
+                title={capitalizeFirstLetter(item.topic)}
+                desc={capitalizeFirstLetter(item.content)}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="footer h-[7rem] w-full bg-transparent" />
+        <Footer />
       </div>
-      <div className="footer h-[7rem] w-full bg-transparent" />
-      <Footer />
-    </div>
+    </Suspense>
   );
 }
