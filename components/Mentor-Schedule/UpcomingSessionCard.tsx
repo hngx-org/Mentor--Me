@@ -15,6 +15,7 @@ interface RecentbookingFromApi {
   tag: string;
   duration: number;
   attendeesLimit: number;
+  sessionUrl: string;
 }
 
 function UpcomingSessionCard({
@@ -28,6 +29,7 @@ function UpcomingSessionCard({
   attendeesLimit,
   occurence,
   tag,
+  sessionUrl,
 }: RecentbookingFromApi) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -45,27 +47,29 @@ function UpcomingSessionCard({
     <div>
       <div>
         {/* Container for the card */}
-        <div className="max-w-[350px] mb-2  border border-neutral-300 rounded-lg p-4 flex flex-col gap-5">
-          <div className="px-4 border border-Accent1 text-center w-fit flex justify-center bg-black">
-            {" "}
-            <p className="text-medium text-white">{tag}</p>
-          </div>
+        <div className="max-w-[350px] h-[400px] mb-2  border border-neutral-300 rounded-lg px-3 py-6 flex flex-col justify-between space-y-6 shadow-sm ">
+          <div className="space-y-3">
+            <div className="px-4 border border-Accent1 text-center w-fit flex justify-center bg-black">
+              {" "}
+              <p className="text-medium text-white">{tag}</p>
+            </div>
 
-          {/* Category */}
-          <div className="flex gap-2">
-            <p className="font-inter text-sm text-stone-500">
-              {relevantTopics}
+            {/* Category */}
+            <div className="flex gap-2">
+              <p className="font-inter text-sm text-stone-500">
+                {relevantTopics}
+              </p>
+              <p className="font-inter text-sm text-stone-500">{sessionType}</p>
+            </div>
+
+            {/* Name */}
+            <p className="font-lg font-bold text-neutral-950 whitespace-nowrap font-Hanken md:text-lg">
+              {sessionName}
             </p>
+
+            {/* Session Type (optional) */}
             <p className="font-inter text-sm text-stone-500">{sessionType}</p>
           </div>
-
-          {/* Name */}
-          <p className="font-lg font-bold text-neutral-950 whitespace-nowrap font-Hanken md:text-lg">
-            {sessionName}
-          </p>
-
-          {/* Session Type (optional) */}
-          <p className="font-inter text-sm text-stone-500">{sessionType}</p>
 
           {/* Date and Time */}
           <div className=" flex font-Inter justify-center   font-medium items-center">
@@ -109,6 +113,7 @@ function UpcomingSessionCard({
               description={description}
               tag={tag}
               occurence={occurence}
+              sessionUrl={sessionUrl}
             />
           </Modal>
         )}

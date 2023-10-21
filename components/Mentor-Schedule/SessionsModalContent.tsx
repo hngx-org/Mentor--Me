@@ -9,6 +9,7 @@ interface SessionModalContentProps {
   description: string;
   occurence: string;
   tag: string;
+  sessionUrl: string;
 }
 
 const SessionModalContent: React.FC<SessionModalContentProps> = ({
@@ -20,6 +21,7 @@ const SessionModalContent: React.FC<SessionModalContentProps> = ({
   attendeesLimit,
   tag,
   occurence,
+  sessionUrl,
 }) => {
   function formatDateString(dateString: string | number): string {
     const options: Intl.DateTimeFormatOptions = {
@@ -75,10 +77,16 @@ const SessionModalContent: React.FC<SessionModalContentProps> = ({
       )}
       {tag && (
         <div>
-          <p className="text-Neutra30">Tag</p>
+          <p className="text-Neutra30">Type of Session</p>
           <p>{tag}</p>
         </div>
       )}
+      <div>
+        <p className="text-Neutra30">Link</p>
+        <a className="text-blue-600" href={sessionUrl}>
+          Go
+        </a>
+      </div>
     </div>
   );
 };
