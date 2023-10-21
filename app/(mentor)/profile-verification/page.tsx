@@ -79,7 +79,7 @@ export default function MentorProfileVerification() {
         const newUser = JSON.parse(getUser);
         token = newUser.data.token; // assign token value here
       } catch (error) {
-        console.error("Error parsing JSON:", error);
+        // console.error("Error parsing JSON:", error);
       }
     }
   }
@@ -115,7 +115,7 @@ export default function MentorProfileVerification() {
         },
       };
 
-      console.log(requestData);
+      // console.log(requestData);
 
       const response = await axios.post(url, requestData, {
         headers: {
@@ -128,11 +128,11 @@ export default function MentorProfileVerification() {
         setStep(0);
         setFormSubmitted(true);
       } else {
-        console.error("Unexpected status:", response.status);
+        // console.error("Unexpected status:", response.status);
         toast.error("An error occurred. Please try again later.");
       }
     } catch (error) {
-      console.error("Error:", error);
+      // console.error("Error:", error);
     }
   };
   return (

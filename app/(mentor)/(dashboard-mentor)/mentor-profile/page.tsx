@@ -54,7 +54,7 @@ export default function ProfilePage() {
     isOpen: false,
   });
   let token = ""; // declare token variable
-  const [skills, setSkills] = useState<any>([])
+  const [skills, setSkills] = useState<any>([]);
 
   if (typeof window !== "undefined") {
     const getUser = localStorage.getItem("Mentor");
@@ -103,25 +103,25 @@ export default function ProfilePage() {
       console.error("Error fetching current mentor data:", error);
     } finally {
       console.log(user);
-      if(userData.skills.includes(",")) {
-        const newSkills = userData.skills.split(",")
-        setSkills(Array.from(newSkills))
+      if (userData.skills.includes(",")) {
+        const newSkills = userData.skills.split(",");
+        setSkills(Array.from(newSkills));
       } else {
-        setSkills(userData.skills)
+        setSkills(userData.skills);
       }
     }
   };
 
   useEffect(() => {
-    if(userData.skills.includes(",")) {
-      const newSkills = userData.skills.split(",")
-      setSkills(Array.from(newSkills))
+    if (userData.skills.includes(",")) {
+      const newSkills = userData.skills.split(",");
+      setSkills(Array.from(newSkills));
     } else {
-      setSkills(Array.from(userData.skills))
+      setSkills(Array.from(userData.skills));
     }
-  }, [userData])
+  }, [userData]);
 
-  console.log(skills)
+  console.log(skills);
   console.log(user);
   // const getCurrent = async () => {
   //   try {
@@ -158,8 +158,8 @@ export default function ProfilePage() {
   const paramsAction = useSearchParams().get("action");
   // console.log(user);
   // console.log(currMentor);
-  console.log({userData});
-  
+  console.log({ userData });
+
   return (
     <>
       {paramsAction === "edit-mentor" ? (

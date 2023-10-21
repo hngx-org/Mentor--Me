@@ -18,11 +18,11 @@ const Page = () => {
     setIsBrowser(true);
   }, []);
 
-  const handleGoBack = () => {
-    if (isBrowser) {
-      window.history.back();
-    }
-  };
+  // const handleGoBack = () => {
+  //   if (isBrowser) {
+  //     window.history.back();
+  //   }
+  // };
 
   return (
     <div className="sm:px-16 px-6">

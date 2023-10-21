@@ -25,7 +25,7 @@ function Form1({ handleMoveForward, handleMoveBack }: myProps) {
 
   function showFile(e: any) {
     if ([...e.target.files][0].size > 2 * 1024 * 1024) {
-      alert("Image size exceeds 2MB. Please upload a smaller image.");
+      // toast("Image size exceeds 2MB. Please upload a smaller image.");
       return;
     }
     setFiles((prevFile: any) => ({

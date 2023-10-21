@@ -38,7 +38,10 @@ export default function MentorProfileModal({
           <ModalCloseIcon />
         </div>
         <p className="font-bold text-Neutra50 ">Update your profile Details</p>
-        <MentorProfileTabLayout modalState={state} />
+        <MentorProfileTabLayout
+          modalState={state}
+          // onClose={onClose}
+        />
       </div>
     </div>
   );

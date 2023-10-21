@@ -74,14 +74,14 @@ export default function UploadResourcesPage() {
             }
           );
           const anotherData = await anotherRes.json();
-          console.log(anotherData);
+          // console.log(anotherData);
           const fileReader = new FileReader();
           fileReader.readAsDataURL(file!);
 
           fileReader.onloadend = async function () {
             videoBase64 = fileReader.result as string;
 
-            console.log(videoBase64);
+            // console.log(videoBase64);
             const resourceData = {
               category: categoryRef.current?.value!,
               description: courseDescriptionRef.current?.value!,
@@ -102,7 +102,7 @@ export default function UploadResourcesPage() {
               },
             });
             const data = await res.json();
-            console.log(data);
+            // console.log(data);
             if (data.success === true) {
               toast.success("resource uploaded successfully");
             } else {
@@ -248,7 +248,7 @@ export default function UploadResourcesPage() {
             if (e.key === "e") {
               e.preventDefault();
             }
-            console.log(e.key);
+            // console.log(e.key);
           }}
           required
           placeholder="Input the price"
@@ -292,7 +292,7 @@ const DragArea = ({
         setIsDraggingOver(false);
 
         const file = e.dataTransfer.files[0];
-        console.log(file);
+        // console.log(file);
         setFile(file);
       }}
       onDragOver={(e) => {
@@ -350,7 +350,7 @@ const Input = ({
       htmlFor={htmlFor}
       onClick={onClick}
       onKeyUp={() => {
-        console.log("ally rule");
+        // console.log("ally rule");
       }}
     >
       {children}

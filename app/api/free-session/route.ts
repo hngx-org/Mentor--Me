@@ -12,7 +12,7 @@ type FormData = {
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const data: FormData = await req.json();
-  console.log("data:", data);
+  // console.log("data:", data);
 
   const {
     sessionName,

@@ -86,7 +86,7 @@ export function FreeSessionForm() {
     }
 
     const data = formData;
-    console.log(JSON.stringify(data));
+    // console.log(JSON.stringify(data));
 
     // POSTING DATA
     const response = await fetch(
@@ -102,11 +102,11 @@ export function FreeSessionForm() {
 
     if (response.ok) {
       const responseData = await response.json();
-      console.log("form submitted,", responseData);
+      // console.log("form submitted,", responseData);
     } else {
       setCalendarVisible(false);
       setError("An error occurred while creating a session");
-      console.error("submissiom failed");
+      // console.error("submissiom failed");
     }
   };
   return (
@@ -296,7 +296,7 @@ export function OneOffSessionForm() {
     }
 
     const data = formData;
-    console.log(JSON.stringify(data));
+    // console.log(JSON.stringify(data));
 
     // POSTING DATA
     const response = await fetch(
@@ -312,11 +312,11 @@ export function OneOffSessionForm() {
 
     if (response.ok) {
       const responseData = await response.json();
-      console.log("form submitted,", responseData);
+      // console.log("form submitted,", responseData);
     } else {
       setCalendarVisible(false);
       setError("An error occurred while creating a session");
-      console.error("submissiom failed");
+      // console.error("submissiom failed");
     }
   };
   return (
@@ -499,7 +499,7 @@ export function RecurringSessionForm() {
     }
 
     const data = formData;
-    console.log(JSON.stringify(data));
+    // console.log(JSON.stringify(data));
 
     // POSTING DATA
     const response = await fetch(
@@ -515,11 +515,11 @@ export function RecurringSessionForm() {
 
     if (response.ok) {
       const responseData = await response.json();
-      console.log("form submitted,", responseData);
+      // console.log("form submitted,", responseData);
     } else {
       setCalendarVisible(false);
       setError("An error occurred while creating a session");
-      console.error("submissiom failed");
+      // console.error("submissiom failed");
     }
   };
   return (

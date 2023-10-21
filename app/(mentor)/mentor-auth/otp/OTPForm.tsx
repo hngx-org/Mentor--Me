@@ -32,7 +32,7 @@ const OTPForm = () => {
           setEmail(newUser.data.email);
           setUserId(newUser.data._id);
         } catch (error) {
-          console.error("Error parsing JSON:", error);
+          // console.error("Error parsing JSON:", error);
         }
       }
     }
@@ -80,10 +80,10 @@ const OTPForm = () => {
         const data = await response.json();
         openModal();
       } else {
-        alert("Incorrect Otp. Try Again");
+        // toast("Incorrect Otp. Try Again");
       }
     } catch (error) {
-      console.error("Error", error);
+      // console.error("Error", error);
     }
   };
 
@@ -129,7 +129,7 @@ const OTPForm = () => {
 
   return (
     <div>
-      <div className="w-full h-[100vh] grid sm:grid-cols-6 overflow-hidden">
+      <div className="w-9/10 max-w-[500px] lg:w-4/5 lg:max-xl:w-4/5 xl:w-4/5 lg:max-w-[1200px] mx-auto mt-[4rem] grid grid-cols-1 lg:grid-cols-6 overflow-hidden shadow-xl shadow-gray-100 rounded-[20px]">
         <div className="sm:col-span-3 ">
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
             <Image
@@ -140,7 +140,7 @@ const OTPForm = () => {
             />
           </div>
         </div>
-        <div className="col-span-3  px-6  sm:px-16">
+        <div className="col-span-3 mb-[12rem]  px-6  sm:px-16">
           <div className="mt-6">
             <h2 className="text-[#2A2A2A] font-Gladiora text-3xl">Mentor Me</h2>
             <h4 className="font-Inter font-medium text-[#121212] text-xl mt-10">

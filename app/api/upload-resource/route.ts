@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     formData.reviews = "0";
     formData.currency = "N";
 
-    console.log("works");
+    // console.log("works");
 
     const res = await fetch("https://hngmentorme.onrender.com/api/resources", {
       method: "POST",
@@ -37,14 +37,14 @@ export async function POST(request: NextRequest) {
       },
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     if (data.error) {
       return NextResponse.json({ success: false, message: data.error });
     }
     revalidatePath("/mentor-resources");
     return NextResponse.json({ success: true });
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     return NextResponse.json({ message: "failed to upload resource" });
   }
 }

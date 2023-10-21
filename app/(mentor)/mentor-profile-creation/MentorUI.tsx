@@ -65,7 +65,7 @@ export function MentorProfileCreationForms() {
         const newUser = JSON.parse(getUser);
         token = newUser.data.token; // assign token value here
       } catch (error) {
-        console.error("Error parsing JSON:", error);
+        // console.error("Error parsing JSON:", error);
       }
     }
   }
@@ -89,7 +89,7 @@ export function MentorProfileCreationForms() {
       })
       .catch((error) => {
         // Handle any errors
-        console.log(error.response.data.message);
+        // console.log(error.response.data.message);
         toast.error(error.response.data.message);
       });
   }

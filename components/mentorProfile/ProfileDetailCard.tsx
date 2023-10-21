@@ -99,12 +99,11 @@ export function BioCard({ text }: { text: string }) {
   );
 }
 export function SkillSCard({ skills }: { skills: string[] }) {
-  console.log({skills})
+  console.log({ skills });
   return (
     <div className="w-[100%] flex flex-col  h-fit ">
       <p className="text-lg font-bold font-[#000]"> Skills/Expertise</p>
       <div className="flex w-[100%] flex-wrap">
-        
         {skills.length === 0 && <p> click to add skills</p>}
         {skills.length > 1 &&
           skills?.slice(0, 5)?.map((item) => (

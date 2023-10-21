@@ -7,6 +7,7 @@ import Selector from "../selector";
 
 export type ModalType = {
   state: "basic info" | "Experience/ Certification" | "Social links";
+  // onClose?: () => void
 };
 
 export default function MentorProfileTabLayout({

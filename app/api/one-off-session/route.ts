@@ -12,7 +12,7 @@ type OneOffFormData = {
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const data: OneOffFormData = await req.json();
-  console.log("data:", data);
+  // console.log("data:", data);
 
   const { sessionName, description, sessionType, time, date, relevantTopics } =
     data;
