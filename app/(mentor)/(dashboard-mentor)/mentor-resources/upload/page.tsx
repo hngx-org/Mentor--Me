@@ -5,6 +5,7 @@
 
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -29,6 +30,7 @@ const TRACKOPTIONS = [
 
 export default function UploadResourcesPage() {
   const courseTitleRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const [curriculumList, setCurriculumList] = useState<
     { id: string; title: string; duration: number }[]
@@ -112,11 +114,13 @@ export default function UploadResourcesPage() {
 
           fileReader.onloadend = async function () {
             videoBase64 = fileReader.result as string;
-            const newList = curriculumList.map((list, idx) => ({
-              [`Id${idx + 1}`]: list.id,
-              [`Title${idx + 1}`]: list.title,
-              [`Duration${idx + 1}`]: list.duration,
-            }));
+            const newList = curriculumList
+              .map((list, idx) => ({
+                [`Id${idx + 1}`]: list.id,
+                [`Title${idx + 1}`]: list.title,
+                [`Duration${idx + 1}`]: list.duration,
+              }))
+              .reduce((acc, curr) => ({ ...acc, ...curr }), {});
 
             const resourceData = {
               category: trackRef.current?.value!,
@@ -132,11 +136,7 @@ export default function UploadResourcesPage() {
               currency: "NGN",
               videoUrl: videoBase64 as string,
               imageUrl: "",
-              ...newList[0],
-              ...newList[1],
-              ...newList[2],
-              ...newList[3],
-              ...newList[4],
+              ...newList,
             };
 
             const res = await fetch("/api/upload-resource", {
@@ -154,6 +154,7 @@ export default function UploadResourcesPage() {
               return;
             }
             toast.success("Resource uploaded successfully!");
+            router.push(`/mentor-resources/${data._id}`);
           };
         } catch (e) {
           console.log(e);
@@ -280,7 +281,7 @@ export default function UploadResourcesPage() {
         <p className="capitalize text-Neutral60 font-Inter font-medium mb-2 text-lg">
           video preview
         </p>
-        <DragArea setFile={setFile} />
+        <DragArea video={video} setFile={setFile} />
         {video.trim().length > 0 && (
           <div className="flex items-center my-4 gap-4 relative">
             <CancelIcon
@@ -332,10 +333,20 @@ export default function UploadResourcesPage() {
 
 const DragArea = ({
   setFile,
+  video,
 }: {
   setFile: React.Dispatch<React.SetStateAction<File | null>>;
+  video: string;
 }) => {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (video === "") {
+      fileRef.current!.value = "";
+    }
+  }, [video]);
+
   return (
     <div
       className={`${
@@ -392,6 +403,7 @@ const DragArea = ({
             name="upload-file"
             accept=".mp4, .webm, .avi, .mkv, .ogg"
             size={15728640}
+            ref={fileRef}
             onChange={(e) => {
               if (e.target.files![0].size > 15728640) {
                 toast.error("The uploaded file is larger than 15MB");
