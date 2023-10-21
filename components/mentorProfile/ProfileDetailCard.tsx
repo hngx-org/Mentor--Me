@@ -84,8 +84,10 @@ export function InfoCard({ type, heading, text, id }: InfoCardProps) {
     <div className="w-[100%]  flex space-x-5 h-fit items-center my-2" key={id}>
       {getIcons(type)}
       <div>
-        <p className="text-lg  font-[500] text-Neutra50">{heading}</p>
-        <p className="text-Neutra40"> {text} </p>
+        <p className="text-lg  font-[500] text-Neutra50 truncate  max-w-[250px] sm:max-w-[350px]">
+          {heading}
+        </p>
+        <p className="text-Neutra40 "> {text} </p>
       </div>
     </div>
   );

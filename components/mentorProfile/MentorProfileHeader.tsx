@@ -46,8 +46,8 @@ export default function MentorProfileHeader({
           />
         </div>
         <div className=" w-[100%] flex flex-col items-center sm:flex-row sm:justify-between px-2 ">
-          <div className="flex  flex-col items-center sm:items-start w-[100%]">
-            <p className="text-Neutra60 font-[700] text-lg capitalize">
+          <div className="flex  flex-col  items-center sm:items-start w-[100%]">
+            <p className="text-Neutra60   text-center font-[700] text-lg capitalize">
               {userName}
             </p>
             <div className="flex w-fit items-center">
