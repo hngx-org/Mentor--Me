@@ -8,7 +8,7 @@ import useAuth from "@/context/useAuth";
 export default function Instructor() {
   // Vxrcel
   const { data } = useAuth();
-  console.log(data);
+
   // Vxrcel End
   const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
     data?.userDetails?.fullName || ""
