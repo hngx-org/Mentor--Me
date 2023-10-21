@@ -73,7 +73,7 @@ export function MentorProfileCreationForms() {
 
     axios
       .post(
-        "https://mentorme-be.vercel.app/api/create_mentor_data",
+        "https://mentormee-api.onrender.com/mentors/create-profile",
         formInputs,
         { headers: customHeaders }
       )

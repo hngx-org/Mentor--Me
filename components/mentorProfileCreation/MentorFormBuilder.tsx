@@ -107,16 +107,25 @@ export default function MentorFormBuilder({
         'input[name="year_of_graduation"]'
       );
 
-      yearGradInp?.addEventListener("input", () => {
-        // @ts-ignore
-        if (yearGradInp!.value !== "") {
-          setInschool(false);
-        } else {
-          setInschool(true);
-        }
-      });
+      // @ts-ignore
+      if (yearGradInp!.value !== "") {
+        setInschool(false);
+      } else {
+        setInschool(true);
+      }
+      // yearGradInp!.addEventListener("input", () => {
+      //   console.log('hello')
+      //   // @ts-ignore
+      //   if (yearGradInp!.value !== "") {
+      //     setInschool(false);
+      //   } else {
+      //     setInschool(true);
+      //   }
+      // });
     }
   }, [formInputs]);
+
+  // console.log(formInputs)
 
   useEffect(() => {
     if (currForm === 2) {
