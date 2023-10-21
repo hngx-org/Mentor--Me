@@ -79,7 +79,7 @@ export default function FilterContainer() {
 
   // SelectedDate
   const dateString = selectedDate;
-  console.log(dateString);
+  // console.log(dateString);
 
   // Date from api
   const originalDate = new Date(selectedDate);
@@ -87,7 +87,7 @@ export default function FilterContainer() {
   // Format the Date object into "YYYY-MM-DD" format COMMENTED THIS OUT COS OF ERROR
   const formattedDate = format(originalDate, "yyyy-MM-dd");
   // const formattedDate = originalDate.toISOString().split("T")[0];
-  console.log(formattedDate);
+  // console.log(formattedDate);
 
   // handle filter
 
@@ -102,21 +102,21 @@ export default function FilterContainer() {
     setFilteredResults(filtered);
     // console.log(filtered);
     // console.log(formattedDate);
-    console.log({
-      date: dateString,
-      price: value,
-      timezone: selectedTimeZone,
-    });
+    // console.log({
+    //   date: dateString,
+    //   price: value,
+    //   timezone: selectedTimeZone,
+    // });
   };
 
   const handleReset = () => {
     setFilteredResults(cards);
   };
-  console.log(filteredResults);
+  // console.log(filteredResults);
 
   return (
     <>
-      <div className="container mx-auto mt-24 px-4 py-8">
+      <div className="container mx-auto mt-5 mt24 px-4 py-8">
         <div className="bg bg-Neutral60 rounded-[5px] px-6 py-4 space-y-5 lg:py-8">
           {/* All */}
           {/* Search for mobile */}
