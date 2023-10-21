@@ -19,6 +19,7 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
   const router = useRouter(); // router
   const [addInput, setAddInput] = useState([1]);
   const [token, setToken] = useState("");
+  const [pageLoading, setPageLoading] = useState(true);
   const [formData, setFormData] = useState<formProps>({
     social: "",
   });
@@ -48,6 +49,13 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
         }
       }
     }
+  }, []);
+  useEffect(() => {
+    const loadingTimeout = setTimeout(() => {
+      setPageLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(loadingTimeout);
   }, []);
 
   const fetchMenteeData = async () => {
@@ -129,7 +137,11 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
     e.preventDefault();
   };
 
-  return (
+  return pageLoading ? (
+    <div className="absolute top-1/2 right-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 z-30">
+      <div className="w-16 h-16 border-t-4 border-b-4 border-green-700/90 rounded-full animate-spin" />
+    </div>
+  ) : (
     <div className="flex w-full xl:max-w-full justify-start sm:justify-start">
       <div className="flex w-full gap-4 flex-col">
         <p

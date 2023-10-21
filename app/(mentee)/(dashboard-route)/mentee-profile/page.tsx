@@ -14,7 +14,7 @@ import Commendations from "@/components/cards/mentee-profile-cards/Commendations
 import MyMentorsCard from "@/components/cards/mentee-profile-cards/MyMentorsCard";
 import OverviewCard from "@/components/cards/mentee-profile-cards/OverviewCard";
 
-import { DashboardCoverBg, MenteeDashboardProfileImg } from "@/public";
+import { DashboardCoverBg } from "@/public";
 import { EditIcon, GoNextArrowIcon, NaijaFlagIcon } from "@/public/SVGs";
 import Button from "../mentee-sessions/(ui)/VxrcelBtn";
 import UpdateProfile from "@/components/cards/mentee-profile-cards/UpdateProfile";
@@ -66,17 +66,7 @@ export default function MenteeProfilePage() {
 
   useEffect(() => {
     setActiveTab(paramsTab || "overview");
-    router.refresh();
   }, [paramsTab]);
-
-  useEffect(() => {
-    const hasReloaded = sessionStorage.getItem("hasReloaded");
-
-    if (!hasReloaded) {
-      sessionStorage.setItem("hasReloaded", "true");
-      window.location.reload();
-    }
-  }, []);
 
   useEffect(() => {
     const getUser = localStorage.getItem("Mentee");
@@ -152,7 +142,14 @@ export default function MenteeProfilePage() {
           <div className="flex w-full justify-between items-center px-6 lg:pl-8 max-lg:flex-col max-lg:items-start max-lg:gap-6 2xl:px-32">
             <div className="flex items-center gap-6  w-full max-lg:flex-col max-lg:items-start max-lg:gap-6 ">
               <div className="relative -mt-12 ">
-                <Suspense fallback={<LoadingSpinner />}>
+                <Suspense
+                  fallback={
+                    <LoadingSpinner
+                      color="border-black"
+                      innerColor="border-rose-700/90"
+                    />
+                  }
+                >
                   <div className="h-[200px] w-[200px] bg-gradient-to-b rounded-full p-1 overflow-hidden">
                     <Image
                       src={

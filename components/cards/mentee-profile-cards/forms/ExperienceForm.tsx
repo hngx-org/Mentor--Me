@@ -30,6 +30,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
     company: "",
   });
   const [token, setToken] = useState("");
+  const [pageLoading, setPageLoading] = useState(true);
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
   const [inputData, setInputData] = useState([
     // Initialize inputData with an empty object for the first input field
@@ -69,6 +70,14 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
         }
       }
     }
+  }, []);
+
+  useEffect(() => {
+    const loadingTimeout = setTimeout(() => {
+      setPageLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(loadingTimeout);
   }, []);
 
   const fetchMenteeData = async () => {
@@ -148,7 +157,11 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
   };
   const isDisabled = !formData.title || !formData.company;
 
-  return (
+  return pageLoading ? (
+    <div className="absolute top-1/2 right-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 z-30">
+      <div className="w-16 h-16 border-t-4 border-b-4 border-green-700/90 rounded-full animate-spin" />
+    </div>
+  ) : (
     <div className="flex w-full xl:max-w-full justify-start sm:justify-start">
       <div className="flex gap-4 flex-col">
         <p

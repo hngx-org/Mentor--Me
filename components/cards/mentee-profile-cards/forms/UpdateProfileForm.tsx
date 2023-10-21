@@ -4,8 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
-import { toast } from "react-hot-toast";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   MenteeDashboardProfileImg,
   MenteeUpdateProfileCheckmark,
@@ -23,7 +22,7 @@ type formProps = {
 const MAX_SIZE = 2 * 1024 * 1024; // 2MB in bytes
 export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const [isLoading, setIsLoading] = useState(false);
-
+  const [pageLoading, setPageLoading] = useState(true);
   const [fileURL, setFileURL] = useState<any>("");
   const [formData, setFormData] = useState<formProps>({
     fullName: "",
@@ -86,19 +85,11 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   }, [formData, fileURL]);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const getUser = localStorage.getItem("Mentee");
-      if (getUser) {
-        try {
-          const newUser = JSON.parse(getUser);
-          const getToken = newUser.data.token;
-          setToken(getToken);
-          // assign token value here
-        } catch (error) {
-          console.error("Error parsing JSON:", error);
-        }
-      }
-    }
+    const loadingTimeout = setTimeout(() => {
+      setPageLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(loadingTimeout);
   }, []);
 
   useEffect(() => {
@@ -225,7 +216,11 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   //   }
   // };
 
-  return (
+  return pageLoading ? (
+    <div className="absolute top-1/2 right-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 z-30">
+      <div className="w-16 h-16 border-t-4 border-b-4 border-green-700/90 rounded-full animate-spin" />
+    </div>
+  ) : (
     <div className="flex  w-full xl:max-w-full xl:mb-[100px]  justify-center xl:justify-start sm:justify-start">
       <div className="flex gap-4 flex-col ">
         <p
@@ -322,7 +317,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 <span className="text-red-500 font-medium text-sm">*</span>
               </p>
               <textarea
-                placeholder="Bio......"
+                placeholder="Tell us about your professional background and experience..."
                 name="bio"
                 required
                 id="bio"
@@ -354,7 +349,10 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
           <div className="  flex relative justify-end">
             {isLoading && (
               <div className="absolute top-1/2 right-8 transform -translate-x-[50%] -translate-y-1/2 z-30">
-                <LoadingSpinner />
+                <LoadingSpinner
+                  color="border-white"
+                  innerColor="border-green-700/90"
+                />
               </div>
             )}
 
