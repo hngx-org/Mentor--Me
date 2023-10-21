@@ -62,10 +62,10 @@ export default function UpdateProfile() {
         setIsDark(false);
       }
     }
-  }, [params]);
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem("theme", isDark ? "dark" : "light");
+    localStorage.setItem("theme", isDark ? "light" : "light");
   }, [isDark]);
 
   return (
