@@ -158,7 +158,6 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
           // Handle a successful update here
           setIsProfileUpdated(true);
 
-          // router.replace("/mentee-profile?path=profile");
           setTimeout(() => {
             setIsProfileUpdated(false);
           }, 3000);
@@ -173,7 +172,9 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
       } finally {
         setIsLoading(false);
         fetchMenteeData();
-        router.push("/mentee-profile?path=profile");
+        router.replace("/mentee-profile?path=profile");
+
+        // router.push("/mentee-profile?path=profile");
       }
     } else {
       // Handle the case where authToken is missing
@@ -186,35 +187,6 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const isDisabled = !formData.fullName || formData.bio.length < 30;
-
-  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   setIsLoading(true);
-  //   e.preventDefault();
-  //   if (!file) return;
-
-  //   const formData = new FormData();
-  //   formData.append("file", file); // Use append instead of set
-  //   formData.append("upload_preset", "nd2sr4np");
-
-  //   try {
-  //     const response = await axios.post(
-  //       "https://api.cloudinary.com/v1_1/dp5ysdt4c/image/upload",
-  //       formData
-  //     );
-
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.error(error);
-  //   } finally {
-  //     setIsLoading(false);
-  //     setFormData({
-  //       fullName: "",
-  //       gender: "select",
-  //       bio: "",
-  //       image: "",
-  //     });
-  //   }
-  // };
 
   return pageLoading ? (
     <div className="absolute top-1/2 right-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 z-30">
