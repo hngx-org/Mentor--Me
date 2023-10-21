@@ -60,8 +60,6 @@ const Resource = ({ params }: { params: { resource: string } }) => {
     getResource();
   }, []);
   const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${data?.name}`;
-  console.log(profileImg);
-
   const handleSave = () => {
     if (!save) {
       const savedItems = localStorage.getItem("save");
@@ -197,15 +195,24 @@ const Resource = ({ params }: { params: { resource: string } }) => {
           </div>
         </div>
         <div className="w-full flex flex-col">
-          {/* <video src="" controls>
-          <track kind="captions" src="captions.vtt" label="English captions" />
-        </video> */}
-          <iframe
-            src="https://www.youtube.com/embed/lFUXtURI-Dk?si=_RNgHAhBoVmB_Ws1"
-            title="YouTube video player"
-            allowFullScreen
-            className="w-full h-[400px]"
-          />
+          {data.videoUrl !== undefined && !data.videoUrl.includes("example") ? (
+            <video autoPlay controls className="w-full h-[450px]">
+              <source src={data.videoUrl} type="video/mp4" />
+              <track
+                kind="captions"
+                src={data.videoUrl}
+                label="English captions"
+              />
+            </video>
+          ) : (
+            <iframe
+              src="https://www.youtube.com/embed/lFUXtURI-Dk?si=_RNgHAhBoVmB_Ws1"
+              title="YouTube video player"
+              allowFullScreen
+              className="w-full h-[400px]"
+            />
+          )}
+
           <div className="w-full p-3 sm:p-6">
             <div className="w-full flex justify-between items-center mb-[34px]">
               <p className="font-Hanken text-[32px] text-NeutalBase font-semibold">

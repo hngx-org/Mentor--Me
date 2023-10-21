@@ -42,7 +42,7 @@ const Resources = () => {
             My Resources
           </p>
         </div>
-        <div className="flex gap-6 w-full flex-wrap justify-center pb-20">
+        <div className="flex gap-6 w-full flex-wrap pb-20">
           {[...data].reverse()?.map((res: any, i: number) => (
             <Link
               key={res._id}
