@@ -11,11 +11,26 @@ import React, { useEffect, useRef, useState } from "react";
 import { MentorProvider } from "./MentorContext";
 
 import { MentorProfileCreationForms } from "./MentorUI";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 export default function MentorPage() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
+
   return (
     <MentorProvider>
-      <MentorProfileCreationForms />
+      {isLoading ? (
+        <div className="h-screen flex items-center justify-center">
+          <LoadingSpinner />
+        </div>
+      ) : (
+        <MentorProfileCreationForms />
+      )}
     </MentorProvider>
   );
 }
