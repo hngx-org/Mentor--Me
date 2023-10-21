@@ -257,6 +257,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
               >
                 Select a file
               </p>
+              {errorMessage && <p className="text-red-500">{errorMessage}</p>}
               <p
                 className={`${
                   isDark ? "text-gray-300" : "text-Neutra50"
