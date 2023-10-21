@@ -7,7 +7,6 @@ import Link from "next/link";
 // @ts-ignore
 import { Dialog, Transition } from "@headlessui/react";
 
-
 interface ModalProps {
   isOpen: boolean;
   closeModal: () => void;
@@ -19,10 +18,7 @@ interface ModalProps {
 // const linkHref =
 //   pathName === "forget-password" ? window.location.href : "/mentor-auth/login";
 
-const Modal: FC<ModalProps> = ({
-  isOpen,
-  closeModal,
-}) => (
+const Modal: FC<ModalProps> = ({ isOpen, closeModal }) => (
   <Transition appear show={isOpen}>
     <Dialog as="div" className="relative z-10" onClose={closeModal}>
       <Transition.Child
