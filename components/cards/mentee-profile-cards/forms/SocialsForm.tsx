@@ -123,7 +123,7 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
       } finally {
         setIsLoading(false);
         fetchMenteeData();
-        router.push("/mentee-profile?path=profile");
+        router.replace("/mentee-profile?path=profile");
       }
     } else {
       // Handle the case where authToken is missing
