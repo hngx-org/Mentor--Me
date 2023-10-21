@@ -169,7 +169,7 @@ export default function SignUpForm() {
               </div>
             </form>
 
-            <div className="flex justify-center w-full">
+            {/* <div className="flex justify-center w-full">
               <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
                 OR
               </h5>
@@ -191,7 +191,7 @@ export default function SignUpForm() {
                 loading={isLoading}
                 icon={facebook}
               />
-            </div>
+            </div> */}
             <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
               Already a user?{" "}
               <span className="font-semibold text-[#121212]">
