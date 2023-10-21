@@ -31,7 +31,7 @@ export default async function MentorResources() {
       <div className="bg-white p-4 pt-10">
         <Link
           className="bg-[#121212] px-5 py-3 rounded-[6px] cursor-pointer text-white ml-auto mb-8 block w-max"
-          href="/mentor-resources/upload"
+          href="/mentor-resources/upload?path=resources•upload"
         >
           Upload resource
         </Link>
@@ -129,7 +129,7 @@ const ResourceCard = ({
         </p>
         <Link
           className="text-Accent1 font-Hanken capitalize cursor-pointer mt-auto"
-          href={`/mentor-resources/${resourceId}`}
+          href={`/mentor-resources/${resourceId}?path=resource`}
         >
           view more
         </Link>

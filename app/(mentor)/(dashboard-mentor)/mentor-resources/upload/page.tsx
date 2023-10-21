@@ -90,7 +90,7 @@ export default function UploadResourcesPage() {
         const {
           data: { token },
         } = user;
-
+        console.log(token);
         const toastId = toast.loading("Uploading resource, please wait.");
 
         try {
@@ -136,6 +136,7 @@ export default function UploadResourcesPage() {
               currency: "NGN",
               videoUrl: videoBase64 as string,
               imageUrl: "",
+              id: token,
               ...newList,
             };
 

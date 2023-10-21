@@ -11,15 +11,15 @@ import ResourceTwo from "@/public/assets/resource_two.png";
 import ResourceCard from "./explore/ResourceCard";
 import Container from "./Container";
 
-// export async function generateStaticMetadata({
-//   searchParams: { path },
-// }: {
-//   searchParams: { path?: string | null };
-// }) {
-//   return {
-//     title: path || "Resources",
-//   };
-// }
+export async function generateStaticMetadata({
+  searchParams: { path },
+}: {
+  searchParams: { path?: string | null };
+}) {
+  return {
+    title: path || "Resources",
+  };
+}
 
 const Resources = () => {
   const [data, setData] = useState<any>([]);

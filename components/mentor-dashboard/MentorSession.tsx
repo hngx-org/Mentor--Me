@@ -45,14 +45,6 @@ const MentorSession = ({ isVerified, setIsOpen, isOpen }: mentorProps) => (
         <h3 className="font-Inter text-sm lg:text-xl font-semibold leading-7">
           View Pending Scheduled Sessions with Mentees
         </h3>
-        {isVerified && (
-          <Link
-            className="rounded-lg border border-[hsl(0,0%,7%)] px-2 lg:px-5 py-2 text-xs  md:text-sm hidden md:block"
-            href="#"
-          >
-            Go to Dashboard
-          </Link>
-        )}
       </div>
       <div className="font-Hanken flex justify-between items-center mt-5">
         <span className="text-sm md:text-base lg:text-lg font-semibold leading-7">
