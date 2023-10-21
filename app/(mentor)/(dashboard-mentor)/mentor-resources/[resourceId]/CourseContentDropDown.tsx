@@ -1,3 +1,5 @@
+/* eslint-disable func-names */
+
 "use client";
 
 import { useState } from "react";
