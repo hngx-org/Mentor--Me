@@ -7,7 +7,7 @@ export default function BookingMentor() {
         How To Get a Mentor
       </h3>
 
-      <p className="hidden md:block relative w-2/3 mx-auto flex justify-between">
+      <p className="hidden md:flex relative w-2/3 mx-auto  justify-between">
         <span className="border-[#808080] border-[1px] w-full absolute top-[1.5rem] -z-[10]" />
       </p>
 
