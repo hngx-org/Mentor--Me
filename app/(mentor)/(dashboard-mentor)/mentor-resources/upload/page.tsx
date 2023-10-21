@@ -8,7 +8,7 @@ import Image from "next/image";
 import { toast } from "react-hot-toast";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { CaretIcon } from "@/public/SVGs";
+import { CancelIcon, CaretIcon } from "@/public/SVGs";
 import DropDown from "@/components/DropDown";
 import ResourceCurriculum from "./resourceCurriculum";
 
@@ -106,17 +106,23 @@ export default function UploadResourcesPage() {
             throw new Error("Error fetching user data.");
           }
           const { data: anotherData } = await anotherRes.json();
+          console.log(anotherData);
           const fileReader = new FileReader();
           fileReader.readAsDataURL(file!);
 
           fileReader.onloadend = async function () {
             videoBase64 = fileReader.result as string;
+            const newList = curriculumList.map((list, idx) => ({
+              [`Id${idx + 1}`]: list.id,
+              [`Title${idx + 1}`]: list.title,
+              [`Duration${idx + 1}`]: list.duration,
+            }));
 
             const resourceData = {
-              track: trackRef.current?.value!,
+              category: trackRef.current?.value!,
               description: courseDescriptionRef.current?.value!,
               title: courseTitleRef.current?.value!,
-              category: courseTypeRef.current?.value!,
+              track: courseTypeRef.current?.value!,
               price: priceRef.current?.value!,
               name: anotherData?.userDetails?.fullName,
               role: anotherData?.userDetails?.role,
@@ -124,11 +130,15 @@ export default function UploadResourcesPage() {
               ratings: "0.0",
               reviews: "0",
               currency: "NGN",
-              // videoUrl: videoBase64 as string,
-              videoUrl: "random2",
-              imageUrl: "random",
-              courseContents: curriculumList,
+              videoUrl: videoBase64 as string,
+              imageUrl: "",
+              ...newList[0],
+              ...newList[1],
+              ...newList[2],
+              ...newList[3],
+              ...newList[4],
             };
+
             const res = await fetch("/api/upload-resource", {
               method: "POST",
               body: JSON.stringify(resourceData),
@@ -139,6 +149,10 @@ export default function UploadResourcesPage() {
             const data = await res.json();
             console.log(data);
             toast.dismiss(toastId);
+            if (data.error) {
+              toast.error(data.error.message);
+              return;
+            }
             toast.success("Resource uploaded successfully!");
           };
         } catch (e) {
@@ -268,10 +282,18 @@ export default function UploadResourcesPage() {
         </p>
         <DragArea setFile={setFile} />
         {video.trim().length > 0 && (
-          <div className="flex items-center my-4 gap-4">
+          <div className="flex items-center my-4 gap-4 relative">
+            <CancelIcon
+              className="absolute inset-[0_0_auto_auto] cursor-pointer border-Neutra20 rounded-full border-2"
+              onClick={() => {
+                setFile(null);
+                setVideo("");
+              }}
+            />
             <video
               autoPlay
-              className=" w-40 object-cover object-center"
+              loop
+              className="w-40 aspect-video object-cover object-center"
               src={video}
             />
             <p className="font-medium font-Inter">{file?.name}</p>
