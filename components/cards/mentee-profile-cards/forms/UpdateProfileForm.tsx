@@ -274,7 +274,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
           >
             <label htmlFor="name">
               <p className="flex items-start mb-2">
-                <span>Your full name</span>
+                <span>Full name</span>
                 <span className="text-red-500 font-medium text-sm">*</span>
               </p>
 
