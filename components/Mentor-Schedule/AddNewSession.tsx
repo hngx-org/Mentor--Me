@@ -53,6 +53,7 @@ function AddNewSession() {
   const closeModal = () => {
     setIsModalOpen(false);
     setIsFormModal("");
+    window.location.reload(); // Reload the page
   };
 
   return (
@@ -93,7 +94,7 @@ function AddNewSession() {
 
           {/* Modal */}
           <div
-            className="modal w-1/2  bg-white z-50 rounded-lg shadow-md"
+            className="modal h-full md:h-3/4 w-full md:w-2/3 lg:w-1/2  bg-white z-50 rounded-lg shadow-md"
             ref={modalRef}
             style={{ maxHeight: "80vh", overflowY: "auto" }}
           >

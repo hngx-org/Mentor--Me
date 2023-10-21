@@ -39,21 +39,6 @@ export default function SidebarMentor({
   email,
   jobTitle,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
-  // const { user } = useAuthCtx();
-
-  // const [imgUrl, setImgUrl] = useState("");
-  // const email = userData.data?.user.email;
-  // const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
-  //   imgUrl || ""
-  // }`;
-
-  // may or may not need this
-  // useEffect(() => {
-  //   if (email) {
-  //     setImgUrl(email);
-  //   }
-  // }, [imgUrl]);
-
   return (
     <section
       className={`hidden w-[240px]  p-5 min-h-screen h-full fixed lg:flex left-0 top-0 ${

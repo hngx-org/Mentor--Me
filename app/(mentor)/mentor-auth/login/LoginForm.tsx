@@ -72,7 +72,7 @@ export default function LoginForm() {
           setUserData(response.data);
 
           if (response?.data?.data && response?.data?.data?.user?.profileLink) {
-            router.replace("/mentor-profile?path=mentor-profile");
+            router.replace("/mentor-profile?path=profile");
             setIsLoading(false);
           } else {
             router.replace("/mentor-profile-creation");
@@ -170,7 +170,7 @@ export default function LoginForm() {
               </div>
             </form>
 
-            <div className="flex justify-center w-full">
+            {/* <div className="flex justify-center w-full">
               <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
                 OR
               </h5>
@@ -192,7 +192,7 @@ export default function LoginForm() {
                 loading={isLoading}
                 icon={facebook}
               />
-            </div>
+            </div> */}
             <Link href="mentor-auth/sign-up">
               <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
                 New to MentorMe?

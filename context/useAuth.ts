@@ -1,7 +1,9 @@
 // context/useAuth.ts
 
+import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { UserData, useAuthCtx } from "./AuthContext";
+import { useReadLocalStorage } from "usehooks-ts";
+import { Data, UserData, useAuthCtx } from "./AuthContext";
 import { CurrentMentee, CurrentMentor } from "./types";
 
 interface User {
@@ -11,27 +13,32 @@ interface User {
 }
 
 const baseUrl = "https://mentormee-api.onrender.com";
-type urlType = "users" | "mentors" | "mentee";
+// type urlType = "users" | "mentors" | "mentee";
+type UserType = "Mentee" | "Mentor";
 
-export const useAuth = (type: urlType = "mentors") => {
+// type: urlType = "mentors"
+export const useAuth = (type: UserType = "Mentor") => {
   const { user } = useAuthCtx();
   const [data, setData] = useState<User>({
     message: "",
     data: null,
     success: false,
   });
-
-  // console.log(user);
+  const userData: Data | null = useReadLocalStorage(type);
 
   useEffect(() => {
+    let token: string | undefined;
+    if (userData) {
+      token = userData?.data?.token;
+    }
     const requestAuth = async () => {
       // Make an authenticated request to the server
-      const url = `${baseUrl}/${type}/get-current`;
-      if (user?.token) {
-        const response = await fetch(url!, {
+      const url = `${baseUrl}/mentors/get-current`;
+      if (token) {
+        const response = await fetch(url, {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         });
@@ -41,7 +48,7 @@ export const useAuth = (type: urlType = "mentors") => {
       }
     };
     requestAuth();
-  }, [user]);
+  }, []);
 
   return data;
 };

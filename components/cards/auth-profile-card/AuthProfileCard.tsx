@@ -21,14 +21,7 @@ export default function AuthProfileCard({
 }) {
   console.log(user);
   return (
-    // ${
-    //     path === "profile"
-    //       ? "bg-gradient-to-r from-orange-500 via-red-600 to-fuchsia-500 p-[1px] rounded-xl"
-    //       : ""
-    //   }
-    <div
-      className={`w-full max-w-[95%] flex justify-between items-center  ${styles} `}
-    >
+    <div className={`w-[100%] ${styles} `}>
       <div
         className={`flex gap-2 p-1 rounded-xl bg-black  ${
           path === "profile" ? "w-full" : "overflow-hidden"
@@ -44,13 +37,11 @@ export default function AuthProfileCard({
           />
         </div>
 
-        <div className="flex flex-col">
-          <span className="font-bold line-clamp-1 capitalize ">
-            {user || "hello"}
-          </span>
-          <span className="text-sm w-full overflow-ellipsis">
-            {email || "bye"}
-          </span>
+        <div className="flex flex-col w-fit ">
+          <p className="font-bold   w-[100px] capitalize truncate ">
+            {user || ""}
+          </p>
+          <p className=" truncate w-[120px] text-xs ">{email || ""}</p>
         </div>
       </div>
     </div>

@@ -25,9 +25,11 @@ import Input from "@/components/inputs/input";
 import { BackwardIcon } from "@/public/SVGs";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Button from "../../(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
+import { useAuthCtx } from "@/context/AuthContext";
 
 export default function LoginForm() {
   const router = useRouter();
+  const { setUserData } = useAuthCtx();
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = React.useState<any>();
   const [isValid, setIsValid] = React.useState(true);
@@ -63,6 +65,7 @@ export default function LoginForm() {
         .then((response) => {
           localStorage.setItem("Mentee", JSON.stringify(response.data));
           setUser(response.data);
+          setUserData(response.data);
 
           if (response?.data?.data && response?.data?.data?.user?.profileLink) {
             router.replace("/mentee-profile?path=profile");
@@ -158,7 +161,7 @@ export default function LoginForm() {
               </div>
             </form>
 
-            <div className="flex justify-center w-full">
+            {/* <div className="flex justify-center w-full">
               <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
                 OR
               </h5>
@@ -180,7 +183,7 @@ export default function LoginForm() {
                 loading={isLoading}
                 icon={facebook}
               />
-            </div>
+            </div> */}
             <Link href="/mentee-auth/sign-up">
               <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
                 New to MentorMe?

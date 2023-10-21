@@ -5,6 +5,7 @@ import Calendarcomponent from "./Calender";
 interface PopupProps {
   onClose: () => void;
   onSubmit: () => void;
+  onReset: () => void;
   setSelectedTimeZone: Dispatch<React.SetStateAction<string>>;
   selectedTimeZone: string;
   value: number;
@@ -22,6 +23,7 @@ export default function FilterPopup({
   selectedDate,
   setSelectedDate,
   onSubmit,
+  onReset,
 }: PopupProps) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -32,16 +34,18 @@ export default function FilterPopup({
 
   const closePopup = () => {
     // setIsPopupOpen(false);
+    // onSubmit();
+    onClose();
+  };
+  const submitFilter = () => {
     onSubmit();
     onClose();
   };
 
-  // const filtered = cards.filter(
-  //   (card) =>
-  //     card.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     card.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     card.title.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
+  const resetFilter = () => {
+    onReset();
+    onClose();
+  };
 
   return (
     <div className=" z-10 container mx-auto absolute top20 top-16 right-0 right5 md:top-16 md:right-0 drop-shadow-2xl bg-white shadow-md rounded-md p-6 w-fit md:w-[400px] space-y-8">
@@ -56,9 +60,11 @@ export default function FilterPopup({
         <h1 className="font-Inter font-medium text-lg">Time Zones</h1>
         <div className="grid grid-cols-3 gap-5 p-4">
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <div className="font-Hanken mr-3">GMT</div>
+            <label htmlFor="GMT" className="font-Hanken mr-3 cursor-pointer">
+              GMT
+            </label>
             <input
-              id="choiceGmt"
+              id="GMT"
               type="radio"
               value="GMT"
               checked={selectedTimeZone === "GMT"}
@@ -68,9 +74,11 @@ export default function FilterPopup({
 
           {/* EST Time Zone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <div className="font-Hanken mr-3">EST</div>
+            <label htmlFor="EST" className="font-Hanken mr-3 cursor-pointer">
+              EST
+            </label>
             <input
-              id="choiceEst"
+              id="EST"
               type="radio"
               value="EST"
               checked={selectedTimeZone === "EST"}
@@ -81,9 +89,11 @@ export default function FilterPopup({
 
           {/* GST TimeZone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <div className="font-Hanken mr-3">GST</div>
+            <label htmlFor="GST" className="font-Hanken mr-3 cursor-pointer">
+              GST
+            </label>
             <input
-              id="choiceGst"
+              id="GST"
               type="radio"
               value="GST"
               checked={selectedTimeZone === "GST"}
@@ -92,40 +102,47 @@ export default function FilterPopup({
             />
           </div>
 
-          {/* WAT TimeZone */}
+          {/* IST TimeZone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <div className="font-Hanken mr-3">WAT</div>
+            <label htmlFor="IST" className="font-Hanken mr-3 cursor-pointer">
+              IST
+            </label>
             <input
-              id="choiceWat"
+              id="IST"
               type="radio"
-              value="WAT"
-              checked={selectedTimeZone === "WAT"}
+              value="IST"
+              checked={selectedTimeZone === "IST"}
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
           </div>
 
-          {/* EST TimeZone */}
+          {/* PST TimeZone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <div className="font-Hanken mr-3">EST</div>
+            <label htmlFor="PST" className="font-Hanken mr-3 cursor-pointer">
+              PST
+            </label>
             <input
-              id="choiceEst2"
+              id="PST"
               type="radio"
-              value="choiceEst2"
-              checked={selectedTimeZone === "choiceEst2"}
+              value="PST"
+              checked={selectedTimeZone === "PST"}
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
           </div>
 
-          {/* GST TimeZone */}
+          {/* CET TimeZone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <div className="font-Hanken mr-3">GST</div>
+            <label htmlFor="CET" className="font-Hanken mr-3 cursor-pointer">
+              CET
+            </label>
+
             <input
-              id="choiceGst2"
+              id="CET"
               type="radio"
-              value="choiceGst2"
-              checked={selectedTimeZone === "choiceGst2"}
+              value="CET"
+              checked={selectedTimeZone === "CET"}
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
@@ -139,13 +156,23 @@ export default function FilterPopup({
           <Calendarcomponent setSelectedDate={setSelectedDate} />
         </div>
       </div>
-      <button
-        type="button"
-        onClick={closePopup}
-        className=" flex flex-col items-center bg-black text-white rounded-lg py-3 px-6 cursor-pointer ml-60 -mr-0 hover:bg-opacity-80 transition-opacity"
-      >
-        Apply
-      </button>
+      <div className="flex justify-between">
+        <button
+          type="button"
+          // onClick={onReset}
+          onClick={resetFilter}
+          className="border border-[#121212] rounded-lg py-3 px-6 hover:bg-gray-100 transition-colors"
+        >
+          Reset
+        </button>
+        <button
+          type="button"
+          onClick={submitFilter}
+          className=" flex flex-col items-center bg-black text-white rounded-lg py-3 px-6 cursor-pointer ml-60-mr-0 hover:bg-opacity-80 transition-opacity"
+        >
+          Apply
+        </button>
+      </div>
     </div>
   );
 }
