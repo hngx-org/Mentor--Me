@@ -15,6 +15,7 @@ interface CardProps {
   contentImage: string;
   timezone: string;
   nextAvailable: string;
+  pricing: string;
 }
 interface SearchBoxProps {
   cards: CardProps[];
@@ -22,21 +23,25 @@ interface SearchBoxProps {
   // setFilteredResults: React.Dispatch<React.SetStateAction<CardProps[]>>;
   setSearchResults: Dispatch<React.SetStateAction<CardProps[]>>;
   setFilteredResults: Dispatch<React.SetStateAction<CardProps[]>>;
+  filteredResults: CardProps[];
   value: number;
   setValue: Dispatch<React.SetStateAction<number>>;
   selectedDate: Date;
   setSelectedDate: Dispatch<React.SetStateAction<Date>>;
   onSubmit: () => void;
+  onReset: () => void;
 }
 export default function SearchBox({
   cards,
   setSearchResults,
   setFilteredResults,
+  filteredResults,
   value,
   setValue,
   selectedDate,
   setSelectedDate,
   onSubmit,
+  onReset,
 }: SearchBoxProps) {
   // {info, setSearchResults}
 
@@ -70,6 +75,7 @@ export default function SearchBox({
     //     card.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
     //     card.lastname.toLowerCase().includes(searchTerm.toLowerCase())
     // );
+    // const filtered = cards.filter(
     const filtered = cards.filter(
       (card) =>
         card.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -109,7 +115,7 @@ export default function SearchBox({
           value={searchTerm}
           className="w[80%] w-full bg-transparent outline-none font-Inter font-normal text-sm text-[#101928]"
         />
-        <div className="-mr5 ml-2 lg:hidden">
+        {/* <div className="-mr5 ml-2 lg:hidden">
           <Filter
             selectedTimeZone={selected}
             setSelectedTimeZone={setSelected}
@@ -118,8 +124,9 @@ export default function SearchBox({
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
             onSubmit={onSubmit}
+            onReset={onReset}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
