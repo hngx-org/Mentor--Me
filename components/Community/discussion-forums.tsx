@@ -6,7 +6,7 @@ import {
   ArrowRightIcon,
 } from "@/public/assets/Icons/mentor-communities";
 import ForumCard from "./ForumCard";
-import { discussionCommunities } from "@/app/(mentor)/(dashboard-mentor)/mentor-community/data";
+
 import { discussionState } from "@/app/(mentee)/(dashboard-route)/mentee-community/data";
 
 const DiscussionForums = ({
@@ -70,6 +70,12 @@ const DiscussionForums = ({
             members={comm.members}
             slug={comm.slug}
           />
+          // <DiscussionCards
+          //   title={comm.name}
+          //   members={comm.members.length}
+          //   desc={comm.description}
+          //   id={idx}
+          // />
         ))}
       </div>
     </section>
