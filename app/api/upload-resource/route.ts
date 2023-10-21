@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     formData.videoUrl = result.url;
 
     const res = await fetch(
-      "https://api.unsplash.com/search/photos?client_id=2ftKLo4PsEAc2RAGFEZNcPbhFH7N0cs2KR4BFWKjsjI&page=1&query=office"
+      `https://api.unsplash.com/search/photos?client_id=2ftKLo4PsEAc2RAGFEZNcPbhFH7N0cs2KR4BFWKjsjI&page=1&query=${formData.title}`
     );
 
     if (!res.ok) throw new Error("Error fetching resource image");
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: data.error });
     }
     revalidatePath("/mentor-resources");
-    return NextResponse.json({ success: true });
+    return NextResponse.json(data);
   } catch (e) {
     console.log(e);
     return NextResponse.json(e);
