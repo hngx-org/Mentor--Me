@@ -11,6 +11,7 @@ const config: Config = {
       animation: {
         shimmer: "shimmer 1.5s infinite",
         slideLeft: "slideLeft 1s ease forwards",
+        slideDown: "slideDown 1s ease forwards",
         loadspin: "loadspin 1.5s linear infinite",
       },
       keyframes: {
@@ -31,6 +32,26 @@ const config: Config = {
           },
           "100%": {
             transform: "translateX(0)",
+            opacity: "1",
+          },
+        },
+        slideDown: {
+          "50%": {
+            opacity: "0.7",
+            transform: "translateY(50)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+            opacity: "1",
+          },
+        },
+        fadeOut: {
+          "50%": {
+            opacity: "0.7",
+            transform: "translateY(50)",
+          },
+          "100%": {
+            transform: "translateY(0)",
             opacity: "1",
           },
         },
