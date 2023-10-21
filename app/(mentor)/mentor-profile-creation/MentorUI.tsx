@@ -35,7 +35,7 @@ import Form5 from "./Form5";
 import { useMentorContext } from "./MentorContext";
 
 export function MentorProfileCreationForms() {
-  const { formInputs, currForm, setCurrForm, files, loader, setLoader } =
+  const { formInputs, currForm, setFormInputs, setCurrForm, setLoader } =
     useMentorContext();
   const [isModalShown, setIsModalShown] = useState(false);
 
@@ -128,7 +128,9 @@ export function MentorProfileCreationForms() {
 
   return (
     //   {/* // Overall container for the whole page */}
-    <div className={`lg:flex-row flex  ${styles.scroll} relative bg-white`}>
+    <div
+      className={`lg:flex-row flex max-w-[15000px] w-full mx-auto overflow-hidden max-h-[900px]  ${styles.scroll} relative bg-white`}
+    >
       {/* overlay that shows behind the modal */}
       <Link
         className={`duration-[0.5s] fixed top-0 left-0 h-full w-full bg-[#00000080] z-[8]  pointer-events-none ${
@@ -234,7 +236,7 @@ export function MentorProfileCreationForms() {
 
       {/* CONTAINER FOR THE IMAGE */}
 
-      <div className="bg-black hidden lg:flex lg:w-[50%] lg:min-h-[100vh] pt-20  items-start justify-center relative overflow-hidden">
+      <div className="bg-black hidden lg:flex lg:w-[50%] lg:min-h-full pt-20  items-start justify-center relative overflow-hidden">
         {/* top right ellipse image */}
         <Image
           src={MentorCreationTopEllipse}
