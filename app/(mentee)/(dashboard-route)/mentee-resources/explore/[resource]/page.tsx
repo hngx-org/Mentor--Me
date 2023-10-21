@@ -130,32 +130,9 @@ const Resource = ({ params }: { params: { resource: string } }) => {
           </p>
         </div>
       </div>
-      <div className="flex flex-col  p-3 sm:p-[30px] gap-4 md:gap-9">
-        <div className="w-full ">
-          {/* <div className="w-full flex justify-between items-center mb-[19px]">
-            <h1 className="text-NeutalBase font-Inter text-2xl font-medium">
-              Course Content
-            </h1>
-            <p className="text-Neutra40 font-Hanken">20 Lessons (1h 20m)</p>
-          </div> */}
-          {/* <div className="py-[22px] px-[18px] rounded-lg shadow-md border border-Neutra10">
-            {courseTitles.map((course) => (
-              <div key={course.id} className="flex gap-2 items-center  mb-6">
-                <course.icon />
-                <span className="text-[#333] font-Hanken">{course.title}</span>
-              </div>
-            ))}
-            <button
-              type="button"
-              className="text-Accent1 font-Inter font-medium text-sm flex gap-2 items-center"
-            >
-              Show All Lessons{" "}
-              <span>
-                <DownArrowIcon className="cursor-pointer" />
-              </span>
-            </button>
-          </div> */}
-          <div className="flex flex-col gap-[18px] mt-8">
+      <div className="flex flex-col px-3 sm:p-[30px] gap-1 md:gap-10">
+        <div className="w-full">
+          <div className="flex flex-col gap-[18px] mt-8 mb-0 p-3">
             <h1 className="text-NeutalBase font-Inter text-2xl font-medium">
               {data?.title}
             </h1>
@@ -176,7 +153,7 @@ const Resource = ({ params }: { params: { resource: string } }) => {
                 </p>
               </div>
             </div>
-            <p className="text-Neutra40 font-Hanken leading-[120%]">
+            <p className="text-Neutra40 font-Hanken leading-[120%] ">
               {data?.name} is a renowned researcher with over 20 years
               experience in designing customer centric products that align with
               business objectives. She is an award-winning visual designer with
@@ -186,17 +163,11 @@ const Resource = ({ params }: { params: { resource: string } }) => {
               leaders to create engaging narratives that communicate value and
               business impact.{" "}
             </p>
-            {/* <button
-              type="button"
-              className="w-max font-Inter text-sm text-Accent1 "
-            >
-              View Profile
-            </button> */}
           </div>
         </div>
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col px-3">
           {data.videoUrl !== undefined && !data.videoUrl.includes("example") ? (
-            <video autoPlay controls className="w-full h-[450px]">
+            <video autoPlay controls className="w-full h-[250px] md:h-[450px]">
               <source src={data.videoUrl} type="video/mp4" />
               <track
                 kind="captions"

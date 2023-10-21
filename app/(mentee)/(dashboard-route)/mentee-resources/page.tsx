@@ -73,21 +73,39 @@ const Resources = () => {
       </div>
     </Container>
   ) : (
-    <div className="w-full max-w-[447px] h-[calc(100vh-100px)] flex flex-col justify-center items-center mx-auto px-2 ">
+    <div className="relative w-full max-w-[447px] h-[calc(100vh-100px)] flex flex-col justify-center items-center mx-auto px-2 ">
       <BookIcon />
       <p className="mt-6 mb-7 font-Hanken text-Neutra40 text-lg">
         You have no resources yet
       </p>
-      <p className="mb-[66px] font-Hanken text-[#121212] text-lg text-center">
+      <p className="hidden md:block mb-[66px] font-Hanken text-[#121212] text-lg text-center">
         Click on “Get new resources” to start exploring
       </p>
-      <Link href="/mentee-resources/explore?path=Explores" className="w-full">
+      <p className="mb-[66px] font-Hanken text-[#121212] text-lg text-center md:hidden">
+        Click on the add icon to start exploring
+      </p>
+      <Link
+        href="/mentee-resources/explore?path=Explores"
+        className="hidden md:block w-full"
+      >
         <button
           type="button"
           className="font-Hanken text-white rounded-lg bg-NeutalBase h-12 mb-4 w-full"
         >
           Get New Resources
         </button>
+      </Link>
+      <Link
+        href="/mentee-resources/explore?path=Explores"
+        className="fixed bottom-[200px] right-10 md:hidden"
+      >
+        <Image
+          src={Add}
+          width={60}
+          height={60}
+          alt="add"
+          className="hover:scale-105"
+        />
       </Link>
     </div>
   );
