@@ -24,7 +24,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const [isLoading, setIsLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const [fileURL, setFileURL] = useState<any>("");
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState<formProps>({
     fullName: "",
     bio: "",
@@ -39,6 +39,15 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const handleFileChange = (event: any) => {
     const file = event.target.files[0];
     if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        // File is larger than 2MB (2 * 1024 * 1024 bytes)
+        setErrorMessage("File size should be less than 2MB");
+      } else {
+        // File is within the size limit
+        setErrorMessage("");
+        setFileURL(file);
+      }
+
       const reader = new FileReader();
       reader.onload = async (e) => {
         setFileURL(e.target?.result);

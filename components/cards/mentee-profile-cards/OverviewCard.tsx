@@ -64,7 +64,7 @@ export default function OverviewCard({
         />
       </div>
       <div className="flex flex-col w-full xl:max-w-[500px] xl:gap-y-5 gap-y-5 ">
-        <div className="border border-gray-200 rounded-[8px] p-2 xl:h-[100px] xl:p-3">
+        <div className="border border-gray-200 rounded-[8px] p-2 xl:h-[100px] xl:px-3">
           <div className=" w-full flex justify-between ">
             <p className="text-Neutra50 font-bold text-[18px] font-Hanken">
               Experience
@@ -78,12 +78,12 @@ export default function OverviewCard({
               }
             />
           </div>
-          <div className="flex justify-center items-center xl:pl-6 xl:py-2 gap-4 lg:gap-8">
+          <div className="flex justify-center items-center xl:pl-6 gap-4 lg:gap-8">
             <div>
               <AwardIcon />
             </div>
-            <div className="flex flex-col w-full">
-              <div className="flex justify-between">
+            <div className="flex flex-col w-full ">
+              <div className="flex justify-between ">
                 <p className="text-black font-medium text-[16px] font-Inter">
                   {experience}
                 </p>
@@ -100,7 +100,7 @@ export default function OverviewCard({
           </div>
         </div>
         <div className="flex flex-col w-full xl:max-w-[500px] xl:gap-y-5">
-          <div className="border border-gray-200 p-2 xl:h-[100px] rounded-[8px] xl:p-3">
+          <div className="border border-gray-200 p-2 xl:h-[100px] rounded-[8px] xl:px-3">
             <div className="w-full flex justify-between ">
               <p className="text-Neutra50 font-bold text-[18px] font-Hanken">
                 Education
