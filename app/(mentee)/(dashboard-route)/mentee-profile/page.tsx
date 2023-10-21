@@ -66,6 +66,7 @@ export default function MenteeProfilePage() {
 
   useEffect(() => {
     setActiveTab(paramsTab || "overview");
+    router.refresh();
   }, [paramsTab]);
 
   useEffect(() => {
@@ -79,6 +80,7 @@ export default function MenteeProfilePage() {
 
   useEffect(() => {
     const getUser = localStorage.getItem("Mentee");
+
     if (getUser) {
       try {
         const newUser = JSON.parse(getUser);
