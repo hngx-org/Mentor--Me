@@ -42,13 +42,14 @@ export type IReview = {
 export type UpcomingSessionProp = {
   id?: number;
   underline?: boolean;
-  name: string;
-  time: string;
-  date: string;
-  meetingLink: string;
+  relevantTopics?: string;
+  time?: string;
+  date?: string;
+  sessionUrl?: string;
   rescheduleBtn?: string;
   reminderBtn?: string;
-  imgSrc: string | StaticImageData;
+  imgSrc?: string | StaticImageData;
+  name?: string;
 };
 export type historySessionProp = {
   id?: number;
@@ -124,7 +125,7 @@ export const upcomingSessions: UpcomingSessionProp[] = [
     name: "Patricia Flow",
     time: "4pm (WAT)",
     date: "2023-10-26",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
     rescheduleBtn: "Cancel Session",
     reminderBtn: "Join Meeting",
     imgSrc: sessionPatricia,
@@ -134,7 +135,7 @@ export const upcomingSessions: UpcomingSessionProp[] = [
     name: "Shao Lin",
     time: "4pm (WAT)",
     date: "2023-10-24",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
     rescheduleBtn: "Cancel Session",
     reminderBtn: "Join Meeting",
     imgSrc: sessionShaolin,
@@ -144,7 +145,7 @@ export const upcomingSessions: UpcomingSessionProp[] = [
     name: "Hope Chidi",
     time: "4pm (WAT)",
     date: "2023-10-20",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
     rescheduleBtn: "Cancel Session",
     reminderBtn: "Join Meeting",
     imgSrc: sessionHope,
@@ -154,7 +155,7 @@ export const upcomingSessions: UpcomingSessionProp[] = [
     name: "Hope Chidi",
     time: "4pm (WAT)",
     date: "2023-10-21",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
     rescheduleBtn: "Cancel Session",
     reminderBtn: "Join Meeting",
     imgSrc: sessionHope,
@@ -164,7 +165,7 @@ export const upcomingSessions: UpcomingSessionProp[] = [
     name: "Hope Chidi",
     time: "4pm (WAT)",
     date: "2023-10-29",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
     rescheduleBtn: "Cancel Session",
     reminderBtn: "Join Meeting",
     imgSrc: sessionHope,
@@ -174,7 +175,7 @@ export const upcomingSessions: UpcomingSessionProp[] = [
     name: "Hope Chidi",
     time: "4pm (WAT)",
     date: "2023-10-23",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
     rescheduleBtn: "Cancel Session",
     reminderBtn: "Join Meeting",
     imgSrc: sessionHope,
@@ -184,7 +185,7 @@ export const upcomingSessions: UpcomingSessionProp[] = [
     name: "Hope Chidi",
     time: "4pm (WAT)",
     date: "2023-10-30",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
     rescheduleBtn: "Cancel Session",
     reminderBtn: "Join Meeting",
     imgSrc: sessionHope,
@@ -196,7 +197,7 @@ export const cancelledSessions: UpcomingSessionProp[] = [
     name: "Patricia Flow",
     time: "4pm (WAT)",
     date: "02 Aug",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
 
     rescheduleBtn: "Delete",
     imgSrc: sessionPatricia,
@@ -207,7 +208,7 @@ export const cancelledSessions: UpcomingSessionProp[] = [
     name: "Maurice Monye",
     time: "4pm (WAT)",
     date: "02 Aug",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
     rescheduleBtn: "Delete",
     imgSrc: sessionMaurice,
     underline: true,
@@ -217,7 +218,7 @@ export const cancelledSessions: UpcomingSessionProp[] = [
     name: "Kaplan Kai",
     time: "4pm (WAT)",
     date: "02 Aug",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
     rescheduleBtn: "Delete",
     imgSrc: sessionKaplan,
     underline: true,
