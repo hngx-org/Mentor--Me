@@ -56,9 +56,9 @@ const MentorGrid: React.FC = () => {
               href={`${
                 pathname === "/mentor-community"
                   ? "/mentor-community/mentorships"
-                  : pathname === "/mentee-communities"
+                  : pathname === "/mentee-community"
                   ? "/mentee-community/mentorships"
-                  : "mentee-community/mentorships"
+                  : "communities/mentorships"
               }`}
             >
               <div className="seeMore  text-Accent1 lg:font-medium lg:text-[16px] lg:leading-[25.2px] mr-6 cursor-pointer ">
