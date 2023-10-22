@@ -6,7 +6,7 @@
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { CancelIcon, CaretIcon } from "@/public/SVGs";
@@ -155,7 +155,7 @@ export default function UploadResourcesPage() {
               toast.error(data.error);
               return;
             }
-            toast.success("Resource uploaded successfully!");
+            toast("Resource uploaded successfully!");
             router.push(`/mentor-resources/${data._id}`);
           };
         } catch (e) {

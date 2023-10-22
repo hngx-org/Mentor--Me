@@ -31,31 +31,31 @@ export default function Partners() {
           <Image
             src={AdobeIcon}
             alt="brand logo"
-            className="w-fit max-w-[100px] lg:max-w-[200px] sm:grayscale hover:grayscale-0 transition-all duration-300"
+            className="w-fit max-w-[100px] lg:max-w-[200px]  hover:brightness-150 transition-all duration-300"
           />
 
           <Image
             src={NetflixIcon}
             alt="brand logo"
-            className="w-fit max-w-[100px] lg:max-w-[200px] sm:grayscale hover:grayscale-0 transition-all duration-300"
+            className="w-fit max-w-[100px] lg:max-w-[200px]  hover:brightness-150 transition-all duration-300"
           />
 
           <Image
             src={CourseraIcon}
             alt="brand logo"
-            className="w-fit max-w-[100px] lg:max-w-[200px] sm:grayscale hover:grayscale-0 transition-all duration-300"
+            className="w-fit max-w-[100px] lg:max-w-[200px]  hover:brightness-150 transition-all duration-300"
           />
 
           <Image
             src={GoogleIcon}
             alt="brand logo"
-            className="w-fit max-w-[100px] lg:max-w-[200px] sm:grayscale hover:grayscale-0 transition-all duration-300"
+            className="w-fit max-w-[100px] lg:max-w-[200px]  hover:brightness-150 transition-all duration-300"
           />
 
           <Image
             src={AirbnbIcon}
             alt="brand logo"
-            className="w-fit max-w-[100px] lg:max-w-[200px] sm:grayscale hover:grayscale-0 transition-all duration-300"
+            className="w-fit max-w-[100px] lg:max-w-[200px]  hover:brightness-150 transition-all duration-300"
           />
         </MotionDiv>
       </div>
