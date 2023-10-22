@@ -1,12 +1,13 @@
 import React from "react";
 import { WarningIcon, LoadingIcon } from "@/public/SVGs";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 export default function CheckoutModal() {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-[700px] h-[600px] bg-white rounded-[8px]">
         <div className="flex flex-col items-center justify-center mt-[15%]">
-          <LoadingIcon />
+          <LoadingSpinner />
           <p>Loading...</p>
           <p className="mt-[20px] text-[#565656] text-[14px]">
             Your details have been received and is currently being processed.

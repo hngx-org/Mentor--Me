@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import axios from "axios";
 import OTPInput from "@/components/Otp";
 import auth from "../../../../public/assets/images/auth.jpeg";
@@ -28,7 +28,7 @@ function VerifyOTP() {
           setUserEmail(newUser.data.email);
           setUserId(newUser.data._id);
         } catch (error) {
-          console.error("Error parsing JSON:", error);
+          // console.error("Error parsing JSON:", error);
         }
       }
     }
@@ -38,8 +38,8 @@ function VerifyOTP() {
     setIsOpen(true);
   };
   const handleOtpChange = async (otp: string) => {
-    console.log("Number OTP: ", otp);
-    console.log(userid);
+    // console.log("Number OTP: ", otp);
+    // console.log(userid);
     setOTPValue(otp); // Assuming you need the OTP as a string
 
     if (otp.length === 6) {
@@ -49,12 +49,12 @@ function VerifyOTP() {
           verificationCode: otp,
         })
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           openModal();
         })
         .catch((error) => {
           toast.error(error?.response?.data?.message || "something went wrong");
-          console.log(error?.response?.data?.message || "something went wrong");
+          // console.log(error?.response?.data?.message || "something went wrong");
         });
     }
   };
@@ -69,11 +69,11 @@ function VerifyOTP() {
         }
       )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         toast.error(error?.response?.data?.message || "something went wrong");
-        console.error("Error", error);
+        // console.error("Error", error);
       });
   };
   return (

@@ -115,7 +115,7 @@ const form4Arr = [
   {
     id: 2,
     label: "Need help with any specific tools? (optional)",
-    placeholder: "+ Add tools",
+    placeholder: "Add tools",
     nature: "dropdown",
     type: "",
     dropList: [
@@ -137,7 +137,7 @@ const form4Arr = [
   {
     id: 3,
     label: "Need help with any specific skills? (optional)",
-    placeholder: "+ Add skills",
+    placeholder: "Add skills",
     nature: "dropdown",
     type: "",
     dropList: [
