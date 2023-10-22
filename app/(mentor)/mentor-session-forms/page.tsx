@@ -6,7 +6,7 @@ import RecurringSessionForm from "@/components/modal/MentorSessionModalForms/Rec
 
 function MentorSessionForms() {
   // return <OneOffSessionForm />;
-  return <FreeSessionForm />;
-  // return <RecurringSessionForm />;
+  // return <FreeSessionForm />;
+  return <RecurringSessionForm />;
 }
 export default MentorSessionForms;

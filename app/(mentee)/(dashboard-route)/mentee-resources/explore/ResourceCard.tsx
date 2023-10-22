@@ -3,10 +3,10 @@ import Link from "next/link";
 import { EmptyStarIcon, FilledStarIcon } from "@/public/SVGs";
 
 interface Card {
-  id: number;
+  id?: number;
   src: StaticImageData;
   title: string;
-  price: string;
+  price?: string;
   author: string;
   ratings: number;
   reviews: number;
@@ -21,7 +21,7 @@ const ResourceCard = ({
   ratings,
   reviews,
 }: Card) => (
-  <div className="w-full max-w-[397px] flex flex-col justify-between gap-4 items-center rounded-lg shadow-md flex-shrink-0">
+  <div className="w-full max-w-[397px] flex flex-col justify-between gap-4 items-center rounded-lg shadow-md flex-shrink-0 hover:shadow-2xl hover:scale-103">
     <Image
       src={src}
       alt={title}
@@ -37,7 +37,7 @@ const ResourceCard = ({
         <p className="font-Hanken text-sm text-Neutra40">{author}</p>
       </div>
       <h1 className="font-Inter text-2xl font-medium text-NeutalBase">
-        N{price}
+        {price ? `N${price}` : null}
       </h1>
       <div className="flex font-Hanken text-xs text-NeutalBase">
         {Array.from({ length: Math.min(ratings, 5) }, (_, index) => (
@@ -50,14 +50,16 @@ const ResourceCard = ({
         <span> {reviews} reviews</span>
       </div>
       <div className="flex gap-4 mb-4">
-        <Link href={`/mentee-resources/explore/${id}?path=Resources`}>
-          <button
-            type="button"
-            className="font-Inter w-[112px] text-white rounded-lg bg-NeutalBase h-10 mb-4"
-          >
-            Buy Now
-          </button>
-        </Link>
+        {id ? (
+          <Link href={`/mentee-resources/explore/${id}?path=Resources`}>
+            <button
+              type="button"
+              className="font-Inter w-[112px] text-white rounded-lg bg-NeutalBase h-10 mb-4"
+            >
+              Buy Now
+            </button>
+          </Link>
+        ) : null}
       </div>
     </div>
   </div>

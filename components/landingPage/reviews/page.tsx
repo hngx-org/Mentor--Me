@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import AyraStar from "../../../public/assets/images/landing-page/ayra-star.png";
 import Chioma from "../../../public/assets/images/landing-page/chioma.png";
 import David from "../../../public/assets/images/landing-page/david.png";
@@ -12,7 +15,13 @@ export default function Reviews() {
       <h3 className="text-[1.7rem] md:text-[2.2rem] font-medium pb-[5rem] text-center">
         What People Say...
       </h3>
-      <div className="w-9/10 md:w-9/10 mx-auto pb-[3rem]">
+      <motion.div
+        initial={{ opacity: 0.5, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: "all" }}
+        transition={{ duration: 0.5, ease: "easeInOut", delay: 0.2 }}
+        className="w-9/10 md:w-9/10 mx-auto pb-[3rem]"
+      >
         <div className="top-card-container">
           <div className="w-full lg:w-2/5 max-w-[502px] mx-auto lg:flex justify-between items-center">
             <figure className="">
@@ -148,18 +157,16 @@ export default function Reviews() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <div className="w-9/10 md:w-auto mx-auto mt-[4rem] text-center">
-        <h3 className="text-[1.2rem] pb-[1.2rem]">
-          Click the button to get started in
-        </h3>
-        <button
-          type="button"
-          className="bg-[black] text-[white] text-[0.7rem] font-medium w-4/5 md:w-1/6 max-w-[169px] py-[1.1rem] md:py-[0.8rem] rounded-[8px] outline-none"
+        <Link
+          href="/welcome/signup"
+          className="bg-[black] text-[white] text-[0.7rem] font-medium rounded-[8px] outline-none sm:text-xl px-4 p-2 xl:text-2xl xl:px-6 hover:opacity-80 transition-all duration-500"
         >
-          <Link href="welcome/signup"> Get Started</Link>
-        </button>
+          {" "}
+          Get Started
+        </Link>
       </div>
     </section>
   );

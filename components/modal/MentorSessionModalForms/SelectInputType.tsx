@@ -21,6 +21,7 @@ interface TimeInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value?: string | number;
   InputName?: string;
   placeholder?: string;
+  minDate?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   isRequired?: boolean;
   children?: React.ReactNode;
@@ -77,6 +78,7 @@ export function TimeInputType({
   InputName,
   InputId,
   type,
+  minDate,
   value,
   children,
 }: TimeInputProps) {
@@ -89,6 +91,7 @@ export function TimeInputType({
         </label>
         <div className="relative">
           <input
+            min={minDate}
             type={type}
             value={value}
             id={InputId}
