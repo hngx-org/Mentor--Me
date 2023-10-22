@@ -10,7 +10,7 @@ import axios from "axios";
 
 import { useRouter } from "next/navigation";
 
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
 
@@ -70,7 +70,7 @@ export default function SignUpForm() {
           router.push("/mentor-auth/otp");
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           toast.error(error?.response?.data?.message || "something went wrong");
         })
         .finally(() => {
@@ -98,6 +98,7 @@ export default function SignUpForm() {
           />
         </div>
       </div>
+
       <div className="col-span-3  px-4  lg:px-6 xl:px-16">
         <div className="flex justify-between items-center">
           {/* <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
@@ -109,6 +110,7 @@ export default function SignUpForm() {
             {" "}
             <BackwardIcon />
           </a>
+
           <h4 className="font-Inter font-medium text-[#121212] text-[1.5rem] my-[1rem]">
             Sign Up As Mentor
           </h4>

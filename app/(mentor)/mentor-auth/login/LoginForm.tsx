@@ -15,13 +15,9 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
-
-import google from "../../../../public/assets/images/goggle.svg";
-
-import facebook from "../../../../public/assets/images/facebook.svg";
 
 import Input from "@/components/inputs/input";
 
@@ -118,7 +114,7 @@ export default function LoginForm() {
             />
           </div>
         </div>
-        <div className="col-span-3  px-4  lg:px-6 xl:px-16">
+        <div className="col-span-3  px-4  lg:px-6 xl:px-16 md:mt-7">
           <div className="flex justify-between items-center">
             {/* <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
               <a href="/"> Mentor Me</a>

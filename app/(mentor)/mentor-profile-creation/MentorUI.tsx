@@ -11,7 +11,7 @@ import axios from "axios";
 import Link from "next/link";
 
 import Image from "next/image";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import styles from "./page.module.css";
 
 import MentorMeIcon from "@/svgs/MentorMeIcon";

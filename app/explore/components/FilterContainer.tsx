@@ -1,5 +1,6 @@
 "use client";
 
+// @ts-ignore
 import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { StaticImageData } from "next/image";
@@ -73,7 +74,7 @@ export default function FilterContainer() {
     if (page >= 1 && page <= Math.ceil(totalPages / postsPerPage)) {
       setCurrentPage(page);
     }
-    console.log(currentPage);
+    // console.log(currentPage);
     // You can add logic here to fetch data for the new page if needed.
   };
 
