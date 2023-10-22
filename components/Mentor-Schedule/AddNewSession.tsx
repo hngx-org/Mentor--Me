@@ -99,7 +99,7 @@ function AddNewSession({
 
           {/* Modal */}
           <div
-            className="modal h-full md:h-3/4 w-full md:w-2/3 lg:w-1/2  bg-white z-50 rounded-lg shadow-md"
+            className="modal h-full md:h-3/4 w-full md:w-2/3 lg:w-1/2  bg-none z-50 rounded-lg shadow-md"
             ref={modalRef}
             style={{ maxHeight: "80vh", overflowY: "auto" }}
           >
@@ -120,7 +120,7 @@ function AddNewSession({
                 goBack={() => setIsFormModal("")}
               />
             ) : (
-              <div className="w-[380px] min-w-[300px] h-[436px] lg:w-[584px] lg:h-[474px] mx-auto flex justify-center items-center">
+              <div className="w-fit rounded-lg min-w-[300px]  bg-white h-[536px] lg:w-[584px]  mx-auto flex justify-center items-center">
                 <div className="w-[348px] h-[401px] lg:w-[504px] lg:h-[394px]">
                   <div className="flex justify-between items-center">
                     <h2 className="font-Hanken text-2xl lg:text-[32px] font-bold">
@@ -158,7 +158,7 @@ function AddNewSession({
                   <p className="text-base lg:text-xl text-neutral-500 mb-6 xl:mb-12">
                     Create a session that best suits you!
                   </p>
-                  <div className="flex flex-col justify-between items-center gap-7 xl:gap-12">
+                  <div className="flex flex-col justify-between items-center gap-5">
                     {/* First option */}
 
                     <button

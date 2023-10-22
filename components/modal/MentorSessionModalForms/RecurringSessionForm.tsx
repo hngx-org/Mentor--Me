@@ -25,8 +25,8 @@ function RecurringSessionForm({
   refetchData,
   goBack,
 }: {
-  refetchData: (state: boolean) => void;
-  goBack: () => void;
+  refetchData?: (state: boolean) => void;
+  goBack?: () => void;
 }) {
   const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [formVisible, setFormVisible] = useState<boolean>(true);
@@ -116,7 +116,7 @@ function RecurringSessionForm({
     if (response.ok) {
       const responseData = await response.json();
       console.log("form submitted,", responseData);
-      refetchData(true);
+      refetchData?.(true);
     } else {
       // setCalendarVisible(false);
       setSuccessful(false);
@@ -260,7 +260,7 @@ function RecurringSessionForm({
                 className="p-4 w-full md:w-[20%]"
                 variant="outline-primary"
                 type="button"
-                onClick={() => goBack()}
+                onClick={() => goBack?.()}
               >
                 Cancel
               </Button>
