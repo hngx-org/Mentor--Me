@@ -13,9 +13,14 @@ import RecurringSessionForm from "../modal/MentorSessionModalForms/RecurringSess
 import OneOffSessionForm from "../modal/MentorSessionModalForms/OneOffSessionForm";
 import FreeSessionForm from "../modal/MentorSessionModalForms/FreeSessionForm";
 
-function AddNewSession() {
+function AddNewSession({
+  refetChData,
+}: {
+  refetChData: (state: boolean) => void;
+}) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isFormModal, setIsFormModal] = useState("");
+
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -53,7 +58,7 @@ function AddNewSession() {
   const closeModal = () => {
     setIsModalOpen(false);
     setIsFormModal("");
-    window.location.reload(); // Reload the page
+    // window.location.reload(); // Reload the page
   };
 
   return (
@@ -100,11 +105,20 @@ function AddNewSession() {
           >
             {/* Modal content */}
             {isFormModal === "free" ? (
-              <FreeSessionForm />
+              <FreeSessionForm
+                refetchData={(state) => refetChData(state)}
+                goBack={() => setIsFormModal("")}
+              />
             ) : isFormModal === "recurring" ? (
-              <RecurringSessionForm />
+              <RecurringSessionForm
+                refetchData={(state) => refetChData(state)}
+                goBack={() => setIsFormModal("")}
+              />
             ) : isFormModal === "one-off" ? (
-              <OneOffSessionForm />
+              <OneOffSessionForm
+                refetchData={(state) => refetChData(state)}
+                goBack={() => setIsFormModal("")}
+              />
             ) : (
               <div className="w-[380px] min-w-[300px] h-[436px] lg:w-[584px] lg:h-[474px] mx-auto flex justify-center items-center">
                 <div className="w-[348px] h-[401px] lg:w-[504px] lg:h-[394px]">
@@ -141,10 +155,10 @@ function AddNewSession() {
                       <CancelIcon />
                     </div>
                   </div>
-                  <p className="text-base lg:text-xl text-neutral-500 mb-4">
+                  <p className="text-base lg:text-xl text-neutral-500 mb-6 xl:mb-12">
                     Create a session that best suits you!
                   </p>
-                  <div className="flex flex-col justify-between items-center gap-7">
+                  <div className="flex flex-col justify-between items-center gap-7 xl:gap-12">
                     {/* First option */}
 
                     <button
