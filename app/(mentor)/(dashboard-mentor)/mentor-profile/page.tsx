@@ -52,7 +52,7 @@ export default function ProfilePage() {
   });
   const [user, setUser] = useState<any>({});
   const [userData, setUserData] = useState({
-    username: "",
+    fullName: "",
     bio: "",
     email: "",
     mentorship: "",
