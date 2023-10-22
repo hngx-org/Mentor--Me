@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import useAuth from "@/context/useAuth";
 import HeaderAfterSignUp from "@/components/mentor-profile-verification/HeaderAfterSignUp";
 import {

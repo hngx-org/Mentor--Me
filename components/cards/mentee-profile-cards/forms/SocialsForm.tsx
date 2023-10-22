@@ -5,7 +5,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { redirect, useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
@@ -123,7 +123,7 @@ export default function SocialsForm({ isDark }: { isDark: boolean }) {
       } finally {
         setIsLoading(false);
         fetchMenteeData();
-        router.push("/mentee-profile?path=profile");
+        router.replace("/mentee-profile?path=profile");
       }
     } else {
       // Handle the case where authToken is missing
