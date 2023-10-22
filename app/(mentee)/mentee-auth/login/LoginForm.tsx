@@ -25,12 +25,16 @@ import Input from "@/components/inputs/input";
 import { BackwardIcon } from "@/public/SVGs";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Button from "../../(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
+import EmailValidator from "@/components/inputs/email-validator";
+import NonEmptyValidator from "@/components/inputs/non-empty-validator";
 
 export default function LoginForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = React.useState<any>();
-  const [isValid, setIsValid] = React.useState(true);
+  const [isEmailValid, setisEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [inputChanged, setInputChanged] = useState(false);
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
@@ -38,6 +42,7 @@ export default function LoginForm() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    setInputChanged(true);
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -50,9 +55,11 @@ export default function LoginForm() {
     const form = e.currentTarget as HTMLFormElement;
 
     if (form.checkValidity() === false) {
-      setIsValid(false);
+      setisEmailValid(false);
+      setIsPasswordValid(false);
     } else {
-      setIsValid(true);
+      setisEmailValid(true);
+      setIsPasswordValid(true);
 
       axios
         .post("https://mentormee-api.onrender.com/auth/login", {
@@ -124,7 +131,18 @@ export default function LoginForm() {
                 required
                 type="email"
                 name="email"
+                isValid={
+                  inputChanged && !isEmailValid
+                    ? "border-red-500"
+                    : "border-[#CCC]"
+                }
                 onChange={handleInputChange}
+              />
+              <EmailValidator
+                email={formData.email}
+                setIsValid={setisEmailValid}
+                onValidEmail={() => setisEmailValid(true)}
+                inputChanged={inputChanged}
               />
               <Input
                 id="password"
@@ -132,7 +150,18 @@ export default function LoginForm() {
                 required
                 type="password"
                 name="password"
+                isValid={
+                  inputChanged && !isPasswordValid
+                    ? "border-red-500"
+                    : "border-[#CCC]"
+                }
                 onChange={handleInputChange}
+              />
+              <NonEmptyValidator
+                text={formData.password}
+                setIsValid={setIsPasswordValid}
+                onValidText={() => setIsPasswordValid(true)}
+                inputChanged={inputChanged}
               />
 
               <Link href="/mentee-auth/forget-password">
@@ -151,7 +180,12 @@ export default function LoginForm() {
                   title="Log in"
                   type="submit"
                   variant="primary"
-                  className="w-full h-[48px]"
+                  disabled={!isEmailValid || !isPasswordValid}
+                  className={`w-full h-[48px] ${
+                    !isEmailValid || !isPasswordValid
+                      ? "opacity-60 hover:bg-gray-400 cursor-not-allowed"
+                      : ""
+                  }`}
                   fullWidth
                   loading={isLoading}
                 />
