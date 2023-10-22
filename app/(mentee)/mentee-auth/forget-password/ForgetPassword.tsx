@@ -70,7 +70,7 @@ const ResetPassword = () => {
             />
           </div>
         </div>
-        <div className="col-span-3  px-4  lg:px-6 xl:px-16">
+        <div className="col-span-3  px-4  lg:px-6 xl:px-16 md:mt-7">
           <Link href="/">
             <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
               Mentor Me
@@ -84,7 +84,7 @@ const ResetPassword = () => {
           </Link>
 
           <div className="flex justify-center flex-col">
-            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
+            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-6">
               Forgot Password
             </h4>
             <p className="font-Hanken text-[#808080] flex justify-end text-sm my-3">
@@ -106,7 +106,7 @@ const ResetPassword = () => {
             <Button
               variant="primary"
               paddingLess
-              className="w-full h-[48px]"
+              className="w-full h-[48px] mt-4"
               onClick={handleSubmit}
             >
               Reset Password

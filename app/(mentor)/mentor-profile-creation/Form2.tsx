@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import MentorFormBuilder from "@/components/mentorProfileCreation/MentorFormBuilder";
 import { HeadingBuild } from "./MentorUI";
 import { form2Arr } from "@/lib/mentorProfileCreationData";
