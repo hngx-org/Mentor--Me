@@ -1,13 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DiscussionForums, MentorshipSessions } from "@/components/Community";
 import SearchCommunitySearchbar from "@/components/Community/searchcommunity-searchbar";
-import { discussionCommunities } from "./data";
+import { Community, discussionCommunities } from "./data";
 import SecondSearchCommunitySearchbar from "@/components/Community/searchcommunity-searchbar2";
 import ProtectedRoute from "@/context/ProtectedRoute";
+import { getForums, postSingleForum } from "@/lib/apiHelper";
+import { images } from "@/lib/constants/index";
 
 export default function MenteeCommunitiesPage() {
+  const [initialForums, setInitialForums] = useState([] as Community[]);
+  useEffect(() => {
+    getForums(setInitialForums);
+  }, []);
+  console.log(initialForums);
+
   // set discussion data to a state
   const [discussionData, setDiscussionData] = useState(discussionCommunities);
 
@@ -45,6 +53,11 @@ export default function MenteeCommunitiesPage() {
         <DiscussionForums
           discussionData={discussionData}
           setDiscussionData={setDiscussionData}
+        />
+
+        <DiscussionForums
+          discussionData={initialForums}
+          setDiscussionData={setInitialForums}
         />
         {/* Free mentorship sessions */}
         <MentorshipSessions />

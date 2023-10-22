@@ -115,7 +115,7 @@ const Forum = ({
       ref={discussionRef}
     >
       <div className="text flex flex-col xl:gap-[14px] lg:gap-[10px] gap-2 font-Hanken  text-left w-full">
-        <p className=" text-NeutalBase font-semibold xl:text-[24px] lg:text-[19px] text-[14px] leading-[120%]  ">
+        <p className=" text-NeutalBase font-semibold xl:text-[24px] lg:text-[19px] text-[14px] leading-[120%] line-clamp-1 ">
           {name}
         </p>
 
