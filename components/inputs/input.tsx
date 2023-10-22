@@ -41,9 +41,9 @@ const Input: React.FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full mb-[1.1rem]">
       <label
-        className="text-xs text-[#565656] font-medium font-Inter"
+        className="text-[0.9rem] text text-[#565656] block pb-[0.7rem] font-medium font-Inter"
         htmlFor={id}
       >
         {label}
@@ -59,14 +59,14 @@ const Input: React.FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
           required={required}
           placeholder=""
           type={values.isPasswordVisible && isPasswordInput ? "text" : type}
-          className=" sm:h-[48px] h-[42px] pl-2 outline-none w-[100%]  border-[1px] border-[#CCC] rounded-lg"
+          className="  py-[1rem] md:py-[1.1rem] pl-2 md:pl-4 outline-none w-[100%]  border-[1px] border-[#CCC] rounded-lg"
           {...props}
         />
         {isPasswordInput && (
           <button
             type="button"
             onClick={togglePasswordVisibility}
-            className="absolute sm:top-[18px] top-[12px] right-2 cursor-pointer text-[#808080]"
+            className="absolute top-[22px] md:top-[30px] right-2 cursor-pointer text-[#808080]"
           >
             {values.isPasswordVisible ? <IoEyeSharp /> : <IoEyeOffSharp />}
           </button>
