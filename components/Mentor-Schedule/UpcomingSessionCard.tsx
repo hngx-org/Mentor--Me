@@ -49,7 +49,7 @@ function UpcomingSessionCard({
     <div>
       <div>
         {/* Container for the card */}
-        <div className="w-[300px]   h-[400px] mb-2  border border-neutral-300 rounded-lg px-3 py-6 flex flex-col justify-between space-y-6 shadow-sm ">
+        <div className="w-[300px] xl:w-[350px]  h-[400px] mb-2  border border-neutral-300 rounded-lg px-3 py-6 flex flex-col justify-between space-y-6 shadow-sm ">
           <div className="space-y-3">
             <div className="px-4 border border-Neutra40 text-center rounded-md w-fit flex justify-center">
               {" "}

@@ -37,7 +37,7 @@ function SeeYourUpComingSession({
           <LoadingSpinner />
         </div>
       ) : (
-        <div className="flex flex-wrap gap-4 justify-evenly">
+        <div className="flex flex-wrap gap-8 justify-around sm:justify-start">
           {feedFromApi &&
             feedFromApi.map((feed) => (
               <UpcomingSessionCard key={feed._id} {...feed} />
