@@ -47,7 +47,6 @@ const CreateDiscussionModal: React.FC<prop> = ({ onClose }) => {
         {
           name: "Member 1",
           isMentor: true,
-          profilePhotoUrl: "url-to-member-1-photo",
         },
       ],
       discussions: [],

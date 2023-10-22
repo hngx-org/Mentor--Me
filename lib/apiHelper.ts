@@ -99,7 +99,7 @@ export const getForums = async (
 };
 
 export const getSingleForums = async (
-  setData: Dispatch<SetStateAction<Community2>>,
+  setData: Dispatch<SetStateAction<Community>>,
   slug: string
 ) => {
   const data = await get(

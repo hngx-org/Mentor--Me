@@ -42,18 +42,10 @@ export default function MenteeCommunitiesPage() {
   const [q, setQ] = useState("");
 
   const filterDiscussions = () => {
-    if (q) {
-      // console.log("Search is on. Query: ", q);
-      const filteredSliderInfo = initialForums.filter((item) =>
-        item.name.toLowerCase().includes(q.toLowerCase())
-      );
-
-      // Update the sliderInfo state with the filtered array
-      setDiscussionData(filteredSliderInfo);
-    } else {
-      setDiscussionData(discussionCommunities);
-    }
-    // console.log(discussionData);
+    const filteredSliderInfo = initialForums.filter((item) =>
+      item.name.toLowerCase().includes(q.toLowerCase())
+    );
+    setDiscussionData(filteredSliderInfo);
   };
 
   return (
