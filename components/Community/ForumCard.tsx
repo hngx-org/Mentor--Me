@@ -156,8 +156,8 @@ const Forum = ({
           pathname === "/communities"
             ? "/communities"
             : pathname === "/mentor-community"
-            ? `/mentor-community/${slug}`
-            : `/mentee-community/${slug}`
+            ? `/mentor-community/${slug}?path=Communities`
+            : `/mentee-community/${slug}?path=Communities`
         }
         className="text-xs text-center md:text-base border-solid border-[1px] p-4 md:py-5 md:px-10 w-full md:w-fit mx-auto border-NeutalBase rounded-lg font-medium font-Inter"
         onClick={(e) => {
