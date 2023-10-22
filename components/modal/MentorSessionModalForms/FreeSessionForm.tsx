@@ -1,11 +1,19 @@
 "use client";
 
-import React, { useState, ChangeEvent, FormEvent, MouseEvent } from "react";
+import React, {
+  useState,
+  useEffect,
+  ChangeEvent,
+  FormEvent,
+  MouseEvent,
+} from "react";
 import Link from "next/link";
+import axios from "axios";
 import SuccessModal from "@/components/modal/SuccessModal";
 import { SelectInputType, TimeInputType } from "./SelectInputType";
 import MentorCalendar from "./MentorCalendar";
 import { Button } from "@/components/buttons/button";
+import useAuth from "@/context/useAuth";
 
 interface FreeFormData {
   sessionName?: string;
@@ -17,6 +25,7 @@ interface FreeFormData {
   relevantTopics?: string;
   sessionUrl?: string;
   tag?: string;
+  mentorId?: string;
 }
 
 function FreeSessionForm() {
@@ -93,8 +102,62 @@ function FreeSessionForm() {
     setSuccessful(true);
   };
 
+  // const { data } = useAuth();
+  // console.log(data);
+  // const mentorId=data?.id
+  // const email = data?.userDetails?.email;
+  // const userName = data?.userProfile;
+  // console.log(userName);
+  // const jobTitle = data?.mentorship_type;
+
+  // useEffect(() => {
+  // const user = JSON.parse(
+  //   localStorage.getItem("Mentor") || JSON.stringify({ data: { token: null } })
+  // )
+  // const {
+  // data:{token},
+  // } = user
+
+  // const fetchUser = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       "https://mentormee-api.onrender.com/mentors/get-current",
+  //       {
+  //         redirect : "follow",
+  //         headers:{
+  //         Authorization : `Bearer ${token}`,
+  //         "Content-Type": "application/json",
+  //       }
+  //       }
+  //     );
+  //     if (response.ok) {
+  //       const userData = await response.json();
+  //       return userData
+  //       console.log("user fetched,", userData);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw error;
+  //   }
+  // };
+  // fetchUser();
+  // }, [])
+
+  // const mentorId=userData?.
+
   const openCalendar = async (e: MouseEvent<HTMLButtonElement>) => {
     // e.preventDefault();
+    const user = JSON.parse(
+      localStorage.getItem("Mentor") ||
+        JSON.stringify({ data: { token: null } })
+    );
+    const {
+      data: { _id },
+    } = user;
+    console.log(user?.data?.user?._id);
+    const currentUser = user?.data?.user?._id;
+    console.log(currentUser);
+
     const isFormValid = Object.values(formData).every((value) => value !== "");
 
     if (isFormValid) {
@@ -107,7 +170,7 @@ function FreeSessionForm() {
       // console.log("All fields are required");
     }
 
-    const data = { ...formData, tag: "Free session" };
+    const data = { ...formData, tag: "Free session", mentorId: currentUser };
 
     console.log(JSON.stringify(data));
 

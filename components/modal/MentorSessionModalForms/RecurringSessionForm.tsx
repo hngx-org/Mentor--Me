@@ -19,6 +19,7 @@ interface RecurringFormData {
   relevantTopics?: string;
   sessionUrl?: string;
   tag?: string;
+  mentorId?: string;
 }
 
 function RecurringSessionForm() {
@@ -77,6 +78,17 @@ function RecurringSessionForm() {
   };
   const openCalendar = async (e: MouseEvent<HTMLButtonElement>) => {
     // e.preventDefault();
+    const user = JSON.parse(
+      localStorage.getItem("Mentor") ||
+        JSON.stringify({ data: { token: null } })
+    );
+    const {
+      data: { _id },
+    } = user;
+    console.log(user?.data?.user?._id);
+    const currentUser = user?.data?.user?._id;
+    console.log(currentUser);
+
     const isFormValid = Object.values(formData).every((value) => value !== "");
 
     if (isFormValid) {
@@ -92,6 +104,7 @@ function RecurringSessionForm() {
     const data = {
       ...formData,
       tag: "Recurring session",
+      mentorid: currentUser,
     };
     console.log(JSON.stringify(data));
 
