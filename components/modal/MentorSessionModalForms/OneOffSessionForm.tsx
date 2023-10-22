@@ -135,16 +135,16 @@ function OneOffSessionForm() {
       {formVisible && (
         // <div className="p-0 bg-[#1d1c1c57]  bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
         <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
-          <div className=" w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3">
+          <div className="sticky bg-[#fafafa] z-10 top-0 w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3 lg:py-4">
             <h1 className="text-left font-bold text-[1.5rem] sm:text-[2rem] text-[#08051e]">
               Create a OneOff Session
             </h1>
             <p className="text-gray-500">
               Create a session that best suits you!
             </p>
+            <span className="text-Error50 font-bold">{error}</span>
           </div>
           <form className="flex flex-col gap-3 sm:gap-6 py-3 rounded sm:px-12 w-full justify-between">
-            <span className="text-Error50 font-bold">{error}</span>
             <TimeInputType
               labelText="Session name"
               isRequired
