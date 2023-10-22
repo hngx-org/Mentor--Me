@@ -113,8 +113,10 @@ export default function UpcomingCard({
         </div>
         <p className="flex w-full justify-between">
           <span className="text-Neutra50 font-Inter text-[16px] font-medium">
-            Mentor session with
-            <span className="text-Accent1"> {apiData.sessionName}</span>
+            Mentor/Session:
+            <span className="text-Accent1"> {apiData.sessionName}</span> <br />
+            Discuss:
+            <span className="text-Accent1 pl-1">{apiData.relevantTopics}</span>
           </span>
           <span
             className={`w-[40px] h-[40px] font-Hanken font-medium text-[12px] text-Neutra40 text-center bg-[#e5ffff] rounded-full leading-none flex justify-center items-center ${
