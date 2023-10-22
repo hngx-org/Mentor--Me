@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unsafe-optional-chaining */
 
 "use client";
@@ -29,6 +30,7 @@ export default function LoginForm() {
   const router = useRouter();
   const { setUserData } = useAuthCtx();
   const [isLoading, setIsLoading] = useState(false);
+  const [imgLoading, setImgLoading] = React.useState(false);
   const [user, setUser] = React.useState<any>();
   const [isEmailValid, setisEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -37,6 +39,10 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
+
+  const isDisabled = !formData.email.match(
+    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}$/
+  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -92,35 +98,39 @@ export default function LoginForm() {
   };
   return (
     <div>
-      <div className="w-full h-[100vh] grid grid-cols-1 lg:grid-cols-6  overflow-hidden">
+      <div className="w-9/10 max-w-[700px] lg:w-4/5 lg:max-xl:w-4/5 xl:w-4/5 lg:max-w-[1350px] mt-[4rem] mx-auto grid grid-cols-1 lg:grid-cols-6 overflow-hidden shadow-xl shadow-gray-100 rounded-[20px]">
         <div className="lg:col-span-3 ">
-          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+          {imgLoading && (
+            <div className="flex w-full min-h-screen justify-center items-center relative scale-150">
+              <LoadingSpinner />
+            </div>
+          )}
+          <div className="w-full h-full relative">
             <Image
               src={auth}
               alt="Authentication Image"
               layout="fill"
               objectFit="cover"
+              loading="lazy"
+              onLoadingComplete={() => setImgLoading(false)}
+              className="hidden lg:block"
             />
           </div>
         </div>
-        <div className="col-span-3  px-4  lg:px-6 xl:px-16 md:mt-7">
+        <div className="col-span-3  px-4  lg:px-6 xl:px-16 ">
           <div className="flex justify-between items-center">
-            <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
+            {/* <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
               <a href="/"> Mentor Me</a>
-            </h2>
-
+            </h2> */}
+          </div>
+          <div className="flex w-9/10 xl:w-full mx-auto xl:mx-auto lg:mx-0 lg:max-xl:relative lg:max-xl:left-[8%] flex-col py-[3rem]">
             <a href="/welcome/login" className="flex">
               {" "}
-              <BackwardIcon /> <span className="ms-2">Go back</span>
+              <BackwardIcon />
             </a>
-          </div>
-          <div className="flex justify-center flex-col">
             <h4 className="font-Inter font-medium text-[#121212] text-xl mt-6">
-              Welcome Back
+              Log in As Mentee
             </h4>
-            <h5 className="text-[#808080] text-base font-Hanken mt-2 mb-5">
-              Login into your account
-            </h5>
             <form className="flex flex-col gap-5" onSubmit={handleSumbit}>
               <Input
                 id="email"
@@ -178,7 +188,7 @@ export default function LoginForm() {
                   type="submit"
                   variant="primary"
                   disabled={!isEmailValid || !isPasswordValid}
-                  className={`w-full h-[48px] ${
+                  className={`w-full py-[1.1rem] ${
                     !isEmailValid || !isPasswordValid
                       ? "opacity-60 hover:bg-gray-400 cursor-not-allowed"
                       : ""
