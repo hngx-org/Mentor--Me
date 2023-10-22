@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
+
 import { ErrorCard } from "@/components/errors/ErrorCard";
 
 export default function Error({

@@ -8,7 +8,7 @@ import Link from "next/link";
 
 import axios from "axios";
 
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 import { useRouter } from "next/navigation";
 
@@ -69,7 +69,7 @@ export default function SignUpForm() {
         })
 
         .catch((error) => {
-          console.error("An error occurred: ", error);
+          // console.error("An error occurred: ", error);
           toast.error(error?.response?.data?.message || "something went wrong");
         })
         .finally(() => {
@@ -91,7 +91,7 @@ export default function SignUpForm() {
           </div>
         </div>
 
-        <div className="col-span-3  px-4  lg:px-6 xl:px-16">
+        <div className="col-span-3  px-4  lg:px-6 xl:px-16 md:mt-7">
           <div className="flex justify-between items-center">
             <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
               <a href="/"> Mentor Me</a>
@@ -103,7 +103,7 @@ export default function SignUpForm() {
             </a>
           </div>
           <div className="flex justify-center flex-col">
-            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
+            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-6">
               Sign Up
             </h4>
             <h5 className="text-[#808080] text-base font-Hanken mt-2 mb-5">
@@ -169,7 +169,7 @@ export default function SignUpForm() {
               </div>
             </form>
 
-            <div className="flex justify-center w-full">
+            {/* <div className="flex justify-center w-full">
               <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
                 OR
               </h5>
@@ -191,7 +191,7 @@ export default function SignUpForm() {
                 loading={isLoading}
                 icon={facebook}
               />
-            </div>
+            </div> */}
             <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
               Already a user?{" "}
               <span className="font-semibold text-[#121212]">

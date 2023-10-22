@@ -14,33 +14,50 @@ export async function POST(request: NextRequest) {
 
   try {
     const result = await cloudinary.v2.uploader.upload(
-      formData.file as string,
+      formData.videoUrl as string,
       {
         resource_type: "video",
+        allowed_formats: ["mp4", "mkv", "ogg", "avi", "webm"],
+        timeout: 120000,
       }
     );
-    delete formData.file;
 
-    formData.file = result.url;
+    formData.videoUrl = result.url;
+
+    const res = await fetch(
+      `https://api.unsplash.com/search/photos?client_id=2ftKLo4PsEAc2RAGFEZNcPbhFH7N0cs2KR4BFWKjsjI&page=1&query=${formData.title}`
+    );
+
+    if (!res.ok) throw new Error("Error fetching resource image");
+    const {
+      results: [
+        {
+          urls: { raw },
+        },
+      ],
+    } = await res.json();
 
     console.log("formdata", formData);
+    formData.imageUrl = raw;
 
-    const res = await fetch("https://hngmentorme.onrender.com/api/resources", {
+    const res2 = await fetch("https://hngmentorme.onrender.com/api/resources", {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const data = await res.json();
+    // if (!res2.ok) throw new Error("Error fetching resource image");
+
+    const data = await res2.json();
     console.log(data);
     if (data.error) {
-      return NextResponse.json({ success: false, message: data.error });
+      return NextResponse.json({ success: false, error: data.error });
     }
     revalidatePath("/mentor-resources");
-    return NextResponse.json({ success: true });
+    return NextResponse.json(data);
   } catch (e) {
     console.log(e);
-    return NextResponse.json({ message: "failed to upload resource" });
+    return NextResponse.json(e);
   }
 }

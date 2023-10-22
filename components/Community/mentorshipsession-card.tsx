@@ -82,7 +82,7 @@ const MentorshipSessionCard = ({
         </div>
         {/* Title and description */}
         <div className="font-Hanken flex flex-col gap-2">
-          <h2 className="font-semibold text-NeutalBase text-[1.125rem] leading-[1.5] line-clamp-2">
+          <h2 className="font-semibold text-NeutalBase text-[1.125rem] leading-[1.5] line-clamp-1">
             {title}
           </h2>
           <p className="text-[.75rem] text-Neutra40 line-clamp-3">

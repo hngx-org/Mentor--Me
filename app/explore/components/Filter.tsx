@@ -6,6 +6,7 @@ import { FilterIcon } from "@/public/SVGs";
 
 interface Props {
   onSubmit: () => void;
+  onReset: () => void;
   setSelectedTimeZone: Dispatch<React.SetStateAction<string>>;
   selectedTimeZone: string;
   value: number;
@@ -22,6 +23,7 @@ export default function Filter({
   selectedDate,
   setSelectedDate,
   onSubmit,
+  onReset,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,7 +45,7 @@ export default function Filter({
           <span className="mr-2">
             <FilterIcon />
           </span>
-          <span className="hidden lg:flex md:text-lg font-normal font-[Hanken]">
+          <span className="hidden lg:flex md:text-lg lg:text-xl font-normal font-[Hanken]">
             Filter
           </span>
         </div>
@@ -58,6 +60,7 @@ export default function Filter({
           setSelectedDate={setSelectedDate}
           selectedDate={selectedDate}
           onSubmit={onSubmit}
+          onReset={onReset}
         />
       )}
     </div>

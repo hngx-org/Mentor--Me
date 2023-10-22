@@ -10,7 +10,7 @@ type ButtonProps = {
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
   disabled?: boolean;
   icon?: string | StaticImageData;
-  title: string;
+  title?: string;
   iconHeight?: number;
   iconWidth?: number;
   alt?: string;

@@ -1,20 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Image from "next/image";
 
 import SearchCommunitySearchbar from "@/components/Community/searchcommunity-searchbar";
 import { discussionComms, discussionCommunitites } from "../data";
 import { MsgEditIcon } from "@/public/assets/Icons/mentor-communities";
 import DiscussionCard from "@/components/Community/discussion-card";
-import { StartDiscussionModal } from "@/components/Community";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 
 const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log(discussionCommunitites);
 
   return (
-    <>
-      {isModalOpen && <StartDiscussionModal setIsModalOpen={setIsModalOpen} />}
+    <Suspense fallback={<LoadingSpinner />}>
       <section>
         {/* Search component */}
         <section className="p-6 md:p-10">
@@ -69,7 +68,7 @@ const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
               </span>
             </div>
             {/* Comm description */}
-            <p className="text-Neutral60 font-Hanken md:text-[1.125rem]">
+            <p className="text-Neutral60 font-Hanken md:text-[1.125rem] max-w-[680px]">
               {
                 discussionCommunitites[params.forum as keyof discussionComms]
                   .description
@@ -78,7 +77,7 @@ const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
           </div>
 
           {/* Start a discussion */}
-          <button
+          {/* <button
             type="button"
             onClick={() => setIsModalOpen((p) => !p)}
             className="mt-3 px-12 py-4 md:py-[1.125rem] text-white bg-NeutalBase rounded-lg font-Inter hover:bg-Neutral60 cursor-pointer md:flex gap-3 items-center"
@@ -89,6 +88,13 @@ const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
             <span className="text-[.875rem] font-Hanken font-semibold">
               Start a discussion
             </span>
+          </button> */}
+
+          <button
+            type="button"
+            className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px]  text-white border  bg-NeutalBase flex items-center gap-x-1 rounded-[8px]"
+          >
+            Join disscussion
           </button>
         </section>
         {/* Discussion list */}
@@ -96,6 +102,14 @@ const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
           {discussionCommunitites[
             params.forum as keyof discussionComms
           ].discussions.map((item) => (
+            // <BigDiscussionCard
+            //   mentor={item.author.isMentor}
+            //   name={item.author.name}
+            //   title={item.topic}
+            //   desc={item.note}
+            //   heroCard={item.imageUrl}
+            //   image={item.author.profilePhotoUrl}
+            // />
             <DiscussionCard
               author={item.author}
               description={item.note}
@@ -106,7 +120,7 @@ const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
           ))}
         </section>
       </section>
-    </>
+    </Suspense>
   );
 };
 

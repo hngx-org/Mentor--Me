@@ -57,34 +57,39 @@ const MentorCard: React.FC<Props> = ({
       </Suspense>
 
       <div className="info w-full px-2 lg:px-[14px] lg:gap-[10px] flex flex-col gap-[4px] ">
-        <div className="w-fit flex lg:gap-1 gap-[3px] flex-col justify-center text-center">
+        <div className="w-fit max-w-full flex lg:gap-1 gap-[3px] flex-col justify-center text-center">
           <div className="flex gap-1 items-center">
             <Image
               alt="members"
               src={mentorAvatar}
               height={24}
-              className="block xl:w-[24px] xl:h-[24px] w-[12px] h-[12px]"
+              className="block lg:w-[24px] lg:h-[24px] w-[12px] h-[12px]"
             />
-            <p className="text-NeutalBase font-semibold xl:text-[18px] text-[12px] lg:leading-[14px] leading-none ">
-              {mentorName}
-            </p>
+            <div className="div">
+              <div className="flex gap-1">
+                {" "}
+                <p className="text-NeutalBase font-semibold xl:text-[18px] text-[12px] lg:leading-[14px] leading-none overflow-clip  ">
+                  {mentorName}
+                </p>{" "}
+                {/* <IconVerfied className="lg:w-6 w-3 aspect-square" /> */}
+                {verify ? (
+                  <Image
+                    alt="members"
+                    src={verified}
+                    width={24}
+                    height={24}
+                    className="block xl:w-[24px] xl:h-[24px] w-[12px] h-[12px]"
+                  />
+                ) : (
+                  <div className="" />
+                )}
+              </div>
 
-            {/* <IconVerfied className="lg:w-6 w-3 aspect-square" /> */}
-            {verify ? (
-              <Image
-                alt="members"
-                src={verified}
-                width={24}
-                height={24}
-                className="block xl:w-[24px] xl:h-[24px] w-[12px] h-[12px]"
-              />
-            ) : (
-              <div className="" />
-            )}
+              <p className="text-Neutra30 font-normal lg:text-xs text-[10px] leading-none text-left">
+                {mentorPostion}
+              </p>
+            </div>
           </div>
-          <p className="text-Neutra30 font-normal lg:text-xs text-[10px] leading-none">
-            {mentorPostion}
-          </p>
         </div>
         <div className="time flex lg:gap-[10px] lg:justify-normal justify-between xl:text-xs text-[10px] font-norm">
           <div className="w-fit flex gap-x-[3px] items-center">

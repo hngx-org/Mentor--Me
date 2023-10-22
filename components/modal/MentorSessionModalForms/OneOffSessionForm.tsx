@@ -67,13 +67,22 @@ function OneOffSessionForm() {
     setCalendarVisible(false);
     setSuccessful(true);
   };
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const yyyy = today.getFullYear();
+
+  const minDate = `${yyyy}-${mm}-${dd}`;
+
   const openCalendar = async (e: MouseEvent<HTMLButtonElement>) => {
     // e.preventDefault();
     const isFormValid = Object.values(formData).every((value) => value !== "");
 
     if (isFormValid) {
       setError("");
-      setCalendarVisible(true);
+      // setCalendarVisible(true);
+      setSuccessful(true);
+      setFormVisible(false);
     } else {
       setError("All fields are required");
       // console.log("All fields are required");
@@ -101,7 +110,8 @@ function OneOffSessionForm() {
       const responseData = await response.json();
       console.log("form submitted,", responseData);
     } else {
-      setCalendarVisible(false);
+      // setCalendarVisible(false);
+      setSuccessful(false);
       setFormVisible(true);
       setError("An error occurred while creating a session");
       console.error("submissiom failed");
@@ -171,6 +181,7 @@ function OneOffSessionForm() {
               type="date"
               onChange={handleInputChange}
               value={formData.date}
+              minDate={minDate}
               isRequired
               InputId="date"
               InputName="date"
@@ -187,7 +198,7 @@ function OneOffSessionForm() {
               placeholder="Add a link to the session"
             />
             <TimeInputType
-              labelText="Duration"
+              labelText="Duration in minutes"
               type="number"
               onChange={handleInputChange}
               value={formData.duration}
@@ -224,19 +235,19 @@ function OneOffSessionForm() {
                 variant="primary"
                 type="button"
               >
-                Continue
+                Submit
               </Button>
             </div>
           </form>
         </div>
         // </div>
       )}
-      {CalendarVisible && (
+      {/* {CalendarVisible && (
         <MentorCalendar
           onClose={closeCalendar}
           onShowSuccessModal={openSuccessModal}
         />
-      )}
+      )} */}
       {successful && (
         <SuccessModal
           isOpen={successful}

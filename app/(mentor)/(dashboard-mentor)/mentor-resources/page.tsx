@@ -49,7 +49,11 @@ export default async function MentorResources() {
                 price={resource?.price}
                 reviewCount={resource?.reviews}
                 stars={resource?.ratings}
-                previewImage="/assets/images/mentor-upload-resource/resource-card.jpg"
+                previewImage={
+                  resource?.imageUrl?.includes("images.unsplash.com")
+                    ? resource.imageUrl
+                    : "/assets/images/mentor-upload-resource/resource-card.jpg"
+                }
               />
             ))}
           </div>
@@ -68,7 +72,11 @@ export default async function MentorResources() {
                 price={resource?.price}
                 reviewCount={resource?.reviews}
                 stars={resource?.ratings}
-                previewImage="/assets/images/mentor-upload-resource/resource-card.jpg"
+                previewImage={
+                  resource?.imageUrl?.includes("images.unsplash.com")
+                    ? resource.imageUrl
+                    : "/assets/images/mentor-upload-resource/resource-card.jpg"
+                }
               />
             ))}
           </div>

@@ -42,13 +42,14 @@ export type IReview = {
 export type UpcomingSessionProp = {
   id?: number;
   underline?: boolean;
-  name: string;
-  time: string;
-  date: string;
-  meetingLink: string;
-  rescheduleBtn: string;
-  reminderBtn: string;
-  imgSrc: string | StaticImageData;
+  relevantTopics?: string;
+  time?: string;
+  date?: string;
+  sessionUrl?: string;
+  rescheduleBtn?: string;
+  reminderBtn?: string;
+  imgSrc?: string | StaticImageData;
+  name?: string;
 };
 export type historySessionProp = {
   id?: number;
@@ -123,30 +124,70 @@ export const upcomingSessions: UpcomingSessionProp[] = [
     id: 1,
     name: "Patricia Flow",
     time: "4pm (WAT)",
-    date: "06 Sept",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
-    rescheduleBtn: "Reschedule Session",
-    reminderBtn: "Set reminder",
+    date: "2023-10-26",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Cancel Session",
+    reminderBtn: "Join Meeting",
     imgSrc: sessionPatricia,
   },
   {
     id: 2,
     name: "Shao Lin",
     time: "4pm (WAT)",
-    date: "06 Sept",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
-    rescheduleBtn: "Reschedule Session",
-    reminderBtn: "Set reminder",
+    date: "2023-10-24",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Cancel Session",
+    reminderBtn: "Join Meeting",
     imgSrc: sessionShaolin,
   },
   {
     id: 3,
     name: "Hope Chidi",
     time: "4pm (WAT)",
-    date: "06 Sept",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
-    rescheduleBtn: "Reschedule Session",
-    reminderBtn: "Set reminder",
+    date: "2023-10-20",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Cancel Session",
+    reminderBtn: "Join Meeting",
+    imgSrc: sessionHope,
+  },
+  {
+    id: 4,
+    name: "Hope Chidi",
+    time: "4pm (WAT)",
+    date: "2023-10-21",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Cancel Session",
+    reminderBtn: "Join Meeting",
+    imgSrc: sessionHope,
+  },
+  {
+    id: 5,
+    name: "Hope Chidi",
+    time: "4pm (WAT)",
+    date: "2023-10-29",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Cancel Session",
+    reminderBtn: "Join Meeting",
+    imgSrc: sessionHope,
+  },
+  {
+    id: 6,
+    name: "Hope Chidi",
+    time: "4pm (WAT)",
+    date: "2023-10-23",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Cancel Session",
+    reminderBtn: "Join Meeting",
+    imgSrc: sessionHope,
+  },
+  {
+    id: 7,
+    name: "Hope Chidi",
+    time: "4pm (WAT)",
+    date: "2023-10-30",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Cancel Session",
+    reminderBtn: "Join Meeting",
     imgSrc: sessionHope,
   },
 ];
@@ -156,9 +197,9 @@ export const cancelledSessions: UpcomingSessionProp[] = [
     name: "Patricia Flow",
     time: "4pm (WAT)",
     date: "02 Aug",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
-    rescheduleBtn: "Reschedule Session",
-    reminderBtn: "Contact Mentor",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
+
+    rescheduleBtn: "Delete",
     imgSrc: sessionPatricia,
     underline: false,
   },
@@ -167,9 +208,8 @@ export const cancelledSessions: UpcomingSessionProp[] = [
     name: "Maurice Monye",
     time: "4pm (WAT)",
     date: "02 Aug",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
-    rescheduleBtn: "Reschedule Session",
-    reminderBtn: "Contact Mentor",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Delete",
     imgSrc: sessionMaurice,
     underline: true,
   },
@@ -178,9 +218,8 @@ export const cancelledSessions: UpcomingSessionProp[] = [
     name: "Kaplan Kai",
     time: "4pm (WAT)",
     date: "02 Aug",
-    meetingLink: "https://meet.mentorme.com/azv-bspc-fyb",
-    rescheduleBtn: "Reschedule Session",
-    reminderBtn: "Contact Mentor",
+    sessionUrl: "https://meet.mentorme.com/azv-bspc-fyb",
+    rescheduleBtn: "Delete",
     imgSrc: sessionKaplan,
     underline: true,
   },

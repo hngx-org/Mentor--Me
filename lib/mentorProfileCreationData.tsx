@@ -93,7 +93,7 @@ export const form2Arr = [
   {
     id: 5,
     label: "Skils",
-    placeholder: "+ Add skils",
+    placeholder: "Add skils",
     nature: "dropdown",
     type: "",
     dropList: [

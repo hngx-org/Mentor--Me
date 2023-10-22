@@ -1,13 +1,10 @@
+/* eslint-disable jsx-a11y/media-has-caption */
+
 import Link from "next/link";
 import Image from "next/image";
 
-import {
-  CaretIcon,
-  PlayIcon,
-  PlayResourceIcon,
-  StarIcon,
-  UpdateIcon,
-} from "@/public/SVGs";
+import { StarIcon, UpdateIcon } from "@/public/SVGs";
+import CourseContents from "./CourseContentDropDown";
 
 export default async function Resource({
   params,
@@ -21,11 +18,21 @@ export default async function Resource({
     throw new Error(res.statusText);
   }
   const data = await res.json();
+  console.log(data);
+  const resources = data.courseContents as {
+    id: string;
+    titlee: string;
+    duration: number;
+  }[];
+  const resourcesShown = resources.slice(0, 3);
+  const resourcesHidden = resources.slice(3);
+  const totalTime = resources.reduce((prev, curr) => prev + curr.duration, 0);
+
   return (
     <div>
       <section className="bg-Neutral60 px-4 py-11 text-white font-Inter text-center">
         <h1 className="text-3xl font-medium capitalize">{data?.title}</h1>
-        <p className="mt-5 mb-3 w-[min(446px,_100%)] mx-auto">
+        <p className="mt-5 mb-3 w-[min(600px,_100%)] mx-auto break-words">
           {data?.description}
         </p>
         <div className="flex items-center justify-center gap-3">
@@ -59,20 +66,14 @@ export default async function Resource({
             course content
           </h2>
           <p className="text-Neutra40 font-normal row-start-1 row-end-2 col-start-3 col-end-4">
-            20 Lessons (1h 20m)
+            {resources.length} Lessons (
+            {secondsToHoursMinutes(totalTime).trim()})
           </p>
-          <div className="p-4 rounded-[8px] border-Neutra10 border-[1px] row-start-2 row-end-3 col-span-full">
-            <CourseContent title="Introduction" />
-            <CourseContent title="What is UI Design" />
-            <CourseContent title="What is UI Design" />
-            <CourseContent title="What is UI Design" />
-            <div className="flex items-center gap-2 mt-4 cursor-pointer">
-              <p className="capitalize text-Accent1 font-medium">
-                show all lessons
-              </p>
-              <CaretIcon className="w-10" />
-            </div>
-          </div>
+
+          <CourseContents
+            contentShown={resourcesShown}
+            contentHidden={resourcesHidden}
+          />
         </div>
         <div className="font-Hanken mt-4 md:row-start-2 md:row-end-3 md:col-start-1 md:col-end-2">
           <h2 className="font-Inter text-NeutalBase font-medium text-2xl capitalize">
@@ -86,9 +87,12 @@ export default async function Resource({
               alt="Instructor"
               className="w-12 h-12 rounded-full row-span-full col-start-1 col-end-2"
             />
-            <p className="text-NeutalBase row-start-1 row-end-2 col-start-2 col-end-3 w-max">
+            <Link
+              href="/mentor-profile"
+              className="text-Accent1 row-start-1 row-end-2 col-start-2 col-end-3 w-max"
+            >
               {data?.name}
-            </p>
+            </Link>
             <p className="text-Neutra40 row-start-2 row-end-3 col-start-2 col-end-3 w-max">
               {data?.role} at {data?.company}
             </p>
@@ -102,27 +106,19 @@ export default async function Resource({
             Microsoft, Deb collaborates with product leaders to create engaging
             narratives that communicate value and business impact.{" "}
           </p>
-          <Link
-            href="/mentor-profile"
-            className="text-Accent1 font-medium mt-4"
-          >
-            View Profile
-          </Link>
         </div>
         <div className="w-[min(353px,_100%)] border-Neutra10 border-[1px] rounded-[6px] overflow-hidden mt-4 mx-auto md:row-span-full md:col-start-2 md:col-end-3 md:mt-2 md:mx-0">
-          <div className="relative w-full">
-            <Image
-              width={495}
-              height={233}
-              className="w-full"
-              src="/assets/images/mentor-upload-resource/course-video.png"
-              alt="course-video"
+          <div className="relative w-full border-b-[1px] border-Neutra10">
+            <video
+              controls
+              className="w-full aspect-video object-cover object-center"
+              src={data.videoUrl}
             />
-            <PlayResourceIcon className=" absolute inset-[auto_50%_50%_auto] z-10 translate-x-1/2 translate-y-1/2" />
           </div>
           <div className="p-4 pt-0">
             <p className="w-max font-Hanken text-NeutalBase font-semibold text-3xl my-4">
-              $10
+              {data.currency}
+              {data.price}
             </p>
             <p className="w-max font-Inter text-NeutalBase font-medium text-lg">
               This course includes:
@@ -154,16 +150,20 @@ export default async function Resource({
   );
 }
 
-const CourseContent = ({ title }: { title: string }) => (
-  <p className="text-[#333333] flex gap-5 items-center text-lg leading-[2.5] font-medium cursor-pointer">
-    <PlayIcon className=" w-6" />
-    {title}
-  </p>
-);
-
 function convertDateFormat(dateString: string) {
   const date = new Date(dateString);
   const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Adding 1 because getMonth is 0-based
   const year = date.getFullYear().toString();
   return `${month}/${year}`;
+}
+
+function secondsToHoursMinutes(seconds: number) {
+  const hours = Math.floor(seconds / 3600);
+  const remainingSeconds = seconds % 3600;
+  const minutes = Math.floor(remainingSeconds / 60);
+
+  const formattedHours = hours > 0 ? `${hours}h ` : "";
+  const formattedMinutes = minutes > 0 ? `${minutes}m` : "";
+
+  return `${formattedHours}${formattedMinutes}`;
 }
