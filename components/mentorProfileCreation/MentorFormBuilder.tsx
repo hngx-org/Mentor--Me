@@ -5,7 +5,7 @@
 //  The buttons trigger the change of the currForm state from here using props. Which in turn changes which form is shown
 import { use, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import { useMentorContext } from "@/app/(mentor)/mentor-profile-creation/MentorContext";
 import LoadingSpinner from "../loaders/LoadingSpinner";
 import arrowDown from "@/public/assets/images/mentor-profile-creation/mentor-arrow-down.svg";

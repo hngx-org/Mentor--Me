@@ -81,7 +81,7 @@ export default function UpcomingCard({
   };
 
   const vunct = async (itemId: string, dataObject: any) => {
-    toast.success("Cancel succefully", {
+    toast("Cancel succefully", {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
