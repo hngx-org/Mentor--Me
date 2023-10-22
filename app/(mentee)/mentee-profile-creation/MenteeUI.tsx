@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import MentorMeIcon from "@/svgs/MentorMeIcon";
 
 import {

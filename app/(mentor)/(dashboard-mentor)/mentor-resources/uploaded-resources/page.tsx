@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Link from "next/link";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import DeleteModal from "@/components/mentor-resources/DeleteModal";
 import {
   ArrowIcon,
@@ -135,7 +135,7 @@ export default function UploadResources() {
                 <button
                   type="button"
                   onKeyUp={() => {
-                    console.log("ally rule");
+                    // console.log("ally rule");
                   }}
                   onClick={() => {
                     if (paginationData.currentPage - 1 <= 0) return;
@@ -144,7 +144,7 @@ export default function UploadResources() {
                       currentPage: prev.currentPage - 1,
                     }));
                     toast(`Page ${paginationData.currentPage - 1}`, {
-                      duration: 1000,
+                      autoClose: 1000,
                     });
                   }}
                   className={`flex items-center gap-4 ${
@@ -170,7 +170,7 @@ export default function UploadResources() {
                             <button
                               type="button"
                               onKeyUp={() => {
-                                console.log("ally rule");
+                                // console.log("ally rule");
                               }}
                               onClick={() =>
                                 setPaginationData((prev) => ({
@@ -206,7 +206,7 @@ export default function UploadResources() {
                               <button
                                 type="button"
                                 onKeyUp={() => {
-                                  console.log("ally rule");
+                                  // console.log("ally rule");
                                 }}
                                 onClick={() =>
                                   setPaginationData((prev) => ({
@@ -233,7 +233,7 @@ export default function UploadResources() {
                 <button
                   type="button"
                   onKeyUp={() => {
-                    console.log("ally rule");
+                    // console.log("ally rule");
                   }}
                   onClick={() => {
                     if (
@@ -246,7 +246,7 @@ export default function UploadResources() {
                       currentPage: prev.currentPage + 1,
                     }));
                     toast(`Page ${paginationData.currentPage + 1}`, {
-                      duration: 1000,
+                      autoClose: 1000,
                     });
                   }}
                   className={`flex flex-row-reverse items-center gap-4 ${
