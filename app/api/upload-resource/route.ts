@@ -29,16 +29,25 @@ export async function POST(request: NextRequest) {
     );
 
     if (!res.ok) throw new Error("Error fetching resource image");
+    const imageResponse = await res.json();
+
+    if (imageResponse.total === 0) {
+      console.log("Errored");
+      throw new Error("Please enter a short title with logical meaning");
+    }
+
     const {
       results: [
         {
           urls: { raw },
         },
       ],
-    } = await res.json();
+    } = imageResponse;
 
     console.log("formdata", formData);
     formData.imageUrl = raw;
+
+    console.log("formData", formData);
 
     const res2 = await fetch("https://hngmentorme.onrender.com/api/resources", {
       method: "POST",
@@ -51,13 +60,19 @@ export async function POST(request: NextRequest) {
 
     const data = await res2.json();
     console.log(data);
+    if (data._id === undefined) {
+      return NextResponse.json({
+        success: false,
+        error: "There was an error uploading the resource.",
+      });
+    }
     if (data.error) {
-      return NextResponse.json({ success: false, error: data.error });
+      return NextResponse.json({ success: false, error: data.error.message });
     }
     revalidatePath("/mentor-resources");
     return NextResponse.json(data);
-  } catch (e) {
-    console.log(e);
-    return NextResponse.json(e);
+  } catch (e: any) {
+    console.log(e.message);
+    return NextResponse.json({ error: e.message });
   }
 }

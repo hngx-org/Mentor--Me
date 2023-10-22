@@ -10,12 +10,12 @@ interface CourseContentProps {
   contentShown: {
     titlee: string;
     duration: number;
-    id: string;
+    _id: string;
   }[];
   contentHidden: {
     titlee: string;
     duration: number;
-    id: string;
+    _id: string;
   }[];
 }
 
@@ -28,13 +28,13 @@ const CourseContents = function ({
   return (
     <div className="p-4 rounded-[8px] border-Neutra10 border-[1px] row-start-2 row-end-3 col-span-full">
       {contentShown.map((content) => (
-        <CourseContent key={content.id} title={content.titlee} />
+        <CourseContent key={content._id} title={content.titlee} />
       ))}
       <motion.div animate={{ height }} className="overflow-hidden origin-top">
         <div ref={ref}>
           {isExpanded &&
             contentHidden.map((content) => (
-              <CourseContent key={content.id} title={content.titlee} />
+              <CourseContent key={content._id} title={content.titlee} />
             ))}
         </div>
       </motion.div>
