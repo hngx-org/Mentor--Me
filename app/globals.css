@@ -1,4 +1,5 @@
 @import url("https://fonts.cdnfonts.com/css/gladiora");
+@import "react-alice-carousel/lib/alice-carousel.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,7 +10,9 @@
   --background-end-rgb: 255, 255, 255;
   --font-gladiora: "Gladiora", sans-serif;
 }
-
+* {
+  scroll-behavior: smooth;
+}
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -59,4 +62,38 @@ body {
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+::selection {
+  background-color: rgba(0, 0, 0, 0.292);
+  color: white;
+}
+::-moz-selection {
+  background-color: rgba(0, 0, 0, 0.292);
+  color: white;
+}
+
+.alice-carousel__dots-item {
+  width: 20px !important;
+  height: 20px !important;
+  background: none !important;
+  border: 1px solid #000000 !important;
+}
+.alice-carousel__dots-item.__active {
+  background: #000000 !important;
+}
+.alice-carousel__wrapper {
+  border-radius: 20px;
 }

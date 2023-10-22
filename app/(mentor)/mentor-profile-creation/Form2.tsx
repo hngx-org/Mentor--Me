@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-hot-toast";
 import MentorFormBuilder from "@/components/mentorProfileCreation/MentorFormBuilder";
 import { HeadingBuild } from "./MentorUI";
@@ -10,38 +10,99 @@ interface myProps {
   handleMoveBack: () => void;
 }
 function Form2({ handleMoveForward, handleMoveBack }: myProps) {
-  const { currForm, files, setFiles, setFormInputs } = useMentorContext();
+  const { currForm, files, setFiles, setFormInputs, formInputs } =
+    useMentorContext();
 
+  const [file2Arr, setFile2Arr] = useState([]);
   const select2 = useRef<HTMLInputElement>(null);
   const image2 = useRef<HTMLImageElement>(null);
+  const [image, setImage] = useState(null);
+  const [url, setUrl] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [preview, setPreview] = useState(null);
 
+  const uploadImage = async () => {
+    setLoading(true);
+    const fileReader = new FileReader();
+    //
+    fileReader.readAsDataURL(image!);
+    fileReader.onloadend = async () => {
+      try {
+        const response = await fetch("/api/mentor-profile", {
+          method: "POST",
+          body: JSON.stringify(fileReader.result),
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        });
+        const data = await response.json();
+        if (data.error) {
+          toast.error(
+            "problem uploading image, please check your internet connection"
+          );
+        }
+        // @ts-ignore
+        setUrl((prevData) => [...prevData, data.url]);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+  // This useEffect performs the post request when the value of files.file2 changes
   useEffect(() => {
-    if (files.file2) {
-      // @ts-ignore
-      image2.current!.src = URL.createObjectURL(files.file2);
+    if (file2Arr.length > 0) {
+      uploadImage();
     }
-  }, [files]);
+  }, [image]);
+
+  // This useefect updates the object of data going to the backend, this particular data is an array of strings of urls of the cloudinary images
+  useEffect(() => {
+    if (url) {
+      setFormInputs((prevData: any) => ({
+        ...prevData,
+        // @ts-ignore
+        certification_file: url.join(", "),
+      }));
+    }
+  }, [url]);
 
   function showFile(e: any) {
-    if ([...e.target.files][0].size > 2 * 1024 * 1024) {
+    if (
+      [...e.target.files][0] &&
+      [...e.target.files][0].size > 2 * 1024 * 1024
+    ) {
       toast.error("Image size exceeds 2MB. Please upload a smaller image.");
       return;
     }
+
+    // @ts-ignore
+    setFile2Arr((prevArr) => [...prevArr, select2.current!.files![0]]);
+
     setFiles((prevFile: any) => ({
       ...prevFile,
-      [e.target.id]: [...e.target.files][0],
+      [e.target.id]: file2Arr,
     }));
 
-    setFormInputs((prevData: any) => ({
-      ...prevData,
-      [e.target.name]: e.target.files[0].name,
-    }));
-
-    // console.log(formInputs);
+    setImage(e.target.files[0]);
   }
 
   function selectFile(element: any) {
     element.click();
+  }
+
+  function handleDelete(e: any) {
+    const id = Number(e.target.parentElement.id);
+    // @ts-ignore
+    setFile2Arr((prevArr) => {
+      const newArr = prevArr.filter((box, idx) => idx !== id);
+      return newArr;
+    });
+
+    setUrl((prevUrls) => {
+      const newArr = prevUrls.filter((box, idx) => idx !== id);
+      return newArr;
+    });
   }
 
   return (
@@ -54,7 +115,7 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
       <MentorFormBuilder
         content={form2Arr}
         handleClick={() => {
-          if (files.file2 === "") {
+          if (file2Arr.length === 0) {
             toast.error("please upload a certificate");
             return;
           }
@@ -77,7 +138,7 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
                 placeholder="Link"
                 id="certification"
                 name="certification_link"
-                required
+                // required
                 onInput={(e: any) => {
                   setFormInputs((prevData: any) => ({
                     ...prevData,
@@ -93,7 +154,7 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
               type="file"
               onChange={showFile}
               id="file2"
-              name="certification_file"
+              name="certificate_name"
             />
 
             <button
@@ -107,19 +168,46 @@ function Form2({ handleMoveForward, handleMoveBack }: myProps) {
             </button>
           </div>
 
-          <div>
-            <img
-              ref={image2}
-              src="/"
-              alt=""
-              className=" mr-[20px] max-w-[200px] w-[80%]"
-            />
-            <p>
-              {
-                // @ts-ignore
-                files.file2 && files.file2.name
-              }
-            </p>
+          <div className="flex flex-wrap gap-4 items-start mt-6">
+            {file2Arr.length > 0
+              ? file2Arr.map((file, idx) => (
+                  <div
+                    id={`${idx}`}
+                    className="border-[1px] min-h-[100px] flex flex-col items-center justify-center border-black rounded-md p-2 pr-4 relative"
+                    key={
+                      // @ts-ignore
+                      file.size + 5
+                    }
+                  >
+                    {
+                      // @ts-ignore
+                      file && file.type === "application/pdf" ? (
+                        <p className="text-[red] font-bold mb-3">PDF</p>
+                      ) : (
+                        ""
+                      )
+                    }
+                    <img
+                      className=" mr-[20px] max-w-[120px] w-[80%]"
+                      src={URL.createObjectURL(file)}
+                      alt=""
+                    />
+                    <p className="uppercase text-sm">
+                      {
+                        // @ts-ignore
+                        file.name
+                      }
+                    </p>
+                    <button
+                      type="button"
+                      onClick={handleDelete}
+                      className="border-black rounded-[50%] absolute top-2 right-2 ml-5 border-[1px] px-[5px] text-center cursor-pointer"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))
+              : ""}
           </div>
         </div>
       </MentorFormBuilder>

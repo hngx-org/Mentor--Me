@@ -6,6 +6,7 @@ import Link from "next/link";
 import { MentorImg1, MentorImg2, MentorImg3, MentorImg4 } from "@/public";
 import { BlackStar, ZoneIcon } from "@/public/SVGs";
 import Loader from "./Loader";
+import Skeleton from "./Skeleton";
 
 interface Cards {
   id?: string;
@@ -68,31 +69,19 @@ export default function Card({ filteredResults, loading }: CardProps) {
   //   contentImage?: string
   // }
 
-  // const cardSlice = cards.slice(0, 10);
-
   return (
     <div>
       {loading ? (
-        <Loader />
+        <Skeleton />
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5">
-          {/* <ul>
-        {filteredResults.length === 0 ? (
-          <li>No user found</li>
-        ) : (
-          filteredResults.map((card) => (
-            <li key={card.id}>{`${card.firstname} ${card.lastname}`}</li>
-          ))
-        )}
-      </ul> */}
-
           {filteredResults.length === 0 ? (
-            <h1 className=" text-center  text-2xl">No card Available...</h1>
+            <h1 className=" text-center  text-2xl">No result...</h1>
           ) : (
             filteredResults.map((details) => (
               <div
                 key={details.id}
-                className=" w-[330px] md:w-[280px] lg:w-[295px] h-[420px] lg:h-[435px] overflow-hidden container mx-auto border-[0.5px] border-[#ABABAB] rounded-lg mt-6"
+                className=" w-[330px] md:w-[280px] lg:w-[295px] 2xl:w-[320px] h-[420px] lg:h-[415px] overflow-hidden container mx-auto border-[0.5px] border-[#ABABAB] rounded-lg mt-6"
               >
                 <Image
                   src={details?.contentImage}
@@ -169,12 +158,14 @@ export default function Card({ filteredResults, loading }: CardProps) {
                   {/* Line */}
                   <div className="mt-2 border-t-2 border-t-Neutra20" />
                   {/* View Profile */}
-                  <Link
-                    href="/welcome/login"
-                    className=" cursorpointer mlauto mrauto w-full mt-5 flex justify-center items-center font-Hanken text-Accent1 text-base hover:opacity-50 transition-opacity lg:border lg:border-[#121212] lg:py-[10px] lg:px[32px] lg:px-[40px] lg:rounded-[8px] lg:flex"
-                  >
-                    View Profile
-                  </Link>
+                  <div className="flex justify-center items-center mt-5  ">
+                    <Link
+                      href="/welcome/login"
+                      className=" cursorpointer mlauto mrauto wfull font-Hanken text-Accent1 text-base hover:opacity-50 transition-opacity lg:borderlg:border-[#121212]lg:py-[10px]lg:px[32px]lg:px-[40px]lg:rounded-[8px]lg:flex"
+                    >
+                      View Profile
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))

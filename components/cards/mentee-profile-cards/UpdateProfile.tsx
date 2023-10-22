@@ -9,6 +9,8 @@ import { MenteeDashboardProfileImg } from "@/public";
 import { EditIcon } from "@/public/SVGs";
 
 import UpdateProfileForm from "./forms/UpdateProfileForm";
+import ExperienceForm from "./forms/ExperienceForm";
+import SocialsForm from "./forms/SocialsForm";
 
 type UpdateProfileTabsProp = {
   id: number;
@@ -28,21 +30,19 @@ const updateProfileTabs: UpdateProfileTabsProp[] = [
   },
   {
     id: 3,
-    title: "Social links",
-    tab: "social_links",
+    title: "Social Links",
+    tab: "socials",
   },
 ];
 export default function UpdateProfile() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
-    email: "",
-    message: "",
+
+    bio: "",
   });
-  const isDisabled =
-    !formData.name || !formData.email || !formData.message || !formData.phone;
+  const isDisabled = !formData.name || !formData.bio;
   const [activeTab, setActiveTab] = useState<string | null | undefined>("");
 
   const router = useRouter();
@@ -58,20 +58,20 @@ export default function UpdateProfile() {
     setActiveTab(params || "basic-info");
     if (typeof localStorage !== "undefined") {
       const theme = localStorage.getItem("theme");
-      if (theme === "dark") {
-        setIsDark(true);
+      if (theme === "light") {
+        setIsDark(false);
       }
     }
-  }, [params]);
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem("theme", isDark ? "dark" : "light");
+    localStorage.setItem("theme", isDark ? "light" : "light");
   }, [isDark]);
 
   return (
     <div
       className={`w-full justify-start  flex flex-col items-start gap-8 h-full min-h-screen relative   px-4 pb-16 sm:pb-0 sm:pl-10 lg:pl-20 ${
-        isDark ? "bg-NeutalBase" : ""
+        isDark ? "bg-gray-950" : ""
       }`}
     >
       <Link
@@ -92,18 +92,7 @@ export default function UpdateProfile() {
           </button>
         </p>
       </Link>
-      <div className="absolute top-5 left-5 h-[40px] w-[60px] flex justify-center items-center ">
-        <div
-          className={`w-[50px] h-[20px] p-[2px] ${
-            isDark
-              ? "bg-white before:bg-black before:scale-105"
-              : "before:bg-white bg-NeutalBase"
-          }  rounded-full relative before:absolute before:content-[''] before:h-[16px] before:w-[16px] before:rounded-full cursor-pointer before:active:scale-90   ${
-            isDark && "before:right-0 transition-all duration-300"
-          } `}
-          onClick={() => setIsDark(!isDark)}
-        />
-      </div>
+
       <div
         className={`pt-16 select-none  font-medium text-xl font-Inter ${
           isDark
@@ -114,7 +103,7 @@ export default function UpdateProfile() {
         <p>Update your profile details</p>
       </div>
       <div
-        className={`flex gap-4 w-full justify-between sm:max-w-[400px] px-2 sm:p-4 ${
+        className={`flex gap-4 w-full justify-between xl:max-w-[900px] xl:ml-[-17px] sm:max-w-[400px] px-2 sm:p-4 ${
           isDark ? "border-gray-800 border-t border-b" : ""
         }`}
       >
@@ -144,6 +133,8 @@ export default function UpdateProfile() {
         ))}
       </div>
       {activeTab === "basic-info" && <UpdateProfileForm isDark={isDark} />}
+      {activeTab === "experience" && <ExperienceForm isDark={isDark} />}
+      {activeTab === "socials" && <SocialsForm isDark={isDark} />}
     </div>
   );
 }

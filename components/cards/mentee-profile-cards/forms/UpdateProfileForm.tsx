@@ -3,109 +3,198 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from "next/image";
-import React, { useRef, useState } from "react";
-import { toast } from "react-hot-toast";
-import axios from "axios";
-import { MenteeDashboardProfileImg } from "@/public";
+import React, { useRef, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import {
+  MenteeDashboardProfileImg,
+  MenteeUpdateProfileCheckmark,
+} from "@/public";
 import { EditIcon, EditIconDark } from "@/public/SVGs";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 
 type formProps = {
-  name: string;
+  fullName: string;
   bio: string;
-  gender: string;
-  image: File | undefined;
+  image: string | null;
 };
 
 const MAX_SIZE = 2 * 1024 * 1024; // 2MB in bytes
 export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [file, setFile] = useState<File>();
+  const [pageLoading, setPageLoading] = useState(true);
+  const [fileURL, setFileURL] = useState<any>("");
   const [formData, setFormData] = useState<formProps>({
-    name: "",
-    gender: "select",
+    fullName: "",
     bio: "",
-    image: file,
+    image: null,
   });
+  const [token, setToken] = useState("");
+  const [isProfileUpdated, setIsProfileUpdated] = useState(false);
+  const [imageSource, setImageSource] = useState("");
+  const baseUrl = "https://mentormee-api.onrender.com";
+  const router = useRouter(); // router
 
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const handleFileChange = (event: any) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        setFileURL(e.target?.result);
 
-  // const handleEditClick = () => {
-  //   // @ts-ignore
-  //   fileInputRef.current.click();
-  // };
-  const isDisabled =
-    !formData.name || formData.gender === "select" || formData.bio.length < 30;
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setIsLoading(true);
-    e.preventDefault();
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append("file", file); // Use append instead of set
-    formData.append("uoload_preset", "nd2sr4np");
-
-    try {
-      const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dp5ysdt4c/image/upload",
-        formData
-      );
-
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-      setFormData({
-        name: "",
-        gender: "select",
-        bio: "",
-        image: undefined,
-      });
+        const imageData = new FormData();
+        imageData.append("file", e.target?.result as string);
+        imageData.append("upload_preset", "nd2sr4np");
+        imageData.append("cloud_name", "dp5ysdt4c");
+        imageData.append("api_key", "484974749171579");
+        imageData.append("folder", "mentee-profile");
+        const res = await fetch(
+          "https://api.cloudinary.com/v1_1/dp5ysdt4c/image/upload",
+          {
+            method: "POST",
+            body: imageData,
+          }
+        );
+        const data = await res.json();
+        setFormData({ ...formData, image: data.url });
+      };
+      reader.readAsDataURL(file);
     }
-
-    // try {
-    //   const data = new FormData();
-    //   data.append("image", file); // Use append instead of set
-    //   // data.append("name", formData.name);
-    //   // data.append("gender", formData.gender);
-    //   // data.append("bio", formData.bio);
-
-    //   // const res = await fetch("/api/form-upload", {
-    //   //   method: "POST",
-    //   //   body: data,
-    //   //   headers: {
-    //   //     // Set the Content-Type header to allow the server to properly parse the FormData
-    //   //     // 'multipart/form-data' is the content type used for file uploads
-    //   //     "Content-Type": "multipart/form-data",
-    //   //   },
-    //   // });
-
-    //   // handle the error
-    //   if (!res.ok) {
-    //     throw new Error(await res.text());
-    //   } else {
-    //     console.log("Upload successful:", res);
-    //   }
-    // } catch (error) {
-    //   // Handle other errors here
-    //   console.error(error);
-    // } finally {
-    //   setIsLoading(false);
-    //   setFormData({
-    //     name: "",
-    //     gender: "select",
-    //     bio: "",
-    //     image: undefined,
-    //   });
-    // }
   };
 
-  return (
-    <div className="flex w-full justify-center sm:justify-start">
-      <div className="flex gap-4 flex-col">
+  // Create an event handler function to update the name state
+
+  const handleFullNameChange = (e: any) => {
+    const newFullName = e.target.value;
+    setFormData({
+      ...formData,
+      fullName: newFullName,
+    });
+  };
+
+  useEffect(() => {
+    if (formData.image) {
+      setImageSource(formData.image);
+    } else if (fileURL) {
+      setImageSource(fileURL);
+    } else {
+      setImageSource(
+        `https://api.dicebear.com/7.x/initials/png?seed=${formData.fullName}`
+      );
+    }
+  }, [formData, fileURL]);
+
+  useEffect(() => {
+    const loadingTimeout = setTimeout(() => {
+      setPageLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(loadingTimeout);
+  }, []);
+
+  useEffect(() => {
+    const getUser = localStorage.getItem("Mentee");
+    if (getUser) {
+      try {
+        const newUser = JSON.parse(getUser);
+        const extractedToken = newUser.data.token;
+        setToken(extractedToken);
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
+    }
+  }, []);
+
+  const fetchMenteeData = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/mentee/get-current`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setFormData({
+          fullName: data?.data?.user?.fullName,
+          bio: data?.data?.user?.bio,
+          image: data?.data?.user?.image,
+        });
+      } else {
+        console.error("Failed to fetch user data");
+      }
+    } catch (error) {
+      console.error("Error fetching user data");
+    }
+  };
+  useEffect(() => {
+    if (token) {
+      fetchMenteeData();
+    }
+  }, [token]);
+
+  const handleUpdate = async (e: any) => {
+    setIsLoading(true);
+    e.preventDefault();
+    // Check if authToken exists
+
+    if (formData.image && token) {
+      const apiUrl = "https://mentormee-api.onrender.com/mentee/update-profile";
+
+      const patchData = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      };
+
+      try {
+        const response = await fetch(apiUrl, patchData);
+
+        if (response.ok) {
+          // Handle a successful update here
+          setIsProfileUpdated(true);
+
+          setTimeout(() => {
+            setIsProfileUpdated(false);
+          }, 3000);
+        } else {
+          console.error(
+            `PATCH request failed with status code ${response.status}`
+          );
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        setIsLoading(false);
+      } finally {
+        setIsLoading(false);
+        fetchMenteeData();
+        router.replace("/mentee-profile?path=profile");
+
+        // router.push("/mentee-profile?path=profile");
+      }
+    } else {
+      // Handle the case where authToken is missing
+      console.log("Auth token is missing.");
+      setIsLoading(false);
+    }
+  };
+
+  // console.log(formData);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const isDisabled = !formData.fullName || formData.bio.length < 30;
+
+  return pageLoading ? (
+    <div className="absolute top-1/2 right-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 z-30">
+      <div className="w-16 h-16 border-t-4 border-b-4 border-green-700/90 rounded-full animate-spin" />
+    </div>
+  ) : (
+    <div className="flex  w-full xl:max-w-full xl:mb-[100px]  justify-center xl:justify-start sm:justify-start">
+      <div className="flex gap-4 flex-col ">
         <p
           className={`${
             isDark ? "text-white" : "text-Neutra50"
@@ -115,28 +204,18 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
         </p>
 
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleUpdate}
           className="w-full flex flex-col gap-4 sm:gap-6  "
         >
           <div className="flex items-center gap-4">
             <div className="relative  ">
-              <div
-                className={`h-[130px] w-[130px] bg-gradient-to-b ${
-                  isDark
-                    ? "from-[#0d62ff] via-[#00ffb7] to-[#ffcc00] "
-                    : "from-[#ff0d82] via-[#da0303] to-[#ff960d]"
-                }  rounded-full p-1 overflow-hidden`}
-              >
+              <div className="h-[130px] w-[130px] bg-gradient-to-b rounded-full p-1 overflow-hidden">
                 <Image
-                  src={
-                    formData.image
-                      ? URL.createObjectURL(formData.image)
-                      : MenteeDashboardProfileImg
-                  }
-                  alt="cover"
+                  src={imageSource}
+                  alt="user image"
                   width={130}
                   height={130}
-                  className="rounded-full object-contain"
+                  className="rounded-full object-cover"
                 />
               </div>
               <div
@@ -154,26 +233,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                     accept="image/*"
                     ref={fileInputRef}
                     className="hidden"
-                    onChange={(e) => {
-                      if (
-                        e.currentTarget.files &&
-                        e.currentTarget.files[0].size > MAX_SIZE
-                      ) {
-                        toast.error(
-                          "Image size exceeds 2MB. Please upload a smaller image."
-                        );
-
-                        return;
-                      }
-
-                      if (e.currentTarget.files && e.currentTarget.files[0]) {
-                        setFormData({
-                          ...formData,
-                          image: e.currentTarget.files[0],
-                        });
-                        setFile(e.currentTarget.files[0]);
-                      }
-                    }}
+                    onChange={handleFileChange}
                   />
                 </label>
               </div>
@@ -196,7 +256,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
             </div>
           </div>
           <div
-            className={`flex  flex-col w-full gap-4 sm:gap-10 ${
+            className={`flex  flex-col w-full xl:w-[500px] gap-4 sm:gap-10 ${
               isDark && "text-white "
             }`}
           >
@@ -210,7 +270,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 type="text"
                 placeholder="Your full name"
                 name="name"
-                value={formData.name}
+                value={formData.fullName}
                 id="name"
                 required
                 className={`w-full p-2 outline-none rounded-xl bg-transparent border  py-3 focus:border-primary focus:valid:border-green-400  transition-all duration-300 ${
@@ -219,44 +279,8 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                     : "border-Neutra10"
                 } `}
                 min={2}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    [e.target.name]: e.target.value,
-                  })
-                }
+                onChange={handleFullNameChange}
               />
-            </label>
-
-            {/* Select gender */}
-            <label htmlFor="gender">
-              <p className="flex items-start mb-2">
-                <span>Select gender</span>
-                <span className="text-red-500 font-medium text-sm">*</span>
-              </p>
-              <select
-                id="gender"
-                required
-                name="gender"
-                className={`w-full p-2 outline-none rounded-xl  border  py-3 focus:border-primary focus:valid:border-green-400  transition-all duration-300 ${
-                  isDark
-                    ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059] bg-black"
-                    : "border-Neutra10 bg-transparent"
-                } `}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    [e.target.name]: e.target.value,
-                  })
-                }
-                value={formData.gender}
-              >
-                <option value="select" disabled>
-                  Select gender
-                </option>
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-              </select>
             </label>
 
             <label htmlFor="bio">
@@ -265,7 +289,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 <span className="text-red-500 font-medium text-sm">*</span>
               </p>
               <textarea
-                placeholder="Bio......"
+                placeholder="Tell us about your professional background and experience..."
                 name="bio"
                 required
                 id="bio"
@@ -283,14 +307,27 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 }
               />
             </label>
+            {isProfileUpdated && (
+              <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div className="bg-white border rounded-lg p-8 max-w-sm w-full mx-4">
+                  <p className="text-xl text-green-600">
+                    Profile updated successfully!
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="  flex relative justify-end">
             {isLoading && (
               <div className="absolute top-1/2 right-8 transform -translate-x-[50%] -translate-y-1/2 z-30">
-                <LoadingSpinner />
+                <LoadingSpinner
+                  color="border-white"
+                  innerColor="border-green-700/90"
+                />
               </div>
             )}
+
             <Button
               title={isLoading ? "Updating..." : "Update"}
               type="submit"

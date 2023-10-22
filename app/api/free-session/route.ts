@@ -8,6 +8,9 @@ type FormData = {
   time?: string;
   date?: string;
   relevantTopics?: string;
+  sessionUrl?: string;
+  duration?: number;
+  tag?: string;
 };
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
@@ -21,6 +24,9 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     time,
     date,
     relevantTopics,
+    sessionUrl,
+    duration,
+    tag,
   } = data;
 
   //    return new NextResponse("Form Submitted");
@@ -31,6 +37,9 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     time,
     date,
     relevantTopics,
+    sessionUrl,
+    duration,
+    tag,
   });
 };
 

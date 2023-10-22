@@ -22,3 +22,16 @@
 .scroll .inner-bar {
   background-color: green;
 }
+
+/* Chrome, Safari, Edge, Opera */
+.scroll input::-webkit-outer-spin-button,
+.scroll input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.scroll input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}

@@ -1,40 +1,67 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import UpcomingSessionCard from "./UpcomingSessionCard";
 
 interface RecentbookingFromApi {
   sessionName: string;
   sessionType: string;
-  id?: number;
+  _id?: string;
   relevantTopics: string;
   time: string | number;
   date: number | string;
+  createdAt: number | string;
+  updatedAt: Date;
   description: string;
+  duration: number;
+  attendeesLimit: number;
+  tag: string;
+  sessionUrl: string;
+  occurence: string;
+  numberOfSession?: number;
 }
 function SeeYourUpComingSession() {
   const [feedFromApi, setFeedFromApi] = useState<RecentbookingFromApi[] | null>(
     null
   );
 
+  const fetchDataFromApi = async (type: string) => {
+    try {
+      const res = await axios.get(
+        `https://hngmentorme.onrender.com/api/${type}`
+      );
+      return res.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
   useEffect(() => {
     // Fetch data from the API
-    const fetchDataFromApi = async () => {
-      try {
-        const res = await fetch(
-          "https://hngmentorme.onrender.com/api/one-off-session"
-        );
-        if (!res.ok) {
-          throw new Error(`API request failed with status ${res.status}`);
-        }
-        const data = await res.json();
-        setFeedFromApi(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    const fetchData = async () => {
+      const freeSessionData = await fetchDataFromApi("free-session");
+      const oneOffSessionData = await fetchDataFromApi("one-off-session");
+      const recurringSessionData = await fetchDataFromApi("recurring-session");
 
-    fetchDataFromApi();
+      // Merge the data from different endpoints into one array
+      const mergedData = [
+        ...freeSessionData,
+        ...oneOffSessionData,
+        ...recurringSessionData,
+      ];
+      // Add creationDate field to each form data when fetching
+      console.log(mergedData, "merged");
+      // Sort the merged data by updatedAt in descending order
+      const sortedData = mergedData.sort(
+        (a, b) =>
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+      );
+      console.log(sortedData, "all");
+      setFeedFromApi(sortedData);
+    };
+    fetchData();
   }, []);
 
   if (feedFromApi === null || feedFromApi.length === 0) {
@@ -42,20 +69,13 @@ function SeeYourUpComingSession() {
       <h2 className="text-xl font-semibold leading-10">No Upcoming Session</h2>
     );
   }
-
-  const sliceTwo = feedFromApi.slice(1, 3); // to make sure it is only two cards that render for smaller screens
-  const sliceThree = feedFromApi.slice(1, 4); // render three for larger screens
+  const sliceThree = feedFromApi.slice(1, 12);
 
   return (
     <div>
-      <div className="lg:hidden w-full grid grid-cols-2 gap-3 box-border">
-        {sliceTwo.map((feed) => (
-          <UpcomingSessionCard key={feed.id} {...feed} />
-        ))}
-      </div>
-      <div className="hidden lg:grid lg:grid-cols-3 gap-4">
-        {sliceThree.map((feed) => (
-          <UpcomingSessionCard key={feed.id} {...feed} />
+      <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        {feedFromApi.map((feed) => (
+          <UpcomingSessionCard key={feed._id} {...feed} />
         ))}
       </div>
     </div>

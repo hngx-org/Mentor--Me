@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import MentorMeIcon from "@/svgs/MentorMeIcon";
 
 import {
@@ -16,6 +17,7 @@ import {
 import MenteeProgressBar from "@/components/menteeProfileCreation/MenteeProgressBar";
 import MenteeFormBuilder from "@/components/menteeProfileCreation/MenteeFormBuilder";
 import { Button } from "@/components/buttons/button";
+import { BackwardIcon } from "@/public/SVGs";
 
 import formData from "@/lib/menteeProfileCreationData";
 import { MenteeProvider, useMenteeContext } from "./MenteeContext";
@@ -26,8 +28,8 @@ const form3Arr = formData[2];
 const form4Arr = formData[3];
 
 export default function MenteeProfileCreationForms() {
-  const { formInputs, setFormInputs } = useMenteeContext();
-  const [currForm, setCurrForm] = useState(0);
+  const { formInputs, setFormInputs, currForm, setCurrForm, setLoader } =
+    useMenteeContext();
   const [isModalShown, setIsModalShown] = useState(false);
 
   const select1 = useRef<HTMLInputElement>(null);
@@ -81,11 +83,13 @@ export default function MenteeProfileCreationForms() {
       )
       .then((response) => {
         // Handle the response
+        setLoader(false);
         setIsModalShown(true);
       })
       .catch((error) => {
         // Handle any errors
-        alert(error.response.data.message);
+        setLoader(false);
+        toast.error(error.response.data.message);
       });
   }
 
@@ -115,6 +119,56 @@ export default function MenteeProfileCreationForms() {
     }
   }, [files]);
 
+  const [image, setImage] = useState(null);
+  const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [preview, setPreview] = useState(null);
+
+  const uploadImage = async () => {
+    setLoading(true);
+    const fileReader = new FileReader();
+    //
+    fileReader.readAsDataURL(image!);
+    fileReader.onloadend = async () => {
+      try {
+        const response = await fetch("/api/mentor-profile", {
+          method: "POST",
+          body: JSON.stringify(fileReader.result),
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        });
+        const data = await response.json();
+        setUrl(data);
+        if (data.error) {
+          alert(
+            "Problem uploading image, please check your internet connection"
+          );
+        }
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+
+  // This useEffect performs the post request when the value of files.file2 changes
+  useEffect(() => {
+    if (files.file1) {
+      uploadImage();
+    }
+  }, [files.file1]);
+
+  useEffect(() => {
+    if (url) {
+      setFormInputs((prevData: any) => ({
+        ...prevData,
+        // @ts-ignore
+        image: url.url,
+      }));
+    }
+  }, [url]);
+
   function move(motion: string) {
     // console.log(forms);
     if (currForm <= 0 && motion === "back") {
@@ -127,6 +181,7 @@ export default function MenteeProfileCreationForms() {
       setCurrForm(currForm + 1);
     } else if (currForm === forms.length - 1 && motion === "forward") {
       // setCurrForm(0);
+      setLoader(true);
       submitData();
     }
   }
@@ -144,6 +199,8 @@ export default function MenteeProfileCreationForms() {
       ...prevFile,
       [e.target.id]: [...e.target.files][0],
     }));
+
+    setImage(e.target.files[0]);
 
     setFormInputs((prevData: any) => ({
       ...prevData,
@@ -178,7 +235,16 @@ export default function MenteeProfileCreationForms() {
       <div className="flex flex-col w-[100%] lg:w-[50%] relative max-h-[100vh]">
         {/* mentor me logo */}
 
-        <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px] mb-[40px] sm:mb-[80px] sticky top-0 mt-5 sm:mx-10 mx-4" />
+        <Link href="/">
+          <MentorMeIcon className="lg:w-[195px] md:w-[152px] min-h-[31px] w-[130px] sticky top-0 mt-5 sm:mx-10 mx-4" />
+        </Link>
+
+        <Link
+          href="/mentee-auth/login"
+          className="flex mb-[30px] sm:mb-[30px] ml-4 sm:ml-8 mt-8"
+        >
+          <BackwardIcon /> <span className="ms-2">Go back</span>
+        </Link>
 
         {/* CONTAINER FOR THE FORMS */}
 
@@ -220,7 +286,7 @@ export default function MenteeProfileCreationForms() {
                     type="file"
                     onChange={showFile}
                     id="file1"
-                    name="image"
+                    name="image_name"
                     required
                   />
                   <button

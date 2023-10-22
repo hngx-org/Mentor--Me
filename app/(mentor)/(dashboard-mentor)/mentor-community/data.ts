@@ -195,7 +195,7 @@ export const discussionCommunities: Community[] = [
     discussions: [
       {
         topic: "My take on Augmented Reality (AR)",
-        note: "AR enhances our everyday experiences by overlaying digital elements onto the real world. Through AR, your smartphone becomes a window to a new dimension. Imagine exploring a historic city, and with a simple glance through your device, historical figures come to life, sharing stories and insights. AR is revolutionizing education, gaming, and even shopping, making the ordinary extraordinary.",
+        note: "Lorem",
         author: {
           name: "Lisa Pastel",
           isMentor: true,

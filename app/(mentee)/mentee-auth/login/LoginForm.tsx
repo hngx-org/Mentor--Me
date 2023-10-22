@@ -22,12 +22,14 @@ import facebook from "@/public/assets/images/facebook.svg";
 
 import Input from "@/components/inputs/input";
 
-import { Button } from "@/components/buttons/button";
 import { BackwardIcon } from "@/public/SVGs";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
+import Button from "../../(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
+import { useAuthCtx } from "@/context/AuthContext";
 
 export default function LoginForm() {
   const router = useRouter();
+  const { setUserData } = useAuthCtx();
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = React.useState<any>();
   const [isValid, setIsValid] = React.useState(true);
@@ -54,31 +56,37 @@ export default function LoginForm() {
     } else {
       setIsValid(true);
 
-      try {
-        const response = await axios.post(
-          "https://mentormee-api.onrender.com/auth/login",
-          {
-            email: formData.email,
-            password: formData.password,
-            role: "mentee",
-          }
-        );
-        localStorage.setItem("Mentee", JSON.stringify(response.data));
-        setUser(response.data);
+      axios
+        .post("https://mentormee-api.onrender.com/auth/login", {
+          email: formData.email,
+          password: formData.password,
+          role: "mentee",
+        })
+        .then((response) => {
+          localStorage.setItem("Mentee", JSON.stringify(response.data));
+          setUser(response.data);
+          setUserData(response.data);
 
-        if (response?.data?.data && response?.data?.data?.user?.profileLink) {
-          router.replace("/mentee-profile?path=profile");
-        } else {
-          router.replace("/mentee-profile-creation");
-        }
-      } catch (error: any) {
-        if (error.response && error.response.status === 406) {
-          localStorage.setItem("Mentee", JSON.stringify(error.response.data));
-          router.push("/mentee-auth/otp");
-        } else {
-          toast.error(error?.response?.data?.message || "something went wrong");
-        }
-      }
+          if (response?.data?.data && response?.data?.data?.user?.profileLink) {
+            router.replace("/mentee-profile?path=profile");
+          } else {
+            router.replace("/mentee-profile-creation");
+          }
+        })
+
+        .catch((error) => {
+          if (error.response && error.response.status === 406) {
+            localStorage.setItem("Mentee", JSON.stringify(error.response.data));
+            router.push("/mentee-auth/otp");
+          } else {
+            toast.error(
+              error?.response?.data?.message || "something went wrong"
+            );
+          }
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
   };
   return (
@@ -136,48 +144,46 @@ export default function LoginForm() {
                   Forget Password?
                 </p>
               </Link>
-              <div className="flex relative justify-end">
+              <div className="  flex relative justify-end">
                 {isLoading && (
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-1/2 z-30">
                     <LoadingSpinner />
                   </div>
                 )}
                 <Button
-                  variant="primary"
-                  paddingLess
-                  className="w-full h-[48px]"
+                  title="Log in"
                   type="submit"
-                >
-                  Log in
-                </Button>
+                  variant="primary"
+                  className="w-full h-[48px]"
+                  fullWidth
+                  loading={isLoading}
+                />
               </div>
             </form>
 
-            <div className="flex justify-center w-full">
+            {/* <div className="flex justify-center w-full">
               <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
                 OR
               </h5>
             </div>
             <div className="flex flex-col gap-4">
               <Button
-                variant="outline-primary"
-                paddingLess
-                className="w-full h-[48px]"
-                imgSrc={google}
-                imgAlt="google"
-              >
-                Log in with Google
-              </Button>
+                title="Log in with Google"
+                variant="secondary"
+                className="w-full h-[48px] gap-4"
+                fullWidth
+                loading={isLoading}
+                icon={google}
+              />
               <Button
-                variant="outline-primary"
-                paddingLess
-                className="w-full h-[48px]"
-                imgSrc={facebook}
-                imgAlt="facebook"
-              >
-                Log in with Google
-              </Button>
-            </div>
+                title="Log in with Facebook"
+                variant="secondary"
+                className="w-full h-[48px] gap-4"
+                fullWidth
+                loading={isLoading}
+                icon={facebook}
+              />
+            </div> */}
             <Link href="/mentee-auth/sign-up">
               <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
                 New to MentorMe?

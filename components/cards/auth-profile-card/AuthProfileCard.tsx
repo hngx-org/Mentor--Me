@@ -9,29 +9,39 @@ export default function AuthProfileCard({
   email,
   profession,
   styles,
+  path,
+  profileImg,
 }: {
   user: string;
   email: string;
+  profileImg: string;
   profession?: string;
   styles?: string;
+  path?: string;
 }) {
+  console.log(user);
   return (
-    <div className=" w-fit flex flex-col h-fit ">
+    <div className={`w-[100%] ${styles} `}>
       <div
-        className={`w-[100%] flex  justify-between items-center  ${styles} `}
+        className={`flex gap-2 p-1 rounded-xl bg-black  ${
+          path === "profile" ? "w-full" : "overflow-hidden"
+        }`}
       >
-        <div className="w-[24px]  h-[24px] sm:w-[54px] sm:h-[54px]  rounded-full relative ">
+        <div className="w-[15px] h-[15px] sm:w-[40px] sm:h-[40px] rounded-full relative aspect-square">
           <Image
             style={{ objectFit: "cover", borderRadius: "100%" }}
-            src={`https://api.dicebear.com/7.x/initials/png?seed=${user}`}
+            // src={`https://api.dicebear.com/7.x/initials/png?seed=${user}`}
+            src={profileImg}
             fill
             alt="profile"
           />
         </div>
 
-        <div className="space-y-0.5 mx-2">
-          <p className="font-bold  text-base capitalize ">{user || "hello"}</p>
-          <p className="text-sm ">{email || "bye"}</p>
+        <div className="flex flex-col w-fit ">
+          <p className="font-bold   w-[100px] capitalize truncate ">
+            {user || ""}
+          </p>
+          <p className=" truncate w-[120px] text-xs ">{email || ""}</p>
         </div>
       </div>
     </div>

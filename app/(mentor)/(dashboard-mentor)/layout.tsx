@@ -9,42 +9,43 @@ import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import { NavbarMentee } from "@/components/menteeTopNav/NavbarMentee";
 import SidebarMentor from "@/components/mentor/SidebarMentor";
 import { useAuthCtx } from "@/context/AuthContext";
+import useAuth from "@/context/useAuth";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const pathParams = useSearchParams().get("path");
   const actionParams = useSearchParams().get("action");
-  const { user } = useAuthCtx();
-  const email = user?.email;
-  const userName = user?.email?.split("@")[0];
-  const nameParams = useSearchParams().get("name");
-  const bioParams = useSearchParams().get("bio");
-  const emailParams = useSearchParams().get("email");
-  const mentorshipParams = useSearchParams().get("mentorship");
-  const firstLetterOfEmail = email ? email[0] : ""; // Default to empty string if email is undefined
+
+  const { data } = useAuth();
+  console.log(data);
+  const email = data?.userDetails?.email;
+  const userName = data?.userDetails?.fullName;
+  const jobTitle = data?.mentorship_type;
+
   const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
-    nameParams || firstLetterOfEmail
+    userName || email
   }`;
   return (
     <>
+      {/* <Suspense fallback={<LoadingSpinner />}> */}
       <SidebarMentor
         path={pathParams}
-        name={nameParams}
+        name={userName}
         imgSrc={profileImg}
-        email={emailParams}
+        email={email}
       />
+      {/* </Suspense> */}
 
-      <main className="lg:ml-[274px]">
-        <NavbarMentee
-          path={pathParams}
-          action={actionParams}
-          username={userName}
-          name={nameParams}
-          imgSrc={profileImg}
-          email={emailParams}
-          bio={bioParams}
-          jobTitle={mentorshipParams}
-        />
-
+      <main className="lg:ml-[240px]">
+        <Suspense fallback={<LoadingSpinner />}>
+          <NavbarMentee
+            path={pathParams}
+            action={actionParams}
+            username={userName}
+            name={userName}
+            imgSrc={profileImg}
+            jobTitle={jobTitle}
+          />
+        </Suspense>
         <MobileSideBar path={pathParams} action={actionParams} />
         <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
       </main>

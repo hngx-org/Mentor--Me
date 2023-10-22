@@ -1,37 +1,67 @@
-"use client";
-
+/* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+
+"use client";
 
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { CaretIcon } from "@/public/SVGs";
+import { CancelIcon, CaretIcon } from "@/public/SVGs";
 import DropDown from "@/components/DropDown";
+import ResourceCurriculum from "./resourceCurriculum";
 
-const courseTypeOptions = ["JavaScript", "TypeScript", "C++", "C#"];
+const COURSETYPEOPTIONS = [
+  "Video Course",
+  "Text-Based Course",
+  "Interactive Course",
+  "Live Webinar",
+  "Self-Paced Course",
+];
+const TRACKOPTIONS = [
+  "Frontend Track",
+  "Backend Track",
+  "Mobile Track",
+  "UI / UX",
+  "Video Editing",
+];
 
 export default function UploadResourcesPage() {
   const courseTitleRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+
+  const [curriculumList, setCurriculumList] = useState<
+    { id: string; title: string; duration: number }[]
+  >([{ id: "FIRSTSECTIONFIELD", title: "", duration: 0 }]);
+
   const courseDescriptionRef = useRef<HTMLTextAreaElement>(null);
-  const categoryRef = useRef<HTMLInputElement>(null);
+  const trackRef = useRef<HTMLInputElement>(null);
   const courseTypeRef = useRef<HTMLInputElement>(null);
   const priceRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
+  const [video, setVideo] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
-  const [isCategoryDropDownExpanded, setIsCategoryDropDownExpanded] =
-    useState(false);
+  const [isTrackDropDownExpanded, setIsTrackDropDownExpanded] = useState(false);
   const [isCourseTypeDropDownExpanded, setIsCourseTypeDropDownExpanded] =
     useState(false);
   const [selectedOptionIdx, setSelectedOptionIdx] = useState(-1);
-  const [selectedCategoryOptionIdx, setSelectedCategoryOptionIdx] =
-    useState(-1);
+  const [selectedTrackOptionIdx, setSelectedTrackOptionIdx] = useState(-1);
 
   useEffect(() => {
+    if (!file) return;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
+    fileReader.onloadend = function () {
+      setVideo(fileReader.result as string);
+    };
+  }, [file?.name]);
+  useEffect(() => {
     function detectOuterClick(this: Document, ev: MouseEvent) {
-      if (!categoryRef.current?.parentElement?.contains(ev.target as Node)) {
-        setIsCategoryDropDownExpanded(false);
+      if (!trackRef.current?.parentElement?.contains(ev.target as Node)) {
+        setIsTrackDropDownExpanded(false);
       }
       if (!courseTypeRef.current?.parentElement?.contains(ev.target as Node)) {
         setIsCourseTypeDropDownExpanded(false);
@@ -61,7 +91,8 @@ export default function UploadResourcesPage() {
           data: { token },
         } = user;
 
-        const toastLoader = toast.loading("Uploading resource");
+        const toastId = toast.loading("Uploading resource, please wait.");
+
         try {
           const anotherRes = await fetch(
             "https://mentormee-api.onrender.com/mentors/get-current",
@@ -73,27 +104,41 @@ export default function UploadResourcesPage() {
               },
             }
           );
-          const anotherData = await anotherRes.json();
-          // console.log(anotherData);
+          if (!anotherRes.ok) {
+            throw new Error("Error fetching user data.");
+          }
+          const { data: anotherData } = await anotherRes.json();
+          console.log(anotherData);
           const fileReader = new FileReader();
           fileReader.readAsDataURL(file!);
 
           fileReader.onloadend = async function () {
             videoBase64 = fileReader.result as string;
+            const newList = curriculumList
+              .map((list, idx) => ({
+                [`Id${idx + 1}`]: list.id,
+                [`Title${idx + 1}`]: list.title,
+                [`Duration${idx + 1}`]: list.duration,
+              }))
+              .reduce((acc, curr) => ({ ...acc, ...curr }), {});
 
-            // console.log(videoBase64);
             const resourceData = {
-              category: categoryRef.current?.value!,
+              category: trackRef.current?.value!,
               description: courseDescriptionRef.current?.value!,
               title: courseTitleRef.current?.value!,
-              coursetype: courseTypeRef.current?.value!,
+              track: courseTypeRef.current?.value!,
               price: priceRef.current?.value!,
               name: anotherData?.userDetails?.fullName,
-              role: anotherData?.userDetails?.fullName,
+              role: anotherData?.userDetails?.role,
               company: anotherData?.company,
-              file: videoBase64 as string,
-              image: "random",
+              ratings: "0.0",
+              reviews: "0",
+              currency: "NGN",
+              videoUrl: videoBase64 as string,
+              imageUrl: "",
+              ...newList,
             };
+
             const res = await fetch("/api/upload-resource", {
               method: "POST",
               body: JSON.stringify(resourceData),
@@ -102,20 +147,22 @@ export default function UploadResourcesPage() {
               },
             });
             const data = await res.json();
-            // console.log(data);
-            if (data.success === true) {
-              toast.success("resource uploaded successfully");
-            } else {
-              toast.error(`Error: ${data.message}`);
+            console.log(data);
+            toast.dismiss(toastId);
+            if (data.error) {
+              toast.error(data.error.message);
+              return;
             }
+            toast.success("Resource uploaded successfully!");
+            router.push(`/mentor-resources/${data._id}`);
           };
         } catch (e) {
-          toast.error("An error occurred while uploading the resource.");
-        } finally {
-          toast.dismiss(toastLoader);
+          console.log(e);
+          toast.dismiss(toastId);
+          toast.error("There was an error uploading the resource.");
         }
       }}
-      className="row-start-2 row-end-3 col-start-2 col-end-3 w-[min(550px,_100%)] mx-auto sticky p-4 top-0 bg-white pt-10"
+      className="w-[min(550px,_100%)] mx-auto p-4 top-0 bg-white pt-10 mb-8"
     >
       <h1 className="capitalize font-Inter font-medium text-2xl mb-8 text-NeutalBase">
         upload resources
@@ -155,20 +202,20 @@ export default function UploadResourcesPage() {
         </p>
       </Input>
       <Input
-        title="Category"
-        htmlFor="category"
+        title="Track"
+        htmlFor="track"
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
-          setIsCategoryDropDownExpanded((prev) => !prev);
+          setIsTrackDropDownExpanded((prev) => !prev);
         }}
         extraElements={
           <AnimatePresence>
-            {isCategoryDropDownExpanded && (
+            {isTrackDropDownExpanded && (
               <DropDown
-                dropDownOptions={courseTypeOptions}
-                setSelectedOptionIdx={setSelectedCategoryOptionIdx}
-                selectedOptionIdx={selectedCategoryOptionIdx}
+                dropDownOptions={TRACKOPTIONS}
+                setSelectedOptionIdx={setSelectedTrackOptionIdx}
+                selectedOptionIdx={selectedTrackOptionIdx}
               />
             )}
           </AnimatePresence>
@@ -176,20 +223,18 @@ export default function UploadResourcesPage() {
       >
         <input
           type="text"
-          id="category"
-          name="category"
-          ref={categoryRef}
+          id="track"
+          name="track"
+          ref={trackRef}
           required
           onKeyDown={(e) => {
             e.preventDefault();
           }}
-          value={courseTypeOptions[selectedCategoryOptionIdx]}
-          placeholder="select category"
+          defaultValue={TRACKOPTIONS[selectedTrackOptionIdx] || ""}
+          placeholder="select track"
           className="border-none cursor-pointer outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
         />
-        <motion.span
-          animate={{ rotate: isCategoryDropDownExpanded ? 0 : -180 }}
-        >
+        <motion.span animate={{ rotate: isTrackDropDownExpanded ? 0 : -180 }}>
           <CaretIcon className=" cursor-pointer" />
         </motion.span>
       </Input>
@@ -205,7 +250,7 @@ export default function UploadResourcesPage() {
           <AnimatePresence>
             {isCourseTypeDropDownExpanded && (
               <DropDown
-                dropDownOptions={courseTypeOptions}
+                dropDownOptions={COURSETYPEOPTIONS}
                 setSelectedOptionIdx={setSelectedOptionIdx}
                 selectedOptionIdx={selectedOptionIdx}
               />
@@ -222,7 +267,7 @@ export default function UploadResourcesPage() {
             e.preventDefault();
           }}
           required
-          value={courseTypeOptions[selectedOptionIdx]}
+          defaultValue={COURSETYPEOPTIONS[selectedOptionIdx] || ""}
           placeholder="select course type"
           className="border-none cursor-pointer outline-none w-full placeholder:text-Neutra20 placeholder:capitalize placeholder:font-normal disabled:bg-transparent"
         />
@@ -234,9 +279,27 @@ export default function UploadResourcesPage() {
       </Input>
       <div className="mb-4">
         <p className="capitalize text-Neutral60 font-Inter font-medium mb-2 text-lg">
-          upload file
+          video preview
         </p>
-        <DragArea setFile={setFile} />
+        <DragArea video={video} setFile={setFile} />
+        {video.trim().length > 0 && (
+          <div className="flex items-center my-4 gap-4 relative">
+            <CancelIcon
+              className="absolute inset-[0_0_auto_auto] cursor-pointer border-Neutra20 rounded-full border-2"
+              onClick={() => {
+                setFile(null);
+                setVideo("");
+              }}
+            />
+            <video
+              autoPlay
+              loop
+              className="w-40 aspect-video object-cover object-center"
+              src={video}
+            />
+            <p className="font-medium font-Inter">{file?.name}</p>
+          </div>
+        )}
       </div>
       <Input title="price" htmlFor="price">
         <input
@@ -248,16 +311,19 @@ export default function UploadResourcesPage() {
             if (e.key === "e") {
               e.preventDefault();
             }
-            // console.log(e.key);
           }}
           required
           placeholder="Input the price"
           className="border-none outline-none w-full placeholder:text-Neutra20 placeholder:font-normal"
         />
       </Input>
+      <ResourceCurriculum
+        curriculumList={curriculumList}
+        setCurriculumList={setCurriculumList}
+      />
       <button
         type="submit"
-        className="font-Inter mb-4 font-medium capitalize cursor-pointer bg-NeutalBase py-3 px-5 w-full rounded-[8px] border-none outline-none text-white"
+        className="font-Inter mb-4 font-medium capitalize cursor-pointer bg-NeutalBase py-4 px-5 w-full rounded-[8px] border-none outline-none text-white"
       >
         upload resource
       </button>
@@ -267,10 +333,20 @@ export default function UploadResourcesPage() {
 
 const DragArea = ({
   setFile,
+  video,
 }: {
   setFile: React.Dispatch<React.SetStateAction<File | null>>;
+  video: string;
 }) => {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (video === "") {
+      fileRef.current!.value = "";
+    }
+  }, [video]);
+
   return (
     <div
       className={`${
@@ -292,7 +368,18 @@ const DragArea = ({
         setIsDraggingOver(false);
 
         const file = e.dataTransfer.files[0];
-        // console.log(file);
+        console.log(file);
+        const acceptedFileTypes = ["mp4", "webm", "avi", "mkv", "ogg"];
+        const fileType = file.name.split(".").at(-1);
+
+        if (!acceptedFileTypes.includes(fileType!.toLowerCase())) {
+          toast.error(`Unsupported file format: ${fileType}`);
+          return;
+        }
+        if (file.size > 15728640) {
+          toast.error("The uploaded file is larger than 15MB");
+          return;
+        }
         setFile(file);
       }}
       onDragOver={(e) => {
@@ -314,7 +401,14 @@ const DragArea = ({
             type="file"
             id="upload-file"
             name="upload-file"
+            accept=".mp4, .webm, .avi, .mkv, .ogg"
+            size={15728640}
+            ref={fileRef}
             onChange={(e) => {
+              if (e.target.files![0].size > 15728640) {
+                toast.error("The uploaded file is larger than 15MB");
+                return;
+              }
               setFile(e.target.files![0]);
             }}
             className="hidden"
@@ -323,7 +417,7 @@ const DragArea = ({
         to upload
       </div>
       <p className="text-[#9C9CA7]">
-        Accepted formats (mp4, xls, pdf, csv, ppt). Maximum of 15MB
+        Accepted formats (mp4, WebM, avi, mkv, ogg). Maximum of 15MB
       </p>
     </div>
   );
@@ -355,7 +449,6 @@ const Input = ({
     >
       {children}
     </label>
-    {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */}
     {extraElements}
   </div>
 );

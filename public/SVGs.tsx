@@ -1,4 +1,9 @@
+// @ts-nocheck
+
+"use client";
+
 import * as React from "react";
+import { motion } from "framer-motion";
 import { SVGProps } from "react";
 
 export const ListViewIcon = ({
@@ -560,7 +565,11 @@ export const NotificationIcon = (props?: SVGProps<SVGSVGElement>) => (
 );
 
 export const NotificationBingIcon = (props?: SVGProps<SVGSVGElement>) => (
-  <svg
+  <motion.svg
+    whileHover={{
+      rotateZ: [0, -20, 20, -20, 20, -20, 20, 0],
+      transition: { duration: 0.5 },
+    }}
     xmlns="http://www.w3.org/2000/svg"
     width={24}
     height={24}
@@ -575,7 +584,7 @@ export const NotificationBingIcon = (props?: SVGProps<SVGSVGElement>) => (
       <path d="M15.332 18.82c0 1.83-1.5 3.33-3.33 3.33-.91 0-1.75-.38-2.35-.98-.6-.6-.98-1.44-.98-2.35" />
     </g>
     <path fill="#D53232" d="M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-  </svg>
+  </motion.svg>
 );
 
 export const CartOutlineIcon = (props?: SVGProps<SVGSVGElement>) => (
@@ -2576,5 +2585,45 @@ export const ArrowDown = () => (
 	c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393
 	s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"
     />
+  </svg>
+);
+export const EditIConv2 = () => (
+  <svg
+    fill="#000000"
+    version="1.1"
+    id="Capa_1"
+    xmlns="http://www.w3.org/2000/svg"
+    width="14px"
+    height="14px"
+    viewBox="0 0 528.899 528.899"
+  >
+    <g>
+      <path
+        d="M328.883,89.125l107.59,107.589l-272.34,272.34L56.604,361.465L328.883,89.125z M518.113,63.177l-47.981-47.981
+		c-18.543-18.543-48.653-18.543-67.259,0l-45.961,45.961l107.59,107.59l53.611-53.611
+		C532.495,100.753,532.495,77.559,518.113,63.177z M0.3,512.69c-1.958,8.812,5.998,16.708,14.811,14.565l119.891-29.069
+		L27.473,390.597L0.3,512.69z"
+      />
+    </g>
+  </svg>
+);
+export const AddIConv2 = ({ color }: { color?: string }) => (
+  <svg
+    width="20px"
+    height="20px"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="Edit / Add_Plus">
+      <path
+        id="Vector"
+        d="M6 12H12M12 12H18M12 12V18M12 12V6"
+        stroke={`${color || "#000000"}`}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </g>
   </svg>
 );

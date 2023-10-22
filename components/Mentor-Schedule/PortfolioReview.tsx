@@ -1,51 +1,129 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { MySettingsIcon, SharePlaneIcon } from "@/svgs/Schedule/ScheduleMentor";
+import Modal from "./ModalSchedules";
+import SessionModalContent from "./SessionsModalContent";
 
 interface PortfolioReviewProps {
-  time: number;
-  mode: boolean;
-  // Add other props if needed
+  sessionName: string;
+  relevantTopics: string;
+  sessionType?: string; // Optional property
+  time: string | number;
+  date: number | string;
+  description: string;
+  sessionUrl: string;
+  attendeesLimit: number;
+  tag: string;
+  occurence: string;
+  duration: number;
 }
 
-function PortfolioReview({ time, mode }: PortfolioReviewProps) {
+function PortfolioReview({
+  relevantTopics,
+  sessionName,
+  sessionUrl,
+  sessionType,
+  time,
+  date,
+  attendeesLimit,
+  description,
+  occurence,
+  tag,
+  duration,
+}: PortfolioReviewProps) {
+  const [copySuccess, setCopySuccess] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const copyToClipboard = () => {
+    // Create a temporary input element to hold the URL
+    const input = document.createElement("input");
+    input.value = sessionUrl;
+    document.body.appendChild(input);
+
+    // Select the URL text and copy it to the clipboard
+    input.select();
+    document.execCommand("copy");
+
+    // Remove the temporary input element
+    document.body.removeChild(input);
+
+    // Set copySuccess to true to display the success message
+    setCopySuccess(true);
+
+    // Reset copySuccess after a few seconds (e.g., 3 seconds)
+    setTimeout(() => {
+      setCopySuccess(false);
+    }, 3000);
+  };
   return (
     <div>
-      <div className="h-[223px] w-full bg-Accent1 rounded-lg flex max-w-[295px] justify-center items-end lg:h-[235px]">
-        <div className="h-[218px] w-full lg:px-5 bg-white rounded-lg border p-1 border-slate-100 grid grid-rows-6 grid-cols-3 lg:pb-6 lg:h-[230px]">
-          <div className="flex justify-between item-center trim p-2 mt-2 col-span-full row-span-2 text-left">
-            <h3 className="font-Hanken font-bold text-base whitespace-nowrap pr-1">
-              Portfolio Review
-            </h3>
-            <div className="cursor-pointer hidden">
+      <div className="h-[235px] max-w-[295px] border-t-4 border-Accent1 hover:transform hover:scale-95 ease-in-out duration-300 shadow-lg rounded-lg px-2 py-4 flex flex-col justify-between gap-5">
+        <div>
+          {" "}
+          <div className="flex justify-between item-center ">
+            <h3 className="font-Hanken font-bold text-lg ">{sessionName}</h3>
+            <div className="hidden md:block cursor-pointer">
               <MySettingsIcon />
             </div>
           </div>
-          <div className="font-Hanken text-sm font-normal flex flex-col h-[58px] gap-4 justify-between col-span-full row-span-3 ">
-            <p>
-              {time} mins
-              <span className="  h-[7px] inline-block rounded-full bg-neutral-500 mx-3" />
-              {mode ? "Private" : "Public"}
-            </p>
-            <p className="text-neutral-500 font-base cursor-pointer underline leading-5 underline-offset-4">
+          <div className="font-Hanken text-Neutra50 font-medium text-base flex flex-col h-[58px] gap-4 justify-between col-span-full row-span-3 ">
+            <p>{duration} mins</p>
+            <button
+              type="button"
+              onClick={openModal}
+              className="text-neutral-500 font-base cursor-pointer underline leading-5 underline-offset-4   text-left w-fit"
+            >
               View Details
-            </p>
+            </button>
           </div>
-          <div className=" col-span-full ">
-            <div className="hidden lg:text-Accent1 lg:text-sm gap-4 lg:flex cursor-pointer lg:justify-between lg:items-center">
-              <p className="underline underline-offset-4">Copy Link</p>
-              <p className="underline underline-offset-4">Share Session</p>
-            </div>
-            <div className="cursour-pointer flex justify-start items-center gap-1 pb-1 lg:hidden">
-              <SharePlaneIcon />{" "}
-              <p className="font-Hanken font-normal text-Accent1 underline underline-offset-2">
-                Share Session
-              </p>
-            </div>
+        </div>
+
+        <div className=" ">
+          <div className="hidden lg:text-Accent1 lg:text-sm gap-4 lg:flex cursor-pointer lg:justify-between lg:items-center">
+            <button
+              type="button"
+              onClick={copyToClipboard}
+              className={`underline underline-offset-4 ${
+                copySuccess ? "text-success" : ""
+              }`}
+            >
+              {copySuccess ? "Link Copied" : "Copy Link"}
+            </button>
+            <p className="underline underline-offset-4">Share Session</p>
+          </div>
+          <div className="cursour-pointer flex justify-start items-center gap-1 pb-1 lg:hidden">
+            <SharePlaneIcon />{" "}
+            <p className="font-Hanken font-normal text-Accent1 underline underline-offset-2">
+              Share Session
+            </p>
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <Modal closeModal={closeModal}>
+          {" "}
+          <SessionModalContent
+            sessionName={sessionName}
+            relevantTopics={relevantTopics}
+            sessionType={sessionType}
+            date={date}
+            attendeesLimit={attendeesLimit}
+            description={description}
+            tag={tag}
+            occurence={occurence}
+            sessionUrl={sessionUrl}
+          />
+        </Modal>
+      )}
     </div>
   );
 }
