@@ -39,7 +39,7 @@ type UserData = {
   experience?: string;
 };
 export default function ProfilePage() {
-  const { data } = useAuth();
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [userDetailsContext, setUserDetailsContext] = useState<UserDetails>({
@@ -65,7 +65,7 @@ export default function ProfilePage() {
     mentoring_experience: "",
     certification: "",
   });
-  const router = useRouter();
+
   const [modal, setModal] = useState<ModalState>({
     state: "basic info",
     isOpen: false,
@@ -80,6 +80,7 @@ export default function ProfilePage() {
         token = newUser.data.token; // assign token value here
       } catch (error) {
         console.error("Error parsing JSON:", error);
+        setError("Error fetching current mentor data");
       }
     }
   }
@@ -126,6 +127,8 @@ export default function ProfilePage() {
         setLoading(false);
       } else {
         console.error("Failed to fetch current mentor data");
+        setLoading(false);
+        setError("Error fetching current mentor data");
       }
     } catch (error) {
       setLoading(false);
@@ -137,79 +140,81 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
+    router.refresh();
     getCurrentMentor();
   }, []);
 
   return (
-    <>
-      <MentorDetailsContextProvider
-        updateUserDetailsCtx={setUserDetailsContext}
-        details={userDetailsContext}
-      >
-        {loading && <MentorProfileSkeleton />}
+    <MentorDetailsContextProvider
+      updateUserDetailsCtx={setUserDetailsContext}
+      details={userDetailsContext}
+    >
+      {loading && <MentorProfileSkeleton />}
 
-        {!loading && !error && user && (
-          <div className="w-[100%] h-fit pb-10">
-            <MentorProfileHeader
-              userName={userDetailsContext.fullName}
-              email=""
-              userRole={user?.mentorship_type}
-              userRating={4}
-              modal={setModal}
+      {!loading && !error && user && (
+        <div className="w-[100%] h-fit pb-10">
+          <MentorProfileHeader
+            userName={userDetailsContext.fullName}
+            email=""
+            userRole={user?.mentorship_type}
+            userRating={1}
+            modal={setModal}
+          />
+          <MentorProfileMainLayout>
+            <BioCard text={userDetailsContext?.bio || "Add bio"} />
+            <SkillSCard
+              skills={userData?.skills?.split(",")! || "add skills"}
             />
-            <MentorProfileMainLayout>
-              <BioCard text={userDetailsContext?.bio || "Add bio"} />
-              <SkillSCard
-                skills={userData?.skills?.split(",")! || "add skills"}
-              />
-              <ProfileDetailsCardContainer
-                heading="education"
-                items={[
-                  {
-                    text: userData?.degree || "",
-                    heading: userData?.institution || "",
-                    type: "education",
-                  },
-                ]}
-                openModal={setModal}
-              />
+            <ProfileDetailsCardContainer
+              heading="education"
+              items={[
+                {
+                  text: userData?.degree || "",
+                  heading: userData?.institution || "",
+                  type: "education",
+                  id: "5",
+                },
+              ]}
+              openModal={setModal}
+            />
 
-              <ProfileDetailsCardContainer
-                heading="Experience"
-                items={
-                  userData?.mentoring_experience?.split(" ").map((item) => ({
-                    type: "experience",
-                    heading: item,
-                    text: "present",
-                  })) || []
-                }
-                openModal={setModal}
-              />
-              <ProfileDetailsCardContainer
-                heading="certification"
-                items={
-                  userData?.certification?.split("  ").map((item) => ({
-                    type: "certification",
-                    heading: item,
-                    text: "certificate",
-                  })) || []
-                }
-                openModal={setModal}
-              />
+            <ProfileDetailsCardContainer
+              heading="Experience"
+              items={
+                userDetailsContext?.experience?.split(" ").map((item) => ({
+                  type: "experience",
+                  heading: item,
+                  text: "present",
+                  id: "1",
+                })) || []
+              }
+              openModal={setModal}
+            />
+            <ProfileDetailsCardContainer
+              heading="certification"
+              items={
+                userDetailsContext.certification.split("  ").map((item) => ({
+                  type: "certification",
+                  heading: item,
+                  text: "certificate",
+                  id: "q",
+                })) || []
+              }
+              openModal={setModal}
+            />
 
-              <AvailableSessionCard
-                timezone=" Greenwich Mean Time (GMT)"
-                availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
-              />
-              <OverViewCardLayout heading="impact at a glance" />
-              <SessionsProgressCard progress={80} />
-            </MentorProfileMainLayout>
-            {modal.isOpen && (
-              <MentorProfileModal onClose={setModal} state={modal.state} />
-            )}
-          </div>
-        )}
-      </MentorDetailsContextProvider>
-    </>
+            <AvailableSessionCard
+              timezone=" Greenwich Mean Time (GMT)"
+              availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
+            />
+            <OverViewCardLayout heading="impact at a glance" />
+            <SessionsProgressCard progress={80} />
+          </MentorProfileMainLayout>
+          {modal.isOpen && (
+            <MentorProfileModal onClose={setModal} state={modal.state} />
+          )}
+        </div>
+      )}
+    </MentorDetailsContextProvider>
   );
 }

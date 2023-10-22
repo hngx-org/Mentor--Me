@@ -26,6 +26,10 @@ export type SideBarMentorProps = {
   jobTitle?: string | null;
 };
 
+const logoutHandler = () => {
+  localStorage.clear();
+};
+
 export default function SidebarMentor({
   light,
   path,
@@ -35,21 +39,6 @@ export default function SidebarMentor({
   email,
   jobTitle,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
-  // const { user } = useAuthCtx();
-
-  // const [imgUrl, setImgUrl] = useState("");
-  // const email = userData.data?.user.email;
-  // const profileImg = `https://api.dicebear.com/7.x/initials/png?seed=${
-  //   imgUrl || ""
-  // }`;
-
-  // may or may not need this
-  // useEffect(() => {
-  //   if (email) {
-  //     setImgUrl(email);
-  //   }
-  // }, [imgUrl]);
-
   return (
     <section
       className={`hidden w-[240px]  p-5 min-h-screen h-full fixed lg:flex left-0 top-0 ${
@@ -103,6 +92,7 @@ export default function SidebarMentor({
             </span>
           </div> */}
           <Link
+            onClick={logoutHandler}
             href="/welcome/login?path=login"
             className="flex items-center w-full justify-start gap-4 pl-2 hover:brightness-150 transition-all duration-300 py-4"
           >

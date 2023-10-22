@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Link from "next/link";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import DeleteModal from "@/components/mentor-resources/DeleteModal";
 import {
   ArrowIcon,
@@ -27,7 +27,7 @@ export default function UploadResources() {
   });
 
   useEffect(() => {
-    const toastId = toast.loading("Fetching your resources");
+    const toastId = toast.loading("Loading your resources");
     (async () => {
       try {
         const res = await fetch(
@@ -58,6 +58,7 @@ export default function UploadResources() {
       {deletingResource.resourceName ? (
         <div className="fixed inset-0 bg-[rgba(0,_0,_0,_0.2)] backdrop-blur-sm z-30 grid grid-cols-[450px] place-content-center">
           <DeleteModal
+            setData={setData}
             resourceId={deletingResource.resourceId}
             closeModal={() =>
               setDeletingResource({
@@ -79,13 +80,16 @@ export default function UploadResources() {
         <thead>
           <tr>
             <th colSpan={3} className="p-0">
-              <div className="py-8 px-4 bg-white border-[#EAEBF0] border-[1px] rounded-t-xl">
-                <EllipsisIcon className="ml-auto" />
+              <div className="py-5 px-4 bg-white border-[#EAEBF0] border-[1px] rounded-t-xl">
+                <p className="w-max ml-auto text-[#272D37] font-Inter">
+                  {(paginationData.currentPage - 1) * 8 + 1} -{" "}
+                  {paginationData.currentPage * 8}
+                </p>
               </div>
             </th>
           </tr>
           <tr className="border-[#EAEBF0] bg-white border-[1px] border-t-0">
-            <th className="text-start font-Inter font-semibold text-[#5F6D7E] capitalize py-3 px-4 flex items-center gap-4 w-1/3">
+            <th className="text-start font-Inter font-semibold text-[#5F6D7E] capitalize py-5 px-4 flex items-center gap-4 w-1/3">
               <div className="shrink-0 w-5 h-5 border-[#DAE0E6] border-[2px] rounded-[5px] cursor-pointer relative">
                 <input
                   type="checkbox"
@@ -98,10 +102,10 @@ export default function UploadResources() {
               </div>
               <p>title</p>
             </th>
-            <th className="w-1/3 text-start font-Inter font-semibold text-[#5F6D7E] capitalize py-3 px-4">
+            <th className="w-1/3 text-start font-Inter font-semibold text-[#5F6D7E] capitalize py-5 px-4">
               price
             </th>
-            <th className="w-1/3 text-start font-Inter font-semibold text-[#5F6D7E] capitalize py-3 px-4">
+            <th className="w-1/3 text-start font-Inter font-semibold text-[#5F6D7E] capitalize py-5 px-4">
               actions
             </th>
           </tr>
@@ -131,7 +135,7 @@ export default function UploadResources() {
                 <button
                   type="button"
                   onKeyUp={() => {
-                    console.log("ally rule");
+                    // console.log("ally rule");
                   }}
                   onClick={() => {
                     if (paginationData.currentPage - 1 <= 0) return;
@@ -140,7 +144,7 @@ export default function UploadResources() {
                       currentPage: prev.currentPage - 1,
                     }));
                     toast(`Page ${paginationData.currentPage - 1}`, {
-                      duration: 1000,
+                      autoClose: 1000,
                     });
                   }}
                   className={`flex items-center gap-4 ${
@@ -166,7 +170,7 @@ export default function UploadResources() {
                             <button
                               type="button"
                               onKeyUp={() => {
-                                console.log("ally rule");
+                                // console.log("ally rule");
                               }}
                               onClick={() =>
                                 setPaginationData((prev) => ({
@@ -202,7 +206,7 @@ export default function UploadResources() {
                               <button
                                 type="button"
                                 onKeyUp={() => {
-                                  console.log("ally rule");
+                                  // console.log("ally rule");
                                 }}
                                 onClick={() =>
                                   setPaginationData((prev) => ({
@@ -229,7 +233,7 @@ export default function UploadResources() {
                 <button
                   type="button"
                   onKeyUp={() => {
-                    console.log("ally rule");
+                    // console.log("ally rule");
                   }}
                   onClick={() => {
                     if (
@@ -242,7 +246,7 @@ export default function UploadResources() {
                       currentPage: prev.currentPage + 1,
                     }));
                     toast(`Page ${paginationData.currentPage + 1}`, {
-                      duration: 1000,
+                      autoClose: 1000,
                     });
                   }}
                   className={`flex flex-row-reverse items-center gap-4 ${

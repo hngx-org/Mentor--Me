@@ -5,7 +5,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import axios from "axios";
 import { redirect, useRouter } from "next/navigation";
 import {
@@ -16,21 +16,43 @@ import { EditIcon, EditIconDark } from "@/public/SVGs";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 
+type formProps = {
+  title: string;
+  company: string;
+};
+
 export default function ExperienceForm({ isDark }: { isDark: boolean }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter(); // router
   const [addInput, setAddInput] = useState([1]);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState<formProps>({
+    title: "",
+    company: "",
+  });
   const [token, setToken] = useState("");
+  const [pageLoading, setPageLoading] = useState(true);
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
+  const [inputData, setInputData] = useState([
+    // Initialize inputData with an empty object for the first input field
+    { title: "", company: "" },
+  ]);
   const baseUrl = "https://mentormee-api.onrender.com";
 
-  // Create an event handler function to update the gender state
-  const handleGenderChange = (e: any) => {
-    const newGender = e.target.value;
+  // Create an event handler function to update the experience state
+  const handleExperienceChange = (e: any) => {
+    const newTitle = e.target.value;
     setFormData({
       ...formData,
-      gender: newGender,
+      title: newTitle,
+    });
+  };
+
+  // Create an event handler function to update the workplace state
+  const handleWorklaceChange = (e: any) => {
+    const newWorkplace = e.target.value;
+    setFormData({
+      ...formData,
+      company: newWorkplace,
     });
   };
 
@@ -50,6 +72,14 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
     }
   }, []);
 
+  useEffect(() => {
+    const loadingTimeout = setTimeout(() => {
+      setPageLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(loadingTimeout);
+  }, []);
+
   const fetchMenteeData = async () => {
     try {
       const response = await fetch(`${baseUrl}/mentee/get-current`, {
@@ -61,12 +91,11 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
       });
       if (response.ok) {
         const data = await response.json();
+        console.log(data.data);
 
         setFormData({
-          fullName: data?.data?.user?.fullName,
-          gender: data?.data?.gender,
-          bio: data?.data?.user?.bio,
-          image: data?.data?.image,
+          title: data?.data?.title,
+          company: data?.data?.company,
         });
       } else {
         console.error("Failed to fetch user data");
@@ -75,10 +104,15 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
       console.error("Error fetching user data");
     }
   };
+  useEffect(() => {
+    if (token) {
+      fetchMenteeData();
+    }
+  }, [token]);
 
   const handleUpdate = async (e: any) => {
-    setIsLoading(true);
-    e.preventDefault();
+    e.preventDefault(); // Prevent the default form submission behavior
+
     // Check if authToken exists
     if (token) {
       const apiUrl = "https://mentormee-api.onrender.com/mentee/update-profile";
@@ -91,6 +125,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
         },
         body: JSON.stringify(formData),
       };
+      console.log(formData);
 
       try {
         const response = await fetch(apiUrl, patchData);
@@ -98,8 +133,6 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
         if (response.ok) {
           // Handle a successful update here
           setIsProfileUpdated(true);
-
-          router.push("/mentee-profile?path=profile");
 
           setTimeout(() => {
             setIsProfileUpdated(false);
@@ -112,26 +145,24 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
         }
       } catch (error) {
         console.error("Error:", error);
-        setIsLoading(false);
       } finally {
         setIsLoading(false);
         fetchMenteeData();
-        router.push("/mentee-profile?path=profile");
+        router.replace("/mentee-profile?path=profile");
       }
     } else {
       // Handle the case where authToken is missing
       console.log("Auth token is missing.");
-      setIsLoading(false);
     }
   };
+  const isDisabled = !formData.title || !formData.company;
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setIsLoading(true);
-    e.preventDefault();
-  };
-
-  return (
-    <div className="flex w-full justify-center sm:justify-start">
+  return pageLoading ? (
+    <div className="absolute top-1/2 right-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 z-30">
+      <div className="w-16 h-16 border-t-4 border-b-4 border-green-700/90 rounded-full animate-spin" />
+    </div>
+  ) : (
+    <div className="flex w-full xl:max-w-full justify-start sm:justify-start">
       <div className="flex gap-4 flex-col">
         <p
           className={`${
@@ -160,30 +191,67 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
             }`}
           >
             {addInput.map((num, idx) => (
-              <div className="flex items-center gap-4 relative" key={num}>
-                <label htmlFor={`experience-${num}`}>
-                  <p className="flex items-start mb-2">
-                    <span>Experience</span>
-                    <span className="text-red-500 font-medium text-sm">*</span>
-                  </p>
+              <div className="flex items-center gap-4 relative">
+                <div className="flex flex-col">
+                  <label
+                    htmlFor={`experience-${idx}`}
+                    className="w-[300px] xl:w-[500px] xl:my-[10px]"
+                  >
+                    <p className="flex items-start mb-2">
+                      <span>Experience</span>
+                      <span className="text-red-500 font-medium text-sm">
+                        *
+                      </span>
+                    </p>
 
-                  <input
-                    type="text"
-                    placeholder="Your Experience"
-                    name={`experience-${num}`}
-                    id={`experience-${num}`}
-                    className={`w-full p-2 outline-none rounded-xl bg-transparent border py-3 focus:border-primary focus:valid:border-green-400 transition-all duration-300 ${
-                      isDark
-                        ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059]"
-                        : "border-Neutra10"
-                    }`}
-                    min={2}
-                  />
-                </label>
+                    <input
+                      type="text"
+                      placeholder="Your Experience"
+                      required
+                      value={formData.title}
+                      name={`experience-${num}`}
+                      id={`experience-${num}`}
+                      className={`w-full p-2 outline-none rounded-xl bg-transparent border py-3 focus:border-primary focus:valid:border-green-400 transition-all duration-300 ${
+                        isDark
+                          ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059]"
+                          : "border-Neutra10"
+                      }`}
+                      min={2}
+                      onChange={handleExperienceChange}
+                    />
+                  </label>
+
+                  <label
+                    htmlFor={`experience-${num}`}
+                    className="w-full xl:w-[500px]"
+                  >
+                    <p className="flex items-start mb-2">
+                      <span>Workplace</span>
+                      <span className="text-red-500 font-medium text-sm">
+                        *
+                      </span>
+                    </p>
+
+                    <input
+                      type="text"
+                      placeholder="Workplace"
+                      value={formData.company}
+                      name={`experience-${num}`}
+                      id={`experience-${num}`}
+                      className={`w-full p-2 outline-none rounded-xl bg-transparent border py-3 focus:border-primary focus:valid:border-green-400 transition-all duration-300 ${
+                        isDark
+                          ? "border-gray-700 shadow-[-5px_-5px_15px_#bbbbbb38,5px_5px_15px_#00000059]"
+                          : "border-Neutra10"
+                      }`}
+                      min={2}
+                      onChange={handleWorklaceChange}
+                    />
+                  </label>
+                </div>
                 {addInput.length > 1 && idx > 0 && (
                   <button
                     type="button"
-                    className="w-6 h-1  bg-white absolute top-1/2 right-0 transform -translate-y-1/2"
+                    className="w-6 h-1  bg-black absolute top-1/2 right-[-50px] transform -translate-y-1/2"
                     onClick={() => {
                       const updatedInputs = addInput.slice(
                         0,
@@ -195,7 +263,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
                 )}
               </div>
             ))}
-            <div
+            {/* <div
               className={`text-4xl h-full flex items-center justify-center w-fit px-6 p-2 font-bold  rounded-xl bg-transparent border active:scale-90 select-none  transition-all duration-300 ${
                 addInput.length === 10 ? "opacity-40 cursor-not-allowed" : ""
               }  ${
@@ -206,9 +274,9 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
             >
               <button
                 type="button"
-                className={
+                className={` mt-[-8px] ${
                   addInput.length === 10 ? "opacity-40 cursor-not-allowed" : ""
-                }
+                }`}
                 disabled={addInput.length === 10}
                 onClick={() =>
                   setAddInput((prev) => [...prev, prev.length + 1])
@@ -216,13 +284,13 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
               >
                 +
               </button>
-            </div>
+            </div> */}
 
             {isProfileUpdated && (
               <div className="fixed inset-0 flex items-center justify-center z-50">
                 <div className="bg-white border rounded-lg p-8 max-w-sm w-full mx-4">
                   <p className="text-xl text-green-600">
-                    Exoerience updated successfully!
+                    Experience updated successfully!
                   </p>
                 </div>
               </div>
@@ -239,6 +307,7 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
             <Button
               title={isLoading ? "Updating..." : "Update"}
               type="submit"
+              disabled={isDisabled}
               loading={isLoading}
               variant={isDark ? "secondary" : "primary"}
               className={`${

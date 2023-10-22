@@ -13,8 +13,9 @@ interface CardProps {
   topic?: string;
   review?: string;
   contentImage: string;
-  timezone?: string;
+  timezone: string;
   nextAvailable: string;
+  pricing: string;
 }
 interface SearchBoxProps {
   cards: CardProps[];
@@ -22,11 +23,25 @@ interface SearchBoxProps {
   // setFilteredResults: React.Dispatch<React.SetStateAction<CardProps[]>>;
   setSearchResults: Dispatch<React.SetStateAction<CardProps[]>>;
   setFilteredResults: Dispatch<React.SetStateAction<CardProps[]>>;
+  filteredResults: CardProps[];
+  value: number;
+  setValue: Dispatch<React.SetStateAction<number>>;
+  selectedDate: Date;
+  setSelectedDate: Dispatch<React.SetStateAction<Date>>;
+  onSubmit: () => void;
+  onReset: () => void;
 }
 export default function SearchBox({
   cards,
   setSearchResults,
   setFilteredResults,
+  filteredResults,
+  value,
+  setValue,
+  selectedDate,
+  setSelectedDate,
+  onSubmit,
+  onReset,
 }: SearchBoxProps) {
   // {info, setSearchResults}
 
@@ -47,6 +62,12 @@ export default function SearchBox({
   //  added this
   // const [filteredResults, setFilteredResults] = useState<CardProps[]>([]);
 
+  // For filter
+  const [selected, setSelected] = useState("");
+
+  // For range slider
+  // const [value, setValue] = useState<number>(10);
+
   useEffect(() => {
     // Filter the cards based on the search term and update the search results
     // const filteredResults = cards.filter(
@@ -54,6 +75,7 @@ export default function SearchBox({
     //     card.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
     //     card.lastname.toLowerCase().includes(searchTerm.toLowerCase())
     // );
+    // const filtered = cards.filter(
     const filtered = cards.filter(
       (card) =>
         card.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -93,9 +115,18 @@ export default function SearchBox({
           value={searchTerm}
           className="w[80%] w-full bg-transparent outline-none font-Inter font-normal text-sm text-[#101928]"
         />
-        <div className="-mr5 ml-2 lg:hidden">
-          <Filter />
-        </div>
+        {/* <div className="-mr5 ml-2 lg:hidden">
+          <Filter
+            selectedTimeZone={selected}
+            setSelectedTimeZone={setSelected}
+            value={value}
+            setValue={setValue}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+            onSubmit={onSubmit}
+            onReset={onReset}
+          />
+        </div> */}
       </div>
     </div>
   );

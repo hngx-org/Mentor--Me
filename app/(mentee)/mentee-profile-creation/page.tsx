@@ -9,11 +9,25 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MenteeProvider } from "./MenteeContext";
 import MenteeProfileCreationForms from "./MenteeUI";
+import LoadingSpinner from "../../../components/loaders/LoadingSpinner";
 
 function MenteePage() {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
+
   return (
     <MenteeProvider>
-      <MenteeProfileCreationForms />
+      {isLoading ? (
+        <div className="h-screen flex items-center justify-center">
+          <LoadingSpinner />
+        </div>
+      ) : (
+        <MenteeProfileCreationForms />
+      )}
     </MenteeProvider>
   );
 }

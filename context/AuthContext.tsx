@@ -59,17 +59,17 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const MenteeData: Data | null = useReadLocalStorage("Mentee");
   const data = MenteeData || Mentordata;
 
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log(data, { email: data.data?.user.email });
-  //     setUserData(data);
-  //     setUser((prev) => ({
-  //       ...prev,
-  //       email: data?.data?.user.email,
-  //       token: data.data?.token,
-  //     }));
-  //   }
-  // }, [userData, data]);
+  useEffect(() => {
+    if (data) {
+      // console.log(data, { email: data.data?.user.email });
+      setUserData(data);
+      setUser((prev) => ({
+        ...prev,
+        email: data?.data?.user?.email,
+        token: data.data?.token,
+      }));
+    }
+  }, [userData, data]);
 
   const value = useMemo(() => ({ user, setUserData, userData }), [user, data]);
 

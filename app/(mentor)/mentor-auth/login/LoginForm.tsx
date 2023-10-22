@@ -15,13 +15,9 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 import auth from "../../../../public/assets/images/auth.jpeg";
-
-import google from "../../../../public/assets/images/goggle.svg";
-
-import facebook from "../../../../public/assets/images/facebook.svg";
 
 import Input from "@/components/inputs/input";
 
@@ -33,7 +29,7 @@ import EmailValidator from "@/components/inputs/email-validator";
 import NonEmptyValidator from "@/components/inputs/non-empty-validator";
 
 export default function LoginForm() {
-  // const { userData, setUserData } = useAuthCtx();
+  const { userData, setUserData } = useAuthCtx();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailValid, setisEmailValid] = useState(false);
@@ -76,10 +72,10 @@ export default function LoginForm() {
         })
         .then((response) => {
           localStorage.setItem("Mentor", JSON.stringify(response.data));
-          // setUserData(response.data);
+          setUserData(response.data);
 
           if (response?.data?.data && response?.data?.data?.user?.profileLink) {
-            router.replace("/mentor-profile?path=mentor-profile");
+            router.replace("/mentor-profile?path=profile");
             setIsLoading(false);
           } else {
             router.replace("/mentor-profile-creation");
@@ -105,7 +101,7 @@ export default function LoginForm() {
 
   return (
     <div>
-      <div className="w-full h-[100vh] grid grid-cols-1 lg:grid-cols-6  overflow-hidden">
+      <div className="w-full h-[100vh] grid grid-cols-1 lg:grid-cols-6 overflow-hidden">
         <div className="lg:col-span-3 ">
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
             <Image
@@ -116,19 +112,18 @@ export default function LoginForm() {
             />
           </div>
         </div>
-        <div className="col-span-3  px-4  lg:px-6 xl:px-16">
+        <div className="col-span-3  px-4  lg:px-6 xl:px-16 md:mt-7">
           <div className="flex justify-between items-center">
             <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
               <a href="/"> Mentor Me</a>
             </h2>
 
             <a href="/welcome/login" className="flex">
-              {" "}
               <BackwardIcon /> <span className="ms-2">Go back</span>
             </a>
           </div>
           <div className="flex justify-center flex-col">
-            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
+            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-8">
               Welcome Back
             </h4>
             <h5 className="text-[#808080] text-base font-Hanken mt-2 mb-5">
@@ -202,7 +197,7 @@ export default function LoginForm() {
               </div>
             </form>
 
-            <div className="flex justify-center w-full">
+            {/* <div className="flex justify-center w-full">
               <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
                 OR
               </h5>
@@ -224,7 +219,7 @@ export default function LoginForm() {
                 loading={isLoading}
                 icon={facebook}
               />
-            </div>
+            </div> */}
             <Link href="mentor-auth/sign-up">
               <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
                 New to MentorMe?

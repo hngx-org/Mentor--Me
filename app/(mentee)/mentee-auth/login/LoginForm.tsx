@@ -12,13 +12,9 @@ import { useRouter } from "next/navigation";
 
 import axios from "axios";
 
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 import auth from "@/public/assets/images/auth.jpeg";
-
-import google from "@/public/assets/images/goggle.svg";
-
-import facebook from "@/public/assets/images/facebook.svg";
 
 import Input from "@/components/inputs/input";
 
@@ -27,9 +23,11 @@ import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Button from "../../(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
 import EmailValidator from "@/components/inputs/email-validator";
 import NonEmptyValidator from "@/components/inputs/non-empty-validator";
+import { useAuthCtx } from "@/context/AuthContext";
 
 export default function LoginForm() {
   const router = useRouter();
+  const { setUserData } = useAuthCtx();
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = React.useState<any>();
   const [isEmailValid, setisEmailValid] = useState(false);
@@ -70,6 +68,7 @@ export default function LoginForm() {
         .then((response) => {
           localStorage.setItem("Mentee", JSON.stringify(response.data));
           setUser(response.data);
+          setUserData(response.data);
 
           if (response?.data?.data && response?.data?.data?.user?.profileLink) {
             router.replace("/mentee-profile?path=profile");
@@ -83,9 +82,7 @@ export default function LoginForm() {
             localStorage.setItem("Mentee", JSON.stringify(error.response.data));
             router.push("/mentee-auth/otp");
           } else {
-            toast.error(
-              error?.response?.data?.message || "something went wrong"
-            );
+            toast(error?.response?.data?.message || "something went wrong");
           }
         })
         .finally(() => {
@@ -106,7 +103,7 @@ export default function LoginForm() {
             />
           </div>
         </div>
-        <div className="col-span-3  px-4  lg:px-6 xl:px-16">
+        <div className="col-span-3  px-4  lg:px-6 xl:px-16 md:mt-7">
           <div className="flex justify-between items-center">
             <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
               <a href="/"> Mentor Me</a>
@@ -118,7 +115,7 @@ export default function LoginForm() {
             </a>
           </div>
           <div className="flex justify-center flex-col">
-            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
+            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-6">
               Welcome Back
             </h4>
             <h5 className="text-[#808080] text-base font-Hanken mt-2 mb-5">
@@ -192,7 +189,7 @@ export default function LoginForm() {
               </div>
             </form>
 
-            <div className="flex justify-center w-full">
+            {/* <div className="flex justify-center w-full">
               <h5 className="font-inter text-[#565656] text-sm font-medium my-5">
                 OR
               </h5>
@@ -214,7 +211,7 @@ export default function LoginForm() {
                 loading={isLoading}
                 icon={facebook}
               />
-            </div>
+            </div> */}
             <Link href="/mentee-auth/sign-up">
               <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
                 New to MentorMe?

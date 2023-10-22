@@ -1,22 +1,49 @@
-import React, { useState } from "react";
+import React, { Dispatch, useState } from "react";
 import RangeSlider from "./RangeSlider";
-import Calendarcomponent from "@/app/(mentee)/(dashboard-route)/mentee-booking/components/booking-session/Calender";
+import Calendarcomponent from "./Calender";
 
-type PopupProps = {
+interface PopupProps {
   onClose: () => void;
-};
+  onSubmit: () => void;
+  onReset: () => void;
+  setSelectedTimeZone: Dispatch<React.SetStateAction<string>>;
+  selectedTimeZone: string;
+  value: number;
+  setValue: Dispatch<React.SetStateAction<number>>;
+  selectedDate: Date;
+  setSelectedDate: Dispatch<React.SetStateAction<Date>>;
+}
 
-export default function FilterPopup({ onClose }: PopupProps) {
-  const [selected, setSelected] = useState("");
+export default function FilterPopup({
+  onClose,
+  setSelectedTimeZone,
+  selectedTimeZone,
+  value,
+  setValue,
+  selectedDate,
+  setSelectedDate,
+  onSubmit,
+  onReset,
+}: PopupProps) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(event.target.value);
-    setSelected(event.target.value);
+    setSelectedTimeZone(event.target.value);
+    // console.log(selected);
   };
 
   const closePopup = () => {
     // setIsPopupOpen(false);
+    // onSubmit();
+    onClose();
+  };
+  const submitFilter = () => {
+    onSubmit();
+    onClose();
+  };
+
+  const resetFilter = () => {
+    onReset();
     onClose();
   };
 
@@ -33,24 +60,28 @@ export default function FilterPopup({ onClose }: PopupProps) {
         <h1 className="font-Inter font-medium text-lg">Time Zones</h1>
         <div className="grid grid-cols-3 gap-5 p-4">
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <div className="font-Hanken mr-3">GMT</div>
+            <label htmlFor="GMT" className="font-Hanken mr-3 cursor-pointer">
+              GMT
+            </label>
             <input
-              id="choiceGmt"
+              id="GMT"
               type="radio"
-              value="choiceGmt"
-              checked={selected === "choiceGmt"}
+              value="GMT"
+              checked={selectedTimeZone === "GMT"}
               onChange={handleChange}
             />
           </div>
 
           {/* EST Time Zone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <div className="font-Hanken mr-3">EST</div>
+            <label htmlFor="EST" className="font-Hanken mr-3 cursor-pointer">
+              EST
+            </label>
             <input
-              id="choiceEst"
+              id="EST"
               type="radio"
-              value="choiceEst"
-              checked={selected === "choiceEst"}
+              value="EST"
+              checked={selectedTimeZone === "EST"}
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
@@ -58,70 +89,90 @@ export default function FilterPopup({ onClose }: PopupProps) {
 
           {/* GST TimeZone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <div className="font-Hanken mr-3">GST</div>
+            <label htmlFor="GST" className="font-Hanken mr-3 cursor-pointer">
+              GST
+            </label>
             <input
-              id="choiceGst"
+              id="GST"
               type="radio"
-              value="choiceGst"
-              checked={selected === "choiceGst"}
+              value="GST"
+              checked={selectedTimeZone === "GST"}
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
           </div>
 
-          {/* WAT TimeZone */}
+          {/* IST TimeZone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <div className="font-Hanken mr-3">WAT</div>
+            <label htmlFor="IST" className="font-Hanken mr-3 cursor-pointer">
+              IST
+            </label>
             <input
-              id="choiceWat"
+              id="IST"
               type="radio"
-              value="choiceWat"
-              checked={selected === "choiceWat"}
+              value="IST"
+              checked={selectedTimeZone === "IST"}
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
           </div>
 
-          {/* EST TimeZone */}
+          {/* PST TimeZone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <div className="font-Hanken mr-3">EST</div>
+            <label htmlFor="PST" className="font-Hanken mr-3 cursor-pointer">
+              PST
+            </label>
             <input
-              id="choiceEst2"
+              id="PST"
               type="radio"
-              value="choiceEst2"
-              checked={selected === "choiceEst2"}
+              value="PST"
+              checked={selectedTimeZone === "PST"}
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
           </div>
 
-          {/* GST TimeZone */}
+          {/* CET TimeZone */}
           <div className="flex items-center border-[0.5px] border-[#ABABAB] py-3 px-4 rounded-lg">
-            <div className="font-Hanken mr-3">GST</div>
+            <label htmlFor="CET" className="font-Hanken mr-3 cursor-pointer">
+              CET
+            </label>
+
             <input
-              id="choiceGst2"
+              id="CET"
               type="radio"
-              value="choiceGst2"
-              checked={selected === "choiceGst2"}
+              value="CET"
+              checked={selectedTimeZone === "CET"}
               onChange={handleChange}
               //   className=" relative appearancenone w-[20px] h-[20px] rounded-full border-2 border-black checked:border4 checked:border-black transition-all"
             />
           </div>
         </div>
       </div>
-      <RangeSlider />
+      <RangeSlider value={value} setValue={setValue} />
       <div className="flex flex-col space-y-5 justify-center ml3">
         <h1 className="font-Inter font-medium text-lg">Availability</h1>
         <div className="flex justify-center">
-          <Calendarcomponent />
+          <Calendarcomponent setSelectedDate={setSelectedDate} />
         </div>
       </div>
-      <button
-        type="button"
-        className=" flex flex-col items-center bg-black text-white rounded-lg py-3 px-6 cursor-pointer ml-60 -mr-0 hover:bg-opacity-80 transition-opacity"
-      >
-        Apply
-      </button>
+      <div className="flex justify-between">
+        <button
+          type="button"
+          // onClick={onReset}
+          onClick={resetFilter}
+          className="border border-[#121212] rounded-lg py-3 px-6 hover:bg-gray-100 transition-colors"
+        >
+          Reset
+        </button>
+        <button
+          type="button"
+          onClick={submitFilter}
+          className=" flex flex-col items-center bg-black text-white rounded-lg py-3 px-6 cursor-pointer ml-60-mr-0 hover:bg-opacity-80 transition-opacity"
+        >
+          Apply
+        </button>
+      </div>
     </div>
   );
 }

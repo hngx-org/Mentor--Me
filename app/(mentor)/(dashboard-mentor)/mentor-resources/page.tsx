@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { StarIcon } from "@/public/SVGs";
+import ProtectedRoute from "@/context/ProtectedRoute";
 
 export default async function MentorResources() {
   const res = await fetch("https://hngmentorme.onrender.com/api/resources");
@@ -26,52 +27,62 @@ export default async function MentorResources() {
     .slice(0, 20);
 
   return (
-    <div className="bg-white p-4 pt-10">
-      <Link
-        className="bg-[#121212] px-5 py-3 rounded-[6px] cursor-pointer text-white ml-auto mb-8 block w-max"
-        href="/mentor-resources/upload"
-      >
-        Upload resource
-      </Link>
-      <div>
-        <h2 className="capitalize text-[#1C0028] font-Inter font-medium text-2xl mb-4">
-          new resources
-        </h2>
-        <div className="mentor-resources-scroll flex overflow-y-auto gap-4 pb-4">
-          {recentResources.map((resource: any) => (
-            <ResourceCard
-              key={resource?._id}
-              title={resource?.title}
-              description={resource?.description}
-              resourceId={resource?._id}
-              price={resource?.price}
-              reviewCount={resource?.reviews}
-              stars={resource?.ratings}
-              previewImage="/assets/images/mentor-upload-resource/resource-card.jpg"
-            />
-          ))}
+    <ProtectedRoute>
+      <div className="bg-white p-4 pt-10">
+        <Link
+          className="bg-[#121212] px-5 py-3 rounded-[6px] cursor-pointer text-white ml-auto mb-8 block w-max"
+          href="/mentor-resources/upload"
+        >
+          Upload resource
+        </Link>
+        <div>
+          <h2 className="capitalize text-[#1C0028] font-Inter font-medium text-2xl mb-4">
+            new resources
+          </h2>
+          <div className="mentor-resources-scroll flex overflow-y-auto gap-4 pb-4">
+            {recentResources.map((resource: any) => (
+              <ResourceCard
+                key={resource?._id}
+                title={resource?.title}
+                description={resource?.description}
+                resourceId={resource?._id}
+                price={resource?.price}
+                reviewCount={resource?.reviews}
+                stars={resource?.ratings}
+                previewImage={
+                  resource?.imageUrl?.includes("images.unsplash.com")
+                    ? resource.imageUrl
+                    : "/assets/images/mentor-upload-resource/resource-card.jpg"
+                }
+              />
+            ))}
+          </div>
+        </div>
+        <div className="mt-8">
+          <h2 className="capitalize text-[#1C0028] font-Inter font-medium text-2xl mb-4">
+            top rated resources
+          </h2>
+          <div className="mentor-resources-scroll flex overflow-y-auto gap-4 pb-4">
+            {mostRatedResources.map((resource: any) => (
+              <ResourceCard
+                key={resource?._id}
+                title={resource?.title}
+                description={resource?.description}
+                resourceId={resource?._id}
+                price={resource?.price}
+                reviewCount={resource?.reviews}
+                stars={resource?.ratings}
+                previewImage={
+                  resource?.imageUrl?.includes("images.unsplash.com")
+                    ? resource.imageUrl
+                    : "/assets/images/mentor-upload-resource/resource-card.jpg"
+                }
+              />
+            ))}
+          </div>
         </div>
       </div>
-      <div className="mt-8">
-        <h2 className="capitalize text-[#1C0028] font-Inter font-medium text-2xl mb-4">
-          top rated resources
-        </h2>
-        <div className="mentor-resources-scroll flex overflow-y-auto gap-4 pb-4">
-          {mostRatedResources.map((resource: any) => (
-            <ResourceCard
-              key={resource?._id}
-              title={resource?.title}
-              description={resource?.description}
-              resourceId={resource?._id}
-              price={resource?.price}
-              reviewCount={resource?.reviews}
-              stars={resource?.ratings}
-              previewImage="/assets/images/mentor-upload-resource/resource-card.jpg"
-            />
-          ))}
-        </div>
-      </div>
-    </div>
+    </ProtectedRoute>
   );
 }
 

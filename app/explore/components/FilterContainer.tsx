@@ -1,5 +1,7 @@
 "use client";
 
+// @ts-ignore
+import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { StaticImageData } from "next/image";
 import SearchBox from "./SearchBox";
@@ -7,6 +9,7 @@ import ShowAvailMentor from "./ShowAvailMentor";
 import Filter from "./Filter";
 import Card from "./Card";
 import Pagination from "./Pagination";
+import formatDate from "@/lib/formDate";
 
 export default function FilterContainer() {
   interface CardProps {
@@ -20,10 +23,12 @@ export default function FilterContainer() {
     topic?: string;
     review?: string;
     contentImage: string;
-    timezone?: string;
+    timezone: string;
     nextAvailable: string;
+    pricing: string;
   }
 
+  // For search Filter
   const [searchResults, setSearchResults] = useState<CardProps[]>([]);
 
   const [filteredResults, setFilteredResults] = useState<CardProps[]>([]);
@@ -34,11 +39,25 @@ export default function FilterContainer() {
   // For pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(8);
+
   // Get current page
   const indexOfLastCard = currentPage * postsPerPage;
   const indexOfFirstCard = indexOfLastCard - postsPerPage;
-  const currentCard = filteredResults.slice(indexOfFirstCard, indexOfLastCard);
+  const currentCard = filteredResults.slice(indexOfFirstCard, indexOfLastCard); // After paginated
   const totalPages = filteredResults.length;
+
+  // For toogle switch
+  const [enabled, setEnabled] = useState(true);
+  const handleToggle = (isEnabled: boolean) => {
+    setEnabled(isEnabled);
+  };
+
+  // For filter
+  const [selectedDate, setSelectedDate] = useState<Date | any>("2023-10-21");
+  const [selectedTimeZone, setSelectedTimeZone] = useState("");
+
+  // For range slider
+  const [value, setValue] = useState<number>(10);
 
   useEffect(() => {
     fetch("https://cardbackendhngx.onrender.com/api/get_data")
@@ -55,56 +74,81 @@ export default function FilterContainer() {
     if (page >= 1 && page <= Math.ceil(totalPages / postsPerPage)) {
       setCurrentPage(page);
     }
-    console.log(currentPage);
+    // console.log(currentPage);
     // You can add logic here to fetch data for the new page if needed.
   };
 
+  // SelectedDate
+  const dateString = selectedDate;
+  // console.log(dateString);
+
+  // Date from api
+  const originalDate = new Date(selectedDate);
+
+  // Format the Date object into "YYYY-MM-DD" format COMMENTED THIS OUT COS OF ERROR
+  const formattedDate = format(originalDate, "yyyy-MM-dd");
+  // const formattedDate = originalDate.toISOString().split("T")[0];
+  // console.log(formattedDate);
+
+  // handle filter
+
+  const handleFilter = () => {
+    const filtered = cards.filter(
+      (card) =>
+        card.timezone.toLowerCase().includes(selectedTimeZone.toLowerCase()) &&
+        card.pricing.includes(value.toString()) &&
+        card.nextAvailable === formattedDate
+      // && card.nextAvailable === formattedDate
+    );
+    setFilteredResults(filtered);
+    // console.log(filtered);
+    // console.log(formattedDate);
+    // console.log({
+    //   date: dateString,
+    //   price: value,
+    //   timezone: selectedTimeZone,
+    // });
+  };
+
+  const handleReset = () => {
+    setFilteredResults(cards);
+  };
+  // console.log(filteredResults);
+
   return (
     <>
-      <div className="container mx-auto mt-24 px-4 py-8">
+      <div className="container mx-auto mt-5 mt24 px-4 py-8">
         <div className="bg bg-Neutral60 rounded-[5px] px-6 py-4 space-y-5 lg:py-8">
           {/* All */}
-          {/* <div className="w[350px] flex items-center space-x-10 gap10 text-white overflow-x-auto lg:justify-center lg:space-x-16">
-            <span className=" font-Inter font-medium text-base lg:text-lg">
-              All
-            </span>
-            <span className="border-b[2px] border-white pb-[1px] font-Inter font-medium text-base lg:text-lg">
-              Academic
-            </span>
-            <span className=" font-Inter font-medium text-base lg:text-lg">
-              Finance
-            </span>
-            <span className=" font-Inter font-medium text-base lg:text-lg">
-              Coaches
-            </span>
-            <div className=" font-Inter font-medium text-base lg:text-lg">
-              Health Professionals
-            </div>
-            <span className=" font-Inter font-medium text-base lg:text-lg">
-              Tech
-            </span>
-            <span className=" font-Inter font-medium text-base lg:text-lg">
-              Other
-            </span>
-            <span className=" font-Inter font-medium text-base lg:text-lg">
-              Marketing
-            </span>
-          </div> */}
-
           {/* Search for mobile */}
-          {/* <Filter /> */}
           <div className=" space-y-5 lg:space-y-0 lg:space-x-5 lg:flex md:justify-center md:items-center">
             <SearchBox
               cards={cards}
               setSearchResults={setSearchResults}
+              filteredResults={filteredResults}
               setFilteredResults={setFilteredResults}
+              value={value}
+              setValue={setValue}
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+              onSubmit={handleFilter}
+              onReset={handleReset}
             />
             {/* <SearchBox /> */}
             <div>
-              <ShowAvailMentor />
+              <ShowAvailMentor enabled={enabled} onChange={handleToggle} />
             </div>
             <div className="hidden lg:flex">
-              <Filter />
+              <Filter
+                selectedTimeZone={selectedTimeZone}
+                setSelectedTimeZone={setSelectedTimeZone}
+                value={value}
+                setValue={setValue}
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+                onSubmit={handleFilter}
+                onReset={handleReset}
+              />
             </div>
           </div>
         </div>
@@ -120,6 +164,7 @@ export default function FilterContainer() {
         totalPages={totalPages}
         postsPerPage={postsPerPage}
         onPageChange={handlePageChange}
+        loading={loading}
       />
     </>
   );

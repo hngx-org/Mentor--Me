@@ -29,8 +29,10 @@ export default function MenteeSideBar({
   email,
   imgSrc,
 }: SideBarMentorProps & { path?: string | null | undefined }) {
-  // const { data } = useAuth();
-  const router = useRouter();
+  const logoutHandler = () => {
+    localStorage.clear();
+  };
+
   return (
     <section
       className={`hidden w-[240px] border-[1px] py-7 px-4 min-h-screen h-screen fixed left-0 ${
@@ -85,8 +87,8 @@ export default function MenteeSideBar({
             </span>
           </div>
           <Link
-            href="/"
-            onClick={() => router.replace("/")}
+            onClick={logoutHandler}
+            href="/welcome/login?path=login"
             className="flex items-center w-full justify-start gap-4 pt-6 pl-2 hover:brightness-150 transition-all duration-300 "
           >
             <LogoutIcon />
