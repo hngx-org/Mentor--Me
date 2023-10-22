@@ -105,15 +105,7 @@ export default function OverviewCard({
               <p className="text-Neutra50 font-bold text-[18px] font-Hanken">
                 Education
               </p>
-              <EditIcon
-                className="cursor-pointer"
-                onClick={() =>
-                  router.push("?action=edit-profile&tab=education")
-                }
-                onKeyDown={() =>
-                  router.push("?action=edit-profile&tab=education")
-                }
-              />
+              <EditIcon className="cursor-pointer" />
             </div>
             <div className="flex justify-start items-center xl:pl-4 xl:py-2 gap-4 lg:gap-8">
               {" "}
