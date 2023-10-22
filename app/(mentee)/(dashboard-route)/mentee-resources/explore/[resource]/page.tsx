@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import {
   courseContents,
   courseTitles,
@@ -33,7 +33,7 @@ const Resource = ({ params }: { params: { resource: string } }) => {
         `https://hngmentorme.onrender.com/api/resources/${id}`
       );
       const res = await result.json();
-      console.log(res);
+      // console.log(res);
 
       setData(res);
     } catch (error) {
@@ -67,10 +67,10 @@ const Resource = ({ params }: { params: { resource: string } }) => {
         const stored: string[] = JSON.parse(savedItems);
         stored.push(data);
         localStorage.setItem("save", JSON.stringify(stored));
-        toast.success("Saved successfully");
+        toast("Saved successfully");
       } else {
         localStorage.setItem("save", JSON.stringify([data]));
-        toast.success("Saved successfully");
+        toast("Saved successfully");
       }
 
       setSave(true);
@@ -80,7 +80,7 @@ const Resource = ({ params }: { params: { resource: string } }) => {
         const stored: any[] = JSON.parse(savedItems);
         const modifiedData = stored.filter((data) => data?._id !== id);
         localStorage.setItem("save", JSON.stringify(modifiedData));
-        toast.success("Deleted successfully");
+        toast("Deleted successfully");
       }
 
       setSave(false);

@@ -32,7 +32,7 @@ const OTPForm = () => {
           setEmail(newUser.data.email);
           setUserId(newUser.data._id);
         } catch (error) {
-          console.error("Error parsing JSON:", error);
+          // console.error("Error parsing JSON:", error);
         }
       }
     }

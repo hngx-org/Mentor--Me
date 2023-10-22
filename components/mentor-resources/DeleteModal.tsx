@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, useState } from "react";
 
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import { CancelIcon } from "@/public/SVGs";
 
 interface DeleteModalProps {
@@ -68,9 +68,7 @@ const DeleteModal = ({
             confirmatoryAnswer.toLowerCase() !== resourceName.toLowerCase()
           }
           onClick={async () => {
-            const toastId = toast.loading(`Deleting ${resourceName} resource`, {
-              id: resourceId,
-            });
+            const toastId = toast.loading(`Deleting ${resourceName} resource`);
             try {
               const res = await fetch("/api/delete-resource", {
                 method: "DELETE",
@@ -84,7 +82,7 @@ const DeleteModal = ({
               }
               const data = await res.json();
               if (data.success) {
-                toast.success("Deleted resource successfully");
+                toast("Deleted resource successfully");
                 setData((prev) =>
                   prev.filter((resource) => resource._id !== resourceId)
                 );

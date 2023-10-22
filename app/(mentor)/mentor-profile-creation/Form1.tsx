@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import MentorFormBuilder from "@/components/mentorProfileCreation/MentorFormBuilder";
 import { MentorCreationProfileIcon } from "@/public";
 import { HeadingBuild } from "./MentorUI";

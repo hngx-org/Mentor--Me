@@ -4,9 +4,10 @@ import Image from "next/image";
 import { IoSearch } from "react-icons/io5";
 
 import dynamic from "next/dynamic";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import HeroImage from "../../../public/assets/images/landing-page/hero-section-images.png";
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 const TypewriterComponent = dynamic(() => import("typewriter-effect"), {
   ssr: false,
 });
@@ -50,13 +51,8 @@ export default function Hero() {
                 type="button"
                 className="border bg-[black] text-[white] text-[0.7rem] md:text-[0.8rem] w-1/4 md:w-1/5 max-w-[134px] rounded-[8px] absolute py-[0.7rem] md:py-[0.75rem] bottom-[3.4rem] right-[0.5rem] active:scale-95 transition-all duration-300"
                 onClick={() => {
-                  toast.loading("Searching...", {
-                    duration: 3000,
-                    iconTheme: { primary: "white", secondary: "black" },
-                    style: {
-                      background: "black",
-                      color: "white",
-                    },
+                  toast("Searching...", {
+                    autoClose: 3000,
                   });
                 }}
               >
