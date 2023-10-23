@@ -81,7 +81,7 @@ export default function UpcomingCard({
   };
 
   const vunct = async (itemId: string, dataObject: any) => {
-    toast.success("Cancel succefully", {
+    toast.success("Cancelled succefully", {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -107,7 +107,7 @@ export default function UpcomingCard({
         <div
           className={`${!isGrid ? "hidden" : ""} w-full flex justify-between `}
         >
-          <span className="w-[40px] h-[40px] font-Hanken font-medium text-[12px] text-Neutra40 text-center bg-[#e5ffff] rounded-full leading-none flex justify-center items-center">
+          <span className="h-[40px] px-2 font-Hanken text-[12px] font-bold text-Neutra40 text-center bg-[#e5ffff] rounded-full leading-none flex justify-center items-center">
             {formattedDate}
           </span>
         </div>
@@ -119,7 +119,7 @@ export default function UpcomingCard({
             <span className="text-Accent1 pl-1">{apiData.relevantTopics}</span>
           </span>
           <span
-            className={`w-[40px] h-[40px] font-Hanken font-medium text-[12px] text-Neutra40 text-center bg-[#e5ffff] rounded-full leading-none flex justify-center items-center ${
+            className={`h-[40px] px-2 font-Hanken font-medium text-[12px] text-Neutra40 text-center bg-[#e5ffff] rounded-full leading-none flex justify-center items-center ${
               isGrid ? "hidden" : ""
             }`}
           >

@@ -159,25 +159,41 @@ export default function AllSession({
       });
   };
 
-  useEffect(() => {
-    const currentDate = new Date();
 
-    // Filter the items based on whether their date is in the future
-    const filteredItems = pastApiData.filter((item: any) => {
-      const itemDate = new Date(item.date);
-      return itemDate >= currentDate;
-    });
+useEffect(() => {
+  const currentDate = new Date();
 
-    // Determine the value to set for comingItems based on the sessionState condition
-    const sessionStateToFilter = "pending";
-    const newComingItems = filteredItems.filter(
-      (item) => item.sessionState === sessionStateToFilter
-    );
+  // Log apiData to check its value
+  console.log("apiData:", apiData);
 
-    // Update the state with the newComingItems
+  // Filter the items based on whether their date is in the future
+  const filteredItems = pastApiData.filter((item: any) => {
+    const itemDate = new Date(item.date);
+    return itemDate >= currentDate;
+  });
 
-    setComingItems(newComingItems);
-  }, [apiData]);
+  // Log filteredItems to check its value
+  console.log("filteredItems:", filteredItems);
+
+  // Determine the value to set for comingItems based on the sessionState condition
+  const sessionStateToFilter = "pending";
+  const newComingItems = filteredItems.filter((item) => item.sessionState === sessionStateToFilter);
+
+  // Log newComingItems to check its value
+  console.log("newComingItems:", newComingItems);
+
+  // Sort the newComingItems array in descending order based on the date
+  newComingItems.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+  // Log sorted newComingItems to check its value
+  console.log("sorted newComingItems:", newComingItems);
+
+  // Update the state with the newComingItems
+  setComingItems(newComingItems);
+  console.log(comingItems)
+}, [apiData]);
+
+
 
   useEffect(() => {
     const currentDate = new Date().setHours(0, 0, 0, 0);
@@ -195,10 +211,11 @@ export default function AllSession({
     getPastDate();
   }, []);
 
-  // useEffect(()=> {
-  //     console.log(passedItems)
-  //   console.log(apiData)
-  // },[apiData])
+  useEffect(()=> {
+    //   console.log(passedItems)
+    // console.log(apiData)
+    console.log(comingItems)
+  },[apiData])
 
   useEffect(() => {
     localStorage.setItem("view", paramsView || "List");

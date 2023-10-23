@@ -11,7 +11,10 @@ const JoinModal: React.FC<SuccessReminderProps> = ({
   collapseModal,
   sessionUrl,
 }) => (
-  <div className=" w-full h-[300px] text-white  relative sm:h-[300px] sm:w-[500px]  items-start flex bg-black px-8 mx-8">
+  <div className=" w-full h-[300px] text-black relative sm:h-[300px] sm:w-[500px]  items-start flex bg-white px-8 mx-8 shadow-lg spread-4 offset-x-3 offset-y-3 blur-3>
+  <!-- Your content here -->
+</div>
+">
     <button
       type="button"
       className="w-[24px] h-[24px] absolute top-4 right-4 border border-[#7B7F84] flex justify-center items-center  cursor-pointer"
@@ -23,7 +26,7 @@ const JoinModal: React.FC<SuccessReminderProps> = ({
       <a target="_blank" rel="noopener noreferrer" href={sessionUrl}>
         <h3 className="text-[30px]">
           Join the meeting now.{" "}
-          <span className="cursor-pointer hover:text-white text-Accent1">
+          <span className="cursor-pointer hover:text-black text-Accent1">
             Click Here
           </span>
         </h3>
@@ -40,7 +43,7 @@ const JoinModal: React.FC<SuccessReminderProps> = ({
         rel="noopener noreferrer"
         href="https://calendar.google.com/calendar/u/0/r?pli=1"
       >
-        <h4 className="text-[20px] mt-[20px] hover:text-Accent1 cursor-pointer">
+        <h4 className="text-[20px] text-black mt-[20px] hover:text-Accent1 cursor-pointer">
           Set reminder
         </h4>
       </a>
