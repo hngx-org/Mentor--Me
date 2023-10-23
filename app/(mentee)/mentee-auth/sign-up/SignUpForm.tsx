@@ -8,7 +8,7 @@ import Link from "next/link";
 
 import axios from "axios";
 
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 import { useRouter } from "next/navigation";
 
@@ -27,6 +27,7 @@ import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 export default function SignUpForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
+  const [imgLoading, setImgLoading] = React.useState(false);
   const [isValid, setIsValid] = React.useState(true);
   const [formData, setFormData] = React.useState({
     // first_name: "",
@@ -69,7 +70,7 @@ export default function SignUpForm() {
         })
 
         .catch((error) => {
-          console.error("An error occurred: ", error);
+          // console.error("An error occurred: ", error);
           toast.error(error?.response?.data?.message || "something went wrong");
         })
         .finally(() => {
@@ -79,36 +80,41 @@ export default function SignUpForm() {
   };
   return (
     <div>
-      <div className="w-full h-[100vh] grid grid-cols-1 lg:grid-cols-6  overflow-hidden">
+      <div className="w-9/10 max-w-[700px] lg:w-4/5 lg:max-xl:w-4/5 xl:w-4/5 lg:max-w-[1350px] mx-auto mt-[4rem] grid grid-cols-1 lg:grid-cols-6 overflow-hidden shadow-xl shadow-gray-100 rounded-[20px]">
         <div className="lg:col-span-3 ">
-          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+          {imgLoading && (
+            <div className="flex w-full min-h-screen justify-center items-center relative scale-150">
+              <LoadingSpinner />
+            </div>
+          )}
+          <div className="w-full h-full relative">
             <Image
               src={auth}
               alt="Authentication Image"
               layout="fill"
               objectFit="cover"
+              loading="lazy"
+              onLoadingComplete={() => setImgLoading(false)}
+              className="hidden lg:block"
             />
           </div>
         </div>
 
-        <div className="col-span-3  px-4  lg:px-6 xl:px-16">
+        <div className="col-span-3  px-4  lg:px-6 xl:px-16 ">
           <div className="flex justify-between items-center">
-            <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
+            {/* <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
               <a href="/"> Mentor Me</a>
-            </h2>
+            </h2> */}
+          </div>
 
+          <div className="flex w-9/10 xl:w-full mx-auto xl:mx-auto lg:mx-0 lg:max-xl:relative lg:max-xl:left-[8%] flex-col py-[3rem] pb-[5rem]">
             <a href="/welcome/signup" className="flex">
               {" "}
-              <BackwardIcon /> <span className="ms-2">Go back</span>
+              <BackwardIcon />
             </a>
-          </div>
-          <div className="flex justify-center flex-col">
-            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
-              Sign Up
+            <h4 className="font-Inter font-medium text-[#121212] text-[1.5rem] my-[1rem]">
+              Sign Up As Mentee
             </h4>
-            <h5 className="text-[#808080] text-base font-Hanken mt-2 mb-5">
-              Create an account
-            </h5>
             <form className="flex flex-col gap-5" onSubmit={handleSumbit}>
               {/* <Input
                 id="first_name"
@@ -161,7 +167,7 @@ export default function SignUpForm() {
                   title="Sign up"
                   type="submit"
                   variant="primary"
-                  className="w-full h-[48px]"
+                  className="w-full py-[1.1rem]"
                   fullWidth
                   loading={isLoading}
                   disabled={isDisabled}
@@ -192,7 +198,7 @@ export default function SignUpForm() {
                 icon={facebook}
               />
             </div> */}
-            <h5 className="font-Hanken mt-3 text-sm text-[#2A2A2A]">
+            <h5 className="font-Hanken mt-[1.5rem] text-sm text-[#2A2A2A]">
               Already a user?{" "}
               <span className="font-semibold text-[#121212]">
                 {" "}

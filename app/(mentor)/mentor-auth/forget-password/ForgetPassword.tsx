@@ -15,10 +15,13 @@ import Input from "@/components/inputs/input";
 import { Button } from "@/components/buttons/button";
 
 import Modal from "@/components/modal/Modal";
+import LoadingSpinner from "@/components/loaders/LoadingSpinner";
+import { BackwardIcon } from "@/public/SVGs";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [imgLoading, setImgLoading] = React.useState(false);
 
   const closeModal = (): void => {
     setIsOpen(false);
@@ -59,63 +62,66 @@ const ResetPassword = () => {
 
   return (
     <div>
-      <div className="w-full h-[100vh] grid grid-cols-1 lg:grid-cols-6  overflow-hidden">
+      <div className="w-9/10 max-w-[700px] lg:w-4/5 lg:max-xl:w-4/5 xl:w-4/5 lg:max-w-[1350px] mx-auto mt-[4rem] grid grid-cols-1 lg:grid-cols-6 overflow-hidden shadow-xl shadow-gray-100 rounded-[20px]">
         <div className="lg:col-span-3 ">
-          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+          {imgLoading && (
+            <div className="flex w-full min-h-screen justify-center items-center relative scale-150">
+              <LoadingSpinner />
+            </div>
+          )}
+          <div className="w-full h-full relative">
             <Image
               src={auth}
               alt="Authentication Image"
               layout="fill"
               objectFit="cover"
+              loading="lazy"
+              onLoadingComplete={() => setImgLoading(false)}
+              className="hidden lg:block"
             />
           </div>
         </div>
         <div className="col-span-3  px-4  lg:px-6 xl:px-16">
-          <Link href="/">
-            <h2 className="text-[#2A2A2A] font-Gladiora text-3xl mt-5">
-              Mentor Me
-            </h2>
-          </Link>
-          <Link href="/mentor-auth/login">
-            <div className="flex items-center gap-2 my-5">
-              <Image src={back} width={20} height={20} alt="back-icon" />
-              <h5 className="font-Hanken text-[18px]">Back</h5>
-            </div>
-          </Link>
-          <div className="flex justify-center flex-col">
-            <h4 className="font-Inter font-medium text-[#121212] text-xl mt-3">
-              Forgot Password
-            </h4>
-            <p className="font-Hanken text-[#808080] flex justify-end text-sm my-3">
-              No worries, we will send your reset instructions to your
-              registered email address
-            </p>
-            <div className="flex flex-col gap-5 mb-5">
-              <Input
-                id="password"
-                label="Email Address"
-                required
-                type="email"
-                name="mentor-email"
-                value={email}
-                onChange={handleChange}
+          <div className="flex w-9/10 xl:w-full mx-auto xl:mx-auto lg:mx-0 lg:max-xl:relative lg:max-xl:left-[8%] flex-col py-[3rem] xl:pb-[12rem]">
+            <a href="/welcome/login" className="flex">
+              {" "}
+              <BackwardIcon />
+            </a>
+            <div className="flex justify-center flex-col">
+              <h4 className="font-Inter font-medium text-[#121212] text-xl mt-6">
+                Forgot Password
+              </h4>
+              <p className="font-Hanken text-[#808080] flex justify-end text-sm my-5">
+                No worries, we will send your reset instructions to your
+                registered email address
+              </p>
+              <div className="flex flex-col gap-5 my-[1rem]">
+                <Input
+                  id="password"
+                  label="Email Address"
+                  required
+                  type="email"
+                  name="mentor-email"
+                  value={email}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <Button
+                variant="primary"
+                paddingLess
+                className="w-full py-[1.1rem]"
+                onClick={handleSubmit}
+              >
+                Reset Password
+              </Button>
+              <Modal
+                isOpen={isOpen}
+                closeModal={closeModal}
+                content="A resent link has been sent to your email address. Please follow the instructions to reset your password"
+                buttontext="Check Inbox"
               />
             </div>
-
-            <Button
-              variant="primary"
-              paddingLess
-              className="w-full h-[48px]"
-              onClick={handleSubmit}
-            >
-              Reset Password
-            </Button>
-            <Modal
-              isOpen={isOpen}
-              closeModal={closeModal}
-              content="A resent link has been sent to your email address. Please follow the instructions to reset your password"
-              buttontext="Check Inbox"
-            />
           </div>
         </div>
       </div>
