@@ -12,6 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CancelIcon, CaretIcon } from "@/public/SVGs";
 import DropDown from "@/components/DropDown";
 import ResourceCurriculum from "./resourceCurriculum";
+import { useAuthCtx } from "@/context/AuthContext";
 
 const COURSETYPEOPTIONS = [
   "Video Course",
@@ -86,10 +87,10 @@ export default function UploadResourcesPage() {
           localStorage.getItem("Mentor") ||
             JSON.stringify({ data: { token: null } })
         );
-        let videoBase64;
         const {
           data: { token },
         } = user;
+        let videoBase64;
 
         const toastId = toast.loading("Uploading resource, please wait.");
 
@@ -130,6 +131,7 @@ export default function UploadResourcesPage() {
               price: priceRef.current?.value!,
               name: anotherData?.userDetails?.fullName,
               role: anotherData?.userDetails?.role,
+              mentorId: anotherData._id,
               company: anotherData?.company,
               ratings: "0.0",
               reviews: "0",
@@ -150,14 +152,13 @@ export default function UploadResourcesPage() {
             console.log(data);
             toast.dismiss(toastId);
             if (data.error) {
-              toast.error(data.error.message);
+              toast.error(data.error);
               return;
             }
             toast("Resource uploaded successfully!");
             router.push(`/mentor-resources/${data._id}`);
           };
         } catch (e) {
-          console.log(e);
           toast.dismiss(toastId);
           toast.error("There was an error uploading the resource.");
         }

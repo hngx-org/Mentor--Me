@@ -19,7 +19,7 @@ export default function UploadResources() {
     currentPage: 0,
   });
   const [data, setData] = useState<
-    { name: string; price: number; _id: string; currency: string }[]
+    { title: string; price: number; _id: string; currency: string }[]
   >([]);
   const [deletingResource, setDeletingResource] = useState({
     resourceName: "",
@@ -35,15 +35,33 @@ export default function UploadResources() {
         );
         if (!res.ok) throw new Error("Failed to fetch resources");
         const data = await res.json();
-        if (data.length === 0) {
+        console.log(data);
+
+        const user = JSON.parse(
+          localStorage.getItem("Mentor") ||
+            JSON.stringify({ data: { user: { profileLink: "" } } })
+        );
+        console.log(user);
+        const {
+          data: {
+            user: { profileLink },
+          },
+        } = user;
+
+        const filteredData = data.filter(
+          (resource: { mentorId: string }) => resource.mentorId === profileLink
+        );
+        if (filteredData.length === 0) {
           toast("You have no uploaded resources.", {
             icon: "ℹ️",
           });
         }
-        setData(data);
+
+        console.log(filteredData);
+        setData(filteredData);
         setPaginationData({
           currentPage: 1,
-          totalPages: Math.ceil(data.length / 8),
+          totalPages: Math.ceil(filteredData.length / 8),
         });
       } catch (e: any) {
         toast.error(e.message);
@@ -54,7 +72,7 @@ export default function UploadResources() {
   }, []);
 
   return (
-    <div className="bg-[#FBFBFB] p-4">
+    <div className="bg-[#FBFBFB] p-4 min-h-screen">
       {deletingResource.resourceName ? (
         <div className="fixed inset-0 bg-[rgba(0,_0,_0,_0.2)] backdrop-blur-sm z-30 grid grid-cols-[450px] place-content-center">
           <DeleteModal
@@ -83,7 +101,12 @@ export default function UploadResources() {
               <div className="py-5 px-4 bg-white border-[#EAEBF0] border-[1px] rounded-t-xl">
                 <p className="w-max ml-auto text-[#272D37] font-Inter">
                   {(paginationData.currentPage - 1) * 8 + 1} -{" "}
-                  {paginationData.currentPage * 8}
+                  {data.slice((paginationData.currentPage - 1) * 8 + 1).length >
+                  8
+                    ? paginationData.currentPage * 8
+                    : data.slice((paginationData.currentPage - 1) * 8 + 1)
+                        .length +
+                      ((paginationData.currentPage - 1) * 8 + 1)}
                 </p>
               </div>
             </th>
@@ -121,7 +144,7 @@ export default function UploadResources() {
                 key={resource._id}
                 isAllSelected={isAllSelected}
                 id={resource._id}
-                title={resource.name}
+                title={resource.title}
                 price={resource.price}
                 setDeletingResource={setDeletingResource}
                 currency={resource.currency}
@@ -156,10 +179,7 @@ export default function UploadResources() {
                   <ArrowIcon />
                   Prev
                 </button>
-                <button
-                  type="button"
-                  className="flex items-center gap-4 font-Inter font-medium text-[#5F6D7E]"
-                >
+                <div className="flex items-center gap-4 font-Inter font-medium text-[#5F6D7E]">
                   {paginationData.totalPages < 5 ? (
                     <>
                       {Array(paginationData.totalPages)
@@ -194,7 +214,7 @@ export default function UploadResources() {
                     <>
                       {Array(paginationData.totalPages)
                         .fill(null)
-                        .map((_page, idx, arr) => {
+                        .reduce((acc, _page, idx, arr) => {
                           const key = Math.random();
                           if (
                             idx === 0 ||
@@ -202,7 +222,8 @@ export default function UploadResources() {
                             idx === arr.length - 2 ||
                             idx === arr.length - 1
                           ) {
-                            return (
+                            return [
+                              ...acc,
                               <button
                                 type="button"
                                 onKeyUp={() => {
@@ -222,14 +243,22 @@ export default function UploadResources() {
                                 key={key}
                               >
                                 {idx + 1}
-                              </button>
-                            );
+                              </button>,
+                            ];
                           }
-                          return <EllipsisIcon className="cursor-pointer" />;
-                        })}
+                          if (idx === 2)
+                            return [
+                              ...acc,
+                              <EllipsisIcon
+                                key={key}
+                                className="cursor-pointer"
+                              />,
+                            ];
+                          return acc;
+                        }, [])}
                     </>
                   )}
-                </button>
+                </div>
                 <button
                   type="button"
                   onKeyUp={() => {
@@ -313,7 +342,7 @@ const Course = ({
         <label
           htmlFor={id}
           title={title}
-          className="font-Inter font-medium text-[#272D37] max-w-[140px] overflow-hidden whitespace-nowrap"
+          className="font-Inter font-medium text-[#272D37] max-w-[140px] overflow-hidden whitespace-nowrap overflow-ellipsis"
         >
           {title}
         </label>

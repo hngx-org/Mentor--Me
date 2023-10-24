@@ -122,7 +122,7 @@ const Forum = ({
     //   </Link>
     // </div>
     <div
-      className="discussioncard  flex flex-col flex-shrink-0 lg:pt-4 lg:px-[19px] lg:pb-[30px] px-2 py-4 border border-Neutra10 lg:rounded-[8px] rounded-[6.2px] justify-center items-center  gap-4 lg:gap-[35px] xl:gap-[45px] xl:max-w-[295px] lg:max-w-[225px]  max-w-[182px] xl:w-[295px]  lg:w-[225px] w-[182px]   lg:min-h-[220px]  h-fit   "
+      className="discussioncard flex flex-col flex-shrink-0 lg:pt-4 lg:px-[19px] lg:pb-[30px] px-2 py-4 border border-Neutra10 lg:rounded-[8px] rounded-[6.2px] justify-center items-center gap-4 lg:gap-[35px] xl:gap-[45px] xl:max-w-[295px] lg:max-w-[225px] max-w-[182px] xl:w-[295px] lg:w-[225px] w-[182px] lg:min-h-[220px] h-[350px]"
       ref={discussionRef}
     >
       <div className="text flex flex-col xl:gap-[14px] lg:gap-[10px] gap-2 font-Hanken  text-left w-full">
@@ -156,8 +156,8 @@ const Forum = ({
           pathname === "/communities"
             ? "/communities"
             : pathname === "/mentor-community"
-            ? `/mentor-community/${slug}`
-            : `/mentee-community/${slug}`
+            ? `/mentor-community/${slug}?path=Communities`
+            : `/mentee-community/${slug}?path=Discussions`
         }
         className="text-xs text-center md:text-base border-solid border-[1px] p-4 md:py-5 md:px-10 w-full md:w-fit mx-auto border-NeutalBase rounded-lg font-medium font-Inter"
         onClick={(e) => {
