@@ -20,7 +20,13 @@ interface OneOffFormData {
   mentorId?: string;
 }
 
-function OneOffSessionForm() {
+function OneOffSessionForm({
+  refetchData,
+  goBack,
+}: {
+  refetchData?: (state: boolean) => void;
+  goBack?: () => void;
+}) {
   const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [successful, setSuccessful] = useState<boolean>(false);
   const [formVisible, setFormVisible] = useState<boolean>(true);
@@ -122,6 +128,8 @@ function OneOffSessionForm() {
     if (response.ok) {
       const responseData = await response.json();
       console.log("form submitted,", responseData);
+
+      refetchData?.(true);
     } else {
       // setCalendarVisible(false);
       setSuccessful(false);
@@ -235,7 +243,7 @@ function OneOffSessionForm() {
             </SelectInputType>
             <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
               <Button
-                onClick={closeForm}
+                onClick={() => goBack?.()}
                 className="p-4 w-full md:w-[20%]"
                 variant="outline-primary"
                 type="button"

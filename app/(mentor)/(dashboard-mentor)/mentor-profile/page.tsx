@@ -145,76 +145,78 @@ export default function ProfilePage() {
   }, []);
 
   return (
-    <MentorDetailsContextProvider
-      updateUserDetailsCtx={setUserDetailsContext}
-      details={userDetailsContext}
-    >
-      {loading && <MentorProfileSkeleton />}
+    <ProtectedRoute>
+      <MentorDetailsContextProvider
+        updateUserDetailsCtx={setUserDetailsContext}
+        details={userDetailsContext}
+      >
+        {loading && <MentorProfileSkeleton />}
 
-      {!loading && !error && user && (
-        <div className="w-[100%] h-fit pb-10">
-          <MentorProfileHeader
-            userName={userDetailsContext.fullName}
-            email=""
-            userRole={user?.mentorship_type}
-            userRating={1}
-            modal={setModal}
-          />
-          <MentorProfileMainLayout>
-            <BioCard text={userDetailsContext?.bio || "Add bio"} />
-            <SkillSCard
-              skills={userData?.skills?.split(",")! || "add skills"}
+        {!loading && !error && user && (
+          <div className="w-[100%] h-fit pb-10">
+            <MentorProfileHeader
+              userName={userDetailsContext.fullName}
+              email=""
+              userRole={user?.mentorship_type}
+              userRating={1}
+              modal={setModal}
             />
-            <ProfileDetailsCardContainer
-              heading="education"
-              items={[
-                {
-                  text: userData?.degree || "",
-                  heading: userData?.institution || "",
-                  type: "education",
-                  id: "5",
-                },
-              ]}
-              openModal={setModal}
-            />
+            <MentorProfileMainLayout>
+              <BioCard text={userDetailsContext?.bio || "Add bio"} />
+              <SkillSCard
+                skills={userData?.skills?.split(",")! || "add skills"}
+              />
+              <ProfileDetailsCardContainer
+                heading="education"
+                items={[
+                  {
+                    text: userData?.degree || "",
+                    heading: userData?.institution || "",
+                    type: "education",
+                    id: "5",
+                  },
+                ]}
+                openModal={setModal}
+              />
 
-            <ProfileDetailsCardContainer
-              heading="Experience"
-              items={
-                userDetailsContext?.experience?.split(" ").map((item) => ({
-                  type: "experience",
-                  heading: item,
-                  text: "present",
-                  id: "1",
-                })) || []
-              }
-              openModal={setModal}
-            />
-            <ProfileDetailsCardContainer
-              heading="certification"
-              items={
-                userDetailsContext.certification.split("  ").map((item) => ({
-                  type: "certification",
-                  heading: item,
-                  text: "certificate",
-                  id: "q",
-                })) || []
-              }
-              openModal={setModal}
-            />
+              <ProfileDetailsCardContainer
+                heading="Experience"
+                items={
+                  userDetailsContext?.experience?.split(" ").map((item) => ({
+                    type: "experience",
+                    heading: item,
+                    text: "present",
+                    id: "1",
+                  })) || []
+                }
+                openModal={setModal}
+              />
+              <ProfileDetailsCardContainer
+                heading="certification"
+                items={
+                  userDetailsContext.certification.split("  ").map((item) => ({
+                    type: "certification",
+                    heading: item,
+                    text: "certificate",
+                    id: "q",
+                  })) || []
+                }
+                openModal={setModal}
+              />
 
-            <AvailableSessionCard
-              timezone=" Greenwich Mean Time (GMT)"
-              availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
-            />
-            <OverViewCardLayout heading="impact at a glance" />
-            <SessionsProgressCard progress={80} />
-          </MentorProfileMainLayout>
-          {modal.isOpen && (
-            <MentorProfileModal onClose={setModal} state={modal.state} />
-          )}
-        </div>
-      )}
-    </MentorDetailsContextProvider>
+              <AvailableSessionCard
+                timezone=" Greenwich Mean Time (GMT)"
+                availableDays={`${userData?.preferred_days} ${userData?.preferred_startTime} ${userData?.preferred_endTime}`}
+              />
+              <OverViewCardLayout heading="impact at a glance" />
+              <SessionsProgressCard progress={80} />
+            </MentorProfileMainLayout>
+            {modal.isOpen && (
+              <MentorProfileModal onClose={setModal} state={modal.state} />
+            )}
+          </div>
+        )}
+      </MentorDetailsContextProvider>
+    </ProtectedRoute>
   );
 }

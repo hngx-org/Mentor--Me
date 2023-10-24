@@ -13,6 +13,7 @@ interface PortfolioReviewProps {
   date: number | string;
   description: string;
   sessionUrl: string;
+  sessionState: string;
   attendeesLimit: number;
   tag: string;
   occurence: string;
@@ -31,6 +32,7 @@ function PortfolioReview({
   occurence,
   tag,
   duration,
+  sessionState,
 }: PortfolioReviewProps) {
   const [copySuccess, setCopySuccess] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -66,7 +68,15 @@ function PortfolioReview({
   };
   return (
     <div>
-      <div className="h-[235px] max-w-[295px] border-t-4 border-Accent1 hover:transform hover:scale-95 ease-in-out duration-300 shadow-lg rounded-lg px-2 py-4 flex flex-col justify-between gap-5">
+      <div
+        className="h-[235px] w-[295px] max-w-[100%]   shadow-md rounded-lg px-2 py-4 flex flex-col justify-between gap-5"
+        style={{
+          borderTop: "5px solid #008080",
+          borderLeft: "1px solid #ABABAB",
+          borderRight: "1px solid #ABABAB",
+          borderBottom: "1px solid #ABABAB",
+        }}
+      >
         <div>
           {" "}
           <div className="flex justify-between item-center ">
@@ -121,6 +131,7 @@ function PortfolioReview({
             tag={tag}
             occurence={occurence}
             sessionUrl={sessionUrl}
+            sessionState={sessionState}
           />
         </Modal>
       )}
