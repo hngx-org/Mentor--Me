@@ -102,7 +102,7 @@ export default function MenteeSideBar({
           <Link
             href="/mentee-profile?path=profile"
             prefetch
-            className="bottom-3  mt-2"
+            className="bottom-3 lg:hidden  mt-2"
           >
             <AuthProfileCard
               path={path}
