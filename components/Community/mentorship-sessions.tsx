@@ -21,8 +21,8 @@ const MentorshipSessions = () => {
             pathname === "/mentor-community"
               ? "/mentor-community/mentorships"
               : pathname === "/mentee-communities"
-              ? "/mentee-community/mentorships"
-              : "mentee-community/mentorships"
+              ? "/mentee-community/mentorships?path=Mentorship"
+              : "mentee-community/mentorships?path=Mentorship"
           }`}
           className="text-[.875rem] md:block md:text-[1rem] font-medium cursor-pointer text-Accent1 hover:underline"
         >
