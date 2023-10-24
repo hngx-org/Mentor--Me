@@ -21,7 +21,13 @@ interface RecurringFormData {
   tag?: string;
 }
 
-function RecurringSessionForm() {
+function RecurringSessionForm({
+  refetchData,
+  goBack,
+}: {
+  refetchData?: (state: boolean) => void;
+  goBack?: () => void;
+}) {
   const [currentStep, setcurrentStep] = useState<boolean>(false);
   const [formVisible, setFormVisible] = useState<boolean>(true);
   const [successful, setSuccessful] = useState<boolean>(false);
@@ -110,6 +116,7 @@ function RecurringSessionForm() {
     if (response.ok) {
       const responseData = await response.json();
       console.log("form submitted,", responseData);
+      refetchData?.(true);
     } else {
       // setCalendarVisible(false);
       setSuccessful(false);
@@ -250,10 +257,10 @@ function RecurringSessionForm() {
             </SelectInputType>
             <div className="flex flex-col-reverse gap-4 sm:flex-row justify-between items-center w-full md:pt-8 py-2">
               <Button
-                onClick={closeForm}
                 className="p-4 w-full md:w-[20%]"
                 variant="outline-primary"
                 type="button"
+                onClick={() => goBack?.()}
               >
                 Cancel
               </Button>
