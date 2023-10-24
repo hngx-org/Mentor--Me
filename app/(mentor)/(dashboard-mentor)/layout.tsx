@@ -16,7 +16,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const actionParams = useSearchParams().get("action");
 
   const { data } = useAuth();
-  console.log(data);
+
   const email = data?.userDetails?.email;
   const userName = data?.userDetails?.fullName;
   const jobTitle = data?.mentorship_type;

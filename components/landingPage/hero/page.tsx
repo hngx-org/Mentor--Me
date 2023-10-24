@@ -25,12 +25,12 @@ export default function Hero() {
                   options={{
                     autoStart: true,
                     loop: true,
-                    strings: ["Guidance", "Insights", "Support"],
+                    strings: ["Guidance", "Insights", "Support", "Mentoring"],
                     delay: 150,
-                    skipAddStyles: true,
+                    // skipAddStyles: true,
                     cursor: "_",
                     deleteSpeed: 100,
-                    cursorClassName: "cursor",
+                    cursorClassName: "cursor ",
                   }}
                 />
               </span>
