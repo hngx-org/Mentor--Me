@@ -97,7 +97,7 @@ const Resources = () => {
       </Link>
       <Link
         href="/mentee-resources/explore?path=Explores"
-        className="fixed bottom-[200px] right-10 md:hidden"
+        className="fixed bottom-[130px] right-10 md:hidden"
       >
         <Image
           src={Add}
