@@ -31,6 +31,13 @@ export type Community = {
   description: string;
   discussions: Discussion[];
 };
+export type Community2 = {
+  slug: string;
+  name: string;
+  members: Member[];
+  description: string;
+  discussion: Discussion[];
+};
 export type discussionState = {
   discussionData: Community[];
   setDiscussionData: Dispatch<SetStateAction<Community[]>>;

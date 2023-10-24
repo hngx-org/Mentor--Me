@@ -1,32 +1,51 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DiscussionForums, MentorshipSessions } from "@/components/Community";
 import SearchCommunitySearchbar from "@/components/Community/searchcommunity-searchbar";
-import { discussionCommunities } from "./data";
+import { Community, discussionCommunities } from "./data";
 import SecondSearchCommunitySearchbar from "@/components/Community/searchcommunity-searchbar2";
 import ProtectedRoute from "@/context/ProtectedRoute";
+import { getForums } from "@/lib/apiHelper";
 
 export default function MenteeCommunitiesPage() {
+  const [initialForums, setInitialForums] = useState([
+    {
+      slug: "",
+      name: "",
+      members: [],
+      description: "",
+      discussions: [],
+    },
+  ] as Community[]);
+
+  const [discussionData, setDiscussionData] = useState([
+    {
+      slug: "",
+      name: "",
+      members: [],
+      description: "",
+      discussions: [],
+    },
+  ] as Community[]);
+
+  useEffect(() => {
+    getForums(setInitialForums);
+
+    getForums(setDiscussionData);
+  }, []);
+  console.log(initialForums);
+
   // set discussion data to a state
-  const [discussionData, setDiscussionData] = useState(discussionCommunities);
 
   // filter part
   const [q, setQ] = useState("");
 
   const filterDiscussions = () => {
-    if (q) {
-      // console.log("Search is on. Query: ", q);
-      const filteredSliderInfo = discussionCommunities.filter((item) =>
-        item.name.toLowerCase().includes(q.toLowerCase())
-      );
-
-      // Update the sliderInfo state with the filtered array
-      setDiscussionData(filteredSliderInfo);
-    } else {
-      setDiscussionData(discussionCommunities);
-    }
-    // console.log(discussionData);
+    const filteredSliderInfo = initialForums.filter((item) =>
+      item.name.toLowerCase().includes(q.toLowerCase())
+    );
+    setDiscussionData(filteredSliderInfo);
   };
 
   return (
@@ -42,6 +61,7 @@ export default function MenteeCommunitiesPage() {
           />
         </section>
         {/* Discussion Forums */}
+
         <DiscussionForums
           discussionData={discussionData}
           setDiscussionData={setDiscussionData}
