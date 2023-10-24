@@ -21,12 +21,16 @@ import Input from "@/components/inputs/input";
 import { BackwardIcon } from "@/public/SVGs";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import Button from "@/app/(mentee)/(dashboard-route)/mentee-sessions/(ui)/VxrcelBtn";
+import EmailValidator from "@/components/inputs/email-validator";
+import PasswordPopover from "@/components/inputs/password-validator";
 
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [imgLoading, setImgLoading] = React.useState(false);
   const router = useRouter();
-  const [isValid, setIsValid] = React.useState(true);
+  const [isEmailValid, setisEmailValid] = React.useState(false);
+  const [isPasswordValid, setIsPasswordValid] = React.useState(false);
+  const [inputChanged, setInputChanged] = React.useState(false);
 
   const [formData, setFormData] = React.useState({
     // first_name: "",
@@ -39,6 +43,7 @@ export default function SignUpForm() {
   );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputChanged(true);
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -51,9 +56,11 @@ export default function SignUpForm() {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
     if (form.checkValidity() === false) {
-      setIsValid(false);
+      setisEmailValid(false);
+      setIsPasswordValid(false);
     } else {
-      setIsValid(true);
+      setisEmailValid(true);
+      setIsPasswordValid(true);
       axios
         .post("https://mentormee-api.onrender.com/auth/register", {
           // first_name: formData.first_name,
@@ -135,7 +142,18 @@ export default function SignUpForm() {
               required
               type="email"
               name="email"
+              isValid={
+                inputChanged && !isEmailValid
+                  ? "border-red-500"
+                  : "border-[#CCC]"
+              }
               onChange={handleInputChange}
+            />
+            <EmailValidator
+              email={formData.email}
+              setIsValid={setisEmailValid}
+              onValidEmail={() => setisEmailValid(true)}
+              inputChanged={inputChanged}
             />
             <Input
               id="password"
@@ -143,7 +161,17 @@ export default function SignUpForm() {
               name="password"
               required
               type="password"
+              isValid={
+                inputChanged && !isPasswordValid
+                  ? "border-red-500"
+                  : "border-[#CCC]"
+              }
               onChange={handleInputChange}
+            />
+            <PasswordPopover
+              password={formData.password}
+              inputChanged={inputChanged}
+              setIsPaswordValid={setIsPasswordValid}
             />
             <p className="font-Hanken text-[#565656] text-sm my-0 leading-6">
               {" "}
@@ -163,10 +191,14 @@ export default function SignUpForm() {
                 title="Sign up"
                 type="submit"
                 variant="primary"
-                className="w-full py-[1.1rem]"
+                disabled={!isEmailValid || !isPasswordValid}
+                className={`w-full py-[1.1rem] ${
+                  !isEmailValid || !isPasswordValid
+                    ? "opacity-60 hover:bg-gray-400 cursor-not-allowed"
+                    : ""
+                }`}
                 fullWidth
                 loading={isLoading}
-                disabled={isDisabled}
               />
             </div>
           </form>

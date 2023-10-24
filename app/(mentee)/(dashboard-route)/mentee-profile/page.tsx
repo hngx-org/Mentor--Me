@@ -139,8 +139,8 @@ export default function MenteeProfilePage() {
               height={500}
             />
           </div>
-          <div className="flex w-full justify-between items-center px-6 lg:pl-8 max-lg:flex-col max-lg:items-start max-lg:gap-6 2xl:px-32">
-            <div className="flex items-center gap-6  w-full max-lg:flex-col max-lg:items-start max-lg:gap-6 ">
+          <div className="flex w-full justify-between items-center px-4 md:px-6 lg:pl-8 max-lg:flex-col max-lg:items-start max-lg:gap-6 2xl:px-32">
+            <div className="flex items-center  gap-6  w-full max-lg:flex-col max-lg:items-start max-lg:gap-6 ">
               <div className="relative -mt-12 ">
                 <Suspense
                   fallback={
