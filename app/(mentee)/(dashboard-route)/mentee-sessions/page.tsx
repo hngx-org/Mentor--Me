@@ -162,11 +162,17 @@ export default function AllSession({
   useEffect(() => {
     const currentDate = new Date();
 
+    // Log apiData to check its value
+    console.log("apiData:", apiData);
+
     // Filter the items based on whether their date is in the future
     const filteredItems = pastApiData.filter((item: any) => {
       const itemDate = new Date(item.date);
       return itemDate >= currentDate;
     });
+
+    // Log filteredItems to check its value
+    console.log("filteredItems:", filteredItems);
 
     // Determine the value to set for comingItems based on the sessionState condition
     const sessionStateToFilter = "pending";
@@ -174,9 +180,21 @@ export default function AllSession({
       (item) => item.sessionState === sessionStateToFilter
     );
 
-    // Update the state with the newComingItems
+    // Log newComingItems to check its value
+    console.log("newComingItems:", newComingItems);
 
+    // Sort the newComingItems array in descending order based on the date
+    newComingItems.sort(
+      (a: any, b: any) =>
+        new Date(a.date).getTime() - new Date(b.date).getTime()
+    );
+
+    // Log sorted newComingItems to check its value
+    console.log("sorted newComingItems:", newComingItems);
+
+    // Update the state with the newComingItems
     setComingItems(newComingItems);
+    console.log(comingItems);
   }, [apiData]);
 
   useEffect(() => {
@@ -195,10 +213,11 @@ export default function AllSession({
     getPastDate();
   }, []);
 
-  // useEffect(()=> {
-  //     console.log(passedItems)
-  //   console.log(apiData)
-  // },[apiData])
+  useEffect(() => {
+    //   console.log(passedItems)
+    // console.log(apiData)
+    console.log(comingItems);
+  }, [apiData]);
 
   useEffect(() => {
     localStorage.setItem("view", paramsView || "List");
@@ -498,8 +517,8 @@ export default function AllSession({
                   }`}
                 >
                   {cancelledItems.length === 0 ? (
-                    <p className="text-center text-[30px] mt-10  font-Hanken">
-                      NO CANCELLED SESSION. EDUCTION IS KEY
+                    <p className="text-center text-[20px] lg:text-[30px] mt-10  font-Hanken">
+                      NO CANCELLED SESSION. EDUCTION IS KEY <br /> &#128526;
                     </p>
                   ) : (
                     cancelledItems.map((session: DataApi) => (
@@ -524,8 +543,8 @@ export default function AllSession({
               <Suspense fallback={<LoadingSpinner />}>
                 <div className="w-full flex flex-col  border  border-Neutra10 rounded-xl  translate-x-[100px] lg:translate-x-[500px] opacity-0 animate-slideLeft">
                   <div className="grid grid-cols-4 w-full sm:gap-10 gap-4 border-b border-Neutra10 h-full sm:pl-8 pl-2 py-2 sm:py-6 font-Inter font-medium text-[12px] sm:text-[18px] text-NeutalBase ">
-                    <p>Session</p>
-                    <p>Mentor</p>
+                    <p>Session/Mentor</p>
+                    <p>Discuss</p>
                     <p>Date</p>
                     <p>Duration</p>
                   </div>
