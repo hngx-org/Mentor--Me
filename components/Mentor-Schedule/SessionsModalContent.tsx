@@ -10,6 +10,7 @@ interface SessionModalContentProps {
   occurence: string;
   tag: string;
   sessionUrl: string;
+  sessionState: string;
 }
 
 const SessionModalContent: React.FC<SessionModalContentProps> = ({
@@ -22,6 +23,7 @@ const SessionModalContent: React.FC<SessionModalContentProps> = ({
   tag,
   occurence,
   sessionUrl,
+  sessionState,
 }) => {
   function formatDateString(dateString: string | number): string {
     const options: Intl.DateTimeFormatOptions = {
@@ -40,7 +42,7 @@ const SessionModalContent: React.FC<SessionModalContentProps> = ({
   return (
     <div className="grid sm:grid-cols-2 gap-5 mb-10 justify-between items-center font-Hanken w-full">
       <div>
-        <p className="text-Neutra30">Name of Mentee</p>
+        <p className="text-Neutra30">Mentor</p>
         <p>{sessionName}</p>
       </div>
       <div>
@@ -75,6 +77,13 @@ const SessionModalContent: React.FC<SessionModalContentProps> = ({
           <p>{sessionType}</p>
         </div>
       )}
+      {sessionState && (
+        <div>
+          <p className="text-Neutra30">Status</p>
+          <p>{sessionState}</p>
+        </div>
+      )}
+
       {tag && (
         <div>
           <p className="text-Neutra30">Type of Session</p>

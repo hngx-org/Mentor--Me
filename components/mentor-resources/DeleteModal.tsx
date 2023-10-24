@@ -12,7 +12,7 @@ interface DeleteModalProps {
   setData: Dispatch<
     SetStateAction<
       {
-        name: string;
+        title: string;
         price: number;
         _id: string;
         currency: string;

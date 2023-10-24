@@ -109,7 +109,7 @@ export default function CancelledCard({
         <div
           className={`${!isGrid ? "hidden" : ""} w-full flex justify-between`}
         >
-          <span className="w-[35px] h-[35px] font-Hanken font-medium text-[12px] text-Neutra40 text-center bg-Neutra40/10 rounded-full leading-none flex justify-center items-center">
+          <span className="px-2 h-[35px] font-Hanken font-medium text-[12px] text-Neutra40 text-center bg-Neutra40/10 rounded-full leading-none flex justify-center items-center">
             {formattedDate}
           </span>
         </div>
@@ -122,7 +122,7 @@ export default function CancelledCard({
             </span>
           </span>
           <span
-            className={`w-[35px] h-[35px] font-Hanken font-medium text-[12px] text-Neutra40 text-center bg-Neutra40/10 rounded-full leading-none flex justify-center items-center ${
+            className={`px-2 h-[35px] font-Hanken font-medium text-[12px] text-Neutra40 text-center bg-Neutra40/10 rounded-full leading-none flex justify-center items-center ${
               isGrid ? "hidden" : ""
             }`}
           >

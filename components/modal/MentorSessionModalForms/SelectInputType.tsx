@@ -1,4 +1,6 @@
-import React, { SelectHTMLAttributes } from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import { MentorCreationArrDown } from "@/public";
 
@@ -37,6 +39,7 @@ export function SelectInputType({
   value,
   children,
 }: SelectInputProps) {
+  const [isSelected, setIsSelected] = useState(false);
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-col justify-between">
@@ -98,7 +101,7 @@ export function TimeInputType({
             name={InputName}
             placeholder={placeholder}
             required={isRequired}
-            className=" first:text-gray-500 border rounded-lg sm:rounded-lg p-2 md:p-4 md:py-5 w-full focus:outline-none focus:border-gray-600 "
+            className="border rounded-lg sm:rounded-lg p-2 md:p-4 md:py-5 w-full focus:outline-none focus:border-gray-600 "
             onChange={onChange}
           />
         </div>
