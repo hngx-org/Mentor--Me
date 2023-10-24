@@ -31,7 +31,7 @@ export default async function MentorResources() {
       <div className="bg-white p-4 pt-10">
         <Link
           className="bg-[#121212] px-5 py-3 rounded-[6px] cursor-pointer text-white ml-auto mb-8 block w-max"
-          href="/mentor-resources/upload"
+          href="/mentor-resources/upload?path=Resources"
         >
           Upload resource
         </Link>
