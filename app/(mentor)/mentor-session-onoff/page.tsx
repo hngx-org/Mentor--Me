@@ -1,5 +1,5 @@
 import React from "react";
-import { OneOffSessionForm } from "@/components/modal/MentorSessionModalForms/SessionForms";
+import OneOffSessionForm from "@/components/modal/MentorSessionModalForms/OneOffSessionForm";
 
 function page() {
   return (

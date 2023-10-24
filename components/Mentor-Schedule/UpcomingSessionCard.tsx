@@ -16,6 +16,7 @@ interface RecentbookingFromApi {
   duration: number;
   attendeesLimit: number;
   sessionUrl: string;
+  sessionState: string;
 }
 
 function UpcomingSessionCard({
@@ -30,6 +31,7 @@ function UpcomingSessionCard({
   occurence,
   tag,
   sessionUrl,
+  sessionState,
 }: RecentbookingFromApi) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -47,11 +49,11 @@ function UpcomingSessionCard({
     <div>
       <div>
         {/* Container for the card */}
-        <div className="max-w-[350px] h-[400px] mb-2  border border-neutral-300 rounded-lg px-3 py-6 flex flex-col justify-between space-y-6 shadow-sm ">
+        <div className="w-[300px] xl:w-[350px]  h-[400px] mb-2  border border-neutral-300 rounded-lg px-3 py-6 flex flex-col justify-between space-y-6 shadow-sm ">
           <div className="space-y-3">
-            <div className="px-4 border border-Accent1 text-center w-fit flex justify-center bg-black">
+            <div className="px-4 border border-Neutra40 text-center rounded-md w-fit flex justify-center">
               {" "}
-              <p className="text-medium text-white">{tag}</p>
+              <p className="text-medium font-medium">{tag}</p>
             </div>
 
             {/* Category */}
@@ -95,7 +97,7 @@ function UpcomingSessionCard({
           <Button
             onClick={openModal}
             variant="outline-primary"
-            className="bg-[#FFFF] mx-auto hover:bg-black self-start hover:text-white text-[#000] text-[16px] font-[500] border-[1.5px] border-[#121212] rounded-[6px] sm:rounded-[8px] font-Hanken !w-2/3"
+            className="bg-[#FFFF] mx-auto hover:bg-black self-start hover:text-white text-[#000] text-[16px] hover:transform hover:scale-x-125 ease-in-out duration-300 font-[500] border-[1.5px] border-[#121212] rounded-[6px] sm:rounded-[8px] font-Hanken !w-2/3"
           >
             View Details
           </Button>
@@ -114,6 +116,7 @@ function UpcomingSessionCard({
               tag={tag}
               occurence={occurence}
               sessionUrl={sessionUrl}
+              sessionState={sessionState}
             />
           </Modal>
         )}
