@@ -91,7 +91,7 @@ export default function UpcomingCard({
       progress: undefined,
       theme: "light",
     });
-    console.log(itemId);
+    // console.log(itemId);
     cancel(itemId);
     await PatchRequest(itemId, dataObject);
   };

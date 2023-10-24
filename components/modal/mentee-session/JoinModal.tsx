@@ -12,7 +12,7 @@ const JoinModal: React.FC<SuccessReminderProps> = ({
   sessionUrl,
 }) => (
   <div
-    className=" w-full h-[300px] text-black relative sm:h-[300px] sm:w-[500px]  items-start flex bg-white px-8 mx-8 shadow-lg spread-4 offset-x-3 offset-y-3 blur-3>
+    className=" w-full h-[300px] text-black relative sm:h-[300px] sm:w-[500px]  items-start flex border rounded-lg border-black bg-white px-8 mx-8 shadow-lg spread-4 offset-x-3 offset-y-3 blur-3>
   <!-- Your content here -->
 </div>
 "
