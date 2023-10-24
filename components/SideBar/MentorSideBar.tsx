@@ -82,7 +82,7 @@ export default function MentorSideBar({
           </Link>
         </div>
 
-        <div className=" ">
+        <div className="lg:hidden">
           <ul className="cursor-pointer">
             <li className="flex gap-3 items-center  p-2">
               <ProfileIcon />

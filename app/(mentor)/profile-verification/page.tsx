@@ -351,7 +351,7 @@ export default function MentorProfileVerification() {
           title="Submission successful"
           message={`Your application has been submitted. \n
               Your profile will be verified between 24 - 48 hours.`}
-          buttonText="Go to dashboard"
+          buttonText="Continue"
         />
       )}
     </>

@@ -19,11 +19,13 @@ export default async function Resource({
   }
   const data = await res.json();
   console.log(data);
-  const resources = data.courseContents as {
-    id: string;
-    titlee: string;
-    duration: number;
-  }[];
+  const resources = (
+    data.courseContents as {
+      _id: string;
+      titlee: string;
+      duration: number;
+    }[]
+  ).filter((content) => !!content.titlee);
   const resourcesShown = resources.slice(0, 3);
   const resourcesHidden = resources.slice(3);
   const totalTime = resources.reduce((prev, curr) => prev + curr.duration, 0);
