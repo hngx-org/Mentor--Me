@@ -1,5 +1,5 @@
 import React from "react";
-import { RecurringSessionForm } from "@/components/modal/MentorSessionModalForms/SessionForms";
+import RecurringSessionForm from "@/components/modal/MentorSessionModalForms/RecurringSessionForm";
 
 function page() {
   return (

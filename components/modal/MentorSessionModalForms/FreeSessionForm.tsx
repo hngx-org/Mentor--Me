@@ -1,11 +1,19 @@
 "use client";
 
-import React, { useState, ChangeEvent, FormEvent, MouseEvent } from "react";
+import React, {
+  useState,
+  useEffect,
+  ChangeEvent,
+  FormEvent,
+  MouseEvent,
+} from "react";
 import Link from "next/link";
+import axios from "axios";
 import SuccessModal from "@/components/modal/SuccessModal";
 import { SelectInputType, TimeInputType } from "./SelectInputType";
 import MentorCalendar from "./MentorCalendar";
 import { Button } from "@/components/buttons/button";
+import useAuth from "@/context/useAuth";
 
 interface FreeFormData {
   sessionName?: string;
@@ -17,6 +25,7 @@ interface FreeFormData {
   relevantTopics?: string;
   sessionUrl?: string;
   tag?: string;
+  mentorId?: string;
 }
 
 function FreeSessionForm({
@@ -100,8 +109,62 @@ function FreeSessionForm({
     setSuccessful(true);
   };
 
+  // const { data } = useAuth();
+  // console.log(data);
+  // const mentorId=data?.id
+  // const email = data?.userDetails?.email;
+  // const userName = data?.userProfile;
+  // console.log(userName);
+  // const jobTitle = data?.mentorship_type;
+
+  // useEffect(() => {
+  // const user = JSON.parse(
+  //   localStorage.getItem("Mentor") || JSON.stringify({ data: { token: null } })
+  // )
+  // const {
+  // data:{token},
+  // } = user
+
+  // const fetchUser = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       "https://mentormee-api.onrender.com/mentors/get-current",
+  //       {
+  //         redirect : "follow",
+  //         headers:{
+  //         Authorization : `Bearer ${token}`,
+  //         "Content-Type": "application/json",
+  //       }
+  //       }
+  //     );
+  //     if (response.ok) {
+  //       const userData = await response.json();
+  //       return userData
+  //       console.log("user fetched,", userData);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw error;
+  //   }
+  // };
+  // fetchUser();
+  // }, [])
+
+  // const mentorId=userData?.
+
   const openCalendar = async (e: MouseEvent<HTMLButtonElement>) => {
     // e.preventDefault();
+    const user = JSON.parse(
+      localStorage.getItem("Mentor") ||
+        JSON.stringify({ data: { token: null } })
+    );
+    const {
+      data: { _id },
+    } = user;
+    console.log(user?.data?.user?._id);
+    const currentUser = user?.data?.user?._id;
+    console.log(currentUser);
+
     const isFormValid = Object.values(formData).every((value) => value !== "");
 
     if (isFormValid) {
@@ -114,7 +177,7 @@ function FreeSessionForm({
       // console.log("All fields are required");
     }
 
-    const data = { ...formData, tag: "Free session" };
+    const data = { ...formData, tag: "Free session", mentorId: currentUser };
 
     console.log(JSON.stringify(data));
 
@@ -150,16 +213,16 @@ function FreeSessionForm({
       {formVisible && (
         // <div className="p-0 bg-[#1d1c1c57]  bg-opacity-10 sm:py-8 sm:px-10 mx-auto flex flex-col justify-center items-center my-auto ">
         <div className="bg-[#fafafa] min-w-[100%] px-3 sm:min-w-[70%] md:min-w-[60%] py-4 rounded">
-          <div className=" w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3">
+          <div className="sticky bg-[#fafafa] z-10 top-0 w-[100%] sm:px-8 md:px-12 flex flex-col gap-3 py-3 lg:py-4">
             <h1 className="text-left font-bold text-[1.5rem] sm:text-[2rem] text-[#08051e]">
               Create a Free Session
             </h1>
             <p className="text-gray-500">
               Create a session that best suits you!
             </p>
+            <span className="text-Error50 font-bold">{error}</span>
           </div>
           <form className="flex flex-col gap-3 sm:gap-6 py-3 rounded sm:px-12 w-full justify-between">
-            <span className="text-Error50 font-bold">{error}</span>
             <TimeInputType
               labelText="Session name"
               type="text"
