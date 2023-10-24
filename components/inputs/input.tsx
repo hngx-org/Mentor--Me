@@ -1,7 +1,6 @@
 "use client";
 
 import React, { InputHTMLAttributes, useState } from "react";
-
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 
 interface InputProps {
@@ -13,9 +12,9 @@ interface InputProps {
   name?: string;
   value?: string;
   error?: string;
+  isValid?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-
 const Input: React.FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
   id,
   label,
@@ -26,10 +25,10 @@ const Input: React.FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
   error,
   value,
   onChange,
+  isValid,
   ...props
 }) => {
   const isPasswordInput = type === "password";
-
   const [values, setValues] = useState({
     isPasswordVisible: false,
   });
@@ -39,7 +38,6 @@ const Input: React.FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
       isPasswordVisible: !values.isPasswordVisible,
     });
   };
-
   return (
     <div className="w-full mb-[1.1rem]">
       <label
@@ -59,7 +57,7 @@ const Input: React.FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
           required={required}
           placeholder=""
           type={values.isPasswordVisible && isPasswordInput ? "text" : type}
-          className="  py-[1rem] md:py-[1.1rem] pl-2 md:pl-4 outline-none w-[100%]  border-[1px] border-[#CCC] rounded-lg"
+          className={` py-[1rem] md:py-[1.1rem] pl-2 md:pl-4 outline-none w-[100%] border-[#CCC] border-[1px] ${isValid} rounded-lg`}
           {...props}
         />
         {isPasswordInput && (
@@ -75,5 +73,4 @@ const Input: React.FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
     </div>
   );
 };
-
 export default Input;
