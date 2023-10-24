@@ -148,7 +148,8 @@ export default function ExperienceForm({ isDark }: { isDark: boolean }) {
       } finally {
         setIsLoading(false);
         fetchMenteeData();
-        router.replace("/mentee-profile?path=profile");
+        router.push("/mentee-profile?path=profile");
+        window.location.reload();
       }
     } else {
       // Handle the case where authToken is missing

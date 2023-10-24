@@ -24,6 +24,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const [isLoading, setIsLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const [fileURL, setFileURL] = useState<any>("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState<formProps>({
     fullName: "",
     bio: "",
@@ -38,6 +39,15 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
   const handleFileChange = (event: any) => {
     const file = event.target.files[0];
     if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        // File is larger than 2MB (2 * 1024 * 1024 bytes)
+        setErrorMessage("File size should be less than 2MB");
+      } else {
+        // File is within the size limit
+        setErrorMessage("");
+        setFileURL(file);
+      }
+
       const reader = new FileReader();
       reader.onload = async (e) => {
         setFileURL(e.target?.result);
@@ -172,9 +182,8 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
       } finally {
         setIsLoading(false);
         fetchMenteeData();
-        router.replace("/mentee-profile?path=profile");
-
-        // router.push("/mentee-profile?path=profile");
+        router.push("/mentee-profile?path=profile");
+        window.location.reload();
       }
     } else {
       // Handle the case where authToken is missing
@@ -208,13 +217,15 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
           className="w-full flex flex-col gap-4 sm:gap-6  "
         >
           <div className="flex items-center gap-4">
-            <div className="relative  ">
-              <div className="h-[130px] w-[130px] bg-gradient-to-b rounded-full p-1 overflow-hidden">
+            <div className="relative">
+              <div className="h-[130px] w-[130px] bg-gradient-to-b rounded-full p-1 overflow-hidden relative">
+                {/* Circular container for the image */}
                 <Image
                   src={imageSource}
                   alt="user image"
                   width={130}
                   height={130}
+                  layout="fixed"
                   className="rounded-full object-cover"
                 />
               </div>
@@ -225,7 +236,6 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
               >
                 <label htmlFor="image" className="cursor-pointer">
                   {isDark ? <EditIconDark /> : <EditIcon />}
-
                   <input
                     type="file"
                     name="image"
@@ -238,6 +248,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
                 </label>
               </div>
             </div>
+
             <div className="flex flex-col">
               <p
                 className={`${
@@ -246,6 +257,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
               >
                 Select a file
               </p>
+              {errorMessage && <p className="text-red-500">{errorMessage}</p>}
               <p
                 className={`${
                   isDark ? "text-gray-300" : "text-Neutra50"
@@ -262,7 +274,7 @@ export default function UpdateProfileForm({ isDark }: { isDark: boolean }) {
           >
             <label htmlFor="name">
               <p className="flex items-start mb-2">
-                <span>Your full name</span>
+                <span>Full name</span>
                 <span className="text-red-500 font-medium text-sm">*</span>
               </p>
 
