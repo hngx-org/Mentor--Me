@@ -1,24 +1,48 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 
 import SearchCommunitySearchbar from "@/components/Community/searchcommunity-searchbar";
-import { discussionComms, discussionCommunitites } from "../data";
+import { Community, discussionComms, discussionCommunitites } from "../data";
 import { MsgEditIcon } from "@/public/assets/Icons/mentor-communities";
 import DiscussionCard from "@/components/Community/discussion-card";
 import { StartDiscussionModal } from "@/components/Community";
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
+import { getSingleForums } from "@/lib/apiHelper";
+import { membersCardAvatar } from "@/public";
+import { images } from "@/lib/constants/index";
+import CreateDiscussionModal from "@/components/Community/CreateDiscussionModal";
 
 const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   console.log(discussionCommunitites);
 
+  const [forum, setForum] = useState({
+    slug: "",
+    name: "",
+    members: [],
+    description: "",
+    discussions: [],
+  } as Community);
+  useEffect(() => {
+    getSingleForums(setForum, params.forum);
+    // postSingleForum(roadsidedata);
+  }, [params.forum]);
+
+  // const { members } = forum;
+
+  // const memeberLenght = members?.length;
+  console.log("current forum", forum);
+
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <section>
-        {isModalOpen && (
+        {/* {isModalOpen && (
           <StartDiscussionModal setIsModalOpen={setIsModalOpen} />
+        )} */}
+        {isModalOpen && (
+          <CreateDiscussionModal onClose={() => setIsModalOpen(false)} />
         )}
 
         <section>
@@ -32,100 +56,59 @@ const DiscussionsPage = ({ params }: { params: { forum: string } }) => {
             {/* Info */}
             <div className="flex flex-col gap-2">
               <h1 className="font-bold text-[1.125rem] font-Hanken md:text-[2rem]">
-                {
-                  discussionCommunitites[params.forum as keyof discussionComms]
-                    .name
-                }
+                {forum.name}
               </h1>
               {/* Member info */}
-              <div className="flex">
+              <div className="flex gap-1 ">
                 {/* Member Pfps */}
                 <div className="flex items-center">
                   {/* image */}
-                  {discussionCommunitites[
-                    params.forum as keyof discussionComms
-                  ].members
-                    .slice(0, 3)
-                    .map((member, idx) => (
-                      <div
-                        className={`w-[1.5rem] border-solid rounded-full overflow-hidden border-2 border-NeutalBase relative ${
-                          idx === 1 ? "right-3" : idx === 2 ? "right-6" : ""
-                        } ${idx === 1 ? "-z-10" : idx === 2 ? "-z-20" : ""}`}
-                        key={member.name}
-                      >
-                        <Image
-                          src={
-                            member.profilePhotoUrl !== undefined // could simply use non-null assertion operator but this is safer
-                              ? member.profilePhotoUrl
-                              : ""
-                          }
-                          className="object-cover aspect-square"
-                          alt="Member"
-                        />
-                      </div>
-                    ))}
+                  <Image
+                    alt="members"
+                    src={membersCardAvatar}
+                    width={36}
+                    height={20}
+                    className="flex  xl:h-6 xl:w-[56] h-4 w-9 lg:h-[22px]  lg:w-[51px] "
+                  />{" "}
                 </div>
                 {/* Member count */}
-                <span className=" md:text-base relative font-medium text-Accent1 font-Hanken right-5">
-                  {`${
-                    discussionCommunitites[
-                      params.forum as keyof discussionComms
-                    ].members.length
-                  }`}{" "}
-                  members
+                <span className=" md:text-base relative font-medium text-Accent1 font-Hanken ">
+                  {forum.members.length} members
                 </span>
               </div>
               {/* Comm description */}
               <p className="text-Neutral60 font-Hanken md:text-[1.125rem] max-w-[680px]">
                 {
-                  discussionCommunitites[params.forum as keyof discussionComms]
-                    .description
+                  // discussionCommunitites[params.forum as keyof discussionComms]
+                  //   .description
+
+                  forum?.description
                 }
               </p>
             </div>
 
             {/* Start a discussion */}
-            {/* <button
-            type="button"
-            onClick={() => setIsModalOpen((p) => !p)}
-            className="mt-3 px-12 py-4 md:py-[1.125rem] text-white bg-NeutalBase rounded-lg font-Inter hover:bg-Neutral60 cursor-pointer md:flex gap-3 items-center"
-          >
-            <span className="hidden md:block">
-              <MsgEditIcon />
-            </span>
-            <span className="text-[.875rem] font-Hanken font-semibold">
-              Start a discussion
-            </span>
-          </button> */}
-
             <button
               type="button"
-              className="text-[10px]  whitespace-nowrap px-[40px]   py-[16px]  text-white border  bg-NeutalBase flex items-center gap-x-1 rounded-[8px]"
-              onClick={() => setIsModalOpen((p) => !p)}
+              onClick={() => setIsModalOpen(true)}
+              className="mt-3 px-12 py-4 md:py-[1.125rem] text-white bg-NeutalBase rounded-lg font-Inter hover:bg-Neutral60 cursor-pointer md:flex gap-3 items-center"
             >
-              <MsgEditIcon />
-              Start a disscussion
+              <span className="hidden md:block">
+                <MsgEditIcon />
+              </span>
+              <span className="text-[.875rem] font-Hanken font-semibold">
+                Start a discussion
+              </span>
             </button>
           </section>
           {/* Discussion list */}
           <section className="p-8 pb-[3rem] flex flex-col gap-4 md:p-14">
-            {discussionCommunitites[
-              params.forum as keyof discussionComms
-            ].discussions.map((item, ifx) => (
-              // <BigDiscussionCard
-              //   mentor={item.author.isMentor}
-              //   name={item.author.name}
-              //   title={item.topic}
-              //   desc={item.note}
-              //   heroCard={item.imageUrl}
-              //   image={item.author.profilePhotoUrl}
-              // />
+            {forum?.discussions.map((item) => (
               <DiscussionCard
                 author={item.author}
                 description={item.note}
                 title={item.topic}
-                key={item.author.name}
-                image={item.imageUrl}
+                image={images.DiscussionPhoto}
               />
             ))}
           </section>

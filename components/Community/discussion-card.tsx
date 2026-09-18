@@ -7,6 +7,7 @@ import {
   ShareIcon,
 } from "@/public/assets/Icons/mentor-communities";
 import { Member } from "@/app/(mentor)/(dashboard-mentor)/mentor-community/data";
+import { images } from "@/lib/constants/index";
 
 interface Props {
   image?: StaticImageData;
@@ -50,15 +51,11 @@ export default function DiscussionCard({
         <div className="flex gap-2">
           {/* Image */}
           <div className="self-start border-[3px] border-solid border-NeutalBase rounded-full overflow-hidden max-w-[2.3125rem]">
-            {author.profilePhotoUrl ? (
-              <Image
-                src={author.profilePhotoUrl!}
-                alt={author.name}
-                className="w-full h-full object-cover aspect-square"
-              />
-            ) : (
-              ""
-            )}
+            <Image
+              src={images.MemberPfp4!}
+              alt={author.name}
+              className="w-full h-full object-cover aspect-square"
+            />
           </div>
           {/* name */}
           <div className="flex flex-col gap-1">

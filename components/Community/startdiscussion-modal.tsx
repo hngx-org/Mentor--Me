@@ -38,15 +38,33 @@ const StartDiscussionModal = ({ setIsModalOpen }: Props) => {
     }
   };
 
+  function removeSpacesAndConvertToLower(inputString: string) {
+    // Remove spaces with regex and convert to lowercase
+    const result = inputString.replace(/\s+/g, "").toLowerCase();
+    return result;
+  }
   const onFormSubmit = (data: FieldValues) => {
     //  todo send data to backend
     console.log("hello there");
     console.log("Form Data:", data);
 
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    const dataPost = {
+      slug: removeSpacesAndConvertToLower(data.topic),
+      name: data.topic,
+      description: data.topic,
+      members: [
+        {
+          name: "Member 1",
+          isMentor: true,
+          profilePhotoUrl: "url-to-member-1-photo",
+        },
+      ],
+      discussions: [],
+    };
+    console.log(dataPost);
 
     // close modal
-    setIsModalOpen((p) => !p);
+    setIsModalOpen(false);
   };
   // md:max-h-[28.625rem]
   return (
@@ -60,7 +78,7 @@ const StartDiscussionModal = ({ setIsModalOpen }: Props) => {
       >
         <div
           onClick={() => {
-            setIsModalOpen((p) => !p);
+            setIsModalOpen(true);
 
             console.log("close modal");
           }}
@@ -156,7 +174,8 @@ const StartDiscussionModal = ({ setIsModalOpen }: Props) => {
           </div>
 
           <button
-            disabled={isSubmitting}
+            // disabled={isSubmitting}
+            onClick={handleSubmit((data) => onFormSubmit(data))}
             type="submit"
             className="text-white bg-NeutalBase rounded-lg font-Inter hover:bg-Neutral60 cursor-pointer py-2 px-6 text-[.875rem] disabled:opacity-50 disabled:cursor-not-allowed"
           >

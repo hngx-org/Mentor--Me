@@ -1,5 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
-import { Community } from "@/app/(mentee)/(dashboard-route)/mentee-community/data";
+import {
+  Community,
+  Community2,
+} from "@/app/(mentee)/(dashboard-route)/mentee-community/data";
 
 export const get = (url: string) =>
   fetch(url).then((response) => response.json());
@@ -18,6 +21,27 @@ export const post = (url: string, data: any, config: any = {}) => {
     body: JSON.stringify(data),
     headers,
   }).then((res) => res.json());
+};
+
+export const postSingleForum = async (postData: Community) => {
+  try {
+    console.log("posting", postData);
+    const response = await post(
+      "https://hngmentorme.onrender.com/api/community",
+      postData
+    );
+
+    if (response.status === 200) {
+      console.log("success in posting", response);
+      return response;
+    }
+    // Handle other status codes or error cases
+    return null; // or return an error response if needed
+  } catch (error) {
+    // Handle network errors or exceptions
+    console.error("Error posting forum:", error);
+    return null; // or return an error response if needed
+  }
 };
 
 type loginDataType = { email: string; password: string };
@@ -60,6 +84,35 @@ export const getMentorInfo = async (
 
   return data;
 };
+
+export const getForums = async (
+  setData: Dispatch<SetStateAction<Community[]>>
+) => {
+  const data = await get(
+    "https://hngmentorme.onrender.com/api/community"
+  ).catch((err) => console.error(err, "Error fetching forums "));
+  // filter it
+
+  setData(data);
+  // console.log(modifiedData);
+  return data;
+};
+
+export const getSingleForums = async (
+  setData: Dispatch<SetStateAction<Community>>,
+  slug: string
+) => {
+  const data = await get(
+    `https://hngmentorme.onrender.com/api/community/${slug}`
+  ).catch((err) => console.error(err, "Error fetching forum"));
+  // filter it
+
+  setData(data);
+  // console.log(modifiedData);
+  return data;
+};
+
+// functions
 
 export const filterCommunitiyForum: (
   q: string,
